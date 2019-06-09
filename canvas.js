@@ -17,7 +17,7 @@ $(document).ready(function() {
     }
   }
 
-  nIntervId = setInterval(test, 1000);
+  nIntervId = setInterval(test, 100);
 });
 
 function setUpCanvas() {
@@ -44,10 +44,10 @@ function test() {
   for (var i = 0; i < 50; i++) {
     for (var j = 0; j < 50; j++) {
       if (board[i][j] === 1) {
-        var xStart = i * CANVAS_SIZE / 50
-        var yStart = j * CANVAS_SIZE / 50
+        var xStart = i * CANVAS_SIZE / 50 + 1;
+        var yStart = j * CANVAS_SIZE / 50 + 1;
         var xEnd = CANVAS_SIZE / 50 - 1;
-        var yEnd = CANVAS_SIZE / 50 - 1
+        var yEnd = CANVAS_SIZE / 50 - 1;
         context.fillRect(xStart, yStart, xEnd, yEnd);
       }
     }

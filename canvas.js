@@ -5,10 +5,13 @@ const CANVAS_SIZE = 750;
 
 var board;
 var nIntervId;
-var canvas = document.getElementById('myCanvas');
-var context = canvas.getContext('2d');
+var canvas;
+var context;
 
 $(document).ready(function() {
+  canvas = document.getElementById('myCanvas');
+  context = canvas.getContext('2d');
+
   setUpCanvas();
 
   board = new Array(50);

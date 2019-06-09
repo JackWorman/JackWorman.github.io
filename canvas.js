@@ -72,7 +72,7 @@ function display() {
     board[xCoord][yCoord] = 0;
     yCoord++;
   }
-  if (xCoord < 0 || yCoord < 0 || xCoord >== GRID_SIZE || yCoord >== GRID_SIZE) {
+  if (xCoord < 0 || yCoord < 0 || xCoord >= GRID_SIZE || yCoord >= GRID_SIZE) {
     stopDisplay();
     alert('GAME OVER!');
   }

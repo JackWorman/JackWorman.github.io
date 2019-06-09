@@ -166,6 +166,8 @@ function moveSnake() {
 
 function reset() {
   nextDirection = 'none';
+  divScore = document.getElementById('divScore');
+  divScore.textContent = 0;
   snake = [new Vector(GRID_SIZE / 2, GRID_SIZE / 2, 'none')];
   placeFruit();
   score = 0;

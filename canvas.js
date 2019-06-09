@@ -1,7 +1,7 @@
 // Constants
-const CANVAS_SIZE = 750;
+const CANVAS_SIZE = 750; // in pixels
 const GRID_SIZE = 50;
-const REFRESH_RATE = 200; // time in milliseconds
+const REFRESH_RATE = 125; // time in milliseconds
 
 // Globals
 var gameLoop;
@@ -11,7 +11,7 @@ var context;
 var snake = [];
 var fruit;
 
-$(document).ready(function() {
+document.addEventListener("DOMContentLoaded", function(){
   canvas = document.getElementById('myCanvas');
   context = canvas.getContext('2d');
   setUpCanvas();

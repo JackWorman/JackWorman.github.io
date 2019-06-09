@@ -7,12 +7,9 @@ var board;
 var nIntervId;
 
 $(document).ready(function() {
-
-
-
   setUpCanvas();
 
-  var board = new Array(50);
+  board = new Array(50);
   for (var i = 0; i < 50; i++) {
     board[i] = new Array(50);
     for (var j = 0; j < 50; j++) {

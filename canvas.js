@@ -9,9 +9,7 @@ var nIntervId;
 var canvas;
 var context;
 
-var direction = 'none';
-var xCoord = GRID_SIZE / 2;
-var yCoord = GRID_SIZE / 2;
+var snake = [];
 
 $(document).ready(function() {
   canvas = document.getElementById('myCanvas');
@@ -19,7 +17,6 @@ $(document).ready(function() {
   setUpCanvas();
   setUpBoard();
 
-  nIntervId = setInterval(display, REFRESH_RATE);
   document.addEventListener('keydown', function(event) {
     if (event.keyCode == 37) { // Left Arrow
       direction = 'left';
@@ -31,6 +28,10 @@ $(document).ready(function() {
       direction = 'down';
     }
   }, true);
+
+  snake.push(new Vector(GRID_SIZE / 2, GRID_SIZE / 2, 'none'));
+
+  nIntervId = setInterval(display, REFRESH_RATE);
 });
 
 function setUpCanvas() {
@@ -59,25 +60,25 @@ function setUpBoard() {
 }
 
 function display() {
-  if (direction === 'right') {
-    board[xCoord][yCoord] = 0;
-    xCoord++;
-  } else if (direction === 'up') {
-    board[xCoord][yCoord] = 0;
-    yCoord--;
-  } else if (direction === 'left') {
-    board[xCoord][yCoord] = 0;
-    xCoord--;
-  } else if (direction === 'down') {
-    board[xCoord][yCoord] = 0;
-    yCoord++;
+  if (snake[0].direction === 'right') {
+    board[snake[0].x][snake[0].y] = 0;
+    snake[0].x++;
+  } else if (snake[0].direction === 'up') {
+    board[snake[0].x][snake[0].y] = 0;
+    snake[0].y--;
+  } else if (snake[0].direction === 'left') {
+    board[snake[0].x][snake[0].y] = 0;
+    snake[0].x--;
+  } else if (snake[0].direction === 'down') {
+    board[snake[0].x][snake[0].y] = 0;
+    snake[0].y++;
   }
   if (xCoord < 0 || yCoord < 0 || xCoord >= GRID_SIZE || yCoord >= GRID_SIZE) {
-    stopDisplay();
+    clearInterval(nIntervId);
     alert('GAME OVER!');
     return;
   }
-  board[xCoord][yCoord] = 1;
+  board[snake[0].x][snake[0].y] = 1;
 
   for (var i = 0; i < GRID_SIZE; i++) {
     for (var j = 0; j < GRID_SIZE; j++) {
@@ -95,6 +96,10 @@ function display() {
   }
 }
 
-function stopDisplay() {
-  clearInterval(nIntervId);
+class Vector {
+  constructor(x, y, direction) {
+    this.x = x;
+    this.y = y;
+    this.direction = direction;
+  }
 }

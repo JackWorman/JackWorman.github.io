@@ -1,7 +1,9 @@
 // Constants
 const CANVAS_SIZE = 500; // in pixels
 const GRID_SIZE = 30;
-const REFRESH_RATE = 125; // time in milliseconds
+const FRAMES_PER_SECOND = 15;
+const MILLISECONDS_PER_FRAME = 1 / FRAMES_PER_SECOND * 1000;
+const GROW_RATE = 5;
 
 // Globals
 var canvas;
@@ -13,19 +15,25 @@ var fruit;
 var score = 0;
 
 document.addEventListener("DOMContentLoaded", function(){
-  canvas = document.getElementById('canvasBoard');
+  canvas = document.getElementById('board');
   context = canvas.getContext('2d');
   setUpCanvas();
   setUpBoard();
   setUpControls();
   snake.push(new Vector(GRID_SIZE / 2, GRID_SIZE / 2, 'none'));
   placeFruit();
-  gameLoop = setInterval(refresh, REFRESH_RATE);
+  gameLoop = setInterval(refresh, MILLISECONDS_PER_FRAME);
 });
 
 function setUpCanvas() {
+  canvas.style.position = "absolute";
   canvas.width = CANVAS_SIZE;
   canvas.height = CANVAS_SIZE;
+  // Position the canvas in the center of the screen.
+  window.onload = window.onresize = function() {
+    canvas.style.top = (window.innerHeight - canvas.height) / 2 + "px";
+    canvas.style.left = (window.innerWidth - canvas.width) / 2 + "px";
+  }
   // Draws a grid onto the canvas.
   for (var i = 0; i <= GRID_SIZE; i++) {
     var step = i * CANVAS_SIZE / GRID_SIZE;
@@ -155,22 +163,23 @@ function moveSnake() {
   // Test if the snake ate a fruit.
   if (snake[0].x === fruit.x && snake[0].y === fruit.y) {
     placeFruit();
-    for (var i = 0; i < 5; i++) {
+    for (var i = 0; i < GROW_RATE; i++) {
       snake.push(new Vector(snake[snake.length - 1].x, snake[snake.length - 1].y, 'none'));
     }
-    score += 500 * snake.length * Math.PI;
-    divScore = document.getElementById('divScore');
-    divScore.textContent = score;
+    // Update score.
+    score += Math.floor(500 * snake.length * (Math.PI - 3));
+    divScore = document.getElementById('score');
+    divScore.textContent = 'Score: ' + score;
   }
 }
 
 function reset() {
   nextDirection = 'none';
-  divScore = document.getElementById('divScore');
-  divScore.textContent = 0;
   snake = [new Vector(GRID_SIZE / 2, GRID_SIZE / 2, 'none')];
   placeFruit();
+  divScore = document.getElementById('score');
   score = 0;
+  divScore.textContent = 'Score: ' + score;
 }
 
 class Vector {

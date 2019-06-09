@@ -42,7 +42,7 @@ function setUpCanvas() {
 }
 
 function test() {
-  alert('test()');
+  alert(board[3][10]);
   var context = document.getElementById('myCanvas').getContext('2d');
   context.fillStyle = "#FF0000";
   for (var i = 0; i < 50; i++) {

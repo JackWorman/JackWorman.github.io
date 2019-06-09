@@ -1,6 +1,6 @@
 // Constants
-const CANVAS_SIZE = 750; // in pixels
-const GRID_SIZE = 50;
+const CANVAS_SIZE = 500; // in pixels
+const GRID_SIZE = 30;
 const REFRESH_RATE = 125; // time in milliseconds
 
 // Globals
@@ -157,7 +157,7 @@ function moveSnake() {
     for (var i = 0; i < 5; i++) {
       snake.push(new Vector(snake[snake.length - 1].x, snake[snake.length - 1].y, 'none'));
     }
-    score += 500;
+    score += 500 * snake.length;
     divScore = document.getElementById('divScore');
     divScore.textContent = score;
   }

@@ -17,16 +17,8 @@ $(document).ready(function() {
   setUpCanvas();
   setUpBoard();
   setUpControls();
-
   snake.push(new Vector(GRID_SIZE / 2, GRID_SIZE / 2, 'none'));
-  var fruitX;
-  var fruitY;
-  do {
-    fruitX = Math.floor(Math.random() * 50);
-    fruitY = Math.floor(Math.random() * 50);
-  } while (fruitX === GRID_SIZE / 2 && fruitY === GRID_SIZE / 2);
-  fruit = new Point(fruitX, fruitY);
-
+  placeFruit();
   gameLoop = setInterval(display, REFRESH_RATE);
 });
 
@@ -69,9 +61,24 @@ function setUpControls() {
   }, true);
 }
 
+function placeFruit() {
+  var fruitX;
+  var fruitY;
+  do {
+    fruitX = Math.floor(Math.random() * 50);
+    fruitY = Math.floor(Math.random() * 50);
+    var collison = false;
+    for (var i = 0; i < snake.length; i++) {
+      if (fruitX === snake[i].x && fruitY === snake[i].y) {
+        collison = true;
+      }
+    }
+  } while (collison);
+  fruit = new Point(fruitX, fruitY);
+}
+
 function display() {
   moveSnake();
-
   // Refresh display.
   for (var i = 0; i < GRID_SIZE; i++) {
     for (var j = 0; j < GRID_SIZE; j++) {
@@ -85,8 +92,6 @@ function display() {
           break;
         }
       }
-
-
       var xStart = i * CANVAS_SIZE / GRID_SIZE + 1;
       var yStart = j * CANVAS_SIZE / GRID_SIZE + 1;
       var xLength = CANVAS_SIZE / GRID_SIZE - 2;
@@ -113,7 +118,7 @@ function moveSnake() {
   }
   // Test if the snake ate a fruit.
   if (snake[0].x === fruit.x && snake[0].y === fruit.y) {
-    // TODO: move fruit
+    placeFruit();
     for (var i = 0; i < 5; i++) {
       snake.push(new Vector(snake[snake.length - 1].x, snake[snake.length - 1].y, 'none'));
     }

@@ -2,12 +2,14 @@
 var CANVAS_SIZE = 750;
 
 // Globals
-var canvas = document.getElementById('myCanvas');
-var context = canvas.getContext('2d');
+
 var board;
 var nIntervId;
 
 $(document).ready(function() {
+
+
+
   setUpCanvas();
 
   // var board = new Array(50);
@@ -23,6 +25,8 @@ $(document).ready(function() {
 });
 
 function setUpCanvas() {
+  var canvas = document.getElementById('myCanvas');
+  var context = canvas.getContext('2d');
   canvas.width = CANVAS_SIZE;
   canvas.height = CANVAS_SIZE;
   // Draws a grid onto the canvas.

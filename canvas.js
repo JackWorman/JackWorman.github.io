@@ -17,7 +17,7 @@ $(document).ready(function() {
     }
   }
 
-  nIntervId = setInterval(test, 100);
+  nIntervId = setInterval(test, 10);
 });
 
 function setUpCanvas() {

@@ -165,6 +165,7 @@ function moveSnake() {
 }
 
 function reset() {
+  nextDirection = 'none';
   snake = [new Vector(GRID_SIZE / 2, GRID_SIZE / 2, 'none')];
   placeFruit();
   score = 0;

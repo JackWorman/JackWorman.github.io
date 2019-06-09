@@ -70,7 +70,7 @@ function setUpControls() {
 }
 
 function display() {
-
+  moveSnake();
 
   for (var i = 0; i < GRID_SIZE; i++) {
     for (var j = 0; j < GRID_SIZE; j++) {

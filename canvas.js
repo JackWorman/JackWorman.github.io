@@ -16,7 +16,6 @@ $(document).ready(function() {
       board[i][j] = 0;
     }
   }
-  board[3][10] = 1;
 
   nIntervId = setInterval(test, 1000);
 });
@@ -39,7 +38,7 @@ function setUpCanvas() {
 }
 
 function test() {
-  alert(board[3][10]);
+  board[Math.floor((Math.random() * 50))][Math.floor((Math.random() * 50))] = 1;
   var context = document.getElementById('myCanvas').getContext('2d');
   context.fillStyle = "#FF0000";
   for (var i = 0; i < 50; i++) {
@@ -47,8 +46,8 @@ function test() {
       if (board[i][j] === 1) {
         var xStart = i * CANVAS_SIZE / 50
         var yStart = j * CANVAS_SIZE / 50
-        var xEnd = xStart + CANVAS_SIZE / 50 - 1;
-        var yEnd = yStart + CANVAS_SIZE / 50 - 1
+        var xEnd = CANVAS_SIZE / 50 - 1;
+        var yEnd = CANVAS_SIZE / 50 - 1
         context.fillRect(xStart, yStart, xEnd, yEnd);
       }
     }

@@ -1,7 +1,7 @@
 // Constants
 const CANVAS_SIZE = 750;
 const GRID_SIZE = 50;
-const REFRESH_RATE = 125; // time in milliseconds
+const REFRESH_RATE = 200; // time in milliseconds
 
 // Globals
 var gameLoop;

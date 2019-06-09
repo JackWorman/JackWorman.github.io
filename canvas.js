@@ -26,11 +26,9 @@ $(document).ready(function() {
 });
 
 function setUpCanvas() {
-
   canvas.width = CANVAS_SIZE;
   canvas.height = CANVAS_SIZE;
   // Draws a grid onto the canvas.
-
   for (var i = 0; i <= 50; i++) {
     var step = i * CANVAS_SIZE / 50;
     context.moveTo(0, step);

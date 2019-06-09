@@ -19,13 +19,13 @@ $(document).ready(function() {
 
   document.addEventListener('keydown', function(event) {
     if (event.keyCode == 37) { // Left Arrow
-      direction = 'left';
+      snake[0].direction = 'left';
     } else if (event.keyCode == 38) { // Up Arrow
-      direction = 'up';
+      snake[0].direction = 'up';
     } else if (event.keyCode == 39) { // Right Arrow
-      direction = 'right';
+      snake[0].direction = 'right';
     } else if (event.keyCode == 40) { // Down Arrow
-      direction = 'down';
+      snake[0].direction = 'down';
     }
   }, true);
 

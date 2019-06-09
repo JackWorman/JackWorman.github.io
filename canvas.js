@@ -1,15 +1,16 @@
 // Constants
 const CANVAS_SIZE = 750;
 const GRID_SIZE = 50;
-const REFRESH_RATE = 250; // time in milliseconds
+const REFRESH_RATE = 125; // time in milliseconds
 
 // Globals
 var board;
-var nIntervId;
+var gameLoop;
 var canvas;
 var context;
 
 var snake = [];
+var fruit;
 
 $(document).ready(function() {
   canvas = document.getElementById('myCanvas');
@@ -17,21 +18,17 @@ $(document).ready(function() {
   setUpCanvas();
   setUpBoard();
 
-  document.addEventListener('keydown', function(event) {
-    if (event.keyCode == 37) { // Left Arrow
-      snake[0].direction = 'left';
-    } else if (event.keyCode == 38) { // Up Arrow
-      snake[0].direction = 'up';
-    } else if (event.keyCode == 39) { // Right Arrow
-      snake[0].direction = 'right';
-    } else if (event.keyCode == 40) { // Down Arrow
-      snake[0].direction = 'down';
-    }
-  }, true);
-
   snake.push(new Vector(GRID_SIZE / 2, GRID_SIZE / 2, 'none'));
 
-  nIntervId = setInterval(display, REFRESH_RATE);
+  var fruitX;
+  var fruitY;
+  do {
+    fruitX = Math.floor(Math.random() * 50);
+    fruitY = Math.floor(Math.random() * 50);
+  } while (fruitX !== GRID_SIZE / 2 && fruitY !== GRID_SIZE / 2);
+  fruit = new Point(fruitX, fruitY);
+
+  gameLoop = setInterval(display, REFRESH_RATE);
 });
 
 function setUpCanvas() {
@@ -59,6 +56,20 @@ function setUpBoard() {
   }
 }
 
+function setUpControls() {
+  document.addEventListener('keydown', function(event) {
+    if (event.keyCode == 37) { // Left Arrow
+      snake[0].direction = 'left';
+    } else if (event.keyCode == 38) { // Up Arrow
+      snake[0].direction = 'up';
+    } else if (event.keyCode == 39) { // Right Arrow
+      snake[0].direction = 'right';
+    } else if (event.keyCode == 40) { // Down Arrow
+      snake[0].direction = 'down';
+    }
+  }, true);
+}
+
 function display() {
   if (snake[0].direction === 'right') {
     board[snake[0].x][snake[0].y] = 0;
@@ -73,17 +84,19 @@ function display() {
     board[snake[0].x][snake[0].y] = 0;
     snake[0].y++;
   }
-  // if (xCoord < 0 || yCoord < 0 || xCoord >= GRID_SIZE || yCoord >= GRID_SIZE) {
-  //   clearInterval(nIntervId);
-  //   alert('GAME OVER!');
-  //   return;
-  // }
+  if (snake[0].x < 0 || snake[0].y < 0 || snake[0].x >= GRID_SIZE || snake[0].y >= GRID_SIZE) {
+    clearInterval(gameLoop);
+    alert('GAME OVER!');
+    return;
+  }
   board[snake[0].x][snake[0].y] = 1;
 
   for (var i = 0; i < GRID_SIZE; i++) {
     for (var j = 0; j < GRID_SIZE; j++) {
-      if (board[i][j] === 1) {
+      if (i === snake[0].x && j === snake[0].y) {
         context.fillStyle = "#FF0000"; // red
+      } else if (i === fruit.x && j === fruit.y) {
+        context.fillStyle = "#0000FF"; // ???
       } else {
         context.fillStyle = "#FFFFFF"; // white
       }
@@ -101,5 +114,12 @@ class Vector {
     this.x = x;
     this.y = y;
     this.direction = direction;
+  }
+}
+
+class Point {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
   }
 }

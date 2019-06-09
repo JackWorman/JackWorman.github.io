@@ -14,7 +14,18 @@ $(document).ready(function() {
   context = canvas.getContext('2d');
   setUpCanvas();
   setUpBoard();
-  nIntervId = setInterval(display, REFRESH_RATE);
+
+
+  document.addEventListener('keydown', function(event) {
+    if (event.keyCode == 37) {
+      //alert('Left was pressed');
+      nIntervId = setInterval(display, REFRESH_RATE);
+    }
+    else if (event.keyCode == 39) {
+      //alert('Right was pressed');
+      stopDisplay()
+    }
+  }, true);
 });
 
 function setUpCanvas() {
@@ -61,6 +72,6 @@ function display() {
   }
 }
 
-function stopTest() {
+function stopDisplay() {
   clearInterval(nIntervId);
 }

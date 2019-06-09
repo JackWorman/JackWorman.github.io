@@ -158,7 +158,7 @@ function moveSnake() {
     for (var i = 0; i < 5; i++) {
       snake.push(new Vector(snake[snake.length - 1].x, snake[snake.length - 1].y, 'none'));
     }
-    score += 500 * snake.length;
+    score += 500 * snake.length * Math.PI;
     divScore = document.getElementById('divScore');
     divScore.textContent = score;
   }

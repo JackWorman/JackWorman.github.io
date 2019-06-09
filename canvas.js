@@ -68,8 +68,8 @@ function display() {
   } else if (direction === 'left') {
     board[xCoord][yCoord] = 0;
     xCoord--;
-  } else if (direction === 4) {
-    board[xCoord][yCoord] = 'down';
+  } else if (direction === 'down') {
+    board[xCoord][yCoord] = 0;
     yCoord++;
   }
   if (xCoord < 0 || yCoord < 0 || xCoord >= GRID_SIZE || yCoord >= GRID_SIZE) {

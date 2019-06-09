@@ -17,6 +17,7 @@ $(document).ready(function() {
   context = canvas.getContext('2d');
   setUpCanvas();
   setUpBoard();
+  setUpControls();
 
   snake.push(new Vector(GRID_SIZE / 2, GRID_SIZE / 2, 'none'));
 

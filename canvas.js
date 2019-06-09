@@ -4,7 +4,6 @@ const GRID_SIZE = 50;
 const REFRESH_RATE = 125; // time in milliseconds
 
 // Globals
-var board;
 var gameLoop;
 var canvas;
 var context;
@@ -20,7 +19,6 @@ $(document).ready(function() {
   setUpControls();
 
   snake.push(new Vector(GRID_SIZE / 2, GRID_SIZE / 2, 'none'));
-
   var fruitX;
   var fruitY;
   do {
@@ -72,25 +70,7 @@ function setUpControls() {
 }
 
 function display() {
-  if (snake[0].direction === 'right') {
-    board[snake[0].x][snake[0].y] = 0;
-    snake[0].x++;
-  } else if (snake[0].direction === 'up') {
-    board[snake[0].x][snake[0].y] = 0;
-    snake[0].y--;
-  } else if (snake[0].direction === 'left') {
-    board[snake[0].x][snake[0].y] = 0;
-    snake[0].x--;
-  } else if (snake[0].direction === 'down') {
-    board[snake[0].x][snake[0].y] = 0;
-    snake[0].y++;
-  }
-  if (snake[0].x < 0 || snake[0].y < 0 || snake[0].x >= GRID_SIZE || snake[0].y >= GRID_SIZE) {
-    clearInterval(gameLoop);
-    alert('GAME OVER!');
-    return;
-  }
-  board[snake[0].x][snake[0].y] = 1;
+
 
   for (var i = 0; i < GRID_SIZE; i++) {
     for (var j = 0; j < GRID_SIZE; j++) {
@@ -107,6 +87,36 @@ function display() {
       var yLength = CANVAS_SIZE / GRID_SIZE - 2;
       context.fillRect(xStart, yStart, xLength, yLength);
     }
+  }
+}
+
+function moveSnake() {
+  for (var i = snake.length - 1; i >= 0; i--) {
+    if (snake[i].direction === 'right') {
+      snake[i].x++;
+    } else if (snake[i].direction === 'up') {
+      snake[i].y--;
+    } else if (snake[i].direction === 'left') {
+      snake[i].x--;
+    } else if (snake[i].direction === 'down') {
+      snake[i].y++;
+    }
+    if (i !== 0) {
+      snake[i].direction = snake[i - 1].direction;
+    }
+  }
+  // Test if the snake ate a fruit.
+  if (snake[0].x === fruit.x && snake[0].y === fruit.y) {
+    // TODO: move fruit
+    for (var i = 0; i < 5; i++) {
+      snake.push(new Vector(snake[snake.length - 1].x, snake[snake.length - 1].y, 'none'));
+    }
+  }
+  // Test if the snake hit a wall.
+  if (snake[0].x < 0 || snake[0].y < 0 || snake[0].x >= GRID_SIZE || snake[0].y >= GRID_SIZE) {
+    clearInterval(gameLoop);
+    alert('GAME OVER!');
+    return;
   }
 }
 

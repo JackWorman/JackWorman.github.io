@@ -14,6 +14,8 @@ var snake = [];
 var fruit;
 var score = 0;
 
+window.location.reload(true);
+
 document.addEventListener("DOMContentLoaded", function(){
   canvas = document.getElementById('board');
   context = canvas.getContext('2d');

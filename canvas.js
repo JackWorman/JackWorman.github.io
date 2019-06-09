@@ -46,9 +46,9 @@ function test() {
       if (board[i][j] === 1) {
         var xStart = i * CANVAS_SIZE / 50 + 1;
         var yStart = j * CANVAS_SIZE / 50 + 1;
-        var xEnd = CANVAS_SIZE / 50 - 1;
-        var yEnd = CANVAS_SIZE / 50 - 1;
-        context.fillRect(xStart, yStart, xEnd, yEnd);
+        var xLength = CANVAS_SIZE / 50 - 2;
+        var yLength = CANVAS_SIZE / 50 - 2;
+        context.fillRect(xStart, yStart, xLength, yLength);
       }
     }
   }

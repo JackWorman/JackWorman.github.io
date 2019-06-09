@@ -59,7 +59,7 @@ function setUpControls() {
       if (event.keyCode == 38) {
         snake[0].direction = 'up';
       } else if (event.keyCode == 40) {
-        snake[0].direction = 'dowm';
+        snake[0].direction = 'down';
       }
     } else if (snake[0].direction === 'up' || snake[0].direction === 'down') {
       if (event.keyCode == 37) {

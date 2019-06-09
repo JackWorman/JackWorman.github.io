@@ -26,7 +26,7 @@ $(document).ready(function() {
   do {
     fruitX = Math.floor(Math.random() * 50);
     fruitY = Math.floor(Math.random() * 50);
-  } while (fruitX !== GRID_SIZE / 2 && fruitY !== GRID_SIZE / 2);
+  } while (fruitX === GRID_SIZE / 2 && fruitY === GRID_SIZE / 2);
   fruit = new Point(fruitX, fruitY);
 
   gameLoop = setInterval(display, REFRESH_RATE);

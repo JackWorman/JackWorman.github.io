@@ -73,11 +73,11 @@ function display() {
     board[snake[0].x][snake[0].y] = 0;
     snake[0].y++;
   }
-  if (xCoord < 0 || yCoord < 0 || xCoord >= GRID_SIZE || yCoord >= GRID_SIZE) {
-    clearInterval(nIntervId);
-    alert('GAME OVER!');
-    return;
-  }
+  // if (xCoord < 0 || yCoord < 0 || xCoord >= GRID_SIZE || yCoord >= GRID_SIZE) {
+  //   clearInterval(nIntervId);
+  //   alert('GAME OVER!');
+  //   return;
+  // }
   board[snake[0].x][snake[0].y] = 1;
 
   for (var i = 0; i < GRID_SIZE; i++) {

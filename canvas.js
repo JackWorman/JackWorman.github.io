@@ -12,7 +12,7 @@ var fruit;
 var score = 0;
 
 document.addEventListener("DOMContentLoaded", function(){
-  canvas = document.getElementById('myCanvas');
+  canvas = document.getElementById('canvasBoard');
   context = canvas.getContext('2d');
   setUpCanvas();
   setUpBoard();
@@ -157,6 +157,9 @@ function moveSnake() {
     for (var i = 0; i < 5; i++) {
       snake.push(new Vector(snake[snake.length - 1].x, snake[snake.length - 1].y, 'none'));
     }
+    score += 500;
+    divScore = document.getElementById('divScore');
+    divScore.textContent = score;
   }
 }
 

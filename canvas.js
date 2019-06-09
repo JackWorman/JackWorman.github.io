@@ -123,8 +123,15 @@ function moveSnake() {
       snake.push(new Vector(snake[snake.length - 1].x, snake[snake.length - 1].y, 'none'));
     }
   }
-  // Test if the snake hit a wall.
-  if (snake[0].x < 0 || snake[0].y < 0 || snake[0].x >= GRID_SIZE || snake[0].y >= GRID_SIZE) {
+  // Test if the snake hit a wall or itself.
+  var hitSelf = false;
+  for (var i = 1; i < snake.length; i++) {
+    if (snake[0].x === snake[i].x && snake[0].y === snake[i].y) {
+      hitSelf = true;
+      break;
+    }
+  }
+  if (hitSelf || snake[0].x < 0 || snake[0].y < 0 || snake[0].x >= GRID_SIZE || snake[0].y >= GRID_SIZE) {
     clearInterval(gameLoop);
     alert('GAME OVER!');
     return;

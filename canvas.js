@@ -5,6 +5,8 @@ const CANVAS_SIZE = 750;
 
 var board;
 var nIntervId;
+var canvas = document.getElementById('myCanvas');
+var context = canvas.getContext('2d');
 
 $(document).ready(function() {
   setUpCanvas();
@@ -21,11 +23,11 @@ $(document).ready(function() {
 });
 
 function setUpCanvas() {
-  var canvas = document.getElementById('myCanvas');
+
   canvas.width = CANVAS_SIZE;
   canvas.height = CANVAS_SIZE;
   // Draws a grid onto the canvas.
-  var context = canvas.getContext('2d');
+
   for (var i = 0; i <= 50; i++) {
     var step = i * CANVAS_SIZE / 50;
     context.moveTo(0, step);
@@ -37,9 +39,11 @@ function setUpCanvas() {
   }
 }
 
-function test() {
-  board[Math.floor((Math.random() * 50))][Math.floor((Math.random() * 50))] = 1;
-  var context = document.getElementById('myCanvas').getContext('2d');
+function display() {
+  var x = Math.floor((Math.random() * 50));
+  var y = Math.floor((Math.random() * 50));
+  board[x][y] = 1;
+  //var context = document.getElementById('myCanvas').getContext('2d');
   context.fillStyle = "#FF0000";
   for (var i = 0; i < 50; i++) {
     for (var j = 0; j < 50; j++) {

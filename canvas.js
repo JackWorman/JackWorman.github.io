@@ -1,7 +1,7 @@
 // Constants
 const CANVAS_SIZE = 750;
 const GRID_SIZE = 50;
-const REFRESH_RATE = 500; // time in milliseconds
+const REFRESH_RATE = 250; // time in milliseconds
 
 // Globals
 var board;
@@ -71,6 +71,10 @@ function display() {
   } else if (direction === 4) {
     board[xCoord][yCoord] = 0;
     yCoord++;
+  }
+  if (xCoord < 0 || yCoord < 0 || xCoord >== GRID_SIZE || yCoord >== GRID_SIZE) {
+    stopDisplay();
+    alert('GAME OVER!');
   }
   board[xCoord][yCoord] = 1;
 

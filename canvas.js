@@ -26,7 +26,7 @@ function setUpCanvas() {
   canvas.height = CANVAS_SIZE;
   // Draws a grid onto the canvas.
   var context = canvas.getContext('2d');
-  for (var i = 1; i < 50; i++) {
+  for (var i = 0; i <= 50; i++) {
     var step = i * CANVAS_SIZE / 50;
     context.moveTo(0, step);
     context.lineTo(CANVAS_SIZE, step);

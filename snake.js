@@ -156,7 +156,7 @@ function moveSnake() {
     }
   }
   if (hitSelf || snake[0].x < 0 || snake[0].y < 0 || snake[0].x >= GRID_SIZE || snake[0].y >= GRID_SIZE) {
-    alert('GAME OVER!');
+    alert('GAME OVER!\nScore: ' + score);
     reset();
     return;
   }

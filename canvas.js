@@ -9,7 +9,7 @@ var nIntervId;
 var canvas;
 var context;
 
-var direction = 0; // 0 = none, 1 = right, 2 = up, 3 = left, 4 = down
+var direction = 'none';
 var xCoord = GRID_SIZE / 2;
 var yCoord = GRID_SIZE / 2;
 
@@ -22,13 +22,13 @@ $(document).ready(function() {
   nIntervId = setInterval(display, REFRESH_RATE);
   document.addEventListener('keydown', function(event) {
     if (event.keyCode == 37) { // Left Arrow
-      direction = 3;
+      direction = 'left';
     } else if (event.keyCode == 38) { // Up Arrow
-      direction = 2;
+      direction = 'up';
     } else if (event.keyCode == 39) { // Right Arrow
-      direction = 1;
+      direction = 'right';
     } else if (event.keyCode == 40) { // Down Arrow
-      direction = 4;
+      direction = 'down';
     }
   }, true);
 });
@@ -59,22 +59,23 @@ function setUpBoard() {
 }
 
 function display() {
-  if (direction === 1) {
+  if (direction === 'right') {
     board[xCoord][yCoord] = 0;
     xCoord++;
-  } else if (direction === 2) {
+  } else if (direction === 'up') {
     board[xCoord][yCoord] = 0;
     yCoord--;
-  } else if (direction === 3) {
+  } else if (direction === 'left') {
     board[xCoord][yCoord] = 0;
     xCoord--;
   } else if (direction === 4) {
-    board[xCoord][yCoord] = 0;
+    board[xCoord][yCoord] = 'down';
     yCoord++;
   }
   if (xCoord < 0 || yCoord < 0 || xCoord >= GRID_SIZE || yCoord >= GRID_SIZE) {
     stopDisplay();
     alert('GAME OVER!');
+    return;
   }
   board[xCoord][yCoord] = 1;
 

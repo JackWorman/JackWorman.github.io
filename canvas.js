@@ -72,15 +72,21 @@ function setUpControls() {
 function display() {
   moveSnake();
 
+  // Refresh display.
   for (var i = 0; i < GRID_SIZE; i++) {
     for (var j = 0; j < GRID_SIZE; j++) {
-      if (i === snake[0].x && j === snake[0].y) {
-        context.fillStyle = "#FF0000"; // red
-      } else if (i === fruit.x && j === fruit.y) {
-        context.fillStyle = "#0000FF"; // ???
-      } else {
-        context.fillStyle = "#FFFFFF"; // white
+      context.fillStyle = "#FFFFFF"; // white
+      if (i === fruit.x && j === fruit.y) {
+        context.fillStyle = "#00FF00"; // ???
       }
+      for (var k = 0; k < snake.length; k++) {
+        if (i === snake[k].x && j === snake[k].y) {
+          context.fillStyle = "#FF0000"; // red
+          break;
+        }
+      }
+
+
       var xStart = i * CANVAS_SIZE / GRID_SIZE + 1;
       var yStart = j * CANVAS_SIZE / GRID_SIZE + 1;
       var xLength = CANVAS_SIZE / GRID_SIZE - 2;

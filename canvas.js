@@ -123,7 +123,7 @@ function refresh() {
 }
 
 function moveSnake() {
-  snake[0].direction =
+  snake[0].direction = nextDirection;
   // Move the snake from tail to head.
   for (var i = snake.length - 1; i >= 0; i--) {
     if (snake[i].direction === 'right') {

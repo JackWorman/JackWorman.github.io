@@ -6,6 +6,7 @@ const REFRESH_RATE = 125; // time in milliseconds
 // Globals
 var canvas;
 var context;
+var nextDirection;
 var gameLoop;
 var snake = [];
 var fruit;
@@ -57,25 +58,25 @@ function setUpControls() {
   document.addEventListener('keydown', function(event) {
     if (snake[0].direction === 'left' || snake[0].direction === 'right') {
       if (event.keyCode == 38) {
-        snake[0].direction = 'up';
+        nextDirection = 'up';
       } else if (event.keyCode == 40) {
-        snake[0].direction = 'down';
+        nextDirection = 'down';
       }
     } else if (snake[0].direction === 'up' || snake[0].direction === 'down') {
       if (event.keyCode == 37) {
-        snake[0].direction = 'left';
+        nextDirection = 'left';
       } else if (event.keyCode == 39) {
-        snake[0].direction = 'right';
+        nextDirection = 'right';
       }
     } else {
       if (event.keyCode == 37) { // Left Arrow
-        snake[0].direction = 'left';
+        nextDirection = 'left';
       } else if (event.keyCode == 38) { // Up Arrow
-        snake[0].direction = 'up';
+        nextDirection = 'up';
       } else if (event.keyCode == 39) { // Right Arrow
-        snake[0].direction = 'right';
+        nextDirection = 'right';
       } else if (event.keyCode == 40) { // Down Arrow
-        snake[0].direction = 'down';
+        nextDirection = 'down';
       }
     }
   }, true);
@@ -122,6 +123,7 @@ function refresh() {
 }
 
 function moveSnake() {
+  snake[0].direction =
   // Move the snake from tail to head.
   for (var i = snake.length - 1; i >= 0; i--) {
     if (snake[i].direction === 'right') {

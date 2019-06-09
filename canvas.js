@@ -85,8 +85,8 @@ function placeFruit() {
   var fruitX;
   var fruitY;
   do {
-    fruitX = Math.floor(Math.random() * 50);
-    fruitY = Math.floor(Math.random() * 50);
+    fruitX = Math.floor(Math.random() * GRID_SIZE);
+    fruitY = Math.floor(Math.random() * GRID_SIZE);
     var collison = false;
     for (var i = 0; i < snake.length; i++) {
       if (fruitX === snake[i].x && fruitY === snake[i].y) {

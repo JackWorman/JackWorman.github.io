@@ -22,7 +22,7 @@ $(document).ready(function() {
     }
   }
 
-  nIntervId = setInterval(test, 10);
+  nIntervId = setInterval(display, 10);
 });
 
 function setUpCanvas() {

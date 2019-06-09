@@ -1,16 +1,61 @@
+// Constants
 var CANVAS_SIZE = 750;
 
+// Globals
+var canvas = document.getElementById('myCanvas');
+var context = canvas.getContext('2d');
+var board;
+var nIntervId;
+
 $(document).ready(function() {
-  var canvas = document.getElementById('myCanvas');
+  setUpCanvas();
+
+  var board = new Array(50);
+  for (var i = 0; i < 50; i++) {
+    board[i] = new Array(50);
+    for (var j = 0; j < 50; j++) {
+      board[i][j] = 0;
+    }
+  }
+  board[3][10] = 1;
+
+  nIntervId = setInterval(test, 1000);
+});
+
+function setUpCanvas() {
   canvas.width = CANVAS_SIZE;
   canvas.height = CANVAS_SIZE;
-  var context = canvas.getContext('2d');
+  // Draws a grid onto the canvas.
   for (var i = 1; i < 50; i++) {
-    context.moveTo(0, i * CANVAS_SIZE / 50);
-    context.lineTo(CANVAS_SIZE, i * CANVAS_SIZE / 50);
+    var step = i * CANVAS_SIZE / 50;
+    context.moveTo(0, step);
+    context.lineTo(CANVAS_SIZE, step);
     context.stroke();
-    context.moveTo(i * CANVAS_SIZE / 50, 0);
-    context.lineTo(i * CANVAS_SIZE / 50, CANVAS_SIZE);
+    context.moveTo(step, 0);
+    context.lineTo(step, CANVAS_SIZE);
     context.stroke();
   }
-});
+}
+
+function test() {
+  context.fillStyle = "#FF0000";
+  for (var i = 0; i < 50; i++) {
+    for (var j = 0; j < 50; j++) {
+      if (board[i][j] === 1) {
+        var xStart = i * CANVAS_SIZE / 50
+        var yStart = j * CANVAS_SIZE / 50
+        var xEnd = xStart + CANVAS_SIZE / 50 - 1;
+        var yEnd = yStart + CANVAS_SIZE / 50 - 1
+        context.fillRect(xStart, yStart, xEnd, yEnd);
+      }
+    }
+
+  }
+}
+
+
+
+
+function stopTest() {
+  clearInterval(nIntervId);
+}

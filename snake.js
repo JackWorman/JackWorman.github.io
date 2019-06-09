@@ -14,7 +14,10 @@ var snake = [];
 var fruit;
 var score = 0;
 
-window.location.reload(true);
+if (getCookie("clear_cache") === "") {
+  setCookie("clear_cache", "true", 1 / 24 / 60);
+  window.location.reload(true);
+}
 
 document.addEventListener("DOMContentLoaded", function(){
   canvas = document.getElementById('board');

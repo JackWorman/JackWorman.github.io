@@ -116,13 +116,6 @@ function moveSnake() {
       snake[i].direction = snake[i - 1].direction;
     }
   }
-  // Test if the snake ate a fruit.
-  if (snake[0].x === fruit.x && snake[0].y === fruit.y) {
-    placeFruit();
-    for (var i = 0; i < 5; i++) {
-      snake.push(new Vector(snake[snake.length - 1].x, snake[snake.length - 1].y, 'none'));
-    }
-  }
   // Test if the snake hit a wall or itself.
   var hitSelf = false;
   for (var i = 1; i < snake.length; i++) {
@@ -135,6 +128,13 @@ function moveSnake() {
     clearInterval(gameLoop);
     alert('GAME OVER!');
     return;
+  }
+  // Test if the snake ate a fruit.
+  if (snake[0].x === fruit.x && snake[0].y === fruit.y) {
+    placeFruit();
+    for (var i = 0; i < 5; i++) {
+      snake.push(new Vector(snake[snake.length - 1].x, snake[snake.length - 1].y, 'none'));
+    }
   }
 }
 

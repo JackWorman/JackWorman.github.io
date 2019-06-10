@@ -1,3 +1,8 @@
+if (getCookie("clear_cache") === "") {
+  setCookie("clear_cache", "true", 1 / 24 / 60);
+  window.location.reload(true);
+}
+
 // Constants
 const CANVAS_SIZE = 500; // in pixels
 const GRID_SIZE = 30;
@@ -24,17 +29,14 @@ var rainbow = [
   "rgb(148, 0, 211)",
 ]
 var stopWatch = new StopWatch();
+var divScore;
 
-if (getCookie("clear_cache") === "") {
-  setCookie("clear_cache", "true", 1 / 24 / 60);
-  window.location.reload(true);
-}
-
-document.addEventListener("DOMContentLoaded", function(){
+document.addEventListener("DOMContentLoaded", function() {
   canvas = document.getElementById('board');
   context = canvas.getContext('2d');
+  context.lineCap = 'round';
+  divScore = document.getElementById('score');
   setUpCanvas();
-  setUpBoard();
   setUpControls();
   snake = [new Vector(GRID_SIZE / 2, GRID_SIZE / 2, 'none')];
   placeFruit();
@@ -50,26 +52,16 @@ function setUpCanvas() {
     canvas.style.top = (window.innerHeight - canvas.height) / 2 + "px";
     canvas.style.left = (window.innerWidth - canvas.width) / 2 + "px";
   }
-  // Draws a grid onto the canvas.
-  for (var i = 0; i <= GRID_SIZE; i++) {
-    var step = i * CANVAS_SIZE / GRID_SIZE;
-    context.moveTo(0, step);
-    context.lineTo(CANVAS_SIZE, step);
-    context.stroke();
-    context.moveTo(step, 0);
-    context.lineTo(step, CANVAS_SIZE);
-    context.stroke();
-  }
-}
-
-function setUpBoard() {
-  board = new Array(GRID_SIZE);
-  for (var i = 0; i < GRID_SIZE; i++) {
-    board[i] = new Array(GRID_SIZE);
-    for (var j = 0; j < GRID_SIZE; j++) {
-      board[i][j] = 0;
-    }
-  }
+  // // Draws a grid onto the canvas.
+  // for (var i = 50; i <= GRID_SIZE; i++) {
+  //   var step = Math.round(i * CANVAS_SIZE / GRID_SIZE);
+  //   context.moveTo(0, step);
+  //   context.lineTo(CANVAS_SIZE, step);
+  //   context.stroke();
+  //   context.moveTo(step, 0);
+  //   context.lineTo(step, CANVAS_SIZE);
+  //   context.stroke();
+  // }
 }
 
 function setUpControls() {
@@ -183,9 +175,7 @@ function moveSnake() {
     stopWatch.stop();
     score += Math.ceil(snake.length / stopWatch.getElapsedSeconds());
     stopWatch.start();
-    divScore = document.getElementById('score');
     divScore.textContent = 'Score: ' + score;
-
     placeFruit();
     for (var i = 0; i < GROW_RATE; i++) {
       snake.push(new Vector(snake[snake.length - 1].x, snake[snake.length - 1].y, 'none'));
@@ -198,7 +188,6 @@ function reset() {
   nextDirection = 'none';
   snake = [new Vector(GRID_SIZE / 2, GRID_SIZE / 2, 'none')];
   placeFruit();
-  divScore = document.getElementById('score');
   score = 0;
   divScore.textContent = 'Score: ' + score;
 }

@@ -4,8 +4,11 @@ if (getCookie("clear_cache") === "") {
 }
 
 // Constants
-const CANVAS_SIZE = 500; // in pixels
+const CANVAS_SIZE = 600; // in pixels
 const GRID_SIZE = 30;
+if (CANVAS_SIZE / GRID_SIZE !== Math.round(CANVAS_SIZE / GRID_SIZE)) {
+  alert('CANVAS_SIZE / GRID_SIZE is not a whole number. The canvas might render incorrectly.');
+}
 const FRAMES_PER_SECOND = 15;
 const MILLISECONDS_PER_SECOND = 1000;
 const MILLISECONDS_PER_FRAME = 1 / FRAMES_PER_SECOND * MILLISECONDS_PER_SECOND;
@@ -14,6 +17,7 @@ const GROW_RATE = 5;
 // Globals
 var canvas;
 var context;
+var divScore;
 var nextDirection;
 var gameLoop;
 var snake;
@@ -29,13 +33,13 @@ var rainbow = [
   "rgb(148, 0, 211)",
 ]
 var stopWatch = new StopWatch();
-var divScore;
 
 document.addEventListener("DOMContentLoaded", function() {
   canvas = document.getElementById('board');
   context = canvas.getContext('2d');
   context.lineCap = 'round';
   divScore = document.getElementById('score');
+  updateHighscore();
   setUpCanvas();
   setUpControls();
   snake = [new Vector(GRID_SIZE / 2, GRID_SIZE / 2, 'none')];
@@ -44,24 +48,18 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 function setUpCanvas() {
-  canvas.style.position = "absolute";
   canvas.width = CANVAS_SIZE;
   canvas.height = CANVAS_SIZE;
-  // Position the canvas in the center of the screen.
-  window.onload = window.onresize = function() {
-    canvas.style.top = (window.innerHeight - canvas.height) / 2 + "px";
-    canvas.style.left = (window.innerWidth - canvas.width) / 2 + "px";
+  // Draws a grid onto the canvas.
+  for (var i = 0; i <= GRID_SIZE; i++) {
+    var step = i * CANVAS_SIZE / GRID_SIZE + 0.5;
+    context.moveTo(0.5, step);
+    context.lineTo(CANVAS_SIZE, step);
+    context.stroke();
+    context.moveTo(step, 0.5);
+    context.lineTo(step, CANVAS_SIZE);
+    context.stroke();
   }
-  // // Draws a grid onto the canvas.
-  // for (var i = 50; i <= GRID_SIZE; i++) {
-  //   var step = Math.round(i * CANVAS_SIZE / GRID_SIZE);
-  //   context.moveTo(0, step);
-  //   context.lineTo(CANVAS_SIZE, step);
-  //   context.stroke();
-  //   context.moveTo(step, 0);
-  //   context.lineTo(step, CANVAS_SIZE);
-  //   context.stroke();
-  // }
 }
 
 function setUpControls() {
@@ -130,10 +128,10 @@ function refresh() {
           break;
         }
       }
-      var xStart = i * CANVAS_SIZE / GRID_SIZE + 1;
-      var yStart = j * CANVAS_SIZE / GRID_SIZE + 1;
-      var xLength = CANVAS_SIZE / GRID_SIZE - 2;
-      var yLength = CANVAS_SIZE / GRID_SIZE - 2;
+      var xStart = i * CANVAS_SIZE / GRID_SIZE + 1.5;
+      var yStart = j * CANVAS_SIZE / GRID_SIZE + 1.5;
+      var xLength = CANVAS_SIZE / GRID_SIZE - 1.5;
+      var yLength = CANVAS_SIZE / GRID_SIZE - 1.5;
       context.fillRect(xStart, yStart, xLength, yLength);
     }
   }
@@ -166,6 +164,7 @@ function moveSnake() {
   }
   if (hitSelf || snake[0].x < 0 || snake[0].y < 0 || snake[0].x >= GRID_SIZE || snake[0].y >= GRID_SIZE) {
     alert('GAME OVER!\nScore: ' + score);
+    updateHighscore();
     reset();
     return;
   }
@@ -190,6 +189,22 @@ function reset() {
   placeFruit();
   score = 0;
   divScore.textContent = 'Score: ' + score;
+}
+
+function updateHighscore() {
+  for (var i = 1; i <= 5; i++) {
+    if (Number(getCookie('highscore' + i)) < score) {
+      for (var j = 5; j > i; j--) { // move scores down
+        setCookie('highscore' + j, getCookie('highscore' + (j - 1)), 365);
+      }
+      setCookie('highscore' + i, score, 365);
+      break;
+    }
+  }
+  for (var i = 1; i <= 5; i++) {
+    highscoreX = document.getElementById('highscore' + i);
+    highscoreX.textContent = i + '. ' + getCookie('highscore' + i);
+  }
 }
 
 class Vector {

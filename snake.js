@@ -2,7 +2,8 @@
 const CANVAS_SIZE = 500; // in pixels
 const GRID_SIZE = 30;
 const FRAMES_PER_SECOND = 15;
-const MILLISECONDS_PER_FRAME = 1 / FRAMES_PER_SECOND * 1000;
+const MILLISECONDS_PER_SECOND = 1000;
+const MILLISECONDS_PER_FRAME = 1 / FRAMES_PER_SECOND * MILLISECONDS_PER_SECOND;
 const GROW_RATE = 5;
 
 // Globals
@@ -10,9 +11,19 @@ var canvas;
 var context;
 var nextDirection;
 var gameLoop;
-var snake = [];
+var snake;
 var fruit;
 var score = 0;
+var rainbow = [
+  "rgb(255, 0 , 0)",
+  "rgb(255, 127, 0)",
+  "rgb(255, 255, 0)",
+  "rgb(0, 255, 0)",
+  "rgb(0, 0, 255)",
+  "rgb(75, 0, 130)",
+  "rgb(148, 0, 211)",
+]
+var stopWatch = new StopWatch();
 
 if (getCookie("clear_cache") === "") {
   setCookie("clear_cache", "true", 1 / 24 / 60);
@@ -25,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function(){
   setUpCanvas();
   setUpBoard();
   setUpControls();
-  snake.push(new Vector(GRID_SIZE / 2, GRID_SIZE / 2, 'none'));
+  snake = [new Vector(GRID_SIZE / 2, GRID_SIZE / 2, 'none')];
   placeFruit();
   gameLoop = setInterval(refresh, MILLISECONDS_PER_FRAME);
 });
@@ -91,6 +102,7 @@ function setUpControls() {
       } else if (event.keyCode == 40) { // Down Arrow
         nextDirection = 'down';
       }
+      stopWatch.start();
     }
   }, true);
 }
@@ -116,13 +128,13 @@ function refresh() {
   // Refresh display.
   for (var i = 0; i < GRID_SIZE; i++) {
     for (var j = 0; j < GRID_SIZE; j++) {
-      context.fillStyle = "#FFFFFF"; // White
+      context.fillStyle = "rgb(255, 255, 255)"; // White
       if (i === fruit.x && j === fruit.y) {
-        context.fillStyle = "#00FF00"; // Green
+        context.fillStyle = "rgb(0, 0, 0)"; // Green
       }
       for (var k = 0; k < snake.length; k++) {
         if (i === snake[k].x && j === snake[k].y) {
-          context.fillStyle = "#FF0000"; // Red
+          context.fillStyle = rainbow[k % rainbow.length]; // Red
           break;
         }
       }
@@ -167,14 +179,18 @@ function moveSnake() {
   }
   // Test if the snake ate a fruit.
   if (snake[0].x === fruit.x && snake[0].y === fruit.y) {
+    // Update score.
+    stopWatch.stop();
+    score += Math.ceil(snake.length / stopWatch.getElapsedSeconds());
+    stopWatch.start();
+    divScore = document.getElementById('score');
+    divScore.textContent = 'Score: ' + score;
+
     placeFruit();
     for (var i = 0; i < GROW_RATE; i++) {
       snake.push(new Vector(snake[snake.length - 1].x, snake[snake.length - 1].y, 'none'));
     }
-    // Update score.
-    score += Math.floor(500 * snake.length * (Math.PI - 3));
-    divScore = document.getElementById('score');
-    divScore.textContent = 'Score: ' + score;
+
   }
 }
 

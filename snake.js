@@ -24,9 +24,9 @@ const GRID_SIZE = 30;
 if (CANVAS_SIZE / GRID_SIZE !== Math.round(CANVAS_SIZE / GRID_SIZE)) {
   alert('CANVAS_SIZE / GRID_SIZE is not a whole number. The canvas might render incorrectly.');
 }
-const FRAMES_PER_SECOND = 15;
+var FRAMES_PER_SECOND = 20;
 const MILLISECONDS_PER_SECOND = 1000;
-const MILLISECONDS_PER_FRAME = 1 / FRAMES_PER_SECOND * MILLISECONDS_PER_SECOND;
+var MILLISECONDS_PER_FRAME = 1 / FRAMES_PER_SECOND * MILLISECONDS_PER_SECOND;
 const GROW_RATE = 5;
 
 // Globals
@@ -51,6 +51,8 @@ var rainbow = [
 ]
 var distanceTraveled = 0;
 var smallestDistancePossible;
+var controlsEnabled = false;
+var slider;
 
 document.addEventListener("DOMContentLoaded", function() {
   canvasBackground = document.getElementById('background');
@@ -58,14 +60,30 @@ document.addEventListener("DOMContentLoaded", function() {
   canvasForeground = document.getElementById('foreground');
   contextForeground = canvasForeground.getContext('2d');
   divScore = document.getElementById('score');
-  updateHighscore();
+  slider = document.getElementById("inputDifficulty");
+  slider.onchange = function() {
+    clearInterval(loop);
+    loop = setInterval(gameLoop, 1 / this.value * MILLISECONDS_PER_SECOND);
+  }
+
   setUpBackgroundAndForeground();
+  setUpControls();
+
+  reset();
+});
+
+function reset() {
+  FRAMES_PER_SECOND = slider.value;
+  updateHighscore();
+  nextDirection = 'none';
   snake = [new Vector(GRID_SIZE / 2, GRID_SIZE / 2, 'none')];
   placeFruit();
-
-  setUpControls();
-  gameLoop = setInterval(gameLoop, MILLISECONDS_PER_FRAME);
-});
+  score = 0;
+  divScore.textContent = 'Score: ' + score;
+  renderForeground();
+  loop = setInterval(gameLoop, 1 / FRAMES_PER_SECOND * MILLISECONDS_PER_SECOND);
+  controlsEnabled = true;
+}
 
 function setUpBackgroundAndForeground() {
   // Set canvas's size.
@@ -78,6 +96,7 @@ function setUpBackgroundAndForeground() {
   contextBackground.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
   // Draws a grid onto the canvas.
   contextBackground.fillStyle = "rgb(0, 0, 0)";
+  contextBackground.beginPath();
   for (var i = 0; i <= GRID_SIZE; i++) {
     var step = i * CANVAS_SIZE / GRID_SIZE + 0.5;
     contextBackground.moveTo(0.5, step);
@@ -85,35 +104,37 @@ function setUpBackgroundAndForeground() {
     contextBackground.stroke();
     contextBackground.moveTo(step, 0.5);
     contextBackground.lineTo(step, CANVAS_SIZE);
-    contextBackground.stroke();
+
   }
+  contextBackground.stroke();
 }
 
 function setUpControls() {
   document.addEventListener('keydown', function(event) {
-    if (snake[0].direction === 'left' || snake[0].direction === 'right') {
-      if (event.keyCode == 38) {
-        nextDirection = 'up';
-      } else if (event.keyCode == 40) {
-        nextDirection = 'down';
+    if (controlsEnabled) {
+      if (snake[0].direction === 'left' || snake[0].direction === 'right') {
+        if (event.keyCode == 38) {
+          nextDirection = 'up';
+        } else if (event.keyCode == 40) {
+          nextDirection = 'down';
+        }
+      } else if (snake[0].direction === 'up' || snake[0].direction === 'down') {
+        if (event.keyCode == 37) {
+          nextDirection = 'left';
+        } else if (event.keyCode == 39) {
+          nextDirection = 'right';
+        }
+      } else if (snake[0].direction === 'none') {
+        if (event.keyCode == 37) { // Left Arrow
+          nextDirection = 'left';
+        } else if (event.keyCode == 38) { // Up Arrow
+          nextDirection = 'up';
+        } else if (event.keyCode == 39) { // Right Arrow
+          nextDirection = 'right';
+        } else if (event.keyCode == 40) { // Down Arrow
+          nextDirection = 'down';
+        }
       }
-    } else if (snake[0].direction === 'up' || snake[0].direction === 'down') {
-      if (event.keyCode == 37) {
-        nextDirection = 'left';
-      } else if (event.keyCode == 39) {
-        nextDirection = 'right';
-      }
-    } else {
-      if (event.keyCode == 37) { // Left Arrow
-        nextDirection = 'left';
-      } else if (event.keyCode == 38) { // Up Arrow
-        nextDirection = 'up';
-      } else if (event.keyCode == 39) { // Right Arrow
-        nextDirection = 'right';
-      } else if (event.keyCode == 40) { // Down Arrow
-        nextDirection = 'down';
-      }
-      stopWatch.start();
     }
   }, true);
 }
@@ -135,7 +156,7 @@ function placeFruit() {
   smallestDistancePossible = Math.abs(fruit.x - snake[0].x) + Math.abs(fruit.y - snake[0].y,);
 }
 
-function render() {
+function renderForeground() {
   contextForeground.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
   fillSquare(fruit.x, fruit.y, "rgb(0, 0, 0)");
   for (var i = 0; i < snake.length; i++) {
@@ -172,9 +193,7 @@ function moveSnake() {
   distanceTraveled++;
 }
 
-
-
-function detectCollison() {
+async function detectCollison() {
   // Test if it hit itself.
   var hitSelf = false;
   for (var i = 1; i < snake.length; i++) {
@@ -185,8 +204,9 @@ function detectCollison() {
   }
   // Test if hit a wall.
   if (hitSelf || snake[0].x < 0 || snake[0].y < 0 || snake[0].x >= GRID_SIZE || snake[0].y >= GRID_SIZE) {
-    alert('GAME OVER!\nScore: ' + score);
-    updateHighscore();
+    clearInterval(loop);
+    controlsEnabled = false;
+    await Swal.fire({text: 'Game Over', showConfirmButton: false, timer: 1000});
     reset();
   }
 }
@@ -201,14 +221,6 @@ function detectFruitEaten() {
       snake.push(new Vector(snake[snake.length - 1].x, snake[snake.length - 1].y, 'none'));
     }
   }
-}
-
-function reset() {
-  nextDirection = 'none';
-  snake = [new Vector(GRID_SIZE / 2, GRID_SIZE / 2, 'none')];
-  placeFruit();
-  score = 0;
-  divScore.textContent = 'Score: ' + score;
 }
 
 function updateHighscore() {
@@ -231,5 +243,5 @@ function gameLoop() {
   moveSnake();
   detectCollison();
   detectFruitEaten();
-  render();
+  renderForeground();
 }

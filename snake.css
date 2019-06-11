@@ -38,6 +38,7 @@ html, body {
 
 #canvas-container {
   position: relative;
+   cursor: none;
 }
 
 #background {

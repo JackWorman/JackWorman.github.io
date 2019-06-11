@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <script src="cookies.js"></script>
-    <script src="StopWatch.js"></script>
+    <script src="SweetAlert2.js"></script>
     <script src="snake.js"></script>
     <link rel="stylesheet" type="text/css" href="snake.css">
   </head>
@@ -16,6 +16,9 @@
     <div id="wrapper">
       <div id="directions-container">
         Use the arrow keys.
+        <div class="slidecontainer">
+          <input type="range" min="10" max="30" value="15" class="slider" id="inputDifficulty">
+        </div>
       </div>
       <div id="canvas-container">
         <canvas id="background"></canvas>

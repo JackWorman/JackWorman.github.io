@@ -35,3 +35,21 @@ html, body {
   font-size: 48px;
   text-align: left;
 }
+
+#canvas-container {
+  position: relative;
+}
+
+#background {
+  position: absolute;
+  z-index: 0;
+  top: 0px;
+  left: 0px;
+}
+
+#foreground {
+  position: absolute;
+  z-index: 1;
+  top: 0px;
+  left: 0px;
+}

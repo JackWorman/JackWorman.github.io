@@ -3,6 +3,21 @@ if (getCookie("clear_cache") === "") {
   window.location.reload(true);
 }
 
+class Vector {
+  constructor(x, y, direction) {
+    this.x = x;
+    this.y = y;
+    this.direction = direction;
+  }
+}
+
+class Point {
+  constructor(x, y) {
+    this.x = x;
+    this.y = y;
+  }
+}
+
 // Constants
 const CANVAS_SIZE = 600; // in pixels
 const GRID_SIZE = 30;
@@ -15,8 +30,10 @@ const MILLISECONDS_PER_FRAME = 1 / FRAMES_PER_SECOND * MILLISECONDS_PER_SECOND;
 const GROW_RATE = 5;
 
 // Globals
-var canvas;
-var context;
+var canvasBackground;
+var contextBackground;
+var canvasForeground;
+var contextForeground;
 var divScore;
 var nextDirection;
 var gameLoop;
@@ -24,7 +41,7 @@ var snake;
 var fruit;
 var score = 0;
 var rainbow = [
-  "rgb(255, 0 , 0)",
+  "rgb(255, 0, 0)",
   "rgb(255, 127, 0)",
   "rgb(255, 255, 0)",
   "rgb(0, 255, 0)",
@@ -32,43 +49,47 @@ var rainbow = [
   "rgb(75, 0, 130)",
   "rgb(148, 0, 211)",
 ]
-var stopWatch = new StopWatch();
+var distanceTraveled = 0;
+var smallestDistancePossible;
 
 document.addEventListener("DOMContentLoaded", function() {
-  canvas = document.getElementById('board');
-  context = canvas.getContext('2d');
-  context.lineCap = 'round';
+  canvasBackground = document.getElementById('background');
+  contextBackground = canvasBackground.getContext('2d');
+  canvasForeground = document.getElementById('foreground');
+  contextForeground = canvasForeground.getContext('2d');
   divScore = document.getElementById('score');
   updateHighscore();
-  setUpCanvas();
-  setUpControls();
+  setUpBackgroundAndForeground();
   snake = [new Vector(GRID_SIZE / 2, GRID_SIZE / 2, 'none')];
   placeFruit();
-  gameLoop = setInterval(refresh, MILLISECONDS_PER_FRAME);
+
+  setUpControls();
+  gameLoop = setInterval(gameLoop, MILLISECONDS_PER_FRAME);
 });
 
-function setUpCanvas() {
-  canvas.width = CANVAS_SIZE;
-  canvas.height = CANVAS_SIZE;
+function setUpBackgroundAndForeground() {
+  // Set canvas's size.
+  canvasBackground.width = CANVAS_SIZE;
+  canvasBackground.height = CANVAS_SIZE;
+  canvasForeground.width = CANVAS_SIZE;
+  canvasForeground.height = CANVAS_SIZE;
+  // Draws a white background.
+  contextBackground.fillStyle = "rgb(255, 255, 255)";
+  contextBackground.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
   // Draws a grid onto the canvas.
+  contextBackground.fillStyle = "rgb(0, 0, 0)";
   for (var i = 0; i <= GRID_SIZE; i++) {
     var step = i * CANVAS_SIZE / GRID_SIZE + 0.5;
-    context.moveTo(0.5, step);
-    context.lineTo(CANVAS_SIZE, step);
-    context.stroke();
-    context.moveTo(step, 0.5);
-    context.lineTo(step, CANVAS_SIZE);
-    context.stroke();
+    contextBackground.moveTo(0.5, step);
+    contextBackground.lineTo(CANVAS_SIZE, step);
+    contextBackground.stroke();
+    contextBackground.moveTo(step, 0.5);
+    contextBackground.lineTo(step, CANVAS_SIZE);
+    contextBackground.stroke();
   }
 }
 
 function setUpControls() {
-  /**
-   * 37 = Left Arrow
-   * 38 = Up Arrow
-   * 39 = Right Arrow
-   * 40 = Down Arrow
-  */
   document.addEventListener('keydown', function(event) {
     if (snake[0].direction === 'left' || snake[0].direction === 'right') {
       if (event.keyCode == 38) {
@@ -111,30 +132,24 @@ function placeFruit() {
     }
   } while (collison);
   fruit = new Point(fruitX, fruitY);
+  smallestDistancePossible = Math.abs(fruit.x - snake[0].x) + Math.abs(fruit.y - snake[0].y,);
 }
 
-function refresh() {
-  moveSnake();
-  // Refresh display.
-  for (var i = 0; i < GRID_SIZE; i++) {
-    for (var j = 0; j < GRID_SIZE; j++) {
-      context.fillStyle = "rgb(255, 255, 255)"; // White
-      if (i === fruit.x && j === fruit.y) {
-        context.fillStyle = "rgb(0, 0, 0)"; // Green
-      }
-      for (var k = 0; k < snake.length; k++) {
-        if (i === snake[k].x && j === snake[k].y) {
-          context.fillStyle = rainbow[k % rainbow.length]; // Red
-          break;
-        }
-      }
-      var xStart = i * CANVAS_SIZE / GRID_SIZE + 1.5;
-      var yStart = j * CANVAS_SIZE / GRID_SIZE + 1.5;
-      var xLength = CANVAS_SIZE / GRID_SIZE - 1.5;
-      var yLength = CANVAS_SIZE / GRID_SIZE - 1.5;
-      context.fillRect(xStart, yStart, xLength, yLength);
-    }
+function render() {
+  contextForeground.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
+  fillSquare(fruit.x, fruit.y, "rgb(0, 0, 0)");
+  for (var i = 0; i < snake.length; i++) {
+    fillSquare(snake[i].x, snake[i].y, rainbow[i % rainbow.length]);
   }
+}
+
+function fillSquare(x, y, color) {
+  contextForeground.fillStyle = color;
+  var xStart = x * CANVAS_SIZE / GRID_SIZE + 0.5;
+  var yStart = y * CANVAS_SIZE / GRID_SIZE + 0.5;
+  var xLength = CANVAS_SIZE / GRID_SIZE;
+  var yLength = CANVAS_SIZE / GRID_SIZE;
+  contextForeground.fillRect(xStart, yStart, xLength, yLength);
 }
 
 function moveSnake() {
@@ -154,7 +169,13 @@ function moveSnake() {
       snake[i].direction = snake[i - 1].direction;
     }
   }
-  // Test if the snake hit a wall or itself.
+  distanceTraveled++;
+}
+
+
+
+function detectCollison() {
+  // Test if it hit itself.
   var hitSelf = false;
   for (var i = 1; i < snake.length; i++) {
     if (snake[0].x === snake[i].x && snake[0].y === snake[i].y) {
@@ -162,24 +183,23 @@ function moveSnake() {
       break;
     }
   }
+  // Test if hit a wall.
   if (hitSelf || snake[0].x < 0 || snake[0].y < 0 || snake[0].x >= GRID_SIZE || snake[0].y >= GRID_SIZE) {
     alert('GAME OVER!\nScore: ' + score);
     updateHighscore();
     reset();
-    return;
   }
-  // Test if the snake ate a fruit.
+}
+
+function detectFruitEaten() {
   if (snake[0].x === fruit.x && snake[0].y === fruit.y) {
-    // Update score.
-    stopWatch.stop();
-    score += Math.ceil(snake.length / stopWatch.getElapsedSeconds());
-    stopWatch.start();
+    score += Math.ceil(snake.length / (distanceTraveled / smallestDistancePossible));
     divScore.textContent = 'Score: ' + score;
+    distanceTraveled = 0;
     placeFruit();
     for (var i = 0; i < GROW_RATE; i++) {
       snake.push(new Vector(snake[snake.length - 1].x, snake[snake.length - 1].y, 'none'));
     }
-
   }
 }
 
@@ -195,9 +215,9 @@ function updateHighscore() {
   for (var i = 1; i <= 5; i++) {
     if (Number(getCookie('highscore' + i)) < score) {
       for (var j = 5; j > i; j--) { // move scores down
-        setCookie('highscore' + j, getCookie('highscore' + (j - 1)), 365);
+        setCookie('highscore' + j, getCookie('highscore' + (j - 1)), 1000);
       }
-      setCookie('highscore' + i, score, 365);
+      setCookie('highscore' + i, score, 1000);
       break;
     }
   }
@@ -207,17 +227,9 @@ function updateHighscore() {
   }
 }
 
-class Vector {
-  constructor(x, y, direction) {
-    this.x = x;
-    this.y = y;
-    this.direction = direction;
-  }
-}
-
-class Point {
-  constructor(x, y) {
-    this.x = x;
-    this.y = y;
-  }
+function gameLoop() {
+  moveSnake();
+  detectCollison();
+  detectFruitEaten();
+  render();
 }

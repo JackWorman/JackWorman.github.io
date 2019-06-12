@@ -52,6 +52,7 @@ var distanceTraveled;
 var smallestDistancePossible;
 var controlsEnabled;
 var framesPerSecond;
+var inputQueuingEnabled = true;
 
 document.addEventListener("DOMContentLoaded", function() {
   // Get DOM elements
@@ -72,7 +73,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
 function reset() {
   updateHighscore();
-  nextDirection = 'none';
+  nextDirection = [];
   // Place objects.
   snake = [new Vector(GRID_SIZE / 2, GRID_SIZE / 2, 'none')];
   placeFruit();
@@ -112,28 +113,67 @@ function setUpBackgroundAndForeground() {
 function setUpControls() {
   document.addEventListener('keydown', function(event) {
     if (controlsEnabled) {
-      if (snake[0].direction === 'left' || snake[0].direction === 'right') {
-        if (event.keyCode == 38) {
-          nextDirection = 'up';
-        } else if (event.keyCode == 40) {
-          nextDirection = 'down';
+      if (inputQueuingEnabled) {
+        var dir;
+        if (nextDirection.length === 0) {
+          dir = snake[0].direction;
+        } else {
+          dir = nextDirection[nextDirection.length - 1]
         }
-      } else if (snake[0].direction === 'up' || snake[0].direction === 'down') {
-        if (event.keyCode == 37) {
-          nextDirection = 'left';
-        } else if (event.keyCode == 39) {
-          nextDirection = 'right';
+        if (dir === 'left' || dir === 'right') {
+          if (event.keyCode == 38) {
+            nextDirection.push('up');
+          } else if (event.keyCode == 40) {
+            nextDirection.push('down');
+          }
+        } else if (dir === 'up' || dir === 'down') {
+          if (event.keyCode == 37) {
+            nextDirection.push('left');
+          } else if (event.keyCode == 39) {
+            nextDirection.push('right');
+          }
+        } else if (dir === 'none') {
+          if (event.keyCode == 37) { // Left Arrow
+            nextDirection.push('left');
+          } else if (event.keyCode == 38) { // Up Arrow
+            nextDirection.push('up');
+          } else if (event.keyCode == 39) { // Right Arrow
+            nextDirection.push('right');
+          } else if (event.keyCode == 40) { // Down Arrow
+            nextDirection.push('down');
+          }
         }
-      } else if (snake[0].direction === 'none') {
-        if (event.keyCode == 37) { // Left Arrow
-          nextDirection = 'left';
-        } else if (event.keyCode == 38) { // Up Arrow
-          nextDirection = 'up';
-        } else if (event.keyCode == 39) { // Right Arrow
-          nextDirection = 'right';
-        } else if (event.keyCode == 40) { // Down Arrow
-          nextDirection = 'down';
+      } else {
+        if (snake[0].direction === 'left' || snake[0].direction === 'right') {
+          if (event.keyCode == 38) {
+            nextDirection.push('up');
+          } else if (event.keyCode == 40) {
+            nextDirection.push('down');
+          }
+        } else if (snake[0].direction === 'up' || snake[0].direction === 'down') {
+          if (event.keyCode == 37) {
+            nextDirection.push('left');
+          } else if (event.keyCode == 39) {
+            nextDirection.push('right');
+          }
+        } else if (snake[0].direction === 'none') {
+          if (event.keyCode == 37) { // Left Arrow
+            nextDirection.push('left');
+          } else if (event.keyCode == 38) { // Up Arrow
+            nextDirection.push('up');
+          } else if (event.keyCode == 39) { // Right Arrow
+            nextDirection.push('right');
+          } else if (event.keyCode == 40) { // Down Arrow
+            nextDirection.push('down');
+          }
         }
+      }
+
+
+      if (nextDirection.length === 0) {
+
+      } else {
+
       }
     }
   }, true);
@@ -174,7 +214,10 @@ function fillSquare(x, y, color) {
 }
 
 function moveSnake() {
-  snake[0].direction = nextDirection;
+  var direction =  nextDirection.shift();
+  if (direction) {
+    snake[0].direction = direction;
+  }
   // Move the snake from tail to head.
   for (var i = snake.length - 1; i >= 0; i--) {
     if (snake[i].direction === 'right') {
@@ -270,4 +313,17 @@ async function chooseDifficulty() {
     framesPerSecond = value;
   }
   loop = setInterval(gameLoop, MILLISECONDS_PER_SECOND / framesPerSecond);
+}
+
+async function changeSettings() {
+  const {value: enable} = await Swal.fire({
+    title: 'Settings',
+    input: 'checkbox',
+    inputValue: inputQueuingEnabled,
+    inputPlaceholder: 'Enable Input Queuing',
+    confirmButtonText: 'Save'
+  });
+  if (enable !== undefined) {
+    inputQueuingEnabled = enable;
+  }
 }

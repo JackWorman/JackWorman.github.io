@@ -1,3 +1,4 @@
+// Force a refresh from server.
 if (getCookie("clear_cache") === "") {
   setCookie("clear_cache", "true", 1 / 24 / 60);
   window.location.reload(true);
@@ -24,9 +25,7 @@ const GRID_SIZE = 30;
 if (CANVAS_SIZE / GRID_SIZE !== Math.round(CANVAS_SIZE / GRID_SIZE)) {
   alert('CANVAS_SIZE / GRID_SIZE is not a whole number. The canvas might render incorrectly.');
 }
-var FRAMES_PER_SECOND = 20;
 const MILLISECONDS_PER_SECOND = 1000;
-var MILLISECONDS_PER_FRAME = 1 / FRAMES_PER_SECOND * MILLISECONDS_PER_SECOND;
 const GROW_RATE = 5;
 
 // Globals
@@ -39,7 +38,7 @@ var nextDirection;
 var gameLoop;
 var snake;
 var fruit;
-var score = 0;
+var score;
 var rainbow = [
   "rgb(255, 0, 0)",
   "rgb(255, 127, 0)",
@@ -49,22 +48,21 @@ var rainbow = [
   "rgb(75, 0, 130)",
   "rgb(148, 0, 211)",
 ]
-var distanceTraveled = 0;
+var distanceTraveled;
 var smallestDistancePossible;
-var controlsEnabled = false;
-var slider;
+var controlsEnabled;
+var framesPerSecond;
 
 document.addEventListener("DOMContentLoaded", function() {
+  // Get DOM elements
   canvasBackground = document.getElementById('background');
   contextBackground = canvasBackground.getContext('2d');
   canvasForeground = document.getElementById('foreground');
   contextForeground = canvasForeground.getContext('2d');
   divScore = document.getElementById('score');
-  slider = document.getElementById("inputDifficulty");
-  slider.onchange = function() {
-    clearInterval(loop);
-    loop = setInterval(gameLoop, 1 / this.value * MILLISECONDS_PER_SECOND);
-  }
+  // Initialize variables
+  framesPerSecond = 15;
+  controlsEnabled = false;
 
   setUpBackgroundAndForeground();
   setUpControls();
@@ -73,15 +71,17 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 function reset() {
-  FRAMES_PER_SECOND = slider.value;
   updateHighscore();
   nextDirection = 'none';
+  // Place objects.
   snake = [new Vector(GRID_SIZE / 2, GRID_SIZE / 2, 'none')];
   placeFruit();
+  // Reset score variables.
+  distanceTraveled = 0;
   score = 0;
   divScore.textContent = 'Score: ' + score;
   renderForeground();
-  loop = setInterval(gameLoop, 1 / FRAMES_PER_SECOND * MILLISECONDS_PER_SECOND);
+  loop = setInterval(gameLoop, MILLISECONDS_PER_SECOND / framesPerSecond);
   controlsEnabled = true;
 }
 
@@ -213,7 +213,7 @@ async function detectCollison() {
 
 function detectFruitEaten() {
   if (snake[0].x === fruit.x && snake[0].y === fruit.y) {
-    score += Math.ceil(snake.length / (distanceTraveled / smallestDistancePossible));
+    score += Math.ceil(snake.length * smallestDistancePossible / distanceTraveled * framesPerSecond);
     divScore.textContent = 'Score: ' + score;
     distanceTraveled = 0;
     placeFruit();
@@ -228,14 +228,18 @@ function updateHighscore() {
     if (Number(getCookie('highscore' + i)) < score) {
       for (var j = 5; j > i; j--) { // move scores down
         setCookie('highscore' + j, getCookie('highscore' + (j - 1)), 1000);
+        setCookie('highscoreFPS' + j, getCookie('highscoreFPS' + (j - 1)), 1000);
       }
       setCookie('highscore' + i, score, 1000);
+      setCookie('highscoreFPS' + i, framesPerSecond, 1000);
       break;
     }
   }
   for (var i = 1; i <= 5; i++) {
-    highscoreX = document.getElementById('highscore' + i);
-    highscoreX.textContent = i + '. ' + getCookie('highscore' + i);
+    if (Number(getCookie('highscore' + i))) {
+      highscoreX = document.getElementById('highscore' + i);
+      highscoreX.textContent = i + '. ' + getCookie('highscore' + i) + ' - ' + getCookie('highscoreFPS' + i) + 'FPS';
+    }
   }
 }
 
@@ -244,4 +248,26 @@ function gameLoop() {
   detectCollison();
   detectFruitEaten();
   renderForeground();
+}
+
+function showDirections() {
+  Swal.fire('Use the arrow keys to turn.\nThe score increases each time you eat a fruit.\nHigher FPS = more points\nInefficent Route = less points');
+}
+
+async function chooseDifficulty() {
+  clearInterval(loop);
+  const {value: value} = await Swal.fire({
+    title: 'Frames per Second',
+    input: 'range',
+    inputAttributes: {
+      min: 5,
+      max: 60,
+      step: 5
+    },
+    inputValue: framesPerSecond
+  });
+  if (value) {
+    framesPerSecond = value;
+  }
+  loop = setInterval(gameLoop, MILLISECONDS_PER_SECOND / framesPerSecond);
 }

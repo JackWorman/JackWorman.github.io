@@ -15,10 +15,8 @@
     </div>
     <div id="wrapper">
       <div id="directions-container">
-        Use the arrow keys.
-        <div class="slidecontainer">
-          <input type="range" min="10" max="30" value="15" class="slider" id="inputDifficulty">
-        </div>
+        <button onclick="showDirections()">Directions</button>
+        <button onclick="chooseDifficulty()">Choose Difficulty</button>
       </div>
       <div id="canvas-container">
         <canvas id="background"></canvas>
@@ -27,15 +25,15 @@
       <div id="highscore-container">
         Your Top 5 Scores:
         <br>
-        <span id="highscore1">1. 0</span>
+        <span id="highscore1"></span>
         <br>
-        <span id="highscore2">2. 0</span>
+        <span id="highscore2"></span>
         <br>
-        <span id="highscore3">3. 0</span>
+        <span id="highscore3"></span>
         <br>
-        <span id="highscore4">4. 0</span>
+        <span id="highscore4"></span>
         <br>
-        <span id="highscore5">5. 0</span>
+        <span id="highscore5"></span>
       </div>
     </div>
   </body>

@@ -27,6 +27,15 @@ if (CANVAS_SIZE / GRID_SIZE !== Math.round(CANVAS_SIZE / GRID_SIZE)) {
 }
 const MILLISECONDS_PER_SECOND = 1000;
 const GROW_RATE = 5;
+const RAINBOW = [
+  "rgb(255, 0, 0)",
+  "rgb(255, 127, 0)",
+  "rgb(255, 255, 0)",
+  "rgb(0, 255, 0)",
+  "rgb(0, 0, 255)",
+  "rgb(75, 0, 130)",
+  "rgb(148, 0, 211)",
+]
 
 // Globals
 var canvasBackground;
@@ -39,20 +48,12 @@ var gameLoop;
 var snake;
 var fruit;
 var score;
-var rainbow = [
-  "rgb(255, 0, 0)",
-  "rgb(255, 127, 0)",
-  "rgb(255, 255, 0)",
-  "rgb(0, 255, 0)",
-  "rgb(0, 0, 255)",
-  "rgb(75, 0, 130)",
-  "rgb(148, 0, 211)",
-]
 var distanceTraveled;
 var smallestDistancePossible;
 var controlsEnabled;
 var framesPerSecond;
-var inputQueuingEnabled = true;
+var inputQueuing = true;
+var showGrid = false;
 
 document.addEventListener("DOMContentLoaded", function() {
   // Get DOM elements
@@ -81,6 +82,7 @@ function reset() {
   distanceTraveled = 0;
   score = 0;
   divScore.textContent = 'Score: ' + score;
+  //
   renderForeground();
   loop = setInterval(gameLoop, MILLISECONDS_PER_SECOND / framesPerSecond);
   controlsEnabled = true;
@@ -96,24 +98,13 @@ function setUpBackgroundAndForeground() {
   contextBackground.fillStyle = "rgb(255, 255, 255)";
   contextBackground.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
   // Draws a grid onto the canvas.
-  contextBackground.fillStyle = "rgb(0, 0, 0)";
-  contextBackground.beginPath();
-  for (var i = 0; i <= GRID_SIZE; i++) {
-    var step = i * CANVAS_SIZE / GRID_SIZE + 0.5;
-    contextBackground.moveTo(0.5, step);
-    contextBackground.lineTo(CANVAS_SIZE, step);
-    contextBackground.stroke();
-    contextBackground.moveTo(step, 0.5);
-    contextBackground.lineTo(step, CANVAS_SIZE);
-
-  }
-  contextBackground.stroke();
+  renderBackground();
 }
 
 function setUpControls() {
   document.addEventListener('keydown', function(event) {
     if (controlsEnabled) {
-      if (inputQueuingEnabled) {
+      if (inputQueuing) {
         var dir;
         if (nextDirection.length === 0) {
           dir = snake[0].direction;
@@ -200,7 +191,7 @@ function renderForeground() {
   contextForeground.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
   fillSquare(fruit.x, fruit.y, "rgb(0, 0, 0)");
   for (var i = 0; i < snake.length; i++) {
-    fillSquare(snake[i].x, snake[i].y, rainbow[i % rainbow.length]);
+    fillSquare(snake[i].x, snake[i].y, RAINBOW[i % RAINBOW.length]);
   }
 }
 
@@ -316,14 +307,49 @@ async function chooseDifficulty() {
 }
 
 async function changeSettings() {
-  const {value: enable} = await Swal.fire({
+  function isChecked(setting) {
+    return setting ? 'checked' : '';
+  }
+  const {value: settings} = await Swal.fire({
     title: 'Settings',
-    input: 'checkbox',
-    inputValue: inputQueuingEnabled,
-    inputPlaceholder: 'Enable Input Queuing',
-    confirmButtonText: 'Save'
+    html:
+      '<div class="form-check">' +
+        '<input class="form-check-input" type="checkbox" ' + isChecked(showGrid) + ' id="inputShowGrid">' +
+        '<label class="form-check-label" for="checkbox1">Show Grid</label>' +
+      '</div>' +
+      '<div class="form-check">' +
+        '<input class="form-check-input" type="checkbox" ' + isChecked(inputQueuing) + ' id="inputInputQueuing">' +
+        '<label class="form-check-label" for="checkbox2">Input Queuing</label>' +
+      '</div>',
+    focusConfirm: true,
+    preConfirm: () => {
+      return {
+        showGrid: document.getElementById('inputShowGrid').checked,
+        inputQueuing: document.getElementById('inputInputQueuing').checked
+      }
+    }
   });
-  if (enable !== undefined) {
-    inputQueuingEnabled = enable;
+  if (settings !== undefined) {
+    inputQueuing = settings.inputQueuing;
+    showGrid = settings.showGrid;
+    renderBackground();
+  }
+}
+
+function renderBackground() {
+  if (showGrid) {
+    contextBackground.fillStyle = "rgb(0, 0, 0)";
+    contextBackground.beginPath();
+    for (var i = 0; i <= GRID_SIZE; i++) {
+      var step = i * CANVAS_SIZE / GRID_SIZE + 0.5;
+      contextBackground.moveTo(0.5, step);
+      contextBackground.lineTo(CANVAS_SIZE, step);
+      contextBackground.moveTo(step, 0.5);
+      contextBackground.lineTo(step, CANVAS_SIZE);
+    }
+    contextBackground.stroke();
+  } else {
+    contextBackground.fillStyle = "rgb(255, 255, 255)";
+    contextBackground.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
   }
 }

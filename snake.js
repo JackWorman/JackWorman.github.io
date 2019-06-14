@@ -213,7 +213,8 @@ function placeFruit() {
 
 function gameLoop() {
   if (AI_ENABLED) {
-    snakeAI();
+    //snakeAI();
+    snakeAI2();
   }
   moveSnake();
   detectCollison();
@@ -415,8 +416,67 @@ function detectCollisonAI() {
 
 function enableDisableAI() {
   AI_ENABLED = !AI_ENABLED;
+
+}
+var neuralNetwork = new NeuralNetwork(30 * 30 + 30 * 30, 4);
+neuralNetwork.initializeWeightsAndBiases();
+
+function snakeAI2() {
+  // feed input
+  for (var x = 0; x < GRID_SIZE; x++) {
+    for (var y = 0; y < GRID_SIZE; y++) {
+      neuralNetwork.inputs.elements[x * 30 + y][0] = 0; // fruit checker inputs
+      neuralNetwork.inputs.elements[30 * 30 + x * 30 + y][0] = 0; // snake checker inputs
+    }
+  }
+  neuralNetwork.inputs.elements[fruit.x * 30 + fruit.y][0] = 1;
+  for (var i = 0; i < snake.length; i++) {
+    neuralNetwork.inputs.elements[30 * 30 + snake[i].x * 30 + snake[i].y][0] = 1;
+  }
+  // calculate outputs
+  neuralNetwork.calculateOutputs();
+  // select direction
+  var status = new Array();
+  status.push({direction: 'right', val: neuralNetwork.outputs.elements[0][0]});
+  status.push({direction: 'up', val: neuralNetwork.outputs.elements[1][0]});
+  status.push({direction: 'down', val: neuralNetwork.outputs.elements[2][0]});
+  status.push({direction: 'left', val: neuralNetwork.outputs.elements[3][0]});
+  status.sort(function(a, b) {
+    return a.val - b.val;
+  });
+
+  if (snake[0].direction === 'right' && status[3].direction === 'left') {
+    nextDirection.push(status[2].direction);
+  } else if (snake[0].direction === 'left' && status[3].direction === 'right') {
+    nextDirection.push(status[2].direction);
+  } else if (snake[0].direction === 'up' && status[3].direction === 'down') {
+    nextDirection.push(status[2].direction);
+  } else if (snake[0].direction === 'down' && status[3].direction === 'up') {
+    nextDirection.push(status[2].direction);
+  } else {
+   nextDirection.push(status[3].direction);
+  }
+
 }
 
-// MACHINE LEARNING
-// INPUTS: 30 by 30 grid, head location, food location
-// OUTPUTS: up, down, left, or right
+function indexOfMax(arr) {
+    if (arr.length === 0) {
+        return -1;
+    }
+    var max = arr[0];
+    var maxIndex = 0;
+    for (var i = 1; i < arr.length; i++) {
+        if (arr[i] > max) {
+            maxIndex = i;
+            max = arr[i];
+        }
+    }
+    return maxIndex;
+}
+
+function getSortedKeys(obj) {
+    var keys = keys = Object.keys(obj);
+    return keys.sort(function(a, b) {
+      return obj[b] - obj[a];
+    });
+}

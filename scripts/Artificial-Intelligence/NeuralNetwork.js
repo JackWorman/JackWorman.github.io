@@ -24,7 +24,10 @@ class NeuralNetwork {
     for (var row = 0; row < m.numRows; row++) {
       m.elements[row][0] = 1 / (1 + Math.pow(Math.E, -1 * m.elements[row][0]));
     }
-
     return m;
+  }
+
+  mutate(rate) {
+
   }
 }

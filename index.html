@@ -16,16 +16,21 @@
     <div id="title-container">
       <span class="rainbow">Rainbow Snake</span>
       <br>
-      <span id="score" class="rainbow">Score: 0</span>
-      <br>
-      <span id="ea" class"rainbow"></span>
+      <span id="scoreBoard" class="rainbow">Score: 0</span>
+
     </div>
     <div id="wrapper">
       <div id="directions-container">
         <button onclick="showDirections()">Directions</button>
         <button onclick="chooseDifficulty()">Difficulty</button>
         <button onclick="changeSettings()">Settings</button>
-        <button onclick="enableDisableAI()">Enable/Disable AI</button>
+
+        <div id="ai-container">
+          <button onclick="enableDisableAI()">Enable/Disable AI</button>
+          <br>
+          <span id="ea" class"rainbow"></span>
+        </div>
+
       </div>
       <div id="canvas-container">
         <canvas id="background"></canvas>

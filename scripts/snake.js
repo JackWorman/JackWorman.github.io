@@ -35,23 +35,24 @@ const RAINBOW = [
   "rgb(75, 0, 130)",
   "rgb(148, 0, 211)",
 ]
+const DIRECTIONS = ['left', 'up', 'right', 'down'];
 
 // DOM Elements
 var canvasBackground;
 var contextBackground;
 var canvasForeground;
 var contextForeground;
-var divScore;
+var scoreBoard;
 
 // Globals
-var nextDirectionQueue;
+var directionQueue;
 var gameLoop;
 var snake;
 var fruit;
-var score;
+var score = 0;
 var distanceTraveled;
 var smallestDistancePossible;
-var controlsEnabled;
+var controlsEnabled = false;
 
 document.addEventListener("DOMContentLoaded", function() {
   if (CANVAS_SIZE / GRID_SIZE !== Math.round(CANVAS_SIZE / GRID_SIZE)) {
@@ -62,19 +63,18 @@ document.addEventListener("DOMContentLoaded", function() {
   contextBackground = canvasBackground.getContext('2d');
   canvasForeground = document.getElementById('foreground');
   contextForeground = canvasForeground.getContext('2d');
-  divScore = document.getElementById('score');
+  scoreBoard = document.getElementById('scoreBoard');
   divea = document.getElementById('ea');
-  // Initialize variables
-  controlsEnabled = false;
 
   setUpBackgroundAndForeground();
   setUpControls();
 
-  evAlgor = new EvolutionaryAlgorithm(100, 1800, 4);
-  evAlgor.initializeAllNeuralNetworks();
+  evolAlg = new EvolutionaryAlgorithm(2000, 14, 8, 4);
+  evolAlg.initializeAllNeuralNetworks();
 
   reset();
 });
+
 function setUpBackgroundAndForeground() {
   // Set canvas's size.
   canvasBackground.width = CANVAS_SIZE;
@@ -82,12 +82,12 @@ function setUpBackgroundAndForeground() {
   canvasForeground.width = CANVAS_SIZE;
   canvasForeground.height = CANVAS_SIZE;
   // Draws a white background.
-  contextBackground.fillStyle = WHITE;
-  contextBackground.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
-  // Draws a grid onto the canvas.
   renderBackground();
 }
+
 function renderBackground() {
+  contextBackground.fillStyle = WHITE;
+  contextBackground.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
   if (showGrid) {
     contextBackground.fillStyle = BLACK;
     contextBackground.beginPath();
@@ -99,94 +99,91 @@ function renderBackground() {
       contextBackground.lineTo(step, CANVAS_SIZE);
     }
     contextBackground.stroke();
-  } else {
-    contextBackground.fillStyle = WHITE;
-    contextBackground.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
   }
 }
+
 function setUpControls() {
   document.addEventListener('keydown', function(event) {
-    if (!controlsEnabled) {
+    if (!controlsEnabled || (event.keyCode !== 37 && event.keyCode !== 38 && event.keyCode !== 39 && event.keyCode !== 40)) {
       return;
     }
     if (inputQueuing) {
-      var dir = nextDirectionQueue.length ? nextDirectionQueue[nextDirectionQueue.length - 1] : snake[0].direction;
+      var dir = directionQueue.length ? directionQueue[directionQueue.length - 1] : snake[0].direction;
       if (dir === 'left' || dir === 'right') {
-        if (event.keyCode == 38) {
-          nextDirectionQueue.push('up');
-        } else if (event.keyCode == 40) {
-          nextDirectionQueue.push('down');
+        if (event.keyCode === 38) {
+          directionQueue.push('up');
+        } else if (event.keyCode === 40) {
+          directionQueue.push('down');
         }
       } else if (dir === 'up' || dir === 'down') {
-        if (event.keyCode == 37) {
-          nextDirectionQueue.push('left');
-        } else if (event.keyCode == 39) {
-          nextDirectionQueue.push('right');
+        if (event.keyCode === 37) {
+          directionQueue.push('left');
+        } else if (event.keyCode === 39) {
+          directionQueue.push('right');
         }
       } else if (dir === 'none') {
-        if (event.keyCode == 37) {
-          nextDirectionQueue.push('left');
-        } else if (event.keyCode == 38) {
-          nextDirectionQueue.push('up');
-        } else if (event.keyCode == 39) {
-          nextDirectionQueue.push('right');
-        } else if (event.keyCode == 40) {
-          nextDirectionQueue.push('down');
-        }
+        directionQueue.push(DIRECTIONS[event.keyCode - 37]);
       }
     } else {
       if (snake[0].direction === 'left' || snake[0].direction === 'right') {
-        if (event.keyCode == 38) {
-          nextDirectionQueue.push('up');
-        } else if (event.keyCode == 40) {
-          nextDirectionQueue.push('down');
+        if (event.keyCode === 38) {
+          directionQueue.push('up');
+        } else if (event.keyCode === 40) {
+          directionQueue.push('down');
         }
       } else if (snake[0].direction === 'up' || snake[0].direction === 'down') {
-        if (event.keyCode == 37) {
-          nextDirectionQueue.push('left');
-        } else if (event.keyCode == 39) {
-          nextDirectionQueue.push('right');
+        if (event.keyCode === 37) {
+          directionQueue.push('left');
+        } else if (event.keyCode === 39) {
+          directionQueue.push('right');
         }
       } else if (snake[0].direction === 'none') {
-        if (event.keyCode == 37) {
-          nextDirectionQueue.push('left');
-        } else if (event.keyCode == 38) {
-          nextDirectionQueue.push('up');
-        } else if (event.keyCode == 39) {
-          nextDirectionQueue.push('right');
-        } else if (event.keyCode == 40) {
-          nextDirectionQueue.push('down');
-        }
+        directionQueue.push(DIRECTIONS[event.keyCode - 37]);
       }
     }
   }, true);
 }
 
 function reset() {
-  if (aiEnabled) {
-    numMovementsSinceFruit = 0;
-    framesPerSecond = 1000;
-    if (evAlgor.activeSpecies === evAlgor.neuralNetworks.length - 1) {
-      evAlgor.sort();
-      console.log('Best of generation ' + evAlgor.generation + ': ' + evAlgor.neuralNetworks[0].fitness);
+  if (aiEnabled) { // move to ai controller
+    if (evolAlg.species < 0) {
+
+    } else {
+      evolAlg.nN[evolAlg.species].fitness = score;
     }
-    evAlgor.activeSpecies++;
-    divea.textContent = evAlgor.generation + ' - ' + evAlgor.activeSpecies;
+    numMovementsSinceFruit = 0;
+    //framesPerSecond = 1000;
+    if (evolAlg.species === evolAlg.nN.length - 1) {
+      evolAlg.sort();
+      var sum = 0;
+      for (var i = 0; i < evolAlg.nN.length; i++) {
+        sum += evolAlg.nN[i].fitness;
+      }
+      console.log('Best of generation ' + evolAlg.gen + ': ' + evolAlg.nN[0].fitness);
+      console.log('Average of generation ' + evolAlg.gen + ': ' + sum / evolAlg.nN.length);
+      evolAlg.mutate();
+      evolAlg.gen++;
+      evolAlg.species = -1;
+    }
+    evolAlg.species++;
+    divea.textContent = 'Generation: ' + evolAlg.gen + ', Species: ' + evolAlg.species;
   }
+
   updateHighscore();
-  nextDirectionQueue = [];
+  directionQueue = [];
   // Place objects.
   snake = [new Vector(GRID_SIZE / 2, GRID_SIZE / 2, 'none')];
   placeFruit();
   // Reset score variables.
   distanceTraveled = 0;
   score = 0;
-  divScore.textContent = 'Score: ' + score;
+  scoreBoard.textContent = 'Score: ' + score;
   //
   renderForeground();
   loop = setInterval(gameLoop, MILLISECONDS_PER_SECOND / framesPerSecond);
   controlsEnabled = true;
 }
+
 function updateHighscore() {
   for (var i = 1; i <= 5; i++) {
     if (Number(getCookie('highscore' + i)) < score) {
@@ -206,6 +203,7 @@ function updateHighscore() {
     }
   }
 }
+
 function placeFruit() {
   var fruitX;
   var fruitY;
@@ -221,16 +219,18 @@ function placeFruit() {
   } while (collison);
   fruit = new Point(fruitX, fruitY);
   smallestDistancePossible = Math.abs(fruit.x - snake[0].x) + Math.abs(fruit.y - snake[0].y);
-  numMovementsSinceFruit = 0;
+
+  numMovementsSinceFruit = 0; // ai var
 }
 
 function gameLoop() {
-  if (aiEnabled) snakeAI2();
+  if (aiEnabled) snakeAI3();
   moveSnake();
   detectCollison();
   detectFruitEaten();
   renderForeground();
 }
+
 function renderForeground() {
   function fillSquare(x, y, color) {
     contextForeground.fillStyle = color;
@@ -246,8 +246,10 @@ function renderForeground() {
     fillSquare(snake[i].x, snake[i].y, RAINBOW[i % RAINBOW.length]);
   }
 }
+
 function moveSnake() {
-  var direction =  nextDirectionQueue.shift();
+  // var startingDistance = calcDistance();
+  var direction =  directionQueue.shift();
   if (direction) {
     snake[0].direction = direction;
   }
@@ -267,7 +269,18 @@ function moveSnake() {
     }
   }
   distanceTraveled++;
+
+  if (aiEnabled) {
+    score++;
+    if (numMovementsSinceFruit++ > 500) {
+      clearInterval(loop);
+      reset();
+    }
+  }
+  // var endingDistance = calcDistance();
+  // if (endingDistance < startingDistance) score++;
 }
+
 async function detectCollison() {
   // Test if it hit itself.
   var hitSelf = false;
@@ -283,20 +296,19 @@ async function detectCollison() {
     controlsEnabled = false;
     if (!aiEnabled) {
       await Swal.fire({text: 'Game Over', showConfirmButton: false, timer: 1000});
-    } else {
-      evAlgor.neuralNetworks[evAlgor.activeSpecies].fitness = score;
     }
     reset();
   }
 }
+
 function detectFruitEaten() {
   if (snake[0].x === fruit.x && snake[0].y === fruit.y) {
     if (aiEnabled) {
-      score += Math.ceil(snake.length * smallestDistancePossible / distanceTraveled);
+      score += 1000;
     } else {
       score += Math.ceil(snake.length * smallestDistancePossible / distanceTraveled * framesPerSecond);
     }
-    divScore.textContent = 'Score: ' + score;
+    scoreBoard.textContent = 'Score: ' + score;
     distanceTraveled = 0;
     placeFruit();
     for (var i = 0; i < GROW_RATE; i++) {

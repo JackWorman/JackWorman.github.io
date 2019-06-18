@@ -185,8 +185,7 @@ function snakeAI3() {
 // enter -1, 0, or 1
 function detectBody(horizontal, vertical) {
   var found = false;
-  var xCount = 0;
-  var yCount = 0;
+  var count = 0;
   while (!found) {
     count++;
     var testPoint = new Point(snake[0].x + count * horizontal, snake[0].y + count * vertical);
@@ -207,8 +206,7 @@ function detectBody(horizontal, vertical) {
 
 function detectWall(horizontal, vertical) {
   var found = false;
-  var xCount = 0;
-  var yCount = 0;
+  var count = 0;
   while (!found) {
     count++;
     var testPoint = new Point(snake[0].x + count * horizontal, snake[0].y + count * vertical);
@@ -222,8 +220,7 @@ function detectWall(horizontal, vertical) {
 
 function detectFruit(horizontal, vertical) {
   var found = false;
-  var xCount = 0;
-  var yCount = 0;
+  var count = 0;
   while (!found) {
     count++;
     var testPoint = new Point(snake[0].x + count * horizontal, snake[0].y + count * vertical);

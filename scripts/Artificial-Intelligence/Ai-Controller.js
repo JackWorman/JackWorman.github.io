@@ -123,26 +123,42 @@ function snakeAI2() {
 function snakeAI3() {
   if (numMovementsSinceFruit++ > 500) reset();
   // Distance to fruit.
-  evolAlg.nN[evolAlg.species].inputs.elements[0][0] = Math.sqrt(Math.pow(snake[0].x - fruit.x, 2) + Math.pow(snake[0].y - fruit.y, 2));
+    // evolAlg.nN[evolAlg.species].inputs.elements[0][0] = Math.sqrt(Math.pow(snake[0].x - fruit.x, 2) + Math.pow(snake[0].y - fruit.y, 2));
   // Angle to fruit.
-  evolAlg.nN[evolAlg.species].inputs.elements[1][0] = Math.atan2(fruit.y - snake[0].y, fruit.x - snake[0].x);
+    // evolAlg.nN[evolAlg.species].inputs.elements[1][0] = Math.atan2(fruit.y - snake[0].y, fruit.x - snake[0].x);
   // 8 way obstacle detection.
 
   // TODO: seperate out border detection and body detection
-  var count = 2;
+  var count = 0;
   for (var x = -1; x <= 1; x++) {
     for (var y = -1; y <= 1; y++) {
       if (x !== 0 || y !== 0) {
-        evolAlg.nN[evolAlg.species].inputs.elements[count][0] = detectObsticles(x, y);
+        evolAlg.nN[evolAlg.species].inputs.elements[count][0] = detectWall(x, y);
+        count++;
+      }
+    }
+  }
+  for (var x = -1; x <= 1; x++) {
+    for (var y = -1; y <= 1; y++) {
+      if (x !== 0 || y !== 0) {
+        evolAlg.nN[evolAlg.species].inputs.elements[count][0] = detectBody(x, y);
+        count++;
+      }
+    }
+  }
+  for (var x = -1; x <= 1; x++) {
+    for (var y = -1; y <= 1; y++) {
+      if (x !== 0 || y !== 0) {
+        evolAlg.nN[evolAlg.species].inputs.elements[count][0] = detectFruit(x, y);
         count++;
       }
     }
   }
   // Current direction
-  evolAlg.nN[evolAlg.species].inputs.elements[10][0] = snake[0].direction === 'left' ? 1 : -1;
-  evolAlg.nN[evolAlg.species].inputs.elements[11][0] = snake[0].direction === 'right' ? 1 : -1;
-  evolAlg.nN[evolAlg.species].inputs.elements[12][0] = snake[0].direction === 'down' ? 1 : -1;
-  evolAlg.nN[evolAlg.species].inputs.elements[13][0] = snake[0].direction === 'up' ? 1 : -1;
+    // evolAlg.nN[evolAlg.species].inputs.elements[10][0] = snake[0].direction === 'left' ? 1 : -1;
+    // evolAlg.nN[evolAlg.species].inputs.elements[11][0] = snake[0].direction === 'right' ? 1 : -1;
+    // evolAlg.nN[evolAlg.species].inputs.elements[12][0] = snake[0].direction === 'down' ? 1 : -1;
+    // evolAlg.nN[evolAlg.species].inputs.elements[13][0] = snake[0].direction === 'up' ? 1 : -1;
   // calculate outputs
   evolAlg.nN[evolAlg.species].calculateOutputs();
   // sort outputs
@@ -167,16 +183,16 @@ function snakeAI3() {
 }
 
 // enter -1, 0, or 1
-function detectObsticles(horizontal, vertical) {
+function detectBody(horizontal, vertical) {
   var found = false;
   var xCount = 0;
   var yCount = 0;
   while (!found) {
-    xCount++;
-    yCount++;
-    var testPoint = new Point(snake[0].x + xCount * horizontal, snake[0].y + yCount * vertical);
+    count++;
+    var testPoint = new Point(snake[0].x + count * horizontal, snake[0].y + count * vertical);
     // Check for wall.
     if (testPoint.x < 0 || testPoint.x >= 30 || testPoint.y < 0 || testPoint.y >= 30) {
+      count = GRID_SIZE;
       found = true;
     }
     // Check for snake body.
@@ -186,5 +202,40 @@ function detectObsticles(horizontal, vertical) {
       }
     }
   }
-  return Math.sqrt(Math.pow(xCount, 2) + Math.pow(yCount, 2));
+  return GRID_SIZE - count;
+}
+
+function detectWall(horizontal, vertical) {
+  var found = false;
+  var xCount = 0;
+  var yCount = 0;
+  while (!found) {
+    count++;
+    var testPoint = new Point(snake[0].x + count * horizontal, snake[0].y + count * vertical);
+    // Check for wall.
+    if (testPoint.x < 0 || testPoint.x >= 30 || testPoint.y < 0 || testPoint.y >= 30) {
+      found = true;
+    }
+  }
+  return GRID_SIZE - count;
+}
+
+function detectFruit(horizontal, vertical) {
+  var found = false;
+  var xCount = 0;
+  var yCount = 0;
+  while (!found) {
+    count++;
+    var testPoint = new Point(snake[0].x + count * horizontal, snake[0].y + count * vertical);
+    // Check for wall.
+    if (testPoint.x < 0 || testPoint.x >= 30 || testPoint.y < 0 || testPoint.y >= 30) {
+      count = GRID_SIZE;
+      found = true;
+    }
+    // Check for fruit.
+    if (testPoint.x === fruit.x && testPoint.y === fruit.y) {
+      found = true;
+    }
+  }
+  return GRID_SIZE - count;
 }

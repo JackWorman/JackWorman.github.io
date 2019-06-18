@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", function() {
   setUpBackgroundAndForeground();
   setUpControls();
 
-  evolAlg = new EvolutionaryAlgorithm(2000, 14, 8, 4);
+  evolAlg = new EvolutionaryAlgorithm(2000, 24, Math.ceil(Math.sqrt(Math.pow(24, 2)+Math.pow(4, 2))), 4);
   evolAlg.initializeAllNeuralNetworks();
 
   reset();

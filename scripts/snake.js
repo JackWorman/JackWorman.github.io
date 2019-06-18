@@ -152,7 +152,7 @@ function reset() {
       evolAlg.nN[evolAlg.species].fitness = score;
     }
     numMovementsSinceFruit = 0;
-    //framesPerSecond = 1000;
+    // End of generation.
     if (evolAlg.species === evolAlg.nN.length - 1) {
       evolAlg.sort();
       var sum = 0;

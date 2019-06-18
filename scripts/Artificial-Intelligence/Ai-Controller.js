@@ -123,7 +123,6 @@ function snakeAI2() {
 function snakeAI3() {
   if (numMovementsSinceFruit++ > 500) reset();
   // Distance to fruit.
-  alert(evolAlg.species);
   evolAlg.nN[evolAlg.species].inputs.elements[0][0] = Math.sqrt(Math.pow(snake[0].x - fruit.x, 2) + Math.pow(snake[0].y - fruit.y, 2));
   // Angle to fruit.
   evolAlg.nN[evolAlg.species].inputs.elements[1][0] = Math.atan2(fruit.y - snake[0].y, fruit.x - snake[0].x);

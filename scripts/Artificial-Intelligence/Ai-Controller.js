@@ -39,7 +39,7 @@ function snakeAI3() {
   } else if (snake[0].direction === 'down' && status[0].direction === 'up') {
     directionQueue.push(status[1].direction);
   } else {
-   directionQueue.push(status[0].direction);
+    directionQueue.push(status[0].direction);
   }
 }
 

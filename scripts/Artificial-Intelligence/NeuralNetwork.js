@@ -21,7 +21,7 @@ function gaussian(mean, stdev) {
     return mean + stdev * y1;
   }
 }
-var gaussianRandom = this.gaussian(0, 1);
+var gaussianRandom = this.gaussian(0, 2);
 
 class NeuralNetwork {
   constructor(numInputNodes, numHiddenLayerNodes, numOutputNodes) {

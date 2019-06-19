@@ -33,7 +33,7 @@ class EvolutionaryAlgorithm {
           }
           this.nN[this.nN.length * 0.1 + (i * 200) + j].b2.elements[row][col] = this.nN[j].b2.elements[row][col];
         }
-        this.nN[this.nN.length * 0.1 + (i * 200) + j].mutate();
+        this.nN[this.nN.length * 0.1 + (i * 200) + j].mutate(0.2);
       }
     }
   }

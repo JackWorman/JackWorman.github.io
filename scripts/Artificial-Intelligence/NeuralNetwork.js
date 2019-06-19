@@ -12,8 +12,8 @@ function gaussian(mean, stdev) {
         x1 = 2.0 * Math.random() - 1.0;
         x2 = 2.0 * Math.random() - 1.0;
         w  = x1 * x1 + x2 * x2;
-      } while( w >= 1.0);
-      w = Math.sqrt((-2.0 * Math.log(w))/w);
+      } while(w >= 1.0);
+      w = Math.sqrt((-2.0 * Math.log(w)) / w);
       y1 = x1 * w;
       y2 = x2 * w;
       use_last = true;
@@ -25,39 +25,34 @@ var gaussianRandom = this.gaussian(0, 1);
 
 class NeuralNetwork {
   constructor(numInputNodes, numHiddenLayerNodes, numOutputNodes) {
-    this.inputs = new Matrix(numInputNodes, 1);
-
-    this.weights1 = new Matrix(numHiddenLayerNodes, numInputNodes);
-    this.biases1 = new Matrix(numHiddenLayerNodes, 1);
-
-    this.hiddenLayer1 = new Matrix(numHiddenLayerNodes, 1);
-
-    this.weights2 = new Matrix(numOutputNodes, numHiddenLayerNodes);
-    this.biases2 = new Matrix(numOutputNodes, 1);
-
-    this.outputs = new Matrix(numOutputNodes, 1);
-
+    this.i = new Matrix(numInputNodes, 1);
+    this.w1 = new Matrix(numHiddenLayerNodes, numInputNodes);
+    this.b1 = new Matrix(numHiddenLayerNodes, 1);
+    this.hL = new Matrix(numHiddenLayerNodes, 1);
+    this.w2 = new Matrix(numOutputNodes, numHiddenLayerNodes);
+    this.b2 = new Matrix(numOutputNodes, 1);
+    this.o = new Matrix(numOutputNodes, 1);
     this.fitness = 0;
   }
 
   initializeWeightsAndBiases() {
-    for (var row = 0; row < this.weights1.numRows; row++) {
-      for (var col = 0; col < this.weights1.numCols; col++) {
-        this.weights1.elements[row][col] = gaussianRandom();
+    for (var row = 0; row < this.w1.numRows; row++) {
+      for (var col = 0; col < this.w1.numCols; col++) {
+        this.w1.elements[row][col] = gaussianRandom();
       }
-      this.biases1.elements[row][0] = 0.01;
+      this.b1.elements[row][0] = 0.01;
     }
-    for (var row = 0; row < this.weights2.numRows; row++) {
-      for (var col = 0; col < this.weights2.numCols; col++) {
-        this.weights2.elements[row][col] = gaussianRandom();
+    for (var row = 0; row < this.w2.numRows; row++) {
+      for (var col = 0; col < this.w2.numCols; col++) {
+        this.w2.elements[row][col] = gaussianRandom();
       }
-      this.biases2.elements[row][0] = 0.01;
+      this.b2.elements[row][0] = 0.01;
     }
   }
 
   calculateOutputs() {
-    this.hiddenLayer1 = this.tanh(Matrix.add(Matrix.multiply(this.weights1, this.inputs), this.biases1));
-    this.outputs = this.tanh(Matrix.add(Matrix.multiply(this.weights2, this.hiddenLayer1), this.biases2));
+    this.hL = this.tanh(Matrix.add(Matrix.multiply(this.w1, this.i), this.b1));
+    this.o = this.tanh(Matrix.add(Matrix.multiply(this.w2, this.hL), this.b2));
   }
 
   tanh(m) {
@@ -68,24 +63,26 @@ class NeuralNetwork {
   }
 
   mutate(rate) {
-    for (var row = 0; row < this.weights1.numRows; row++) {
-      for (var col = 0; col < this.weights1.numCols; col++) {
+    // Mutate the first set of weights and biases.
+    for (var row = 0; row < this.w1.numRows; row++) {
+      for (var col = 0; col < this.w1.numCols; col++) {
         if (rate <= Math.random()) {
-            this.weights1.elements[row][col] *= gaussianRandom();
+            this.w1.elements[row][col] += gaussianRandom();
         }
       }
       if (rate <= Math.random()) {
-          this.biases1.elements[row][0] *= gaussianRandom();
+          this.b1.elements[row][0] += gaussianRandom();
       }
     }
-    for (var row = 0; row < this.weights2.numRows; row++) {
-      for (var col = 0; col < this.weights2.numCols; col++) {
+    // Mutate the second set of weights and biases.
+    for (var row = 0; row < this.w2.numRows; row++) {
+      for (var col = 0; col < this.w2.numCols; col++) {
         if (rate <= Math.random()) {
-            this.weights2.elements[row][col] *= gaussianRandom();
+            this.w2.elements[row][col] += gaussianRandom();
         }
       }
       if (rate <= Math.random()) {
-          this.biases2.elements[row][0] *= gaussianRandom();
+          this.b2.elements[row][0] += gaussianRandom();
       }
     }
   }

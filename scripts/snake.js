@@ -46,13 +46,13 @@ var scoreBoard;
 
 // Globals
 var directionQueue;
-var gameLoop;
 var snake;
 var fruit;
 var score = 0;
 var distanceTraveled;
 var smallestDistancePossible;
 var controlsEnabled = false;
+var loop;
 
 document.addEventListener("DOMContentLoaded", function() {
   if (CANVAS_SIZE / GRID_SIZE !== Math.round(CANVAS_SIZE / GRID_SIZE)) {
@@ -68,10 +68,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
   setUpBackgroundAndForeground();
   setUpControls();
-
-  evolAlg = new EvolutionaryAlgorithm(2000, 24, Math.ceil(Math.sqrt(Math.pow(24, 2)+Math.pow(4, 2))), 4);
-  evolAlg.initializeAllNeuralNetworks();
-
   reset();
 });
 
@@ -144,42 +140,26 @@ function setUpControls() {
   }, true);
 }
 
-function reset() {
-  if (aiEnabled) { // move to ai controller
-    if (evolAlg.species < 0) {
-
-    } else {
-      evolAlg.nN[evolAlg.species].fitness = score;
-    }
-    numMovementsSinceFruit = 0;
-    // End of generation.
-    if (evolAlg.species === evolAlg.nN.length - 1) {
-      evolAlg.sort();
-      var sum = 0;
-      for (var i = 0; i < evolAlg.nN.length; i++) {
-        sum += evolAlg.nN[i].fitness;
-      }
-      console.log('Best of generation ' + evolAlg.gen + ': ' + evolAlg.nN[0].fitness);
-      console.log('Average of generation ' + evolAlg.gen + ': ' + sum / evolAlg.nN.length);
-      evolAlg.mutate();
-      evolAlg.gen++;
-      evolAlg.species = -1;
-    }
-    evolAlg.species++;
-    divea.textContent = 'Generation: ' + evolAlg.gen + ', Species: ' + evolAlg.species;
+async function reset() {
+  controlsEnabled = false;
+  if (typeof loop !== 'undefined') { // Does not run the first time.
+    clearInterval(loop);
+    if (!aiEnabled) await Swal.fire({text: 'Game Over', showConfirmButton: false, timer: 1000});
   }
 
-  updateHighscore();
+  nextSpecies();
+
   directionQueue = [];
-  // Place objects.
-  snake = [new Vector(GRID_SIZE / 2, GRID_SIZE / 2, 'none')];
-  placeFruit();
   // Reset score variables.
+  updateHighscore();
   distanceTraveled = 0;
   score = 0;
   scoreBoard.textContent = 'Score: ' + score;
-  //
+  // Setup and render foreground.
+  snake = [new Vector(GRID_SIZE / 2, GRID_SIZE / 2, 'none')];
+  placeFruit();
   renderForeground();
+
   loop = setInterval(gameLoop, MILLISECONDS_PER_SECOND / framesPerSecond);
   controlsEnabled = true;
 }
@@ -205,11 +185,9 @@ function updateHighscore() {
 }
 
 function placeFruit() {
-  var fruitX;
-  var fruitY;
   do {
-    fruitX = Math.floor(Math.random() * GRID_SIZE);
-    fruitY = Math.floor(Math.random() * GRID_SIZE);
+    var fruitX = Math.floor(Math.random() * GRID_SIZE);
+    var fruitY = Math.floor(Math.random() * GRID_SIZE);
     var collison = false;
     for (var i = 0; i < snake.length; i++) {
       if (fruitX === snake[i].x && fruitY === snake[i].y) {
@@ -218,17 +196,24 @@ function placeFruit() {
     }
   } while (collison);
   fruit = new Point(fruitX, fruitY);
+  // Reset distance variables.
+  distanceTraveled = 0;
   smallestDistancePossible = Math.abs(fruit.x - snake[0].x) + Math.abs(fruit.y - snake[0].y);
-
-  numMovementsSinceFruit = 0; // ai var
 }
 
 function gameLoop() {
-  if (aiEnabled) snakeAI3();
+  if (aiEnabled) {
+    snakeAI3();
+  } else {
+    var direction = directionQueue.shift();
+    if (direction) {
+      snake[0].direction = direction;
+    }
+  }
   moveSnake();
   detectCollison();
   detectFruitEaten();
-  renderForeground();
+  requestAnimationFrame(renderForeground);
 }
 
 function renderForeground() {
@@ -248,11 +233,6 @@ function renderForeground() {
 }
 
 function moveSnake() {
-  // var startingDistance = calcDistance();
-  var direction =  directionQueue.shift();
-  if (direction) {
-    snake[0].direction = direction;
-  }
   // Move the snake from tail to head.
   for (var i = snake.length - 1; i >= 0; i--) {
     if (snake[i].direction === 'right') {
@@ -269,50 +249,30 @@ function moveSnake() {
     }
   }
   distanceTraveled++;
+}
 
-  if (aiEnabled) {
-    score++;
-    if (numMovementsSinceFruit++ > 500) {
-      clearInterval(loop);
+function detectCollison() {
+  // Check if the snake hit its body.
+  for (var i = 1; i < snake.length; i++) {
+    if (snake[0].x === snake[i].x && snake[0].y === snake[i].y) {
       reset();
     }
   }
-  // var endingDistance = calcDistance();
-  // if (endingDistance < startingDistance) score++;
-}
-
-async function detectCollison() {
-  // Test if it hit itself.
-  var hitSelf = false;
-  for (var i = 1; i < snake.length; i++) {
-    if (snake[0].x === snake[i].x && snake[0].y === snake[i].y) {
-      hitSelf = true;
-      break;
-    }
-  }
-  // Test if hit a wall.
-  if (hitSelf || snake[0].x < 0 || snake[0].y < 0 || snake[0].x >= GRID_SIZE || snake[0].y >= GRID_SIZE) {
-    clearInterval(loop);
-    controlsEnabled = false;
-    if (!aiEnabled) {
-      await Swal.fire({text: 'Game Over', showConfirmButton: false, timer: 1000});
-    }
+  // Check if the snake hit a wall.
+  if (snake[0].x < 0 || snake[0].y < 0 || snake[0].x >= GRID_SIZE || snake[0].y >= GRID_SIZE) {
     reset();
   }
 }
 
 function detectFruitEaten() {
   if (snake[0].x === fruit.x && snake[0].y === fruit.y) {
-    if (aiEnabled) {
-      score += 1000;
-    } else {
-      score += Math.ceil(snake.length * smallestDistancePossible / distanceTraveled * framesPerSecond);
-    }
+    // Update score.
+    score += Math.ceil(snake.length * smallestDistancePossible / distanceTraveled * framesPerSecond);
     scoreBoard.textContent = 'Score: ' + score;
-    distanceTraveled = 0;
-    placeFruit();
+    // Increase the size of the snake.
     for (var i = 0; i < GROW_RATE; i++) {
       snake.push(new Vector(snake[snake.length - 1].x, snake[snake.length - 1].y, 'none'));
     }
+    placeFruit();
   }
 }

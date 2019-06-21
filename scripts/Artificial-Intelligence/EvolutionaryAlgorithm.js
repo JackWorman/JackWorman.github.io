@@ -4,6 +4,7 @@ class EvolutionaryAlgorithm {
     for (var i = 0; i < numNeuralNetworks; i++) {
       this.nN[i] = new NeuralNetwork(numInputsPerNetwork, numHiddenLayerNodes, numOutputsPerNetwork);
     }
+    this.mutationRate = 0.3;
   }
 
   initializeAllNeuralNetworks() {
@@ -19,6 +20,7 @@ class EvolutionaryAlgorithm {
   }
 
   mutate() {
+    // TODO: add survivalRate variable
     for (var i = 0; i < 9; i++) { // runs 9 times
       for (var j = 0; j < this.nN.length * 0.1; j++) { // runs 200 times
         for (var row = 0; row < this.nN[i].w1.numRows; row++) {
@@ -33,7 +35,7 @@ class EvolutionaryAlgorithm {
           }
           this.nN[this.nN.length * 0.1 + (i * 200) + j].b2.elements[row][col] = this.nN[j].b2.elements[row][col];
         }
-        this.nN[this.nN.length * 0.1 + (i * 200) + j].mutate(0.2);
+        this.nN[this.nN.length * 0.1 + (i * 200) + j].mutate(this.mutationRate);
       }
     }
   }

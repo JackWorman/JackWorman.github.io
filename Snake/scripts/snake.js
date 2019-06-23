@@ -73,10 +73,10 @@ document.addEventListener("DOMContentLoaded", function() {
   // canvasBrainsForeground = document.getElementById('brainsForeground')
   // contextBrainsForeground = canvasBrainsForeground.getContext('2d');
 
-    // canvasBrainsBackground.width = BRAIN_CANVAS_SIZE;
-    // canvasBrainsBackground.height = BRAIN_CANVAS_SIZE;
-    // canvasBrainsForeground.width = BRAIN_CANVAS_SIZE;
-    // canvasBrainsForeground.height = BRAIN_CANVAS_SIZE;
+  // canvasBrainsBackground.width = BRAIN_CANVAS_SIZE;
+  // canvasBrainsBackground.height = BRAIN_CANVAS_SIZE;
+  // canvasBrainsForeground.width = BRAIN_CANVAS_SIZE;
+  // canvasBrainsForeground.height = BRAIN_CANVAS_SIZE;
 
   setUpBackgroundAndForeground();
   setUpControls();
@@ -159,7 +159,7 @@ async function reset() {
     if (!aiEnabled) await Swal.fire({text: 'Game Over', showConfirmButton: false, timer: 1000});
   }
 
-  nextSpecies();
+  //nextSpecies();
 
   directionQueue = [];
   // Reset score variables.

@@ -34,7 +34,7 @@ const RAINBOW = [
   "rgb(0, 0, 255)",
   "rgb(75, 0, 130)",
   "rgb(148, 0, 211)",
-]
+];
 const DIRECTIONS = ['left', 'up', 'right', 'down'];
 
 // DOM Elements

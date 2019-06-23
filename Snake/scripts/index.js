@@ -38,12 +38,11 @@ const RAINBOW = [
   "rgb(148, 0, 211)",
 ];
 const DIRECTIONS = ['left', 'up', 'right', 'down'];
-
 // DOM Elements
-const canvasBackground = document.getElementById('canvas-board-background');
-const contextBackground = canvasBackground.getContext('2d');
-const canvasForeground = document.getElementById('canvas-board-foreground');
-const contextForeground = canvasForeground.getContext('2d');
+const CANVAS_BOARD_BACKGROUND = document.getElementById('canvas-board-background');
+const CONTEXT_BOARD_BACKGROUND = CANVAS_BOARD_BACKGROUND.getContext('2d');
+const CANVAS_BOARD_FOREGROUND = document.getElementById('canvas-board-foreground');
+const CONTEXT_BOARD_FOREGROUND = CANVAS_BOARD_FOREGROUND.getContext('2d');
 const scoreBoard = document.getElementById('scoreBoard');
 // Globals
 var directionQueue;
@@ -67,28 +66,28 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function setUpBackgroundAndForeground() {
   // Set canvas's size.
-  canvasBackground.width = CANVAS_SIZE;
-  canvasBackground.height = CANVAS_SIZE;
-  canvasForeground.width = CANVAS_SIZE;
-  canvasForeground.height = CANVAS_SIZE;
+  CANVAS_BOARD_BACKGROUND.width = CANVAS_SIZE;
+  CANVAS_BOARD_BACKGROUND.height = CANVAS_SIZE;
+  CANVAS_BOARD_FOREGROUND.width = CANVAS_SIZE;
+  CANVAS_BOARD_FOREGROUND.height = CANVAS_SIZE;
   // Draws a white background.
   renderBackground();
 }
 
 function renderBackground() {
-  contextBackground.fillStyle = BLACK;
-  contextBackground.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
+  CONTEXT_BOARD_BACKGROUND.fillStyle = BLACK;
+  CONTEXT_BOARD_BACKGROUND.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
   if (showGrid) {
-    contextBackground.strokeStyle = WHITE;
-    contextBackground.beginPath();
+    CONTEXT_BOARD_BACKGROUND.strokeStyle = WHITE;
+    CONTEXT_BOARD_BACKGROUND.beginPath();
     for (var i = 0; i <= GRID_SIZE; i++) {
       var step = i * CANVAS_SIZE / GRID_SIZE + 0.5;
-      contextBackground.moveTo(0.5, step);
-      contextBackground.lineTo(CANVAS_SIZE, step);
-      contextBackground.moveTo(step, 0.5);
-      contextBackground.lineTo(step, CANVAS_SIZE);
+      CONTEXT_BOARD_BACKGROUND.moveTo(0.5, step);
+      CONTEXT_BOARD_BACKGROUND.lineTo(CANVAS_SIZE, step);
+      CONTEXT_BOARD_BACKGROUND.moveTo(step, 0.5);
+      CONTEXT_BOARD_BACKGROUND.lineTo(step, CANVAS_SIZE);
     }
-    contextBackground.stroke();
+    CONTEXT_BOARD_BACKGROUND.stroke();
   }
 }
 
@@ -213,14 +212,14 @@ function gameLoop() {
 
 function renderForeground() {
   function fillSquare(x, y, color) {
-    contextForeground.fillStyle = color;
+    CONTEXT_BOARD_FOREGROUND.fillStyle = color;
     var xStart = x * CANVAS_SIZE / GRID_SIZE + 0.5;
     var yStart = y * CANVAS_SIZE / GRID_SIZE + 0.5;
     var xLength = CANVAS_SIZE / GRID_SIZE;
     var yLength = CANVAS_SIZE / GRID_SIZE;
-    contextForeground.fillRect(xStart, yStart, xLength, yLength);
+    CONTEXT_BOARD_FOREGROUND.fillRect(xStart, yStart, xLength, yLength);
   }
-  contextForeground.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
+  CONTEXT_BOARD_FOREGROUND.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
   fillSquare(fruit.x, fruit.y, WHITE);
   for (var i = 0; i < snake.length; i++) {
     fillSquare(snake[i].x, snake[i].y, RAINBOW[i % RAINBOW.length]);

@@ -6,13 +6,13 @@ document.addEventListener("DOMContentLoaded", function() {
     alert('CANVAS_SIZE / GRID_SIZE is not a whole number. The canvas might render incorrectly.');
   }
 
-  // canvasBrainsBackground = document.getElementById('brainsBackground')
-  // contextBrainsBackground = canvasBrainsBackground.getContext('2d');
-  // canvasBrainsForeground = document.getElementById('brainsForeground')
-  // contextBrainsForeground = canvasBrainsForeground.getContext('2d');
+  canvasBoardBackground = document.getElementById('brainsBackground')
+  contextBrainsBackground = canvasBrainsBackground.getContext('2d');
+  canvasBrainsForeground = document.getElementById('brainsForeground')
+  contextBrainsForeground = canvasBrainsForeground.getContext('2d');
 
-  // canvasBrainsBackground.width = BRAIN_CANVAS_SIZE;
-  // canvasBrainsBackground.height = BRAIN_CANVAS_SIZE;
-  // canvasBrainsForeground.width = BRAIN_CANVAS_SIZE;
-  // canvasBrainsForeground.height = BRAIN_CANVAS_SIZE;
+  canvasBrainsBackground.width = CANVAS_SIZE;
+  canvasBrainsBackground.height = CANVAS_SIZE;
+  canvasBrainsForeground.width = CANVAS_SIZE;
+  canvasBrainsForeground.height = CANVAS_SIZE;
 });

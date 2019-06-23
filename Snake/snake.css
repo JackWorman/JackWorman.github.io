@@ -5,7 +5,7 @@ html, body {
   background-color: black;
 }
 
-#title-container {
+#header-container {
   display: block;
   margin: 0 auto;
   color: white;
@@ -54,7 +54,7 @@ html, body {
   top: 0px;
   left: 0px;
 }
-/* 
+/*
 #ai-container {
   position: relative;
    cursor: none;

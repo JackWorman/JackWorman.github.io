@@ -239,7 +239,7 @@ function renderForeground() {
     contextForeground.fillRect(xStart, yStart, xLength, yLength);
   }
   contextForeground.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
-  fillSquare(fruit.x, fruit.y, BLACK);
+  fillSquare(fruit.x, fruit.y, WHITE);
   for (var i = 0; i < snake.length; i++) {
     fillSquare(snake[i].x, snake[i].y, RAINBOW[i % RAINBOW.length]);
   }

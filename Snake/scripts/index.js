@@ -1,4 +1,7 @@
 'use strict';
+import * as cookies from '/cookies.js';
+import * as settings from '/settings.js';
+import * as sweetAlert2 from '/sweetalert2.all.min.js';
 // Force a refresh from server.
 if (getCookie("clear_cache") === "") {
   setCookie("clear_cache", "true", 1 / 24 / 60);

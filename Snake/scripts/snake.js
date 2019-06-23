@@ -44,8 +44,6 @@ var canvasForeground;
 var contextForeground;
 var scoreBoard;
 
-
-
 // Globals
 var directionQueue;
 var snake;
@@ -61,22 +59,12 @@ document.addEventListener("DOMContentLoaded", function() {
     alert('CANVAS_SIZE / GRID_SIZE is not a whole number. The canvas might render incorrectly.');
   }
   // Get DOM elements
-  canvasBackground = document.getElementById('background');
+  canvasBackground = document.getElementById('canvas-board-background');
   contextBackground = canvasBackground.getContext('2d');
-  canvasForeground = document.getElementById('foreground');
+  canvasForeground = document.getElementById('canvas-board-foreground');
   contextForeground = canvasForeground.getContext('2d');
   scoreBoard = document.getElementById('scoreBoard');
   divea = document.getElementById('ea');
-
-  // canvasBrainsBackground = document.getElementById('brainsBackground')
-  // contextBrainsBackground = canvasBrainsBackground.getContext('2d');
-  // canvasBrainsForeground = document.getElementById('brainsForeground')
-  // contextBrainsForeground = canvasBrainsForeground.getContext('2d');
-
-  // canvasBrainsBackground.width = BRAIN_CANVAS_SIZE;
-  // canvasBrainsBackground.height = BRAIN_CANVAS_SIZE;
-  // canvasBrainsForeground.width = BRAIN_CANVAS_SIZE;
-  // canvasBrainsForeground.height = BRAIN_CANVAS_SIZE;
 
   setUpBackgroundAndForeground();
   setUpControls();
@@ -97,7 +85,7 @@ function renderBackground() {
   contextBackground.fillStyle = BLACK;
   contextBackground.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
   if (showGrid) {
-    contextBackground.fillStyle = WHITE;
+    contextBackground.strokeStyle = WHITE;
     contextBackground.beginPath();
     for (var i = 0; i <= GRID_SIZE; i++) {
       var step = i * CANVAS_SIZE / GRID_SIZE + 0.5;

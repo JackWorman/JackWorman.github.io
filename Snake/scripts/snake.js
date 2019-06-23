@@ -156,7 +156,8 @@ async function reset() {
   controlsEnabled = false;
   if (typeof loop !== 'undefined') { // Does not run the first time.
     clearInterval(loop);
-    if (!aiEnabled) await Swal.fire({text: 'Game Over', showConfirmButton: false, timer: 1000});
+    //if (!aiEnabled)
+    await Swal.fire({text: 'Game Over', showConfirmButton: false, timer: 1000});
   }
 
   //nextSpecies();

@@ -65,7 +65,6 @@ document.addEventListener('DOMContentLoaded', function() {
   canvasForeground = document.getElementById('canvas-board-foreground');
   contextForeground = canvasForeground.getContext('2d');
   scoreBoard = document.getElementById('scoreBoard');
-  divea = document.getElementById('ea');
 
   setUpBackgroundAndForeground();
   setUpControls();

@@ -94,7 +94,7 @@ function setUpBackgroundAndForeground() {
 }
 
 function renderBackground() {
-  contextBackground.fillStyle = WHITE;
+  contextBackground.fillStyle = BLACK;
   contextBackground.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
   if (showGrid) {
     contextBackground.fillStyle = BLACK;

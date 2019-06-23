@@ -97,7 +97,7 @@ function renderBackground() {
   contextBackground.fillStyle = BLACK;
   contextBackground.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
   if (showGrid) {
-    contextBackground.fillStyle = BLACK;
+    contextBackground.fillStyle = WHITE;
     contextBackground.beginPath();
     for (var i = 0; i <= GRID_SIZE; i++) {
       var step = i * CANVAS_SIZE / GRID_SIZE + 0.5;

@@ -41,14 +41,14 @@ html, body {
    cursor: none;
 }
 
-#background {
+#canvas-board-background {
   position: absolute;
   z-index: 0;
   top: 0px;
   left: 0px;
 }
 
-#foreground {
+#canvas-board-foreground {
   position: absolute;
   z-index: 1;
   top: 0px;

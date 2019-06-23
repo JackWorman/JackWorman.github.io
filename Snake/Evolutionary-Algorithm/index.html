@@ -2,8 +2,28 @@
 <html>
   <head>
     <meta charset="UTF-8">
+    <script src="scripts\snake.js"></script>
+    <script src="scripts\Artificial-Intelligence\Matrix.js"></script>
+    <script src="scripts\Artificial-Intelligence\NeuralNetwork.js"></script>
+    <script src="scripts\Artificial-Intelligence\EvolutionaryAlgorithm.js"></script>
+    <script src="scripts\Artificial-Intelligence\Ai-Controller.js"></script>
+    <link rel="stylesheet" type="text/css" href="snake.css">
   </head>
   <body>
-    <h1>EvolutionaryAlgorithm</h1>
+    <div id="header-container">
+      <span class="rainbow">Evolutionary Algorithm</span>
+      <br>
+      <span class="rainbow">Generation: 0, Species: 0/2000</span>
+    </div>
+    <div id="wrapper">
+      <div id="canvas-brain-container">
+        <canvas id="canvasBoardBackground"></canvas>
+        <canvas id="canvasBoardForeground"></canvas>
+      </div>
+      <div id="canvas-board-container">
+        <canvas id="canvasBoardBackground"></canvas>
+        <canvas id="canvasBoardForeground"></canvas>
+      </div>
+    </div>
   </body>
 </html>

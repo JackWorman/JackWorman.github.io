@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <script src="scripts\cookies.js"></script>
+    <script src="scripts\SweetAlert2.js"></script>
+    <script src="scripts\settings.js"></script>
+    <script src="scripts\Artificial-Intelligence\Matrix.js"></script>
+    <script src="scripts\Artificial-Intelligence\NeuralNetwork.js"></script>
+    <script src="scripts\Artificial-Intelligence\EvolutionaryAlgorithm.js"></script>
+    <script src="scripts\Artificial-Intelligence\Ai-Controller.js"></script>
+    <script src="scripts\snake.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gun/gun.js"></script>
+    <link rel="stylesheet" type="text/css" href="snake.css">
+  </head>
+  <body>
+    <div id="title-container">
+      <span class="rainbow">Rainbow Snake</span>
+      <br>
+      <span id="scoreBoard" class="rainbow">Score: 0</span>
+    </div>
+    <div id="wrapper">
+      <div id="directions-container">
+        <button onclick="showDirections()">Directions</button>
+        <button onclick="chooseDifficulty()">Difficulty</button>
+        <button onclick="changeSettings()">Settings</button>
+        <button onclick="enableDisableAI()">Enable/Disable AI</button>
+        <br>
+        <span id="ea" class"rainbow"></span>
+        <br>
+        <div id="ai-container">
+          <!-- <canvas id="brainsBackground"></canvas> -->
+          <canvas id="brainsForeground"></canvas>
+        </div>
+      </div>
+      <div id="canvas-container">
+        <canvas id="background"></canvas>
+        <canvas id="foreground"></canvas>
+      </div>
+      <div id="highscore-container">
+        Your Top 5 Scores:
+        <br>
+        <span id="highscore1"></span>
+        <br>
+        <span id="highscore2"></span>
+        <br>
+        <span id="highscore3"></span>
+        <br>
+        <span id="highscore4"></span>
+        <br>
+        <span id="highscore5"></span>
+      </div>
+    </div>
+  </body>
+</html>

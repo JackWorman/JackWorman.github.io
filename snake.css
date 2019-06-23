@@ -54,3 +54,22 @@ html, body {
   top: 0px;
   left: 0px;
 }
+/* 
+#ai-container {
+  position: relative;
+   cursor: none;
+}
+
+#brainsBackground {
+  position: absolute;
+  z-index: 0;
+  top: 0px;
+  left: 0px;
+}
+
+#brainsForeground {
+  position: absolute;
+  z-index: 1;
+  top: 0px;
+  left: 0px;
+} */

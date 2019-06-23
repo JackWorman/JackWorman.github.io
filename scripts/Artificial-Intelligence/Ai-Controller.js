@@ -3,6 +3,99 @@ var divea;
 var evolAlg;
 var positions = [];
 
+var canvasBrainsBackground;
+var contextBrainsBackground;
+var canvasBrainsBackground;
+var contextBrainsBackground;
+
+const BRAIN_CANVAS_SIZE = 600;
+const NUM_INPUTS = 24;
+const NUM_HIDDEN_LAYER = 8;
+const NUM_OUTPUTS = 4;
+
+function renderWeights() {
+  contextBrainsForeground.fillStyle = BLACK;
+  var max = Number.NEGATIVE_INFINITY;
+  var min = 0;
+  for (var row = 0; row < NUM_HIDDEN_LAYER; row++) {
+    for (var col = 0; col < NUM_INPUTS; col++) {
+      // if (evolAlg.nN[evolAlg.species].w1.elements[row][col] * evolAlg.nN[evolAlg.species].i.elements[col][0] < min) {
+      //   min = evolAlg.nN[evolAlg.species].w1.elements[row][col];
+      // }
+      if (Math.abs(evolAlg.nN[evolAlg.species].w1.elements[row][col] * evolAlg.nN[evolAlg.species].i.elements[col][0]) > max) {
+        max = evolAlg.nN[evolAlg.species].w1.elements[row][col];
+      }
+    }
+  }
+
+  for (var i = 1; i <= NUM_INPUTS; i++) {
+    for (var j = 1; j <= NUM_HIDDEN_LAYER; j++) {
+      var intensity = (Math.abs(evolAlg.nN[evolAlg.species].w1.elements[j-1][i-1] * evolAlg.nN[evolAlg.species].i.elements[i-1][0]) - min) / (max - min);
+      contextBrainsForeground.strokeStyle = 'rgba(0,0,0,' + intensity + ')';
+      contextBrainsForeground.beginPath();
+      contextBrainsForeground.moveTo(BRAIN_CANVAS_SIZE/10, BRAIN_CANVAS_SIZE/(NUM_INPUTS*2 + 1)*i*2);
+      contextBrainsForeground.lineTo(BRAIN_CANVAS_SIZE/2, BRAIN_CANVAS_SIZE/(NUM_HIDDEN_LAYER*2 + 1)*j*2);
+      contextBrainsForeground.stroke();
+    }
+  }
+
+  max = Number.NEGATIVE_INFINITY;
+  min = 0;
+  for (var row = 0; row < NUM_OUTPUTS; row++) {
+    for (var col = 0; col < NUM_HIDDEN_LAYER; col++) {
+      if (Math.abs(evolAlg.nN[evolAlg.species].w2.elements[row][col] * evolAlg.nN[evolAlg.species].hL.elements[col][0]) > max) {
+        max = evolAlg.nN[evolAlg.species].w2.elements[row][col];
+      }
+    }
+  }
+
+  for (var i = 1; i <= NUM_HIDDEN_LAYER; i++) {
+    for (var j = 1; j <= NUM_OUTPUTS; j++) {
+      var intensity = (Math.abs(evolAlg.nN[evolAlg.species].w2.elements[j-1][i-1] * evolAlg.nN[evolAlg.species].hL.elements[i-1][0]) - min) / (max - min);
+      contextBrainsForeground.strokeStyle = 'rgba(0,0,0,' + intensity + ')';
+      contextBrainsForeground.beginPath();
+      contextBrainsForeground.moveTo(BRAIN_CANVAS_SIZE/2, BRAIN_CANVAS_SIZE/(NUM_HIDDEN_LAYER*2 + 1)*i*2);
+      contextBrainsForeground.lineTo(BRAIN_CANVAS_SIZE*9/10, BRAIN_CANVAS_SIZE/(NUM_OUTPUTS*2 + 1)*j*2);
+      contextBrainsForeground.stroke();
+    }
+  }
+}
+
+function renderBrains() {
+  contextBrainsForeground.fillStyle = 'rgb(0, 155, 155)';
+  contextBrainsForeground.fillRect(0, 0, BRAIN_CANVAS_SIZE, BRAIN_CANVAS_SIZE);
+  renderWeights();
+
+  // Input layer
+  for (var i = 1; i <= NUM_INPUTS; i++) {
+    var intensity = (1 - evolAlg.nN[evolAlg.species].i.elements[i-1][0]) * 255;
+    contextBrainsForeground.beginPath();
+    contextBrainsForeground.arc(BRAIN_CANVAS_SIZE/10, BRAIN_CANVAS_SIZE/(NUM_INPUTS*2 + 1)*i*2, BRAIN_CANVAS_SIZE/(NUM_INPUTS*2 + 1)/2, 0, 2*Math.PI);
+    contextBrainsForeground.strokeStyle = 'rgb(' + intensity + ', ' + intensity + ', ' + intensity + ')';
+    contextBrainsForeground.stroke();
+    contextBrainsForeground.fillStyle = 'rgb(' + intensity + ', ' + intensity + ', ' + intensity + ')';
+    contextBrainsForeground.fill();
+  }
+  for (var i = 1; i <= NUM_HIDDEN_LAYER; i++) {
+    var intensity = (1 - evolAlg.nN[evolAlg.species].hL.elements[i-1][0]) * 255;
+    contextBrainsForeground.beginPath();
+    contextBrainsForeground.arc(BRAIN_CANVAS_SIZE/2, BRAIN_CANVAS_SIZE/(NUM_HIDDEN_LAYER*2 + 1)*i*2, BRAIN_CANVAS_SIZE/(NUM_HIDDEN_LAYER*2 + 1)/2, 0, 2*Math.PI);
+    contextBrainsForeground.strokeStyle = 'rgb(' + intensity + ', ' + intensity + ', ' + intensity + ')';
+    contextBrainsForeground.stroke();
+    contextBrainsForeground.fillStyle = 'rgb(' + intensity + ', ' + intensity + ', ' + intensity + ')';
+    contextBrainsForeground.fill();
+  }
+  for (var i = 1; i <= NUM_OUTPUTS; i++) {
+    var intensity = (1 - evolAlg.nN[evolAlg.species].o.elements[i-1][0]) * 255;
+    contextBrainsForeground.beginPath();
+    contextBrainsForeground.arc(BRAIN_CANVAS_SIZE*9/10, BRAIN_CANVAS_SIZE/(NUM_OUTPUTS*2 + 1)*i*2, BRAIN_CANVAS_SIZE/(NUM_OUTPUTS*2 + 1)/2, 0, 2*Math.PI);
+    contextBrainsForeground.strokeStyle = 'rgb(' + intensity + ', ' + intensity + ', ' + intensity + ')';
+    contextBrainsForeground.stroke();
+    contextBrainsForeground.fillStyle = 'rgb(' + intensity + ', ' + intensity + ', ' + intensity + ')';
+    contextBrainsForeground.fill();
+  }
+}
+
 function enableDisableAI() {
   aiEnabled = !aiEnabled;
   reset();
@@ -11,7 +104,7 @@ function enableDisableAI() {
 function nextSpecies() {
   if (aiEnabled) {
     if (typeof evolAlg === 'undefined') { // Run the first time.
-      evolAlg = new EvolutionaryAlgorithm(2000, 24, Math.ceil(Math.sqrt(Math.pow(24, 2) + Math.pow(4, 2))), 4);
+      evolAlg = new EvolutionaryAlgorithm(2000, 24, 8, 4);
       evolAlg.initializeAllNeuralNetworks();
     }
     nextGeneration();
@@ -25,27 +118,19 @@ function nextSpecies() {
 function nextGeneration() {
   if (evolAlg.species === evolAlg.nN.length - 1) {
     evolAlg.sort();
+    console.log('=================================');
+    console.log('Best of generation ' + evolAlg.gen + ': ' + evolAlg.nN[0].fitness);
     var sum = 0;
     for (var i = 0; i < evolAlg.nN.length; i++) {
       sum += evolAlg.nN[i].fitness;
+      evolAlg.nN[i].fitness = 0;
     }
-    console.log('=================================');
-    console.log('Best of generation ' + evolAlg.gen + ': ' + evolAlg.nN[0].fitness);
     console.log('Average of generation ' + evolAlg.gen + ': ' + Math.floor(sum / evolAlg.nN.length));
     evolAlg.mutate();
     evolAlg.gen++;
     evolAlg.species = -1;
   }
 }
-
-function aiGameLoop() {
-    snakeAI3();
-    moveSnake();
-    detectCollison();
-    detectFruitEaten();
-}
-
-
 
 function snakeAI3() {
   checkRepeat();
@@ -82,6 +167,8 @@ function snakeAI3() {
   } else {
     snake[0].direction = status[0].direction;
   }
+
+  renderBrains();
 }
 
 // enter -1, 0, or 1
@@ -103,7 +190,7 @@ function detectBody(horizontal, vertical) {
       }
     }
   }
-  return GRID_SIZE - count;
+  return 1 - count / GRID_SIZE;
 }
 
 function detectWall(horizontal, vertical) {
@@ -117,7 +204,7 @@ function detectWall(horizontal, vertical) {
       found = true;
     }
   }
-  return GRID_SIZE - count;
+  return 1 - count / GRID_SIZE;
 }
 
 function detectFruit(horizontal, vertical) {
@@ -136,7 +223,7 @@ function detectFruit(horizontal, vertical) {
       found = true;
     }
   }
-  return GRID_SIZE - count;
+  return 1 - count / GRID_SIZE;
 }
 
 class PositionTracker {

@@ -4,7 +4,8 @@ class EvolutionaryAlgorithm {
     for (var i = 0; i < numNeuralNetworks; i++) {
       this.nN[i] = new NeuralNetwork(numInputsPerNetwork, numHiddenLayerNodes, numOutputsPerNetwork);
     }
-    this.mutationRate = 0.3;
+    this.mutationRate = 0.2;
+    this.survivalRate = 0.01;
   }
 
   initializeAllNeuralNetworks() {

@@ -51,13 +51,13 @@ class NeuralNetwork {
   }
 
   calculateOutputs() {
-    this.hL = this.tanh(Matrix.add(Matrix.multiply(this.w1, this.i), this.b1));
-    this.o = this.tanh(Matrix.add(Matrix.multiply(this.w2, this.hL), this.b2));
+    this.hL = this.sigmoid(Matrix.add(Matrix.multiply(this.w1, this.i), this.b1));
+    this.o = this.sigmoid(Matrix.add(Matrix.multiply(this.w2, this.hL), this.b2));
   }
 
-  tanh(m) {
+  sigmoid(m) {
     for (var row = 0; row < m.numRows; row++) {
-      m.elements[row][0] = Math.tanh(m.elements[row][0]);
+      m.elements[row][0] = 1 / (1 + Math.pow(Math.E, -1 * m.elements[row][0]));
     }
     return m;
   }

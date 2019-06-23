@@ -44,6 +44,8 @@ var canvasForeground;
 var contextForeground;
 var scoreBoard;
 
+
+
 // Globals
 var directionQueue;
 var snake;
@@ -65,6 +67,16 @@ document.addEventListener("DOMContentLoaded", function() {
   contextForeground = canvasForeground.getContext('2d');
   scoreBoard = document.getElementById('scoreBoard');
   divea = document.getElementById('ea');
+
+  // canvasBrainsBackground = document.getElementById('brainsBackground')
+  // contextBrainsBackground = canvasBrainsBackground.getContext('2d');
+  canvasBrainsForeground = document.getElementById('brainsForeground')
+  contextBrainsForeground = canvasBrainsForeground.getContext('2d');
+
+    // canvasBrainsBackground.width = BRAIN_CANVAS_SIZE;
+    // canvasBrainsBackground.height = BRAIN_CANVAS_SIZE;
+    canvasBrainsForeground.width = BRAIN_CANVAS_SIZE;
+    canvasBrainsForeground.height = BRAIN_CANVAS_SIZE;
 
   setUpBackgroundAndForeground();
   setUpControls();

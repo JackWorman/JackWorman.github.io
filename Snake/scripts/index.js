@@ -40,12 +40,11 @@ const RAINBOW = [
 const DIRECTIONS = ['left', 'up', 'right', 'down'];
 
 // DOM Elements
-var canvasBackground;
-var contextBackground;
-var canvasForeground;
-var contextForeground;
-var scoreBoard;
-
+const canvasBackground = document.getElementById('canvas-board-background');
+const contextBackground = canvasBackground.getContext('2d');
+const canvasForeground = document.getElementById('canvas-board-foreground');
+const contextForeground = canvasForeground.getContext('2d');
+const scoreBoard = document.getElementById('scoreBoard');
 // Globals
 var directionQueue;
 var snake;
@@ -60,12 +59,6 @@ document.addEventListener('DOMContentLoaded', function() {
   if (CANVAS_SIZE / GRID_SIZE !== Math.round(CANVAS_SIZE / GRID_SIZE)) {
     alert('CANVAS_SIZE / GRID_SIZE is not a whole number. The canvas might render incorrectly.');
   }
-  // Get DOM elements
-  canvasBackground = document.getElementById('canvas-board-background');
-  contextBackground = canvasBackground.getContext('2d');
-  canvasForeground = document.getElementById('canvas-board-foreground');
-  contextForeground = canvasForeground.getContext('2d');
-  scoreBoard = document.getElementById('scoreBoard');
 
   setUpBackgroundAndForeground();
   setUpControls();

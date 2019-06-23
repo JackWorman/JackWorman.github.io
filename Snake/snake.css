@@ -38,7 +38,7 @@ html, body {
 
 #canvas-container {
   position: relative;
-   cursor: none;
+  cursor: none;
 }
 
 #canvas-board-background {
@@ -46,6 +46,7 @@ html, body {
   z-index: 0;
   top: 0px;
   left: 0px;
+  border: 1px solid white;
 }
 
 #canvas-board-foreground {
@@ -53,6 +54,7 @@ html, body {
   z-index: 1;
   top: 0px;
   left: 0px;
+  border: 1px solid white;
 }
 /*
 #ai-container {

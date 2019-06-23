@@ -214,14 +214,14 @@ function placeFruit() {
 }
 
 function gameLoop() {
-  if (aiEnabled) {
-    snakeAI3();
-  } else {
+  // if (aiEnabled) {
+  //   snakeAI3();
+  // } else {
     var direction = directionQueue.shift();
     if (direction) {
       snake[0].direction = direction;
     }
-  }
+  // }
   moveSnake();
   detectCollison();
   detectFruitEaten();

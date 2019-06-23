@@ -1,6 +1,6 @@
-import * as cookies from '/cookies.js';
-import * as settings from '/settings.js';
-import * as sweetAlert2 from '/sweetalert2.all.min.js';
+import * as cookies from '/scripts/cookies.js';
+import * as settings from '/scripts/settings.js';
+import * as sweetAlert2 from '/scripts/sweetalert2.all.min.js';
 'use strict';
 
 // Force a refresh from server.

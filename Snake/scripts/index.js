@@ -43,7 +43,7 @@ const CANVAS_BOARD_BACKGROUND = document.getElementById('canvas-board-background
 const CONTEXT_BOARD_BACKGROUND = CANVAS_BOARD_BACKGROUND.getContext('2d');
 const CANVAS_BOARD_FOREGROUND = document.getElementById('canvas-board-foreground');
 const CONTEXT_BOARD_FOREGROUND = CANVAS_BOARD_FOREGROUND.getContext('2d');
-const scoreBoard = document.getElementById('scoreBoard');
+const SPAN_SCORE = document.getElementById('span-score');
 // Globals
 var directionQueue;
 var snake;
@@ -148,7 +148,7 @@ async function reset() {
   updateHighscore();
   distanceTraveled = 0;
   score = 0;
-  scoreBoard.textContent = 'Score: ' + score;
+  SPAN_SCORE.textContent = 'Score: ' + score;
   // Setup and render foreground.
   snake = [new Vector(GRID_SIZE / 2, GRID_SIZE / 2, 'none')];
   placeFruit();
@@ -262,7 +262,7 @@ function detectFruitEaten() {
   if (snake[0].x === fruit.x && snake[0].y === fruit.y) {
     // Update score.
     score += Math.ceil(snake.length * smallestDistancePossible / distanceTraveled * framesPerSecond);
-    scoreBoard.textContent = 'Score: ' + score;
+    SPAN_SCORE.textContent = 'Score: ' + score;
     // Increase the size of the snake.
     for (var i = 0; i < GROW_RATE; i++) {
       snake.push(new Vector(snake[snake.length - 1].x, snake[snake.length - 1].y, 'none'));

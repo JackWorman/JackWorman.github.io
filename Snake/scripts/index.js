@@ -179,7 +179,7 @@ function updateHighscore() {
   }
   for (var i = 1; i <= 5; i++) {
     if (Number(getCookie('highscore' + i))) {
-      highscoreX = document.getElementById('highscore' + i);
+      var highscoreX = document.getElementById('highscore' + i);
       highscoreX.textContent = i + '. ' + getCookie('highscore' + i) + ' - ' + getCookie('highscoreFPS' + i) + 'FPS';
     }
   }

@@ -1,3 +1,4 @@
+'use strict';
 // Force a refresh from server.
 if (getCookie("clear_cache") === "") {
   setCookie("clear_cache", "true", 1 / 24 / 60);
@@ -54,7 +55,7 @@ var smallestDistancePossible;
 var controlsEnabled = false;
 var loop;
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener('DOMContentLoaded', function() {
   if (CANVAS_SIZE / GRID_SIZE !== Math.round(CANVAS_SIZE / GRID_SIZE)) {
     alert('CANVAS_SIZE / GRID_SIZE is not a whole number. The canvas might render incorrectly.');
   }

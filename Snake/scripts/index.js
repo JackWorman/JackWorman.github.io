@@ -24,6 +24,9 @@ class Point {
 // Constants
 const CANVAS_SIZE = 600; // in pixels
 const GRID_SIZE = 30;
+if (CANVAS_SIZE / GRID_SIZE !== Math.round(CANVAS_SIZE / GRID_SIZE)) {
+  throw 'CANVAS_SIZE / GRID_SIZE is not a whole number. The canvas might render incorrectly.';
+}
 const MILLISECONDS_PER_SECOND = 1000;
 const GROW_RATE = 5;
 const BLACK = 'rgb(0, 0, 0)';
@@ -55,22 +58,16 @@ var controlsEnabled = false;
 var loop;
 
 document.addEventListener('DOMContentLoaded', function() {
-  if (CANVAS_SIZE / GRID_SIZE !== Math.round(CANVAS_SIZE / GRID_SIZE)) {
-    alert('CANVAS_SIZE / GRID_SIZE is not a whole number. The canvas might render incorrectly.');
-  }
-
   setUpBackgroundAndForeground();
   setUpControls();
   reset();
 });
 
 function setUpBackgroundAndForeground() {
-  // Set canvas's size.
   CANVAS_BOARD_BACKGROUND.width = CANVAS_SIZE;
   CANVAS_BOARD_BACKGROUND.height = CANVAS_SIZE;
   CANVAS_BOARD_FOREGROUND.width = CANVAS_SIZE;
   CANVAS_BOARD_FOREGROUND.height = CANVAS_SIZE;
-  // Draws a white background.
   renderBackground();
 }
 
@@ -137,18 +134,12 @@ async function reset() {
   controlsEnabled = false;
   if (typeof loop !== 'undefined') { // Does not run the first time.
     clearInterval(loop);
-    //if (!aiEnabled)
     await Swal.fire({text: 'Game Over', showConfirmButton: false, timer: 1000});
   }
-
-  //nextSpecies();
-
   directionQueue = [];
   // Reset score variables.
-  updateHighscore();
-  distanceTraveled = 0;
   score = 0;
-  SPAN_SCORE.textContent = 'Score: ' + score;
+  updateScore();
   // Setup and render foreground.
   snake = [new Vector(GRID_SIZE / 2, GRID_SIZE / 2, 'none')];
   placeFruit();
@@ -158,7 +149,8 @@ async function reset() {
   controlsEnabled = true;
 }
 
-function updateHighscore() {
+function updateScore() {
+  SPAN_SCORE.textContent = 'Score: ' + score;
   for (var i = 1; i <= 5; i++) {
     if (Number(getCookie('highscore' + i)) < score) {
       for (var j = 5; j > i; j--) { // move scores down
@@ -196,14 +188,10 @@ function placeFruit() {
 }
 
 function gameLoop() {
-  // if (aiEnabled) {
-  //   snakeAI3();
-  // } else {
-    var direction = directionQueue.shift();
-    if (direction) {
-      snake[0].direction = direction;
-    }
-  // }
+  var direction = directionQueue.shift();
+  if (direction) {
+    snake[0].direction = direction;
+  }
   moveSnake();
   detectCollison();
   detectFruitEaten();
@@ -262,7 +250,7 @@ function detectFruitEaten() {
   if (snake[0].x === fruit.x && snake[0].y === fruit.y) {
     // Update score.
     score += Math.ceil(snake.length * smallestDistancePossible / distanceTraveled * framesPerSecond);
-    SPAN_SCORE.textContent = 'Score: ' + score;
+    updateScore();
     // Increase the size of the snake.
     for (var i = 0; i < GROW_RATE; i++) {
       snake.push(new Vector(snake[snake.length - 1].x, snake[snake.length - 1].y, 'none'));

@@ -92,6 +92,9 @@ function setUpControls() {
     if (!controlsEnabled || (event.keyCode !== 37 && event.keyCode !== 38 && event.keyCode !== 39 && event.keyCode !== 40)) {
       return;
     }
+    if (snake.direction === 'none') {
+        loop = setInterval(gameLoop, MILLISECONDS_PER_SECOND / framesPerSecond);
+    }
     if (inputQueuing) {
       var dir = directionQueue.length ? directionQueue[directionQueue.length - 1] : snake.direction;
       if (dir === 'left' || dir === 'right') {
@@ -126,7 +129,6 @@ function setUpControls() {
         directionQueue.push(DIRECTIONS[event.keyCode - 37]);
       }
     }
-    loop = setInterval(gameLoop, MILLISECONDS_PER_SECOND / framesPerSecond);
   }, true);
 }
 

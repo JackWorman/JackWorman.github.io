@@ -1,4 +1,4 @@
-import Snake from './modules/snake.js'; 
+import Snake from './modules/snake.js';
 'use strict';
 
 // Force a refresh from server.
@@ -52,7 +52,6 @@ var loop;
 
 // Run on load.
 setUpBackgroundAndForeground();
-setUpControls();
 reset();
 
 document.addEventListener('keydown', function(event) {

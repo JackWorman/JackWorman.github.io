@@ -185,8 +185,8 @@ function gameLoop() {
     snake.direction = direction;
   }
   snake.move();
-  snake.checkCollison();
-  snake.checkFruitEaten();
+  snake.checkCollison(GRID_SIZE);
+  snake.checkFruitEaten(fruit, score);
   renderForeground();
 }
 

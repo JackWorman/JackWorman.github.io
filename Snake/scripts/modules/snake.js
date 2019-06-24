@@ -27,7 +27,7 @@ export default class Snake {
     }
   }
 
-  checkCollison() {
+  checkCollison(GRID_SIZE) {
     // Check if the snake hit its body.
     for (var i = 1; i < this.body.length; i++) {
       if (this.body[0].x === this.body[i].x && this.body[0].y === this.body[i].y) {
@@ -40,13 +40,13 @@ export default class Snake {
     }
   }
 
-  checkFruitEaten() {
+  checkFruitEaten(fruit, score) {
     if (this.body[0].x === fruit.x && this.body[0].y === fruit.y) {
       // Update score.
       score += Math.ceil(snake.body.length * smallestDistancePossible / distanceTraveled * framesPerSecond);
       updateScore();
       // Increase the size of the snake.
-      snake.grow();
+      this.grow();
       placeFruit();
     }
   }

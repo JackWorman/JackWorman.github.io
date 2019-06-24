@@ -1,10 +1,10 @@
 @font-face {
-    font-family: 'AlexBrush'; /*a name to be used later*/
-    src: url('https://jackworman.com/fonts/AlexBrush-Regular.ttf'); /*URL to font*/
+    font-family: 'Heavy Data'; /*a name to be used later*/
+    src: url('https://jackworman.com/fonts/heavy-data.ttf'); /*URL to font*/
 }
 
 #span-title {
-  font-family: 'AlexBrush';
+
 }
 
 html, body {
@@ -15,6 +15,7 @@ html, body {
 }
 
 #header-container {
+  font-family: 'Heavy Data';
   display: block;
   margin: 0 auto;
   color: white;

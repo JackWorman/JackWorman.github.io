@@ -212,7 +212,7 @@ function renderForeground() {
   CONTEXT_BOARD_FOREGROUND.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
   fillSquare(fruit.x, fruit.y, WHITE);
   // Render snake from head to tail.
-  for (var i = snake.body.length - 1; i <= 0; i--) {
+  for (var i = snake.body.length - 1; i >= 0; i--) {
     fillSquare(snake.body[i].x, snake.body[i].y, RAINBOW[i % RAINBOW.length]);
   }
 }

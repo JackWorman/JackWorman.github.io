@@ -40,7 +40,7 @@ export default class Snake {
     }
   }
 
-  checkFruitEaten(fruit, score) {
+  checkFruitEaten(fruit, score, smallestDistancePossible) {
     if (this.body[0].x === fruit.x && this.body[0].y === fruit.y) {
       // Update score.
       score += Math.ceil(this.body.length * smallestDistancePossible / distanceTraveled * framesPerSecond);

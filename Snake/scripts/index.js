@@ -211,7 +211,7 @@ function renderForeground() {
   }
   CONTEXT_BOARD_FOREGROUND.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
   fillSquare(fruit.x, fruit.y, WHITE);
-  for (var i = 0; i < snake.length; i++) {
+  for (var i = 0; i < snake.body.length; i++) {
     fillSquare(snake.body[i].x, snake.body[i].y, RAINBOW[i % RAINBOW.length]);
   }
 }

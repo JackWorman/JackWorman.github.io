@@ -154,6 +154,7 @@ async function reset() {
 }
 
 function updateScore() {
+  alert(score);
   SPAN_SCORE.textContent = 'Score: ' + score;
   for (var i = 1; i <= 5; i++) {
     if (Number(getCookie('highscore' + i)) < score) {
@@ -197,6 +198,7 @@ function gameLoop() {
     snake.direction = direction;
   }
   snake.move();
+  distanceTraveled++;
   detectCollison();
   detectFruitEaten();
   requestAnimationFrame(renderForeground);

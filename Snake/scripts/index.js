@@ -125,7 +125,7 @@ function setUpControls() {
       } else if (snake.body[0].direction === 'none') {
         directionQueue.push(DIRECTIONS[event.keyCode - 37]);
       }
-    }
+    loop = setInterval(gameLoop, MILLISECONDS_PER_SECOND / framesPerSecond);
   }, true);
 }
 
@@ -146,7 +146,7 @@ async function reset() {
   placeFruit();
   renderForeground();
 
-  loop = setInterval(gameLoop, MILLISECONDS_PER_SECOND / framesPerSecond);
+
   controlsEnabled = true;
 }
 
@@ -176,7 +176,7 @@ function placeFruit() {
     var fruitX = Math.floor(Math.random() * GRID_SIZE);
     var fruitY = Math.floor(Math.random() * GRID_SIZE);
     var collison = false;
-    for (var i = 0; i < snake.length; i++) {
+    for (var i = 0; i < snake.body.length; i++) {
       if (fruitX === snake.body[i].x && fruitY === snake.body[i].y) {
         collison = true;
       }
@@ -194,7 +194,6 @@ function gameLoop() {
     snake.direction = direction;
   }
   snake.move();
-  //moveSnake();
   detectCollison();
   detectFruitEaten();
   requestAnimationFrame(renderForeground);
@@ -216,25 +215,6 @@ function renderForeground() {
     fillSquare(snake.body[i].x, snake.body[i].y, RAINBOW[i % RAINBOW.length]);
   }
 }
-
-// function moveSnake() {
-//   // Move the snake from tail to head.
-//   for (var i = snake.length - 1; i >= 0; i--) {
-//     if (snake[i].direction === 'right') {
-//       snake[i].x++;
-//     } else if (snake[i].direction === 'up') {
-//       snake[i].y--;
-//     } else if (snake[i].direction === 'left') {
-//       snake[i].x--;
-//     } else if (snake[i].direction === 'down') {
-//       snake[i].y++;
-//     }
-//     if (i !== 0) {
-//       snake[i].direction = snake[i - 1].direction;
-//     }
-//   }
-//   distanceTraveled++;
-// }
 
 function detectCollison() {
   // Check if the snake hit its body.

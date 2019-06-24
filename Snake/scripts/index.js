@@ -1,4 +1,4 @@
-import Snake from '/modules/snake.js'; 
+import Snake from './modules/snake.js'; 
 'use strict';
 
 // Force a refresh from server.

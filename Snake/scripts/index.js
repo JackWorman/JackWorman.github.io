@@ -93,7 +93,7 @@ function setUpControls() {
       return;
     }
     if (inputQueuing) {
-      var dir = directionQueue.length ? directionQueue[directionQueue.length - 1] : snake.body[0].direction;
+      var dir = directionQueue.length ? directionQueue[directionQueue.length - 1] : snake.direction;
       if (dir === 'left' || dir === 'right') {
         if (event.keyCode === 38) {
           directionQueue.push('up');

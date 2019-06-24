@@ -177,7 +177,7 @@ function placeFruit() {
     var fruitY = Math.floor(Math.random() * GRID_SIZE);
     var collison = false;
     for (var i = 0; i < snake.length; i++) {
-      if (fruitX === snake[i].x && fruitY === snake[i].y) {
+      if (fruitX === snake.body[i].x && fruitY === snake.body[i].y) {
         collison = true;
       }
     }

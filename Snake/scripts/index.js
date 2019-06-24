@@ -1,3 +1,4 @@
+import Snake from '/modules/snake.js'; 
 'use strict';
 
 // Force a refresh from server.
@@ -5,14 +6,6 @@ if (getCookie("clear_cache") === "") {
   setCookie("clear_cache", "true", 1 / 24 / 60);
   window.location.reload(true);
 }
-
-// class Vector {
-//   constructor(x, y, direction) {
-//     this.x = x;
-//     this.y = y;
-//     this.direction = direction;
-//   }
-// }
 
 class Point {
   constructor(x, y) {
@@ -62,6 +55,49 @@ setUpBackgroundAndForeground();
 setUpControls();
 reset();
 
+document.addEventListener('keydown', function(event) {
+  if (!controlsEnabled || (event.keyCode !== 37 && event.keyCode !== 38 && event.keyCode !== 39 && event.keyCode !== 40)) {
+    return;
+  }
+  if (snake.direction === 'none') {
+      loop = setInterval(gameLoop, MILLISECONDS_PER_SECOND / framesPerSecond);
+  }
+  if (inputQueuing) {
+    var dir = directionQueue.length ? directionQueue[directionQueue.length - 1] : snake.direction;
+    if (dir === 'left' || dir === 'right') {
+      if (event.keyCode === 38) {
+        directionQueue.push('up');
+      } else if (event.keyCode === 40) {
+        directionQueue.push('down');
+      }
+    } else if (dir === 'up' || dir === 'down') {
+      if (event.keyCode === 37) {
+        directionQueue.push('left');
+      } else if (event.keyCode === 39) {
+        directionQueue.push('right');
+      }
+    } else if (dir === 'none') {
+      directionQueue.push(DIRECTIONS[event.keyCode - 37]);
+    }
+  } else {
+    if (snake.body[0].direction === 'left' || snake.body[0].direction === 'right') {
+      if (event.keyCode === 38) {
+        directionQueue.push('up');
+      } else if (event.keyCode === 40) {
+        directionQueue.push('down');
+      }
+    } else if (snake.body[0].direction === 'up' || snake.body[0].direction === 'down') {
+      if (event.keyCode === 37) {
+        directionQueue.push('left');
+      } else if (event.keyCode === 39) {
+        directionQueue.push('right');
+      }
+    } else if (snake.body[0].direction === 'none') {
+      directionQueue.push(DIRECTIONS[event.keyCode - 37]);
+    }
+  }
+}, true);
+
 function setUpBackgroundAndForeground() {
   CANVAS_BOARD_BACKGROUND.width = CANVAS_SIZE;
   CANVAS_BOARD_BACKGROUND.height = CANVAS_SIZE;
@@ -87,54 +123,9 @@ function renderBackground() {
   }
 }
 
-function setUpControls() {
-  document.addEventListener('keydown', function(event) {
-    if (!controlsEnabled || (event.keyCode !== 37 && event.keyCode !== 38 && event.keyCode !== 39 && event.keyCode !== 40)) {
-      return;
-    }
-    if (snake.direction === 'none') {
-        loop = setInterval(gameLoop, MILLISECONDS_PER_SECOND / framesPerSecond);
-    }
-    if (inputQueuing) {
-      var dir = directionQueue.length ? directionQueue[directionQueue.length - 1] : snake.direction;
-      if (dir === 'left' || dir === 'right') {
-        if (event.keyCode === 38) {
-          directionQueue.push('up');
-        } else if (event.keyCode === 40) {
-          directionQueue.push('down');
-        }
-      } else if (dir === 'up' || dir === 'down') {
-        if (event.keyCode === 37) {
-          directionQueue.push('left');
-        } else if (event.keyCode === 39) {
-          directionQueue.push('right');
-        }
-      } else if (dir === 'none') {
-        directionQueue.push(DIRECTIONS[event.keyCode - 37]);
-      }
-    } else {
-      if (snake.body[0].direction === 'left' || snake.body[0].direction === 'right') {
-        if (event.keyCode === 38) {
-          directionQueue.push('up');
-        } else if (event.keyCode === 40) {
-          directionQueue.push('down');
-        }
-      } else if (snake.body[0].direction === 'up' || snake.body[0].direction === 'down') {
-        if (event.keyCode === 37) {
-          directionQueue.push('left');
-        } else if (event.keyCode === 39) {
-          directionQueue.push('right');
-        }
-      } else if (snake.body[0].direction === 'none') {
-        directionQueue.push(DIRECTIONS[event.keyCode - 37]);
-      }
-    }
-  }, true);
-}
-
 async function reset() {
-  clearInterval(loop);
   controlsEnabled = false;
+  clearInterval(loop);
   if (typeof loop !== 'undefined') { // Does not run the first time.
     clearInterval(loop);
     await Swal.fire({text: 'Game Over', showConfirmButton: false, timer: 1000});
@@ -145,11 +136,8 @@ async function reset() {
   updateScore();
   // Setup and render foreground.
   snake = new Snake(GRID_SIZE / 2, GRID_SIZE / 2);
-
   placeFruit();
   renderForeground();
-
-
   controlsEnabled = true;
 }
 
@@ -192,15 +180,15 @@ function placeFruit() {
 }
 
 function gameLoop() {
+  distanceTraveled++;
   var direction = directionQueue.shift();
   if (direction) {
     snake.direction = direction;
   }
   snake.move();
-  distanceTraveled++;
-  detectCollison();
-  detectFruitEaten();
-  requestAnimationFrame(renderForeground);
+  snake.checkCollison();
+  snake.checkFruitEaten();
+  renderForeground();
 }
 
 function renderForeground() {
@@ -217,32 +205,5 @@ function renderForeground() {
   // Render snake from head to tail.
   for (var i = snake.body.length - 1; i >= 0; i--) {
     fillSquare(snake.body[i].x, snake.body[i].y, RAINBOW[i % RAINBOW.length]);
-  }
-}
-
-function detectCollison() {
-  // Check if the snake hit its body.
-  for (var i = 1; i < snake.body.length; i++) {
-    if (snake.body[0].x === snake.body[i].x && snake.body[0].y === snake.body[i].y) {
-      reset();
-    }
-  }
-  // Check if the snake hit a wall.
-  if (snake.body[0].x < 0 || snake.body[0].y < 0 || snake.body[0].x >= GRID_SIZE || snake.body[0].y >= GRID_SIZE) {
-    reset();
-  }
-}
-
-function detectFruitEaten() {
-  if (snake.body[0].x === fruit.x && snake.body[0].y === fruit.y) {
-    // Update score.
-    score += Math.ceil(snake.body.length * smallestDistancePossible / distanceTraveled * framesPerSecond);
-    updateScore();
-    // Increase the size of the snake.
-    snake.grow();
-    // for (var i = 0; i < GROW_RATE; i++) {
-    //   snake.push(new Vector(snake[snake.length - 1].x, snake[snake.length - 1].y, 'none'));
-    // }
-    placeFruit();
   }
 }

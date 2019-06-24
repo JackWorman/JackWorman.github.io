@@ -1,4 +1,4 @@
-class Snake {
+export default class Snake {
   constructor(startX, startY) {
     this.direction = 'none';
     this.body = [{x: startX, y: startY}];
@@ -24,6 +24,30 @@ class Snake {
   grow() {
     for (var i = 0; i < 5; i++) {
       this.body.push({x: this.body[this.body.length - 1].x, y: this.body[this.body.length - 1].y});
+    }
+  }
+
+  checkCollison() {
+    // Check if the snake hit its body.
+    for (var i = 1; i < this.body.length; i++) {
+      if (this.body[0].x === this.body[i].x && this.body[0].y === this.body[i].y) {
+        reset();
+      }
+    }
+    // Check if the snake hit a wall.
+    if (this.body[0].x < 0 || this.body[0].y < 0 || this.body[0].x >= GRID_SIZE || this.body[0].y >= GRID_SIZE) {
+      reset();
+    }
+  }
+
+  checkFruitEaten() {
+    if (this.body[0].x === fruit.x && this.body[0].y === fruit.y) {
+      // Update score.
+      score += Math.ceil(snake.body.length * smallestDistancePossible / distanceTraveled * framesPerSecond);
+      updateScore();
+      // Increase the size of the snake.
+      snake.grow();
+      placeFruit();
     }
   }
 }

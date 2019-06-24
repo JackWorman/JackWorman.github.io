@@ -24,7 +24,6 @@ async function chooseDifficulty() {
   if (value) {
     framesPerSecond = value;
   }
-  loop = setInterval(gameLoop, MILLISECONDS_PER_SECOND / framesPerSecond);
 }
 
 async function changeSettings() {

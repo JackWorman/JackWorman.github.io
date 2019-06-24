@@ -27,7 +27,7 @@ export default class Snake {
     }
   }
 
-  checkCollison(GRID_SIZE) {
+  checkCollison(gridSize) {
     // Check if the snake hit its body.
     for (var i = 1; i < this.body.length; i++) {
       if (this.body[0].x === this.body[i].x && this.body[0].y === this.body[i].y) {
@@ -35,7 +35,7 @@ export default class Snake {
       }
     }
     // Check if the snake hit a wall.
-    if (this.body[0].x < 0 || this.body[0].y < 0 || this.body[0].x >= GRID_SIZE || this.body[0].y >= GRID_SIZE) {
+    if (this.body[0].x < 0 || this.body[0].y < 0 || this.body[0].x >= gridSize || this.body[0].y >= gridSize) {
       reset();
     }
   }

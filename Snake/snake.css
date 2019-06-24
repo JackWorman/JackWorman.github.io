@@ -1,5 +1,5 @@
 @font-face {
-    font-family: 'Heavy Data'; /*a name to be used later*/
+    font-family: 'HeavyData'; /*a name to be used later*/
     src: url('https://jackworman.com/fonts/heavy-data.ttf'); /*URL to font*/
 }
 
@@ -12,7 +12,7 @@ html, body {
 }
 
 #header-container {
-  font-family: 'Heavy Data';
+  font-family: 'HeavyData';
   display: block;
   margin: 0 auto;
   color: white;

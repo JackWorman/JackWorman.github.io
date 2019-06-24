@@ -53,7 +53,7 @@ document.addEventListener('keydown', function(event) {
   if (!controlsEnabled || (event.keyCode !== 37 && event.keyCode !== 38 && event.keyCode !== 39 && event.keyCode !== 40)) {
     return;
   }
-  if (snake.direction === 'none') {
+  if (snake.direction === 'none' && directionQueue.length === 0) {
       loop = setInterval(gameLoop, MILLISECONDS_PER_SECOND / framesPerSecond);
   }
   if (inputQueuing) {

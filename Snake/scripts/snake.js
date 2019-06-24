@@ -23,7 +23,7 @@ class Snake {
 
   grow() {
     for (var i = 0; i < 5; i++) {
-      this.body.push({x: this.body[this.body.length].x, y: this.body[this.body.length].y});
+      this.body.push({x: this.body[this.body.length - 1].x, y: this.body[this.body.length - 1].y});
     }
   }
 }

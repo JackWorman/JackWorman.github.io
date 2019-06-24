@@ -133,6 +133,7 @@ function setUpControls() {
 }
 
 async function reset() {
+  clearInterval(loop);
   controlsEnabled = false;
   if (typeof loop !== 'undefined') { // Does not run the first time.
     clearInterval(loop);
@@ -144,7 +145,6 @@ async function reset() {
   updateScore();
   // Setup and render foreground.
   snake = new Snake(GRID_SIZE / 2, GRID_SIZE / 2);
-  //snake = [new Vector(GRID_SIZE / 2, GRID_SIZE / 2, 'none')];
 
   placeFruit();
   renderForeground();
@@ -222,7 +222,7 @@ function renderForeground() {
 
 function detectCollison() {
   // Check if the snake hit its body.
-  for (var i = 1; i < snake.length; i++) {
+  for (var i = 1; i < snake.body.length; i++) {
     if (snake.body[0].x === snake.body[i].x && snake.body[0].y === snake.body[i].y) {
       reset();
     }

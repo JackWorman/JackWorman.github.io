@@ -22,7 +22,7 @@ class Point {
 }
 
 // Constants
-const CANVAS_SIZE = 600; // in pixels
+const CANVAS_SIZE = 601; // in pixels
 const GRID_SIZE = 30;
 if (CANVAS_SIZE / GRID_SIZE !== Math.round(CANVAS_SIZE / GRID_SIZE)) {
   throw 'CANVAS_SIZE / GRID_SIZE is not a whole number. The canvas might render incorrectly.';
@@ -57,7 +57,7 @@ var smallestDistancePossible;
 var controlsEnabled = false;
 var loop;
 
-// 
+//
 setUpBackgroundAndForeground();
 setUpControls();
 reset();

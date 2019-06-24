@@ -1,10 +1,10 @@
 @font-face {
-    font-family: 'Sound System'; /*a name to be used later*/
-    src: url('./fonts/sound_system.ttf'); /*URL to font*/
+    font-family: 'AlexBrush'; /*a name to be used later*/
+    src: url('https://jackworman.com/fonts/AlexBrush-Regular.ttf'); /*URL to font*/
 }
 
 #span-title {
-  font-family: 'Sound System';
+  font-family: 'AlexBrush';
 }
 
 html, body {

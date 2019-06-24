@@ -93,7 +93,7 @@ function setUpControls() {
       return;
     }
     if (inputQueuing) {
-      var dir = directionQueue.length ? directionQueue[directionQueue.length - 1] : snake[0].direction;
+      var dir = directionQueue.length ? directionQueue[directionQueue.length - 1] : snake.body[0].direction;
       if (dir === 'left' || dir === 'right') {
         if (event.keyCode === 38) {
           directionQueue.push('up');
@@ -110,19 +110,19 @@ function setUpControls() {
         directionQueue.push(DIRECTIONS[event.keyCode - 37]);
       }
     } else {
-      if (snake[0].direction === 'left' || snake[0].direction === 'right') {
+      if (snake.body[0].direction === 'left' || snake.body[0].direction === 'right') {
         if (event.keyCode === 38) {
           directionQueue.push('up');
         } else if (event.keyCode === 40) {
           directionQueue.push('down');
         }
-      } else if (snake[0].direction === 'up' || snake[0].direction === 'down') {
+      } else if (snake.body[0].direction === 'up' || snake.body[0].direction === 'down') {
         if (event.keyCode === 37) {
           directionQueue.push('left');
         } else if (event.keyCode === 39) {
           directionQueue.push('right');
         }
-      } else if (snake[0].direction === 'none') {
+      } else if (snake.body[0].direction === 'none') {
         directionQueue.push(DIRECTIONS[event.keyCode - 37]);
       }
     }

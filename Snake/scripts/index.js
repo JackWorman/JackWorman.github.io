@@ -57,10 +57,13 @@ var smallestDistancePossible;
 var controlsEnabled = false;
 var loop;
 
+// 
+setUpBackgroundAndForeground();
+setUpControls();
+reset();
+
 document.addEventListener('DOMContentLoaded', function() {
-  setUpBackgroundAndForeground();
-  setUpControls();
-  reset();
+
 });
 
 function setUpBackgroundAndForeground() {

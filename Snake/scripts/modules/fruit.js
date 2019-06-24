@@ -1,12 +1,15 @@
-class Fruit {
+'use strict'
+
+export default class Fruit {
   constructor() {
-    this.placeFruit();
+    this.x = -1;
+    this.y = -1;
   }
 
-  placeFruit() {
+  placeFruit(gridSize, snake) {
     do {
-      var fruitX = Math.floor(Math.random() * GRID_SIZE);
-      var fruitY = Math.floor(Math.random() * GRID_SIZE);
+      var fruitX = Math.floor(Math.random() * gridSize);
+      var fruitY = Math.floor(Math.random() * gridSize);
       var collison = false;
       for (var i = 0; i < snake.body.length; i++) {
         if (fruitX === snake.body[i].x && fruitY === snake.body[i].y) {
@@ -14,9 +17,7 @@ class Fruit {
         }
       }
     } while (collison);
-    fruit = new Point(fruitX, fruitY);
-    // Reset distance variables.
-    distanceTraveled = 0;
-    smallestDistancePossible = Math.abs(fruit.x - snake.body[0].x) + Math.abs(fruit.y - snake.body[0].y);
+    this.x = fruitX
+    this.y = fruitY;
   }
 }

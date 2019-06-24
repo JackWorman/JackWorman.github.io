@@ -1,17 +1,12 @@
 import Snake from './modules/snake.js';
+import Fruit from './modules/fruit.js';
+
 'use strict';
 
 // Force a refresh from server.
 if (getCookie("clear_cache") === "") {
   setCookie("clear_cache", "true", 1 / 24 / 60);
   window.location.reload(true);
-}
-
-class Point {
-  constructor(x, y) {
-    this.x = x;
-    this.y = y;
-  }
 }
 
 // Constants
@@ -43,7 +38,7 @@ const SPAN_SCORE = document.getElementById('span-score');
 // Globals
 var directionQueue = [];
 var snake;
-var fruit;
+var fruit = new Fruit();
 var score = 0;
 var distanceTraveled;
 var smallestDistancePossible;
@@ -135,7 +130,10 @@ async function reset() {
   updateScore();
   // Setup and render foreground.
   snake = new Snake(GRID_SIZE / 2, GRID_SIZE / 2);
-  placeFruit();
+  fruit.placeFruit(GRID_SIZE, snake);
+  // Reset distance variables.
+  distanceTraveled = 0;
+  smallestDistancePossible = Math.abs(fruit.x - snake.body[0].x) + Math.abs(fruit.y - snake.body[0].y);
   renderForeground();
   controlsEnabled = true;
 }
@@ -161,23 +159,6 @@ function updateScore() {
   }
 }
 
-function placeFruit() {
-  do {
-    var fruitX = Math.floor(Math.random() * GRID_SIZE);
-    var fruitY = Math.floor(Math.random() * GRID_SIZE);
-    var collison = false;
-    for (var i = 0; i < snake.body.length; i++) {
-      if (fruitX === snake.body[i].x && fruitY === snake.body[i].y) {
-        collison = true;
-      }
-    }
-  } while (collison);
-  fruit = new Point(fruitX, fruitY);
-  // Reset distance variables.
-  distanceTraveled = 0;
-  smallestDistancePossible = Math.abs(fruit.x - snake.body[0].x) + Math.abs(fruit.y - snake.body[0].y);
-}
-
 function gameLoop() {
   distanceTraveled++;
   var direction = directionQueue.shift();
@@ -188,8 +169,15 @@ function gameLoop() {
   if (snake.checkCollison(GRID_SIZE)) {
     reset();
   }
-  if (snake.checkFruitEaten(fruit, score, smallestDistancePossible)) {
-    
+  if (snake.checkFruitEaten(fruit)) {
+    // Update score.
+    score += Math.ceil(snake.body.length * smallestDistancePossible / distanceTraveled * framesPerSecond);
+    updateScore();
+    // Increase the size of the snake.
+    snake.grow();
+    fruit.placeFruit(GRID_SIZE, snake);
+    distanceTraveled = 0;
+    smallestDistancePossible = Math.abs(fruit.x - snake.body[0].x) + Math.abs(fruit.y - snake.body[0].y);
   }
   renderForeground();
 }

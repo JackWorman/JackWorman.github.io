@@ -1,3 +1,5 @@
+'use strict'
+
 export default class Snake {
   constructor(startX, startY) {
     this.direction = 'none';
@@ -31,23 +33,14 @@ export default class Snake {
     // Check if the snake hit its body.
     for (var i = 1; i < this.body.length; i++) {
       if (this.body[0].x === this.body[i].x && this.body[0].y === this.body[i].y) {
-        reset();
+        return true;
       }
     }
     // Check if the snake hit a wall.
-    if (this.body[0].x < 0 || this.body[0].y < 0 || this.body[0].x >= gridSize || this.body[0].y >= gridSize) {
-      reset();
-    }
+    return this.body[0].x < 0 || this.body[0].y < 0 || this.body[0].x >= gridSize || this.body[0].y >= gridSize;
   }
 
   checkFruitEaten(fruit, score, smallestDistancePossible) {
-    if (this.body[0].x === fruit.x && this.body[0].y === fruit.y) {
-      // Update score.
-      score += Math.ceil(this.body.length * smallestDistancePossible / distanceTraveled * framesPerSecond);
-      updateScore();
-      // Increase the size of the snake.
-      this.grow();
-      placeFruit();
-    }
+    return this.body[0].x === fruit.x && this.body[0].y === fruit.y;
   }
 }

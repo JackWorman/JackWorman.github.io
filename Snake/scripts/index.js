@@ -185,7 +185,7 @@ function placeFruit() {
   fruit = new Point(fruitX, fruitY);
   // Reset distance variables.
   distanceTraveled = 0;
-  smallestDistancePossible = Math.abs(fruit.x - snake[0].x) + Math.abs(fruit.y - snake[0].y);
+  smallestDistancePossible = Math.abs(fruit.x - snake.body[0].x) + Math.abs(fruit.y - snake.body[0].y);
 }
 
 function gameLoop() {

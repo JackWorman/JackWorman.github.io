@@ -1,3 +1,12 @@
+@font-face {
+    font-family: 'Sound System'; /*a name to be used later*/
+    src: url('./fonts/sound_system.ttf'); /*URL to font*/
+}
+
+#span-title {
+  font-family: 'Sound System';
+}
+
 html, body {
   height: 100%;
   width: 100%;
@@ -56,22 +65,3 @@ html, body {
   left: 0px;
   border: 1px solid white;
 }
-/*
-#ai-container {
-  position: relative;
-   cursor: none;
-}
-
-#brainsBackground {
-  position: absolute;
-  z-index: 0;
-  top: 0px;
-  left: 0px;
-}
-
-#brainsForeground {
-  position: absolute;
-  z-index: 1;
-  top: 0px;
-  left: 0px;
-} */

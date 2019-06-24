@@ -17,6 +17,14 @@ html, body {
   margin: 0 auto;
   color: white;
   text-align: center;
+
+}
+
+#span-title {
+  font-size: 100px;
+}
+
+#span-score {
   font-size: 64px;
 }
 

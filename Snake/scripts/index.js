@@ -125,6 +125,7 @@ function setUpControls() {
       } else if (snake.body[0].direction === 'none') {
         directionQueue.push(DIRECTIONS[event.keyCode - 37]);
       }
+    }
     loop = setInterval(gameLoop, MILLISECONDS_PER_SECOND / framesPerSecond);
   }, true);
 }

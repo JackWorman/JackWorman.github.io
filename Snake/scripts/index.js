@@ -1,7 +1,7 @@
+'use strict';
+
 import Snake from './modules/snake.js';
 import Fruit from './modules/fruit.js';
-
-'use strict';
 
 // Force a refresh from server.
 if (getCookie("clear_cache") === "") {

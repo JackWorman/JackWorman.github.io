@@ -1,6 +1,10 @@
 @font-face {
-    font-family: 'HeavyData'; /*a name to be used later*/
+    font-family: 'Heavy Data'; /*a name to be used later*/
     src: url('https://jackworman.com/fonts/heavy-data.ttf'); /*URL to font*/
+}
+@font-face {
+    font-family: 'Courier Prime'; /*a name to be used later*/
+    src: url('https://jackworman.com/fonts/courier-prime.ttf'); /*URL to font*/
 }
 
 
@@ -12,12 +16,11 @@ html, body {
 }
 
 #header-container {
-  font-family: 'HeavyData';
+  font-family: 'Heavy Data';
   display: block;
   margin: 0 auto;
   color: white;
   text-align: center;
-
 }
 
 #span-title {
@@ -49,6 +52,7 @@ html, body {
   color: white;
   font-size: 48px;
   text-align: left;
+  font-family: 'Courier Prime';
 }
 
 #canvas-container {

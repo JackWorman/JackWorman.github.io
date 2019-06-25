@@ -10,7 +10,7 @@ if (getCookie("clear_cache") === "") {
 }
 
 // Constants
-const CANVAS_SIZE = 600; // in pixels
+const CANVAS_SIZE = 750; // in pixels
 const GRID_SIZE = 30;
 if (CANVAS_SIZE / GRID_SIZE !== Math.round(CANVAS_SIZE / GRID_SIZE)) {
   throw 'CANVAS_SIZE / GRID_SIZE is not a whole number. The canvas might render incorrectly.';
@@ -126,8 +126,8 @@ async function reset() {
   }
   directionQueue = [];
   // Reset score variables.
-  score = 0;
   updateScore();
+  score = 0;
   // Setup and render foreground.
   snake = new Snake(GRID_SIZE / 2, GRID_SIZE / 2);
   fruit.placeFruit(GRID_SIZE, snake);
@@ -139,21 +139,13 @@ async function reset() {
 }
 
 function updateScore() {
-  for (var i = 1; i <= 5; i++) {
-    if (Number(localStorage.getItem('highscore' + i)) < score) {
-      for (var j = 5; j > i; j--) { // move scores down
-        localStorage.setItem('highscore' + j, localStorage.getItem('highscore' + (j - 1)));
-      }
-      localStorage.setItem('highscore' + i, score);
-      break;
-    }
+  if (typeof localStorage.highscore === 'undefined') {
+    localStorage.highscore = 0;
   }
-  for (var i = 1; i <= 5; i++) {
-    if (Number(localStorage.getItem('highscore' + i))) {
-      var highscoreX = document.getElementById('highscore' + i);
-      highscoreX.textContent = i + '. ' + localStorage.getItem('highscore' + i);
-    }
+  if (localStorage.highscore < score) {
+    localStorage.highscore = score;
   }
+  document.getElementById('span-highscore').textContent = 'Highscore: ' + localStorage.highscore;
 }
 
 function gameLoop() {

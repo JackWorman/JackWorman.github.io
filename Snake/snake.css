@@ -7,12 +7,12 @@
     src: url('https://jackworman.com/fonts/courier-prime.ttf'); /*URL to font*/
 }
 
-
 html, body {
   height: 100%;
   width: 100%;
   margin: 0;
   background-color: black;
+  text-align: center;
 }
 
 #header-container {
@@ -27,8 +27,14 @@ html, body {
   font-size: 100px;
 }
 
+#span-highscore {
+  font-size: 48px;
+  padding-right: 75px;
+}
+
 #span-score {
-  font-size: 64px;
+  font-size: 48px;
+  padding-left: 75px;
 }
 
 .rainbow {
@@ -39,23 +45,10 @@ html, body {
   background-clip: text;
 }
 
-#wrapper {
-  display: flex;
-  width: 100%;
-}
-
-#wrapper div {
-  flex-basis: 100%;
-}
-
-#directions-container, #highscore-container {
-  color: white;
-  font-size: 48px;
-  text-align: left;
-  font-family: 'Courier Prime';
-}
-
 #canvas-container {
+  height: 752px;
+  width: 752px;
+  display: inline-block;
   position: relative;
   cursor: none;
 }

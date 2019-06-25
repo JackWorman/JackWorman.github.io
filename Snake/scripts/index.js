@@ -30,10 +30,10 @@ const RAINBOW = [
 ];
 const DIRECTIONS = ['left', 'up', 'right', 'down'];
 // DOM Elements
-const CANVAS_BOARD_BACKGROUND = document.getElementById('canvas-board-background');
-const CONTEXT_BOARD_BACKGROUND = CANVAS_BOARD_BACKGROUND.getContext('2d');
-const CANVAS_BOARD_FOREGROUND = document.getElementById('canvas-board-foreground');
-const CONTEXT_BOARD_FOREGROUND = CANVAS_BOARD_FOREGROUND.getContext('2d');
+const CANVAS_BACKGROUND = document.getElementById('canvas-background');
+const CONTEXT_BACKGROUND = CANVAS_BACKGROUND.getContext('2d');
+const CANVAS_FOREGROUND = document.getElementById('canvas-foreground');
+const CONTEXT_FOREGROUND = CANVAS_FOREGROUND.getContext('2d');
 const SPAN_SCORE = document.getElementById('span-score');
 // Globals
 var directionQueue = [];
@@ -93,27 +93,27 @@ document.addEventListener('keydown', function(event) {
 }, true);
 
 function setUpBackgroundAndForeground() {
-  CANVAS_BOARD_BACKGROUND.width = CANVAS_SIZE;
-  CANVAS_BOARD_BACKGROUND.height = CANVAS_SIZE;
-  CANVAS_BOARD_FOREGROUND.width = CANVAS_SIZE;
-  CANVAS_BOARD_FOREGROUND.height = CANVAS_SIZE;
+  CANVAS_BACKGROUND.width = CANVAS_SIZE;
+  CANVAS_BACKGROUND.height = CANVAS_SIZE;
+  CANVAS_FOREGROUND.width = CANVAS_SIZE;
+  CANVAS_FOREGROUND.height = CANVAS_SIZE;
   renderBackground();
 }
 
 function renderBackground() {
-  CONTEXT_BOARD_BACKGROUND.fillStyle = BLACK;
-  CONTEXT_BOARD_BACKGROUND.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
+  CONTEXT_BACKGROUND.fillStyle = BLACK;
+  CONTEXT_BACKGROUND.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
   if (showGrid) {
-    CONTEXT_BOARD_BACKGROUND.strokeStyle = WHITE;
-    CONTEXT_BOARD_BACKGROUND.beginPath();
+    CONTEXT_BACKGROUND.strokeStyle = WHITE;
+    CONTEXT_BACKGROUND.beginPath();
     for (var i = 0; i <= GRID_SIZE; i++) {
       var step = i * CANVAS_SIZE / GRID_SIZE + 0.5;
-      CONTEXT_BOARD_BACKGROUND.moveTo(0.5, step);
-      CONTEXT_BOARD_BACKGROUND.lineTo(CANVAS_SIZE, step);
-      CONTEXT_BOARD_BACKGROUND.moveTo(step, 0.5);
-      CONTEXT_BOARD_BACKGROUND.lineTo(step, CANVAS_SIZE);
+      CONTEXT_BACKGROUND.moveTo(0.5, step);
+      CONTEXT_BACKGROUND.lineTo(CANVAS_SIZE, step);
+      CONTEXT_BACKGROUND.moveTo(step, 0.5);
+      CONTEXT_BACKGROUND.lineTo(step, CANVAS_SIZE);
     }
-    CONTEXT_BOARD_BACKGROUND.stroke();
+    CONTEXT_BACKGROUND.stroke();
   }
 }
 
@@ -173,14 +173,14 @@ function gameLoop() {
 
 function renderForeground() {
   function fillSquare(x, y, color) {
-    CONTEXT_BOARD_FOREGROUND.fillStyle = color;
+    CONTEXT_FOREGROUND.fillStyle = color;
     var xStart = x * CANVAS_SIZE / GRID_SIZE + 0.5;
     var yStart = y * CANVAS_SIZE / GRID_SIZE + 0.5;
     var xLength = CANVAS_SIZE / GRID_SIZE;
     var yLength = CANVAS_SIZE / GRID_SIZE;
-    CONTEXT_BOARD_FOREGROUND.fillRect(xStart, yStart, xLength, yLength);
+    CONTEXT_FOREGROUND.fillRect(xStart, yStart, xLength, yLength);
   }
-  CONTEXT_BOARD_FOREGROUND.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
+  CONTEXT_FOREGROUND.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
   fillSquare(fruit.x, fruit.y, WHITE);
   // Render snake from head to tail.
   for (var i = snake.body.length - 1; i >= 0; i--) {

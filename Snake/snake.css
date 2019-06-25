@@ -53,7 +53,7 @@ html, body {
   cursor: none;
 }
 
-#canvas-board-background {
+#canvas-background {
   position: absolute;
   z-index: 0;
   top: 0px;
@@ -61,7 +61,7 @@ html, body {
   border: 1px solid white;
 }
 
-#canvas-board-foreground {
+#canvas-foreground {
   position: absolute;
   z-index: 1;
   top: 0px;

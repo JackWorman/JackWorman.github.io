@@ -128,6 +128,7 @@ async function reset() {
   // Reset score variables.
   updateScore();
   score = 0;
+  SPAN_SCORE.textContent = 'Score: ' + score;
   // Setup and render foreground.
   snake = new Snake(GRID_SIZE / 2, GRID_SIZE / 2);
   fruit.placeFruit(GRID_SIZE, snake);

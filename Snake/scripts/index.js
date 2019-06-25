@@ -139,22 +139,19 @@ async function reset() {
 }
 
 function updateScore() {
-  SPAN_SCORE.textContent = 'Score: ' + score;
   for (var i = 1; i <= 5; i++) {
-    if (Number(getCookie('highscore' + i)) < score) {
+    if (Number(localStorage.getItem('highscore' + i)) < score) {
       for (var j = 5; j > i; j--) { // move scores down
-        setCookie('highscore' + j, getCookie('highscore' + (j - 1)), 1000);
-        setCookie('highscoreFPS' + j, getCookie('highscoreFPS' + (j - 1)), 1000);
+        localStorage.setItem('highscore' + j, localStorage.getItem('highscore' + (j - 1)));
       }
-      setCookie('highscore' + i, score, 1000);
-      setCookie('highscoreFPS' + i, framesPerSecond, 1000);
+      localStorage.setItem('highscore' + i, score);
       break;
     }
   }
   for (var i = 1; i <= 5; i++) {
-    if (Number(getCookie('highscore' + i))) {
+    if (Number(localStorage.getItem('highscore' + i))) {
       var highscoreX = document.getElementById('highscore' + i);
-      highscoreX.textContent = i + '. ' + getCookie('highscore' + i) + ' - ' + getCookie('highscoreFPS' + i) + 'FPS';
+      highscoreX.textContent = i + '. ' + localStorage.getItem('highscore' + i);
     }
   }
 }
@@ -172,7 +169,7 @@ function gameLoop() {
   if (snake.checkFruitEaten(fruit)) {
     // Update score.
     score += Math.ceil(snake.body.length * smallestDistancePossible / distanceTraveled * framesPerSecond);
-    updateScore();
+    SPAN_SCORE.textContent = 'Score: ' + score;
     // Increase the size of the snake.
     snake.grow();
     fruit.placeFruit(GRID_SIZE, snake);

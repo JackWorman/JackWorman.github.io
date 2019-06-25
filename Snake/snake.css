@@ -52,8 +52,8 @@ html, body {
 }
 
 #canvas-container {
-  height: 752px;
-  width: 752px;
+  height: 692px;
+  width: 692px;
   display: inline-block;
   position: relative;
   cursor: none;

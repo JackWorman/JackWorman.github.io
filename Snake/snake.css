@@ -15,6 +15,12 @@ html, body {
   text-align: center;
 }
 
+#button-settings {
+  position:absolute;
+  top:0;
+  right:0;
+}
+
 #header-container {
   font-family: 'Heavy Data';
   display: block;

@@ -10,7 +10,7 @@ if (getCookie("clear_cache") === "") {
 }
 
 // Constants
-const CANVAS_SIZE = 750; // in pixels
+const CANVAS_SIZE = 690; // in pixels
 const GRID_SIZE = 30;
 if (CANVAS_SIZE / GRID_SIZE !== Math.round(CANVAS_SIZE / GRID_SIZE)) {
   throw 'CANVAS_SIZE / GRID_SIZE is not a whole number. The canvas might render incorrectly.';

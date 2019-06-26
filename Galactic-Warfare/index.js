@@ -38,6 +38,7 @@ CANVAS_FOREGROUND.addEventListener('mousedown', function(evt) {
   }
   bullets.push(new Bullet(ship.x, ship.y, 10, angle));
 }, false);
+CANVAS_FOREGROUND.addEventListener('contextmenu', event => event.preventDefault());
 
 var mousePos = {x: 0, y: 0};
 var bullets = [];

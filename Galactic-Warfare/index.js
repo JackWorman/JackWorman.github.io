@@ -48,9 +48,9 @@ function gameLoop() {
   for (var i = 0; i < bullets.length; i++) {
     if (bullets[i].move(CANVAS_SIZE)) {
       bullets.splice(i, 1);
+      i--;
     }
   }
-  console.log(bullets.length);
   render();
 }
 

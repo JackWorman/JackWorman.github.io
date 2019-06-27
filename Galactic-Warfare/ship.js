@@ -1,13 +1,14 @@
+'use strict';
+
+import Bullet from './bullet.js';
+
 export default class Ship {
   constructor(x, y) {
     this.x = x;
     this.y = y;
     this.speed = 5;
     this.direction = 0;
-    this.dx = 0;
-    this.dy = 0;
-    this.d2x = 0;
-    this.d2y = 0;
+    this.bullets = [];
   }
 
   render(context, mousePos) {
@@ -31,14 +32,39 @@ export default class Ship {
     context.translate(-this.x, -this.y);
   }
 
-  move(context) {
-    var angle = Math.atan2(this.dy, this.dx);
+  move(inputs, canvasSize) {
+    if (inputs[16]) {
+      this.speed = 10;
+    } else {
+      this.speed = 5;
+    }
+    var xDirection = 0;
+    var yDirection = 0;
+    if (inputs[65]) xDirection--;
+    if (inputs[68]) xDirection++;
+    if (inputs[87]) yDirection--;
+    if (inputs[83]) yDirection++;
+    var angle = Math.atan2(yDirection, xDirection);
     if (angle < 0) {
       angle = angle + 2 * Math.PI;
     }
-    if (this.dx !== 0 || this.dy !== 0) {
+    if (xDirection !== 0 || yDirection !== 0) {
       this.x = this.x + this.speed * Math.cos(angle);
       this.y = this.y + this.speed * Math.sin(angle);
+    }
+    if (this.x < 0) this.x += canvasSize;
+    if (this.y < 0) this.y += canvasSize;
+    if (this.x >= canvasSize) this.x -= canvasSize;
+    if (this.y >= canvasSize) this.y -= canvasSize;
+  }
+
+  shoot(inputs, mousePos) {
+    if (inputs['leftMouseDown']) {
+      var angle = Math.atan2(mousePos.y - this.y, mousePos.x - this.x);
+      if (angle < 0) {
+        angle = angle + 2 * Math.PI;
+      }
+      this.bullets.push(new Bullet(this.x, this.y, 40, angle));
     }
   }
 }

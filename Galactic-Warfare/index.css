@@ -5,3 +5,24 @@ html, body {
   background-color: black;
   text-align: center;
 }
+
+#canvas-container {
+  height: 800px;
+  width: 800px;
+  display: inline-block;
+  position: relative;
+}
+
+#canvas-foreground {
+  position: absolute;
+  z-index: 0;
+  top: 0px;
+  left: 0px;
+}
+
+#canvas-ui {
+  position: absolute;
+  z-index: 1;
+  top: 0px;
+  left: 0px;
+}

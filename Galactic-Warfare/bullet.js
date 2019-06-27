@@ -29,7 +29,6 @@ export default class Bullet {
     context.closePath();
     context.fillStyle = 'rgb(0, 255, 0)';
     context.fill();
-
     context.rotate(-this.angle);
     context.translate(-this.x, -this.y);
   }

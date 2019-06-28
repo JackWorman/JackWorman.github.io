@@ -58,9 +58,9 @@ export default class Ship {
     if (this.y >= canvasSize) this.y -= canvasSize;
   }
 
-  shoot(inputs, mousePos) {
+  shoot(inputs) {
     if (inputs['leftMouseDown']) {
-      var angle = Math.atan2(mousePos.y - this.y, mousePos.x - this.x);
+      var angle = Math.atan2(inputs["mousePos"].y - this.y, inputs["mousePos"].x - this.x);
       if (angle < 0) {
         angle = angle + 2 * Math.PI;
       }

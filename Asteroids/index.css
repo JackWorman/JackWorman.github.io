@@ -14,7 +14,7 @@ html, body {
 
 #span-title {
   font-family: 'Forty Second Street';
-  font-size: 64
+  font-size: 64px;
 }
 
 #canvas-foreground {

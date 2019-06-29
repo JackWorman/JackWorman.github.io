@@ -1,3 +1,5 @@
+'use strict';
+
 export default class Bullet {
   constructor(x, y, speed, angle) {
     this.x = x;

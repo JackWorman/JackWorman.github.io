@@ -3,6 +3,7 @@
 import Ship from './ship.js';
 import Asteroid from './asteroid.js';
 
+const WHITE = 'rgb(255, 255, 255)';
 const FRAMES_PER_SECOND = 60;
 const MILLISECONDS_PER_SECOND = 1000;
 const CANVAS_SIZE = 800;
@@ -68,7 +69,7 @@ function update() {
 }
 
 function render() {
-  CONTEXT_FOREGROUND.fillStyle = 'rgb(255, 255, 255)';
+  CONTEXT_FOREGROUND.fillStyle = WHITE;
   CONTEXT_FOREGROUND.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
   for (var i = 0; i < ship.lasers.length; i++) {
     ship.lasers[i].render(CONTEXT_FOREGROUND);
@@ -83,6 +84,6 @@ var requestAnimationFrame = function() {
   render();
   window.requestAnimationFrame(requestAnimationFrame);
 };
-requestAnimationFrame();
 
+requestAnimationFrame();
 var loop = setInterval(update, MILLISECONDS_PER_SECOND / FRAMES_PER_SECOND);

@@ -1,6 +1,5 @@
 'use strict';
 
-const GREEN = 'rgb(0, 255, 0)';
 const RAINBOW = [
   "rgb(255, 0, 0)",
   "rgb(255, 127, 0)",
@@ -17,17 +16,21 @@ export default class Laser {
     this.y = y;
     this.speed = speed;
     this.angle = angle;
+    this.distance = 0;
     this.color = 0;
   }
 
   move(canvasSize) {
-    this.x = this.x + this.speed * Math.cos(this.angle);
-    this.y = this.y + this.speed * Math.sin(this.angle);
-    // return this.x < 0 || this.y < 0 || this.x >= canvasSize || this.y >= canvasSize;
+    var dx = this.speed * Math.cos(this.angle);
+    var dy = this.speed * Math.sin(this.angle);
+    this.distance += Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
+    this.x = this.x + dx;
+    this.y = this.y + dy;
     if (this.x < 0) this.x += canvasSize;
     if (this.y < 0) this.y += canvasSize;
     if (this.x >= canvasSize) this.x -= canvasSize;
     if (this.y >= canvasSize) this.y -= canvasSize;
+    return this.distance > canvasSize * 7 / 8;
   }
 
   render(context) {

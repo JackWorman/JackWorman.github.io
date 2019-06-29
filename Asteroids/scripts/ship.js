@@ -62,7 +62,7 @@ export default class Ship {
   }
 
   shoot(inputs) {
-    var downTime = 1000;
+    var downTime = 750;
     if (inputs['leftMouseDown'] && Date.now() - this.shootTime > downTime) {
       this.shootTime = Date.now();
       var angle = Math.atan2(inputs["mousePos"].y - this.y, inputs["mousePos"].x - this.x);

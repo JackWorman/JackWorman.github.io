@@ -16,9 +16,9 @@ CANVAS_FOREGROUND.height = CANVAS_SIZE;
 
 var ship = new Ship(CANVAS_SIZE / 2, CANVAS_SIZE / 2);
 var asteroids = [
-  new Asteroid(Math.random() * CANVAS_SIZE, Math.random() * CANVAS_SIZE, 100, 2),
-  new Asteroid(Math.random() * CANVAS_SIZE, Math.random() * CANVAS_SIZE, 50, 4),
-  new Asteroid(Math.random() * CANVAS_SIZE, Math.random() * CANVAS_SIZE, 25, 8)
+  new Asteroid(Math.random() * CANVAS_SIZE, Math.random() * CANVAS_SIZE, 2),
+  new Asteroid(Math.random() * CANVAS_SIZE, Math.random() * CANVAS_SIZE, 1),
+  new Asteroid(Math.random() * CANVAS_SIZE, Math.random() * CANVAS_SIZE, 0)
 ];
 
 // Get inputs.
@@ -54,14 +54,9 @@ function update() {
     asteroids[i].move(CANVAS_SIZE);
   }
   ship.move(inputs, CANVAS_SIZE);
+  ship.detectCollison(asteroids);
   for (var i = 0; i < ship.lasers.length; i++) {
-    if (ship.lasers[i].move(CANVAS_SIZE)) {
-      ship.lasers.splice(i, 1);
-      i--;
-    }
-  }
-  for (var i = 0; i < ship.lasers.length; i++) {
-    if (ship.lasers[i].detectCollison(asteroids)) {
+    if (ship.lasers[i].move(CANVAS_SIZE) || ship.lasers[i].detectCollison(asteroids)) {
       ship.lasers.splice(i, 1);
       i--;
     }

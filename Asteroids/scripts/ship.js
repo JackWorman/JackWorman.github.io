@@ -72,4 +72,8 @@ export default class Ship {
       this.lasers.push(new Laser(this.x, this.y, 40, angle));
     }
   }
+
+  detectCollison(asteroids) {
+
+  }
 }

@@ -1,15 +1,17 @@
 'use strict';
 
 const BLACK = 'rgb(0, 0, 0)';
+const BASE_RADIUS = 25;
+const BASE_SPEED = 8;
 
 export default class Asteroid {
-  constructor(x, y, radius, speed) {
+  constructor(x, y, size) {
     this.x = x;
     this.y = y;
-    this.radius = radius;
+    this.radius = BASE_RADIUS * Math.pow(2, size);
+    this.speed = BASE_SPEED / Math.pow(2, size);
     this.rotationAngle = 0;
-    this.rotationSpeed = Math.random() * 0.02 - 0.01;
-    this.speed = speed;
+    this.rotationSpeed = Math.random() * 0.05 - 0.025;
     this.angle = Math.random() * 2 * Math.PI;
   }
 

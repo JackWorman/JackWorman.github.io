@@ -1,6 +1,7 @@
 'use strict';
 
 import Ship from './ship.js';
+import Asteroid from './asteroid.js';
 
 const FRAMES_PER_SECOND = 60;
 const MILLISECONDS_PER_SECOND = 1000;
@@ -12,7 +13,12 @@ const H_FPS = document.getElementById('h1-fps');
 CANVAS_FOREGROUND.width = CANVAS_SIZE;
 CANVAS_FOREGROUND.height = CANVAS_SIZE;
 
-var ship = new Ship(CANVAS_SIZE / 4, CANVAS_SIZE / 2);
+var ship = new Ship(CANVAS_SIZE / 2, CANVAS_SIZE / 2);
+var asteroids = [
+  new Asteroid(Math.random() * CANVAS_SIZE, Math.random() * CANVAS_SIZE, 100, 2),
+  new Asteroid(Math.random() * CANVAS_SIZE, Math.random() * CANVAS_SIZE, 50, 4),
+  new Asteroid(Math.random() * CANVAS_SIZE, Math.random() * CANVAS_SIZE, 25, 8)
+];
 
 // Get inputs.
 var inputs = {"mousePos": {x: 0, y: 0}};
@@ -35,11 +41,12 @@ onmousemove = function(e) {
   };
 }
 
+var then = Date.now();
 var deltas = [];
-function gameLoop() {
+function update() {
   var now = Date.now();
   deltas.push(now - then);
-  H_FPS.textContent = 'FPS: ' + Math.round(deltas.reduce((a,b) => (a+b)) / deltas.length);
+  H_FPS.textContent = 'FPS: ' + Math.round(deltas.reduce((a, b) => (a + b)) / deltas.length);
   then = now;
 
   ship.shoot(inputs);
@@ -50,6 +57,10 @@ function gameLoop() {
       i--;
     }
   }
+  for (var i = 0; i < asteroids.length; i++) {
+    asteroids[i].move(CANVAS_SIZE);
+  }
+
 }
 
 function render() {
@@ -59,6 +70,9 @@ function render() {
     ship.bullets[i].render(CONTEXT_FOREGROUND);
   }
   ship.render(CONTEXT_FOREGROUND, inputs["mousePos"]);
+  for (var i = 0; i < asteroids.length; i++) {
+    asteroids[i].render(CONTEXT_FOREGROUND);
+  }
 }
 
 var requestAnimationFrame = function() {
@@ -67,7 +81,4 @@ var requestAnimationFrame = function() {
 };
 requestAnimationFrame();
 
-// worker = new Worker("web-worker.js");
-// worker.postMessage();
-var then = Date.now();
-var loop = setInterval(gameLoop, MILLISECONDS_PER_SECOND / FRAMES_PER_SECOND);
+var loop = setInterval(update, MILLISECONDS_PER_SECOND / FRAMES_PER_SECOND);

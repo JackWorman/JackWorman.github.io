@@ -15,15 +15,5 @@ html, body {
 }
 
 #canvas-foreground {
-  position: absolute;
-  z-index: 0;
-  top: 0px;
-  left: 0px;
-}
-
-#canvas-ui {
-  position: absolute;
-  z-index: 1;
-  top: 0px;
-  left: 0px;
+  border: 1px solid white;
 }

@@ -3,7 +3,7 @@
 import Ship from './ship.js';
 import Asteroid from './asteroid.js';
 
-const WHITE = 'rgb(255, 255, 255)';
+const BLACK = 'rgb(0, 0, 0)';
 const FRAMES_PER_SECOND = 60;
 const MILLISECONDS_PER_SECOND = 1000;
 const CANVAS_SIZE = 800;
@@ -14,12 +14,10 @@ const H_FPS = document.getElementById('h1-fps');
 CANVAS_FOREGROUND.width = CANVAS_SIZE;
 CANVAS_FOREGROUND.height = CANVAS_SIZE;
 
-var ship = new Ship(CANVAS_SIZE / 2, CANVAS_SIZE / 2);
-var asteroids = [
-  new Asteroid(Math.random() * CANVAS_SIZE, Math.random() * CANVAS_SIZE, 2),
-  new Asteroid(Math.random() * CANVAS_SIZE, Math.random() * CANVAS_SIZE, 1),
-  new Asteroid(Math.random() * CANVAS_SIZE, Math.random() * CANVAS_SIZE, 0)
-];
+var ship;
+var asteroids;
+var lastSpawn;
+var loop;
 
 // Get inputs.
 var inputs = {"mousePos": {x: 0, y: 0}};
@@ -42,6 +40,18 @@ onmousemove = function(e) {
   };
 }
 
+async function reset() {
+  if (typeof loop !== 'undefined') {
+    clearInterval(loop);
+    await Swal.fire({text: 'Game Over', showConfirmButton: false, timer: 1000});
+  }
+  ship = new Ship(CANVAS_SIZE / 2, CANVAS_SIZE / 2);
+  asteroids = [];
+  lastSpawn = 0;
+  loop = setInterval(update, MILLISECONDS_PER_SECOND / FRAMES_PER_SECOND);
+}
+
+
 // var then = Date.now();
 // var deltas = [];
 function update() {
@@ -49,12 +59,23 @@ function update() {
   // deltas.push(now - then);
   // H_FPS.textContent = 'FPS: ' + Math.round(deltas.reduce((a, b) => (a + b)) / deltas.length);
   // then = now;
+
+  if (Date.now() - lastSpawn > 5000) {
+    if (Math.random() < 0.5) {
+      asteroids.push(new Asteroid(-100, Math.random() * (CANVAS_SIZE + 200), 2));
+    } else {
+      asteroids.push(new Asteroid(Math.random() * (CANVAS_SIZE + 200), -100, 2));
+    }
+    lastSpawn = Date.now();
+  }
   ship.shoot(inputs);
   for (var i = 0; i < asteroids.length; i++) {
     asteroids[i].move(CANVAS_SIZE);
   }
   ship.move(inputs, CANVAS_SIZE);
-  ship.detectCollison(asteroids);
+  if (ship.detectCollison(asteroids)) {
+    reset();
+  }
   for (var i = 0; i < ship.lasers.length; i++) {
     if (ship.lasers[i].move(CANVAS_SIZE) || ship.lasers[i].detectCollison(asteroids)) {
       ship.lasers.splice(i, 1);
@@ -64,8 +85,7 @@ function update() {
 }
 
 function render() {
-  CONTEXT_FOREGROUND.fillStyle = WHITE;
-  CONTEXT_FOREGROUND.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
+  CONTEXT_FOREGROUND.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
   for (var i = 0; i < ship.lasers.length; i++) {
     ship.lasers[i].render(CONTEXT_FOREGROUND);
   }
@@ -80,5 +100,5 @@ var requestAnimationFrame = function() {
   window.requestAnimationFrame(requestAnimationFrame);
 };
 
+reset();
 requestAnimationFrame();
-var loop = setInterval(update, MILLISECONDS_PER_SECOND / FRAMES_PER_SECOND);

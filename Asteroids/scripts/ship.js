@@ -2,7 +2,7 @@
 
 import Laser from './laser.js';
 
-const RED = 'rgb(255, 0, 0)';
+const WHITE = 'rgb(255, 255, 255)';
 
 export default class Ship {
   constructor(x, y) {
@@ -15,7 +15,7 @@ export default class Ship {
   }
 
   render(context, mousePos) {
-    var size = 20;
+    var size = 15;
     var angle = Math.atan2(mousePos.y - this.y, mousePos.x - this.x) - Math.PI/2;
     if (angle < 0) {
       angle = angle + 2 * Math.PI;
@@ -29,7 +29,7 @@ export default class Ship {
     context.lineTo(size, -centerY);
     context.lineTo(0, size * Math.tan(22.5 * Math.PI / 180) - centerY);
     context.closePath();
-    context.fillStyle = RED;
+    context.fillStyle = WHITE;
     context.fill();
     context.rotate(-angle);
     context.translate(-this.x, -this.y);
@@ -55,14 +55,14 @@ export default class Ship {
       this.x = this.x + this.speed * Math.cos(angle);
       this.y = this.y + this.speed * Math.sin(angle);
     }
-    if (this.x < 0) this.x += canvasSize;
-    if (this.y < 0) this.y += canvasSize;
-    if (this.x >= canvasSize) this.x -= canvasSize;
-    if (this.y >= canvasSize) this.y -= canvasSize;
+    if (this.x < -100) this.x += canvasSize + 200;
+    if (this.y < -100) this.y += canvasSize + 200;
+    if (this.x >= canvasSize + 100) this.x -= canvasSize + 200;
+    if (this.y >= canvasSize + 100) this.y -= canvasSize + 200;
   }
 
   shoot(inputs) {
-    var downTime = 750;
+    var downTime = 500;
     if (inputs['leftMouseDown'] && Date.now() - this.shootTime > downTime) {
       this.shootTime = Date.now();
       var angle = Math.atan2(inputs["mousePos"].y - this.y, inputs["mousePos"].x - this.x);
@@ -74,6 +74,12 @@ export default class Ship {
   }
 
   detectCollison(asteroids) {
-
+    for (var i = 0; i < asteroids.length; i++) {
+      var distance = Math.sqrt(Math.pow(this.x - asteroids[i].x, 2) + Math.pow(this.y - asteroids[i].y, 2));
+      if (distance < asteroids[i].radius) {
+        return true;
+      }
+    }
+    return false;
   }
 }

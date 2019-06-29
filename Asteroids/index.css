@@ -1,6 +1,6 @@
 @font-face{
 	font-family: 'Forty Second Street';
-	src: url('https://jackworman.com/Asteroid/fonts/forty-second-street.woff') format('woff');
+	src: url('https://jackworman.com/Asteroids/fonts/forty-second-street.woff') format('woff');
 }
 
 html, body {
@@ -14,7 +14,7 @@ html, body {
 
 #span-title {
   font-family: 'Forty Second Street';
-  font-size: 64;
+  font-size: 64
 }
 
 #canvas-foreground {

@@ -2,6 +2,10 @@
 	font-family: 'Forty Second Street';
 	src: url('https://jackworman.com/Asteroids/fonts/forty-second-street.woff') format('woff');
 }
+@font-face{
+	font-family: 'Distant Galaxy';
+	src: url('https://jackworman.com/Asteroids/fonts/distant-galaxy.woff') format('woff');
+}
 
 html, body {
   height: 100%;
@@ -15,6 +19,11 @@ html, body {
 #span-title {
   font-family: 'Forty Second Street';
   font-size: 64px;
+}
+
+#span-highscore, #span-score {
+  font-family: 'Distant Galaxy';
+  font-size: 48px;
 }
 
 #canvas-foreground {

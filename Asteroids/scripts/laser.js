@@ -1,11 +1,23 @@
 'use strict';
 
-export default class Bullet {
+const GREEN = 'rgb(0, 255, 0)';
+const RAINBOW = [
+  "rgb(255, 0, 0)",
+  "rgb(255, 127, 0)",
+  "rgb(255, 255, 0)",
+  "rgb(0, 255, 0)",
+  "rgb(0, 0, 255)",
+  "rgb(75, 0, 130)",
+  "rgb(148, 0, 211)",
+];
+
+export default class Laser {
   constructor(x, y, speed, angle) {
     this.x = x;
     this.y = y;
     this.speed = speed;
     this.angle = angle;
+    this.color = 0;
   }
 
   move(canvasSize) {
@@ -29,9 +41,20 @@ export default class Bullet {
     context.lineTo(length, width);
     context.lineTo(-length, width);
     context.closePath();
-    context.fillStyle = 'rgb(0, 255, 0)';
+    context.fillStyle = RAINBOW[this.color++ % RAINBOW.length];
     context.fill();
     context.rotate(-this.angle);
     context.translate(-this.x, -this.y);
+  }
+
+  detectCollison(asteroids) {
+    for (var i = 0; i < asteroids.length; i++) {
+      var distance = Math.sqrt(Math.pow(this.x - asteroids[i].x, 2) + Math.pow(this.y - asteroids[i].y, 2));
+      if (distance < asteroids[i].radius) {
+        asteroids.splice(i, 1);
+        return true;
+      }
+    }
+    return false;
   }
 }

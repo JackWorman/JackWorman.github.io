@@ -1,5 +1,7 @@
 'use strict';
 
+const BLACK = 'rgb(0, 0, 0)';
+
 export default class Asteroid {
   constructor(x, y, radius, speed) {
     this.x = x;
@@ -31,7 +33,7 @@ export default class Asteroid {
       context.lineTo(this.radius * Math.cos(angle * i), this.radius * Math.sin(angle * i));
     }
     context.closePath();
-    context.fillStyle = 'rgb(0, 0, 0)';
+    context.fillStyle = BLACK;
     context.fill();
     context.rotate(-this.rotationAngle);
     context.translate(-this.x, -this.y);

@@ -1,6 +1,8 @@
 'use strict';
 
-import Bullet from './bullet.js';
+import Laser from './laser.js';
+
+const RED = 'rgb(255, 0, 0)';
 
 export default class Ship {
   constructor(x, y) {
@@ -8,7 +10,8 @@ export default class Ship {
     this.y = y;
     this.speed = 5;
     this.direction = 0;
-    this.bullets = [];
+    this.lasers = [];
+    this.shootTime = 0;
   }
 
   render(context, mousePos) {
@@ -26,7 +29,7 @@ export default class Ship {
     context.lineTo(size, -centerY);
     context.lineTo(0, size * Math.tan(22.5 * Math.PI / 180) - centerY);
     context.closePath();
-    context.fillStyle = 'rgb(255, 0, 0)';
+    context.fillStyle = RED;
     context.fill();
     context.rotate(-angle);
     context.translate(-this.x, -this.y);
@@ -59,12 +62,14 @@ export default class Ship {
   }
 
   shoot(inputs) {
-    if (inputs['leftMouseDown']) {
+    var downTime = 1000;
+    if (inputs['leftMouseDown'] && Date.now() - this.shootTime > downTime) {
+      this.shootTime = Date.now();
       var angle = Math.atan2(inputs["mousePos"].y - this.y, inputs["mousePos"].x - this.x);
       if (angle < 0) {
         angle = angle + 2 * Math.PI;
       }
-      this.bullets.push(new Bullet(this.x, this.y, 40, angle));
+      this.lasers.push(new Laser(this.x, this.y, 40, angle));
     }
   }
 }

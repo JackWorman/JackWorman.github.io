@@ -41,33 +41,37 @@ onmousemove = function(e) {
   };
 }
 
-var then = Date.now();
-var deltas = [];
+// var then = Date.now();
+// var deltas = [];
 function update() {
-  var now = Date.now();
-  deltas.push(now - then);
-  H_FPS.textContent = 'FPS: ' + Math.round(deltas.reduce((a, b) => (a + b)) / deltas.length);
-  then = now;
-
+  // var now = Date.now();
+  // deltas.push(now - then);
+  // H_FPS.textContent = 'FPS: ' + Math.round(deltas.reduce((a, b) => (a + b)) / deltas.length);
+  // then = now;
   ship.shoot(inputs);
-  ship.move(inputs, CANVAS_SIZE);
-  for (var i = 0; i < ship.bullets.length; i++) {
-    if (ship.bullets[i].move(CANVAS_SIZE)) {
-      ship.bullets.splice(i, 1);
-      i--;
-    }
-  }
   for (var i = 0; i < asteroids.length; i++) {
     asteroids[i].move(CANVAS_SIZE);
   }
-
+  ship.move(inputs, CANVAS_SIZE);
+  for (var i = 0; i < ship.lasers.length; i++) {
+    if (ship.lasers[i].move(CANVAS_SIZE)) {
+      ship.lasers.splice(i, 1);
+      i--;
+    }
+  }
+  for (var i = 0; i < ship.lasers.length; i++) {
+    if (ship.lasers[i].detectCollison(asteroids)) {
+      ship.lasers.splice(i, 1);
+      i--;
+    }
+  }
 }
 
 function render() {
   CONTEXT_FOREGROUND.fillStyle = 'rgb(255, 255, 255)';
   CONTEXT_FOREGROUND.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
-  for (var i = 0; i < ship.bullets.length; i++) {
-    ship.bullets[i].render(CONTEXT_FOREGROUND);
+  for (var i = 0; i < ship.lasers.length; i++) {
+    ship.lasers[i].render(CONTEXT_FOREGROUND);
   }
   ship.render(CONTEXT_FOREGROUND, inputs["mousePos"]);
   for (var i = 0; i < asteroids.length; i++) {

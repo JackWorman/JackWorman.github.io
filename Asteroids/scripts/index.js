@@ -11,13 +11,14 @@ const CANVAS_FOREGROUND = document.getElementById('canvas-foreground');
 const CONTEXT_FOREGROUND = CANVAS_FOREGROUND.getContext('2d');
 const SPAN_FPS = document.getElementById('span-fps');
 const SPAN_SCORE = document.getElementById('span-score');
+const SPAN_HIGHSCORE = document.getElementById('span-highscore');
 
 CANVAS_FOREGROUND.width = CANVAS_SIZE;
 CANVAS_FOREGROUND.height = CANVAS_SIZE;
 
 var ship;
 var asteroids;
-var lastSpawn;
+var timeSinceLastAsteroidSpawn;
 var loop;
 var score;
 
@@ -49,9 +50,9 @@ async function reset() {
   }
   ship = new Ship(CANVAS_SIZE / 2, CANVAS_SIZE / 2);
   asteroids = [];
-  lastSpawn = 0;
+  timeSinceLastAsteroidSpawn = -5000;
   score = 0;
-  updateScore()
+  updateScore();
   loop = setInterval(gameLoop, MILLISECONDS_PER_SECOND / FRAMES_PER_SECOND);
 }
 
@@ -65,23 +66,47 @@ function updateScore() {
     SPAN_SCORE.textContent = SPAN_SCORE.textContent + '0';
   }
   SPAN_SCORE.textContent = SPAN_SCORE.textContent + score
+  // Update highscore SPAN_HIGHSCORE
+  if (typeof localStorage.highscore === 'undefined') {
+    localStorage.highscore = 0;
+  }
+  if (localStorage.highscore < score) {
+    localStorage.highscore = score;
+  }
+  count = 1;
+  while (localStorage.highscore / Math.pow(10, count) >= 1) {
+    count++;
+  }
+  SPAN_HIGHSCORE.textContent = 'HIGHSCORE: ';
+  for (var i = 0; i < 7 - count; i++) {
+    SPAN_HIGHSCORE.textContent = SPAN_HIGHSCORE.textContent + '0';
+  }
+  SPAN_HIGHSCORE.textContent = SPAN_HIGHSCORE.textContent + localStorage.highscore;
 }
 
-var then = Date.now();
-var deltas = [];
-function gameLoop() {
-  var now = Date.now();
-  deltas.push(now - then);
-  SPAN_FPS.textContent = 'FPS: ' + Math.round(deltas.reduce((a, b) => (a + b)) / deltas.length);
-  then = now;
+function calculateFPS() {
+  if (typeof calculateFPS.deltas === 'undefined') {
+    calculateFPS.deltas = [];
+    calculateFPS.then = 0;
+  }
+  var now = performance.now();
+  if (calculateFPS.deltas.length >= 100) {
+    calculateFPS.deltas.shift();
+  }
+  calculateFPS.deltas.push(now - calculateFPS.then);
+  SPAN_FPS.textContent = 'FPS: ' + Math.round(MILLISECONDS_PER_SECOND / (calculateFPS.deltas.reduce((a, b) => (a + b)) / calculateFPS.deltas.length));
+  calculateFPS.then = now;
+}
 
-  if (Date.now() - lastSpawn > 5000) {
+function gameLoop() {
+  calculateFPS();
+  if (performance.now() - timeSinceLastAsteroidSpawn > 5000) {
     if (Math.random() < 0.5) {
       asteroids.push(new Asteroid(-100, Math.random() * (CANVAS_SIZE + 200), 2));
     } else {
       asteroids.push(new Asteroid(Math.random() * (CANVAS_SIZE + 200), -100, 2));
     }
-    lastSpawn = Date.now();
+    timeSinceLastAsteroidSpawn = performance.now();
   }
   ship.shoot(inputs);
   for (var i = 0; i < asteroids.length; i++) {
@@ -96,12 +121,13 @@ function gameLoop() {
       ship.lasers.splice(i, 1);
       i--;
     } else if (ship.lasers[i].detectCollison(asteroids)) {
-      score++;
+      score += asteroids.length;
       updateScore();
       ship.lasers.splice(i, 1);
       i--;
     }
   }
+  requestAnimationFrame(render);
 }
 
 function render() {
@@ -115,10 +141,4 @@ function render() {
   }
 }
 
-var requestAnimationFrame = function() {
-  render();
-  window.requestAnimationFrame(requestAnimationFrame);
-};
-
 reset();
-requestAnimationFrame();

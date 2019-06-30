@@ -17,9 +17,6 @@ export default class Ship {
   render(context, mousePos) {
     var size = 15;
     var angle = Math.atan2(mousePos.y - this.y, mousePos.x - this.x) - Math.PI/2;
-    if (angle < 0) {
-      angle = angle + 2 * Math.PI;
-    }
     var centerY = (size * Math.tan(67.5 * Math.PI / 180) + size * Math.tan(22.5 * Math.PI / 180)) / 3;
     context.translate(this.x, this.y);
     context.rotate(angle);
@@ -48,9 +45,6 @@ export default class Ship {
     if (inputs[87]) yDirection--;
     if (inputs[83]) yDirection++;
     var angle = Math.atan2(yDirection, xDirection);
-    if (angle < 0) {
-      angle = angle + 2 * Math.PI;
-    }
     if (xDirection !== 0 || yDirection !== 0) {
       this.x = this.x + this.speed * Math.cos(angle);
       this.y = this.y + this.speed * Math.sin(angle);
@@ -63,12 +57,9 @@ export default class Ship {
 
   shoot(inputs) {
     var downTime = 500;
-    if (inputs['leftMouseDown'] && Date.now() - this.shootTime > downTime) {
+    if ((inputs['leftMouseDown'] || inputs[32]) && Date.now() - this.shootTime > downTime) {
       this.shootTime = Date.now();
       var angle = Math.atan2(inputs["mousePos"].y - this.y, inputs["mousePos"].x - this.x);
-      if (angle < 0) {
-        angle = angle + 2 * Math.PI;
-      }
       this.lasers.push(new Laser(this.x, this.y, 40, angle));
     }
   }

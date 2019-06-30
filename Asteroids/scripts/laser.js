@@ -37,7 +37,7 @@ export default class Laser {
 
   render(context) {
     var length = 20;
-    var width = 2;
+    var width = 1;
     context.translate(this.x, this.y);
     context.rotate(this.angle);
     context.beginPath();

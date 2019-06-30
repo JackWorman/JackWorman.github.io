@@ -4,7 +4,7 @@
 }
 @font-face{
 	font-family: 'VT323';
-	src: url('https://jackworman.com/Asteroids/fonts/vt323.ttf') format('ttf');
+	src: url('https://jackworman.com/Asteroids/fonts/vt323.ttf');
 }
 
 html, body {

@@ -3,8 +3,8 @@
 	src: url('https://jackworman.com/Asteroids/fonts/forty-second-street.woff') format('woff');
 }
 @font-face{
-	font-family: 'Distant Galaxy';
-	src: url('https://jackworman.com/Asteroids/fonts/distant-galaxy.woff') format('woff');
+	font-family: 'Fantasque Sans Mono Bold';
+	src: url('https://jackworman.com/Asteroids/fonts/fantasque-sans-mono-bold.woff') format('woff');
 }
 
 html, body {
@@ -13,10 +13,16 @@ html, body {
   margin: 0;
   background-color: black;
   text-align: center;
+  color: white;
+}
+
+#span-fps {
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 #div-header-container {
-  color: white;
   width: 802px;
   margin: 0 auto;
 }
@@ -27,7 +33,7 @@ html, body {
 }
 
 #div-score-container {
-  font-family: 'Distant Galaxy';
+  font-family: 'Fantasque Sans Mono Bold';
   font-size: 32px;
 }
 

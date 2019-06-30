@@ -67,21 +67,21 @@ function updateScore() {
   }
   SPAN_SCORE.textContent = SPAN_SCORE.textContent + score
   // Update highscore SPAN_HIGHSCORE
-  if (typeof localStorage.highscore === 'undefined') {
-    localStorage.highscore = 0;
+  if (typeof localStorage.asteroidHighscore === 'undefined') {
+    localStorage.asteroidHighscore = 0;
   }
-  if (localStorage.highscore < score) {
-    localStorage.highscore = score;
+  if (localStorage.asteroidHighscore < score) {
+    localStorage.asteroidHighscore = score;
   }
   count = 1;
-  while (localStorage.highscore / Math.pow(10, count) >= 1) {
+  while (localStorage.asteroidHighscore / Math.pow(10, count) >= 1) {
     count++;
   }
   SPAN_HIGHSCORE.textContent = 'HIGHSCORE: ';
   for (var i = 0; i < 7 - count; i++) {
     SPAN_HIGHSCORE.textContent = SPAN_HIGHSCORE.textContent + '0';
   }
-  SPAN_HIGHSCORE.textContent = SPAN_HIGHSCORE.textContent + localStorage.highscore;
+  SPAN_HIGHSCORE.textContent = SPAN_HIGHSCORE.textContent + localStorage.asteroidHighscore;
 }
 
 function calculateFPS() {

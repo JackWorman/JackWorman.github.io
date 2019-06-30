@@ -4,7 +4,7 @@
 }
 @font-face{
 	font-family: 'VT323';
-	src: url('https://jackworman.com/Asteroids/fonts/vt323.ttf');
+	src: url('https://jackworman.com/Asteroids/fonts/vt323.ttf') format('truetype');
 }
 
 html, body {
@@ -34,8 +34,7 @@ html, body {
 
 #div-score-container {
   font-family: 'VT323';
-  font-size: 32px;
-  font-weight: bold;
+  font-size: 48px;
 }
 
 #span-highscore {

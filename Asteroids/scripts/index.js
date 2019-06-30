@@ -60,7 +60,7 @@ function updateScore() {
   while (score / Math.pow(10, count) >= 1) {
     count++;
   }
-  SPAN_SCORE.textContent = 'Score: ';
+  SPAN_SCORE.textContent = 'SCORE: ';
   for (var i = 0; i < 7 - count; i++) {
     SPAN_SCORE.textContent = SPAN_SCORE.textContent + '0';
   }

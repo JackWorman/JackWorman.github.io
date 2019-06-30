@@ -3,8 +3,8 @@
 	src: url('https://jackworman.com/Asteroids/fonts/forty-second-street.woff') format('woff');
 }
 @font-face{
-	font-family: 'Fantasque Sans Mono Bold';
-	src: url('https://jackworman.com/Asteroids/fonts/fantasque-sans-mono-bold.woff') format('woff');
+	font-family: 'VT323';
+	src: url('https://jackworman.com/Asteroids/fonts/vt323.woff') format('woff');
 }
 
 html, body {
@@ -33,8 +33,9 @@ html, body {
 }
 
 #div-score-container {
-  font-family: 'Fantasque Sans Mono Bold';
+  font-family: 'VT323';
   font-size: 32px;
+  font-weight: bold;
 }
 
 #span-highscore {

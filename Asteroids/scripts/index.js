@@ -12,15 +12,17 @@ const CONTEXT_FOREGROUND = CANVAS_FOREGROUND.getContext('2d');
 const SPAN_FPS = document.getElementById('span-fps');
 const SPAN_SCORE = document.getElementById('span-score');
 const SPAN_HIGHSCORE = document.getElementById('span-highscore');
+const ASTEROID_SPAWN_INTERVAL = 3500;
 
 CANVAS_FOREGROUND.width = CANVAS_SIZE;
 CANVAS_FOREGROUND.height = CANVAS_SIZE;
 
 var ship;
 var asteroids;
-var timeSinceLastAsteroidSpawn;
+var timeOfLastAsteroidSpawn;
 var loop;
 var score;
+var scoreMultiplier;
 
 // Get inputs.
 var inputs = {"mousePos": {x: 0, y: 0}};
@@ -50,8 +52,9 @@ async function reset() {
   }
   ship = new Ship(CANVAS_SIZE / 2, CANVAS_SIZE / 2);
   asteroids = [];
-  timeSinceLastAsteroidSpawn = -5000;
+  timeOfLastAsteroidSpawn = -ASTEROID_SPAWN_INTERVAL;
   score = 0;
+  scoreMultiplier = 1;
   updateScore();
   loop = setInterval(gameLoop, MILLISECONDS_PER_SECOND / FRAMES_PER_SECOND);
 }
@@ -100,13 +103,13 @@ function calculateFPS() {
 
 function gameLoop() {
   calculateFPS();
-  if (performance.now() - timeSinceLastAsteroidSpawn > 5000) {
+  if (performance.now() - timeOfLastAsteroidSpawn > ASTEROID_SPAWN_INTERVAL) {
     if (Math.random() < 0.5) {
       asteroids.push(new Asteroid(-100, Math.random() * (CANVAS_SIZE + 200), 2));
     } else {
       asteroids.push(new Asteroid(Math.random() * (CANVAS_SIZE + 200), -100, 2));
     }
-    timeSinceLastAsteroidSpawn = performance.now();
+    timeOfLastAsteroidSpawn = performance.now();
   }
   ship.shoot(inputs);
   for (var i = 0; i < asteroids.length; i++) {
@@ -117,12 +120,14 @@ function gameLoop() {
     reset();
   }
   for (var i = 0; i < ship.lasers.length; i++) {
-    if (ship.lasers[i].move(CANVAS_SIZE)) {
+    if (ship.lasers[i].move(CANVAS_SIZE)) { // Laser faded
+      scoreMultiplier = 1;
       ship.lasers.splice(i, 1);
       i--;
-    } else if (ship.lasers[i].detectCollison(asteroids)) {
-      score += asteroids.length;
+    } else if (ship.lasers[i].detectCollison(asteroids)) { // Laser hit an asteroid
+      score += asteroids.length * scoreMultiplier;
       updateScore();
+      scoreMultiplier++;
       ship.lasers.splice(i, 1);
       i--;
     }
@@ -139,6 +144,9 @@ function render() {
   for (var i = 0; i < asteroids.length; i++) {
     asteroids[i].render(CONTEXT_FOREGROUND);
   }
+  // CONTEXT_FOREGROUND.font = "20px Georgia";
+  CONTEXT_FOREGROUND.strokeStyle = 'rgb(255, 255, 255)';
+  CONTEXT_FOREGROUND.strokeText('x' + scoreMultiplier, 50, 50);
 }
 
 reset();

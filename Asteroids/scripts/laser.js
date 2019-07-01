@@ -11,6 +11,8 @@ const RAINBOW = [
   "rgb(75, 0, 130)",
   "rgb(148, 0, 211)",
 ];
+const MAXIMUM_ASTEROID_RADIUS = 100;
+
 
 export default class Laser {
   constructor(x, y, speed, angle) {
@@ -22,22 +24,22 @@ export default class Laser {
     this.color = 0;
   }
 
-  move(canvasSize) {
+  move(canvasSize, scoreMultiplier) {
     var dx = this.speed * Math.cos(this.angle);
     var dy = this.speed * Math.sin(this.angle);
-    this.distance += Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
     this.x = this.x + dx;
     this.y = this.y + dy;
-    if (this.x < -100) this.x += canvasSize + 200;
-    if (this.y < -100) this.y += canvasSize + 200;
-    if (this.x >= canvasSize + 100) this.x -= canvasSize + 200;
-    if (this.y >= canvasSize + 100) this.y -= canvasSize + 200;
-    return this.distance > canvasSize * 7 / 8;
+    if (this.x < -MAXIMUM_ASTEROID_RADIUS) this.x += canvasSize + MAXIMUM_ASTEROID_RADIUS * 2;
+    if (this.y < -MAXIMUM_ASTEROID_RADIUS) this.y += canvasSize + MAXIMUM_ASTEROID_RADIUS * 2;
+    if (this.x >= canvasSize + MAXIMUM_ASTEROID_RADIUS) this.x -= canvasSize + MAXIMUM_ASTEROID_RADIUS * 2;
+    if (this.y >= canvasSize + MAXIMUM_ASTEROID_RADIUS) this.y -= canvasSize + MAXIMUM_ASTEROID_RADIUS * 2;
+    this.distance += Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
+    return this.distance > canvasSize * 2 / 3;
   }
 
   render(context) {
-    var length = 20;
-    var width = 1;
+    var length = 40;
+    var width = 2;
     context.translate(this.x, this.y);
     context.rotate(this.angle);
     context.beginPath();
@@ -46,7 +48,7 @@ export default class Laser {
     context.lineTo(length, width);
     context.lineTo(-length, width);
     context.closePath();
-    context.fillStyle = RAINBOW[this.color++ % RAINBOW.length];
+    context.fillStyle =  RAINBOW[this.color++ % RAINBOW.length];;
     context.fill();
     context.rotate(-this.angle);
     context.translate(-this.x, -this.y);

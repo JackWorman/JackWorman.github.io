@@ -2,7 +2,7 @@
 
 import Laser from './laser.js';
 
-const WHITE = 'rgb(255, 255, 255)';
+const SHIP_COLOR = 'rgb(255, 255, 255)';
 
 export default class Ship {
   constructor(x, y) {
@@ -11,12 +11,13 @@ export default class Ship {
     this.speed = 5;
     this.direction = 0;
     this.lasers = [];
-    this.shootTime = 0;
+    this.shootRate = 500;
+    this.timeOfLastShot = -this.shootRate;
   }
 
   render(context, mousePos) {
     var size = 15;
-    var angle = Math.atan2(mousePos.y - this.y, mousePos.x - this.x) - Math.PI/2;
+    var angle = Math.atan2(mousePos.y - this.y, mousePos.x - this.x) - Math.PI / 2;
     var centerY = (size * Math.tan(67.5 * Math.PI / 180) + size * Math.tan(22.5 * Math.PI / 180)) / 3;
     context.translate(this.x, this.y);
     context.rotate(angle);
@@ -26,7 +27,7 @@ export default class Ship {
     context.lineTo(size, -centerY);
     context.lineTo(0, size * Math.tan(22.5 * Math.PI / 180) - centerY);
     context.closePath();
-    context.fillStyle = WHITE;
+    context.fillStyle = SHIP_COLOR;
     context.fill();
     context.rotate(-angle);
     context.translate(-this.x, -this.y);
@@ -56,9 +57,8 @@ export default class Ship {
   }
 
   shoot(inputs) {
-    var downTime = 500;
-    if ((inputs['leftMouseDown'] || inputs[32]) && Date.now() - this.shootTime > downTime) {
-      this.shootTime = Date.now();
+    if ((inputs['leftMouseDown'] || inputs[32]) && performance.now() - this.timeOfLastShot > this.shootRate) {
+      this.timeOfLastShot = performance.now();
       var angle = Math.atan2(inputs["mousePos"].y - this.y, inputs["mousePos"].x - this.x);
       this.lasers.push(new Laser(this.x, this.y, 40, angle));
     }

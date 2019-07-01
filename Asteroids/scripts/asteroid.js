@@ -1,6 +1,6 @@
 'use strict';
 
-const GRAY = 'rgb(100, 100, 100)';
+const ASTEROID_COLOR = 'rgb(100, 100, 100)';
 const BASE_RADIUS = 25;
 const BASE_SPEED = 6;
 
@@ -28,7 +28,7 @@ export default class Asteroid {
   render(context) {
     var sides = 10;
     context.beginPath();
-    var angle = Math.PI * 2 / sides;
+    var angle = 2 * Math.PI / sides;
     context.translate(this.x, this.y);
     context.rotate(this.rotationAngle);
     context.moveTo(this.radius, 0);
@@ -36,7 +36,7 @@ export default class Asteroid {
       context.lineTo(this.radius * Math.cos(angle * i), this.radius * Math.sin(angle * i));
     }
     context.closePath();
-    context.fillStyle = GRAY;
+    context.fillStyle = ASTEROID_COLOR;
     context.fill();
     context.rotate(-this.rotationAngle);
     context.translate(-this.x, -this.y);

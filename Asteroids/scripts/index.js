@@ -12,7 +12,7 @@ const CONTEXT_FOREGROUND = CANVAS_FOREGROUND.getContext('2d');
 const SPAN_FPS = document.getElementById('span-fps');
 const SPAN_SCORE = document.getElementById('span-score');
 const SPAN_HIGHSCORE = document.getElementById('span-highscore');
-const ASTEROID_SPAWN_INTERVAL = 3500;
+const ASTEROID_SPAWN_INTERVAL = 1000;
 
 CANVAS_FOREGROUND.width = CANVAS_SIZE;
 CANVAS_FOREGROUND.height = CANVAS_SIZE;
@@ -102,6 +102,14 @@ function calculateFPS() {
 }
 
 function gameLoop() {
+  if (typeof gameLoop.then === 'undefined') {
+    gameLoop.then = 0;
+  }
+  var now = performance.now();
+  var deltaTime = now - gameLoop.then;
+  gameLoop.then = now;
+  console.log(deltaTime);
+
   calculateFPS();
   if (performance.now() - timeOfLastAsteroidSpawn > ASTEROID_SPAWN_INTERVAL) {
     if (Math.random() < 0.5) {
@@ -113,14 +121,14 @@ function gameLoop() {
   }
   ship.shoot(inputs);
   for (var i = 0; i < asteroids.length; i++) {
-    asteroids[i].move(CANVAS_SIZE);
+    asteroids[i].move(CANVAS_SIZE, deltaTime);
   }
-  ship.move(inputs, CANVAS_SIZE);
+  ship.move(inputs, CANVAS_SIZE, deltaTime);
   if (ship.detectCollison(asteroids)) {
     reset();
   }
   for (var i = 0; i < ship.lasers.length; i++) {
-    if (ship.lasers[i].move(CANVAS_SIZE)) { // Laser faded
+    if (ship.lasers[i].move(CANVAS_SIZE, deltaTime)) { // Laser faded
       scoreMultiplier = 1;
       ship.lasers.splice(i, 1);
       i--;

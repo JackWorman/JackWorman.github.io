@@ -12,7 +12,7 @@ const RAINBOW = [
   "rgb(148, 0, 211)",
 ];
 const MAXIMUM_ASTEROID_RADIUS = 100;
-
+const MILLISECONDS_PER_SECOND = 1000;
 
 export default class Laser {
   constructor(x, y, speed, angle) {
@@ -21,14 +21,14 @@ export default class Laser {
     this.speed = speed;
     this.angle = angle;
     this.distance = 0;
-    this.color = 0;
+    this.color = Math.floor(Math.random() * 7);
   }
 
-  move(canvasSize, scoreMultiplier) {
-    var dx = this.speed * Math.cos(this.angle);
-    var dy = this.speed * Math.sin(this.angle);
-    this.x = this.x + dx;
-    this.y = this.y + dy;
+  move(canvasSize, deltaTime) {
+    var dx = this.speed * deltaTime / MILLISECONDS_PER_SECOND * Math.cos(this.angle);
+    var dy = this.speed * deltaTime / MILLISECONDS_PER_SECOND * Math.sin(this.angle);
+    this.x += dx;
+    this.y += dy;
     if (this.x < -MAXIMUM_ASTEROID_RADIUS) this.x += canvasSize + MAXIMUM_ASTEROID_RADIUS * 2;
     if (this.y < -MAXIMUM_ASTEROID_RADIUS) this.y += canvasSize + MAXIMUM_ASTEROID_RADIUS * 2;
     if (this.x >= canvasSize + MAXIMUM_ASTEROID_RADIUS) this.x -= canvasSize + MAXIMUM_ASTEROID_RADIUS * 2;

@@ -2,7 +2,8 @@
 
 const ASTEROID_COLOR = 'rgb(100, 100, 100)';
 const BASE_RADIUS = 25;
-const BASE_SPEED = 6;
+const BASE_SPEED = 360;
+const MILLISECONDS_PER_SECOND = 1000;
 
 export default class Asteroid {
   constructor(x, y, size) {
@@ -16,9 +17,9 @@ export default class Asteroid {
     this.angle = Math.random() * 2 * Math.PI;
   }
 
-  move(canvasSize) {
-    this.x = this.x + this.speed * Math.cos(this.angle);
-    this.y = this.y + this.speed * Math.sin(this.angle);
+  move(canvasSize, deltaTime) {
+    this.x += this.speed * deltaTime / MILLISECONDS_PER_SECOND * Math.cos(this.angle);
+    this.y += this.speed * deltaTime / MILLISECONDS_PER_SECOND * Math.sin(this.angle);
     if (this.x < -100) this.x += canvasSize + 200;
     if (this.y < -100) this.y += canvasSize + 200;
     if (this.x >= canvasSize + 100) this.x -= canvasSize + 200;

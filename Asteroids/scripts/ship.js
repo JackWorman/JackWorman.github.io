@@ -3,15 +3,16 @@
 import Laser from './laser.js';
 
 const SHIP_COLOR = 'rgb(255, 255, 255)';
+const MILLISECONDS_PER_SECOND = 1000;
 
 export default class Ship {
   constructor(x, y) {
     this.x = x;
     this.y = y;
-    this.speed = 5;
+    this.speed = 300;
     this.direction = 0;
     this.lasers = [];
-    this.shootRate = 500;
+    this.shootRate = 100;
     this.timeOfLastShot = -this.shootRate;
   }
 
@@ -33,11 +34,11 @@ export default class Ship {
     context.translate(-this.x, -this.y);
   }
 
-  move(inputs, canvasSize) {
+  move(inputs, canvasSize, deltaTime) {
     if (inputs[16]) {
-      this.speed = 10;
+      this.speed = 600;
     } else {
-      this.speed = 5;
+      this.speed = 300;
     }
     var xDirection = 0;
     var yDirection = 0;
@@ -47,8 +48,8 @@ export default class Ship {
     if (inputs[83]) yDirection++;
     var angle = Math.atan2(yDirection, xDirection);
     if (xDirection !== 0 || yDirection !== 0) {
-      this.x = this.x + this.speed * Math.cos(angle);
-      this.y = this.y + this.speed * Math.sin(angle);
+      this.x += this.speed * deltaTime / MILLISECONDS_PER_SECOND * Math.cos(angle);
+      this.y += this.speed * deltaTime / MILLISECONDS_PER_SECOND * Math.sin(angle);
     }
     if (this.x < -100) this.x += canvasSize + 200;
     if (this.y < -100) this.y += canvasSize + 200;
@@ -60,7 +61,7 @@ export default class Ship {
     if ((inputs['leftMouseDown'] || inputs[32]) && performance.now() - this.timeOfLastShot > this.shootRate) {
       this.timeOfLastShot = performance.now();
       var angle = Math.atan2(inputs["mousePos"].y - this.y, inputs["mousePos"].x - this.x);
-      this.lasers.push(new Laser(this.x, this.y, 40, angle));
+      this.lasers.push(new Laser(this.x, this.y, 2400, angle));
     }
   }
 

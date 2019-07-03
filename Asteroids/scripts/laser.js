@@ -40,6 +40,7 @@ export default class Laser {
   render(context) {
     var length = 40;
     var width = 2;
+    context.save();
     context.translate(this.x, this.y);
     context.rotate(this.angle);
     context.beginPath();
@@ -50,9 +51,24 @@ export default class Laser {
     context.closePath();
     context.fillStyle =  RAINBOW[this.color++ % RAINBOW.length];;
     context.fill();
-    context.rotate(-this.angle);
-    context.translate(-this.x, -this.y);
+    context.restore();
   }
+
+  // render(context) {
+  //   context.save();
+  //   context.translate(this.x, this.y);
+  //   context.rotate(this.angle);
+  //   context.beginPath();
+  //   context.moveTo(this.x, this.y);
+  //   context.quadraticCurveTo(this.x, this.y + 2, this.x + 20, this.y + 2);
+  //   context.quadraticCurveTo(this.x + 40, this.y + 2, this.x + 40, this.y);
+  //   context.quadraticCurveTo(this.x + 40, this.y - 2, this.x + 20, this.y - 2);
+  //   context.quadraticCurveTo(this.x, this.y - 2, this.x, this.y);
+  //   context.closePath();
+  //   context.fillStyle = 'rgb(0, 255, 0)';
+  //   context.fill();
+  //   context.restore();
+  // }
 
   detectCollison(asteroids) {
     for (var i = 0; i < asteroids.length; i++) {
@@ -68,4 +84,18 @@ export default class Laser {
     }
     return false;
   }
+}
+
+function drawOval(x, y, rw, rh)
+{
+  var canvas = document.getElementById("canvas4");
+  var context = canvas.getContext("2d");
+  context.save();
+  context.scale(1,  rh/rw);
+  context.beginPath();
+  context.arc(x, y, rw, 0, 2 * Math.PI);
+  context.restore();
+  context.lineWidth=4;
+  context.strokeStyle="orange";
+  context.stroke();
 }

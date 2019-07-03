@@ -108,7 +108,6 @@ function gameLoop() {
   var now = performance.now();
   var deltaTime = now - gameLoop.then;
   gameLoop.then = now;
-  console.log(deltaTime);
 
   calculateFPS();
   if (performance.now() - timeOfLastAsteroidSpawn > ASTEROID_SPAWN_INTERVAL) {

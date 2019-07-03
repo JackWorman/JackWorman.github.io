@@ -12,7 +12,7 @@ export default class Ship {
     this.speed = 300;
     this.direction = 0;
     this.lasers = [];
-    this.shootRate = 500;
+    this.shootRate = 100;
     this.timeOfLastShot = -this.shootRate;
   }
 

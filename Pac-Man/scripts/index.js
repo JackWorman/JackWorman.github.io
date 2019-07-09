@@ -8,7 +8,7 @@ const GRID_SIZE = 30; // pixels
 CANVAS_BACKGROUND.width = GRID_WIDTH * GRID_SIZE;
 CANVAS_BACKGROUND.height = GRID_HEIGHT * GRID_SIZE;
 
-const WALLS = [
+const WALLS = [ // 1 = walls, 0 = path
   [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
   [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
   [1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1],
@@ -21,9 +21,9 @@ const WALLS = [
   [1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1],
   [1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1],
   [1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1],
-  [1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1],
-  [1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1],
-  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+  [1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1],
+  [1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1],
+  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   [1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1],
   [1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1],
   [1, 1, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1, 1, 1],
@@ -42,19 +42,21 @@ const WALLS = [
   [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 ];
 
+CONTEXT_BACKGROUND.fillStyle = 'rgb(0, 0, 255)';
+CONTEXT_BACKGROUND.fillRect(0, 0, CANVAS_BACKGROUND.width, CANVAS_BACKGROUND.height);
 for (var row = 0; row < WALLS.length; row++) {
   for (var col = 0; col < WALLS[0].length; col++) {
-    if (WALLS[row][col] === 1) {
-      fillSquare(col, row, 'rgb(0, 0, 255)');
+    if (WALLS[row][col] === 0) {
+      fillSquare(col, row, 'rgb(0, 0, 0)');
     }
   }
 }
 
 function fillSquare(x, y, color) {
   CONTEXT_BACKGROUND.fillStyle = color;
-  var xStart = x * CANVAS_BACKGROUND.width / WALLS[0].length + 0.5;
-  var yStart = y * CANVAS_BACKGROUND.height / WALLS.length + 0.5;
-  var xLength = CANVAS_BACKGROUND.width / WALLS[0].length;
-  var yLength = CANVAS_BACKGROUND.height / WALLS.length;
+  var xStart = (x - 0.5) * CANVAS_BACKGROUND.width / WALLS[0].length + 0.5;
+  var yStart = (y - 0.5) * CANVAS_BACKGROUND.height / WALLS.length + 0.5;
+  var xLength = CANVAS_BACKGROUND.width / WALLS[0].length * 2;
+  var yLength = CANVAS_BACKGROUND.height / WALLS.length * 2;
   CONTEXT_BACKGROUND.fillRect(xStart, yStart, xLength, yLength);
 }

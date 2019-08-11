@@ -14,14 +14,7 @@ export default class Piece {
 
   render(context, squareSize) {
     context.beginPath();
-    context.arc(
-      (this.x + 0.5) * squareSize,
-      (this.y + 0.5) * squareSize,
-      squareSize / 2 * 0.9,
-      0,
-      2 * Math.PI,
-      false
-    );
+    context.arc((this.x + 0.5) * squareSize, (this.y + 0.5) * squareSize, squareSize / 2 * 0.9, 0, 2 * Math.PI, false);
     context.closePath();
     context.lineWidth = 3;
     context.strokeStyle = BLACK;

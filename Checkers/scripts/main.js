@@ -45,7 +45,7 @@ function initializePieces() {
   }
   // Create player 2 pieces
   for (var col = 0; col < GRID_SIZE; col++) {
-    for (var row = 5; row < 8; row++) {
+    for (var row = 0; row < 3; row++) {
       if ((col % 2 !== 0 && row % 2 === 0) || (col % 2 === 0 && row % 2 !== 0)) {
         player2Pieces.push(new Piece(col, row, 'two'));
       }

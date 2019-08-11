@@ -16,6 +16,7 @@ const CONTEXT_FOREGROUND = CANVAS_FOREGROUND.getContext('2d');
 
 var player1Pieces = [];
 var player2Pieces = [];
+var turn = 1;
 
 function initializeBoard() {
   CANVAS_BACKGROUND.width = CANVAS_BACKGROUND.height = CANVAS_FOREGROUND.width = CANVAS_FOREGROUND.height = CANVAS_SIZE;
@@ -32,7 +33,7 @@ function initializeBoard() {
 }
 
 function initializePieces() {
-  // Create player 1 pieces
+  // Creates and renders player-1's pieces
   for (var col = 0; col < GRID_SIZE; col++) {
     for (var row = 5; row < 8; row++) {
       if ((col % 2 !== 0 && row % 2 === 0) || (col % 2 === 0 && row % 2 !== 0)) {
@@ -43,7 +44,7 @@ function initializePieces() {
   for (var i = 0; i < player1Pieces.length; i++) {
     player1Pieces[i].render(CONTEXT_FOREGROUND, SQUARE_SIZE);
   }
-  // Create player 2 pieces
+  // Creates and renders player-2's pieces
   for (var col = 0; col < GRID_SIZE; col++) {
     for (var row = 0; row < 3; row++) {
       if ((col % 2 !== 0 && row % 2 === 0) || (col % 2 === 0 && row % 2 !== 0)) {

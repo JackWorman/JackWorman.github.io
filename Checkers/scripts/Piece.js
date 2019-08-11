@@ -23,6 +23,7 @@ export default class Piece {
       false
     );
     context.closePath();
+    context.strokeWidth = 3;
     context.strokeStyle = BLACK;
     context.stroke();
     if (this.player === PLAYER_1) {

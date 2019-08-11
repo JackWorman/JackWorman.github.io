@@ -63,9 +63,9 @@ onmousemove = function(e) {
     x: e.clientX - rect.left,
     y: e.clientY - rect.top
   };
-  var col = mousePosition.x / CANVAS_SIZE;
-  var row = mousePosition.y / CANVAS_SIZE;
-  console.log(col + ' - ' + row)
+  var col = Math.round(mousePosition.x / SQUARE_SIZE);
+  var row = Math.round(mousePosition.y / SQUARE_SIZE);
+  console.log(col + ' - ' + row);
 }
 
 initializeBoard();

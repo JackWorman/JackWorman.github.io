@@ -16,7 +16,7 @@ const CONTEXT_FOREGROUND = CANVAS_FOREGROUND.getContext('2d');
 
 var player1Pieces = [];
 var player2Pieces = [];
-var turn = 1;
+var mousePosition = {x: -1, y: -1};
 
 function initializeBoard() {
   CANVAS_BACKGROUND.width = CANVAS_BACKGROUND.height = CANVAS_FOREGROUND.width = CANVAS_FOREGROUND.height = CANVAS_SIZE;
@@ -55,6 +55,17 @@ function initializePieces() {
   for (var i = 0; i < player2Pieces.length; i++) {
     player2Pieces[i].render(CONTEXT_FOREGROUND, SQUARE_SIZE);
   }
+}
+
+onmousemove = function(e) {
+  var rect = CANVAS_BACKGROUND.getBoundingClientRect();
+  mousePosition = {
+    x: e.clientX - rect.left,
+    y: e.clientY - rect.top
+  };
+  var col = mousePosition.x / CANVAS_SIZE;
+  var row = mousePosition.y / CANVAS_SIZE;
+  console.log(col + ' - ' + row)
 }
 
 initializeBoard();

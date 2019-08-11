@@ -15,8 +15,8 @@ export default class Piece {
   render(context, squareSize) {
     context.beginPath();
     context.arc(
-      this.x * squareSize + squareSize / 2, // (this.x + 0.5) * squareSize
-      this.y * squareSize + squareSize / 2,
+      (this.x + 0.5) * squareSize,
+      (this.y + 0.5) * squareSize,
       squareSize / 2 * 0.9,
       0,
       2 * Math.PI,
@@ -30,7 +30,7 @@ export default class Piece {
     } else if (this.player === PLAYER_2) {
       context.fillStyle = BLACK;
     } else {
-      // error
+      console.log('The property \'player\' may only be \'' + PLAYER_1 + '\' or \'' + PLAYER_2 + '\'.');
     }
     context.fill();
   }

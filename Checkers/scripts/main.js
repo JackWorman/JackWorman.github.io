@@ -63,8 +63,8 @@ onmousemove = function(e) {
     x: e.clientX - rect.left,
     y: e.clientY - rect.top
   };
-  var col = Math.round(mousePosition.x / SQUARE_SIZE);
-  var row = Math.round(mousePosition.y / SQUARE_SIZE);
+  var col = Math.floor(mousePosition.x / SQUARE_SIZE);
+  var row = Math.floor(mousePosition.y / SQUARE_SIZE);
   console.log(col + ' - ' + row);
 }
 

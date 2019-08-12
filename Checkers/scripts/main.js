@@ -2,11 +2,12 @@
 
 import Piece from './Piece.js';
 
+// Colors
 const CHECKER_COLOR_1 = 'rgb(222, 184, 135)';
 const CHECKER_COLOR_2 = 'rgb(139, 69, 19)';
 const HIGHLIGHT_COLOR = 'rgb(153, 204, 255)';
 const SELECT_COLOR = 'rgb(0, 0, 255)';
-
+// Board sizes
 const CANVAS_SIZE = 700; // in pixels
 const GRID_SIZE = 8;
 const SQUARE_SIZE = CANVAS_SIZE / GRID_SIZE;
@@ -20,61 +21,7 @@ var player1Pieces = [];
 var player2Pieces = [];
 var mouseCoordinates = null;
 var selectedCoordinates = null;
-var turn = 1;
-
-function initializeBoard() {
-  CANVAS_BACKGROUND.width = CANVAS_BACKGROUND.height = CANVAS_FOREGROUND.width = CANVAS_FOREGROUND.height = CANVAS_SIZE;
-  renderBoard();
-}
-
-function renderBoard() {
-  CONTEXT_BACKGROUND.fillStyle = CHECKER_COLOR_2;
-  CONTEXT_BACKGROUND.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
-  CONTEXT_BACKGROUND.fillStyle = CHECKER_COLOR_1;
-  // Draws the checker board
-  for (var col = 0; col < GRID_SIZE; col++) {
-    for (var row = 0; row < GRID_SIZE; row++) {
-      if ((col % 2 === 0 && row % 2 === 0) || (col % 2 !== 0 && row % 2 !== 0)) {
-        CONTEXT_BACKGROUND.fillRect(col * SQUARE_SIZE, row * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
-      }
-    }
-  }
-  // Draws highlighted square
-  if (mouseCoordinates !== null) {
-    CONTEXT_BACKGROUND.fillStyle = HIGHLIGHT_COLOR;
-    CONTEXT_BACKGROUND.fillRect(mouseCoordinates.col * SQUARE_SIZE, mouseCoordinates.row * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
-  }
-  // Draws selected square
-  if (selectedCoordinates !== null) {
-    CONTEXT_BACKGROUND.fillStyle = SELECT_COLOR;
-    CONTEXT_BACKGROUND.fillRect(selectedCoordinates.col * SQUARE_SIZE, selectedCoordinates.row * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
-  }
-}
-
-function initializePieces() {
-  // Creates and renders player-1's pieces
-  for (var col = 0; col < GRID_SIZE; col++) {
-    for (var row = 5; row < 8; row++) {
-      if ((col % 2 !== 0 && row % 2 === 0) || (col % 2 === 0 && row % 2 !== 0)) {
-        player1Pieces.push(new Piece(col, row, 'one'));
-      }
-    }
-  }
-  for (var i = 0; i < player1Pieces.length; i++) {
-    player1Pieces[i].render(CONTEXT_FOREGROUND, SQUARE_SIZE);
-  }
-  // Creates and renders player-2's pieces
-  for (var col = 0; col < GRID_SIZE; col++) {
-    for (var row = 0; row < 3; row++) {
-      if ((col % 2 !== 0 && row % 2 === 0) || (col % 2 === 0 && row % 2 !== 0)) {
-        player2Pieces.push(new Piece(col, row, 'two'));
-      }
-    }
-  }
-  for (var i = 0; i < player2Pieces.length; i++) {
-    player2Pieces[i].render(CONTEXT_FOREGROUND, SQUARE_SIZE);
-  }
-}
+var turn = 'player-1';
 
 onmousemove = function(e) {
   var rect = CANVAS_BACKGROUND.getBoundingClientRect();
@@ -98,6 +45,73 @@ onkeyup = function(e) {
   if (e.keyCode === 27) { // Escape
     selectedCoordinates = null;
     renderBoard();
+  }
+}
+
+function initializeBoard() {
+  CANVAS_BACKGROUND.width = CANVAS_BACKGROUND.height = CANVAS_FOREGROUND.width = CANVAS_FOREGROUND.height = CANVAS_SIZE;
+  renderBoard();
+}
+
+function initializePieces() {
+  // Creates and renders player-1's pieces
+  for (var col = 0; col < GRID_SIZE; col++) {
+    for (var row = 5; row < 8; row++) {
+      if ((col % 2 !== 0 && row % 2 === 0) || (col % 2 === 0 && row % 2 !== 0)) {
+        player1Pieces.push(new Piece(col, row, 'player-1'));
+      }
+    }
+  }
+  for (var i = 0; i < player1Pieces.length; i++) {
+    player1Pieces[i].render(CONTEXT_FOREGROUND, SQUARE_SIZE);
+  }
+  // Creates and renders player-2's pieces
+  for (var col = 0; col < GRID_SIZE; col++) {
+    for (var row = 0; row < 3; row++) {
+      if ((col % 2 !== 0 && row % 2 === 0) || (col % 2 === 0 && row % 2 !== 0)) {
+        player2Pieces.push(new Piece(col, row, 'player-2'));
+      }
+    }
+  }
+  for (var i = 0; i < player2Pieces.length; i++) {
+    player2Pieces[i].render(CONTEXT_FOREGROUND, SQUARE_SIZE);
+  }
+}
+
+function renderBoard() {
+  CONTEXT_BACKGROUND.fillStyle = CHECKER_COLOR_2;
+  CONTEXT_BACKGROUND.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
+  CONTEXT_BACKGROUND.fillStyle = CHECKER_COLOR_1;
+  // Draws the checker board
+  for (var col = 0; col < GRID_SIZE; col++) {
+    for (var row = 0; row < GRID_SIZE; row++) {
+      if ((col % 2 === 0 && row % 2 === 0) || (col % 2 !== 0 && row % 2 !== 0)) {
+        CONTEXT_BACKGROUND.fillRect(col * SQUARE_SIZE, row * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
+      }
+    }
+  }
+  // Draws highlighted square
+  if (mouseCoordinates !== null) {
+    CONTEXT_BACKGROUND.fillStyle = HIGHLIGHT_COLOR;
+    CONTEXT_BACKGROUND.fillRect(mouseCoordinates.col * SQUARE_SIZE, mouseCoordinates.row * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
+  }
+  // Draws selected square
+  if (selectedCoordinates !== null) {
+    CONTEXT_BACKGROUND.fillStyle = SELECT_COLOR;
+    CONTEXT_BACKGROUND.fillRect(selectedCoordinates.col * SQUARE_SIZE, selectedCoordinates.row * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
+    highlightAvailableMoves();
+  }
+}
+
+function highlightAvailableMoves() {
+  if (turn === 'player-1') {
+    for (var i = 0; i < player1Pieces.length; i++) {
+      if (player1Pieces[i].col === selectedCoordinates.col && player1Pieces[i].row === selectedCoordinates.row) {
+
+      }
+    }
+  } else {
+    // player-2
   }
 }
 

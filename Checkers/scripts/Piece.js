@@ -1,15 +1,15 @@
 'use strict';
 
-const PLAYER_1 = 'one';
-const PLAYER_2 = 'two';
+const PLAYER_1 = 'player-1';
+const PLAYER_2 = 'player-2';
 const PLAYER_1_COLOR = 'rgb(255, 255, 255)';
 const PLAYER_2_COLOR = 'rgb(255, 0, 0)';
 const OUTLINE_COLOR = 'rgb(0, 0, 0)';
 
 export default class Piece {
-  constructor(x, y, player) {
-    this.x = x;
-    this.y = y;
+  constructor(col, row, player) {
+    this.col = col;
+    this.row = row;
     if (player === PLAYER_1 || player === PLAYER_2) {
       this.player = player;
     } else {

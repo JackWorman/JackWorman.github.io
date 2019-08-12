@@ -52,6 +52,7 @@ function initializeBoard() {
 }
 
 function initializePieces() {
+  console.log('initializePieces()');
   // Creates and renders player-1's pieces
   for (var col = 0; col < GRID_SIZE; col++) {
     for (var row = 5; row < 8; row++) {

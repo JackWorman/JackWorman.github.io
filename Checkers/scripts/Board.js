@@ -40,7 +40,6 @@ export default class Board {
     if (selectedCoordinates !== null) {
       context.fillStyle = SELECT_COLOR;
       context.fillRect(selectedCoordinates.col * squareSize, selectedCoordinates.row * squareSize, squareSize, squareSize);
-      // highlightAvailableMoves();
     }
   }
 }

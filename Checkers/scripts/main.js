@@ -39,10 +39,12 @@ function renderBoard() {
       }
     }
   }
-  // Adds highlight
-  CONTEXT_BACKGROUND.fillStyle = HIGHLIGHT_COLOR;
-  CONTEXT_BACKGROUND.fillRect(mouseCoordinates.col * SQUARE_SIZE, mouseCoordinates.row * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
-  // Add select
+  // Draws highlighted square
+  if (mouseCoordinates !== null) {
+    CONTEXT_BACKGROUND.fillStyle = HIGHLIGHT_COLOR;
+    CONTEXT_BACKGROUND.fillRect(mouseCoordinates.col * SQUARE_SIZE, mouseCoordinates.row * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
+  }
+  // Draws selected square
   if (selectedCoordinates !== null) {
     CONTEXT_BACKGROUND.fillStyle = SELECT_COLOR;
     CONTEXT_BACKGROUND.fillRect(selectedCoordinates.col * SQUARE_SIZE, selectedCoordinates.row * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);

@@ -18,6 +18,7 @@ export default class Piece {
   }
 
   render(context, squareSize) {
+    console.log('render');
     context.beginPath();
     context.arc((this.x + 0.5) * squareSize, (this.y + 0.5) * squareSize, squareSize / 2 * 0.9, 0, 2 * Math.PI, false);
     context.closePath();

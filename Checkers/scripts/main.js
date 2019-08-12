@@ -2,8 +2,9 @@
 
 import Piece from './Piece.js';
 
-const LIGHT_BROWN = 'rgb(222, 184, 135)';
-const DARK_BROWN = 'rgb(139, 69, 19)';
+const CHECKER_COLOR_1 = 'rgb(222, 184, 135)';
+const CHECKER_COLOR_2 = 'rgb(139, 69, 19)';
+const HIGHLIGHT_COLOR = 'rgb(153, 204, 255)';
 
 const CANVAS_SIZE = 700; // in pixels
 const GRID_SIZE = 8;
@@ -24,9 +25,9 @@ function initializeBoard() {
 }
 
 function renderBoard() {
-  CONTEXT_BACKGROUND.fillStyle = DARK_BROWN;
+  CONTEXT_BACKGROUND.fillStyle = CHECKER_COLOR_2;
   CONTEXT_BACKGROUND.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
-  CONTEXT_BACKGROUND.fillStyle = LIGHT_BROWN;
+  CONTEXT_BACKGROUND.fillStyle = CHECKER_COLOR_1;
   for (var col = 0; col < GRID_SIZE; col++) {
     for (var row = 0; row < GRID_SIZE; row++) {
       if ((col % 2 === 0 && row % 2 === 0) || (col % 2 !== 0 && row % 2 !== 0)) {
@@ -71,7 +72,7 @@ onmousemove = function(e) {
   var row = Math.floor(mousePosition.y / SQUARE_SIZE);
   console.log(col + ' - ' + row);
   renderBoard();
-  CONTEXT_BACKGROUND.fillStyle = 'rgb(153, 204, 255)';
+  CONTEXT_BACKGROUND.fillStyle = HIGHLIGHT_COLOR;
   CONTEXT_BACKGROUND.fillRect(col * SQUARE_SIZE, row * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
 }
 

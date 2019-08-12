@@ -76,14 +76,11 @@ onmousemove = function(e) {
 }
 
 CANVAS_FOREGROUND.addEventListener('click', function(e) {
-  console.log(e);
-  if (e.buttons === 1) {
-    selectedCoordinates = {
-      col: mouseCoordinates.col,
-      row: mouseCoordinates.row
-    };
-    console.log(selectedCoordinates);
-  }
+  selectedCoordinates = {
+    col: mouseCoordinates.col,
+    row: mouseCoordinates.row
+  };
+  console.log(selectedCoordinates);
 });
 
 onkeyup = function(e) {

@@ -17,7 +17,8 @@ const CONTEXT_FOREGROUND = CANVAS_FOREGROUND.getContext('2d');
 
 var player1Pieces = [];
 var player2Pieces = [];
-var mousePosition;
+var mousePosition = null;
+var selectedPosition = null;
 
 function initializeBoard() {
   CANVAS_BACKGROUND.width = CANVAS_BACKGROUND.height = CANVAS_FOREGROUND.width = CANVAS_FOREGROUND.height = CANVAS_SIZE;
@@ -65,15 +66,24 @@ function initializePieces() {
 onmousemove = function(e) {
   var rect = CANVAS_BACKGROUND.getBoundingClientRect();
   mousePosition = {
-    x: e.clientX - rect.left,
-    y: e.clientY - rect.top
+    col: e.clientX - rect.left,
+    row: e.clientY - rect.top
   };
-  var col = Math.floor(mousePosition.x / SQUARE_SIZE);
-  var row = Math.floor(mousePosition.y / SQUARE_SIZE);
-  console.log(col + ' - ' + row);
+  var col = Math.floor(mousePosition.col / SQUARE_SIZE);
+  var row = Math.floor(mousePosition.row / SQUARE_SIZE);
   renderBoard();
   CONTEXT_BACKGROUND.fillStyle = HIGHLIGHT_COLOR;
   CONTEXT_BACKGROUND.fillRect(col * SQUARE_SIZE, row * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
+}
+
+onmousedown = function(e) {
+  if (e.buttons === 1) {
+    selectedPosition = {
+      col: Math.floor(mousePosition.col / SQUARE_SIZE),
+      row: Math.floor(mousePosition.row / SQUARE_SIZE)
+    };
+    console.log(selectedPosition);
+  }
 }
 
 initializeBoard();

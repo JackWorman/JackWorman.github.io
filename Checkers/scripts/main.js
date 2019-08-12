@@ -76,17 +76,5 @@ function initializePieces() {
   }
 }
 
-function highlightAvailableMoves() {
-  if (turn === 'player-1') {
-    for (var i = 0; i < player1Pieces.length; i++) {
-      if (player1Pieces[i].col === selectedCoordinates.col && player1Pieces[i].row === selectedCoordinates.row) {
-
-      }
-    }
-  } else {
-    // player-2
-  }
-}
-
 initializeBoard();
 initializePieces();

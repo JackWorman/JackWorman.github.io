@@ -1,5 +1,6 @@
 'use strict';
 
+import Board from './Board.js';
 import Piece from './Piece.js';
 
 // Colors
@@ -17,6 +18,7 @@ const CANVAS_FOREGROUND = document.getElementById('canvas-foreground');
 const CONTEXT_BACKGROUND = CANVAS_BACKGROUND.getContext('2d');
 const CONTEXT_FOREGROUND = CANVAS_FOREGROUND.getContext('2d');
 
+var board = null;
 var player1Pieces = [];
 var player2Pieces = [];
 var mouseCoordinates = null;
@@ -29,7 +31,7 @@ onmousemove = function(e) {
     col: Math.floor((e.clientX - rect.left) / SQUARE_SIZE),
     row: Math.floor((e.clientY - rect.top) / SQUARE_SIZE)
   };
-  renderBoard();
+  board.render(CONTEXT_BACKGROUND, mouseCoordinates, selectedCoordinates);
 }
 
 CANVAS_FOREGROUND.addEventListener('click', function() {
@@ -37,20 +39,21 @@ CANVAS_FOREGROUND.addEventListener('click', function() {
     col: mouseCoordinates.col,
     row: mouseCoordinates.row
   };
-  renderBoard();
+  board.render(CONTEXT_BACKGROUND, mouseCoordinates, selectedCoordinates);
 });
 
 onkeyup = function(e) {
   e = e || event; // to deal with IE
   if (e.keyCode === 27) { // Escape
     selectedCoordinates = null;
-    renderBoard();
+    board.render(CONTEXT_BACKGROUND, mouseCoordinates, selectedCoordinates);
   }
 }
 
 function initializeBoard() {
   CANVAS_BACKGROUND.width = CANVAS_BACKGROUND.height = CANVAS_FOREGROUND.width = CANVAS_FOREGROUND.height = CANVAS_SIZE;
-  renderBoard();
+  board = new Board();
+  board.render(CONTEXT_BACKGROUND, null, null);
 }
 
 function initializePieces() {
@@ -75,31 +78,6 @@ function initializePieces() {
   }
   for (var i = 0; i < player2Pieces.length; i++) {
     player2Pieces[i].render(CONTEXT_FOREGROUND, SQUARE_SIZE);
-  }
-}
-
-function renderBoard() {
-  CONTEXT_BACKGROUND.fillStyle = CHECKER_COLOR_2;
-  CONTEXT_BACKGROUND.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
-  CONTEXT_BACKGROUND.fillStyle = CHECKER_COLOR_1;
-  // Draws the checker board
-  for (var col = 0; col < GRID_SIZE; col++) {
-    for (var row = 0; row < GRID_SIZE; row++) {
-      if ((col % 2 === 0 && row % 2 === 0) || (col % 2 !== 0 && row % 2 !== 0)) {
-        CONTEXT_BACKGROUND.fillRect(col * SQUARE_SIZE, row * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
-      }
-    }
-  }
-  // Draws highlighted square
-  if (mouseCoordinates !== null) {
-    CONTEXT_BACKGROUND.fillStyle = HIGHLIGHT_COLOR;
-    CONTEXT_BACKGROUND.fillRect(mouseCoordinates.col * SQUARE_SIZE, mouseCoordinates.row * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
-  }
-  // Draws selected square
-  if (selectedCoordinates !== null) {
-    CONTEXT_BACKGROUND.fillStyle = SELECT_COLOR;
-    CONTEXT_BACKGROUND.fillRect(selectedCoordinates.col * SQUARE_SIZE, selectedCoordinates.row * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
-    highlightAvailableMoves();
   }
 }
 

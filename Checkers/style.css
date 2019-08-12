@@ -12,6 +12,8 @@ html, body {
 }
 
 #canvas-container {
+  height: 802px;
+  width: 802px;
   display: inline-block;
   position: relative;
 }

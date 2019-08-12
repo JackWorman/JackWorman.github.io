@@ -24,8 +24,8 @@ export default class Board {
     var squareSize = canvasSize / this.size;
     context.fillStyle = CHECKER_COLOR_2;
     // Draws the checker board
-    for (var col = 0; col < gridSize; col++) {
-      for (var row = 0; row < gridSize; row++) {
+    for (var col = 0; col < this.size; col++) {
+      for (var row = 0; row < this.size; row++) {
         if ((col % 2 === 0 && row % 2 === 0) || (col % 2 !== 0 && row % 2 !== 0)) {
           context.fillRect(col * squareSize, row * squareSize, squareSize, squareSize);
         }

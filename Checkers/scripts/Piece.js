@@ -3,7 +3,7 @@
 const PLAYER_1 = 'one';
 const PLAYER_2 = 'two';
 const PLAYER_1_COLOR = 'rgb(255, 255, 255)';
-const PLAYER_2_COLOR = 'rgb(0, 0, 0)';
+const PLAYER_2_COLOR = 'rgb(255, 0, 0)';
 
 export default class Piece {
   constructor(x, y, player) {

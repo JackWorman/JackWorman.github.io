@@ -17,7 +17,7 @@ const CONTEXT_FOREGROUND = CANVAS_FOREGROUND.getContext('2d');
 
 var player1Pieces = [];
 var player2Pieces = [];
-var mouseCoordinates = {col: -1, row: -1};
+var mouseCoordinates = null;
 var selectedCoordinates = null;
 var turn = 1;
 
@@ -75,7 +75,7 @@ onmousemove = function(e) {
   CONTEXT_BACKGROUND.fillRect(mouseCoordinates.col * SQUARE_SIZE, mouseCoordinates.row * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
 }
 
-CANVAS_FOREGROUND.addEventListener('mousedown', function(e) {
+CANVAS_FOREGROUND.addEventListener('mouseup', function(e) {
   if (e.buttons === 1) {
     selectedCoordinates = {
       col: mouseCoordinates.col,
@@ -84,6 +84,14 @@ CANVAS_FOREGROUND.addEventListener('mousedown', function(e) {
     console.log(selectedCoordinates);
   }
 });
+
+onkeyup = function(e) {
+  e = e || event; // to deal with IE
+  if (e.keyCode === 27) {
+    selectedCoordinates = null;
+    console.log(selectedCoordinates);
+  }
+}
 
 initializeBoard();
 initializePieces();

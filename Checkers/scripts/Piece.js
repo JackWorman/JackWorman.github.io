@@ -1,9 +1,9 @@
-'use strict'
+'use strict';
 
-const BLACK = 'rgb(0, 0, 0)';
-const WHITE = 'rgb(255, 255, 255)';
 const PLAYER_1 = 'one';
 const PLAYER_2 = 'two';
+const PLAYER_1_COLOR = 'rgb(255, 255, 255)';
+const PLAYER_2_COLOR = 'rgb(0, 0, 0)';
 
 export default class Piece {
   constructor(x, y, player) {
@@ -20,11 +20,11 @@ export default class Piece {
     context.strokeStyle = BLACK;
     context.stroke();
     if (this.player === PLAYER_1) {
-      context.fillStyle = WHITE;
+      context.fillStyle = PLAYER_1_COLOR;
     } else if (this.player === PLAYER_2) {
-      context.fillStyle = BLACK;
+      context.fillStyle = PLAYER_2_COLOR;
     } else {
-      console.log('The property \'player\' may only be \'' + PLAYER_1 + '\' or \'' + PLAYER_2 + '\'.');
+      throw 'Error: The property \'player\' may only be \'' + PLAYER_1 + '\' or \'' + PLAYER_2 + '\'.';
     }
     context.fill();
   }

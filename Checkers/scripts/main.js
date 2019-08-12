@@ -17,7 +17,7 @@ const CONTEXT_FOREGROUND = CANVAS_FOREGROUND.getContext('2d');
 
 var player1Pieces = [];
 var player2Pieces = [];
-var mousePosition = {x: -1, y: -1};
+var mousePosition;
 
 function initializeBoard() {
   CANVAS_BACKGROUND.width = CANVAS_BACKGROUND.height = CANVAS_FOREGROUND.width = CANVAS_FOREGROUND.height = CANVAS_SIZE;

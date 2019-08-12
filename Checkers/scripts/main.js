@@ -90,6 +90,7 @@ CANVAS_FOREGROUND.addEventListener('click', function() {
     col: mouseCoordinates.col,
     row: mouseCoordinates.row
   };
+  renderBoard();
   console.log(selectedCoordinates);
 });
 

@@ -91,7 +91,6 @@ CANVAS_FOREGROUND.addEventListener('click', function() {
     row: mouseCoordinates.row
   };
   renderBoard();
-  console.log(selectedCoordinates);
 });
 
 onkeyup = function(e) {
@@ -99,7 +98,6 @@ onkeyup = function(e) {
   if (e.keyCode === 27) { // Escape
     selectedCoordinates = null;
     renderBoard();
-    console.log(selectedCoordinates);
   }
 }
 

@@ -71,7 +71,7 @@ onmousemove = function(e) {
   var row = Math.floor(mousePosition.y / SQUARE_SIZE);
   console.log(col + ' - ' + row);
   renderBoard();
-  CONTEXT_BACKGROUND.fillStyle = 'rgb(0, 0, 200)';
+  CONTEXT_BACKGROUND.fillStyle = 'rgb(153, 204, 255)';
   CONTEXT_BACKGROUND.fillRect(col * SQUARE_SIZE, row * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
 }
 

@@ -20,6 +20,10 @@ var mousePosition = {x: -1, y: -1};
 
 function initializeBoard() {
   CANVAS_BACKGROUND.width = CANVAS_BACKGROUND.height = CANVAS_FOREGROUND.width = CANVAS_FOREGROUND.height = CANVAS_SIZE;
+  renderBoard();
+}
+
+function renderBoard() {
   CONTEXT_BACKGROUND.fillStyle = DARK_BROWN;
   CONTEXT_BACKGROUND.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
   CONTEXT_BACKGROUND.fillStyle = LIGHT_BROWN;
@@ -66,7 +70,7 @@ onmousemove = function(e) {
   var col = Math.floor(mousePosition.x / SQUARE_SIZE);
   var row = Math.floor(mousePosition.y / SQUARE_SIZE);
   console.log(col + ' - ' + row);
-  initializeBoard();
+  renderBoard();
   CONTEXT_BACKGROUND.fillStyle = 'rgb(0, 0, 200)';
   CONTEXT_BACKGROUND.fillRect(col * SQUARE_SIZE, row * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
 }

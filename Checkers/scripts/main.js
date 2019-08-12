@@ -17,8 +17,9 @@ const CONTEXT_FOREGROUND = CANVAS_FOREGROUND.getContext('2d');
 
 var player1Pieces = [];
 var player2Pieces = [];
-var mousePosition = null;
+var mouseCoordinates = {col: -1, row: -1};
 var selectedPosition = null;
+var turn = 1;
 
 function initializeBoard() {
   CANVAS_BACKGROUND.width = CANVAS_BACKGROUND.height = CANVAS_FOREGROUND.width = CANVAS_FOREGROUND.height = CANVAS_SIZE;
@@ -65,26 +66,24 @@ function initializePieces() {
 
 onmousemove = function(e) {
   var rect = CANVAS_BACKGROUND.getBoundingClientRect();
-  mousePosition = {
-    col: e.clientX - rect.left,
-    row: e.clientY - rect.top
+  mouseCoordinates = {
+    col: Math.floor((e.clientX - rect.left) / SQUARE_SIZE),
+    row: Math.floor((e.clientY - rect.top) / SQUARE_SIZE)
   };
-  var col = Math.floor(mousePosition.col / SQUARE_SIZE);
-  var row = Math.floor(mousePosition.row / SQUARE_SIZE);
   renderBoard();
   CONTEXT_BACKGROUND.fillStyle = HIGHLIGHT_COLOR;
-  CONTEXT_BACKGROUND.fillRect(col * SQUARE_SIZE, row * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
+  CONTEXT_BACKGROUND.fillRect(mouseCoordinates.col * SQUARE_SIZE, mouseCoordinates.row * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
 }
 
-onmousedown = function(e) {
+CANVAS_FOREGROUND.addEventListener('mousedown', function(e) {
   if (e.buttons === 1) {
-    selectedPosition = {
-      col: Math.floor(mousePosition.col / SQUARE_SIZE),
-      row: Math.floor(mousePosition.row / SQUARE_SIZE)
+    selectedCoordinates = {
+      col: mouseCoordinates.col,
+      row: mouseCoordinates.row
     };
-    console.log(selectedPosition);
+    console.log(selectedCoordinates);
   }
-}
+});
 
 initializeBoard();
 initializePieces();

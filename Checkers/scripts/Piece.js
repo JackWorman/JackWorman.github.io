@@ -32,6 +32,5 @@ export default class Piece {
       throw 'Error: The property \'player\' may only be \'' + PLAYER_1 + '\' or \'' + PLAYER_2 + '\'.';
     }
     context.fill();
-    console.log('fill');
   }
 }

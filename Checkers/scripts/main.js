@@ -4,7 +4,7 @@ import Board from './Board.js';
 import Piece from './Piece.js';
 
 // Board sizes
-const CANVAS_SIZE = 700; // in pixels
+const CANVAS_SIZE = 800; // in pixels
 const GRID_SIZE = 8;
 const SQUARE_SIZE = CANVAS_SIZE / GRID_SIZE;
 // DOM Elements

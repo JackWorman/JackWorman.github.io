@@ -4,6 +4,7 @@ const PLAYER_1 = 'one';
 const PLAYER_2 = 'two';
 const PLAYER_1_COLOR = 'rgb(255, 255, 255)';
 const PLAYER_2_COLOR = 'rgb(255, 0, 0)';
+const OUTLINE_COLOR = 'rgb(0, 0, 0)';
 
 export default class Piece {
   constructor(x, y, player) {
@@ -21,7 +22,7 @@ export default class Piece {
     context.arc((this.x + 0.5) * squareSize, (this.y + 0.5) * squareSize, squareSize / 2 * 0.9, 0, 2 * Math.PI, false);
     context.closePath();
     context.lineWidth = 3;
-    context.strokeStyle = PLAYER_2_COLOR;
+    context.strokeStyle = OUTLINE_COLOR;
     context.stroke();
     if (this.player === PLAYER_1) {
       context.fillStyle = PLAYER_1_COLOR;

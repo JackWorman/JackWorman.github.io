@@ -5,6 +5,7 @@ import Piece from './Piece.js';
 const CHECKER_COLOR_1 = 'rgb(222, 184, 135)';
 const CHECKER_COLOR_2 = 'rgb(139, 69, 19)';
 const HIGHLIGHT_COLOR = 'rgb(153, 204, 255)';
+const SELECT_COLOR = 'rgb(0, 0, 255)';
 
 const CANVAS_SIZE = 700; // in pixels
 const GRID_SIZE = 8;
@@ -30,12 +31,21 @@ function renderBoard() {
   CONTEXT_BACKGROUND.fillStyle = CHECKER_COLOR_2;
   CONTEXT_BACKGROUND.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
   CONTEXT_BACKGROUND.fillStyle = CHECKER_COLOR_1;
+  // Draws the checker board
   for (var col = 0; col < GRID_SIZE; col++) {
     for (var row = 0; row < GRID_SIZE; row++) {
       if ((col % 2 === 0 && row % 2 === 0) || (col % 2 !== 0 && row % 2 !== 0)) {
         CONTEXT_BACKGROUND.fillRect(col * SQUARE_SIZE, row * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
       }
     }
+  }
+  // Adds highlight
+  CONTEXT_BACKGROUND.fillStyle = HIGHLIGHT_COLOR;
+  CONTEXT_BACKGROUND.fillRect(mouseCoordinates.col * SQUARE_SIZE, mouseCoordinates.row * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
+  // Add select
+  if (selectedCoordinates !== null) {
+    CONTEXT_BACKGROUND.fillStyle = SELECT_COLOR;
+    CONTEXT_BACKGROUND.fillRect(selectedCoordinates.col * SQUARE_SIZE, selectedCoordinates.row * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
   }
 }
 
@@ -71,11 +81,9 @@ onmousemove = function(e) {
     row: Math.floor((e.clientY - rect.top) / SQUARE_SIZE)
   };
   renderBoard();
-  CONTEXT_BACKGROUND.fillStyle = HIGHLIGHT_COLOR;
-  CONTEXT_BACKGROUND.fillRect(mouseCoordinates.col * SQUARE_SIZE, mouseCoordinates.row * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
 }
 
-CANVAS_FOREGROUND.addEventListener('click', function(e) {
+CANVAS_FOREGROUND.addEventListener('click', function() {
   selectedCoordinates = {
     col: mouseCoordinates.col,
     row: mouseCoordinates.row
@@ -85,8 +93,9 @@ CANVAS_FOREGROUND.addEventListener('click', function(e) {
 
 onkeyup = function(e) {
   e = e || event; // to deal with IE
-  if (e.keyCode === 27) {
+  if (e.keyCode === 27) { // Escape
     selectedCoordinates = null;
+    renderBoard();
     console.log(selectedCoordinates);
   }
 }

@@ -9,7 +9,7 @@ export default class Piece {
   constructor(x, y, player) {
     this.x = x;
     this.y = y;
-    if (this.player === PLAYER_1 || this.player === PLAYER_2) {
+    if (player === PLAYER_1 || player === PLAYER_2) {
       this.player = player;
     } else {
       throw 'Error: The property \'player\' may only be \'' + PLAYER_1 + '\' or \'' + PLAYER_2 + '\'.';

@@ -3,11 +3,6 @@
 import Board from './Board.js';
 import Piece from './Piece.js';
 
-// Colors
-const CHECKER_COLOR_1 = 'rgb(222, 184, 135)';
-const CHECKER_COLOR_2 = 'rgb(139, 69, 19)';
-const HIGHLIGHT_COLOR = 'rgb(153, 204, 255)';
-const SELECT_COLOR = 'rgb(0, 0, 255)';
 // Board sizes
 const CANVAS_SIZE = 700; // in pixels
 const GRID_SIZE = 8;
@@ -31,7 +26,7 @@ onmousemove = function(e) {
     col: Math.floor((e.clientX - rect.left) / SQUARE_SIZE),
     row: Math.floor((e.clientY - rect.top) / SQUARE_SIZE)
   };
-  board.render(CONTEXT_BACKGROUND, mouseCoordinates, selectedCoordinates);
+  board.render(CONTEXT_BACKGROUND, CANVAS_SIZE, mouseCoordinates, selectedCoordinates);
 }
 
 CANVAS_FOREGROUND.addEventListener('click', function() {
@@ -39,21 +34,21 @@ CANVAS_FOREGROUND.addEventListener('click', function() {
     col: mouseCoordinates.col,
     row: mouseCoordinates.row
   };
-  board.render(CONTEXT_BACKGROUND, mouseCoordinates, selectedCoordinates);
+  board.render(CONTEXT_BACKGROUND, CANVAS_SIZE, mouseCoordinates, selectedCoordinates);
 });
 
 onkeyup = function(e) {
   e = e || event; // to deal with IE
   if (e.keyCode === 27) { // Escape
     selectedCoordinates = null;
-    board.render(CONTEXT_BACKGROUND, mouseCoordinates, selectedCoordinates);
+    board.render(CONTEXT_BACKGROUND, CANVAS_SIZE, mouseCoordinates, selectedCoordinates);
   }
 }
 
 function initializeBoard() {
   CANVAS_BACKGROUND.width = CANVAS_BACKGROUND.height = CANVAS_FOREGROUND.width = CANVAS_FOREGROUND.height = CANVAS_SIZE;
-  board = new Board();
-  board.render(CONTEXT_BACKGROUND, null, null);
+  board = new Board(GRID_SIZE);
+  board.render(CONTEXT_BACKGROUND, CANVAS_SIZE, mouseCoordinates, selectedCoordinates);
 }
 
 function initializePieces() {

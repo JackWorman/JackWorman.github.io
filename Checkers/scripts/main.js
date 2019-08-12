@@ -18,7 +18,7 @@ const CONTEXT_FOREGROUND = CANVAS_FOREGROUND.getContext('2d');
 var player1Pieces = [];
 var player2Pieces = [];
 var mouseCoordinates = {col: -1, row: -1};
-var selectedPosition = null;
+var selectedCoordinates = null;
 var turn = 1;
 
 function initializeBoard() {

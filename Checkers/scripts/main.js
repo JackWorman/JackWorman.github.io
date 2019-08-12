@@ -2,8 +2,8 @@
 
 import Piece from './Piece.js';
 
-const LIGHT_BROWN = 'rgb(222,184,135)';
-const DARK_BROWN = 'rgb(139,69,19)';
+const LIGHT_BROWN = 'rgb(222, 184, 135)';
+const DARK_BROWN = 'rgb(139, 69, 19)';
 
 const CANVAS_SIZE = 700; // in pixels
 const GRID_SIZE = 8;
@@ -66,6 +66,9 @@ onmousemove = function(e) {
   var col = Math.floor(mousePosition.x / SQUARE_SIZE);
   var row = Math.floor(mousePosition.y / SQUARE_SIZE);
   console.log(col + ' - ' + row);
+  initializeBoard();
+  CONTEXT_BACKGROUND.fillStyle = 'rgb(0, 0, 200)';
+  CONTEXT_BACKGROUND.fillRect(col * SQUARE_SIZE, row * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
 }
 
 initializeBoard();

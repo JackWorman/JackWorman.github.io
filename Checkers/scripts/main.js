@@ -75,7 +75,7 @@ onmousemove = function(e) {
   CONTEXT_BACKGROUND.fillRect(mouseCoordinates.col * SQUARE_SIZE, mouseCoordinates.row * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
 }
 
-CANVAS_FOREGROUND.addEventListener('onmouseup', function(e) {
+CANVAS_FOREGROUND.addEventListener('click', function(e) {
   if (e.buttons === 1) {
     selectedCoordinates = {
       col: mouseCoordinates.col,

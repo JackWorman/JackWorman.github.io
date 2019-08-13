@@ -73,3 +73,7 @@ var initializeGame = (function() {
     player2Pieces[i].render();
   }
 })();
+
+function getPiece(col, row) {
+
+}

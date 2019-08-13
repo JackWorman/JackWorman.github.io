@@ -3,6 +3,7 @@
 import Board from './Board.js';
 import Piece from './Piece.js';
 
+const ESCAPE_KEYCODE = 27;
 // Board sizes
 const CANVAS_SIZE = 800; // in pixels
 const GRID_SIZE = 8;
@@ -36,7 +37,7 @@ CANVAS_CONTAINER.addEventListener('click', function() {
 });
 
 onkeyup = function(e) {
-  if (e.keyCode === 27) { // 27 = Esc
+  if (e.keyCode === ESCAPE_KEYCODE) {
     selectedCoordinates = null;
     board.render(mouseCoordinates, selectedCoordinates);
   }

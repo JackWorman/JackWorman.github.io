@@ -78,13 +78,13 @@ function getPiece(col, row) {
   if (turn === 'player-1') {
     for (var piece in player1Pieces) {
       if (piece.col === col && piece.row === row) {
-        return piece[i];
+        return piece;
       }
     }
   } else if (turn === 'player-2') {
     for (var piece in player2Pieces) {
       if (piece.col === col && piece.row === row) {
-        return piece[i];
+        return piece;
       }
     }
   }

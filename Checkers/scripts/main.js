@@ -29,7 +29,7 @@ onmousemove = function(e) {
 }
 
 CANVAS_CONTAINER.addEventListener('click', function() {
-  if (selectedCoordinates.col === mouseCoordinates.col && selectedCoordinates.row === mouseCoordinates.row) {
+  if (selectedCoordinates === null || (selectedCoordinates.col === mouseCoordinates.col && selectedCoordinates.row === mouseCoordinates.row)) {
     selectedCoordinates = null;
   } else {
     selectedCoordinates = {

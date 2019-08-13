@@ -30,7 +30,7 @@ onmousemove = function(e) {
   board.render(CONTEXT_BOARD, CANVAS_SIZE, mouseCoordinates, selectedCoordinates);
 }
 
-CANVAS_FOREGROUND.addEventListener('click', function() {
+CANVAS_PIECES.addEventListener('click', function() {
   selectedCoordinates = {
     col: mouseCoordinates.col,
     row: mouseCoordinates.row

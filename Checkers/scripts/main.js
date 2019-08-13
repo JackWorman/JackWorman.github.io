@@ -50,6 +50,7 @@ onkeyup = function(e) {
 function initializeBoard() {
   CANVAS_PIECES.width = CANVAS_PIECES.height = CANVAS_SIZE;
   board = new Board(GRID_SIZE);
+  board.initializeBoard();
   board.render(null, CANVAS_SIZE, mouseCoordinates, selectedCoordinates);
 }
 

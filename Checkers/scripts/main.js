@@ -27,7 +27,7 @@ onmousemove = function(e) {
     col: Math.floor((e.clientX - rect.left) / SQUARE_SIZE),
     row: Math.floor((e.clientY - rect.top) / SQUARE_SIZE)
   };
-  board.render(null, CANVAS_SIZE, mouseCoordinates, selectedCoordinates);
+  board.render(mouseCoordinates, selectedCoordinates);
 }
 
 CANVAS_PIECES.addEventListener('click', function() {
@@ -36,22 +36,22 @@ CANVAS_PIECES.addEventListener('click', function() {
     row: mouseCoordinates.row
   };
   calculateAvailableMoves();
-  board.render(null, CANVAS_SIZE, mouseCoordinates, selectedCoordinates);
+  board.render(mouseCoordinates, selectedCoordinates);
 });
 
 onkeyup = function(e) {
   e = e || event; // to deal with IE
   if (e.keyCode === 27) { // Escape
     selectedCoordinates = null;
-    board.render(null, CANVAS_SIZE, mouseCoordinates, selectedCoordinates);
+    board.render(mouseCoordinates, selectedCoordinates);
   }
 }
 
 function initializeBoard() {
   CANVAS_PIECES.width = CANVAS_PIECES.height = CANVAS_SIZE;
-  board = new Board(GRID_SIZE);
+  board = new Board(GRID_SIZE, CANVAS_SIZE);
   board.initializeBoard();
-  board.render(null, CANVAS_SIZE, mouseCoordinates, selectedCoordinates);
+  board.render(mouseCoordinates, selectedCoordinates);
 }
 
 function initializePieces() {

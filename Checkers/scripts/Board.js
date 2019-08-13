@@ -10,8 +10,10 @@ const HIGHLIGHT_COLOR = 'rgb(153, 204, 255)';
 const SELECT_COLOR = 'rgb(0, 0, 255)';
 
 export default class Board {
-  constructor(size) {
-    this.size = size;
+  constructor(gridSize, canvasSize) {
+    this.gridSize = gridSize;
+    this.canvasSize = canvasSize;
+
     this.board = [];
     for (var row = 0; row < this.size; row++) {
       this.board.push([]);
@@ -26,14 +28,14 @@ export default class Board {
     CANVAS_BOARD.width = CANVAS_BOARD.height = 800;
   }
 
-  render(context, canvasSize, mouseCoordinates, selectedCoordinates) {
+  render(mouseCoordinates, selectedCoordinates) {
     CONTEXT_BOARD.fillStyle = CHECKER_COLOR_1;
-    CONTEXT_BOARD.fillRect(0, 0, canvasSize, canvasSize);
-    var squareSize = canvasSize / this.size;
+    CONTEXT_BOARD.fillRect(0, 0, this.canvasSize, this.canvasSize);
     CONTEXT_BOARD.fillStyle = CHECKER_COLOR_2;
+    var squareSize = this.canvasSize / this.size;
     // Draws the checker board
-    for (var col = 0; col < this.size; col++) {
-      for (var row = 0; row < this.size; row++) {
+    for (var col = 0; col < this.gridSize; col++) {
+      for (var row = 0; row < this.gridSize; row++) {
         if ((col % 2 === 0 && row % 2 === 0) || (col % 2 !== 0 && row % 2 !== 0)) {
           CONTEXT_BOARD.fillRect(col * squareSize, row * squareSize, squareSize, squareSize);
         }

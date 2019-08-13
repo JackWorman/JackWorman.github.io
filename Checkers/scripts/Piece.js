@@ -23,7 +23,6 @@ export default class Piece {
 
   static initialize(canvasSize) {
     CANVAS_PIECES.width = CANVAS_PIECES.height = canvasSize;
-    console.log('initialize()' + canvasSize);
     // Piece.squareSize = 12;
   }
 
@@ -42,6 +41,5 @@ export default class Piece {
       throw 'Error: The property \'player\' may only be \'' + PLAYER_1 + '\' or \'' + PLAYER_2 + '\'.';
     }
     CONTEXT_PIECES.fill();
-    console.log('render()');
   }
 }

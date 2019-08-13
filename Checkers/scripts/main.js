@@ -49,7 +49,7 @@ function initializeBoard() {
 }
 
 function initializePieces() {
-  Piece.initialize();
+  Piece.initialize(CANVAS_SIZE);
   // Creates and renders player-1's pieces
   for (var col = 0; col < GRID_SIZE; col++) {
     for (var row = 5; row < 8; row++) {

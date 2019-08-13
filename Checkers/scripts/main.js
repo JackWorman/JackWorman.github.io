@@ -79,8 +79,7 @@ function initializePieces() {
 }
 
 function calculateAvailableMoves() {
-  var spot = board.board[][];
-  if ()
+  
 }
 
 initializeBoard();

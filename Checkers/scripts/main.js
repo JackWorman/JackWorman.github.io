@@ -22,7 +22,7 @@ var turn = 'player-1';
 var availableMoves = [];
 
 onmousemove = function(e) {
-  var rect = CANVAS_BACKGROUND.getBoundingClientRect();
+  var rect = CANVAS_BOARD.getBoundingClientRect();
   mouseCoordinates = {
     col: Math.floor((e.clientX - rect.left) / SQUARE_SIZE),
     row: Math.floor((e.clientY - rect.top) / SQUARE_SIZE)

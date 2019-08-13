@@ -29,11 +29,11 @@ export default class Board {
   }
 
   render(mouseCoordinates, selectedCoordinates) {
+    // Draws the checker board
     CONTEXT_BOARD.fillStyle = CHECKER_COLOR_1;
     CONTEXT_BOARD.fillRect(0, 0, this.canvasSize, this.canvasSize);
     CONTEXT_BOARD.fillStyle = CHECKER_COLOR_2;
     var squareSize = this.canvasSize / this.gridSize;
-    // Draws the checker board
     for (var col = 0; col < this.gridSize; col++) {
       for (var row = 0; row < this.gridSize; row++) {
         if ((col % 2 === 0 && row % 2 === 0) || (col % 2 !== 0 && row % 2 !== 0)) {

@@ -9,7 +9,6 @@ const GRID_SIZE = 8;
 const SQUARE_SIZE = CANVAS_SIZE / GRID_SIZE;
 // DOM Elements
 const CANVAS_CONTAINER = document.getElementById('canvas-container');
-
 const CANVAS_PIECES = document.getElementById('canvas-pieces');
 const CONTEXT_PIECES = CANVAS_PIECES.getContext('2d');
 
@@ -30,7 +29,7 @@ onmousemove = function(e) {
   board.render(mouseCoordinates, selectedCoordinates);
 }
 
-CANVAS_PIECES.addEventListener('click', function() {
+CANVAS_CONTAINER.addEventListener('click', function() {
   selectedCoordinates = {
     col: mouseCoordinates.col,
     row: mouseCoordinates.row

@@ -43,13 +43,12 @@ onkeyup = function(e) {
   }
 }
 
-function initializeBoard() {
+function initializeGame() {
+  //
   board = new Board(GRID_SIZE, CANVAS_SIZE);
   board.render(mouseCoordinates, selectedCoordinates);
-}
-
-function initializePieces() {
-  Piece.initialize(CANVAS_SIZE);
+  //
+  Piece.initialize(CANVAS_SIZE, SQUARE_SIZE);
   // Creates and renders player-1's pieces
   for (var col = 0; col < GRID_SIZE; col++) {
     for (var row = 5; row < 8; row++) {
@@ -59,7 +58,7 @@ function initializePieces() {
     }
   }
   for (var i = 0; i < player1Pieces.length; i++) {
-    player1Pieces[i].render(SQUARE_SIZE);
+    player1Pieces[i].render();
   }
   // Creates and renders player-2's pieces
   for (var col = 0; col < GRID_SIZE; col++) {
@@ -70,9 +69,41 @@ function initializePieces() {
     }
   }
   for (var i = 0; i < player2Pieces.length; i++) {
-    player2Pieces[i].render(SQUARE_SIZE);
+    player2Pieces[i].render();
   }
 }
 
-initializeBoard();
-initializePieces();
+// function initializeBoard() {
+//   board = new Board(GRID_SIZE, CANVAS_SIZE);
+//   board.render(mouseCoordinates, selectedCoordinates);
+// }
+//
+// function initializePieces() {
+//   Piece.initialize(CANVAS_SIZE);
+//   // Creates and renders player-1's pieces
+//   for (var col = 0; col < GRID_SIZE; col++) {
+//     for (var row = 5; row < 8; row++) {
+//       if ((col % 2 !== 0 && row % 2 === 0) || (col % 2 === 0 && row % 2 !== 0)) {
+//         player1Pieces.push(new Piece(col, row, 'player-1'));
+//       }
+//     }
+//   }
+//   for (var i = 0; i < player1Pieces.length; i++) {
+//     player1Pieces[i].render(SQUARE_SIZE);
+//   }
+//   // Creates and renders player-2's pieces
+//   for (var col = 0; col < GRID_SIZE; col++) {
+//     for (var row = 0; row < 3; row++) {
+//       if ((col % 2 !== 0 && row % 2 === 0) || (col % 2 === 0 && row % 2 !== 0)) {
+//         player2Pieces.push(new Piece(col, row, 'player-2'));
+//       }
+//     }
+//   }
+//   for (var i = 0; i < player2Pieces.length; i++) {
+//     player2Pieces[i].render(SQUARE_SIZE);
+//   }
+// }
+
+// initializeBoard();
+// initializePieces();
+initializeGame();

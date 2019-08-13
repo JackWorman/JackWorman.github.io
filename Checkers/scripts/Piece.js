@@ -21,14 +21,21 @@ export default class Piece {
     }
   }
 
-  static initialize(canvasSize) {
+  static initialize(canvasSize, squareSize) {
     CANVAS_PIECES.width = CANVAS_PIECES.height = canvasSize;
-    // Piece.squareSize = 12;
+    Piece.squareSize = squareSize;
   }
 
-  render(squareSize) {
+  render() {
     CONTEXT_PIECES.beginPath();
-    CONTEXT_PIECES.arc((this.col + 0.5) * squareSize, (this.row + 0.5) * squareSize, squareSize / 2 * 0.9, 0, 2 * Math.PI, false);
+    CONTEXT_PIECES.arc(
+      (this.col + 0.5) * Piece.squareSize,
+      (this.row + 0.5) * Piece.squareSize,
+      Piece.squareSize / 2 * 0.9,
+      0,
+      2 * Math.PI,
+      false
+    );
     CONTEXT_PIECES.closePath();
     CONTEXT_PIECES.lineWidth = 3;
     CONTEXT_PIECES.strokeStyle = OUTLINE_COLOR;

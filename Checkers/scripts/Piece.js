@@ -1,7 +1,5 @@
 'use strict';
 
-const PLAYER_1 = 'player-1';
-const PLAYER_2 = 'player-2';
 // DOM elements
 const CANVAS_PIECES = document.getElementById('canvas-pieces');
 const CONTEXT_PIECES = CANVAS_PIECES.getContext('2d');
@@ -14,16 +12,18 @@ export default class Piece {
   constructor(col, row, player) {
     this.col = col;
     this.row = row;
-    if (player === PLAYER_1 || player === PLAYER_2) {
+    if (player === Piece.player1 || player === Piece.player2) {
       this.player = player;
     } else {
-      throw 'Error: The property \'player\' may only be \'' + PLAYER_1 + '\' or \'' + PLAYER_2 + '\'.';
+      throw 'Error: The property \'player\' may only be \'' + Piece.player1 + '\' or \'' + Piece.player2 + '\'.';
     }
   }
 
   static initialize(canvasSize, squareSize) {
     CANVAS_PIECES.width = CANVAS_PIECES.height = canvasSize;
     Piece.squareSize = squareSize;
+    Piece.player1 = 'player-1';
+    Piece.player2 = 'player-2';
   }
 
   render() {
@@ -40,12 +40,12 @@ export default class Piece {
     CONTEXT_PIECES.lineWidth = 5;
     CONTEXT_PIECES.strokeStyle = OUTLINE_COLOR;
     CONTEXT_PIECES.stroke();
-    if (this.player === PLAYER_1) {
+    if (this.player === Piece.player1) {
       CONTEXT_PIECES.fillStyle = PLAYER_1_COLOR;
-    } else if (this.player === PLAYER_2) {
+    } else if (this.player === Piece.player2) {
       CONTEXT_PIECES.fillStyle = PLAYER_2_COLOR;
     } else {
-      throw 'Error: The property \'player\' may only be \'' + PLAYER_1 + '\' or \'' + PLAYER_2 + '\'.';
+      throw 'Error: The property \'player\' may only be \'' + Piece.player1 + '\' or \'' + Piece.player2 + '\'.';
     }
     CONTEXT_PIECES.fill();
   }

@@ -15,7 +15,7 @@ var player1Pieces = [];
 var player2Pieces = [];
 var mouseCoordinates = {col: -1, row: -1};
 var selectedCoordinates = {col: -1, row: -1};
-var turn = PLAYER_1;
+var turn = 'player-1';
 var availableMoves = [];
 
 onmousemove = function(e) {
@@ -54,7 +54,7 @@ var initializeGame = (function() {
   for (var col = 0; col < GRID_SIZE; col++) {
     for (var row = 5; row < 8; row++) {
       if ((col % 2 !== 0 && row % 2 === 0) || (col % 2 === 0 && row % 2 !== 0)) {
-        player1Pieces.push(new Piece(col, row, PLAYER_1));
+        player1Pieces.push(new Piece(col, row, 'player-1'));
       }
     }
   }
@@ -65,7 +65,7 @@ var initializeGame = (function() {
   for (var col = 0; col < GRID_SIZE; col++) {
     for (var row = 0; row < 3; row++) {
       if ((col % 2 !== 0 && row % 2 === 0) || (col % 2 === 0 && row % 2 !== 0)) {
-        player2Pieces.push(new Piece(col, row, PLAYER_2));
+        player2Pieces.push(new Piece(col, row, 'player-2'));
       }
     }
   }

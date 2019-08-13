@@ -43,7 +43,8 @@ onkeyup = function(e) {
   }
 }
 
-function initializeGame() {
+(function initializeGame() {
+  CANVAS_CONTAINER.width = CANVAS_CONTAINER.height = CANVAS_SIZE + 2;
   //
   board = new Board(GRID_SIZE, CANVAS_SIZE);
   board.render(mouseCoordinates, selectedCoordinates);
@@ -71,39 +72,4 @@ function initializeGame() {
   for (var i = 0; i < player2Pieces.length; i++) {
     player2Pieces[i].render();
   }
-}
-
-// function initializeBoard() {
-//   board = new Board(GRID_SIZE, CANVAS_SIZE);
-//   board.render(mouseCoordinates, selectedCoordinates);
-// }
-//
-// function initializePieces() {
-//   Piece.initialize(CANVAS_SIZE);
-//   // Creates and renders player-1's pieces
-//   for (var col = 0; col < GRID_SIZE; col++) {
-//     for (var row = 5; row < 8; row++) {
-//       if ((col % 2 !== 0 && row % 2 === 0) || (col % 2 === 0 && row % 2 !== 0)) {
-//         player1Pieces.push(new Piece(col, row, 'player-1'));
-//       }
-//     }
-//   }
-//   for (var i = 0; i < player1Pieces.length; i++) {
-//     player1Pieces[i].render(SQUARE_SIZE);
-//   }
-//   // Creates and renders player-2's pieces
-//   for (var col = 0; col < GRID_SIZE; col++) {
-//     for (var row = 0; row < 3; row++) {
-//       if ((col % 2 !== 0 && row % 2 === 0) || (col % 2 === 0 && row % 2 !== 0)) {
-//         player2Pieces.push(new Piece(col, row, 'player-2'));
-//       }
-//     }
-//   }
-//   for (var i = 0; i < player2Pieces.length; i++) {
-//     player2Pieces[i].render(SQUARE_SIZE);
-//   }
-// }
-
-// initializeBoard();
-// initializePieces();
-initializeGame();
+})();

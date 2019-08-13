@@ -13,19 +13,15 @@ export default class Board {
   constructor(gridSize, canvasSize) {
     this.gridSize = gridSize;
     this.canvasSize = canvasSize;
-
-    this.board = [];
-    for (var row = 0; row < this.size; row++) {
-      this.board.push([]);
-      for (var col = 0; col < this.size; col++) {
-        this.board[row].push(null);
-      }
-    }
-    this.pieces = [];
-  }
-
-  initializeBoard() {
-    CANVAS_BOARD.width = CANVAS_BOARD.height = 800;
+    CANVAS_BOARD.width = CANVAS_BOARD.height = this.canvasSize;
+    // this.board = [];
+    // for (var row = 0; row < this.size; row++) {
+    //   this.board.push([]);
+    //   for (var col = 0; col < this.size; col++) {
+    //     this.board[row].push(null);
+    //   }
+    // }
+    // this.pieces = [];
   }
 
   render(mouseCoordinates, selectedCoordinates) {

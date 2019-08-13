@@ -1,5 +1,9 @@
 'use strict';
 
+// DOM elements
+const CANVAS_PIECES = document.getElementById('canvas-pieces');
+const CONTEXT_PIECES = CANVAS_PIECES.getContext('2d');
+// Colors
 const PLAYER_1 = 'player-1';
 const PLAYER_2 = 'player-2';
 const PLAYER_1_COLOR = 'rgb(255, 255, 255)';
@@ -17,24 +21,25 @@ export default class Piece {
     }
   }
 
-  static initializePieces() {
-    return 'Static method has been called';
+  static initialize(canvasSize) {
+    CANVAS_PIECES.width = CANVAS_PIECES.height = canvasSize;
+    Piece.squareSize = 12;
   }
 
-  render(context, squareSize) {
-    context.beginPath();
-    context.arc((this.col + 0.5) * squareSize, (this.row + 0.5) * squareSize, squareSize / 2 * 0.9, 0, 2 * Math.PI, false);
-    context.closePath();
-    context.lineWidth = 3;
-    context.strokeStyle = OUTLINE_COLOR;
-    context.stroke();
+  render(squareSize) {
+    CONTEXT_PIECES.beginPath();
+    CONTEXT_PIECES.arc((this.col + 0.5) * squareSize, (this.row + 0.5) * squareSize, squareSize / 2 * 0.9, 0, 2 * Math.PI, false);
+    CONTEXT_PIECES.closePath();
+    CONTEXT_PIECES.lineWidth = 3;
+    CONTEXT_PIECES.strokeStyle = OUTLINE_COLOR;
+    CONTEXT_PIECES.stroke();
     if (this.player === PLAYER_1) {
-      context.fillStyle = PLAYER_1_COLOR;
+      CONTEXT_PIECES.fillStyle = PLAYER_1_COLOR;
     } else if (this.player === PLAYER_2) {
-      context.fillStyle = PLAYER_2_COLOR;
+      CONTEXT_PIECES.fillStyle = PLAYER_2_COLOR;
     } else {
       throw 'Error: The property \'player\' may only be \'' + PLAYER_1 + '\' or \'' + PLAYER_2 + '\'.';
     }
-    context.fill();
+    CONTEXT_PIECES.fill();
   }
 }

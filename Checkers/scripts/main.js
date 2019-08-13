@@ -9,8 +9,6 @@ const GRID_SIZE = 8;
 const SQUARE_SIZE = CANVAS_SIZE / GRID_SIZE;
 // DOM Elements
 const CANVAS_CONTAINER = document.getElementById('canvas-container');
-const CANVAS_PIECES = document.getElementById('canvas-pieces');
-const CONTEXT_PIECES = CANVAS_PIECES.getContext('2d');
 
 var board = null;
 var player1Pieces = [];
@@ -34,7 +32,6 @@ CANVAS_CONTAINER.addEventListener('click', function() {
     col: mouseCoordinates.col,
     row: mouseCoordinates.row
   };
-  calculateAvailableMoves();
   board.render(mouseCoordinates, selectedCoordinates);
 });
 
@@ -47,13 +44,12 @@ onkeyup = function(e) {
 }
 
 function initializeBoard() {
-  CANVAS_PIECES.width = CANVAS_PIECES.height = CANVAS_SIZE;
   board = new Board(GRID_SIZE, CANVAS_SIZE);
-  board.initializeBoard();
   board.render(mouseCoordinates, selectedCoordinates);
 }
 
 function initializePieces() {
+  Piece.initialize();
   // Creates and renders player-1's pieces
   for (var col = 0; col < GRID_SIZE; col++) {
     for (var row = 5; row < 8; row++) {
@@ -63,7 +59,7 @@ function initializePieces() {
     }
   }
   for (var i = 0; i < player1Pieces.length; i++) {
-    player1Pieces[i].render(CONTEXT_PIECES, SQUARE_SIZE);
+    player1Pieces[i].render(SQUARE_SIZE);
   }
   // Creates and renders player-2's pieces
   for (var col = 0; col < GRID_SIZE; col++) {
@@ -74,12 +70,8 @@ function initializePieces() {
     }
   }
   for (var i = 0; i < player2Pieces.length; i++) {
-    player2Pieces[i].render(CONTEXT_PIECES, SQUARE_SIZE);
+    player2Pieces[i].render(SQUARE_SIZE);
   }
-}
-
-function calculateAvailableMoves() {
-
 }
 
 initializeBoard();

@@ -10,8 +10,8 @@ const SQUARE_SIZE = CANVAS_SIZE / GRID_SIZE;
 // DOM Elements
 const CANVAS_BOARD = document.getElementById('canvas-board');
 const CANVAS_PIECES = document.getElementById('canvas-pieces');
-const CONTEXT_BOARD = CANVAS_BACKGROUND.getContext('2d');
-const CONTEXT_PIECES = CANVAS_FOREGROUND.getContext('2d');
+const CONTEXT_BOARD = CANVAS_BOARD.getContext('2d');
+const CONTEXT_PIECES = CANVAS_PIECES.getContext('2d');
 
 var board = null;
 var player1Pieces = [];
@@ -79,7 +79,7 @@ function initializePieces() {
 }
 
 function calculateAvailableMoves() {
-  
+
 }
 
 initializeBoard();

@@ -1,11 +1,11 @@
 'use strict';
 
+const PLAYER_1 = 'player-1';
+const PLAYER_2 = 'player-2';
 // DOM elements
 const CANVAS_PIECES = document.getElementById('canvas-pieces');
 const CONTEXT_PIECES = CANVAS_PIECES.getContext('2d');
 // Colors
-const PLAYER_1 = 'player-1';
-const PLAYER_2 = 'player-2';
 const PLAYER_1_COLOR = 'rgb(255, 255, 255)';
 const PLAYER_2_COLOR = 'rgb(255, 0, 0)';
 const OUTLINE_COLOR = 'rgb(0, 0, 0)';

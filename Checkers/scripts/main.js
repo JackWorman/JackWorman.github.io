@@ -91,5 +91,5 @@ function getPiece(col, row) {
   return null;
 }
 
-console.log(getPiece(0, 0));
-console.log(getPiece(0, 1));
+console.log(getPiece(0, 7));
+console.log(getPiece(0, 6));

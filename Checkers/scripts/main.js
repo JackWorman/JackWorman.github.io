@@ -78,12 +78,14 @@ function getPiece(col, row) {
   if (turn === 'player-1') {
     for (var piece in player1Pieces.length) {
       if (piece.col === col && piece.row === row) {
+        console.log(piece);
         return piece[i];
       }
     }
   } else if (turn === 'player-2') {
     for (var piece in player2Pieces.length) {
       if (piece.col === col && piece.row === row) {
+        console.log(piece);
         return piece[i];
       }
     }

@@ -8,10 +8,10 @@ const CANVAS_SIZE = 800; // in pixels
 const GRID_SIZE = 8;
 const SQUARE_SIZE = CANVAS_SIZE / GRID_SIZE;
 // DOM Elements
-const CANVAS_BACKGROUND = document.getElementById('canvas-background');
-const CANVAS_FOREGROUND = document.getElementById('canvas-foreground');
-const CONTEXT_BACKGROUND = CANVAS_BACKGROUND.getContext('2d');
-const CONTEXT_FOREGROUND = CANVAS_FOREGROUND.getContext('2d');
+const CANVAS_BOARD = document.getElementById('canvas-board');
+const CANVAS_PIECES = document.getElementById('canvas-pieces');
+const CONTEXT_BOARD = CANVAS_BACKGROUND.getContext('2d');
+const CONTEXT_PIECES = CANVAS_FOREGROUND.getContext('2d');
 
 var board = null;
 var player1Pieces = [];
@@ -19,6 +19,7 @@ var player2Pieces = [];
 var mouseCoordinates = null;
 var selectedCoordinates = null;
 var turn = 'player-1';
+var availableMoves = [];
 
 onmousemove = function(e) {
   var rect = CANVAS_BACKGROUND.getBoundingClientRect();
@@ -26,7 +27,7 @@ onmousemove = function(e) {
     col: Math.floor((e.clientX - rect.left) / SQUARE_SIZE),
     row: Math.floor((e.clientY - rect.top) / SQUARE_SIZE)
   };
-  board.render(CONTEXT_BACKGROUND, CANVAS_SIZE, mouseCoordinates, selectedCoordinates);
+  board.render(CONTEXT_BOARD, CANVAS_SIZE, mouseCoordinates, selectedCoordinates);
 }
 
 CANVAS_FOREGROUND.addEventListener('click', function() {
@@ -34,21 +35,22 @@ CANVAS_FOREGROUND.addEventListener('click', function() {
     col: mouseCoordinates.col,
     row: mouseCoordinates.row
   };
-  board.render(CONTEXT_BACKGROUND, CANVAS_SIZE, mouseCoordinates, selectedCoordinates);
+  calculateAvailableMoves();
+  board.render(CONTEXT_BOARD, CANVAS_SIZE, mouseCoordinates, selectedCoordinates);
 });
 
 onkeyup = function(e) {
   e = e || event; // to deal with IE
   if (e.keyCode === 27) { // Escape
     selectedCoordinates = null;
-    board.render(CONTEXT_BACKGROUND, CANVAS_SIZE, mouseCoordinates, selectedCoordinates);
+    board.render(CONTEXT_BOARD, CANVAS_SIZE, mouseCoordinates, selectedCoordinates);
   }
 }
 
 function initializeBoard() {
-  CANVAS_BACKGROUND.width = CANVAS_BACKGROUND.height = CANVAS_FOREGROUND.width = CANVAS_FOREGROUND.height = CANVAS_SIZE;
+  CANVAS_BOARD.width = CANVAS_BOARD.height = CANVAS_PIECES.width = CANVAS_PIECES.height = CANVAS_SIZE;
   board = new Board(GRID_SIZE);
-  board.render(CONTEXT_BACKGROUND, CANVAS_SIZE, mouseCoordinates, selectedCoordinates);
+  board.render(CONTEXT_BOARD, CANVAS_SIZE, mouseCoordinates, selectedCoordinates);
 }
 
 function initializePieces() {
@@ -61,7 +63,7 @@ function initializePieces() {
     }
   }
   for (var i = 0; i < player1Pieces.length; i++) {
-    player1Pieces[i].render(CONTEXT_FOREGROUND, SQUARE_SIZE);
+    player1Pieces[i].render(CONTEXT_PIECES, SQUARE_SIZE);
   }
   // Creates and renders player-2's pieces
   for (var col = 0; col < GRID_SIZE; col++) {
@@ -72,8 +74,13 @@ function initializePieces() {
     }
   }
   for (var i = 0; i < player2Pieces.length; i++) {
-    player2Pieces[i].render(CONTEXT_FOREGROUND, SQUARE_SIZE);
+    player2Pieces[i].render(CONTEXT_PIECES, SQUARE_SIZE);
   }
+}
+
+function calculateAvailableMoves() {
+  var spot = board.board[][];
+  if ()
 }
 
 initializeBoard();

@@ -18,6 +18,10 @@ export default class Board {
     this.pieces = [];
   }
 
+  initializeBoard() {
+    
+  }
+
   render(context, canvasSize, mouseCoordinates, selectedCoordinates) {
     context.fillStyle = CHECKER_COLOR_1;
     context.fillRect(0, 0, canvasSize, canvasSize);

@@ -17,6 +17,10 @@ export default class Piece {
     }
   }
 
+  static initializePieces() {
+    return 'Static method has been called';
+  }
+
   render(context, squareSize) {
     context.beginPath();
     context.arc((this.col + 0.5) * squareSize, (this.row + 0.5) * squareSize, squareSize / 2 * 0.9, 0, 2 * Math.PI, false);

@@ -37,7 +37,7 @@ export default class Piece {
       false
     );
     CONTEXT_PIECES.closePath();
-    CONTEXT_PIECES.lineWidth = 3;
+    CONTEXT_PIECES.lineWidth = 5;
     CONTEXT_PIECES.strokeStyle = OUTLINE_COLOR;
     CONTEXT_PIECES.stroke();
     if (this.player === PLAYER_1) {

@@ -14,8 +14,8 @@ const CANVAS_CONTAINER = document.getElementById('canvas-container');
 var board = null;
 var player1Pieces = [];
 var player2Pieces = [];
-var mouseCoordinates = null;
-var selectedCoordinates = null;
+var mouseCoordinates = {col: -1, row: -1};
+var selectedCoordinates = {col: -1, row: -1};
 var turn = 'player-1';
 var availableMoves = [];
 
@@ -29,20 +29,17 @@ onmousemove = function(e) {
 }
 
 CANVAS_CONTAINER.addEventListener('click', function() {
-  if (selectedCoordinates === null || (selectedCoordinates.col === mouseCoordinates.col && selectedCoordinates.row === mouseCoordinates.row)) {
-    selectedCoordinates = null;
+  if (selectedCoordinates.col === mouseCoordinates.col && selectedCoordinates.row === mouseCoordinates.row) {
+    selectedCoordinates = {col: -1, row: -1};
   } else {
-    selectedCoordinates = {
-      col: mouseCoordinates.col,
-      row: mouseCoordinates.row
-    };
+    selectedCoordinates = {col: mouseCoordinates.col, row: mouseCoordinates.row};
   }
   board.render(mouseCoordinates, selectedCoordinates);
 });
 
 onkeyup = function(e) {
   if (e.keyCode === ESCAPE_KEYCODE) {
-    selectedCoordinates = null;
+    selectedCoordinates = {col: -1, row: -1};
     board.render(mouseCoordinates, selectedCoordinates);
   }
 }

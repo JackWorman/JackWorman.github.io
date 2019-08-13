@@ -33,6 +33,7 @@ CANVAS_CONTAINER.addEventListener('click', function() {
   } else {
     selectedCoordinates = {col: mouseCoordinates.col, row: mouseCoordinates.row};
   }
+  calculateAvailableMoves();
   board.render(mouseCoordinates, selectedCoordinates);
 });
 
@@ -91,5 +92,9 @@ function getPiece(col, row) {
   return null;
 }
 
-console.log(getPiece(0, 7));
-console.log(getPiece(0, 6));
+function calculateAvailableMoves() {
+  availableMoves = [];
+  if (true) {
+
+  }
+}

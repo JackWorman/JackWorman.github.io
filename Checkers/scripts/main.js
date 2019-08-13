@@ -76,16 +76,15 @@ var initializeGame = (function() {
 
 function getPiece(col, row) {
   if (turn === 'player-1') {
-    for (var piece in player1Pieces) {
-      console.log(piece);
-      if (piece.col === col && piece.row === row) {
-        return piece;
+    for (var i = 0; i < player1Pieces.length; i++) {
+      if (player1Pieces[i].col === col && player1Pieces[i].row === row) {
+        return player1Pieces[i];
       }
     }
   } else if (turn === 'player-2') {
-    for (var piece in player2Pieces) {
-      if (piece.col === col && piece.row === row) {
-        return piece;
+    for (var i = 0; i < player2Pieces.length; i++) {
+      if (player2Pieces[i].col === col && player2Pieces[i].row === row) {
+        return player2Pieces[i];
       }
     }
   }

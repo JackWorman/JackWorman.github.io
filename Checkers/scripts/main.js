@@ -43,7 +43,7 @@ onkeyup = function(e) {
   }
 }
 
-(function initializeGame() {
+var initializeGame = (function() {
   CANVAS_CONTAINER.width = CANVAS_CONTAINER.height = CANVAS_SIZE + 2;
   //
   board = new Board(GRID_SIZE, CANVAS_SIZE);

@@ -23,7 +23,8 @@ export default class Piece {
 
   static initialize(canvasSize) {
     CANVAS_PIECES.width = CANVAS_PIECES.height = canvasSize;
-    Piece.squareSize = 12;
+    console.log('initialize()');
+    // Piece.squareSize = 12;
   }
 
   render(squareSize) {

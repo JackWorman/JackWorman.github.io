@@ -8,9 +8,9 @@ const CANVAS_SIZE = 800; // in pixels
 const GRID_SIZE = 8;
 const SQUARE_SIZE = CANVAS_SIZE / GRID_SIZE;
 // DOM Elements
-const CANVAS_BOARD = document.getElementById('canvas-board');
+const CANVAS_CONTAINER = document.getElementById('canvas-container');
+
 const CANVAS_PIECES = document.getElementById('canvas-pieces');
-const CONTEXT_BOARD = CANVAS_BOARD.getContext('2d');
 const CONTEXT_PIECES = CANVAS_PIECES.getContext('2d');
 
 var board = null;
@@ -22,12 +22,12 @@ var turn = 'player-1';
 var availableMoves = [];
 
 onmousemove = function(e) {
-  var rect = CANVAS_BOARD.getBoundingClientRect();
+  var rect = CANVAS_CONTAINER.getBoundingClientRect();
   mouseCoordinates = {
     col: Math.floor((e.clientX - rect.left) / SQUARE_SIZE),
     row: Math.floor((e.clientY - rect.top) / SQUARE_SIZE)
   };
-  board.render(CONTEXT_BOARD, CANVAS_SIZE, mouseCoordinates, selectedCoordinates);
+  board.render(null, CANVAS_SIZE, mouseCoordinates, selectedCoordinates);
 }
 
 CANVAS_PIECES.addEventListener('click', function() {
@@ -36,21 +36,21 @@ CANVAS_PIECES.addEventListener('click', function() {
     row: mouseCoordinates.row
   };
   calculateAvailableMoves();
-  board.render(CONTEXT_BOARD, CANVAS_SIZE, mouseCoordinates, selectedCoordinates);
+  board.render(null, CANVAS_SIZE, mouseCoordinates, selectedCoordinates);
 });
 
 onkeyup = function(e) {
   e = e || event; // to deal with IE
   if (e.keyCode === 27) { // Escape
     selectedCoordinates = null;
-    board.render(CONTEXT_BOARD, CANVAS_SIZE, mouseCoordinates, selectedCoordinates);
+    board.render(null, CANVAS_SIZE, mouseCoordinates, selectedCoordinates);
   }
 }
 
 function initializeBoard() {
-  CANVAS_BOARD.width = CANVAS_BOARD.height = CANVAS_PIECES.width = CANVAS_PIECES.height = CANVAS_SIZE;
+  CANVAS_PIECES.width = CANVAS_PIECES.height = CANVAS_SIZE;
   board = new Board(GRID_SIZE);
-  board.render(CONTEXT_BOARD, CANVAS_SIZE, mouseCoordinates, selectedCoordinates);
+  board.render(null, CANVAS_SIZE, mouseCoordinates, selectedCoordinates);
 }
 
 function initializePieces() {

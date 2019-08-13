@@ -1,5 +1,9 @@
 'use strict';
 
+// DOM Elements
+const CANVAS_BOARD = document.getElementById('canvas-board');
+const CONTEXT_BOARD = CANVAS_BOARD.getContext('2d');
+// Colors
 const CHECKER_COLOR_1 = 'rgb(139, 69, 19)';
 const CHECKER_COLOR_2 = 'rgb(222, 184, 135)';
 const HIGHLIGHT_COLOR = 'rgb(153, 204, 255)';
@@ -19,31 +23,31 @@ export default class Board {
   }
 
   initializeBoard() {
-    
+    CANVAS_BOARD.width = CANVAS_BOARD.height = 800;
   }
 
   render(context, canvasSize, mouseCoordinates, selectedCoordinates) {
-    context.fillStyle = CHECKER_COLOR_1;
-    context.fillRect(0, 0, canvasSize, canvasSize);
+    CONTEXT_BOARD.fillStyle = CHECKER_COLOR_1;
+    CONTEXT_BOARD.fillRect(0, 0, canvasSize, canvasSize);
     var squareSize = canvasSize / this.size;
-    context.fillStyle = CHECKER_COLOR_2;
+    CONTEXT_BOARD.fillStyle = CHECKER_COLOR_2;
     // Draws the checker board
     for (var col = 0; col < this.size; col++) {
       for (var row = 0; row < this.size; row++) {
         if ((col % 2 === 0 && row % 2 === 0) || (col % 2 !== 0 && row % 2 !== 0)) {
-          context.fillRect(col * squareSize, row * squareSize, squareSize, squareSize);
+          CONTEXT_BOARD.fillRect(col * squareSize, row * squareSize, squareSize, squareSize);
         }
       }
     }
     // Draws highlighted square
     if (mouseCoordinates !== null) {
-      context.fillStyle = HIGHLIGHT_COLOR;
-      context.fillRect(mouseCoordinates.col * squareSize, mouseCoordinates.row * squareSize, squareSize, squareSize);
+      CONTEXT_BOARD.fillStyle = HIGHLIGHT_COLOR;
+      CONTEXT_BOARD.fillRect(mouseCoordinates.col * squareSize, mouseCoordinates.row * squareSize, squareSize, squareSize);
     }
     // Draws selected square
     if (selectedCoordinates !== null) {
-      context.fillStyle = SELECT_COLOR;
-      context.fillRect(selectedCoordinates.col * squareSize, selectedCoordinates.row * squareSize, squareSize, squareSize);
+      CONTEXT_BOARD.fillStyle = SELECT_COLOR;
+      CONTEXT_BOARD.fillRect(selectedCoordinates.col * squareSize, selectedCoordinates.row * squareSize, squareSize, squareSize);
     }
   }
 }

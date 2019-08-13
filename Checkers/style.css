@@ -12,7 +12,7 @@ html, body {
 }
 
 #canvas-container {
-  height: 802px;
+  height: 802px; /* TODO: do this dynamically in javascript */
   width: 802px;
   display: inline-block;
   position: relative;

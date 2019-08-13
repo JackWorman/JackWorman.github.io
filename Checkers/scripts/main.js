@@ -44,7 +44,7 @@ onkeyup = function(e) {
 }
 
 var initializeGame = (function() {
-  CANVAS_CONTAINER.width = CANVAS_CONTAINER.height = CANVAS_SIZE + 2;
+  CANVAS_CONTAINER.style.width = CANVAS_CONTAINER.style.height = (CANVAS_SIZE + 2) + 'px';
   //
   board = new Board(GRID_SIZE, CANVAS_SIZE);
   board.render(mouseCoordinates, selectedCoordinates);

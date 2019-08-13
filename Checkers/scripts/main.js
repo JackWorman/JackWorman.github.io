@@ -29,10 +29,14 @@ onmousemove = function(e) {
 }
 
 CANVAS_CONTAINER.addEventListener('click', function() {
-  selectedCoordinates = {
-    col: mouseCoordinates.col,
-    row: mouseCoordinates.row
-  };
+  if (selectedCoordinates.col === mouseCoordinates.col && selectedCoordinates.row === mouseCoordinates.row) {
+    selectedCoordinates = null;
+  } else {
+    selectedCoordinates = {
+      col: mouseCoordinates.col,
+      row: mouseCoordinates.row
+    };
+  }
   board.render(mouseCoordinates, selectedCoordinates);
 });
 

@@ -36,8 +36,7 @@ CANVAS_CONTAINER.addEventListener('click', function() {
 });
 
 onkeyup = function(e) {
-  e = e || event; // to deal with IE
-  if (e.keyCode === 27) { // Escape
+  if (e.keyCode === 27) { // 27 = Esc
     selectedCoordinates = null;
     board.render(mouseCoordinates, selectedCoordinates);
   }

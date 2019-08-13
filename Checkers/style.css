@@ -18,18 +18,17 @@ html, body {
   position: relative;
 }
 
-#canvas-board {
+#canvas-board, #canvas-pieces {
   position: absolute;
-  z-index: 0;
   top: 0px;
   left: 0px;
   border: 1px solid black;
 }
 
+#canvas-board {
+  z-index: 0;
+}
+
 #canvas-pieces {
-  position: absolute;
   z-index: 1;
-  top: 0px;
-  left: 0px;
-  border: 1px solid black;
 }

@@ -77,6 +77,7 @@ var initializeGame = (function() {
 function getPiece(col, row) {
   if (turn === 'player-1') {
     for (var piece in player1Pieces) {
+      console.log(piece);
       if (piece.col === col && piece.row === row) {
         return piece;
       }

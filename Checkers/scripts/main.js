@@ -17,7 +17,7 @@ var pieces = [];
 var mouseCoordinates = {col: -1, row: -1};
 var selectedCoordinates = {col: -1, row: -1};
 var turn = 'player-1';
-var availableMoves = [];
+var moveCoordinates = [];
 
 onmousemove = function(e) {
   var rect = CANVAS_CONTAINER.getBoundingClientRect();
@@ -25,7 +25,7 @@ onmousemove = function(e) {
     col: Math.floor((e.clientX - rect.left) / SQUARE_SIZE),
     row: Math.floor((e.clientY - rect.top) / SQUARE_SIZE)
   };
-  board.render(mouseCoordinates, selectedCoordinates);
+  board.render(mouseCoordinates, selectedCoordinates, moveCoordinates);
 }
 
 CANVAS_CONTAINER.addEventListener('click', function() {
@@ -37,14 +37,13 @@ CANVAS_CONTAINER.addEventListener('click', function() {
       moveCoordinates = pieces[selectedCoordinates.col][selectedCoordinates.row].calculateMoves();
     }
   }
-  calculateAvailableMoves();
-  board.render(mouseCoordinates, selectedCoordinates);
+  board.render(mouseCoordinates, selectedCoordinates, moveCoordinates);
 });
 
 onkeyup = function(e) {
   if (e.keyCode === ESCAPE_KEYCODE) {
     selectedCoordinates = {col: -1, row: -1};
-    board.render(mouseCoordinates, selectedCoordinates);
+    board.render(mouseCoordinates, selectedCoordinates, moveCoordinates);
   }
 }
 

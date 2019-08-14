@@ -33,23 +33,23 @@ export default class Piece {
   calculateMoves(pieces) {
     var moves = [];
     if (this.player === PLAYER_1) {
-      if (pieces[this.col - 1][this.row - 1] || 'OoB' === 'empty') {
+      if (pieces[this.col - 1][this.row - 1] !== undefined && pieces[this.col - 1][this.row - 1] === 'empty') {
         moves.push({col: this.col - 1, row: this.row - 1, jumps: []});
       }
-      if (pieces[this.col + 1][this.row - 1] || 'OoB' === 'empty') {
+      if (pieces[this.col + 1][this.row - 1] !== undefined && pieces[this.col + 1][this.row - 1] === 'empty') {
         moves.push({col: this.col + 1, row: this.row - 1, jumps: []});
       }
     } else if (this.player === PLAYER_2) {
-      if (pieces[this.col - 1][this.row + 1] || 'OoB' === 'empty') {
+      if (pieces[this.col - 1][this.row + 1] === 'empty') {
         moves.push({col: this.col - 1, row: this.row + 1, jumps: []});
       }
-      if (pieces[this.col + 1][this.row + 1] || 'OoB' === 'empty') {
+      if (pieces[this.col + 1][this.row + 1] === 'empty') {
         moves.push({col: this.col + 1, row: this.row + 1, jumps: []});
       }
     } else {
       throw 'Error: The property \'player\' may only be \'' + PLAYER_1 + '\' or \'' + PLAYER_2 + '\'.';
     }
-    moves.concat(this.calculateJumps(pieces, this.col, this.row, []));
+    // moves.concat(this.calculateJumps(pieces, this.col, this.row, []));
     return moves;
   }
 

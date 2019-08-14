@@ -40,6 +40,7 @@ CANVAS_CONTAINER.addEventListener('click', function() {
         for (var j = 0; j < moveCoordinates.jumps.length; j++) {
           pieces[moveCoordinates.jumps[j].col][moveCoordinates.jumps[j].row] = 'empty';
         }
+        renderPieces();
         board.render(mouseCoordinates, selectedCoordinates, moveCoordinates);
         return;
       }
@@ -94,6 +95,11 @@ var initializeGame = (function() {
       }
     }
   }
+  //
+  renderPieces();
+})();
+
+function renderPieces() {
   for (var col = 0; col < GRID_SIZE; col++) {
     for (var row = 0; row < GRID_SIZE; row++) {
       if (pieces[col][row] !== 'empty') {
@@ -101,4 +107,4 @@ var initializeGame = (function() {
       }
     }
   }
-})();
+}

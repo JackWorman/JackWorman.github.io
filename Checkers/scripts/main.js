@@ -104,6 +104,7 @@ var initializeGame = (function() {
 })();
 
 function renderPieces() {
+  Piece.clearCanvas();
   for (var col = 0; col < GRID_SIZE; col++) {
     for (var row = 0; row < GRID_SIZE; row++) {
       if (pieces[col][row] !== 'empty') {

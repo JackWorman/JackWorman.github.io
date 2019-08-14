@@ -26,6 +26,10 @@ export default class Piece {
     Piece.squareSize = squareSize;
   }
 
+  static clearCanvas() {
+    CANVAS_PIECES.width = CANVAS_PIECES.height = canvasSize;
+  }
+
   calculateMoves(pieces) {
     var moves = [];
     if (this.player === PLAYER_1) {

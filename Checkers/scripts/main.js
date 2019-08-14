@@ -11,8 +11,6 @@ const SQUARE_SIZE = CANVAS_SIZE / GRID_SIZE;
 const CANVAS_CONTAINER = document.getElementById('canvas-container');
 
 var board = null;
-// var player1Pieces = [];
-// var player2Pieces = [];
 var pieces = [];
 var mouseCoordinates = {col: -1, row: -1};
 var selectedCoordinates = {col: -1, row: -1};
@@ -46,8 +44,7 @@ CANVAS_CONTAINER.addEventListener('click', function() {
         return;
       }
     }
-
-
+    //
     selectedCoordinates = {col: mouseCoordinates.col, row: mouseCoordinates.row};
     if (pieces[selectedCoordinates.col][selectedCoordinates.row] === 'empty') {
       moveCoordinates = [];
@@ -79,47 +76,29 @@ var initializeGame = (function() {
       pieces[col].push('empty');
     }
   }
-  // Creates and renders player-1's pieces
+  // Creates player-1's pieces
   for (var col = 0; col < GRID_SIZE; col++) {
     for (var row = 5; row < 8; row++) {
       if ((col % 2 !== 0 && row % 2 === 0) || (col % 2 === 0 && row % 2 !== 0)) {
         var piece = new Piece(col, row, 'player-1');
         pieces[col][row] = piece;
-        // player1Pieces.push(piece);
       }
     }
   }
-  for (var i = 0; i < player1Pieces.length; i++) {
-    player1Pieces[i].render();
-  }
-  // Creates and renders player-2's pieces
+  // Creates player-2's pieces
   for (var col = 0; col < GRID_SIZE; col++) {
     for (var row = 0; row < 3; row++) {
       if ((col % 2 !== 0 && row % 2 === 0) || (col % 2 === 0 && row % 2 !== 0)) {
         var piece = new Piece(col, row, 'player-2');
         pieces[col][row] = piece;
-        // player2Pieces.push(piece);
       }
     }
   }
-  for (var i = 0; i < player2Pieces.length; i++) {
-    player2Pieces[i].render();
+  for (var col = 0; col < GRID_SIZE; col++) {
+    for (var row = 0; row < GRID_SIZE; row++) {
+      if (pieces[col][row] !== 'empty') {
+        pieces[col][row].render();
+      }
+    }
   }
 })();
-
-// function getPiece(col, row) {
-//   if (turn === 'player-1') {
-//     for (var i = 0; i < player1Pieces.length; i++) {
-//       if (player1Pieces[i].col === col && player1Pieces[i].row === row) {
-//         return player1Pieces[i];
-//       }
-//     }
-//   } else if (turn === 'player-2') {
-//     for (var i = 0; i < player2Pieces.length; i++) {
-//       if (player2Pieces[i].col === col && player2Pieces[i].row === row) {
-//         return player2Pieces[i];
-//       }
-//     }
-//   }
-//   return null;
-// }

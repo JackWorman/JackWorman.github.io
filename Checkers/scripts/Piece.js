@@ -33,7 +33,6 @@ export default class Piece {
   calculateMoves(pieces) {
     var moves = [];
     if (this.player === PLAYER_1) {
-      console.log(typeof pieces[this.col - 1][this.row - 1]);
       if (typeof pieces[this.col - 1] !== 'undefined' && typeof pieces[this.col - 1][this.row - 1] !== 'undefined'
         && pieces[this.col - 1][this.row - 1] === 'empty') {
         moves.push({col: this.col - 1, row: this.row - 1, jumps: []});

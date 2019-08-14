@@ -42,6 +42,7 @@ CANVAS_CONTAINER.addEventListener('click', function() {
         }
         renderPieces();
         board.render(mouseCoordinates, selectedCoordinates, moveCoordinates);
+        console.log('test');
         return;
       }
     }

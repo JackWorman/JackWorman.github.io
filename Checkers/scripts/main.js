@@ -36,6 +36,8 @@ CANVAS_CONTAINER.addEventListener('click', function() {
     selectedCoordinates = {col: mouseCoordinates.col, row: mouseCoordinates.row};
     if (pieces[selectedCoordinates.col][selectedCoordinates.row] !== 'empty') {
       moveCoordinates = pieces[selectedCoordinates.col][selectedCoordinates.row].calculateMoves(pieces);
+    } else {
+      moveCoordinates = [];
     }
   }
   board.render(mouseCoordinates, selectedCoordinates, moveCoordinates);
@@ -44,6 +46,7 @@ CANVAS_CONTAINER.addEventListener('click', function() {
 onkeyup = function(e) {
   if (e.keyCode === ESCAPE_KEYCODE) {
     selectedCoordinates = {col: -1, row: -1};
+    moveCoordinates = [];
     board.render(mouseCoordinates, selectedCoordinates, moveCoordinates);
   }
 }

@@ -94,7 +94,11 @@ function getPiece(col, row) {
 
 function calculateAvailableMoves() {
   availableMoves = [];
-  if (true) {
+  var piece = getPiece(selectedCoordinates.col, selectedCoordinates.row);
+  if (piece === null) {
+    return;
+  }
+  if (piece.player === turn) {
 
   }
 }

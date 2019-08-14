@@ -26,12 +26,16 @@ export default class Piece {
     Piece.squareSize = squareSize;
   }
 
+  calculateMoves(pieces) {
+
+  }
+
   render() {
     CONTEXT_PIECES.beginPath();
     CONTEXT_PIECES.arc(
       (this.col + 0.5) * Piece.squareSize,
       (this.row + 0.5) * Piece.squareSize,
-      Piece.squareSize / 2 * 0.9,
+      Piece.squareSize / 2 * 0.85,
       0,
       2 * Math.PI,
       false

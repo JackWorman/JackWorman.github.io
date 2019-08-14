@@ -35,7 +35,7 @@ CANVAS_CONTAINER.addEventListener('click', function() {
   } else {
     selectedCoordinates = {col: mouseCoordinates.col, row: mouseCoordinates.row};
     if (pieces[selectedCoordinates.col][selectedCoordinates.row] !== 'empty') {
-      moveCoordinates = pieces[selectedCoordinates.col][selectedCoordinates.row].calculateMoves();
+      moveCoordinates = pieces[selectedCoordinates.col][selectedCoordinates.row].calculateMoves(pieces);
     }
   }
   board.render(mouseCoordinates, selectedCoordinates, moveCoordinates);

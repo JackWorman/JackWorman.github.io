@@ -37,8 +37,8 @@ CANVAS_CONTAINER.addEventListener('click', function() {
       if (moveCoordinates[i].col === mouseCoordinates.col && moveCoordinates[i].row === mouseCoordinates.row) {
         pieces[moveCoordinates[i].col][moveCoordinates[i].row] = pieces[selectedCoordinates.col][selectedCoordinates.row];
         pieces[selectedCoordinates.col][selectedCoordinates.row] = 'empty';
-        for (var j = 0; j < moveCoordinates.jumps.length; j++) {
-          pieces[moveCoordinates.jumps[j].col][moveCoordinates.jumps[j].row] = 'empty';
+        for (var j = 0; j < moveCoordinates[i].jumps.length; j++) {
+          pieces[moveCoordinates[i].jumps[j].col][moveCoordinates[i].jumps[j].row] = 'empty';
         }
         renderPieces();
         board.render(mouseCoordinates, selectedCoordinates, moveCoordinates);

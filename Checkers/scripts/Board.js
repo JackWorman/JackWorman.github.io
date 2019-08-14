@@ -8,6 +8,7 @@ const CHECKER_COLOR_1 = 'rgb(139, 69, 19)';
 const CHECKER_COLOR_2 = 'rgb(222, 184, 135)';
 const HIGHLIGHT_COLOR = 'rgb(153, 204, 255)';
 const SELECT_COLOR = 'rgb(0, 0, 255)';
+const MOVE_COLOR = 'rgb(0, 255, 0)';
 
 export default class Board {
   constructor(gridSize, canvasSize) {
@@ -40,7 +41,7 @@ export default class Board {
       CONTEXT_BOARD.fillRect(selectedCoordinates.col * squareSize, selectedCoordinates.row * squareSize, squareSize, squareSize);
     }
     for (var i = 0; i < moveCoordinates.length; i++) {
-      CONTEXT_BOARD.fillStyle = HIGHLIGHT_COLOR;
+      CONTEXT_BOARD.fillStyle = MOVE_COLOR;
       CONTEXT_BOARD.fillRect(moveCoordinates[i].col * squareSize, moveCoordinates[i].row * squareSize, squareSize, squareSize);
     }
   }

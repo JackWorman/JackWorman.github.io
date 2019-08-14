@@ -74,7 +74,7 @@ export default class Piece {
         this.calculateJumps(pieces, col + 2, row + 2, jumps);
       }
     } else {
-      throw 'Error: The property \'player\' may only be \'' + PLAYER_1 + '\' or \'' + PLAYER_2 + '\'.';
+      // throw 'Error: The property \'player\' may only be \'' + PLAYER_1 + '\' or \'' + PLAYER_2 + '\'.';
     }
     return moves;
   }

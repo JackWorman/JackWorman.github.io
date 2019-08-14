@@ -16,7 +16,7 @@ export default class Board {
     CANVAS_BOARD.width = CANVAS_BOARD.height = this.canvasSize;
   }
 
-  render(mouseCoordinates, selectedCoordinates) {
+  render(mouseCoordinates, selectedCoordinates, moveCoordinates) {
     // Draws the checker board
     CONTEXT_BOARD.fillStyle = CHECKER_COLOR_1;
     CONTEXT_BOARD.fillRect(0, 0, this.canvasSize, this.canvasSize);
@@ -38,6 +38,10 @@ export default class Board {
     if (selectedCoordinates !== null) {
       CONTEXT_BOARD.fillStyle = SELECT_COLOR;
       CONTEXT_BOARD.fillRect(selectedCoordinates.col * squareSize, selectedCoordinates.row * squareSize, squareSize, squareSize);
+    }
+    for (var i = 0; i < moveCoordinates.length; i++) {
+      CONTEXT_BOARD.fillStyle = HIGHLIGHT_COLOR;
+      CONTEXT_BOARD.fillRect(moveCoordinates[i].col * squareSize, moveCoordinates[i].row * squareSize, squareSize, squareSize);
     }
   }
 }

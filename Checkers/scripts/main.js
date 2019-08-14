@@ -33,6 +33,9 @@ CANVAS_CONTAINER.addEventListener('click', function() {
     selectedCoordinates = {col: -1, row: -1};
   } else {
     selectedCoordinates = {col: mouseCoordinates.col, row: mouseCoordinates.row};
+    if (pieces[selectedCoordinates.col][selectedCoordinates.row] !== 'empty') {
+      moveCoordinates = pieces[selectedCoordinates.col][selectedCoordinates.row].calculateMoves();
+    }
   }
   calculateAvailableMoves();
   board.render(mouseCoordinates, selectedCoordinates);

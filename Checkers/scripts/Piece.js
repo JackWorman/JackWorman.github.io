@@ -27,7 +27,7 @@ export default class Piece {
   }
 
   static clearCanvas() {
-    CANVAS_PIECES.width = CANVAS_PIECES.height = canvasSize;
+    CONTEXT_PIECES.clearRect(0, 0, CANVAS_PIECES.width, CANVAS_PIECES.height)
   }
 
   calculateMoves(pieces) {

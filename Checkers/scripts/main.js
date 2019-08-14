@@ -11,8 +11,8 @@ const SQUARE_SIZE = CANVAS_SIZE / GRID_SIZE;
 const CANVAS_CONTAINER = document.getElementById('canvas-container');
 
 var board = null;
-var player1Pieces = [];
-var player2Pieces = [];
+// var player1Pieces = [];
+// var player2Pieces = [];
 var pieces = [];
 var mouseCoordinates = {col: -1, row: -1};
 var selectedCoordinates = {col: -1, row: -1};
@@ -29,15 +29,30 @@ onmousemove = function(e) {
 }
 
 CANVAS_CONTAINER.addEventListener('click', function() {
+  // Checks if the selectedCoordinates were selected.
   if (selectedCoordinates.col === mouseCoordinates.col && selectedCoordinates.row === mouseCoordinates.row) {
     selectedCoordinates = {col: -1, row: -1};
     moveCoordinates = [];
   } else {
+    // Checks if a moveCoordinates were selected.
+    for (var i = 0; i < moveCoordinates.length; i++) {
+      if (moveCoordinates[i].col === selectedCoordinates.col && moveCoordinates[i].row === selectedCoordinates.row) {
+        pieces[moveCoordinates[i].col][moveCoordinates[i].row] = pieces[selectedCoordinates.col][selectedCoordinates.row];
+        pieces[selectedCoordinates.col][selectedCoordinates.row] = 'empty';
+        for (var j = 0; j < moveCoordinates.jumps.length; j++) {
+          pieces[moveCoordinates.jumps[j].col][moveCoordinates.jumps[j].row] = 'empty';
+        }
+        board.render(mouseCoordinates, selectedCoordinates, moveCoordinates);
+        return;
+      }
+    }
+
+
     selectedCoordinates = {col: mouseCoordinates.col, row: mouseCoordinates.row};
-    if (pieces[selectedCoordinates.col][selectedCoordinates.row] !== 'empty') {
-      moveCoordinates = pieces[selectedCoordinates.col][selectedCoordinates.row].calculateMoves(pieces);
-    } else {
+    if (pieces[selectedCoordinates.col][selectedCoordinates.row] === 'empty') {
       moveCoordinates = [];
+    } else {
+      moveCoordinates = pieces[selectedCoordinates.col][selectedCoordinates.row].calculateMoves(pieces);
     }
   }
   board.render(mouseCoordinates, selectedCoordinates, moveCoordinates);
@@ -70,7 +85,7 @@ var initializeGame = (function() {
       if ((col % 2 !== 0 && row % 2 === 0) || (col % 2 === 0 && row % 2 !== 0)) {
         var piece = new Piece(col, row, 'player-1');
         pieces[col][row] = piece;
-        player1Pieces.push(piece);
+        // player1Pieces.push(piece);
       }
     }
   }
@@ -83,7 +98,7 @@ var initializeGame = (function() {
       if ((col % 2 !== 0 && row % 2 === 0) || (col % 2 === 0 && row % 2 !== 0)) {
         var piece = new Piece(col, row, 'player-2');
         pieces[col][row] = piece;
-        player2Pieces.push(piece);
+        // player2Pieces.push(piece);
       }
     }
   }

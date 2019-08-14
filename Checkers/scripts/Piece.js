@@ -51,7 +51,7 @@ export default class Piece {
 
   calculateJumps(pieces, col, row, previousJumps) {
     var moves = [];
-    if (pieces[col][row].player === PLAYER_1) {
+    if (this.player === PLAYER_1) {
       if (pieces[col - 1][row - 1].player === PLAYER_2 && pieces[col - 2][row - 2] === 'empty') {
         var jumps = previousJumps.push({col: col - 1, row: row - 1});
         moves.push({col: col - 2, row: row - 2, jumps: jumps});
@@ -62,7 +62,7 @@ export default class Piece {
         moves.push({col: col + 2, row: row - 2, jumps: jumps});
         this.calculateJumps(pieces, col + 2, row - 2, jumps);
       }
-    } else if (pieces[col][row].player === PLAYER_2) {
+    } else if (this.player === PLAYER_2) {
       if (pieces[col - 1][row + 1].player === PLAYER_2 && pieces[col - 2][row + 2] === 'empty') {
         var jumps = previousJumps.push({col: col - 1, row: row + 1});
         moves.push({col: col - 2, row: row + 2, jumps: jumps});

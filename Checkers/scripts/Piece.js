@@ -27,23 +27,23 @@ export default class Piece {
   }
 
   static clearCanvas() {
-    CONTEXT_PIECES.clearRect(0, 0, CANVAS_PIECES.width, CANVAS_PIECES.height)
+    CONTEXT_PIECES.clearRect(0, 0, CANVAS_PIECES.width, CANVAS_PIECES.height);
   }
 
   calculateMoves(pieces) {
     var moves = [];
     if (this.player === PLAYER_1) {
-      if (pieces[this.col - 1][this.row - 1] === 'empty') {
+      if (pieces[this.col - 1][this.row - 1] || 'OoB' === 'empty') {
         moves.push({col: this.col - 1, row: this.row - 1, jumps: []});
       }
-      if (pieces[this.col + 1][this.row - 1] === 'empty') {
+      if (pieces[this.col + 1][this.row - 1] || 'OoB' === 'empty') {
         moves.push({col: this.col + 1, row: this.row - 1, jumps: []});
       }
     } else if (this.player === PLAYER_2) {
-      if (pieces[this.col - 1][this.row + 1] === 'empty') {
+      if (pieces[this.col - 1][this.row + 1] || 'OoB' === 'empty') {
         moves.push({col: this.col - 1, row: this.row + 1, jumps: []});
       }
-      if (pieces[this.col + 1][this.row + 1] === 'empty') {
+      if (pieces[this.col + 1][this.row + 1] || 'OoB' === 'empty') {
         moves.push({col: this.col + 1, row: this.row + 1, jumps: []});
       }
     } else {

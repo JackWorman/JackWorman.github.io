@@ -33,8 +33,7 @@ export default class Piece {
   calculateMoves(pieces) {
     var moves = [];
     if (this.player === PLAYER_1) {
-      if (typeof pieces[this.col - 1] !== 'undefined' && typeof pieces[this.col - 1][this.row - 1] !== 'undefined'
-        && pieces[this.col - 1][this.row - 1] === 'empty') {
+      if (is2DArrayDefined(pieces, this.col - 1, this.row - 1) && pieces[this.col - 1][this.row - 1] === 'empty') {
         moves.push({col: this.col - 1, row: this.row - 1, jumps: []});
       }
       if (typeof pieces[this.col + 1] !== 'undefined' && typeof pieces[this.col + 1][this.row - 1] !== 'undefined'
@@ -82,7 +81,7 @@ export default class Piece {
         this.calculateJumps(pieces, col + 2, row + 2, jumps);
       }
     } else {
-      // throw 'Error: The property \'player\' may only be \'' + PLAYER_1 + '\' or \'' + PLAYER_2 + '\'.';
+      throw 'Error: The property \'player\' may only be \'' + PLAYER_1 + '\' or \'' + PLAYER_2 + '\'.';
     }
     return moves;
   }
@@ -110,4 +109,8 @@ export default class Piece {
     CONTEXT_PIECES.stroke();
     CONTEXT_PIECES.fill();
   }
+}
+
+function is2DArrayDefined(array, i, j) {
+  return typeof array[i] !== 'undefined' && typeof pieces[i][j] !== 'undefined';
 }

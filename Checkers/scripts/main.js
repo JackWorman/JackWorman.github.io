@@ -58,7 +58,7 @@ var initializeGame = (function() {
   for (var col = 0; col < GRID_SIZE; col++) {
     pieces.push([]);
     for (var row = 0; row < GRID_SIZE; row++) {
-      pieces[row].push('empty');
+      pieces[col].push('empty');
     }
   }
   // Creates and renders player-1's pieces

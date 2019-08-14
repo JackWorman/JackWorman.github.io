@@ -112,5 +112,5 @@ export default class Piece {
 }
 
 function is2DArrayDefined(array, i, j) {
-  return typeof array[i] !== 'undefined' && typeof pieces[i][j] !== 'undefined';
+  return typeof array[i] !== 'undefined' && typeof array[i][j] !== 'undefined';
 }

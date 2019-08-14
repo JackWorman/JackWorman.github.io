@@ -31,6 +31,7 @@ onmousemove = function(e) {
 CANVAS_CONTAINER.addEventListener('click', function() {
   if (selectedCoordinates.col === mouseCoordinates.col && selectedCoordinates.row === mouseCoordinates.row) {
     selectedCoordinates = {col: -1, row: -1};
+    moveCoordinates = [];
   } else {
     selectedCoordinates = {col: mouseCoordinates.col, row: mouseCoordinates.row};
     if (pieces[selectedCoordinates.col][selectedCoordinates.row] !== 'empty') {
@@ -51,7 +52,7 @@ var initializeGame = (function() {
   CANVAS_CONTAINER.style.width = CANVAS_CONTAINER.style.height = (CANVAS_SIZE + 2) + 'px';
   //
   board = new Board(GRID_SIZE, CANVAS_SIZE);
-  board.render(mouseCoordinates, selectedCoordinates);
+  board.render(mouseCoordinates, selectedCoordinates, moveCoordinates);
   //
   Piece.initialize(CANVAS_SIZE, SQUARE_SIZE);
   for (var col = 0; col < GRID_SIZE; col++) {

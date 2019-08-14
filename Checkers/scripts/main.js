@@ -13,6 +13,7 @@ const CANVAS_CONTAINER = document.getElementById('canvas-container');
 var board = null;
 var player1Pieces = [];
 var player2Pieces = [];
+var pieces = [];
 var mouseCoordinates = {col: -1, row: -1};
 var selectedCoordinates = {col: -1, row: -1};
 var turn = 'player-1';
@@ -51,11 +52,18 @@ var initializeGame = (function() {
   board.render(mouseCoordinates, selectedCoordinates);
   //
   Piece.initialize(CANVAS_SIZE, SQUARE_SIZE);
+  for (var col = 0; col < GRID_SIZE; col++) {
+    for (var row = 0; row < GRID_SIZE; row++) {
+      pieces[col][row] = 'empty';
+    }
+  }
   // Creates and renders player-1's pieces
   for (var col = 0; col < GRID_SIZE; col++) {
     for (var row = 5; row < 8; row++) {
       if ((col % 2 !== 0 && row % 2 === 0) || (col % 2 === 0 && row % 2 !== 0)) {
-        player1Pieces.push(new Piece(col, row, 'player-1'));
+        var piece = new Piece(col, row, 'player-1');
+        pieces[col][row] = piece;
+        player1Pieces.push(piece);
       }
     }
   }
@@ -66,7 +74,9 @@ var initializeGame = (function() {
   for (var col = 0; col < GRID_SIZE; col++) {
     for (var row = 0; row < 3; row++) {
       if ((col % 2 !== 0 && row % 2 === 0) || (col % 2 === 0 && row % 2 !== 0)) {
-        player2Pieces.push(new Piece(col, row, 'player-2'));
+        var piece = new Piece(col, row, 'player-2');
+        pieces[col][row] = piece;
+        player2Pieces.push(piece);
       }
     }
   }
@@ -75,30 +85,19 @@ var initializeGame = (function() {
   }
 })();
 
-function getPiece(col, row) {
-  if (turn === 'player-1') {
-    for (var i = 0; i < player1Pieces.length; i++) {
-      if (player1Pieces[i].col === col && player1Pieces[i].row === row) {
-        return player1Pieces[i];
-      }
-    }
-  } else if (turn === 'player-2') {
-    for (var i = 0; i < player2Pieces.length; i++) {
-      if (player2Pieces[i].col === col && player2Pieces[i].row === row) {
-        return player2Pieces[i];
-      }
-    }
-  }
-  return null;
-}
-
-function calculateAvailableMoves() {
-  availableMoves = [];
-  var piece = getPiece(selectedCoordinates.col, selectedCoordinates.row);
-  if (piece === null) {
-    return;
-  }
-  if (piece.player === turn) {
-
-  }
-}
+// function getPiece(col, row) {
+//   if (turn === 'player-1') {
+//     for (var i = 0; i < player1Pieces.length; i++) {
+//       if (player1Pieces[i].col === col && player1Pieces[i].row === row) {
+//         return player1Pieces[i];
+//       }
+//     }
+//   } else if (turn === 'player-2') {
+//     for (var i = 0; i < player2Pieces.length; i++) {
+//       if (player2Pieces[i].col === col && player2Pieces[i].row === row) {
+//         return player2Pieces[i];
+//       }
+//     }
+//   }
+//   return null;
+// }

@@ -14,14 +14,6 @@ export default class Board {
     this.gridSize = gridSize;
     this.canvasSize = canvasSize;
     CANVAS_BOARD.width = CANVAS_BOARD.height = this.canvasSize;
-    // this.board = [];
-    // for (var row = 0; row < this.size; row++) {
-    //   this.board.push([]);
-    //   for (var col = 0; col < this.size; col++) {
-    //     this.board[row].push(null);
-    //   }
-    // }
-    // this.pieces = [];
   }
 
   render(mouseCoordinates, selectedCoordinates) {

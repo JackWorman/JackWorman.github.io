@@ -34,7 +34,7 @@ CANVAS_CONTAINER.addEventListener('click', function() {
   } else {
     // Checks if a moveCoordinates were selected.
     for (var i = 0; i < moveCoordinates.length; i++) {
-      if (moveCoordinates[i].col === selectedCoordinates.col && moveCoordinates[i].row === selectedCoordinates.row) {
+      if (moveCoordinates[i].col === mouseCoordinates.col && moveCoordinates[i].row === mouseCoordinates.row) {
         pieces[moveCoordinates[i].col][moveCoordinates[i].row] = pieces[selectedCoordinates.col][selectedCoordinates.row];
         pieces[selectedCoordinates.col][selectedCoordinates.row] = 'empty';
         for (var j = 0; j < moveCoordinates.jumps.length; j++) {

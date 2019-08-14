@@ -36,13 +36,14 @@ CANVAS_CONTAINER.addEventListener('click', function() {
     for (var i = 0; i < moveCoordinates.length; i++) {
       if (moveCoordinates[i].col === mouseCoordinates.col && moveCoordinates[i].row === mouseCoordinates.row) {
         pieces[moveCoordinates[i].col][moveCoordinates[i].row] = pieces[selectedCoordinates.col][selectedCoordinates.row];
+        console.log(pieces[moveCoordinates[i].col][moveCoordinates[i].row]);
         pieces[selectedCoordinates.col][selectedCoordinates.row] = 'empty';
+        console.log(pieces[moveCoordinates[i].col][moveCoordinates[i].row]);
         for (var j = 0; j < moveCoordinates[i].jumps.length; j++) {
           pieces[moveCoordinates[i].jumps[j].col][moveCoordinates[i].jumps[j].row] = 'empty';
         }
         renderPieces();
         board.render(mouseCoordinates, selectedCoordinates, moveCoordinates);
-        console.log('test');
         return;
       }
     }

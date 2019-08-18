@@ -52,12 +52,12 @@ export default class Piece {
   }
 
   calculateJumps(pieces, col, row, jumps) {
-    const func2 = function(pieces, col, row, dCol, dRow, moves, jumps, this) {
+    const func2 = function(pieces, col, row, dCol, dRow, moves, jumps, blah) {
       if (is2DArrayDefined(pieces, col + dCol * 2, row + dRow * 2) && pieces[col + dCol][row + dRow].player === PLAYER_2 && pieces[col + dCol * 2][row + dRow * 2] === 'empty') {
         let newJumps = jumps.slice(0);
         newJumps.push({col: col, row: row});
         moves.push({col: col + dCol * 2, row: row + dRow * 2, jumps: newJumps});
-        moves = moves.concat(this(pieces, col + dCol * 2, row + dRow * 2, newJumps));
+        moves = moves.concat(blah(pieces, col + dCol * 2, row + dRow * 2, newJumps));
       }
       return moves;
     }

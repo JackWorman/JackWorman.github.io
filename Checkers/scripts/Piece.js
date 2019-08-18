@@ -56,23 +56,23 @@ export default class Piece {
   calculateJumps(pieces, col, row, previousJumps) {
     var moves = [];
     if (this.player === PLAYER_1) {
-      if (pieces[col - 1][row - 1].player === PLAYER_2 && pieces[col - 2][row - 2] === 'empty') {
+      if (is2DArrayDefined(pieces, col - 2, row - 2) && pieces[col - 1][row - 1].player === PLAYER_2 && pieces[col - 2][row - 2] === 'empty') {
         var jumps = previousJumps.push({col: col - 1, row: row - 1});
         moves.push({col: col - 2, row: row - 2, jumps: jumps});
         moves.concat(this.calculateJumps(pieces, col - 2, row - 2, jumps));
       }
-      if (pieces[col + 1][row - 1].player === PLAYER_2 && pieces[col + 2][row - 2] === 'empty') {
+      if (is2DArrayDefined(pieces, col + 2, row - 2) && pieces[col + 1][row - 1].player === PLAYER_2 && pieces[col + 2][row - 2] === 'empty') {
         var jumps = previousJumps.push({col: col + 2, row: row - 2});
         moves.push({col: col + 2, row: row - 2, jumps: jumps});
         moves.concat(this.calculateJumps(pieces, col + 2, row - 2, jumps));
       }
     } else if (this.player === PLAYER_2) {
-      if (pieces[col - 1][row + 1].player === PLAYER_1 && pieces[col - 2][row + 2] === 'empty') {
+      if (is2DArrayDefined(pieces, col - 2, row + 2) && pieces[col - 1][row + 1].player === PLAYER_1 && pieces[col - 2][row + 2] === 'empty') {
         var jumps = previousJumps.push({col: col - 1, row: row + 1});
         moves.push({col: col - 2, row: row + 2, jumps: jumps});
         moves.concat(this.calculateJumps(pieces, col - 2, row + 2, jumps));
       }
-      if (pieces[col + 1][row + 1].player === PLAYER_1 && pieces[col + 2][row + 2] === 'empty') {
+      if (is2DArrayDefined(pieces, col + 2, row + 2) && pieces[col + 1][row + 1].player === PLAYER_1 && pieces[col + 2][row + 2] === 'empty') {
         var jumps = previousJumps.push({col: col + 2, row: row + 2});
         moves.push({col: col + 2, row: row + 2, jumps: jumps});
         moves.concat(this.calculateJumps(pieces, col + 2, row + 2, jumps));

@@ -10,15 +10,15 @@ const SQUARE_SIZE = CANVAS_SIZE / GRID_SIZE;
 // DOM Elements
 const CANVAS_CONTAINER = document.getElementById('canvas-container');
 
-var board = null;
-var pieces = [];
-var mouseCoordinates = {col: -1, row: -1};
-var selectedCoordinates = {col: -1, row: -1};
-var turn = 'player-1';
-var moveCoordinates = [];
+let board = null;
+let pieces = [];
+let mouseCoordinates = {col: -1, row: -1};
+let selectedCoordinates = {col: -1, row: -1};
+let turn = 'player-1';
+let moveCoordinates = [];
 
 onmousemove = function(e) {
-  var rect = CANVAS_CONTAINER.getBoundingClientRect();
+  let rect = CANVAS_CONTAINER.getBoundingClientRect();
   mouseCoordinates = {
     col: Math.floor((e.clientX - rect.left) / SQUARE_SIZE),
     row: Math.floor((e.clientY - rect.top) / SQUARE_SIZE)
@@ -33,13 +33,13 @@ CANVAS_CONTAINER.addEventListener('click', function() {
     moveCoordinates = [];
   } else {
     // Checks if a moveCoordinates were selected.
-    for (var i = 0; i < moveCoordinates.length; i++) {
+    for (let i = 0; i < moveCoordinates.length; i++) {
       if (moveCoordinates[i].col === mouseCoordinates.col && moveCoordinates[i].row === mouseCoordinates.row) {
         pieces[selectedCoordinates.col][selectedCoordinates.row].col = moveCoordinates[i].col;
         pieces[selectedCoordinates.col][selectedCoordinates.row].row = moveCoordinates[i].row;
         pieces[moveCoordinates[i].col][moveCoordinates[i].row] = pieces[selectedCoordinates.col][selectedCoordinates.row];
         pieces[selectedCoordinates.col][selectedCoordinates.row] = 'empty';
-        for (var j = 0; j < moveCoordinates[i].jumps.length; j++) {
+        for (let j = 0; j < moveCoordinates[i].jumps.length; j++) {
           pieces[moveCoordinates[i].jumps[j].col][moveCoordinates[i].jumps[j].row] = 'empty';
         }
         selectedCoordinates = {col: -1, row: -1};
@@ -68,33 +68,33 @@ onkeyup = function(e) {
   }
 }
 
-var initializeGame = (function() {
+const initializeGame = (function() {
   CANVAS_CONTAINER.style.width = CANVAS_CONTAINER.style.height = (CANVAS_SIZE + 2) + 'px';
   //
   board = new Board(GRID_SIZE, CANVAS_SIZE);
   board.render(mouseCoordinates, selectedCoordinates, moveCoordinates);
   //
   Piece.initialize(CANVAS_SIZE, SQUARE_SIZE);
-  for (var col = 0; col < GRID_SIZE; col++) {
+  for (let col = 0; col < GRID_SIZE; col++) {
     pieces.push([]);
-    for (var row = 0; row < GRID_SIZE; row++) {
+    for (let row = 0; row < GRID_SIZE; row++) {
       pieces[col].push('empty');
     }
   }
   // Creates player-1's pieces
-  for (var col = 0; col < GRID_SIZE; col++) {
-    for (var row = 5; row < 8; row++) {
+  for (let col = 0; col < GRID_SIZE; col++) {
+    for (let row = 5; row < 8; row++) {
       if ((col % 2 !== 0 && row % 2 === 0) || (col % 2 === 0 && row % 2 !== 0)) {
-        var piece = new Piece(col, row, 'player-1');
+        let piece = new Piece(col, row, 'player-1');
         pieces[col][row] = piece;
       }
     }
   }
   // Creates player-2's pieces
-  for (var col = 0; col < GRID_SIZE; col++) {
-    for (var row = 0; row < 3; row++) {
+  for (let col = 0; col < GRID_SIZE; col++) {
+    for (let row = 0; row < 3; row++) {
       if ((col % 2 !== 0 && row % 2 === 0) || (col % 2 === 0 && row % 2 !== 0)) {
-        var piece = new Piece(col, row, 'player-2');
+        let piece = new Piece(col, row, 'player-2');
         pieces[col][row] = piece;
       }
     }
@@ -105,8 +105,8 @@ var initializeGame = (function() {
 
 function renderPieces() {
   Piece.clearCanvas();
-  for (var col = 0; col < GRID_SIZE; col++) {
-    for (var row = 0; row < GRID_SIZE; row++) {
+  for (let col = 0; col < GRID_SIZE; col++) {
+    for (let row = 0; row < GRID_SIZE; row++) {
       if (pieces[col][row] !== 'empty') {
         pieces[col][row].render();
       }

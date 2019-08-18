@@ -22,9 +22,9 @@ export default class Board {
     CONTEXT_BOARD.fillStyle = CHECKER_COLOR_1;
     CONTEXT_BOARD.fillRect(0, 0, this.canvasSize, this.canvasSize);
     CONTEXT_BOARD.fillStyle = CHECKER_COLOR_2;
-    var squareSize = this.canvasSize / this.gridSize;
-    for (var col = 0; col < this.gridSize; col++) {
-      for (var row = 0; row < this.gridSize; row++) {
+    let squareSize = this.canvasSize / this.gridSize;
+    for (let col = 0; col < this.gridSize; col++) {
+      for (let row = 0; row < this.gridSize; row++) {
         if ((col % 2 === 0 && row % 2 === 0) || (col % 2 !== 0 && row % 2 !== 0)) {
           CONTEXT_BOARD.fillRect(col * squareSize, row * squareSize, squareSize, squareSize);
         }
@@ -40,7 +40,7 @@ export default class Board {
       CONTEXT_BOARD.fillStyle = SELECT_COLOR;
       CONTEXT_BOARD.fillRect(selectedCoordinates.col * squareSize, selectedCoordinates.row * squareSize, squareSize, squareSize);
     }
-    for (var i = 0; i < moveCoordinates.length; i++) {
+    for (let i = 0; i < moveCoordinates.length; i++) {
       CONTEXT_BOARD.fillStyle = MOVE_COLOR;
       CONTEXT_BOARD.fillRect(moveCoordinates[i].col * squareSize, moveCoordinates[i].row * squareSize, squareSize, squareSize);
     }

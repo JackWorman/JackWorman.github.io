@@ -34,7 +34,7 @@ export default class Piece {
   calculateMoves(pieces) {
     var func = function(pieces, moves, col, row) {
       if (is2DArrayDefined(pieces, col, row) && pieces[col][row] === 'empty') {
-        moves.push({col: this.col - 1, row: this.row - 1, jumps: []});
+        moves.push({col: col, row: row, jumps: []});
       }
       return moves;
     }

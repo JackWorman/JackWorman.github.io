@@ -57,6 +57,7 @@ export default class Piece {
       console.log(is2DArrayDefined(pieces, col - 1, row - 1));
       console.log(pieces[col][row].player === PLAYER_2);
       console.log(pieces[col - 1][row - 1] === 'empty');
+      console.log(pieces[col][row].player);
       if (is2DArrayDefined(pieces, col - 1, row - 1) && pieces[col][row].player === PLAYER_2 && pieces[col - 1][row - 1] === 'empty') {
         let newJumps = jumps.slice(0);
         newJumps.push({col: col, row: row});

@@ -52,7 +52,10 @@ export default class Piece {
     console.log('========================');
     console.log('Before calculateJumps():');
     console.log(moves);
-    moves.concat(this.calculateJumps(pieces, this.col, this.row, []));
+    var tests = this.calculateJumps(pieces, this.col, this.row, []);
+    console.log('In calculateJumps():');
+    console.log(tests);
+    moves.concat(tests);
     console.log('After calculateJumps():');
     console.log(moves);
     console.log('========================');
@@ -86,8 +89,6 @@ export default class Piece {
     } else {
       throw 'Error: The property \'player\' may only be \'' + PLAYER_1 + '\' or \'' + PLAYER_2 + '\'.';
     }
-    console.log('In calculateJumps():');
-    console.log(moves);
     return moves;
   }
 

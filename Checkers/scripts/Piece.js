@@ -15,8 +15,7 @@ export default class Piece {
     this.col = col;
     this.row = row;
     if (player === PLAYER_1 || player === PLAYER_2) {
-      this.player = player;
-      Object.defineProperty(this, "player", { configurable: false, writable: false });
+      Object.defineProperty(this, "player", {value: player, configurable: false, writable: false});
     } else {
       throw 'Error: The property \'player\' may only be \'' + PLAYER_1 + '\' or \'' + PLAYER_2 + '\'.';
     }

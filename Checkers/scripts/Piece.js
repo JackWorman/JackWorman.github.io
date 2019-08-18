@@ -52,10 +52,7 @@ export default class Piece {
     console.log('========================');
     console.log('Before calculateJumps():');
     console.log(moves);
-    var tests = this.calculateJumps(pieces, this.col, this.row, []);
-    console.log('In calculateJumps():');
-    console.log(tests);
-    moves.concat(tests);
+    moves = moves.concat(this.calculateJumps(pieces, this.col, this.row, []));
     console.log('After calculateJumps():');
     console.log(moves);
     console.log('========================');
@@ -68,23 +65,23 @@ export default class Piece {
       if (is2DArrayDefined(pieces, col - 2, row - 2) && pieces[col - 1][row - 1].player === PLAYER_2 && pieces[col - 2][row - 2] === 'empty') {
         jumps.push({col: col - 1, row: row - 1});
         moves.push({col: col - 2, row: row - 2, jumps: jumps});
-        moves.concat(this.calculateJumps(pieces, col - 2, row - 2, jumps));
+        moves = moves.concat(this.calculateJumps(pieces, col - 2, row - 2, jumps));
       }
       if (is2DArrayDefined(pieces, col + 2, row - 2) && pieces[col + 1][row - 1].player === PLAYER_2 && pieces[col + 2][row - 2] === 'empty') {
         jumps.push({col: col + 1, row: row - 1});
         moves.push({col: col + 2, row: row - 2, jumps: jumps});
-        moves.concat(this.calculateJumps(pieces, col + 2, row - 2, jumps));
+        moves = moves.concat(this.calculateJumps(pieces, col + 2, row - 2, jumps));
       }
     } else if (this.player === PLAYER_2) {
       if (is2DArrayDefined(pieces, col - 2, row + 2) && pieces[col - 1][row + 1].player === PLAYER_1 && pieces[col - 2][row + 2] === 'empty') {
         jumps.push({col: col - 1, row: row + 1});
         moves.push({col: col - 2, row: row + 2, jumps: jumps});
-        moves.concat(this.calculateJumps(pieces, col - 2, row + 2, jumps));
+        moves = moves.concat(this.calculateJumps(pieces, col - 2, row + 2, jumps));
       }
       if (is2DArrayDefined(pieces, col + 2, row + 2) && pieces[col + 1][row + 1].player === PLAYER_1 && pieces[col + 2][row + 2] === 'empty') {
         jumps.push({col: col + 1, row: row + 1});
         moves.push({col: col + 2, row: row + 2, jumps: jumps});
-        moves.concat(this.calculateJumps(pieces, col + 2, row + 2, jumps));
+        moves = moves.concat(this.calculateJumps(pieces, col + 2, row + 2, jumps));
       }
     } else {
       throw 'Error: The property \'player\' may only be \'' + PLAYER_1 + '\' or \'' + PLAYER_2 + '\'.';

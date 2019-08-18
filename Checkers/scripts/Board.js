@@ -40,10 +40,12 @@ export default class Board {
       CONTEXT_BOARD.fillStyle = SELECT_COLOR;
       CONTEXT_BOARD.fillRect(selectedCoordinates.col * squareSize, selectedCoordinates.row * squareSize, squareSize, squareSize);
     }
-    console.log(moveCoordinates.length);
-    for (var i = 0; i < moveCoordinates.length; i++) {
-      CONTEXT_BOARD.fillStyle = MOVE_COLOR;
-      CONTEXT_BOARD.fillRect(moveCoordinates[i].col * squareSize, moveCoordinates[i].row * squareSize, squareSize, squareSize);
+    if (moveCoordinates !== null) {
+      for (var i = 0; i < moveCoordinates.length; i++) {
+        console.log(moveCoordinates[i]);
+        CONTEXT_BOARD.fillStyle = MOVE_COLOR;
+        CONTEXT_BOARD.fillRect(moveCoordinates[i].col * squareSize, moveCoordinates[i].row * squareSize, squareSize, squareSize);
+      }
     }
   }
 }

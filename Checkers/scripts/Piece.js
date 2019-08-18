@@ -53,27 +53,27 @@ export default class Piece {
     return moves;
   }
 
-  calculateJumps(pieces, col, row, previousJumps) {
+  calculateJumps(pieces, col, row, jumps) {
     var moves = [];
     if (this.player === PLAYER_1) {
       if (is2DArrayDefined(pieces, col - 2, row - 2) && pieces[col - 1][row - 1].player === PLAYER_2 && pieces[col - 2][row - 2] === 'empty') {
-        var jumps = previousJumps.push({col: col - 1, row: row - 1});
+        jumps.push({col: col - 1, row: row - 1});
         moves.push({col: col - 2, row: row - 2, jumps: jumps});
         moves.concat(this.calculateJumps(pieces, col - 2, row - 2, jumps));
       }
       if (is2DArrayDefined(pieces, col + 2, row - 2) && pieces[col + 1][row - 1].player === PLAYER_2 && pieces[col + 2][row - 2] === 'empty') {
-        var jumps = previousJumps.push({col: col + 2, row: row - 2});
+        jumps.push({col: col + 1, row: row - 1});
         moves.push({col: col + 2, row: row - 2, jumps: jumps});
         moves.concat(this.calculateJumps(pieces, col + 2, row - 2, jumps));
       }
     } else if (this.player === PLAYER_2) {
       if (is2DArrayDefined(pieces, col - 2, row + 2) && pieces[col - 1][row + 1].player === PLAYER_1 && pieces[col - 2][row + 2] === 'empty') {
-        var jumps = previousJumps.push({col: col - 1, row: row + 1});
+        jumps.push({col: col - 1, row: row + 1});
         moves.push({col: col - 2, row: row + 2, jumps: jumps});
         moves.concat(this.calculateJumps(pieces, col - 2, row + 2, jumps));
       }
       if (is2DArrayDefined(pieces, col + 2, row + 2) && pieces[col + 1][row + 1].player === PLAYER_1 && pieces[col + 2][row + 2] === 'empty') {
-        var jumps = previousJumps.push({col: col + 2, row: row + 2});
+        jumps.push({col: col + 1, row: row + 1});
         moves.push({col: col + 2, row: row + 2, jumps: jumps});
         moves.concat(this.calculateJumps(pieces, col + 2, row + 2, jumps));
       }

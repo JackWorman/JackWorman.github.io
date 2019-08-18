@@ -54,7 +54,7 @@ export default class Piece {
   calculateJumps(pieces, col, row, jumps) {
     const func2 = function(pieces, col, row, moves, jumps) {
       console.log('=================');
-      console.log(pieces[col][row].player);
+      console.log(pieces[col][row].player === PLAYER_2);
       if (is2DArrayDefined(pieces, col - 1, row - 1) && pieces[col][row].player === PLAYER_2 && pieces[col - 1][row - 1] === 'empty') {
         let newJumps = jumps.slice(0);
         newJumps.push({col: col, row: row});

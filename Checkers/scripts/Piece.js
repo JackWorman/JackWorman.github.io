@@ -60,6 +60,7 @@ export default class Piece {
         moves.push({col: col - 1, row: row - 1, jumps: newJumps});
         moves = moves.concat(this.calculateJumps(pieces, col - 1, row - 1, newJumps));
       }
+      return moves;
     }
     let moves = [];
     if (this.player === PLAYER_1) {

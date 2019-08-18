@@ -32,13 +32,13 @@ export default class Piece {
   }
 
   calculateMoves(pieces) {
-    var func = function(pieces, moves, col, row) { // TODO: rename to be more descriptive
+    const func = function(pieces, moves, col, row) { // TODO: rename to be more descriptive
       if (is2DArrayDefined(pieces, col, row) && pieces[col][row] === 'empty') {
         moves.push({col: col, row: row, jumps: []});
       }
       return moves;
     }
-    var moves = [];
+    let moves = [];
     if (this.player === PLAYER_1 || this.isKing) {
       moves = func(pieces, moves, this.col - 1, this.row - 1);
       moves = func(pieces, moves, this.col + 1, this.row - 1);
@@ -52,29 +52,29 @@ export default class Piece {
   }
 
   calculateJumps(pieces, col, row, jumps) {
-    var moves = [];
+    let moves = [];
     if (this.player === PLAYER_1) {
       if (is2DArrayDefined(pieces, col - 2, row - 2) && pieces[col - 1][row - 1].player === PLAYER_2 && pieces[col - 2][row - 2] === 'empty') {
-        var newJumps = jumps.slice(0);
+        let newJumps = jumps.slice(0);
         newJumps.push({col: col - 1, row: row - 1});
         moves.push({col: col - 2, row: row - 2, jumps: newJumps});
         moves = moves.concat(this.calculateJumps(pieces, col - 2, row - 2, newJumps));
       }
       if (is2DArrayDefined(pieces, col + 2, row - 2) && pieces[col + 1][row - 1].player === PLAYER_2 && pieces[col + 2][row - 2] === 'empty') {
-        var newJumps = jumps.slice(0);
+        let newJumps = jumps.slice(0);
         newJumps.push({col: col + 1, row: row - 1});
         moves.push({col: col + 2, row: row - 2, jumps: newJumps});
         moves = moves.concat(this.calculateJumps(pieces, col + 2, row - 2, newJumps));
       }
     } else if (this.player === PLAYER_2) {
       if (is2DArrayDefined(pieces, col - 2, row + 2) && pieces[col - 1][row + 1].player === PLAYER_1 && pieces[col - 2][row + 2] === 'empty') {
-        var newJumps = jumps.slice(0);
+        let newJumps = jumps.slice(0);
         newJumps.push({col: col - 1, row: row + 1});
         moves.push({col: col - 2, row: row + 2, jumps: newJumps});
         moves = moves.concat(this.calculateJumps(pieces, col - 2, row + 2, newJumps));
       }
       if (is2DArrayDefined(pieces, col + 2, row + 2) && pieces[col + 1][row + 1].player === PLAYER_1 && pieces[col + 2][row + 2] === 'empty') {
-        var newJumps = jumps.slice(0);
+        let newJumps = jumps.slice(0);
         newJumps.push({col: col + 1, row: row + 1});
         moves.push({col: col + 2, row: row + 2, jumps: newJumps});
         moves = moves.concat(this.calculateJumps(pieces, col + 2, row + 2, newJumps));

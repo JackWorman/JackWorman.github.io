@@ -32,7 +32,7 @@ export default class Piece {
   }
 
   calculateMoves(pieces) {
-    var func = function (moves, col, row) {
+    var func = function(pieces, moves, col, row) {
       if (is2DArrayDefined(pieces, col, row) && pieces[col][row] === 'empty') {
         moves.push({col: this.col - 1, row: this.row - 1, jumps: []});
       }
@@ -40,8 +40,8 @@ export default class Piece {
     }
     var moves = [];
     if (this.player === PLAYER_1 || this.isKing) {
-      moves = func(moves, this.col - 1, this.row - 1);
-      moves = func(moves, this.col + 1, this.row - 1);
+      moves = func(pieces, moves, this.col - 1, this.row - 1);
+      moves = func(pieces, moves, this.col + 1, this.row - 1);
       // if (is2DArrayDefined(pieces, this.col - 1, this.row - 1) && pieces[this.col - 1][this.row - 1] === 'empty') {
       //   moves.push({col: this.col - 1, row: this.row - 1, jumps: []});
       // }

@@ -50,7 +50,6 @@ export default class Piece {
       throw 'Error: The property \'player\' may only be \'' + PLAYER_1 + '\' or \'' + PLAYER_2 + '\'.';
     }
     moves.concat(this.calculateJumps(pieces, this.col, this.row, []));
-    console.log(moves);
     return moves;
   }
 
@@ -81,8 +80,6 @@ export default class Piece {
     } else {
       throw 'Error: The property \'player\' may only be \'' + PLAYER_1 + '\' or \'' + PLAYER_2 + '\'.';
     }
-    console.log('---------------');
-    console.log(moves);
     return moves;
   }
 

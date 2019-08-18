@@ -47,6 +47,8 @@ export default class Board {
         CONTEXT_BOARD.fillStyle = MOVE_COLOR;
         CONTEXT_BOARD.fillRect(moveCoordinates[i].col * squareSize, moveCoordinates[i].row * squareSize, squareSize, squareSize);
       }
+    } else {
+      console.log('===fdsfdsfdsfdasfdsfdsgfdshngklfadsbgnjksadhnbfjkadslhfjklasd========');
     }
   }
 }

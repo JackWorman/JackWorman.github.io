@@ -63,8 +63,8 @@ export default class Piece {
     }
     let moves = [];
     if (this.player === PLAYER_1) {
-      moves = func2(pieces, col, row, -1, -1, moves, jumps, this);
-      moves = func2(pieces, col, row, 1, -1, moves, jumps, this);
+      moves = func2(pieces, col, row, -1, -1, moves, jumps, this.calculateJumps);
+      moves = func2(pieces, col, row, 1, -1, moves, jumps, this.calculateJumps);
       // if (is2DArrayDefined(pieces, col - 2, row - 2) && pieces[col - 1][row - 1].player === PLAYER_2 && pieces[col - 2][row - 2] === 'empty') {
       //   let newJumps = jumps.slice(0);
       //   newJumps.push({col: col - 1, row: row - 1});

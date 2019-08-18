@@ -80,6 +80,7 @@ export default class Piece {
     } else {
       throw 'Error: The property \'player\' may only be \'' + PLAYER_1 + '\' or \'' + PLAYER_2 + '\'.';
     }
+    console.log(moves);
     return moves;
   }
 

@@ -16,6 +16,7 @@ export default class Piece {
     this.row = row;
     if (player === PLAYER_1 || player === PLAYER_2) {
       this.player = player;
+      Object.defineProperty(this, "player", { configurable: false, writable: false });
     } else {
       throw 'Error: The property \'player\' may only be \'' + PLAYER_1 + '\' or \'' + PLAYER_2 + '\'.';
     }
@@ -52,20 +53,30 @@ export default class Piece {
   }
 
   calculateJumps(pieces, col, row, jumps) {
+    const func = function(pieces, col, row, moves, jumps) {
+      if (is2DArrayDefined(pieces, col - 1, row - 1) && pieces[col][row].player === PLAYER_2 && pieces[col - 1][row - 1] === 'empty') {
+        let newJumps = jumps.slice(0);
+        newJumps.push({col: col, row: row});
+        moves.push({col: col - 1, row: row - 1, jumps: newJumps});
+        moves = moves.concat(this.calculateJumps(pieces, col - 1, row - 1, newJumps));
+      }
+    }
     let moves = [];
     if (this.player === PLAYER_1) {
-      if (is2DArrayDefined(pieces, col - 2, row - 2) && pieces[col - 1][row - 1].player === PLAYER_2 && pieces[col - 2][row - 2] === 'empty') {
-        let newJumps = jumps.slice(0);
-        newJumps.push({col: col - 1, row: row - 1});
-        moves.push({col: col - 2, row: row - 2, jumps: newJumps});
-        moves = moves.concat(this.calculateJumps(pieces, col - 2, row - 2, newJumps));
-      }
-      if (is2DArrayDefined(pieces, col + 2, row - 2) && pieces[col + 1][row - 1].player === PLAYER_2 && pieces[col + 2][row - 2] === 'empty') {
-        let newJumps = jumps.slice(0);
-        newJumps.push({col: col + 1, row: row - 1});
-        moves.push({col: col + 2, row: row - 2, jumps: newJumps});
-        moves = moves.concat(this.calculateJumps(pieces, col + 2, row - 2, newJumps));
-      }
+      moves = func(pieces, col - 1, col - 1, moves, jumps);
+      moves = func(pieces, col + 1, col - 1, moves, jumps);
+      // if (is2DArrayDefined(pieces, col - 2, row - 2) && pieces[col - 1][row - 1].player === PLAYER_2 && pieces[col - 2][row - 2] === 'empty') {
+      //   let newJumps = jumps.slice(0);
+      //   newJumps.push({col: col - 1, row: row - 1});
+      //   moves.push({col: col - 2, row: row - 2, jumps: newJumps});
+      //   moves = moves.concat(this.calculateJumps(pieces, col - 2, row - 2, newJumps));
+      // }
+      // if (is2DArrayDefined(pieces, col + 2, row - 2) && pieces[col + 1][row - 1].player === PLAYER_2 && pieces[col + 2][row - 2] === 'empty') {
+      //   let newJumps = jumps.slice(0);
+      //   newJumps.push({col: col + 1, row: row - 1});
+      //   moves.push({col: col + 2, row: row - 2, jumps: newJumps});
+      //   moves = moves.concat(this.calculateJumps(pieces, col + 2, row - 2, newJumps));
+      // }
     } else if (this.player === PLAYER_2) {
       if (is2DArrayDefined(pieces, col - 2, row + 2) && pieces[col - 1][row + 1].player === PLAYER_1 && pieces[col - 2][row + 2] === 'empty') {
         let newJumps = jumps.slice(0);

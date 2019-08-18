@@ -63,24 +63,28 @@ export default class Piece {
     var moves = [];
     if (this.player === PLAYER_1) {
       if (is2DArrayDefined(pieces, col - 2, row - 2) && pieces[col - 1][row - 1].player === PLAYER_2 && pieces[col - 2][row - 2] === 'empty') {
-        jumps.push({col: col - 1, row: row - 1});
-        moves.push({col: col - 2, row: row - 2, jumps: jumps});
+        var newJumps = jumps.slice(0);
+        newJumps.push({col: col - 1, row: row - 1});
+        moves.push({col: col - 2, row: row - 2, jumps: newJumps});
         moves = moves.concat(this.calculateJumps(pieces, col - 2, row - 2, jumps));
       }
       if (is2DArrayDefined(pieces, col + 2, row - 2) && pieces[col + 1][row - 1].player === PLAYER_2 && pieces[col + 2][row - 2] === 'empty') {
-        jumps.push({col: col + 1, row: row - 1});
-        moves.push({col: col + 2, row: row - 2, jumps: jumps});
+        var newJumps = jumps.slice(0);
+        newJumps.push({col: col + 1, row: row - 1});
+        moves.push({col: col + 2, row: row - 2, jumps: newJumps});
         moves = moves.concat(this.calculateJumps(pieces, col + 2, row - 2, jumps));
       }
     } else if (this.player === PLAYER_2) {
       if (is2DArrayDefined(pieces, col - 2, row + 2) && pieces[col - 1][row + 1].player === PLAYER_1 && pieces[col - 2][row + 2] === 'empty') {
-        jumps.push({col: col - 1, row: row + 1});
-        moves.push({col: col - 2, row: row + 2, jumps: jumps});
+        var newJumps = jumps.slice(0);
+        newJumps.push({col: col - 1, row: row + 1});
+        moves.push({col: col - 2, row: row + 2, jumps: newJumps});
         moves = moves.concat(this.calculateJumps(pieces, col - 2, row + 2, jumps));
       }
       if (is2DArrayDefined(pieces, col + 2, row + 2) && pieces[col + 1][row + 1].player === PLAYER_1 && pieces[col + 2][row + 2] === 'empty') {
-        jumps.push({col: col + 1, row: row + 1});
-        moves.push({col: col + 2, row: row + 2, jumps: jumps});
+        var newJumps = jumps.slice(0);
+        newJumps.push({col: col + 1, row: row + 1});
+        moves.push({col: col + 2, row: row + 2, jumps: newJumps});
         moves = moves.concat(this.calculateJumps(pieces, col + 2, row + 2, jumps));
       }
     } else {

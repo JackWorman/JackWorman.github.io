@@ -32,7 +32,7 @@ export default class Piece {
   }
 
   calculateMoves(pieces) {
-    var func = function(pieces, moves, col, row) {
+    var func = function(pieces, moves, col, row) { // TODO: rename to be more descriptive
       if (is2DArrayDefined(pieces, col, row) && pieces[col][row] === 'empty') {
         moves.push({col: col, row: row, jumps: []});
       }
@@ -42,20 +42,10 @@ export default class Piece {
     if (this.player === PLAYER_1 || this.isKing) {
       moves = func(pieces, moves, this.col - 1, this.row - 1);
       moves = func(pieces, moves, this.col + 1, this.row - 1);
-      // if (is2DArrayDefined(pieces, this.col - 1, this.row - 1) && pieces[this.col - 1][this.row - 1] === 'empty') {
-      //   moves.push({col: this.col - 1, row: this.row - 1, jumps: []});
-      // }
-      // if (is2DArrayDefined(pieces, this.col + 1, this.row - 1) && pieces[this.col + 1][this.row - 1] === 'empty') {
-      //   moves.push({col: this.col + 1, row: this.row - 1, jumps: []});
-      // }
     }
     if (this.player === PLAYER_2 || this.isKing) {
-      if (is2DArrayDefined(pieces, this.col - 1, this.row + 1) && pieces[this.col - 1][this.row + 1] === 'empty') {
-        moves.push({col: this.col - 1, row: this.row + 1, jumps: []});
-      }
-      if (is2DArrayDefined(pieces, this.col + 1, this.row + 1) && pieces[this.col + 1][this.row + 1] === 'empty') {
-        moves.push({col: this.col + 1, row: this.row + 1, jumps: []});
-      }
+      moves = func(pieces, moves, this.col - 1, this.row + 1);
+      moves = func(pieces, moves, this.col + 1, this.row + 1);
     }
     moves = moves.concat(this.calculateJumps(pieces, this.col, this.row, []));
     return moves;

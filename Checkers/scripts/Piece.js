@@ -49,7 +49,13 @@ export default class Piece {
     } else {
       throw 'Error: The property \'player\' may only be \'' + PLAYER_1 + '\' or \'' + PLAYER_2 + '\'.';
     }
+    console.log('========================');
+    console.log('Before calculateJumps():');
+    console.log(moves);
     moves.concat(this.calculateJumps(pieces, this.col, this.row, []));
+    console.log('After calculateJumps():');
+    console.log(moves);
+    console.log('========================');
     return moves;
   }
 

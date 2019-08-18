@@ -40,6 +40,7 @@ export default class Board {
       CONTEXT_BOARD.fillStyle = SELECT_COLOR;
       CONTEXT_BOARD.fillRect(selectedCoordinates.col * squareSize, selectedCoordinates.row * squareSize, squareSize, squareSize);
     }
+    console.log('=======================================');
     if (moveCoordinates !== null) {
       for (var i = 0; i < moveCoordinates.length; i++) {
         console.log(moveCoordinates[i]);

@@ -19,6 +19,7 @@ export default class Piece {
     } else {
       throw 'Error: The property \'player\' may only be \'' + PLAYER_1 + '\' or \'' + PLAYER_2 + '\'.';
     }
+    this.isKing = false;
   }
 
   static initialize(canvasSize, squareSize) {
@@ -32,30 +33,23 @@ export default class Piece {
 
   calculateMoves(pieces) {
     var moves = [];
-    if (this.player === PLAYER_1) {
+    if (this.player === PLAYER_1 || this.isKing) {
       if (is2DArrayDefined(pieces, this.col - 1, this.row - 1) && pieces[this.col - 1][this.row - 1] === 'empty') {
         moves.push({col: this.col - 1, row: this.row - 1, jumps: []});
       }
       if (is2DArrayDefined(pieces, this.col + 1, this.row - 1) && pieces[this.col + 1][this.row - 1] === 'empty') {
         moves.push({col: this.col + 1, row: this.row - 1, jumps: []});
       }
-    } else if (this.player === PLAYER_2) {
+    }
+    if (this.player === PLAYER_2 || this.isKing) {
       if (is2DArrayDefined(pieces, this.col - 1, this.row + 1) && pieces[this.col - 1][this.row + 1] === 'empty') {
         moves.push({col: this.col - 1, row: this.row + 1, jumps: []});
       }
       if (is2DArrayDefined(pieces, this.col + 1, this.row + 1) && pieces[this.col + 1][this.row + 1] === 'empty') {
         moves.push({col: this.col + 1, row: this.row + 1, jumps: []});
       }
-    } else {
-      throw 'Error: The property \'player\' may only be \'' + PLAYER_1 + '\' or \'' + PLAYER_2 + '\'.';
     }
-    console.log('========================');
-    console.log('Before calculateJumps():');
-    console.log(moves);
     moves = moves.concat(this.calculateJumps(pieces, this.col, this.row, []));
-    console.log('After calculateJumps():');
-    console.log(moves);
-    console.log('========================');
     return moves;
   }
 
@@ -87,8 +81,6 @@ export default class Piece {
         moves.push({col: col + 2, row: row + 2, jumps: newJumps});
         moves = moves.concat(this.calculateJumps(pieces, col + 2, row + 2, newJumps));
       }
-    } else {
-      throw 'Error: The property \'player\' may only be \'' + PLAYER_1 + '\' or \'' + PLAYER_2 + '\'.';
     }
     return moves;
   }
@@ -108,8 +100,6 @@ export default class Piece {
       CONTEXT_PIECES.fillStyle = PLAYER_1_COLOR;
     } else if (this.player === PLAYER_2) {
       CONTEXT_PIECES.fillStyle = PLAYER_2_COLOR;
-    } else {
-      throw 'Error: The property \'player\' may only be \'' + PLAYER_1 + '\' or \'' + PLAYER_2 + '\'.';
     }
     CONTEXT_PIECES.lineWidth = 5;
     CONTEXT_PIECES.strokeStyle = OUTLINE_COLOR;

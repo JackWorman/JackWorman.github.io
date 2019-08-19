@@ -11,9 +11,9 @@ const SQUARE_SIZE = CANVAS_SIZE / GRID_SIZE;
 const CANVAS_CONTAINER = document.getElementById('canvas-container');
 
 const board = new Board(GRID_SIZE, CANVAS_SIZE);
-const pieces = [];
-const mouseCoordinate = {col: -1, row: -1};
-const selectedCoordinate = {col: -1, row: -1};
+let pieces = [];
+let mouseCoordinate = {col: -1, row: -1};
+let selectedCoordinate = {col: -1, row: -1};
 let moveCoordinates = [];
 let turn = 'player-1';
 

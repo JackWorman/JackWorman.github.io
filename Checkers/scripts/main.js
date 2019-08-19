@@ -19,10 +19,12 @@ const moveCoordinates = [];
 
 onmousemove = function(e) {
   let rect = CANVAS_CONTAINER.getBoundingClientRect();
-  mouseCoordinate = {
-    col: Math.floor((e.clientX - rect.left) / SQUARE_SIZE),
-    row: Math.floor((e.clientY - rect.top) / SQUARE_SIZE)
-  };
+  mouseCoordinate.col = Math.floor((e.clientX - rect.left) / SQUARE_SIZE);
+  mouseCoordinate.row = Math.floor((e.clientY - rect.top) / SQUARE_SIZE);
+  // mouseCoordinate = {
+  //   col: Math.floor((e.clientX - rect.left) / SQUARE_SIZE),
+  //   row: Math.floor((e.clientY - rect.top) / SQUARE_SIZE)
+  // };
   board.render(mouseCoordinate, selectedCoordinate, moveCoordinates);
 }
 

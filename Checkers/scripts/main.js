@@ -12,59 +12,61 @@ const CANVAS_CONTAINER = document.getElementById('canvas-container');
 
 let board = null;
 let pieces = [];
-let mouseCoordinates = {col: -1, row: -1};
-let selectedCoordinates = {col: -1, row: -1};
+let mouseCoordinate = {col: -1, row: -1};
+let selectedCoordinate = {col: -1, row: -1};
 let turn = 'player-1';
 let moveCoordinates = [];
 
 onmousemove = function(e) {
   let rect = CANVAS_CONTAINER.getBoundingClientRect();
-  mouseCoordinates = {
+  mouseCoordinate = {
     col: Math.floor((e.clientX - rect.left) / SQUARE_SIZE),
     row: Math.floor((e.clientY - rect.top) / SQUARE_SIZE)
   };
-  board.render(mouseCoordinates, selectedCoordinates, moveCoordinates);
+  board.render(mouseCoordinate, selectedCoordinate, moveCoordinates);
 }
 
 CANVAS_CONTAINER.addEventListener('click', function() {
-  // Checks if the selectedCoordinates were selected.
-  if (selectedCoordinates.col === mouseCoordinates.col && selectedCoordinates.row === mouseCoordinates.row) {
-    selectedCoordinates = {col: -1, row: -1};
+  // Checks if the selectedCoordinate were selected.
+  if (selectedCoordinate.col === mouseCoordinate.col && selectedCoordinate.row === mouseCoordinate.row) {
+    selectedCoordinate = {col: -1, row: -1};
     moveCoordinates = [];
   } else {
     // Checks if a moveCoordinates were selected.
     for (let i = 0; i < moveCoordinates.length; i++) {
-      if (moveCoordinates[i].col === mouseCoordinates.col && moveCoordinates[i].row === mouseCoordinates.row) {
-        pieces[selectedCoordinates.col][selectedCoordinates.row].col = moveCoordinates[i].col;
-        pieces[selectedCoordinates.col][selectedCoordinates.row].row = moveCoordinates[i].row;
-        pieces[moveCoordinates[i].col][moveCoordinates[i].row] = pieces[selectedCoordinates.col][selectedCoordinates.row];
-        pieces[selectedCoordinates.col][selectedCoordinates.row] = 'empty';
+      if (moveCoordinates[i].col === mouseCoordinate.col && moveCoordinates[i].row === mouseCoordinate.row) {
+        // Moves piece to the moveCoordinates.
+        pieces[selectedCoordinate.col][selectedCoordinate.row].col = moveCoordinates[i].col;
+        pieces[selectedCoordinate.col][selectedCoordinate.row].row = moveCoordinates[i].row;
+        pieces[moveCoordinates[i].col][moveCoordinates[i].row] = pieces[selectedCoordinate.col][selectedCoordinate.row];
+        pieces[selectedCoordinate.col][selectedCoordinate.row] = 'empty';
+        // Removes jumped pieces.
         for (let j = 0; j < moveCoordinates[i].jumps.length; j++) {
           pieces[moveCoordinates[i].jumps[j].col][moveCoordinates[i].jumps[j].row] = 'empty';
         }
-        selectedCoordinates = {col: -1, row: -1};
+        selectedCoordinate = {col: -1, row: -1};
         moveCoordinates = [];
         renderPieces();
-        board.render(mouseCoordinates, selectedCoordinates, moveCoordinates);
+        board.render(mouseCoordinate, selectedCoordinate, moveCoordinates);
         return;
       }
     }
     //
-    selectedCoordinates = {col: mouseCoordinates.col, row: mouseCoordinates.row};
-    if (pieces[selectedCoordinates.col][selectedCoordinates.row] === 'empty') {
+    selectedCoordinate = {col: mouseCoordinate.col, row: mouseCoordinate.row};
+    if (pieces[selectedCoordinate.col][selectedCoordinate.row] === 'empty') {
       moveCoordinates = [];
     } else {
-      moveCoordinates = pieces[selectedCoordinates.col][selectedCoordinates.row].calculateMoves(pieces);
+      moveCoordinates = pieces[selectedCoordinate.col][selectedCoordinate.row].calculateMoves(pieces);
     }
   }
-  board.render(mouseCoordinates, selectedCoordinates, moveCoordinates);
+  board.render(mouseCoordinate, selectedCoordinate, moveCoordinates);
 });
 
 onkeyup = function(e) {
   if (e.keyCode === ESCAPE_KEYCODE) {
-    selectedCoordinates = {col: -1, row: -1};
+    selectedCoordinate = {col: -1, row: -1};
     moveCoordinates = [];
-    board.render(mouseCoordinates, selectedCoordinates, moveCoordinates);
+    board.render(mouseCoordinate, selectedCoordinate, moveCoordinates);
   }
 }
 
@@ -72,7 +74,7 @@ const initializeGame = (function() {
   CANVAS_CONTAINER.style.width = CANVAS_CONTAINER.style.height = (CANVAS_SIZE + 2) + 'px';
   //
   board = new Board(GRID_SIZE, CANVAS_SIZE);
-  board.render(mouseCoordinates, selectedCoordinates, moveCoordinates);
+  board.render(mouseCoordinate, selectedCoordinate, moveCoordinates);
   //
   Piece.initialize(CANVAS_SIZE, SQUARE_SIZE);
   for (let col = 0; col < GRID_SIZE; col++) {

@@ -61,7 +61,6 @@ export default class Piece {
         console.log(newJumps);
         moves.push({col: col + dCol * 2, row: row + dRow * 2, jumps: newJumps});
         moves = moves.concat(piece.calculateJumps(pieces, col + dCol * 2, row + dRow * 2, newJumps));
-
       }
       return moves;
     }

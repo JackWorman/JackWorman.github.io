@@ -52,7 +52,8 @@ CANVAS_CONTAINER.addEventListener('click', function() {
       }
     }
     //
-    selectedCoordinate = {col: mouseCoordinate.col, row: mouseCoordinate.row};
+    selectedCoordinate.col = mouseCoordinate.col;
+    selectedCoordinate.row = mouseCoordinate.row;
     if (pieces[selectedCoordinate.col][selectedCoordinate.row] === 'empty') {
       moveCoordinates = [];
     } else {

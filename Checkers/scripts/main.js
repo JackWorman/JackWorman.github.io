@@ -43,7 +43,8 @@ CANVAS_CONTAINER.addEventListener('click', function() {
         for (let j = 0; j < moveCoordinates[i].jumps.length; j++) {
           pieces[moveCoordinates[i].jumps[j].col][moveCoordinates[i].jumps[j].row] = 'empty';
         }
-        selectedCoordinate = {col: -1, row: -1};
+        selectedCoordinate.col = -1;
+        selectedCoordinate.row = -1;
         moveCoordinates = [];
         renderPieces();
         board.render(mouseCoordinate, selectedCoordinate, moveCoordinates);

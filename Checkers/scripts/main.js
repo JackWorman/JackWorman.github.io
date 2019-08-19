@@ -57,7 +57,7 @@ CANVAS_CONTAINER.addEventListener('click', function() {
     if (pieces[selectedCoordinate.col][selectedCoordinate.row] === 'empty') {
       moveCoordinates = [];
     } else {
-      moveCoordinates = pieces[selectedCoordinate.col][selectedCoordinate.row].calculateMoves(pieces);
+      moveCoordinates.from(pieces[selectedCoordinate.col][selectedCoordinate.row].calculateMoves(pieces));
     }
   }
   board.render(mouseCoordinate, selectedCoordinate, moveCoordinates);
@@ -74,7 +74,6 @@ onkeyup = function(e) {
 const initializeGame = (function() {
   CANVAS_CONTAINER.style.width = CANVAS_CONTAINER.style.height = (CANVAS_SIZE + 2) + 'px';
   //
-
   board.render(mouseCoordinate, selectedCoordinate, moveCoordinates);
   //
   Piece.initialize(CANVAS_SIZE, SQUARE_SIZE);

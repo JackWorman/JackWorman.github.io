@@ -14,7 +14,7 @@ const board = new Board(GRID_SIZE, CANVAS_SIZE);
 const pieces = [];
 const mouseCoordinate = {col: -1, row: -1};
 const selectedCoordinate = {col: -1, row: -1};
-const moveCoordinates = [];
+let moveCoordinates = [];
 let turn = 'player-1';
 
 onmousemove = function(e) {
@@ -57,7 +57,7 @@ CANVAS_CONTAINER.addEventListener('click', function() {
     if (pieces[selectedCoordinate.col][selectedCoordinate.row] === 'empty') {
       moveCoordinates = [];
     } else {
-      moveCoordinates.from(pieces[selectedCoordinate.col][selectedCoordinate.row].calculateMoves(pieces));
+      moveCoordinates = pieces[selectedCoordinate.col][selectedCoordinate.row].calculateMoves(pieces);
     }
   }
   board.render(mouseCoordinate, selectedCoordinate, moveCoordinates);

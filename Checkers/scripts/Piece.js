@@ -56,10 +56,10 @@ export default class Piece {
       if (is2DArrayDefined(pieces, col + dCol * 2, row + dRow * 2)
         && ((piece.player === PLAYER_1 && pieces[col + dCol][row + dRow].player === PLAYER_2) || (piece.player === PLAYER_2 && pieces[col + dCol][row + dRow].player === PLAYER_1))
         && pieces[col + dCol * 2][row + dRow * 2] === 'empty') {
-        let newJumps = jumps.slice(0);
-        newJumps.push({col: col + dCol, row: row + dRow});
-        moves.push({col: col + dCol * 2, row: row + dRow * 2, jumps: newJumps});
-        moves = moves.concat(piece.calculateJumps(pieces, col + dCol * 2, row + dRow * 2, newJumps));
+        // let newJumps = jumps.slice(0);
+        jumps.push({col: col + dCol, row: row + dRow});
+        moves.push({col: col + dCol * 2, row: row + dRow * 2, jumps: jumps});
+        moves = moves.concat(piece.calculateJumps(pieces, col + dCol * 2, row + dRow * 2, jumps));
       }
       return moves;
     }

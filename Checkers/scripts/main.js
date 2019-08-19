@@ -21,17 +21,14 @@ onmousemove = function(e) {
   let rect = CANVAS_CONTAINER.getBoundingClientRect();
   mouseCoordinate.col = Math.floor((e.clientX - rect.left) / SQUARE_SIZE);
   mouseCoordinate.row = Math.floor((e.clientY - rect.top) / SQUARE_SIZE);
-  // mouseCoordinate = {
-  //   col: Math.floor((e.clientX - rect.left) / SQUARE_SIZE),
-  //   row: Math.floor((e.clientY - rect.top) / SQUARE_SIZE)
-  // };
   board.render(mouseCoordinate, selectedCoordinate, moveCoordinates);
 }
 
 CANVAS_CONTAINER.addEventListener('click', function() {
   // Checks if the selectedCoordinate were selected.
   if (selectedCoordinate.col === mouseCoordinate.col && selectedCoordinate.row === mouseCoordinate.row) {
-    selectedCoordinate = {col: -1, row: -1};
+    mouseCoordinate.col = -1;
+    mouseCoordinate.row = -1;
     moveCoordinates = [];
   } else {
     // Checks if a moveCoordinates were selected.

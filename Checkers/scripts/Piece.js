@@ -58,7 +58,6 @@ export default class Piece {
         && pieces[col + dCol * 2][row + dRow * 2] === 'empty') {
         let newJumps = jumps.slice(0);
         newJumps.push({col: col + dCol, row: row + dRow});
-        console.log(newJumps);
         moves.push({col: col + dCol * 2, row: row + dRow * 2, jumps: newJumps});
         moves = moves.concat(piece.calculateJumps(pieces, col + dCol * 2, row + dRow * 2, newJumps));
       }

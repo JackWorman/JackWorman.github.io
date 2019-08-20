@@ -27,8 +27,8 @@ onmousemove = function(e) {
 CANVAS_CONTAINER.addEventListener('click', function() {
   // Checks if the selectedCoordinate were selected.
   if (selectedCoordinate.col === mouseCoordinate.col && selectedCoordinate.row === mouseCoordinate.row) {
-    mouseCoordinate.col = -1;
-    mouseCoordinate.row = -1;
+    selectedCoordinate.col = -1;
+    selectedCoordinate.row = -1;
     moveCoordinates = [];
   } else {
     // Checks if a moveCoordinates were selected.

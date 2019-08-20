@@ -32,18 +32,16 @@ CANVAS_CONTAINER.addEventListener('click', function() {
     moveCoordinates = [];
   } else {
     // Checks if a moveCoordinates were selected.
-    for (let i in moveCoordinates) {
-    // for (let i = 0; i < moveCoordinates.length; i++) {
-      if (moveCoordinates[i].col === mouseCoordinate.col && moveCoordinates[i].row === mouseCoordinate.row) {
+    for (const moveCoordinate of moveCoordinates) {
+      if (moveCoordinate.col === mouseCoordinate.col && moveCoordinate.row === mouseCoordinate.row) {
         // Moves piece to the moveCoordinates.
-        pieces[selectedCoordinate.col][selectedCoordinate.row].col = moveCoordinates[i].col;
-        pieces[selectedCoordinate.col][selectedCoordinate.row].row = moveCoordinates[i].row;
-        pieces[moveCoordinates[i].col][moveCoordinates[i].row] = pieces[selectedCoordinate.col][selectedCoordinate.row];
+        pieces[selectedCoordinate.col][selectedCoordinate.row].col = moveCoordinate.col;
+        pieces[selectedCoordinate.col][selectedCoordinate.row].row = moveCoordinate.row;
+        pieces[moveCoordinate.col][moveCoordinate.row] = pieces[selectedCoordinate.col][selectedCoordinate.row];
         pieces[selectedCoordinate.col][selectedCoordinate.row] = 'empty';
         // Removes jumped pieces.
-        for (let j in moveCoordinates[i].jumps) {
-        // for (let j = 0; j < moveCoordinates[i].jumps.length; j++) {
-          pieces[moveCoordinates[i].jumps[j].col][moveCoordinates[i].jumps[j].row] = 'empty';
+        for (let j in moveCoordinate.jumps) {
+          pieces[moveCoordinate.jumps[j].col][moveCoordinate.jumps[j].row] = 'empty';
         }
         selectedCoordinate.col = -1;
         selectedCoordinate.row = -1;
@@ -75,9 +73,7 @@ onkeyup = function(e) {
 
 const initializeGame = (function() {
   CANVAS_CONTAINER.style.width = CANVAS_CONTAINER.style.height = (CANVAS_SIZE + 2) + 'px';
-  //
   board.render(mouseCoordinate, selectedCoordinate, moveCoordinates);
-  //
   Piece.initialize(CANVAS_SIZE, SQUARE_SIZE);
   for (let col = 0; col < GRID_SIZE; col++) {
     pieces.push([]);
@@ -85,25 +81,22 @@ const initializeGame = (function() {
       pieces[col].push('empty');
     }
   }
-  // Creates player-1's pieces
+  // Creates player-1's pieces.
   for (let col = 0; col < GRID_SIZE; col++) {
     for (let row = 5; row < 8; row++) {
       if ((col % 2 !== 0 && row % 2 === 0) || (col % 2 === 0 && row % 2 !== 0)) {
-        let piece = new Piece(col, row, 'player-1');
-        pieces[col][row] = piece;
+        pieces[col][row] = new Piece(col, row, 'player-1');
       }
     }
   }
-  // Creates player-2's pieces
+  // Creates player-2's pieces.
   for (let col = 0; col < GRID_SIZE; col++) {
     for (let row = 0; row < 3; row++) {
       if ((col % 2 !== 0 && row % 2 === 0) || (col % 2 === 0 && row % 2 !== 0)) {
-        let piece = new Piece(col, row, 'player-2');
-        pieces[col][row] = piece;
+        pieces[col][row] = new Piece(col, row, 'player-2');
       }
     }
   }
-  //
   renderPieces();
 })();
 

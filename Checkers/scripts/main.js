@@ -40,7 +40,7 @@ CANVAS_CONTAINER.addEventListener('click', function() {
         pieces[moveCoordinate.col][moveCoordinate.row] = pieces[selectedCoordinate.col][selectedCoordinate.row];
         pieces[selectedCoordinate.col][selectedCoordinate.row] = 'empty';
         // Removes jumped pieces.
-        for (const jump in moveCoordinate.jumps) {
+        for (const jump of moveCoordinate.jumps) {
           pieces[jump.col][jump.row] = 'empty';
         }
         selectedCoordinate.col = -1;

@@ -40,9 +40,10 @@ CANVAS_CONTAINER.addEventListener('click', function() {
         pieces[moveCoordinate.col][moveCoordinate.row] = pieces[selectedCoordinate.col][selectedCoordinate.row];
         pieces[selectedCoordinate.col][selectedCoordinate.row] = 'empty';
         // Checks if the piece becomes a king.
-        if (selectedCoordinate.row === 0 && pieces[selectedCoordinate.col][selectedCoordinate.row].player === 'player-1'
-          || selectedCoordinate.row === 7 && pieces[selectedCoordinate.col][selectedCoordinate.row].player === 'player-2') {
-          pieces[selectedCoordinate.col][selectedCoordinate.row].isKing = true;
+        if (moveCoordinate.row === 0 && pieces[moveCoordinate.col][moveCoordinate.row].player === 'player-1'
+          || moveCoordinate.row === 7 && pieces[moveCoordinate.col][moveCoordinate.row].player === 'player-2') {
+          pieces[moveCoordinate.col][moveCoordinate.row].isKing = true;
+          console.log(pieces[moveCoordinate.col][moveCoordinate.row]);
         }
         // Removes jumped pieces.
         for (const jump of moveCoordinate.jumps) {

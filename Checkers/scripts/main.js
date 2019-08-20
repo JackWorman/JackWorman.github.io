@@ -37,6 +37,7 @@ CANVAS_CONTAINER.addEventListener('click', function() {
         // Moves piece to the moveCoordinates.
         pieces[selectedCoordinate.col][selectedCoordinate.row].col = moveCoordinate.col;
         pieces[selectedCoordinate.col][selectedCoordinate.row].row = moveCoordinate.row;
+        // Checks if the piece becomes a king.
         if (selectedCoordinate.row === 0 && pieces[selectedCoordinate.col][selectedCoordinate.row].player === 'player-1'
           || selectedCoordinate.row === 7 && pieces[selectedCoordinate.col][selectedCoordinate.row].player === 'player-2') {
           pieces[selectedCoordinate.col][selectedCoordinate.row].isKing = true;

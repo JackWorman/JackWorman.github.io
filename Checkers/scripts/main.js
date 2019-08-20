@@ -32,7 +32,8 @@ CANVAS_CONTAINER.addEventListener('click', function() {
     moveCoordinates = [];
   } else {
     // Checks if a moveCoordinates were selected.
-    for (let i = 0; i < moveCoordinates.length; i++) {
+    for (let i in moveCoordinates) {
+    // for (let i = 0; i < moveCoordinates.length; i++) {
       if (moveCoordinates[i].col === mouseCoordinate.col && moveCoordinates[i].row === mouseCoordinate.row) {
         // Moves piece to the moveCoordinates.
         pieces[selectedCoordinate.col][selectedCoordinate.row].col = moveCoordinates[i].col;
@@ -40,7 +41,8 @@ CANVAS_CONTAINER.addEventListener('click', function() {
         pieces[moveCoordinates[i].col][moveCoordinates[i].row] = pieces[selectedCoordinate.col][selectedCoordinate.row];
         pieces[selectedCoordinate.col][selectedCoordinate.row] = 'empty';
         // Removes jumped pieces.
-        for (let j = 0; j < moveCoordinates[i].jumps.length; j++) {
+        for (let j in moveCoordinates[i].jumps) {
+        // for (let j = 0; j < moveCoordinates[i].jumps.length; j++) {
           pieces[moveCoordinates[i].jumps[j].col][moveCoordinates[i].jumps[j].row] = 'empty';
         }
         selectedCoordinate.col = -1;
@@ -51,7 +53,7 @@ CANVAS_CONTAINER.addEventListener('click', function() {
         return;
       }
     }
-    //
+    // Check if a piece was selected.
     selectedCoordinate.col = mouseCoordinate.col;
     selectedCoordinate.row = mouseCoordinate.row;
     if (pieces[selectedCoordinate.col][selectedCoordinate.row] === 'empty') {

@@ -32,7 +32,7 @@ export default class Piece {
   }
 
   calculateMoves(pieces) {
-    const calculateMove = function(pieces, moves, col, row) { // TODO: rename to be more descriptive
+    const calculateMove = function(pieces, moves, col, row) {
       if (is2DArrayDefined(pieces, col, row) && pieces[col][row] === 'empty') {
         moves.push({col: col, row: row, jumps: []});
       }
@@ -56,7 +56,7 @@ export default class Piece {
       if (is2DArrayDefined(pieces, col + dCol * 2, row + dRow * 2)
         && ((piece.player === PLAYER_1 && pieces[col + dCol][row + dRow].player === PLAYER_2) || (piece.player === PLAYER_2 && pieces[col + dCol][row + dRow].player === PLAYER_1))
         && pieces[col + dCol * 2][row + dRow * 2] === 'empty') {
-        let jumpsCopy = jumps.slice(0);
+        const jumpsCopy = jumps.slice(0);
         jumpsCopy.push({col: col + dCol, row: row + dRow});
         moves.push({col: col + dCol * 2, row: row + dRow * 2, jumps: jumpsCopy});
         moves = moves.concat(piece.calculateJumps(pieces, col + dCol * 2, row + dRow * 2, jumpsCopy));

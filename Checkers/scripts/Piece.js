@@ -91,10 +91,13 @@ export default class Piece {
     } else if (this.player === PLAYER_2) {
       CONTEXT_PIECES.fillStyle = PLAYER_2_COLOR;
     }
+    CONTEXT_PIECES.fill();
     CONTEXT_PIECES.lineWidth = 5;
     CONTEXT_PIECES.strokeStyle = OUTLINE_COLOR;
     CONTEXT_PIECES.stroke();
-    CONTEXT_PIECES.fill();
+    if (this.isKing) {
+
+    }
   }
 }
 

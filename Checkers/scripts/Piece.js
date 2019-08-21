@@ -15,7 +15,7 @@ export default class Piece {
     this.col = col;
     this.row = row;
     if (player === PLAYER_1 || player === PLAYER_2) {
-      Object.defineProperty(this, "player", {value: player, configurable: false, writable: false});
+      Object.defineProperty(this, 'player', {value: player, configurable: false, writable: false});
     } else {
       throw 'Error: The property \'player\' may only be \'' + PLAYER_1 + '\' or \'' + PLAYER_2 + '\'.';
     }
@@ -32,7 +32,7 @@ export default class Piece {
   }
 
   calculateMoves(pieces) {
-    const func = function(pieces, moves, col, row) { // TODO: rename to be more descriptive
+    const calculateMove = function(pieces, moves, col, row) { // TODO: rename to be more descriptive
       if (is2DArrayDefined(pieces, col, row) && pieces[col][row] === 'empty') {
         moves.push({col: col, row: row, jumps: []});
       }
@@ -40,37 +40,37 @@ export default class Piece {
     }
     let moves = [];
     if (this.player === PLAYER_1 || this.isKing) {
-      moves = func(pieces, moves, this.col - 1, this.row - 1);
-      moves = func(pieces, moves, this.col + 1, this.row - 1);
+      moves = calculateMove(pieces, moves, this.col - 1, this.row - 1);
+      moves = calculateMove(pieces, moves, this.col + 1, this.row - 1);
     }
     if (this.player === PLAYER_2 || this.isKing) {
-      moves = func(pieces, moves, this.col - 1, this.row + 1);
-      moves = func(pieces, moves, this.col + 1, this.row + 1);
+      moves = calculateMove(pieces, moves, this.col - 1, this.row + 1);
+      moves = calculateMove(pieces, moves, this.col + 1, this.row + 1);
     }
     moves = moves.concat(this.calculateJumps(pieces, this.col, this.row, []));
     return moves;
   }
 
   calculateJumps(pieces, col, row, jumps) {
-    const func2 = function(pieces, col, row, dCol, dRow, moves, jumps, piece) {
+    const calculateJump = function(pieces, col, row, dCol, dRow, moves, jumps, piece) {
       if (is2DArrayDefined(pieces, col + dCol * 2, row + dRow * 2)
         && ((piece.player === PLAYER_1 && pieces[col + dCol][row + dRow].player === PLAYER_2) || (piece.player === PLAYER_2 && pieces[col + dCol][row + dRow].player === PLAYER_1))
         && pieces[col + dCol * 2][row + dRow * 2] === 'empty') {
-        let newJumps = jumps.slice(0);
-        newJumps.push({col: col + dCol, row: row + dRow});
-        moves.push({col: col + dCol * 2, row: row + dRow * 2, jumps: newJumps});
-        moves = moves.concat(piece.calculateJumps(pieces, col + dCol * 2, row + dRow * 2, newJumps));
+        let jumpsCopy = jumps.slice(0);
+        jumpsCopy.push({col: col + dCol, row: row + dRow});
+        moves.push({col: col + dCol * 2, row: row + dRow * 2, jumps: jumpsCopy});
+        moves = moves.concat(piece.calculateJumps(pieces, col + dCol * 2, row + dRow * 2, jumpsCopy));
       }
       return moves;
     }
     let moves = [];
     if (this.player === PLAYER_1 || this.isKing) {
-      moves = func2(pieces, col, row, -1, -1, moves, jumps, this);
-      moves = func2(pieces, col, row, 1, -1, moves, jumps, this);
+      moves = calculateJump(pieces, col, row, -1, -1, moves, jumps, this);
+      moves = calculateJump(pieces, col, row, 1, -1, moves, jumps, this);
     }
     if (this.player === PLAYER_2 || this.isKing) {
-      moves = func2(pieces, col, row, -1, 1, moves, jumps, this);
-      moves = func2(pieces, col, row, 1, 1, moves, jumps, this);
+      moves = calculateJump(pieces, col, row, -1, 1, moves, jumps, this);
+      moves = calculateJump(pieces, col, row, 1, 1, moves, jumps, this);
     }
     return moves;
   }

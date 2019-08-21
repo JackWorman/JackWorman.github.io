@@ -92,7 +92,7 @@ export default class Piece {
       CONTEXT_PIECES.fillStyle = PLAYER_2_COLOR;
     }
     CONTEXT_PIECES.fill();
-    CONTEXT_PIECES.lineWidth = 5;
+    CONTEXT_PIECES.lineWidth = 3;
     CONTEXT_PIECES.strokeStyle = OUTLINE_COLOR;
     CONTEXT_PIECES.stroke();
     if (this.isKing) {

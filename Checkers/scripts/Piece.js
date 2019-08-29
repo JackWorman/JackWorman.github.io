@@ -116,8 +116,10 @@ export default class Piece {
       CONTEXT_PIECES.lineTo(centerX - x, centerY + y);
       CONTEXT_PIECES.lineTo(centerX - x, centerY - y);
       CONTEXT_PIECES.closePath();
+      CONTEXT_PIECES.fillStyle = KING_COLOR;
+      CONTEXT_PIECES.fill();
       CONTEXT_PIECES.lineWidth = 3;
-      CONTEXT_PIECES.strokeStyle = KING_COLOR;
+      CONTEXT_PIECES.strokeStyle = 'rgb(0, 0, 0)';
       CONTEXT_PIECES.stroke();
     }
   }

@@ -53,6 +53,11 @@ export default class Piece {
 
   calculateJumps(pieces, col, row, jumps) {
     const calculateJump = function(pieces, col, row, dCol, dRow, moves, jumps, piece) {
+      for (const jump of jumps) {
+        if (jump.col === col + dCol && jump.row === row + dRow) {
+          return moves;
+        }
+      }
       if (is2DArrayDefined(pieces, col + dCol * 2, row + dRow * 2)
         && ((piece.player === PLAYER_1 && pieces[col + dCol][row + dRow].player === PLAYER_2) || (piece.player === PLAYER_2 && pieces[col + dCol][row + dRow].player === PLAYER_1))
         && pieces[col + dCol * 2][row + dRow * 2] === 'empty') {

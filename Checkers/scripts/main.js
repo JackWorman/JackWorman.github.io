@@ -113,6 +113,7 @@ function renderPieces() {
   for (let col = 0; col < GRID_SIZE; col++) {
     for (let row = 0; row < GRID_SIZE; row++) {
       if (pieces[col][row] !== 'empty') {
+        console.log(col + " " + row);
         pieces[col][row].render();
       }
     }

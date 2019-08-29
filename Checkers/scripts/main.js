@@ -53,6 +53,12 @@ CANVAS_CONTAINER.addEventListener('click', function() {
         moveCoordinates = [];
         renderPieces();
         board.render(mouseCoordinate, selectedCoordinate, moveCoordinates);
+        // Change the turn.
+        if (turn === PLAYER_1) {
+          turn = PLAYER_2;
+        } else if (turn === PLAYER_2) {
+          turn = PLAYER_1;
+        }
         return;
       }
     }

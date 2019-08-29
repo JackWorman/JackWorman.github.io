@@ -13,8 +13,8 @@ const CANVAS_CONTAINER = document.getElementById('canvas-container');
 
 const board = new Board(GRID_SIZE, CANVAS_SIZE);
 let pieces = [];
-let mouseCoordinate = {col: null, row: null};
-let selectedCoordinate = {col: null, row: null};
+let mouseCoordinate = {col: 'undefined', row: 'undefined'};
+let selectedCoordinate = {col: 'undefined', row: 'undefined'};
 let moveCoordinates = [];
 let turn = PLAYER_1;
 
@@ -28,8 +28,8 @@ onmousemove = function(e) {
 CANVAS_CONTAINER.addEventListener('click', function() {
   // Checks if the selectedCoordinate were selected.
   if (selectedCoordinate.col === mouseCoordinate.col && selectedCoordinate.row === mouseCoordinate.row) {
-    selectedCoordinate.col = null;
-    selectedCoordinate.row = null;
+    selectedCoordinate.col = 'undefined';
+    selectedCoordinate.row = 'undefined';
     moveCoordinates = [];
   } else {
     // Checks if a moveCoordinate was selected.
@@ -48,8 +48,8 @@ CANVAS_CONTAINER.addEventListener('click', function() {
         for (const jump of moveCoordinate.jumps) {
           pieces[jump.col][jump.row] = 'empty';
         }
-        selectedCoordinate.col = null;
-        selectedCoordinate.row = null;
+        selectedCoordinate.col = 'undefined';
+        selectedCoordinate.row = 'undefined';
         moveCoordinates = [];
         renderPieces();
         board.render(mouseCoordinate, selectedCoordinate, moveCoordinates);
@@ -77,7 +77,7 @@ CANVAS_CONTAINER.addEventListener('click', function() {
 
 onkeyup = function(e) {
   if (e.keyCode === ESCAPE_KEYCODE) {
-    selectedCoordinate = {col: null, row: null};
+    selectedCoordinate = {col: 'undefined', row: 'undefined'};
     moveCoordinates = [];
     board.render(mouseCoordinate, selectedCoordinate, moveCoordinates);
   }

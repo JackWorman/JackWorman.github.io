@@ -31,12 +31,12 @@ export default class Board {
       }
     }
     // Draws highlighted square.
-    if (mouseCoordinate !== null) {
+    if (mouseCoordinate !== 'undefined') {
       CONTEXT_BOARD.fillStyle = HIGHLIGHT_COLOR;
       CONTEXT_BOARD.fillRect(mouseCoordinate.col * squareSize, mouseCoordinate.row * squareSize, squareSize, squareSize);
     }
     // Draws selected square.
-    if (selectedCoordinate !== null) {
+    if (selectedCoordinate !== 'undefined') {
       CONTEXT_BOARD.fillStyle = SELECT_COLOR;
       CONTEXT_BOARD.fillRect(selectedCoordinate.col * squareSize, selectedCoordinate.row * squareSize, squareSize, squareSize);
     }

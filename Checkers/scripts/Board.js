@@ -41,8 +41,8 @@ export default class Board {
       CONTEXT_BOARD.fillRect(selectedCoordinate.col * squareSize, selectedCoordinate.row * squareSize, squareSize, squareSize);
     }
     // Draws move squares.
+    CONTEXT_BOARD.fillStyle = MOVE_COLOR;
     for (const moveCoordinate of moveCoordinates) {
-      CONTEXT_BOARD.fillStyle = MOVE_COLOR;
       CONTEXT_BOARD.fillRect(moveCoordinate.col * squareSize, moveCoordinate.row * squareSize, squareSize, squareSize);
     }
   }

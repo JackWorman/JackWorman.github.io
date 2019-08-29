@@ -28,16 +28,14 @@ onmousemove = function(e) {
 CANVAS_CONTAINER.addEventListener('click', function() {
   // Checks if the selectedCoordinate were selected.
   if (selectedCoordinate.col === mouseCoordinate.col && selectedCoordinate.row === mouseCoordinate.row) {
-    selectedCoordinate.col = 'undefined';
-    selectedCoordinate.row = 'undefined';
+    selectedCoordinate = {col: 'undefined', row: 'undefined'};
     moveCoordinates = [];
   } else {
     // Checks if a moveCoordinate was selected.
     for (const moveCoordinate of moveCoordinates) {
       if (moveCoordinate.col === mouseCoordinate.col && moveCoordinate.row === mouseCoordinate.row) {
         // Moves piece to the moveCoordinates.
-        pieces[selectedCoordinate.col][selectedCoordinate.row].col = moveCoordinate.col;
-        pieces[selectedCoordinate.col][selectedCoordinate.row].row = moveCoordinate.row;
+        pieces[selectedCoordinate.col][selectedCoordinate.row] = {col: moveCoordinate.col, row: moveCoordinate.row};
         pieces[moveCoordinate.col][moveCoordinate.row] = pieces[selectedCoordinate.col][selectedCoordinate.row];
         pieces[selectedCoordinate.col][selectedCoordinate.row] = 'empty';
         // Checks if the piece becomes a king.
@@ -48,8 +46,7 @@ CANVAS_CONTAINER.addEventListener('click', function() {
         for (const jump of moveCoordinate.jumps) {
           pieces[jump.col][jump.row] = 'empty';
         }
-        selectedCoordinate.col = 'undefined';
-        selectedCoordinate.row = 'undefined';
+        selectedCoordinate = {col: 'undefined', row: 'undefined'};
         moveCoordinates = [];
         renderPieces();
         board.render(mouseCoordinate, selectedCoordinate, moveCoordinates);
@@ -63,8 +60,7 @@ CANVAS_CONTAINER.addEventListener('click', function() {
       }
     }
     // Check if a piece was selected.
-    selectedCoordinate.col = mouseCoordinate.col;
-    selectedCoordinate.row = mouseCoordinate.row;
+    selectedCoordinate = {col: mouseCoordinate.col, row:  mouseCoordinate.row};
     if (pieces[selectedCoordinate.col][selectedCoordinate.row] !== 'empty'
       && pieces[selectedCoordinate.col][selectedCoordinate.row].player === turn) {
       moveCoordinates = pieces[selectedCoordinate.col][selectedCoordinate.row].calculateMoves(pieces);

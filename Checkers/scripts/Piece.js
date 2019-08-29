@@ -54,6 +54,7 @@ export default class Piece {
 
   calculateJumps(pieces, col, row, jumps) {
     const calculateJump = function(pieces, col, row, dCol, dRow, moves, jumps, piece) {
+      // Stops repeat jumps.
       for (const jump of jumps) {
         if (jump.col === col + dCol && jump.row === row + dRow) {
           return moves;

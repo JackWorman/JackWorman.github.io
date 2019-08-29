@@ -104,8 +104,8 @@ export default class Piece {
     if (this.isKing) {
       let centerX = (this.col + 0.5) * Piece.squareSize;
       let centerY = (this.row + 0.5) * Piece.squareSize;
-      let x = 0.25 * Piece.squareSize;
-      let y = 0.25 * Piece.squareSize;
+      let x = 0.2 * Piece.squareSize;
+      let y = 0.2 * Piece.squareSize;
       CONTEXT_PIECES.beginPath();
       CONTEXT_PIECES.moveTo(centerX - x, centerY - y);
       CONTEXT_PIECES.lineTo(centerX - 0.5 * x, centerY);

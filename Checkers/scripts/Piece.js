@@ -101,7 +101,10 @@ export default class Piece {
     CONTEXT_PIECES.strokeStyle = OUTLINE_COLOR;
     CONTEXT_PIECES.stroke();
     if (this.isKing) {
-
+      CONTEXT_PIECES.font = "30px Comic Sans MS";
+      CONTEXT_PIECES.fillStyle = "red";
+      CONTEXT_PIECES.textAlign = "center";
+      CONTEXT_PIECES.fillText("KING", (this.col + 0.5) * Piece.squareSize,   (this.row + 0.5) * Piece.squareSize); 
     }
   }
 }

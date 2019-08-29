@@ -107,8 +107,8 @@ export default class Piece {
       // CONTEXT_PIECES.fillText('KING', (this.col + 0.5) * Piece.squareSize, (this.row + 0.5) * Piece.squareSize);
       let centerX = (this.col + 0.5) * Piece.squareSize;
       let centerY = (this.row + 0.5) * Piece.squareSize;
-      let x = 50;
-      let y = 50;
+      let x = 10;
+      let y = 10;
       CONTEXT_PIECES.beginPath();
       CONTEXT_PIECES.moveTo(centerX - x, centerY - y);
       CONTEXT_PIECES.lineTo(centerX - 0.5 * x, centerY);

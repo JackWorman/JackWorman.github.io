@@ -85,7 +85,7 @@ export default class Piece {
     CONTEXT_PIECES.arc(
       (this.col + 0.5) * Piece.squareSize,
       (this.row + 0.5) * Piece.squareSize,
-      Piece.squareSize / 2 * 0.85,
+      0.85 * Piece.squareSize / 2,
       0,
       2 * Math.PI,
       false

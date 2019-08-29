@@ -101,10 +101,6 @@ export default class Piece {
     CONTEXT_PIECES.strokeStyle = OUTLINE_COLOR;
     CONTEXT_PIECES.stroke();
     if (this.isKing) {
-      // CONTEXT_PIECES.font = '20px Comic Sans MS';
-      // CONTEXT_PIECES.fillStyle = 'rgb(0, 0, 0)';
-      // CONTEXT_PIECES.textAlign = 'center';
-      // CONTEXT_PIECES.fillText('KING', (this.col + 0.5) * Piece.squareSize, (this.row + 0.5) * Piece.squareSize);
       let centerX = (this.col + 0.5) * Piece.squareSize;
       let centerY = (this.row + 0.5) * Piece.squareSize;
       let x = 20;
@@ -120,7 +116,7 @@ export default class Piece {
       CONTEXT_PIECES.lineTo(centerX - x, centerY - y);
       CONTEXT_PIECES.closePath();
       CONTEXT_PIECES.lineWidth = 3;
-      CONTEXT_PIECES.strokeStyle = 'rgb(0, 0, 0)';
+      CONTEXT_PIECES.strokeStyle = 'rgb(255, 215, 0)';
       CONTEXT_PIECES.stroke();
     }
   }

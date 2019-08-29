@@ -13,8 +13,8 @@ const CANVAS_CONTAINER = document.getElementById('canvas-container');
 
 const board = new Board(GRID_SIZE, CANVAS_SIZE);
 let pieces = [];
-let mouseCoordinate = {col: -1, row: -1};
-let selectedCoordinate = {col: -1, row: -1};
+let mouseCoordinate = {col: null, row: null};
+let selectedCoordinate = {col: null, row: null};
 let moveCoordinates = [];
 let turn = PLAYER_1;
 
@@ -28,11 +28,11 @@ onmousemove = function(e) {
 CANVAS_CONTAINER.addEventListener('click', function() {
   // Checks if the selectedCoordinate were selected.
   if (selectedCoordinate.col === mouseCoordinate.col && selectedCoordinate.row === mouseCoordinate.row) {
-    selectedCoordinate.col = -1;
-    selectedCoordinate.row = -1;
+    selectedCoordinate.col = null;
+    selectedCoordinate.row = null;
     moveCoordinates = [];
   } else {
-    // Checks if a moveCoordinates were selected.
+    // Checks if a moveCoordinate was selected.
     for (const moveCoordinate of moveCoordinates) {
       if (moveCoordinate.col === mouseCoordinate.col && moveCoordinate.row === mouseCoordinate.row) {
         // Moves piece to the moveCoordinates.
@@ -41,15 +41,15 @@ CANVAS_CONTAINER.addEventListener('click', function() {
         pieces[moveCoordinate.col][moveCoordinate.row] = pieces[selectedCoordinate.col][selectedCoordinate.row];
         pieces[selectedCoordinate.col][selectedCoordinate.row] = 'empty';
         // Checks if the piece becomes a king.
-        if (moveCoordinate.row === 0 || moveCoordinate.row === 7) {
+        if (moveCoordinate.row === 0 || moveCoordinate.row === GRID_SIZE - 1) {
           pieces[moveCoordinate.col][moveCoordinate.row].isKing = true;
         }
         // Removes jumped pieces.
         for (const jump of moveCoordinate.jumps) {
           pieces[jump.col][jump.row] = 'empty';
         }
-        selectedCoordinate.col = -1;
-        selectedCoordinate.row = -1;
+        selectedCoordinate.col = null;
+        selectedCoordinate.row = null;
         moveCoordinates = [];
         renderPieces();
         board.render(mouseCoordinate, selectedCoordinate, moveCoordinates);
@@ -77,7 +77,7 @@ CANVAS_CONTAINER.addEventListener('click', function() {
 
 onkeyup = function(e) {
   if (e.keyCode === ESCAPE_KEYCODE) {
-    selectedCoordinate = {col: -1, row: -1};
+    selectedCoordinate = {col: null, row: null};
     moveCoordinates = [];
     board.render(mouseCoordinate, selectedCoordinate, moveCoordinates);
   }

@@ -114,7 +114,7 @@ export default class Piece {
       CONTEXT_PIECES.lineTo(centerX + x, centerY - y);
       CONTEXT_PIECES.lineTo(centerX + x, centerY + y);
       CONTEXT_PIECES.lineTo(centerX - x, centerY + y);
-      CONTEXT_PIECES.lineTo(centerX - x, centerY - y);
+      // CONTEXT_PIECES.lineTo(centerX - x, centerY - y);
       CONTEXT_PIECES.closePath();
       CONTEXT_PIECES.fillStyle = KING_COLOR;
       CONTEXT_PIECES.fill();

@@ -2,6 +2,7 @@
 
 import Board from './Board.js';
 import Piece from './Piece.js';
+import {PLAYER_1, PLAYER_2} from './Piece.js';
 
 const ESCAPE_KEYCODE = 27;
 const CANVAS_SIZE = 800; // in pixels
@@ -15,7 +16,7 @@ let pieces = [];
 let mouseCoordinate = {col: -1, row: -1};
 let selectedCoordinate = {col: -1, row: -1};
 let moveCoordinates = [];
-let turn = 'player-1';
+let turn = PLAYER_1;
 
 onmousemove = function(e) {
   let rect = CANVAS_CONTAINER.getBoundingClientRect();
@@ -89,7 +90,7 @@ const initializeGame = (function() {
   for (let col = 0; col < GRID_SIZE; col++) {
     for (let row = 5; row < 8; row++) {
       if ((col % 2 !== 0 && row % 2 === 0) || (col % 2 === 0 && row % 2 !== 0)) {
-        pieces[col][row] = new Piece(col, row, 'player-1');
+        pieces[col][row] = new Piece(col, row, PLAYER_1);
       }
     }
   }
@@ -97,7 +98,7 @@ const initializeGame = (function() {
   for (let col = 0; col < GRID_SIZE; col++) {
     for (let row = 0; row < 3; row++) {
       if ((col % 2 !== 0 && row % 2 === 0) || (col % 2 === 0 && row % 2 !== 0)) {
-        pieces[col][row] = new Piece(col, row, 'player-2');
+        pieces[col][row] = new Piece(col, row, PLAYER_2);
       }
     }
   }

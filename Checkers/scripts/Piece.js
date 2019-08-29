@@ -1,7 +1,7 @@
 'use strict';
 
-const PLAYER_1 = 'player-1';
-const PLAYER_2 = 'player-2';
+export const PLAYER_1 = 'player-1';
+export const PLAYER_2 = 'player-2';
 // DOM elements
 const CANVAS_PIECES = document.getElementById('canvas-pieces');
 const CONTEXT_PIECES = CANVAS_PIECES.getContext('2d');
@@ -86,7 +86,7 @@ export default class Piece {
     CONTEXT_PIECES.arc(
       (this.col + 0.5) * Piece.squareSize,
       (this.row + 0.5) * Piece.squareSize,
-      0.85 * Piece.squareSize / 2,
+      0.8 * Piece.squareSize / 2,
       0,
       2 * Math.PI,
       false

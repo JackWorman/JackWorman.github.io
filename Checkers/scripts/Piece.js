@@ -101,10 +101,27 @@ export default class Piece {
     CONTEXT_PIECES.strokeStyle = OUTLINE_COLOR;
     CONTEXT_PIECES.stroke();
     if (this.isKing) {
-      CONTEXT_PIECES.font = "20px Comic Sans MS";
-      CONTEXT_PIECES.fillStyle = 'rgb(0, 0, 0)';
-      CONTEXT_PIECES.textAlign = 'center';
-      CONTEXT_PIECES.fillText('KING', (this.col + 0.5) * Piece.squareSize, (this.row + 0.5) * Piece.squareSize);
+      // CONTEXT_PIECES.font = '20px Comic Sans MS';
+      // CONTEXT_PIECES.fillStyle = 'rgb(0, 0, 0)';
+      // CONTEXT_PIECES.textAlign = 'center';
+      // CONTEXT_PIECES.fillText('KING', (this.col + 0.5) * Piece.squareSize, (this.row + 0.5) * Piece.squareSize);
+      let centerX = (this.col + 0.5) * Piece.squareSize;
+      let centerY = (this.row + 0.5) * Piece.squareSize;
+      let x = 50;
+      let y = 50;
+      CONTEXT_PIECES.beginPath();
+      CONTEXT_PIECES.moveTo(centerX - x, centerY - y);
+      CONTEXT_PIECES.lineTo(centerX - 0.5 * x, centerY);
+      CONTEXT_PIECES.lineTo(centerX, centerY - y);
+      CONTEXT_PIECES.lineTo(centerX + 0.5 * x, centerY);
+      CONTEXT_PIECES.lineTo(centerX + x, centerY - y);
+      CONTEXT_PIECES.lineTo(centerX + x, centerY + y);
+      CONTEXT_PIECES.lineTo(centerX - x, centerY + y);
+      CONTEXT_PIECES.lineTo(centerX - x, centerY - y);
+      CONTEXT_PIECES.closePath();
+      CONTEXT_PIECES.lineWidth = 3;
+      CONTEXT_PIECES.strokeStyle = 'rgb(0, 0, 0)';
+      CONTEXT_PIECES.stroke();
     }
   }
 }

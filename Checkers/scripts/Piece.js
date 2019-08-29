@@ -104,8 +104,8 @@ export default class Piece {
     if (this.isKing) {
       let centerX = (this.col + 0.5) * Piece.squareSize;
       let centerY = (this.row + 0.5) * Piece.squareSize;
-      let x = 20;
-      let y = 20;
+      let x = 0.25 * Piece.squareSize;
+      let y = 0.25 * Piece.squareSize;
       CONTEXT_PIECES.beginPath();
       CONTEXT_PIECES.moveTo(centerX - x, centerY - y);
       CONTEXT_PIECES.lineTo(centerX - 0.5 * x, centerY);
@@ -119,7 +119,7 @@ export default class Piece {
       CONTEXT_PIECES.fillStyle = KING_COLOR;
       CONTEXT_PIECES.fill();
       CONTEXT_PIECES.lineWidth = 3;
-      CONTEXT_PIECES.strokeStyle = 'rgb(0, 0, 0)';
+      CONTEXT_PIECES.strokeStyle = OUTLINE_COLOR;
       CONTEXT_PIECES.stroke();
     }
   }

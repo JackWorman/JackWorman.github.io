@@ -17,8 +17,8 @@ export default class Board {
     CANVAS_BOARD.width = CANVAS_BOARD.height = this.canvasSize;
   }
 
-  render(mouseCoordinates, selectedCoordinates, moveCoordinates) {
-    // Draws the checker board
+  render(mouseCoordinate, selectedCoordinate, moveCoordinates) {
+    // Draws the checker board.
     CONTEXT_BOARD.fillStyle = CHECKER_COLOR_1;
     CONTEXT_BOARD.fillRect(0, 0, this.canvasSize, this.canvasSize);
     CONTEXT_BOARD.fillStyle = CHECKER_COLOR_2;
@@ -30,19 +30,19 @@ export default class Board {
         }
       }
     }
-    // Draws highlighted square
-    if (mouseCoordinates !== null) {
+    // Draws highlighted square.
+    if (mouseCoordinate !== null) {
       CONTEXT_BOARD.fillStyle = HIGHLIGHT_COLOR;
-      CONTEXT_BOARD.fillRect(mouseCoordinates.col * squareSize, mouseCoordinates.row * squareSize, squareSize, squareSize);
+      CONTEXT_BOARD.fillRect(mouseCoordinate.col * squareSize, mouseCoordinate.row * squareSize, squareSize, squareSize);
     }
-    // Draws selected square
-    if (selectedCoordinates !== null) {
+    // Draws selected square.
+    if (selectedCoordinate !== null) {
       CONTEXT_BOARD.fillStyle = SELECT_COLOR;
-      CONTEXT_BOARD.fillRect(selectedCoordinates.col * squareSize, selectedCoordinates.row * squareSize, squareSize, squareSize);
+      CONTEXT_BOARD.fillRect(selectedCoordinate.col * squareSize, selectedCoordinate.row * squareSize, squareSize, squareSize);
     }
-    for (let i = 0; i < moveCoordinates.length; i++) {
+    for (const moveCoordinate of moveCoordinates) {
       CONTEXT_BOARD.fillStyle = MOVE_COLOR;
-      CONTEXT_BOARD.fillRect(moveCoordinates[i].col * squareSize, moveCoordinates[i].row * squareSize, squareSize, squareSize);
+      CONTEXT_BOARD.fillRect(moveCoordinate.col * squareSize, moveCoordinate.row * squareSize, squareSize, squareSize);
     }
   }
 }

@@ -9,6 +9,7 @@ const CONTEXT_PIECES = CANVAS_PIECES.getContext('2d');
 const PLAYER_1_COLOR = 'rgb(255, 255, 255)';
 const PLAYER_2_COLOR = 'rgb(255, 0, 0)';
 const OUTLINE_COLOR = 'rgb(0, 0, 0)';
+const KING_COLOR = 'rgb(255, 215, 0)';
 
 export default class Piece {
   constructor(col, row, player) {
@@ -116,7 +117,7 @@ export default class Piece {
       CONTEXT_PIECES.lineTo(centerX - x, centerY - y);
       CONTEXT_PIECES.closePath();
       CONTEXT_PIECES.lineWidth = 3;
-      CONTEXT_PIECES.strokeStyle = 'rgb(255, 215, 0)';
+      CONTEXT_PIECES.strokeStyle = KING_COLOR;
       CONTEXT_PIECES.stroke();
     }
   }

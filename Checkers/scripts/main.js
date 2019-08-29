@@ -59,10 +59,11 @@ CANVAS_CONTAINER.addEventListener('click', function() {
     // Check if a piece was selected.
     selectedCoordinate.col = mouseCoordinate.col;
     selectedCoordinate.row = mouseCoordinate.row;
-    if (pieces[selectedCoordinate.col][selectedCoordinate.row] === 'empty') {
-      moveCoordinates = [];
-    } else {
+    if (pieces[selectedCoordinate.col][selectedCoordinate.row] !== 'empty'
+      && pieces[selectedCoordinate.col][selectedCoordinate.row].player === turn) {
       moveCoordinates = pieces[selectedCoordinate.col][selectedCoordinate.row].calculateMoves(pieces);
+    } else {
+      moveCoordinates = [];
     }
   }
   board.render(mouseCoordinate, selectedCoordinate, moveCoordinates);

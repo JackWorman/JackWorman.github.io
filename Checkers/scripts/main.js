@@ -92,7 +92,7 @@ const initializeGame = (function() {
   }
   // Creates player-1's pieces.
   for (let col = 0; col < GRID_SIZE; col++) {
-    for (let row = 5; row < 8; row++) {
+    for (let row = GRID_SIZE - 3; row < GRID_SIZE; row++) {
       if ((col % 2 !== 0 && row % 2 === 0) || (col % 2 === 0 && row % 2 !== 0)) {
         pieces[col][row] = new Piece(col, row, PLAYER_1);
       }
@@ -114,7 +114,6 @@ function renderPieces() {
   for (let col = 0; col < GRID_SIZE; col++) {
     for (let row = 0; row < GRID_SIZE; row++) {
       if (pieces[col][row] !== 'empty') {
-        console.log(col + " " + row);
         pieces[col][row].render();
       }
     }

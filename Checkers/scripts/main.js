@@ -51,6 +51,24 @@ CANVAS_CONTAINER.addEventListener('click', function() {
         moveCoordinates = [];
         renderPieces();
         board.render(mouseCoordinate, selectedCoordinate, moveCoordinates);
+        // Check if a player won.
+        let player1HasAPiece = false;
+        let player2HasAPiece = false;
+        for (let col = 0; col < GRID_SIZE; col++) {
+          for (let row = 0; row < GRID_SIZE; row++) {
+            if (pieces[col][row].player === PLAYER_1) {
+              player1HasAPiece = true;
+            }
+            if (pieces[col][row].player === PLAYER_2) {
+              player2HasAPiece = true;
+            }
+          }
+        }
+        if (!player1HasAPiece) {
+          alert('Player 2 wins!');
+        } else if (!player2HasAPiece) {
+          alert('Player 1 wins!');
+        }
         // Change the turn.
         if (turn === PLAYER_1) {
           turn = PLAYER_2;

@@ -19,9 +19,11 @@ let moveCoordinates = [];
 let turn = PLAYER_1;
 
 onmousemove = function(e) {
-  let rect = CANVAS_CONTAINER.getBoundingClientRect();
-  mouseCoordinate.col = Math.floor((e.clientX - rect.left) / SQUARE_SIZE);
-  mouseCoordinate.row = Math.floor((e.clientY - rect.top) / SQUARE_SIZE);
+  let boundingClientRect = CANVAS_CONTAINER.getBoundingClientRect();
+  mouseCoordinate = {
+    col: Math.floor((e.clientX - boundingClientRect.left) / SQUARE_SIZE),
+    row: Math.floor((e.clientY - boundingClientRect.top) / SQUARE_SIZE)
+  };
   board.render(mouseCoordinate, selectedCoordinate, moveCoordinates);
 }
 
@@ -34,6 +36,8 @@ CANVAS_CONTAINER.addEventListener('click', function() {
     // Checks if a moveCoordinate was selected.
     for (const moveCoordinate of moveCoordinates) {
       if (moveCoordinate.col === mouseCoordinate.col && moveCoordinate.row === mouseCoordinate.row) {
+
+        // ------------------------------------------------ MAKE THIS A FUNCTION
         // Moves piece to the moveCoordinates.
         pieces[selectedCoordinate.col][selectedCoordinate.row].col = moveCoordinate.col;
         pieces[selectedCoordinate.col][selectedCoordinate.row].row = moveCoordinate.row;
@@ -47,28 +51,15 @@ CANVAS_CONTAINER.addEventListener('click', function() {
         for (const jump of moveCoordinate.jumps) {
           pieces[jump.col][jump.row] = 'empty';
         }
+        // -----------------------------------------------
+
+
         selectedCoordinate = {col: 'undefined', row: 'undefined'};
         moveCoordinates = [];
         renderPieces();
         board.render(mouseCoordinate, selectedCoordinate, moveCoordinates);
         // Check if a player won.
-        let player1HasAPiece = false;
-        let player2HasAPiece = false;
-        for (let col = 0; col < GRID_SIZE; col++) {
-          for (let row = 0; row < GRID_SIZE; row++) {
-            if (pieces[col][row].player === PLAYER_1) {
-              player1HasAPiece = true;
-            }
-            if (pieces[col][row].player === PLAYER_2) {
-              player2HasAPiece = true;
-            }
-          }
-        }
-        if (!player1HasAPiece) {
-          alert('Player 2 wins!');
-        } else if (!player2HasAPiece) {
-          alert('Player 1 wins!');
-        }
+        checkIfAPlayerWon();
         // Change the turn.
         if (turn === PLAYER_1) {
           turn = PLAYER_2;
@@ -79,7 +70,7 @@ CANVAS_CONTAINER.addEventListener('click', function() {
       }
     }
     // Check if a piece was selected.
-    selectedCoordinate = {col: mouseCoordinate.col, row:  mouseCoordinate.row};
+    selectedCoordinate = {col: mouseCoordinate.col, row: mouseCoordinate.row};
     if (pieces[selectedCoordinate.col][selectedCoordinate.row] !== 'empty'
       && pieces[selectedCoordinate.col][selectedCoordinate.row].player === turn) {
       moveCoordinates = pieces[selectedCoordinate.col][selectedCoordinate.row].calculateMoves(pieces);
@@ -135,5 +126,27 @@ function renderPieces() {
         pieces[col][row].render();
       }
     }
+  }
+}
+
+function checkIfAPlayerWon() {
+  let player1HasAPiece = false;
+  let player2HasAPiece = false;
+  for (let col = 0; col < GRID_SIZE; col++) {
+    for (let row = 0; row < GRID_SIZE; row++) {
+      if (pieces[col][row].player === PLAYER_1) {
+        player1HasAPiece = true;
+      }
+      if (pieces[col][row].player === PLAYER_2) {
+        player2HasAPiece = true;
+      }
+    }
+  }
+  if (!player1HasAPiece) {
+    alert('Player 2 wins!');
+    // initializeGame();
+  } else if (!player2HasAPiece) {
+    alert('Player 1 wins!');
+    // initializeGame();
   }
 }

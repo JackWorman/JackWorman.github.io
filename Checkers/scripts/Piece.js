@@ -1,5 +1,7 @@
 'use strict';
 
+import {Coordinate} from './Coordinate.js';
+
 export const PLAYER_1 = 'player-1';
 export const PLAYER_2 = 'player-2';
 // DOM elements
@@ -13,8 +15,9 @@ const KING_COLOR = 'rgb(255, 215, 0)';
 
 export class Piece {
   constructor(col, row, player) {
-    this.col = col;
-    this.row = row;
+    this.coordinate = new Coordinate(col, row);
+    // this.col = col;
+    // this.row = row;
     if (player === PLAYER_1 || player === PLAYER_2) {
       Object.defineProperty(this, 'player', {value: player, configurable: false, writable: false});
     } else {
@@ -31,6 +34,8 @@ export class Piece {
   static clearCanvas() {
     CONTEXT_PIECES.clearRect(0, 0, CANVAS_PIECES.width, CANVAS_PIECES.height);
   }
+
+  // Make a 'Move' class that extends/uses Coordinate
 
   calculateMoves(pieces) {
     const calculateMove = function(pieces, moves, col, row) {
@@ -85,8 +90,8 @@ export class Piece {
   render() {
     CONTEXT_PIECES.beginPath();
     CONTEXT_PIECES.arc(
-      (this.col + 0.5) * Piece.squareSize,
-      (this.row + 0.5) * Piece.squareSize,
+      (this.coordinate.col + 0.5) * Piece.squareSize,
+      (this.coordinate.row + 0.5) * Piece.squareSize,
       0.8 * Piece.squareSize / 2,
       0,
       2 * Math.PI,
@@ -103,8 +108,8 @@ export class Piece {
     CONTEXT_PIECES.strokeStyle = OUTLINE_COLOR;
     CONTEXT_PIECES.stroke();
     if (this.isKing) {
-      let centerX = (this.col + 0.5) * Piece.squareSize;
-      let centerY = (this.row + 0.5) * Piece.squareSize;
+      let centerX = (this.coordinate.col + 0.5) * Piece.squareSize;
+      let centerY = (this.coordinate.row + 0.5) * Piece.squareSize;
       let x = 0.2 * Piece.squareSize;
       let y = 0.2 * Piece.squareSize;
       CONTEXT_PIECES.beginPath();

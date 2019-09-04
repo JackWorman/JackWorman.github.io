@@ -14,30 +14,30 @@ const CANVAS_CONTAINER = document.getElementById('canvas-container');
 
 const board = new Board(GRID_SIZE, CANVAS_SIZE);
 let pieces = [];
-let mouseCoordinate = {col: 'undefined', row: 'undefined'};
-let selectedCoordinate = {col: 'undefined', row: 'undefined'};
+let mouseCoordinate = new Coordinate(UNDEFINED, UNDEFINED);
+let selectedCoordinate = new Coordinate(UNDEFINED, UNDEFINED);
 let moveCoordinates = [];
 let turn = PLAYER_1;
 
 onmousemove = function(e) {
   let boundingClientRect = CANVAS_CONTAINER.getBoundingClientRect();
-  mouseCoordinate = {
-    col: Math.floor((e.clientX - boundingClientRect.left) / SQUARE_SIZE),
-    row: Math.floor((e.clientY - boundingClientRect.top) / SQUARE_SIZE)
-  };
+  mouseCoordinate.setCoordinate(
+    Math.floor((e.clientX - boundingClientRect.left) / SQUARE_SIZE),
+    Math.floor((e.clientY - boundingClientRect.top) / SQUARE_SIZE)
+  );
   board.render(mouseCoordinate, selectedCoordinate, moveCoordinates);
 }
 
 CANVAS_CONTAINER.addEventListener('click', function() {
   // Checks if the selectedCoordinate were selected.
-  if (selectedCoordinate.col === mouseCoordinate.col && selectedCoordinate.row === mouseCoordinate.row) {
-    selectedCoordinate = {col: 'undefined', row: 'undefined'};
+  if (Coordinate.compare(selectedCoordinate, mouseCoordinate)) {
+    selectedCoordinate.setCoordinate(UNDEFINED, UNDEFINED);
     moveCoordinates = [];
   } else {
     // Checks if a moveCoordinate was selected.
     for (const moveCoordinate of moveCoordinates) {
-      if (moveCoordinate.col === mouseCoordinate.col && moveCoordinate.row === mouseCoordinate.row) {
-
+      if (Coordinate.compare(moveCoordinate, mouseCoordinate)) {
+        // movePiece();
         // ------------------------------------------------ MAKE THIS A FUNCTION
         // Moves piece to the moveCoordinates.
         pieces[selectedCoordinate.col][selectedCoordinate.row].col = moveCoordinate.col;
@@ -55,7 +55,7 @@ CANVAS_CONTAINER.addEventListener('click', function() {
         // -----------------------------------------------
 
 
-        selectedCoordinate = {col: 'undefined', row: 'undefined'};
+        selectedCoordinate.setCoordinate(UNDEFINED, UNDEFINED);
         moveCoordinates = [];
         renderPieces();
         board.render(mouseCoordinate, selectedCoordinate, moveCoordinates);
@@ -71,7 +71,7 @@ CANVAS_CONTAINER.addEventListener('click', function() {
       }
     }
     // Check if a piece was selected.
-    selectedCoordinate = {col: mouseCoordinate.col, row: mouseCoordinate.row};
+    selectedCoordinate.setCoordinate(mouseCoordinate.col, mouseCoordinate.row);
     if (pieces[selectedCoordinate.col][selectedCoordinate.row] !== 'empty'
       && pieces[selectedCoordinate.col][selectedCoordinate.row].player === turn) {
       moveCoordinates = pieces[selectedCoordinate.col][selectedCoordinate.row].calculateMoves(pieces);
@@ -84,7 +84,7 @@ CANVAS_CONTAINER.addEventListener('click', function() {
 
 onkeyup = function(e) {
   if (e.keyCode === ESCAPE_KEYCODE) {
-    selectedCoordinate = {col: 'undefined', row: 'undefined'};
+    selectedCoordinate.setCoordinate(UNDEFINED, UNDEFINED);
     moveCoordinates = [];
     board.render(mouseCoordinate, selectedCoordinate, moveCoordinates);
   }

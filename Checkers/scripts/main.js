@@ -3,7 +3,7 @@
 import Board from './Board.js';
 // import Piece from './Piece.js';
 import {Piece, PLAYER_1, PLAYER_2} from './Piece.js';
-import {Coordinate, UNDEFINED} from './Coordinate.js';
+// import {Coordinate, UNDEFINED} from './Coordinate.js';
 
 const ESCAPE_KEYCODE = 27;
 const CANVAS_SIZE = 800; // in pixels

@@ -1,5 +1,7 @@
 'use strict';
 
+import {UNDEFINED} from './Coordinate.js';
+
 // DOM Elements
 const CANVAS_BOARD = document.getElementById('canvas-board');
 const CONTEXT_BOARD = CANVAS_BOARD.getContext('2d');
@@ -31,12 +33,12 @@ export class Board {
       }
     }
     // Draws highlighted square.
-    if (mouseCoordinate !== 'undefined') {
+    if (mouseCoordinate !== UNDEFINED) {
       CONTEXT_BOARD.fillStyle = HIGHLIGHT_COLOR;
       CONTEXT_BOARD.fillRect(mouseCoordinate.col * squareSize, mouseCoordinate.row * squareSize, squareSize, squareSize);
     }
     // Draws selected square.
-    if (selectedCoordinate !== 'undefined') {
+    if (selectedCoordinate !== UNDEFINED) {
       CONTEXT_BOARD.fillStyle = SELECT_COLOR;
       CONTEXT_BOARD.fillRect(selectedCoordinate.col * squareSize, selectedCoordinate.row * squareSize, squareSize, squareSize);
     }

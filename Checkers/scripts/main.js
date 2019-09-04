@@ -33,6 +33,7 @@ CANVAS_CONTAINER.addEventListener('click', function() {
     selectedCoordinate.setCoordinate(UNDEFINED, UNDEFINED);
     moveCoordinates = [];
   } else {
+    console.log('test 1');
     // Checks if a moveCoordinate was selected.
     for (const moveCoordinate of moveCoordinates) {
       if (Coordinate.compare(moveCoordinate, mouseCoordinate)) {
@@ -79,6 +80,7 @@ CANVAS_CONTAINER.addEventListener('click', function() {
     }
   }
   board.render(mouseCoordinate, selectedCoordinate, moveCoordinates);
+  console.log('test 2');
 });
 
 onkeyup = function(e) {

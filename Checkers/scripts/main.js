@@ -39,8 +39,8 @@ CANVAS_CONTAINER.addEventListener('click', function() {
         // movePiece();
         // ------------------------------------------------ MAKE THIS A FUNCTION
         // Moves piece to the moveCoordinates.
-        pieces[selectedCoordinate.col][selectedCoordinate.row].col = moveCoordinate.col;
-        pieces[selectedCoordinate.col][selectedCoordinate.row].row = moveCoordinate.row;
+        pieces[selectedCoordinate.col][selectedCoordinate.row].coordinate.col = moveCoordinate.col;
+        pieces[selectedCoordinate.col][selectedCoordinate.row].coordinate.row = moveCoordinate.row;
         pieces[moveCoordinate.col][moveCoordinate.row] = pieces[selectedCoordinate.col][selectedCoordinate.row];
         pieces[selectedCoordinate.col][selectedCoordinate.row] = 'empty';
         // Checks if the piece becomes a king.

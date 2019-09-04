@@ -1,6 +1,6 @@
 'use strict';
 
-import Board from './Board.js';
+import {Board} from './Board.js';
 // import Piece from './Piece.js';
 import {Piece, PLAYER_1, PLAYER_2} from './Piece.js';
 import {Coordinate, UNDEFINED} from './Coordinate.js';

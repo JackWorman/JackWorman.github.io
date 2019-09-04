@@ -1,6 +1,6 @@
 'use strict';
 
-const UNDEFINED = 'undefined';
+export const UNDEFINED = 'undefined';
 
 export default class Coordinate {
   constructor(col, row) {

@@ -2,7 +2,7 @@
 
 export const UNDEFINED = 'undefined';
 
-export default class Coordinate {
+export class Coordinate {
   constructor(col, row) {
     this.col = col;
     this.row = row;

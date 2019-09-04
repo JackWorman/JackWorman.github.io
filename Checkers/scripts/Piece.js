@@ -11,7 +11,7 @@ const PLAYER_2_COLOR = 'rgb(255, 0, 0)';
 const OUTLINE_COLOR = 'rgb(0, 0, 0)';
 const KING_COLOR = 'rgb(255, 215, 0)';
 
-export default class Piece {
+export class Piece {
   constructor(col, row, player) {
     this.col = col;
     this.row = row;

@@ -10,7 +10,7 @@ const HIGHLIGHT_COLOR = 'rgb(153, 204, 255)';
 const SELECT_COLOR = 'rgb(0, 0, 255)';
 const MOVE_COLOR = 'rgb(0, 255, 0)';
 
-export default class Board {
+export class Board {
   constructor(gridSize, canvasSize) {
     this.gridSize = gridSize;
     this.canvasSize = canvasSize;

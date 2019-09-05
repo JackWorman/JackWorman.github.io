@@ -46,16 +46,14 @@ export class Piece {
     }
     let moves = [];
     if (this.player === PLAYER_1 || this.isKing) {
-      moves = calculateMove(pieces, moves, this.col - 1, this.row - 1);
-      moves = calculateMove(pieces, moves, this.col + 1, this.row - 1);
+      moves = calculateMove(pieces, moves, this.coordinate.col - 1, this.coordinate.row - 1);
+      moves = calculateMove(pieces, moves, this.coordinate.col + 1, this.coordinate.row - 1);
     }
     if (this.player === PLAYER_2 || this.isKing) {
-      moves = calculateMove(pieces, moves, this.col - 1, this.row + 1);
-      moves = calculateMove(pieces, moves, this.col + 1, this.row + 1);
+      moves = calculateMove(pieces, moves, this.coordinate.col - 1, this.coordinate.row + 1);
+      moves = calculateMove(pieces, moves, this.coordinate.col + 1, this.coordinate.row + 1);
     }
-    moves = moves.concat(this.calculateJumps(pieces, this.col, this.row, []));
-    console.log('calculateMoves');
-    console.log(moves);
+    moves = moves.concat(this.calculateJumps(pieces, this.coordinate.col, this.coordinate.row, []));
     return moves;
   }
 
@@ -86,8 +84,6 @@ export class Piece {
       moves = calculateJump(pieces, col, row, -1, 1, moves, jumps, this);
       moves = calculateJump(pieces, col, row, 1, 1, moves, jumps, this);
     }
-    console.log('calculateJump');
-    console.log(moves);
     return moves;
   }
 

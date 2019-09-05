@@ -12,10 +12,10 @@ const SQUARE_SIZE = CANVAS_SIZE / GRID_SIZE;
 const CANVAS_CONTAINER = document.getElementById('canvas-container');
 
 const board = new Board(GRID_SIZE, CANVAS_SIZE);
-let pieces = [];
 const mouseCoordinate = new Coordinate(UNDEFINED, UNDEFINED);
 const selectedCoordinate = new Coordinate(UNDEFINED, UNDEFINED);
 let moveCoordinates = [];
+let pieces = [];
 let turn = PLAYER_1;
 
 onmousemove = function(e) {

@@ -32,8 +32,7 @@ CANVAS_CONTAINER.addEventListener('click', function() {
   if (Coordinate.compare(selectedCoordinate, mouseCoordinate)) {
     selectedCoordinate.setCoordinate(UNDEFINED, UNDEFINED);
     moveCoordinates = [];
-  } else {
-    console.log(moveCoordinates);
+  } else if (moveCoordinates.length !== 0) {
     // Checks if a moveCoordinate was selected.
     for (const moveCoordinate of moveCoordinates) {
       if (Coordinate.compare(moveCoordinate, mouseCoordinate)) {
@@ -52,8 +51,6 @@ CANVAS_CONTAINER.addEventListener('click', function() {
           pieces[jump.col][jump.row] = 'empty';
         }
         // -----------------------------------------------
-
-
         selectedCoordinate.setCoordinate(UNDEFINED, UNDEFINED);
         moveCoordinates = [];
         renderPieces();
@@ -66,9 +63,9 @@ CANVAS_CONTAINER.addEventListener('click', function() {
         } else if (turn === PLAYER_2) {
           turn = PLAYER_1;
         }
-        return;
       }
     }
+  } else {
     // Check if a piece was selected.
     selectedCoordinate.setCoordinate(mouseCoordinate.col, mouseCoordinate.row);
     if (pieces[selectedCoordinate.col][selectedCoordinate.row] !== 'empty'

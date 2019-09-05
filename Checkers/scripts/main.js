@@ -13,8 +13,8 @@ const CANVAS_CONTAINER = document.getElementById('canvas-container');
 
 const board = new Board(GRID_SIZE, CANVAS_SIZE);
 let pieces = [];
-let mouseCoordinate = new Coordinate(UNDEFINED, UNDEFINED);
-let selectedCoordinate = new Coordinate(UNDEFINED, UNDEFINED);
+const mouseCoordinate = new Coordinate(UNDEFINED, UNDEFINED);
+const selectedCoordinate = new Coordinate(UNDEFINED, UNDEFINED);
 let moveCoordinates = [];
 let turn = PLAYER_1;
 

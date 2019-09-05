@@ -33,14 +33,14 @@ CANVAS_CONTAINER.addEventListener('click', function() {
     selectedCoordinate.setCoordinate(UNDEFINED, UNDEFINED);
     moveCoordinates = [];
   } else {
+    console.log(moveCoordinates);
     // Checks if a moveCoordinate was selected.
     for (const moveCoordinate of moveCoordinates) {
       if (Coordinate.compare(moveCoordinate, mouseCoordinate)) {
         // movePiece();
         // ------------------------------------------------ MAKE THIS A FUNCTION
         // Moves piece to the moveCoordinates.
-        pieces[selectedCoordinate.col][selectedCoordinate.row].coordinate.col = moveCoordinate.col;
-        pieces[selectedCoordinate.col][selectedCoordinate.row].coordinate.row = moveCoordinate.row;
+        pieces[selectedCoordinate.col][selectedCoordinate.row].coordinate.setCoordinate(moveCoordinate.col, moveCoordinate.row);
         pieces[moveCoordinate.col][moveCoordinate.row] = pieces[selectedCoordinate.col][selectedCoordinate.row];
         pieces[selectedCoordinate.col][selectedCoordinate.row] = 'empty';
         // Checks if the piece becomes a king.

@@ -40,7 +40,6 @@ CANVAS_CONTAINER.addEventListener('click', function() {
         selectedCoordinate.setCoordinate(UNDEFINED, UNDEFINED);
         moveCoordinates = [];
         renderPieces();
-        // Check if a player won.
         checkIfAPlayerWon();
         // Change the turn.
         if (turn === PLAYER_1) {
@@ -48,6 +47,7 @@ CANVAS_CONTAINER.addEventListener('click', function() {
         } else if (turn === PLAYER_2) {
           turn = PLAYER_1;
         }
+        break;
       }
     }
   } else {

@@ -36,7 +36,7 @@ CANVAS_CONTAINER.addEventListener('click', function() {
     // Checks if a moveCoordinate was selected.
     for (const moveCoordinate of moveCoordinates) {
       if (Coordinate.compare(moveCoordinate, mouseCoordinate)) {
-        movePiece();
+        movePiece(moveCoordinate);
         selectedCoordinate.setCoordinate(UNDEFINED, UNDEFINED);
         moveCoordinates = [];
         renderPieces();
@@ -133,7 +133,7 @@ function checkIfAPlayerWon() {
   }
 }
 
-function movePiece() {
+function movePiece(moveCoordinate) {
   // Moves piece to the moveCoordinates.
   pieces[selectedCoordinate.col][selectedCoordinate.row].coordinate.setCoordinate(moveCoordinate.col, moveCoordinate.row);
   pieces[moveCoordinate.col][moveCoordinate.row] = pieces[selectedCoordinate.col][selectedCoordinate.row];

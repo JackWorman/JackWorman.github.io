@@ -42,10 +42,10 @@ export class Board {
       CONTEXT_BOARD.fillStyle = SELECT_COLOR;
       CONTEXT_BOARD.fillRect(selectedCoordinate.col * squareSize, selectedCoordinate.row * squareSize, squareSize, squareSize);
     }
-    console.log(moveCoordinates);
     // Draws move squares.
     CONTEXT_BOARD.fillStyle = MOVE_COLOR;
     for (const moveCoordinate of moveCoordinates) {
+      console.log(moveCoordinate);
       CONTEXT_BOARD.fillRect(moveCoordinate.col * squareSize, moveCoordinate.row * squareSize, squareSize, squareSize);
     }
   }

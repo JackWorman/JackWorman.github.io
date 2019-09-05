@@ -73,31 +73,8 @@ onkeyup = function(e) {
 
 const initializeGame = (function() {
   CANVAS_CONTAINER.style.width = CANVAS_CONTAINER.style.height = (CANVAS_SIZE + 2) + 'px';
-  board.render(mouseCoordinate, selectedCoordinate, moveCoordinates);
   Piece.initialize(CANVAS_SIZE, SQUARE_SIZE);
-  for (let col = 0; col < GRID_SIZE; col++) {
-    pieces.push([]);
-    for (let row = 0; row < GRID_SIZE; row++) {
-      pieces[col].push('empty');
-    }
-  }
-  // Creates player-1's pieces.
-  for (let col = 0; col < GRID_SIZE; col++) {
-    for (let row = GRID_SIZE - 3; row < GRID_SIZE; row++) {
-      if ((col % 2 !== 0 && row % 2 === 0) || (col % 2 === 0 && row % 2 !== 0)) {
-        pieces[col][row] = new Piece(col, row, PLAYER_1);
-      }
-    }
-  }
-  // Creates player-2's pieces.
-  for (let col = 0; col < GRID_SIZE; col++) {
-    for (let row = 0; row < 3; row++) {
-      if ((col % 2 !== 0 && row % 2 === 0) || (col % 2 === 0 && row % 2 !== 0)) {
-        pieces[col][row] = new Piece(col, row, PLAYER_2);
-      }
-    }
-  }
-  renderPieces();
+  resetGame();
 })();
 
 function renderPieces() {
@@ -126,10 +103,10 @@ function checkIfAPlayerWon() {
   }
   if (!player1HasAPiece) {
     alert('Player 2 wins!');
-    // initializeGame();
+    resetGame();
   } else if (!player2HasAPiece) {
     alert('Player 1 wins!');
-    // initializeGame();
+    resetGame();
   }
 }
 
@@ -146,4 +123,32 @@ function movePiece(moveCoordinate) {
   for (const jump of moveCoordinate.jumps) {
     pieces[jump.col][jump.row] = 'empty';
   }
+}
+
+function resetGame() {
+  board.render(mouseCoordinate, selectedCoordinate, moveCoordinates);
+  pieces = [];
+  for (let col = 0; col < GRID_SIZE; col++) {
+    pieces.push([]);
+    for (let row = 0; row < GRID_SIZE; row++) {
+      pieces[col].push('empty');
+    }
+  }
+  // Creates player-1's pieces.
+  for (let col = 0; col < GRID_SIZE; col++) {
+    for (let row = GRID_SIZE - 3; row < GRID_SIZE; row++) {
+      if ((col % 2 !== 0 && row % 2 === 0) || (col % 2 === 0 && row % 2 !== 0)) {
+        pieces[col][row] = new Piece(col, row, PLAYER_1);
+      }
+    }
+  }
+  // Creates player-2's pieces.
+  for (let col = 0; col < GRID_SIZE; col++) {
+    for (let row = 0; row < 3; row++) {
+      if ((col % 2 !== 0 && row % 2 === 0) || (col % 2 === 0 && row % 2 !== 0)) {
+        pieces[col][row] = new Piece(col, row, PLAYER_2);
+      }
+    }
+  }
+  renderPieces();
 }

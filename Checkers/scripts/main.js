@@ -67,14 +67,18 @@ CANVAS_CONTAINER.addEventListener('click', function() {
     }
   } else {
     // Check if a piece was selected.
+    console.log(selectedCoordinate);
     selectedCoordinate.setCoordinate(mouseCoordinate.col, mouseCoordinate.row);
+    console.log(selectedCoordinate);
     if (pieces[selectedCoordinate.col][selectedCoordinate.row] !== 'empty'
       && pieces[selectedCoordinate.col][selectedCoordinate.row].player === turn) {
       moveCoordinates = pieces[selectedCoordinate.col][selectedCoordinate.row].calculateMoves(pieces);
+      console.log(moveCoordinates);
     } else {
       moveCoordinates = [];
     }
   }
+  console.log('----------------');
   board.render(mouseCoordinate, selectedCoordinate, moveCoordinates);
 });
 

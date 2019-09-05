@@ -36,25 +36,10 @@ CANVAS_CONTAINER.addEventListener('click', function() {
     // Checks if a moveCoordinate was selected.
     for (const moveCoordinate of moveCoordinates) {
       if (Coordinate.compare(moveCoordinate, mouseCoordinate)) {
-        // movePiece();
-        // ------------------------------------------------ MAKE THIS A FUNCTION
-        // Moves piece to the moveCoordinates.
-        pieces[selectedCoordinate.col][selectedCoordinate.row].coordinate.setCoordinate(moveCoordinate.col, moveCoordinate.row);
-        pieces[moveCoordinate.col][moveCoordinate.row] = pieces[selectedCoordinate.col][selectedCoordinate.row];
-        pieces[selectedCoordinate.col][selectedCoordinate.row] = 'empty';
-        // Checks if the piece becomes a king.
-        if (moveCoordinate.row === 0 || moveCoordinate.row === GRID_SIZE - 1) {
-          pieces[moveCoordinate.col][moveCoordinate.row].isKing = true;
-        }
-        // Removes jumped pieces.
-        for (const jump of moveCoordinate.jumps) {
-          pieces[jump.col][jump.row] = 'empty';
-        }
-        // -----------------------------------------------
+        movePiece();
         selectedCoordinate.setCoordinate(UNDEFINED, UNDEFINED);
         moveCoordinates = [];
         renderPieces();
-        board.render(mouseCoordinate, selectedCoordinate, moveCoordinates);
         // Check if a player won.
         checkIfAPlayerWon();
         // Change the turn.
@@ -145,5 +130,20 @@ function checkIfAPlayerWon() {
   } else if (!player2HasAPiece) {
     alert('Player 1 wins!');
     // initializeGame();
+  }
+}
+
+function movePiece() {
+  // Moves piece to the moveCoordinates.
+  pieces[selectedCoordinate.col][selectedCoordinate.row].coordinate.setCoordinate(moveCoordinate.col, moveCoordinate.row);
+  pieces[moveCoordinate.col][moveCoordinate.row] = pieces[selectedCoordinate.col][selectedCoordinate.row];
+  pieces[selectedCoordinate.col][selectedCoordinate.row] = 'empty';
+  // Checks if the piece becomes a king.
+  if (moveCoordinate.row === 0 || moveCoordinate.row === GRID_SIZE - 1) {
+    pieces[moveCoordinate.col][moveCoordinate.row].isKing = true;
+  }
+  // Removes jumped pieces.
+  for (const jump of moveCoordinate.jumps) {
+    pieces[jump.col][jump.row] = 'empty';
   }
 }

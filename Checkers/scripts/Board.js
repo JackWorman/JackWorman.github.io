@@ -32,10 +32,8 @@ export class Board {
         }
       }
     }
-    console.log(mouseCoordinate);
     // Draws highlighted square.
     if (mouseCoordinate.col !== UNDEFINED && mouseCoordinate.row !== UNDEFINED) {
-      console.log('mouseCoordinate');
       CONTEXT_BOARD.fillStyle = HIGHLIGHT_COLOR;
       CONTEXT_BOARD.fillRect(mouseCoordinate.col * squareSize, mouseCoordinate.row * squareSize, squareSize, squareSize);
     }
@@ -44,6 +42,7 @@ export class Board {
       CONTEXT_BOARD.fillStyle = SELECT_COLOR;
       CONTEXT_BOARD.fillRect(selectedCoordinate.col * squareSize, selectedCoordinate.row * squareSize, squareSize, squareSize);
     }
+    console.log(moveCoordinates);
     // Draws move squares.
     CONTEXT_BOARD.fillStyle = MOVE_COLOR;
     for (const moveCoordinate of moveCoordinates) {

@@ -33,12 +33,12 @@ export class Board {
       }
     }
     // Draws highlighted square.
-    if (mouseCoordinate !== UNDEFINED) {
+    if (mouseCoordinate.col !== UNDEFINED && mouseCoordinate.row !== UNDEFINED) {
       CONTEXT_BOARD.fillStyle = HIGHLIGHT_COLOR;
       CONTEXT_BOARD.fillRect(mouseCoordinate.col * squareSize, mouseCoordinate.row * squareSize, squareSize, squareSize);
     }
     // Draws selected square.
-    if (selectedCoordinate !== UNDEFINED) {
+    if (selectedCoordinate.col !== UNDEFINED && selectedCoordinate.row !== UNDEFINED) {
       CONTEXT_BOARD.fillStyle = SELECT_COLOR;
       CONTEXT_BOARD.fillRect(selectedCoordinate.col * squareSize, selectedCoordinate.row * squareSize, squareSize, squareSize);
     }

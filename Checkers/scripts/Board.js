@@ -45,7 +45,6 @@ export class Board {
     // Draws move squares.
     CONTEXT_BOARD.fillStyle = MOVE_COLOR;
     for (const moveCoordinate of moveCoordinates) {
-      console.log(moveCoordinate);
       CONTEXT_BOARD.fillRect(moveCoordinate.col * squareSize, moveCoordinate.row * squareSize, squareSize, squareSize);
     }
   }

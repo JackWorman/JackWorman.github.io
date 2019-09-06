@@ -34,6 +34,7 @@ html, body {
 #div-score-container {
   font-family: 'VT323';
   font-size: 48px;
+  color: white;
 }
 
 #span-highscore {

@@ -16,6 +16,10 @@ html, body {
   color: white;
 }
 
+body {
+  background-image: url("https://d2v9y0dukr6mq2.cloudfront.net/video/thumbnail/moving-through-stars-in-space_-1zccenlb__F0000.png");
+}
+
 #span-fps {
   position: absolute;
   top: 0;

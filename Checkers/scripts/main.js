@@ -40,13 +40,13 @@ CANVAS_CONTAINER.addEventListener('click', function() {
         selectedCoordinate.setCoordinate(UNDEFINED, UNDEFINED);
         moveCoordinates = [];
         renderPieces();
-        checkIfAPlayerWon();
         // Change the turn.
         if (turn === PLAYER_1) {
           turn = PLAYER_2;
         } else if (turn === PLAYER_2) {
           turn = PLAYER_1;
         }
+        checkIfAPlayerWon();
         break;
       }
     }
@@ -126,6 +126,7 @@ function movePiece(moveCoordinate) {
 }
 
 function resetGame() {
+  turn = PLAYER_1;
   board.render(mouseCoordinate, selectedCoordinate, moveCoordinates);
   pieces = [];
   for (let col = 0; col < GRID_SIZE; col++) {
@@ -151,4 +152,8 @@ function resetGame() {
     }
   }
   renderPieces();
+}
+
+function checkPossibleMoves() {
+  
 }

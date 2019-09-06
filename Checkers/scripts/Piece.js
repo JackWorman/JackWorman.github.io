@@ -24,6 +24,7 @@ export class Piece {
       throw 'Error: The property \'player\' may only be \'' + PLAYER_1 + '\' or \'' + PLAYER_2 + '\'.';
     }
     this.isKing = false;
+    this.hasMove = false;
   }
 
   static initialize(canvasSize, squareSize) {

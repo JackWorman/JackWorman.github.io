@@ -1,10 +1,10 @@
 @font-face {
-    font-family: 'Heavy Data'; /*a name to be used later*/
-    src: url('https://jackworman.com/Snake/fonts/heavy-data.ttf'); /*URL to font*/
+    font-family: 'Heavy Data';
+    src: url('https://jackworman.com/Snake/fonts/heavy-data.ttf');
 }
 @font-face {
-    font-family: 'Courier Prime'; /*a name to be used later*/
-    src: url('https://jackworman.com/Snake/fonts/courier-prime.ttf'); /*URL to font*/
+	font-family: 'VT323';
+	src: url('https://jackworman.com/Asteroids/fonts/vt323.ttf') format('truetype');
 }
 
 html, body {
@@ -33,14 +33,17 @@ html, body {
   font-size: 100px;
 }
 
-#span-highscore {
+#div-score-container {
+  font-family: 'VT323';
   font-size: 48px;
-  padding-right: 75px;
+}
+
+#span-highscore {
+  float: left;
 }
 
 #span-score {
-  font-size: 48px;
-  padding-left: 75px;
+  float: right;
 }
 
 .rainbow {

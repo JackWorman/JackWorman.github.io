@@ -32,6 +32,7 @@ body {
 }
 
 #span-title {
+  color: 'rgb(255, 56, 0)';
   font-family: 'Forty Second Street';
   font-size: 64px;
 }

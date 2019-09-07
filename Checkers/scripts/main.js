@@ -9,7 +9,7 @@ const CANVAS_SIZE = 800; // in pixels
 const GRID_SIZE = 8;
 const SQUARE_SIZE = CANVAS_SIZE / GRID_SIZE;
 // DOM Elements
-const CANVAS_CONTAINER = document.getElementById('canvas-container');
+const CANVAS_CONTAINER = document.getElementById('div-canvas-container');
 
 const board = new Board(GRID_SIZE, CANVAS_SIZE);
 const mouseCoordinate = new Coordinate(UNDEFINED, UNDEFINED);
@@ -155,5 +155,5 @@ function resetGame() {
 }
 
 function checkPossibleMoves() {
-  
+
 }

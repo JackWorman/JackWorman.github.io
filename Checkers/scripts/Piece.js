@@ -22,7 +22,7 @@ export class Piece {
       throw 'Error: The property \'player\' may only be \'' + PLAYER_1 + '\' or \'' + PLAYER_2 + '\'.';
     }
     this.isKing = false;
-    this.hasMove = false;
+    this.hasMove = true;
   }
 
   static initialize(canvasSize, squareSize) {
@@ -97,6 +97,11 @@ export class Piece {
       false
     );
     CONTEXT_PIECES.closePath();
+    if (this.hasMove) {
+      CONTEXT_PIECES.lineWidth = 6;
+      CONTEXT_PIECES.strokeStyle = 'rgb(255, 255, 255)';
+      CONTEXT_PIECES.stroke();
+    }
     if (this.player === PLAYER_1) {
       CONTEXT_PIECES.fillStyle = PLAYER_1_COLOR;
     } else if (this.player === PLAYER_2) {

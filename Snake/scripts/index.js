@@ -93,10 +93,7 @@ document.addEventListener('keydown', function(event) {
 }, true);
 
 function setUpBackgroundAndForeground() {
-  CANVAS_BACKGROUND.width = CANVAS_SIZE;
-  CANVAS_BACKGROUND.height = CANVAS_SIZE;
-  CANVAS_FOREGROUND.width = CANVAS_SIZE;
-  CANVAS_FOREGROUND.height = CANVAS_SIZE;
+  CANVAS_BACKGROUND.width = CANVAS_BACKGROUND.height = CANVAS_FOREGROUND.width = CANVAS_FOREGROUND.height = CANVAS_SIZE;
   renderBackground();
 }
 

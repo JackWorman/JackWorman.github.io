@@ -53,7 +53,7 @@ CANVAS_CONTAINER.addEventListener('click', function() {
             if (pieces[row][col].player === turn) {
               console.log('====');
               console.log(pieces[row][col].calculateMove(pieces).length);
-              if (pieces[row][col].calculateMove(pieces).length === 0) {
+              if (pieces[row][col].calculateMoves(pieces).length === 0) {
                 pieces[row][col].hasMove = false;
               } else {
                 pieces[row][col].hasMove = true;

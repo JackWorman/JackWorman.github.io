@@ -39,7 +39,6 @@ CANVAS_CONTAINER.addEventListener('click', function() {
         movePiece(moveCoordinate);
         selectedCoordinate.setCoordinate(UNDEFINED, UNDEFINED);
         moveCoordinates = [];
-        renderPieces();
         // Change the turn.
         if (turn === PLAYER_1) {
           turn = PLAYER_2;
@@ -59,6 +58,7 @@ CANVAS_CONTAINER.addEventListener('click', function() {
             }
           }
         }
+        renderPieces();
         break;
       }
     }

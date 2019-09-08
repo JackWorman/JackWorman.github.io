@@ -6,7 +6,7 @@ import {Coordinate, UNDEFINED} from './Coordinate.js';
 
 const ESCAPE_KEYCODE = 27;
 const CANVAS_SIZE = 800; // in pixels
-const GRID_SIZE = 8;
+const GRID_SIZE = 10;
 const SQUARE_SIZE = CANVAS_SIZE / GRID_SIZE;
 // DOM Elements
 const CANVAS_CONTAINER = document.getElementById('div-canvas-container');

@@ -47,6 +47,20 @@ CANVAS_CONTAINER.addEventListener('click', function() {
           turn = PLAYER_1;
         }
         checkIfAPlayerWon();
+        // Check if has move.
+        for (let col = 0; col < GRID_SIZE; col++) {
+          for (let row = 0; row < GRID_SIZE; row++) {
+            if (pieces[row][col].player === turn) {
+              if (pieces[row][col].calculateMove(pieces).length === 0) {
+                pieces[row][col].hasMove = false;
+              } else {
+                pieces[row][col].hasMove = true;
+              }
+            } else if (pieces[row][col] !== 'empty') {
+              pieces[row][col].hasMove = false;
+            }
+          }
+        }
         break;
       }
     }

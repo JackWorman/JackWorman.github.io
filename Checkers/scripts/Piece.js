@@ -22,7 +22,7 @@ export class Piece {
       throw 'Error: The property \'player\' may only be \'' + PLAYER_1 + '\' or \'' + PLAYER_2 + '\'.';
     }
     this.isKing = false;
-    this.hasMove = true;
+    this.hasMove = false;
   }
 
   static initialize(canvasSize, squareSize) {
@@ -98,7 +98,7 @@ export class Piece {
     );
     CONTEXT_PIECES.closePath();
     if (this.hasMove) {
-      CONTEXT_PIECES.lineWidth = 6;
+      CONTEXT_PIECES.lineWidth = 12;
       CONTEXT_PIECES.strokeStyle = 'rgb(255, 255, 255)';
       CONTEXT_PIECES.stroke();
     }

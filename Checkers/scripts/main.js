@@ -50,12 +50,12 @@ CANVAS_CONTAINER.addEventListener('click', function() {
         // Check if has move.
         for (let col = 0; col < GRID_SIZE; col++) {
           for (let row = 0; row < GRID_SIZE; row++) {
-            if (pieces[row][col] !== 'empty'
-              && pieces[row][col].player === turn
-              && pieces[row][col].calculateMoves(pieces).length > 0) {
-              pieces[row][col].hasMove = true;
-            } else {
-              pieces[row][col].hasMove = false;
+            if (pieces[row][col] !== 'empty') {
+              if (pieces[row][col].player === turn && pieces[row][col].calculateMoves(pieces).length > 0) {
+                pieces[row][col].hasMove = true;
+              } else {
+                pieces[row][col].hasMove = false;
+              }
             }
           }
         }

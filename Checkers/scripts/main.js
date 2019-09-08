@@ -40,26 +40,21 @@ CANVAS_CONTAINER.addEventListener('click', function() {
         selectedCoordinate.setCoordinate(UNDEFINED, UNDEFINED);
         moveCoordinates = [];
         renderPieces();
-        console.log('======');
-        console.log('turn: ' + turn);
         // Change the turn.
         if (turn === PLAYER_1) {
           turn = PLAYER_2;
         } else if (turn === PLAYER_2) {
           turn = PLAYER_1;
         }
-        console.log('turn after: ' + turn);
         checkIfAPlayerWon();
         // Check if has move.
         for (let col = 0; col < GRID_SIZE; col++) {
           for (let row = 0; row < GRID_SIZE; row++) {
-            if (pieces[row][col].player === turn) {
-              if (pieces[row][col].calculateMoves(pieces).length === 0) {
-                pieces[row][col].hasMove = false;
-              } else {
-                pieces[row][col].hasMove = true;
-              }
-            } else if (pieces[row][col] !== 'empty') {
+            if (pieces[row][col] !== 'empty'
+              && pieces[row][col].player === turn
+              && pieces[row][col].calculateMoves(pieces).length > 0) {
+              pieces[row][col].hasMove = true;
+            } else {
               pieces[row][col].hasMove = false;
             }
           }

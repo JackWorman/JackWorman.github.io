@@ -51,8 +51,6 @@ CANVAS_CONTAINER.addEventListener('click', function() {
         for (let col = 0; col < GRID_SIZE; col++) {
           for (let row = 0; row < GRID_SIZE; row++) {
             if (pieces[row][col].player === turn) {
-              console.log('====');
-              console.log(pieces[row][col].calculateMove(pieces).length);
               if (pieces[row][col].calculateMoves(pieces).length === 0) {
                 pieces[row][col].hasMove = false;
               } else {

@@ -14,8 +14,9 @@ const MOVE_COLOR = 'rgb(0, 255, 0)';
 
 export class Board {
   constructor(gridSize, canvasSize) {
-    this.gridSize = gridSize;
-    this.canvasSize = canvasSize;
+    Object.defineProperty(this, 'gridSize', {value: gridSize});
+    Object.defineProperty(this, 'canvasSize', {value: canvasSize});
+    Object.seal(this);
     CANVAS_BOARD.width = CANVAS_BOARD.height = this.canvasSize;
   }
 

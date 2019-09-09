@@ -34,7 +34,7 @@ export class Piece {
     CONTEXT_PIECES.clearRect(0, 0, CANVAS_PIECES.width, CANVAS_PIECES.height);
   }
 
-  // Make a 'Move' class that extends/uses Coordinate
+  // Make a 'Move' class that extends/uses Coordinate?
 
   calculateMoves(pieces) {
     const calculateMove = function(pieces, moves, col, row) {

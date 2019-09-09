@@ -23,6 +23,7 @@ export class Piece {
     }
     Object.defineProperty(this, 'isKing', {value: false, writable: true});
     Object.defineProperty(this, 'hasMove', {value: false, writable: true});
+    Object.seal(this);
   }
 
   static initialize(canvasSize, squareSize) {

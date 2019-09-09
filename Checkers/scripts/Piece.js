@@ -16,14 +16,13 @@ const KING_COLOR = 'rgb(255, 215, 0)';
 export class Piece {
   constructor(col, row, player) {
     Object.defineProperty(this, 'coordinate', {value: new Coordinate(col, row)});
-    // this.coordinate = new Coordinate(col, row);
     if (player === PLAYER_1 || player === PLAYER_2) {
       Object.defineProperty(this, 'player', {value: player});
     } else {
       throw 'Error: The property \'player\' may only be \'' + PLAYER_1 + '\' or \'' + PLAYER_2 + '\'.';
     }
-    this.isKing = false;
-    this.hasMove = false;
+    Object.defineProperty(this, 'isKing', {value: false, writable: true});
+    Object.defineProperty(this, 'hasMove', {value: false, writable: true});
   }
 
   static initialize(canvasSize, squareSize) {

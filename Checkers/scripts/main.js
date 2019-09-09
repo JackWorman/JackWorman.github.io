@@ -163,6 +163,18 @@ function resetGame() {
       }
     }
   }
+  // Check if has move.
+  for (let col = 0; col < GRID_SIZE; col++) {
+    for (let row = 0; row < GRID_SIZE; row++) {
+      if (pieces[col][row] !== 'empty') {
+        if (pieces[col][row].player === turn && pieces[col][row].calculateMoves(pieces).length > 0) {
+          pieces[col][row].hasMove = true;
+        } else {
+          pieces[col][row].hasMove = false;
+        }
+      }
+    }
+  }
   renderPieces();
 }
 

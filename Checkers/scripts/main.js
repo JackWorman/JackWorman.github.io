@@ -53,13 +53,15 @@ CANVAS_CONTAINER.addEventListener('click', function() {
     }
   } else {
     // TODO: only allow selecting a pieces with hasMove = true
+
+    selectedCoordinate.setCoordinate(mouseCoordinate.col, mouseCoordinate.row);
     // Check if a piece was selected.
     if (pieces[selectedCoordinate.col][selectedCoordinate.row] !== 'empty'
       && pieces[selectedCoordinate.col][selectedCoordinate.row].hasMove) {
-      selectedCoordinate.setCoordinate(mouseCoordinate.col, mouseCoordinate.row);
       moveCoordinates = pieces[selectedCoordinate.col][selectedCoordinate.row].calculateMoves(pieces);
     } else {
       moveCoordinates = [];
+      selectedCoordinate.setCoordinate(UNDEFINED, UNDEFINED);
     }
   }
   board.render(mouseCoordinate, selectedCoordinate, moveCoordinates);

@@ -172,7 +172,7 @@ function setHasMoveOnAllPieces() {
   for (let col = 0; col < GRID_SIZE; col++) {
     for (let row = 0; row < GRID_SIZE; row++) {
       if (pieces[col][row] !== 'empty' && pieces[col][row].player === turn) {
-        for (const move of pieces[col][row].calculateMoves()) {
+        for (const move of pieces[col][row].calculateMoves(pieces, false)) {
           if (move.jumps.length > 0) {
             jumpsAvailable = true;
           }

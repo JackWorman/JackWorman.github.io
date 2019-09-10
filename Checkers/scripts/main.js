@@ -58,7 +58,7 @@ CANVAS_CONTAINER.addEventListener('click', function() {
       selectedCoordinate.setCoordinate(mouseCoordinate.col, mouseCoordinate.row);
       moveCoordinates = pieces[selectedCoordinate.col][selectedCoordinate.row].calculateMoves(pieces);
     } else {
-      moveCoordinates = [];
+      // moveCoordinates = [];
       // selectedCoordinate.setCoordinate(UNDEFINED, UNDEFINED);
     }
   }

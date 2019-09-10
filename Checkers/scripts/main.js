@@ -32,8 +32,8 @@ CANVAS_CONTAINER.addEventListener('click', function() {
   if (Coordinate.compare(selectedCoordinate, mouseCoordinate)) {
     selectedCoordinate.setCoordinate(UNDEFINED, UNDEFINED);
     moveCoordinates = [];
+  // Checks if a moveCoordinate was selected.
   } else if (moveCoordinates.length !== 0) {
-    // Checks if a moveCoordinate was selected.
     for (const moveCoordinate of moveCoordinates) {
       if (Coordinate.compare(moveCoordinate, mouseCoordinate)) {
         movePiece(moveCoordinate);
@@ -51,7 +51,7 @@ CANVAS_CONTAINER.addEventListener('click', function() {
         break;
       }
     }
-    // Check if a piece was selected.
+  // Check if a piece was selected.
   } else if (pieces[mouseCoordinate.col][mouseCoordinate.row] !== 'empty'
     && pieces[mouseCoordinate.col][mouseCoordinate.row].hasMove) {
     selectedCoordinate.setCoordinate(mouseCoordinate.col, mouseCoordinate.row);

@@ -52,10 +52,11 @@ CANVAS_CONTAINER.addEventListener('click', function() {
       }
     }
   } else {
+    // TODO: only allow selecting a pieces with hasMove = true
     // Check if a piece was selected.
-    selectedCoordinate.setCoordinate(mouseCoordinate.col, mouseCoordinate.row);
     if (pieces[selectedCoordinate.col][selectedCoordinate.row] !== 'empty'
-      && pieces[selectedCoordinate.col][selectedCoordinate.row].player === turn) {
+      && pieces[selectedCoordinate.col][selectedCoordinate.row].hasMove) {
+      selectedCoordinate.setCoordinate(mouseCoordinate.col, mouseCoordinate.row);
       moveCoordinates = pieces[selectedCoordinate.col][selectedCoordinate.row].calculateMoves(pieces);
     } else {
       moveCoordinates = [];

@@ -51,16 +51,11 @@ CANVAS_CONTAINER.addEventListener('click', function() {
         break;
       }
     }
-  } else {
     // Check if a piece was selected.
-    if (pieces[mouseCoordinate.col][mouseCoordinate.row] !== 'empty'
-      && pieces[mouseCoordinate.col][mouseCoordinate.row].hasMove) {
-      selectedCoordinate.setCoordinate(mouseCoordinate.col, mouseCoordinate.row);
-      moveCoordinates = pieces[selectedCoordinate.col][selectedCoordinate.row].calculateMoves(pieces);
-    } else {
-      // moveCoordinates = [];
-      // selectedCoordinate.setCoordinate(UNDEFINED, UNDEFINED);
-    }
+  } else if (pieces[mouseCoordinate.col][mouseCoordinate.row] !== 'empty'
+    && pieces[mouseCoordinate.col][mouseCoordinate.row].hasMove) {
+    selectedCoordinate.setCoordinate(mouseCoordinate.col, mouseCoordinate.row);
+    moveCoordinates = pieces[selectedCoordinate.col][selectedCoordinate.row].calculateMoves(pieces);
   }
   board.render(mouseCoordinate, selectedCoordinate, moveCoordinates);
 });

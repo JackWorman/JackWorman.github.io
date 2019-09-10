@@ -46,18 +46,7 @@ CANVAS_CONTAINER.addEventListener('click', function() {
           turn = PLAYER_1;
         }
         checkIfAPlayerWon();
-        // Check if has move.
-        for (let col = 0; col < GRID_SIZE; col++) {
-          for (let row = 0; row < GRID_SIZE; row++) {
-            if (pieces[col][row] !== 'empty') {
-              if (pieces[col][row].player === turn && pieces[col][row].calculateMoves(pieces).length > 0) {
-                pieces[col][row].hasMove = true;
-              } else {
-                pieces[col][row].hasMove = false;
-              }
-            }
-          }
-        }
+        setHasMoveOnAllPieces();
         renderPieces();
         break;
       }
@@ -163,7 +152,11 @@ function resetGame() {
       }
     }
   }
-  // Check if has move.
+  setHasMoveOnAllPieces();
+  renderPieces();
+}
+
+function setHasMoveOnAllPieces() {
   for (let col = 0; col < GRID_SIZE; col++) {
     for (let row = 0; row < GRID_SIZE; row++) {
       if (pieces[col][row] !== 'empty') {
@@ -175,9 +168,4 @@ function resetGame() {
       }
     }
   }
-  renderPieces();
-}
-
-function checkPossibleMoves() {
-
 }

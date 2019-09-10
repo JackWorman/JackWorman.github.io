@@ -55,7 +55,21 @@ CANVAS_CONTAINER.addEventListener('click', function() {
   } else if (pieces[mouseCoordinate.col][mouseCoordinate.row] !== 'empty'
     && pieces[mouseCoordinate.col][mouseCoordinate.row].hasMove) {
     selectedCoordinate.setCoordinate(mouseCoordinate.col, mouseCoordinate.row);
-    moveCoordinates = pieces[selectedCoordinate.col][selectedCoordinate.row].calculateMoves(pieces);
+
+    let jumpsAvailable = false;
+    for (let col = 0; col < GRID_SIZE; col++) {
+      for (let row = 0; row < GRID_SIZE; row++) {
+        if (pieces[col][row] !== 'empty' && pieces[col][row].player === turn) {
+          for (const move of pieces[col][row].calculateMoves()) {
+            if (move.jumps.length > 0) {
+              jumpsAvailable = true;
+            }
+          }
+        }
+      }
+    }
+
+    moveCoordinates = pieces[selectedCoordinate.col][selectedCoordinate.row].calculateMoves(pieces, jumpsAvailable);
   }
   board.render(mouseCoordinate, selectedCoordinate, moveCoordinates);
 });
@@ -153,10 +167,25 @@ function resetGame() {
 }
 
 function setHasMoveOnAllPieces() {
+  // Checks if there are any jumps available.
+  let jumpsAvailable = false;
+  for (let col = 0; col < GRID_SIZE; col++) {
+    for (let row = 0; row < GRID_SIZE; row++) {
+      if (pieces[col][row] !== 'empty' && pieces[col][row].player === turn) {
+        for (const move of pieces[col][row].calculateMoves()) {
+          if (move.jumps.length > 0) {
+            jumpsAvailable = true;
+          }
+        }
+      }
+    }
+  }
+
   for (let col = 0; col < GRID_SIZE; col++) {
     for (let row = 0; row < GRID_SIZE; row++) {
       if (pieces[col][row] !== 'empty') {
-        if (pieces[col][row].player === turn && pieces[col][row].calculateMoves(pieces).length > 0) {
+        if (pieces[col][row].player === turn && pieces[col][row].calculateMoves(pieces, jumpsAvailable).length > 0) {
+          let hasJump = false;
           pieces[col][row].hasMove = true;
         } else {
           pieces[col][row].hasMove = false;

@@ -35,9 +35,9 @@ export class Piece {
     CONTEXT_PIECES.clearRect(0, 0, CANVAS_PIECES.width, CANVAS_PIECES.height);
   }
 
-  // Make a 'Move' class that extends/uses Coordinate?
-
-  calculateMoves(pieces) {
+  // TODO: make a Move class
+  // TODO: pass in jumps available
+  calculateMoves(pieces, jumpsAvailable) {
     const calculateMove = function(pieces, moves, col, row) {
       if (is2DArrayDefined(pieces, col, row) && pieces[col][row] === 'empty') {
         moves.push({col: col, row: row, jumps: []});
@@ -54,6 +54,9 @@ export class Piece {
       moves = calculateMove(pieces, moves, this.coordinate.col + 1, this.coordinate.row + 1);
     }
     moves = moves.concat(this.calculateJumps(pieces, this.coordinate.col, this.coordinate.row, []));
+    if (jumpsAvailable) {
+      moves = moves.filter(move => move.jumps.length > 0);
+    }
     return moves;
   }
 

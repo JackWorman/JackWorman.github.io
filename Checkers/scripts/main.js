@@ -55,20 +55,7 @@ CANVAS_CONTAINER.addEventListener('click', function() {
   } else if (pieces[mouseCoordinate.col][mouseCoordinate.row] !== 'empty'
     && pieces[mouseCoordinate.col][mouseCoordinate.row].hasMove) {
     selectedCoordinate.setCoordinate(mouseCoordinate.col, mouseCoordinate.row);
-
-    let jumpsAvailable = false;
-    for (let col = 0; col < GRID_SIZE; col++) {
-      for (let row = 0; row < GRID_SIZE; row++) {
-        if (pieces[col][row] !== 'empty' && pieces[col][row].player === turn) {
-          for (const move of pieces[col][row].calculateMoves(pieces, false)) {
-            if (move.jumps.length > 0) {
-              jumpsAvailable = true;
-            }
-          }
-        }
-      }
-    }
-
+    let jumpsAvailable = checkForAvailableJumps();
     moveCoordinates = pieces[selectedCoordinate.col][selectedCoordinate.row].calculateMoves(pieces, jumpsAvailable);
   }
   board.render(mouseCoordinate, selectedCoordinate, moveCoordinates);
@@ -167,20 +154,7 @@ function resetGame() {
 }
 
 function setHasMoveOnAllPieces() {
-  // Checks if there are any jumps available.
-  let jumpsAvailable = false;
-  for (let col = 0; col < GRID_SIZE; col++) {
-    for (let row = 0; row < GRID_SIZE; row++) {
-      if (pieces[col][row] !== 'empty' && pieces[col][row].player === turn) {
-        for (const move of pieces[col][row].calculateMoves(pieces, false)) {
-          if (move.jumps.length > 0) {
-            jumpsAvailable = true;
-          }
-        }
-      }
-    }
-  }
-
+  let jumpsAvailable = checkForAvailableJumps();
   for (let col = 0; col < GRID_SIZE; col++) {
     for (let row = 0; row < GRID_SIZE; row++) {
       if (pieces[col][row] !== 'empty') {
@@ -189,6 +163,21 @@ function setHasMoveOnAllPieces() {
           pieces[col][row].hasMove = true;
         } else {
           pieces[col][row].hasMove = false;
+        }
+      }
+    }
+  }
+}
+
+function checkForAvailableJumps() {
+  let jumpsAvailable = false;
+  for (let col = 0; col < GRID_SIZE; col++) {
+    for (let row = 0; row < GRID_SIZE; row++) {
+      if (pieces[col][row] !== 'empty' && pieces[col][row].player === turn) {
+        for (const move of pieces[col][row].calculateMoves(pieces, false)) {
+          if (move.jumps.length > 0) {
+            jumpsAvailable = true;
+          }
         }
       }
     }

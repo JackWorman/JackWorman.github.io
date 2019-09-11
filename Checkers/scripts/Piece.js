@@ -36,7 +36,6 @@ export class Piece {
   }
 
   // TODO: make a Move class
-  // TODO: pass in jumps available
   calculateMoves(pieces, jumpsAvailable) {
     const calculateMove = function(pieces, moves, col, row) {
       if (is2DArrayDefined(pieces, col, row) && pieces[col][row] === 'empty') {

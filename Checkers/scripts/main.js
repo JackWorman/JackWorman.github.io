@@ -39,8 +39,8 @@ CANVAS_CONTAINER.addEventListener('click', function() {
         movePiece(moveCoordinate);
         selectedCoordinate.setCoordinate(UNDEFINED, UNDEFINED);
         moveCoordinates = [];
-        changeTurn();
         checkIfAPlayerWon();
+        changeTurn();
         setHasMoveOnAllPieces();
         renderPieces();
         break;

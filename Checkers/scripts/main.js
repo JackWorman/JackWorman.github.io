@@ -39,12 +39,7 @@ CANVAS_CONTAINER.addEventListener('click', function() {
         movePiece(moveCoordinate);
         selectedCoordinate.setCoordinate(UNDEFINED, UNDEFINED);
         moveCoordinates = [];
-        // Change the turn.
-        if (turn === PLAYER_1) {
-          turn = PLAYER_2;
-        } else if (turn === PLAYER_2) {
-          turn = PLAYER_1;
-        }
+        changeTurn();
         checkIfAPlayerWon();
         setHasMoveOnAllPieces();
         renderPieces();
@@ -105,6 +100,14 @@ function checkIfAPlayerWon() {
   } else if (!player2HasAPiece) {
     alert('Player 1 wins!');
     resetGame();
+  }
+}
+
+function changeTurn() {
+  if (turn === PLAYER_1) {
+    turn = PLAYER_2;
+  } else if (turn === PLAYER_2) {
+    turn = PLAYER_1;
   }
 }
 

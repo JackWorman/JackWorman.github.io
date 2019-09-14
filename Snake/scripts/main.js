@@ -1,11 +1,10 @@
 'use strict';
 
-import Snake from './modules/snake.js';
-import Fruit from './modules/fruit.js';
+import Snake from './snake.js';
+import Fruit from './fruit.js';
 
 let framesPerSecond = 15;
 let showGrid = false;
-let inputQueuing = true;
 // Constants
 const CANVAS_SIZE = 690; // in pixels
 const GRID_SIZE = 30;
@@ -26,6 +25,12 @@ const RAINBOW = [
   "rgb(148, 0, 211)",
 ];
 const DIRECTIONS = ['left', 'up', 'right', 'down'];
+const KEY_CODES = [
+  left: 37,
+  up: 38,
+  right: 39,
+  down: 40
+];
 // DOM Elements
 const CANVAS_FOREGROUND = document.getElementById('canvas-foreground');
 const CONTEXT_FOREGROUND = CANVAS_FOREGROUND.getContext('2d');
@@ -51,39 +56,21 @@ document.addEventListener('keydown', function(event) {
   if (snake.direction === 'none' && directionQueue.length === 0) {
       loop = setInterval(gameLoop, MILLISECONDS_PER_SECOND / framesPerSecond);
   }
-  if (inputQueuing) {
-    let dir = directionQueue.length ? directionQueue[directionQueue.length - 1] : snake.direction;
-    if (dir === 'left' || dir === 'right') {
-      if (event.keyCode === 38) {
-        directionQueue.push('up');
-      } else if (event.keyCode === 40) {
-        directionQueue.push('down');
-      }
-    } else if (dir === 'up' || dir === 'down') {
-      if (event.keyCode === 37) {
-        directionQueue.push('left');
-      } else if (event.keyCode === 39) {
-        directionQueue.push('right');
-      }
-    } else if (dir === 'none') {
-      directionQueue.push(DIRECTIONS[event.keyCode - 37]);
+  let dir = directionQueue.length ? directionQueue[directionQueue.length - 1] : snake.direction;
+  if (dir === 'left' || dir === 'right') {
+    if (event.keyCode === 38) {
+      directionQueue.push('up');
+    } else if (event.keyCode === 40) {
+      directionQueue.push('down');
     }
-  } else {
-    if (snake.body[0].direction === 'left' || snake.body[0].direction === 'right') {
-      if (event.keyCode === 38) {
-        directionQueue.push('up');
-      } else if (event.keyCode === 40) {
-        directionQueue.push('down');
-      }
-    } else if (snake.body[0].direction === 'up' || snake.body[0].direction === 'down') {
-      if (event.keyCode === 37) {
-        directionQueue.push('left');
-      } else if (event.keyCode === 39) {
-        directionQueue.push('right');
-      }
-    } else if (snake.body[0].direction === 'none') {
-      directionQueue.push(DIRECTIONS[event.keyCode - 37]);
+  } else if (dir === 'up' || dir === 'down') {
+    if (event.keyCode === 37) {
+      directionQueue.push('left');
+    } else if (event.keyCode === 39) {
+      directionQueue.push('right');
     }
+  } else if (dir === 'none') {
+    directionQueue.push(DIRECTIONS[event.keyCode - 37]);
   }
 }, true);
 

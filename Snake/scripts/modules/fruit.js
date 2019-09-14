@@ -7,10 +7,11 @@ export default class Fruit {
   }
 
   placeFruit(gridSize, snake) {
+    let collison;
     do {
       this.x = Math.floor(Math.random() * gridSize);
       this.y = Math.floor(Math.random() * gridSize);
-      let collison = false;
+      collison = false;
       for (const part of snake.body) {
         if (this.x === part.x && this.y === part.y) {
           collison = true;

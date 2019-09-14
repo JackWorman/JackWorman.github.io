@@ -25,12 +25,16 @@ const RAINBOW = [
   "rgb(148, 0, 211)",
 ];
 const DIRECTIONS = ['left', 'up', 'right', 'down'];
-// const KEY_CODES = [
-//   'left': 37,
-//   'up': 38,
-//   'right': 39,
-//   'down': 40
-// ];
+const KEY_CODES = {
+  'Left Arrow': 37,
+  'Up Arrow': 38,
+  'Right Arrow': 39,
+  'Down Arrow': 40,
+  'A': 65,
+  'W': 87,
+  'D': 68,
+  'S': 83
+};
 // DOM Elements
 const CANVAS_FOREGROUND = document.getElementById('canvas-foreground');
 const CONTEXT_FOREGROUND = CANVAS_FOREGROUND.getContext('2d');
@@ -53,6 +57,10 @@ document.addEventListener('keydown', function(event) {
   if (!controlsEnabled || (event.keyCode !== 37 && event.keyCode !== 38 && event.keyCode !== 39 && event.keyCode !== 40)) {
     return;
   }
+  if (!KEY_CODES.includes(event.keyCode)) {
+    return;
+  }
+
   if (snake.direction === 'none' && directionQueue.length === 0) {
       loop = setInterval(gameLoop, MILLISECONDS_PER_SECOND / framesPerSecond);
   }

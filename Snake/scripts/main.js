@@ -25,12 +25,12 @@ const RAINBOW = [
   "rgb(148, 0, 211)",
 ];
 const DIRECTIONS = ['left', 'up', 'right', 'down'];
-const KEY_CODES = [
-  'left': 37,
-  'up': 38,
-  'right': 39,
-  'down': 40
-];
+// const KEY_CODES = [
+//   'left': 37,
+//   'up': 38,
+//   'right': 39,
+//   'down': 40
+// ];
 // DOM Elements
 const CANVAS_FOREGROUND = document.getElementById('canvas-foreground');
 const CONTEXT_FOREGROUND = CANVAS_FOREGROUND.getContext('2d');

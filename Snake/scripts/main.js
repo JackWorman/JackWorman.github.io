@@ -37,6 +37,7 @@ const S_KEY_CODE = 83;
 const CANVAS_FOREGROUND = document.getElementById('canvas-foreground');
 const CONTEXT_FOREGROUND = CANVAS_FOREGROUND.getContext('2d');
 const SPAN_SCORE = document.getElementById('span-score');
+const SPAN_HIGHSCORE = document.getElementById('span-highscore');
 // Globals
 let directionQueue = [];
 let snake;
@@ -120,7 +121,7 @@ function updateScore() {
   if (localStorage.highscore < score) {
     localStorage.highscore = score;
   }
-  document.getElementById('span-highscore').textContent = 'Highscore: ' + localStorage.highscore;
+  SPAN_HIGHSCORE.textContent = 'Highscore: ' + localStorage.highscore;
 }
 
 function gameLoop() {

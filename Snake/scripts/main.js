@@ -27,8 +27,8 @@ const RAINBOW = [
 ];
 const DIRECTIONS = ['left', 'up', 'right', 'down'];
 // DOM Elements
-const CANVAS_BACKGROUND = document.getElementById('canvas-background');
-const CONTEXT_BACKGROUND = CANVAS_BACKGROUND.getContext('2d');
+// const CANVAS_BACKGROUND = document.getElementById('canvas-background');
+// const CONTEXT_BACKGROUND = CANVAS_BACKGROUND.getContext('2d');
 const CANVAS_FOREGROUND = document.getElementById('canvas-foreground');
 const CONTEXT_FOREGROUND = CANVAS_FOREGROUND.getContext('2d');
 const SPAN_SCORE = document.getElementById('span-score');

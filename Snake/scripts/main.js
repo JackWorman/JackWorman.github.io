@@ -25,16 +25,14 @@ const RAINBOW = [
   "rgb(148, 0, 211)",
 ];
 const DIRECTIONS = ['left', 'up', 'right', 'down'];
-const KEY_CODES = {
-  'Left Arrow': 37,
-  'Up Arrow': 38,
-  'Right Arrow': 39,
-  'Down Arrow': 40,
-  'A': 65,
-  'W': 87,
-  'D': 68,
-  'S': 83
-};
+LEFT_ARROW_KEY_CODE = 37;
+UP_ARROW_KEY_CODE = 38;
+RIGHT_ARROW_KEY_CODE = 39;
+DOWN_ARROW_KEY_CODE = 40;
+A_KEY_CODE = 65;
+W_KEY_CODE = 87;
+D_KEY_CODE = 68;
+S_KEY_CODE = 83;
 // DOM Elements
 const CANVAS_FOREGROUND = document.getElementById('canvas-foreground');
 const CONTEXT_FOREGROUND = CANVAS_FOREGROUND.getContext('2d');
@@ -57,27 +55,28 @@ document.addEventListener('keydown', function(event) {
   if (!controlsEnabled || (event.keyCode !== 37 && event.keyCode !== 38 && event.keyCode !== 39 && event.keyCode !== 40)) {
     return;
   }
-  if (!KEY_CODES.includes(event.keyCode)) {
-    return;
-  }
+  // if (!KEY_CODES.includes(event.keyCode)) {
+  //   return;
+  // }
 
   if (snake.direction === 'none' && directionQueue.length === 0) {
-      loop = setInterval(gameLoop, MILLISECONDS_PER_SECOND / framesPerSecond);
+    loop = setInterval(gameLoop, MILLISECONDS_PER_SECOND / framesPerSecond);
   }
-  let dir = directionQueue.length ? directionQueue[directionQueue.length - 1] : snake.direction;
-  if (dir === 'left' || dir === 'right') {
-    if (event.keyCode === 38) {
+  let currentDirection = directionQueue.length ? directionQueue[directionQueue.length - 1] : snake.direction;
+  if (currentDirection === 'left' || currentDirection === 'right') {
+    if (event.keyCode === UP_ARROW_KEY_CODE || event.keyCode === W_KEY_CODE) {
       directionQueue.push('up');
-    } else if (event.keyCode === 40) {
+    } else if (event.keyCode === DOWN_ARROW_KEY_CODE || event.keyCode === S_KEY_CODE) {
       directionQueue.push('down');
     }
-  } else if (dir === 'up' || dir === 'down') {
-    if (event.keyCode === 37) {
+  } else if (currentDirection === 'up' || currentDirection === 'down') {
+    if (event.keyCode === LEFT_ARROW_KEY_CODE || event.keyCode === A_KEY_CODE) {
       directionQueue.push('left');
-    } else if (event.keyCode === 39) {
+    } else if (event.keyCode === RIGHT_ARROW_KEY_CODE || event.keyCode === D_KEY_CODE) {
       directionQueue.push('right');
     }
-  } else if (dir === 'none') {
+  } else if (currentDirection === 'none') {
+    //
     directionQueue.push(DIRECTIONS[event.keyCode - 37]);
   }
 }, true);

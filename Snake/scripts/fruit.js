@@ -1,6 +1,6 @@
 'use strict'
 
-export default class Fruit {
+export class Fruit {
   constructor() {
     this.x = -1;
     this.y = -1;

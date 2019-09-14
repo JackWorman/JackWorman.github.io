@@ -1,6 +1,6 @@
 'use strict'
 
-export default class Snake {
+export class Snake {
   constructor(startX, startY) {
     this.direction = 'none';
     this.body = [{x: startX, y: startY}];

@@ -1,7 +1,7 @@
 'use strict';
 
-import Snake from './snake.js';
-import Fruit from './fruit.js';
+import {Snake} from './snake.js';
+import {Fruit} from './fruit.js';
 
 let framesPerSecond = 15;
 let showGrid = false;

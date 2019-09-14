@@ -51,7 +51,7 @@ html, body {
 #div-score-container {
   font-family: 'VT323';
   font-size: 48px;
-  /* color: white; */
+  color: white;
 }
 
 #span-highscore {

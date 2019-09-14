@@ -78,8 +78,15 @@ document.addEventListener('keydown', function(event) {
       directionQueue.push('right');
     }
   } else if (currentDirection === 'none') {
-    //
-    directionQueue.push(DIRECTIONS[event.keyCode - 37]);
+    if (event.keyCode === LEFT_ARROW_KEY_CODE || event.keyCode === A_KEY_CODE) {
+      directionQueue.push('left');
+    } else if (event.keyCode === UP_ARROW_KEY_CODE || event.keyCode === W_KEY_CODE) {
+      directionQueue.push('up');
+    } else if (event.keyCode === RIGHT_ARROW_KEY_CODE || event.keyCode === D_KEY_CODE) {
+      directionQueue.push('right');
+    } else if (event.keyCode === DOWN_ARROW_KEY_CODE || event.keyCode === S_KEY_CODE) {
+      directionQueue.push('down');
+    }
   }
 }, true);
 

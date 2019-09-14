@@ -3,7 +3,7 @@
 import Snake from './modules/snake.js';
 import Fruit from './modules/fruit.js';
 
-var framesPerSecond = 20;
+var framesPerSecond = 15;
 var showGrid = false;
 var inputQueuing = true;
 // Constants
@@ -33,14 +33,14 @@ const CANVAS_FOREGROUND = document.getElementById('canvas-foreground');
 const CONTEXT_FOREGROUND = CANVAS_FOREGROUND.getContext('2d');
 const SPAN_SCORE = document.getElementById('span-score');
 // Globals
-var directionQueue = [];
-var snake;
-var fruit = new Fruit();
-var score = 0;
-var distanceTraveled;
-var smallestDistancePossible;
-var controlsEnabled = false;
-var loop;
+let directionQueue = [];
+let snake;
+let fruit = new Fruit();
+let score = 0;
+let distanceTraveled;
+let smallestDistancePossible;
+let controlsEnabled = false;
+let loop;
 
 // Run on load.
 setUpBackgroundAndForeground();
@@ -90,8 +90,9 @@ document.addEventListener('keydown', function(event) {
 }, true);
 
 function setUpBackgroundAndForeground() {
-  CANVAS_BACKGROUND.width = CANVAS_BACKGROUND.height = CANVAS_FOREGROUND.width = CANVAS_FOREGROUND.height = CANVAS_SIZE;
-  renderBackground();
+  // CANVAS_BACKGROUND.width = CANVAS_BACKGROUND.height = CANVAS_SIZE;
+  CANVAS_FOREGROUND.width = CANVAS_FOREGROUND.height = CANVAS_SIZE;
+  // renderBackground();
 }
 
 function renderBackground() {

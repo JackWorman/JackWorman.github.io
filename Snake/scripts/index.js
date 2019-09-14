@@ -143,7 +143,7 @@ function updateScore() {
   if (localStorage.highscore < score) {
     localStorage.highscore = score;
   }
-  document.getElementById('span-highscore').textContent = 'Highscore: ' + localStorage.highscore;
+  document.getElementById('span-highscore').textContent = 'Highscore: ' + localStorage.highscore;  
 }
 
 function gameLoop() {

@@ -3,7 +3,7 @@
 import Snake from './modules/snake.js';
 import Fruit from './modules/fruit.js';
 
-var framesPerSecond = 15;
+var framesPerSecond = 20;
 var showGrid = false;
 var inputQueuing = true;
 // Constants

@@ -25,14 +25,14 @@ const RAINBOW = [
   "rgb(148, 0, 211)",
 ];
 const DIRECTIONS = ['left', 'up', 'right', 'down'];
-LEFT_ARROW_KEY_CODE = 37;
-UP_ARROW_KEY_CODE = 38;
-RIGHT_ARROW_KEY_CODE = 39;
-DOWN_ARROW_KEY_CODE = 40;
-A_KEY_CODE = 65;
-W_KEY_CODE = 87;
-D_KEY_CODE = 68;
-S_KEY_CODE = 83;
+const LEFT_ARROW_KEY_CODE = 37;
+const UP_ARROW_KEY_CODE = 38;
+const RIGHT_ARROW_KEY_CODE = 39;
+const DOWN_ARROW_KEY_CODE = 40;
+const A_KEY_CODE = 65;
+const W_KEY_CODE = 87;
+const D_KEY_CODE = 68;
+const S_KEY_CODE = 83;
 // DOM Elements
 const CANVAS_FOREGROUND = document.getElementById('canvas-foreground');
 const CONTEXT_FOREGROUND = CANVAS_FOREGROUND.getContext('2d');

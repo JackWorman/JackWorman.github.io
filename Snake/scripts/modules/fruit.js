@@ -17,13 +17,6 @@ export default class Fruit {
           collison = true;
         }
       }
-      // for (let i = 0; i < snake.body.length; i++) {
-      //   if (fruitX === snake.body[i].x && fruitY === snake.body[i].y) {
-      //     collison = true;
-      //   }
-      // }
     } while (collison);
-    // this.x = fruitX
-    // this.y = fruitY;
   }
 }

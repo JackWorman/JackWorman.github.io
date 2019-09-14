@@ -62,18 +62,19 @@ html, body {
   float: right;
 }
 
-#canvas-container {
+#canvas-foreground {
   height: 692px;
   width: 692px;
   display: inline-block;
   position: relative;
   cursor: none;
+  border: 1px solid white;
 }
 
-#canvas-foreground {
+/* #canvas-foreground {
   position: absolute;
   z-index: 1;
   top: 0px;
   left: 0px;
   border: 1px solid white;
-}
+} */

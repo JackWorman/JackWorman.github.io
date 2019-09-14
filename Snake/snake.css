@@ -32,12 +32,6 @@ html, body {
   text-align: center;
 }
 
-#button-settings {
-  position:absolute;
-  top:0;
-  right:0;
-}
-
 #header-container {
   width: 692px;
   margin: 0 auto;

@@ -3,9 +3,9 @@
 import Snake from './modules/snake.js';
 import Fruit from './modules/fruit.js';
 
-var framesPerSecond = 15;
-var showGrid = false;
-var inputQueuing = true;
+let framesPerSecond = 15;
+let showGrid = false;
+let inputQueuing = true;
 // Constants
 const CANVAS_SIZE = 690; // in pixels
 const GRID_SIZE = 30;
@@ -27,8 +27,6 @@ const RAINBOW = [
 ];
 const DIRECTIONS = ['left', 'up', 'right', 'down'];
 // DOM Elements
-// const CANVAS_BACKGROUND = document.getElementById('canvas-background');
-// const CONTEXT_BACKGROUND = CANVAS_BACKGROUND.getContext('2d');
 const CANVAS_FOREGROUND = document.getElementById('canvas-foreground');
 const CONTEXT_FOREGROUND = CANVAS_FOREGROUND.getContext('2d');
 const SPAN_SCORE = document.getElementById('span-score');
@@ -43,7 +41,7 @@ let controlsEnabled = false;
 let loop;
 
 // Run on load.
-setUpBackgroundAndForeground();
+setUpForeground();
 reset();
 
 document.addEventListener('keydown', function(event) {
@@ -54,7 +52,7 @@ document.addEventListener('keydown', function(event) {
       loop = setInterval(gameLoop, MILLISECONDS_PER_SECOND / framesPerSecond);
   }
   if (inputQueuing) {
-    var dir = directionQueue.length ? directionQueue[directionQueue.length - 1] : snake.direction;
+    let dir = directionQueue.length ? directionQueue[directionQueue.length - 1] : snake.direction;
     if (dir === 'left' || dir === 'right') {
       if (event.keyCode === 38) {
         directionQueue.push('up');
@@ -89,27 +87,8 @@ document.addEventListener('keydown', function(event) {
   }
 }, true);
 
-function setUpBackgroundAndForeground() {
-  // CANVAS_BACKGROUND.width = CANVAS_BACKGROUND.height = CANVAS_SIZE;
+function setUpForeground() {
   CANVAS_FOREGROUND.width = CANVAS_FOREGROUND.height = CANVAS_SIZE;
-  // renderBackground();
-}
-
-function renderBackground() {
-  CONTEXT_BACKGROUND.fillStyle = BLACK;
-  CONTEXT_BACKGROUND.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
-  if (showGrid) {
-    CONTEXT_BACKGROUND.strokeStyle = WHITE;
-    CONTEXT_BACKGROUND.beginPath();
-    for (var i = 0; i <= GRID_SIZE; i++) {
-      var step = i * CANVAS_SIZE / GRID_SIZE + 0.5;
-      CONTEXT_BACKGROUND.moveTo(0.5, step);
-      CONTEXT_BACKGROUND.lineTo(CANVAS_SIZE, step);
-      CONTEXT_BACKGROUND.moveTo(step, 0.5);
-      CONTEXT_BACKGROUND.lineTo(step, CANVAS_SIZE);
-    }
-    CONTEXT_BACKGROUND.stroke();
-  }
 }
 
 async function reset() {
@@ -146,7 +125,7 @@ function updateScore() {
 
 function gameLoop() {
   distanceTraveled++;
-  var direction = directionQueue.shift();
+  let direction = directionQueue.shift();
   if (direction) {
     snake.direction = direction;
   }
@@ -170,16 +149,16 @@ function gameLoop() {
 function renderForeground() {
   function fillSquare(x, y, color) {
     CONTEXT_FOREGROUND.fillStyle = color;
-    var xStart = x * CANVAS_SIZE / GRID_SIZE + 0.5;
-    var yStart = y * CANVAS_SIZE / GRID_SIZE + 0.5;
-    var xLength = CANVAS_SIZE / GRID_SIZE;
-    var yLength = CANVAS_SIZE / GRID_SIZE;
+    let xStart = x * CANVAS_SIZE / GRID_SIZE + 0.5;
+    let yStart = y * CANVAS_SIZE / GRID_SIZE + 0.5;
+    let xLength = CANVAS_SIZE / GRID_SIZE;
+    let yLength = CANVAS_SIZE / GRID_SIZE;
     CONTEXT_FOREGROUND.fillRect(xStart, yStart, xLength, yLength);
   }
   CONTEXT_FOREGROUND.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
   fillSquare(fruit.x, fruit.y, WHITE);
   // Render snake from head to tail.
-  for (var i = snake.body.length - 1; i >= 0; i--) {
+  for (let i = snake.body.length - 1; i >= 0; i--) {
     fillSquare(snake.body[i].x, snake.body[i].y, RAINBOW[i % RAINBOW.length]);
   }
 }

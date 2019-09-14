@@ -1,6 +1,6 @@
-var framesPerSecond = 15;
-var showGrid = false;
-var inputQueuing = true;
+let framesPerSecond = 15;
+let showGrid = false;
+let inputQueuing = true;
 
 function showDirections() {
   Swal.fire('Use the arrow keys to turn.\n' +

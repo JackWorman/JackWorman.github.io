@@ -57,6 +57,7 @@ document.addEventListener('keydown', function(event) {
     && event.keyCode !== 65 && event.keyCode !== 87 && event.keyCode !== 68 && event.keyCode !== 83)) {
     return;
   }
+  // Start Game.
   if (snake.direction === 'none' && directionQueue.length === 0) {
     loop = setInterval(gameLoop, MILLISECONDS_PER_SECOND / framesPerSecond);
   }

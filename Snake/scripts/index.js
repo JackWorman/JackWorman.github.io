@@ -3,12 +3,6 @@
 import Snake from './modules/snake.js';
 import Fruit from './modules/fruit.js';
 
-// Force a refresh from server.
-if (getCookie("clear_cache") === "") {
-  setCookie("clear_cache", "true", 1 / 24 / 60);
-  window.location.reload(true);
-}
-
 // Constants
 const CANVAS_SIZE = 690; // in pixels
 const GRID_SIZE = 30;
@@ -143,7 +137,7 @@ function updateScore() {
   if (localStorage.highscore < score) {
     localStorage.highscore = score;
   }
-  document.getElementById('span-highscore').textContent = 'Highscore: ' + localStorage.highscore;  
+  document.getElementById('span-highscore').textContent = 'Highscore: ' + localStorage.highscore;
 }
 
 function gameLoop() {

@@ -8,11 +8,11 @@ export default class Fruit {
 
   placeFruit(gridSize, snake) {
     do {
-      let fruitX = Math.floor(Math.random() * gridSize);
-      let fruitY = Math.floor(Math.random() * gridSize);
+      this.x = Math.floor(Math.random() * gridSize);
+      this.y = Math.floor(Math.random() * gridSize);
       let collison = false;
-      for (const part of body) {
-        if (fruitX === part.x && fruitY === part.y) {
+      for (const part of snake.body) {
+        if (this.x === part.x && this.y === part.y) {
           collison = true;
         }
       }
@@ -22,7 +22,7 @@ export default class Fruit {
       //   }
       // }
     } while (collison);
-    this.x = fruitX
-    this.y = fruitY;
+    // this.x = fruitX
+    // this.y = fruitY;
   }
 }

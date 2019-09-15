@@ -146,7 +146,7 @@ function updateHighscore() {
     while (localStorage.highscore / Math.pow(10, count) >= 1) {
       count++
     }
-    paddingZeros = paddingZeros.slice(0, padding.length - count);
+    paddingZeros = paddingZeros.slice(0, paddingZeros.length - count);
     SPAN_HIGHSCORE.textContent = '' + paddingZeros + localStorage.highscore;
   }
 }

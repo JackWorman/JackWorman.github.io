@@ -32,6 +32,12 @@ body {
   text-align: center;
 }
 
+#span-fps {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
 #div-header-container {
   width: 692px;
   margin: 0 auto;

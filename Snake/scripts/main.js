@@ -105,7 +105,6 @@ async function reset() {
   updateHighscore();
   score = 0;
   updateScore();
-  // SPAN_SCORE.textContent = 'Score: ' + score;
   // Setup and render foreground.
   snake = new Snake(GRID_SIZE / 2, GRID_SIZE / 2);
   fruit.placeFruit(GRID_SIZE, snake);

@@ -137,7 +137,7 @@ function updateHighscore() {
   let padding = '0000000';
   let count = 6;
   while (localStorage.highscore / Math.pow(10, count--) < 1) {
-    padding = padding.slice(0, padding.length - 1);
+    padding = padding.slice(0, padding.length - 2);
   }
   SPAN_HIGHSCORE.textContent = 'Highscore: ' + padding + localStorage.highscore;
 }

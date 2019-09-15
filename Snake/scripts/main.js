@@ -158,7 +158,7 @@ function calculateFPS() {
     calculateFPS.then = 0;
   }
   var now = performance.now();
-  if (calculateFPS.deltas.length >= 100) {
+  if (calculateFPS.deltas.length >= 15) {
     calculateFPS.deltas.shift();
   }
   calculateFPS.deltas.push(now - calculateFPS.then);

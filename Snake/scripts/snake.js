@@ -8,7 +8,7 @@ export class Snake {
 
   move() {
     // Move the snake from tail to head.
-    for (var i = this.body.length - 1; i > 0; i--) {
+    for (let i = this.body.length - 1; i > 0; i--) {
       this.body[i] = {x: this.body[i - 1].x, y: this.body[i - 1].y};
     }
     // Move the head of the snake.
@@ -24,14 +24,14 @@ export class Snake {
   }
 
   grow() {
-    for (var i = 0; i < 5; i++) {
+    for (let i = 0; i < 5; i++) {
       this.body.push({x: this.body[this.body.length - 1].x, y: this.body[this.body.length - 1].y});
     }
   }
 
   checkCollison(gridSize) {
     // Check if the snake hit its body.
-    for (var i = 1; i < this.body.length; i++) {
+    for (let i = 1; i < this.body.length; i++) {
       if (this.body[0].x === this.body[i].x && this.body[0].y === this.body[i].y) {
         return true;
       }

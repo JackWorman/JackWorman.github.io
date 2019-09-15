@@ -103,7 +103,8 @@ async function reset() {
   // Reset score variables.
   updateHighscore();
   score = 0;
-  SPAN_SCORE.textContent = 'Score: ' + score;
+  updateScore();
+  // SPAN_SCORE.textContent = 'Score: ' + score;
   // Setup and render foreground.
   snake = new Snake(GRID_SIZE / 2, GRID_SIZE / 2);
   fruit.placeFruit(GRID_SIZE, snake);
@@ -112,6 +113,19 @@ async function reset() {
   smallestDistancePossible = Math.abs(fruit.x - snake.body[0].x) + Math.abs(fruit.y - snake.body[0].y);
   renderForeground();
   controlsEnabled = true;
+}
+
+function updateScore() {
+  score += Math.ceil(snake.body.length * smallestDistancePossible / distanceTraveled);
+  let padding = '';
+  let count = 0;
+  while (score / Math.pow(10, count) >= 1) {
+    count++;
+  }
+  for (let i = 0; i < 7 - count; i++) {
+    padding += '0';
+  }
+  SPAN_SCORE.textContent = 'Score: ' + padding + score;
 }
 
 function updateHighscore() {
@@ -144,18 +158,8 @@ function gameLoop() {
   }
   if (snake.checkFruitEaten(fruit)) {
     // Update score.
-    score += Math.ceil(snake.body.length * smallestDistancePossible / distanceTraveled);
+    updateScore();
 
-    let padding = '';
-    let count = 0;
-    while (score / Math.pow(10, count) >= 1) {
-      count++;
-    }
-    for (let i = 0; i < 7 - count; i++) {
-      padding += '0';
-    }
-
-    SPAN_SCORE.textContent = 'Score: ' + padding + score;
     // Increase the size of the snake.
     snake.grow();
     fruit.placeFruit(GRID_SIZE, snake);

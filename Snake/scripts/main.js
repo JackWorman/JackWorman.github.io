@@ -138,7 +138,9 @@ function updateHighscore() {
   // Calculates the amount of padding zeros needed.
   let padding = '000000000';
   let count = 0;
-  while (localStorage.highscore / Math.pow(10, count++) >= 1) {}
+  while (localStorage.highscore / Math.pow(10, count) >= 1) {
+    count++
+  }
   console.log(count);
   padding = padding.slice(0, padding.length - count);
   // Updates the highscore display.

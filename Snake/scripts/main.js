@@ -137,15 +137,18 @@ function updateHighscore() {
   if (localStorage.highscore < score) {
     localStorage.highscore = score;
   }
-  // Calculates the amount of padding zeros needed.
-  let padding = '000000000';
-  let count = 0;
-  while (localStorage.highscore / Math.pow(10, count) >= 1) {
-    count++
+  if (localStorage.highscore === 0) {
+    SPAN_HIGHSCORE.textContent = '000000000';
+  } else {
+    // Calculates the amount of padding-zeros needed.
+    let paddingZeros = '000000000';
+    let count = 0;
+    while (localStorage.highscore / Math.pow(10, count) >= 1) {
+      count++
+    }
+    paddingZeros = paddingZeros.slice(0, padding.length - count);
+    SPAN_HIGHSCORE.textContent = '' + paddingZeros + localStorage.highscore;
   }
-  padding = padding.slice(0, padding.length - count);
-  // Updates the highscore display.
-  SPAN_HIGHSCORE.textContent = '' + padding + localStorage.highscore;
 }
 
 function gameLoop() {

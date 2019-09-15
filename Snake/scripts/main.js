@@ -136,7 +136,7 @@ function updateHighscore() {
     localStorage.highscore = score;
   }
   // Calculates the amount of padding zeros needed.
-  let padding = '00000000';
+  let padding = '000000000';
   let count = 0;
   while (localStorage.highscore / Math.pow(10, count++) >= 1) {}
   console.log(count);

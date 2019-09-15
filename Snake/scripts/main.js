@@ -116,7 +116,6 @@ async function reset() {
 }
 
 function updateScore() {
-  score += Math.ceil(snake.body.length * smallestDistancePossible / distanceTraveled);
   let padding = '';
   let count = 0;
   while (score / Math.pow(10, count) >= 1) {
@@ -158,6 +157,8 @@ function gameLoop() {
   }
   if (snake.checkFruitEaten(fruit)) {
     // Update score.
+
+      score += Math.ceil(snake.body.length * smallestDistancePossible / distanceTraveled);
     updateScore();
 
     // Increase the size of the snake.

@@ -97,7 +97,7 @@ function calculateFPS() {
     calculateFPS.deltas.shift();
   }
   calculateFPS.deltas.push(now - calculateFPS.then);
-  SPAN_FPS.textContent = 'FPS: ' + Math.round(MILLISECONDS_PER_SECOND / (calculateFPS.deltas.reduce((a, b) => (a + b)) / calculateFPS.deltas.length));
+  SPAN_FPS.textContent = 'FPS: ' + (MILLISECONDS_PER_SECOND / (calculateFPS.deltas.reduce((a, b) => (a + b)) / calculateFPS.deltas.length)).toFixed(2);
   calculateFPS.then = now;
 }
 

@@ -177,10 +177,8 @@ function gameLoop() {
     return;
   }
   if (snake.checkFruitEaten(fruit)) {
-    // Update score.
-    score += Math.ceil(Math.pow(snake.body.length, 1 + smallestDistancePossible/distanceTraveled));
+    score += Math.ceil(Math.pow(snake.body.length, 1 + smallestDistancePossible / distanceTraveled));
     updateScore();
-    // Increase the size of the snake.
     snake.grow();
     fruit.placeFruit(GRID_SIZE, snake);
     distanceTraveled = 0;

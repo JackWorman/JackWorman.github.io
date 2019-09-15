@@ -125,6 +125,8 @@ function updateHighscore() {
   let count = 0;
   while (localStorage.highscore / Math.pow(10, count) >= 1 ) {
     count++;
+  }
+  for (let i = 9; i >= 9 - count; i--) {
     padding += '0';
   }
   SPAN_HIGHSCORE.textContent = 'Highscore: ' + padding + localStorage.highscore;

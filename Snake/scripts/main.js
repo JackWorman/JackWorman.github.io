@@ -124,7 +124,7 @@ function updateScore() {
   for (let i = 0; i < 7 - count; i++) {
     padding += '0';
   }
-  SPAN_SCORE.textContent = 'Score: ' + padding + score;
+  SPAN_SCORE.textContent = '' + padding + score;
 }
 
 function updateHighscore() {
@@ -142,7 +142,7 @@ function updateHighscore() {
     padding = padding.slice(0, padding.length - 2);
   }
   // Updates the highscore display.
-  SPAN_HIGHSCORE.textContent = 'Highscore: ' + padding + localStorage.highscore;
+  SPAN_HIGHSCORE.textContent = '' + padding + localStorage.highscore;
 }
 
 function gameLoop() {

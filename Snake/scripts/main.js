@@ -101,7 +101,7 @@ async function reset() {
   }
   directionQueue = [];
   // Reset score variables.
-  updateScore();
+  updateHighscore();
   score = 0;
   SPAN_SCORE.textContent = 'Score: ' + score;
   // Setup and render foreground.
@@ -114,14 +114,20 @@ async function reset() {
   controlsEnabled = true;
 }
 
-function updateScore() {
+function updateHighscore() {
   if (typeof localStorage.highscore === 'undefined') {
     localStorage.highscore = 0;
   }
   if (localStorage.highscore < score) {
     localStorage.highscore = score;
   }
-  SPAN_HIGHSCORE.textContent = 'Highscore: ' + localStorage.highscore;
+  let padding = '';
+  let count = 0;
+  while (localStorage.highscore / Math.pow(10, count) >= 1 ) {
+    count++;
+    padding += '0';
+  }
+  SPAN_HIGHSCORE.textContent = 'Highscore: ' + padding + localStorage.highscore;
 }
 
 function gameLoop() {
@@ -136,7 +142,7 @@ function gameLoop() {
   }
   if (snake.checkFruitEaten(fruit)) {
     // Update score.
-    score += Math.ceil(snake.body.length * smallestDistancePossible / distanceTraveled * framesPerSecond);
+    score += Math.ceil(snake.body.length * smallestDistancePossible / distanceTraveled);
     SPAN_SCORE.textContent = 'Score: ' + score;
     // Increase the size of the snake.
     snake.grow();

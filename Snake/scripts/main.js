@@ -121,7 +121,7 @@ function updateScore() {
   while (score / Math.pow(10, count) >= 1) {
     count++;
   }
-  for (let i = 0; i < 7 - count; i++) {
+  for (let i = 1; i < 7 - count; i++) {
     padding += '0';
   }
   SPAN_SCORE.textContent = '' + padding + score;

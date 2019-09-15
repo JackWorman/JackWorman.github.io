@@ -40,7 +40,22 @@ export class Snake {
     return this.body[0].x < 0 || this.body[0].y < 0 || this.body[0].x >= gridSize || this.body[0].y >= gridSize;
   }
 
-  checkFruitEaten(fruit, score, smallestDistancePossible) {
+  checkFruitEaten(fruit) {
     return this.body[0].x === fruit.x && this.body[0].y === fruit.y;
+  }
+
+  render(context) {
+    context.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
+    // Render snake from head to tail.
+    for (let i = snake.body.length - 1; i >= 0; i--) {
+      context.fillStyle = RAINBOW[i % RAINBOW.length];
+      let squareLength = CANVAS_SIZE / GRID_SIZE;
+      context.fillRect(
+        this.body[i].x * squareLength + 0.5,
+        this.body[i].y * squareLength + 0.5,
+        squareLength,
+        squareLength
+      );
+    }
   }
 }

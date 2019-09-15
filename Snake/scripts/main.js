@@ -152,14 +152,16 @@ function updateHighscore() {
 }
 
 function gameLoop() {
-  distanceTraveled++;
+
   let direction = directionQueue.shift();
   if (direction) {
     snake.direction = direction;
   }
   snake.move();
+  distanceTraveled++;
   if (snake.checkCollison(GRID_SIZE)) {
     reset();
+    return;
   }
   if (snake.checkFruitEaten(fruit)) {
     // Update score.

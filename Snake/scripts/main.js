@@ -116,14 +116,13 @@ async function reset() {
 }
 
 function updateScore() {
-  let padding = '';
+  let padding = '000000000';
   let count = 0;
   while (score / Math.pow(10, count) >= 1) {
     count++;
   }
-  for (let i = 1; i < 7 - count; i++) {
-    padding += '0';
-  }
+  console.log(count);
+  padding = padding.slice(0, padding.length - count);
   SPAN_SCORE.textContent = '' + padding + score;
 }
 
@@ -141,7 +140,6 @@ function updateHighscore() {
   while (localStorage.highscore / Math.pow(10, count) >= 1) {
     count++
   }
-  console.log(count);
   padding = padding.slice(0, padding.length - count);
   // Updates the highscore display.
   SPAN_HIGHSCORE.textContent = '' + padding + localStorage.highscore;

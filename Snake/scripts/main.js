@@ -136,11 +136,11 @@ function updateHighscore() {
     localStorage.highscore = score;
   }
   // Calculates the amount of padding zeros needed.
-  let padding = '000000';
-  let count = 6;
-  while (localStorage.highscore / Math.pow(10, count--) < 1) {
-    padding = padding.slice(0, padding.length - 2);
-  }
+  let padding = '00000000';
+  let count = 0;
+  while (localStorage.highscore / Math.pow(10, count++) >= 1) {}
+  console.log(count);
+  padding = padding.slice(0, padding.length - count);
   // Updates the highscore display.
   SPAN_HIGHSCORE.textContent = '' + padding + localStorage.highscore;
 }

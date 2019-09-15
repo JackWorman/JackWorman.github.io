@@ -145,7 +145,17 @@ function gameLoop() {
   if (snake.checkFruitEaten(fruit)) {
     // Update score.
     score += Math.ceil(snake.body.length * smallestDistancePossible / distanceTraveled);
-    SPAN_SCORE.textContent = 'Score: ' + score;
+
+    let padding = '';
+    let count = 0;
+    while (score / Math.pow(10, count) >= 1) {
+      count++;
+    }
+    for (let i = 0; i < 7 - count; i++) {
+      padding += '0';
+    }
+
+    SPAN_SCORE.textContent = 'Score: ' + padding + score;
     // Increase the size of the snake.
     snake.grow();
     fruit.placeFruit(GRID_SIZE, snake);

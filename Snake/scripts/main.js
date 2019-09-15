@@ -34,6 +34,7 @@ const W_KEY_CODE = 87;
 const D_KEY_CODE = 68;
 const S_KEY_CODE = 83;
 // DOM Elements
+const SPAN_FPS = document.getElementById('span-fps');
 const CANVAS_FOREGROUND = document.getElementById('canvas-foreground');
 const CONTEXT_FOREGROUND = CANVAS_FOREGROUND.getContext('2d');
 const SPAN_SCORE = document.getElementById('span-score');
@@ -151,7 +152,29 @@ function updateHighscore() {
   }
 }
 
+function calculateFPS() {
+  if (typeof calculateFPS.deltas === 'undefined') {
+    calculateFPS.deltas = [];
+    calculateFPS.then = 0;
+  }
+  var now = performance.now();
+  if (calculateFPS.deltas.length >= 100) {
+    calculateFPS.deltas.shift();
+  }
+  calculateFPS.deltas.push(now - calculateFPS.then);
+  SPAN_FPS.textContent = 'FPS: ' + Math.round(MILLISECONDS_PER_SECOND / (calculateFPS.deltas.reduce((a, b) => (a + b)) / calculateFPS.deltas.length));
+  calculateFPS.then = now;
+}
+
 function gameLoop() {
+  if (typeof gameLoop.then === 'undefined') {
+    gameLoop.then = 0;
+  }
+  var now = performance.now();
+  var deltaTime = now - gameLoop.then;
+  gameLoop.then = now;
+
+  calculateFPS();
 
   let direction = directionQueue.shift();
   if (direction) {

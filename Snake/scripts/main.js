@@ -128,17 +128,20 @@ function updateScore() {
 }
 
 function updateHighscore() {
+  // Sets up 'highscore' for the first time.
   if (typeof localStorage.highscore === 'undefined') {
     localStorage.highscore = 0;
   }
   if (localStorage.highscore < score) {
     localStorage.highscore = score;
   }
-  let padding = '0000000';
+  // Calculates the amount of padding zeros needed.
+  let padding = '000000';
   let count = 6;
   while (localStorage.highscore / Math.pow(10, count--) < 1) {
     padding = padding.slice(0, padding.length - 2);
   }
+  // Updates the highscore display.
   SPAN_HIGHSCORE.textContent = 'Highscore: ' + padding + localStorage.highscore;
 }
 

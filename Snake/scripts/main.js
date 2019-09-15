@@ -165,12 +165,12 @@ function calculateFPS() {
 }
 
 function gameLoop() {
-  if (typeof gameLoop.then === 'undefined') {
-    gameLoop.then = 0;
-  }
-  var now = performance.now();
-  var deltaTime = now - gameLoop.then;
-  gameLoop.then = now;
+  // if (typeof gameLoop.then === 'undefined') {
+  //   gameLoop.then = 0;
+  // }
+  // var now = performance.now();
+  // var deltaTime = now - gameLoop.then;
+  // gameLoop.then = now;
 
   calculateFPS();
 

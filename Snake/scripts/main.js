@@ -101,6 +101,7 @@ async function reset() {
     await Swal.fire({text: 'Game Over', showConfirmButton: false, timer: 1000});
   }
   directionQueue = [];
+  SPAN_FPS.textContent = 'FPS: 0.00';
   // Reset score variables.
   updateHighscore();
   clearInterval(loop2);

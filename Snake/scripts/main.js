@@ -117,8 +117,6 @@ async function reset() {
   controlsEnabled = true;
 }
 
-
-
 function updateScore() {
   if (score === 0) {
     SPAN_SCORE.textContent = '000000000';
@@ -166,10 +164,10 @@ function updateHighscore() {
 
 function calculateFPS() {
   if (typeof calculateFPS.deltas === 'undefined') {
-    calculateFPS.deltas = new Array(FRAMES_PER_SECOND);
+    calculateFPS.deltas = new Array(100);
     calculateFPS.then = 0;
   }
-  var now = performance.now();
+  let now = performance.now();
   calculateFPS.deltas.shift();
   calculateFPS.deltas.push(now - calculateFPS.then);
   SPAN_FPS.textContent = 'FPS: ' + (MILLISECONDS_PER_SECOND / (calculateFPS.deltas.reduce((a, b) => (a + b)) / calculateFPS.deltas.length)).toFixed(2);

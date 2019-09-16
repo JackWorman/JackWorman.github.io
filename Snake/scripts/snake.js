@@ -3,7 +3,10 @@
 export class Snake {
   constructor(startX, startY) {
     this.direction = 'none';
-    this.body = [{x: startX, y: startY}];
+    this.body = [];
+    for (let i = 0; i < 3; i++) {
+      this.body.push({x: startX, y: startY});
+    }
   }
 
   move() {

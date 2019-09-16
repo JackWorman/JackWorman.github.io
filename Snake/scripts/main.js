@@ -121,7 +121,7 @@ function updateScore() {
     SPAN_SCORE.textContent = '000000000';
   } else {
     clearInterval(loop2);
-    loop2 = setInterval(scoreAnimation, MILLISECONDS_PER_SECOND / 100);
+    loop2 = setInterval(scoreAnimation, MILLISECONDS_PER_SECOND / 1000);
   }
 }
 

@@ -114,6 +114,7 @@ async function reset() {
 }
 
 function updateScore() {
+  loop2 = setInterval(scoreAnimation, MILLISECONDS_PER_SECOND / 100);
   if (score === 0) {
     SPAN_SCORE.textContent = '000000000';
   } else {
@@ -123,8 +124,15 @@ function updateScore() {
       count++;
     }
     padding = padding.slice(0, padding.length - count);
-    SPAN_SCORE.textContent = '' + padding + score;
+    SPAN_SCORE.textContent = padding + score;
   }
+}
+
+let loop2;
+let displayScore = 0;
+
+function scoreAnimation() {
+
 }
 
 function updateHighscore() {
@@ -144,7 +152,7 @@ function updateHighscore() {
       count++
     }
     paddingZeros = paddingZeros.slice(0, paddingZeros.length - count);
-    SPAN_HIGHSCORE.textContent = '' + paddingZeros + localStorage.highscore;
+    SPAN_HIGHSCORE.textContent = paddingZeros + localStorage.highscore;
   }
 }
 

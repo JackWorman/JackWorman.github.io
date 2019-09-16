@@ -114,17 +114,11 @@ async function reset() {
 }
 
 function updateScore() {
-  loop2 = setInterval(scoreAnimation, MILLISECONDS_PER_SECOND / 100);
   if (score === 0) {
     SPAN_SCORE.textContent = '000000000';
   } else {
-    let padding = '000000000';
-    let count = 0;
-    while (score / Math.pow(10, count) >= 1) {
-      count++;
-    }
-    padding = padding.slice(0, padding.length - count);
-    SPAN_SCORE.textContent = padding + score;
+    clearInterval(loop2);
+    loop2 = setInterval(scoreAnimation, MILLISECONDS_PER_SECOND / 100);
   }
 }
 
@@ -132,7 +126,19 @@ let loop2;
 let displayScore = 0;
 
 function scoreAnimation() {
+  displayScore++;
 
+  let padding = '000000000';
+  let numDigits = 0;
+  while (displayScore / Math.pow(10, numDigits) >= 1) {
+    numDigits++;
+  }
+  padding = padding.slice(0, padding.length - numDigits);
+  SPAN_SCORE.textContent = padding + displayScore;
+
+  if (displayScore === score) {
+    clearInterval(loop2);
+  }
 }
 
 function updateHighscore() {

@@ -24,7 +24,6 @@ const RAINBOW = [
   "rgb(75, 0, 130)",
   "rgb(148, 0, 211)",
 ];
-const DIRECTIONS = ['left', 'up', 'right', 'down'];
 const LEFT_ARROW_KEY_CODE = 37;
 const UP_ARROW_KEY_CODE = 38;
 const RIGHT_ARROW_KEY_CODE = 39;

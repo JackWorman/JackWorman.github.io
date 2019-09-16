@@ -102,6 +102,7 @@ async function reset() {
   // Reset score variables.
   updateHighscore();
   score = 0;
+  displayScore = 0;
   updateScore();
   // Setup and render foreground.
   snake = new Snake(GRID_SIZE / 2, GRID_SIZE / 2);

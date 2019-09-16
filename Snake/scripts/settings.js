@@ -3,10 +3,12 @@ let showGrid = false;
 let inputQueuing = true;
 
 function showDirections() {
-  Swal.fire('Use the arrow keys to turn.\n' +
+  Swal.fire(
+    'Use the arrow keys to turn.\n' +
     'The score increases each time you eat a fruit.\n' +
     'Higher FPS = more points\n' +
-    'Inefficent Route = less points');
+    'Inefficent Route = less points'
+  );
 }
 
 async function chooseDifficulty() {

@@ -46,6 +46,8 @@ let distanceTraveled;
 let smallestDistancePossible;
 let controlsEnabled = false;
 let loop;
+let loop2;
+let displayScore = 0;
 
 // Run on load.
 setUpForeground();
@@ -114,8 +116,7 @@ async function reset() {
   controlsEnabled = true;
 }
 
-let loop2;
-let displayScore = 0;
+
 
 function updateScore() {
   if (score === 0) {

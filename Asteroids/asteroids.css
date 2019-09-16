@@ -7,7 +7,11 @@
 	src: url('https://jackworman.com/Asteroids/fonts/vt323.ttf') format('truetype');
 }
 
-html, body {
+.noselect {
+  user-select: none;
+}
+
+body {
   height: 100%;
   width: 100%;
   margin: 0;

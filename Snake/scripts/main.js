@@ -129,9 +129,9 @@ function updateScore() {
 
 function scoreAnimation() {
   displayScore++;
-  if (displayScore >= score) {
-    displayScore = score;
-  }
+  // if (displayScore >= score) {
+  //   displayScore = score;
+  // }
   let padding = '000000000';
   let numDigits = 0;
   while (displayScore / Math.pow(10, numDigits) >= 1) {

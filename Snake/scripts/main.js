@@ -113,6 +113,9 @@ async function reset() {
   controlsEnabled = true;
 }
 
+let loop2;
+let displayScore = 0;
+
 function updateScore() {
   if (score === 0) {
     SPAN_SCORE.textContent = '000000000';
@@ -121,9 +124,6 @@ function updateScore() {
     loop2 = setInterval(scoreAnimation, MILLISECONDS_PER_SECOND / 100);
   }
 }
-
-let loop2;
-let displayScore = 0;
 
 function scoreAnimation() {
   displayScore++;

@@ -3,8 +3,7 @@
 import {Snake} from './snake.js';
 import {Fruit} from './fruit.js';
 
-let framesPerSecond = 15;
-let showGrid = false;
+let FRAMES_PER_SECOND = 15;
 // Constants
 const CANVAS_SIZE = 690; // in pixels
 const GRID_SIZE = 30;
@@ -13,8 +12,7 @@ if (CANVAS_SIZE / GRID_SIZE !== Math.round(CANVAS_SIZE / GRID_SIZE)) {
 }
 const MILLISECONDS_PER_SECOND = 1000;
 const GROW_RATE = 5;
-const BLACK = 'rgb(0, 0, 0)';
-const WHITE = 'rgb(255, 255, 255)';
+const FRUIT_COLOR = 'rgb(255, 255, 255)';
 const RAINBOW = [
   "rgb(255, 0, 0)",
   "rgb(255, 127, 0)",
@@ -60,7 +58,7 @@ document.addEventListener('keydown', function(event) {
   }
   // Start Game.
   if (snake.direction === 'none' && directionQueue.length === 0) {
-    loop = setInterval(gameLoop, MILLISECONDS_PER_SECOND / framesPerSecond);
+    loop = setInterval(gameLoop, MILLISECONDS_PER_SECOND / FRAMES_PER_SECOND);
   }
   let currentDirection = directionQueue.length ? directionQueue[directionQueue.length - 1] : snake.direction;
   if (currentDirection === 'left' || currentDirection === 'right') {
@@ -152,7 +150,7 @@ function updateHighscore() {
 
 function calculateFPS() {
   if (typeof calculateFPS.deltas === 'undefined') {
-    calculateFPS.deltas = new Array(framesPerSecond);
+    calculateFPS.deltas = new Array(FRAMES_PER_SECOND);
     calculateFPS.then = 0;
   }
   var now = performance.now();
@@ -196,7 +194,7 @@ function renderForeground() {
     CONTEXT_FOREGROUND.fillRect(xStart, yStart, xLength, yLength);
   }
   CONTEXT_FOREGROUND.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
-  fillSquare(fruit.x, fruit.y, WHITE);
+  fillSquare(fruit.x, fruit.y, FRUIT_COLOR);
   // Render snake from head to tail.
   for (let i = snake.body.length - 1; i >= 0; i--) {
     fillSquare(snake.body[i].x, snake.body[i].y, RAINBOW[i % RAINBOW.length]);

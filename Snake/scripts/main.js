@@ -103,6 +103,7 @@ async function reset() {
   directionQueue = [];
   // Reset score variables.
   updateHighscore();
+  clearInterval(loop2);
   score = 0;
   displayScore = 0;
   updateScore();

@@ -22,6 +22,7 @@ const RAINBOW = [
   "rgb(75, 0, 130)",
   "rgb(148, 0, 211)",
 ];
+// Keycodes
 const LEFT_ARROW_KEY_CODE = 37;
 const UP_ARROW_KEY_CODE = 38;
 const RIGHT_ARROW_KEY_CODE = 39;
@@ -127,8 +128,7 @@ function updateScore() {
 }
 
 function updateHighscore() {
-  // Sets up 'highscore' for the first time.
-  if (typeof localStorage.highscore === 'undefined') {
+  if (typeof localStorage.highscore === 'undefined') { // First time setup.
     localStorage.highscore = 0;
   }
   if (localStorage.highscore < score) {

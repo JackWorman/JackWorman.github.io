@@ -164,7 +164,10 @@ function updateHighscore() {
 
 function calculateFPS() {
   if (typeof calculateFPS.deltas === 'undefined') {
-    calculateFPS.deltas = new Array(100);
+    calculateFPS.deltas = [];
+    for (let i = 0; i < 100; i++) {
+      calculateFPS.deltas.push(0);
+    }
     calculateFPS.then = 0;
   }
   let now = performance.now();

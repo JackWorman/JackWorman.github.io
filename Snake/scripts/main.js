@@ -165,14 +165,13 @@ function updateHighscore() {
 function calculateFPS() {
   if (typeof calculateFPS.deltas === 'undefined') {
     calculateFPS.deltas = [];
-    for (let i = 0; i < 100; i++) {
-      calculateFPS.deltas.push(0);
-    }
     calculateFPS.then = 0;
   }
   let now = performance.now();
-  calculateFPS.deltas.shift();
   calculateFPS.deltas.push(now - calculateFPS.then);
+  if (calculateFPS.deltas.length > 15) {
+    calculateFPS.deltas.shift();
+  }
   SPAN_FPS.textContent = 'FPS: ' + (MILLISECONDS_PER_SECOND / (calculateFPS.deltas.reduce((a, b) => (a + b)) / calculateFPS.deltas.length)).toFixed(2);
   calculateFPS.then = now;
 }

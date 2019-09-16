@@ -138,7 +138,7 @@ function scoreAnimation() {
   padding = padding.slice(0, padding.length - numDigits);
   SPAN_SCORE.textContent = padding + displayScore;
 
-  if (displayScore === score) {
+  if (displayScore >== score) {
     clearInterval(loop2);
   }
 }

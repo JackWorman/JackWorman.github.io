@@ -121,7 +121,7 @@ function updateScore() {
 
 function scoreAnimation() {
   displayScore += deltaDisplayScore;
-  if (displayScore >= score) {
+  if (displayScore > score) {
     displayScore = score;
     console.log('displayScore >= score');
   }

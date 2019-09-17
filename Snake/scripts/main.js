@@ -94,7 +94,7 @@ async function reset() {
     await Swal.fire('Use the arrow keys or WASD to move.');
     await Swal.fire(
       'Collect the fruit to gain points.\n'
-      + 'You get more points the faster you get the fruit.'
+      + 'More points are rewarded for being efficent.'
     );
   } else { // Does not run the first time.
     await Swal.fire({text: 'Game Over', showConfirmButton: false, timer: 1000});

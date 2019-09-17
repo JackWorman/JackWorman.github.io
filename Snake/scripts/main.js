@@ -21,8 +21,6 @@ const RAINBOW = [
   "rgb(0, 0, 255)",
   "rgb(148, 0, 211)",
 ];
-// Keycodes
-// const keyCode = new KeyCode();
 // DOM Elements
 const SPAN_FPS = document.getElementById('span-fps');
 const SPAN_SCORE = document.getElementById('span-score');

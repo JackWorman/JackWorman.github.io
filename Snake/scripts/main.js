@@ -114,6 +114,7 @@ async function reset() {
 let deltaDisplayScore = 1;
 
 function updateScore() {
+  console.log(score);
   clearInterval(loop2);
   deltaDisplayScore = Math.ceil((score - displayScore) / 200);
   loop2 = setInterval(scoreAnimation, MILLISECONDS_PER_SECOND / 100);

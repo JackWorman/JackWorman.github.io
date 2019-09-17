@@ -2,7 +2,7 @@
 
 import {Snake} from './snake.js';
 import {Fruit} from './fruit.js';
-import KeyCode from './KeyCode.js';
+import {KeyCode} from './KeyCode.js';
 
 const FRAMES_PER_SECOND = 15;
 // Constants

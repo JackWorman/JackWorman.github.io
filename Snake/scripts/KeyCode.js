@@ -1,6 +1,6 @@
 'use strict';
 
-export default class keyCode {
+export class KeyCode {
   leftArrow = 37;
   upArrow = 38;
   rightArrow = 39;

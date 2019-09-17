@@ -106,7 +106,7 @@ async function reset() {
       + 'More points are rewarded for being efficent.'
     );
   } else { // Does not run the first time.
-    await Swal.fire({text: 'Game Over', showConfirmButton: false, timer: 1000});
+    await Swal.fire({text: 'Game Over!', showConfirmButton: false, timer: 1500});
   }
   directionQueue = [];
   SPAN_FPS.textContent = 'FPS: 0.00';

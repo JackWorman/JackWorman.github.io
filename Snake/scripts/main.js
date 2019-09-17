@@ -50,6 +50,7 @@ window.onresize = function() {
   } else {
     CANVAS_FOREGROUND.width = CANVAS_FOREGROUND.height = 690;
   }
+  renderForeground();
 };
 
 document.addEventListener('keydown', function(event) {

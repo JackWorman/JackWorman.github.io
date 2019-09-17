@@ -23,6 +23,7 @@ const RAINBOW = [
   "rgb(148, 0, 211)",
 ];
 // Keycodes
+const keyCode = new KeyCode();
 const LEFT_ARROW_KEY_CODE = 37;
 const UP_ARROW_KEY_CODE = 38;
 const RIGHT_ARROW_KEY_CODE = 39;
@@ -49,8 +50,6 @@ let loop;
 let loop2;
 let displayScore = 0;
 
-
-console.log((new KeyCode()).a);
 // Run on load.
 setUpForeground();
 reset();
@@ -79,13 +78,13 @@ document.addEventListener('keydown', function(event) {
       directionQueue.push('right');
     }
   } else if (currentDirection === 'none') {
-    if (event.keyCode === LEFT_ARROW_KEY_CODE || event.keyCode === KeyCode.a) {
+    if (event.keyCode === keyCode.leftArrow || event.keyCode === keyCode.a) {
       directionQueue.push('left');
-    } else if (event.keyCode === UP_ARROW_KEY_CODE || event.keyCode === KeyCode.w) {
+    } else if (event.keyCode === keyCode.upArrow || event.keyCode === keyCode.w) {
       directionQueue.push('up');
-    } else if (event.keyCode === RIGHT_ARROW_KEY_CODE || event.keyCode === KeyCode.d) {
+    } else if (event.keyCode === keyCode.rightArrow || event.keyCode === keyCode.d) {
       directionQueue.push('right');
-    } else if (event.keyCode === DOWN_ARROW_KEY_CODE || event.keyCode === KeyCode.s) {
+    } else if (event.keyCode === keyCode.downArrow || event.keyCode === keyCode.s) {
       directionQueue.push('down');
     }
   }

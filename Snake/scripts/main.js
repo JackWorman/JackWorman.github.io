@@ -97,7 +97,7 @@ async function reset() {
   controlsEnabled = false;
   clearInterval(loop);
   if (typeof loop !== 'undefined') { // Does not run the first time.
-    clearInterval(loop);
+    // clearInterval(loop);
     await Swal.fire({text: 'Game Over', showConfirmButton: false, timer: 1000});
   }
   directionQueue = [];

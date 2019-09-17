@@ -24,14 +24,6 @@ const RAINBOW = [
 ];
 // Keycodes
 const keyCode = new KeyCode();
-const LEFT_ARROW_KEY_CODE = 37;
-const UP_ARROW_KEY_CODE = 38;
-const RIGHT_ARROW_KEY_CODE = 39;
-const DOWN_ARROW_KEY_CODE = 40;
-const A_KEY_CODE = 65;
-const W_KEY_CODE = 87;
-const D_KEY_CODE = 68;
-const S_KEY_CODE = 83;
 // DOM Elements
 const SPAN_FPS = document.getElementById('span-fps');
 const SPAN_SCORE = document.getElementById('span-score');
@@ -66,15 +58,15 @@ document.addEventListener('keydown', function(event) {
   }
   let currentDirection = directionQueue.length ? directionQueue[directionQueue.length - 1] : snake.direction;
   if (currentDirection === 'left' || currentDirection === 'right') {
-    if (event.keyCode === UP_ARROW_KEY_CODE || event.keyCode === W_KEY_CODE) {
+    if (event.keyCode === keyCode.upArrow || event.keyCode === keyCode.w) {
       directionQueue.push('up');
-    } else if (event.keyCode === DOWN_ARROW_KEY_CODE || event.keyCode === S_KEY_CODE) {
+    } else if (event.keyCode === keyCode.downArrow || event.keyCode === keyCode.s) {
       directionQueue.push('down');
     }
   } else if (currentDirection === 'up' || currentDirection === 'down') {
-    if (event.keyCode === LEFT_ARROW_KEY_CODE || event.keyCode === A_KEY_CODE) {
+    if (event.keyCode === keyCode.leftArrow || event.keyCode === keyCode.a) {
       directionQueue.push('left');
-    } else if (event.keyCode === RIGHT_ARROW_KEY_CODE || event.keyCode === D_KEY_CODE) {
+    } else if (event.keyCode === keyCode.rightArrow || event.keyCode === keyCode.d) {
       directionQueue.push('right');
     }
   } else if (currentDirection === 'none') {

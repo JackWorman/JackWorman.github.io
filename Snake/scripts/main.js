@@ -1,7 +1,7 @@
 'use strict';
 
-import {Snake} from './snake.js';
-import {Fruit} from './fruit.js';
+import {Snake} from './Snake.js';
+import {Fruit} from './Fruit.js';
 import {KeyCode} from './KeyCode.js';
 
 // Constants

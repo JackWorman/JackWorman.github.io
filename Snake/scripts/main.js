@@ -45,6 +45,13 @@ setUpForeground();
 reset();
 
 window.onresize = function() {
+  if (document.body.clientWidth < document.body.clientHeight) {
+    // alter using width
+  } else {
+    // alter using height
+  }
+
+
   if (document.body.clientWidth < 690) {
     CANVAS_FOREGROUND.width = CANVAS_FOREGROUND.height = document.body.clientWidth;
   } else {

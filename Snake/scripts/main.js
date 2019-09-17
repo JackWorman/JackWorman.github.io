@@ -107,7 +107,7 @@ async function reset() {
   clearInterval(loop2);
   score = 0;
   displayScore = 0;
-  updateScore();
+  SPAN_SCORE.textContent = '000000000';
   // Setup and render foreground.
   snake = new Snake(GRID_SIZE / 2, GRID_SIZE / 2);
   fruit.placeFruit(GRID_SIZE, snake);
@@ -130,11 +130,11 @@ function updateScore() {
 function scoreAnimation() {
   displayScore++;
   let paddingZeros = '000000000';
-  let numDigits = 0;
-  while (displayScore / Math.pow(10, numDigits) >= 1) {
-    numDigits++;
+  let digits = 0;
+  while (displayScore / Math.pow(10, digits) >= 1) {
+    digits++;
   }
-  paddingZeros = paddingZeros.slice(0, paddingZeros.length - numDigits);
+  paddingZeros = paddingZeros.slice(0, paddingZeros.length - digits);
   SPAN_SCORE.textContent = paddingZeros + displayScore;
   if (displayScore >= score) {
     clearInterval(loop2);

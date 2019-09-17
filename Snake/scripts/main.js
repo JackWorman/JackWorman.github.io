@@ -2,6 +2,7 @@
 
 import {Snake} from './snake.js';
 import {Fruit} from './fruit.js';
+import {KeyCode} from './KeyCode.js';
 
 const FRAMES_PER_SECOND = 15;
 // Constants
@@ -19,7 +20,6 @@ const RAINBOW = [
   "rgb(255, 255, 0)",
   "rgb(0, 255, 0)",
   "rgb(0, 0, 255)",
-  // "rgb(75, 0, 130)",
   "rgb(148, 0, 211)",
 ];
 // Keycodes
@@ -77,13 +77,13 @@ document.addEventListener('keydown', function(event) {
       directionQueue.push('right');
     }
   } else if (currentDirection === 'none') {
-    if (event.keyCode === LEFT_ARROW_KEY_CODE || event.keyCode === A_KEY_CODE) {
+    if (event.keyCode === LEFT_ARROW_KEY_CODE || event.keyCode === KeyCode.a) {
       directionQueue.push('left');
-    } else if (event.keyCode === UP_ARROW_KEY_CODE || event.keyCode === W_KEY_CODE) {
+    } else if (event.keyCode === UP_ARROW_KEY_CODE || event.keyCode === KeyCode.w) {
       directionQueue.push('up');
-    } else if (event.keyCode === RIGHT_ARROW_KEY_CODE || event.keyCode === D_KEY_CODE) {
+    } else if (event.keyCode === RIGHT_ARROW_KEY_CODE || event.keyCode === KeyCode.d) {
       directionQueue.push('right');
-    } else if (event.keyCode === DOWN_ARROW_KEY_CODE || event.keyCode === S_KEY_CODE) {
+    } else if (event.keyCode === DOWN_ARROW_KEY_CODE || event.keyCode === KeyCode.s) {
       directionQueue.push('down');
     }
   }

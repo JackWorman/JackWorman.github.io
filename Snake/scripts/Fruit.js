@@ -1,7 +1,10 @@
 'use strict';
 
+import {Coordinate} from './Coordinate.js';
+
 export class Fruit {
   constructor() {
+    this.coordinate = new Coordinate(-1, -1);
     this.x = -1;
     this.y = -1;
   }

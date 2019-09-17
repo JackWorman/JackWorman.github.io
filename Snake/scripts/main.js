@@ -44,11 +44,6 @@ let displayScore = 0;
 setUpForeground();
 reset();
 
-/**
- * [description]
- * @param  {[type]} event [description]
- * @return {[type]}       [description]
- */
 document.addEventListener('keydown', function(event) {
   if (!controlsEnabled
     || (event.keyCode !== KeyCode.a && event.keyCode !== KeyCode.w && event.keyCode !== KeyCode.d
@@ -94,14 +89,16 @@ function setUpForeground() {
 async function reset() {
   controlsEnabled = false;
   clearInterval(loop);
-  if (typeof loop !== 'undefined') { // Does not run the first time.
+  clearInterval(loop2);
+  if (typeof loop === 'undefined') {
+    await Swal.fire({text: 'Use the arrow keys or WASD to move.', showConfirmButton: true});
+  } else { // Does not run the first time.
     await Swal.fire({text: 'Game Over', showConfirmButton: false, timer: 1000});
   }
   directionQueue = [];
   SPAN_FPS.textContent = 'FPS: 0.00';
   // Reset score variables.
   updateHighscore();
-  clearInterval(loop2);
   score = 0;
   displayScore = 0;
   SPAN_SCORE.textContent = '000000000';
@@ -164,10 +161,6 @@ function updateHighscore() {
   }
 }
 
-/**
- * [calculateFPS description]
- * @return {[type]} [description]
- */
 function calculateFPS() {
   if (typeof calculateFPS.deltas === 'undefined') { // First time setup.
     calculateFPS.deltas = [];

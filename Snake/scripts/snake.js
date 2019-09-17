@@ -1,33 +1,41 @@
 'use strict';
 
+const STARTING_SIZE = 6;
+const GROW_RATE = 6;
+
 export class Snake {
   constructor(startX, startY) {
     this.direction = 'none';
     this.body = [];
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < STARTING_SIZE; i++) {
       this.body.push({x: startX, y: startY});
     }
   }
 
   move() {
-    // Move the snake from tail to head.
-    for (let i = this.body.length - 1; i > 0; i--) {
-      this.body[i] = {x: this.body[i - 1].x, y: this.body[i - 1].y};
-    }
+    this.body.pop();
+    // // Move the snake from tail to head.
+    // for (let i = this.body.length - 1; i > 0; i--) {
+    //   this.body[i] = {x: this.body[i - 1].x, y: this.body[i - 1].y};
+    // }
     // Move the head of the snake.
     if (this.direction === 'left') {
-      this.body[0] = {x: this.body[0].x - 1, y: this.body[0].y};
+      this.body.unshift({x: this.body[0].x - 1, y: this.body[0].y});
+      // this.body[0] = {x: this.body[0].x - 1, y: this.body[0].y};
     } else if (this.direction === 'up') {
-      this.body[0] = {x: this.body[0].x, y: this.body[0].y - 1};
+      this.body.unshift({x: this.body[0].x, y: this.body[0].y - 1});
+      // this.body[0] = {x: this.body[0].x, y: this.body[0].y - 1};
     } else if (this.direction === 'right') {
-      this.body[0] = {x: this.body[0].x + 1, y: this.body[0].y};
+      this.body.unshift({x: this.body[0].x + 1, y: this.body[0].y});
+      // this.body[0] = {x: this.body[0].x + 1, y: this.body[0].y};
     } else if (this.direction === 'down') {
-      this.body[0] = {x: this.body[0].x, y: this.body[0].y + 1};
+      this.body.unshift({x: this.body[0].x, y: this.body[0].y + 1});
+      // this.body[0] = {x: this.body[0].x, y: this.body[0].y + 1};
     }
   }
 
   grow() {
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < GROW_RATE; i++) {
       this.body.push({x: this.body[this.body.length - 1].x, y: this.body[this.body.length - 1].y});
     }
   }

@@ -3,7 +3,7 @@
 import {Snake} from './snake.js';
 import {Fruit} from './fruit.js';
 
-let FRAMES_PER_SECOND = 15;
+const FRAMES_PER_SECOND = 15;
 // Constants
 const CANVAS_SIZE = 690; // in pixels
 const GRID_SIZE = 30;

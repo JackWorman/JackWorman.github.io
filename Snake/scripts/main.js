@@ -11,7 +11,7 @@ if (CANVAS_SIZE / GRID_SIZE !== Math.round(CANVAS_SIZE / GRID_SIZE)) {
   throw 'CANVAS_SIZE / GRID_SIZE is not a whole number. The canvas might render incorrectly.';
 }
 const MILLISECONDS_PER_SECOND = 1000;
-const GROW_RATE = 5;
+const GROW_RATE = 6;
 const FRUIT_COLOR = 'rgb(255, 255, 255)';
 const RAINBOW = [
   "rgb(255, 0, 0)",

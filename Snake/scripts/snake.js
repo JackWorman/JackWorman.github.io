@@ -4,7 +4,7 @@ export class Snake {
   constructor(startX, startY) {
     this.direction = 'none';
     this.body = [];
-    for (let i = 0; i < 7; i++) {
+    for (let i = 0; i < 6; i++) {
       this.body.push({x: startX, y: startY});
     }
   }

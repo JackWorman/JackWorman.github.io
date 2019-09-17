@@ -9,4 +9,6 @@ export class keyCode {
   w = 87;
   d = 68;
   s = 83;
+
+  constructor() {}
 }

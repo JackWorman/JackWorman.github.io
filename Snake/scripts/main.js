@@ -121,6 +121,9 @@ function updateScore() {
 
 function scoreAnimation() {
   displayScore += deltaDisplayScore;
+  if (displayScore >= score) {
+    displayScore = score;
+  }
   let paddingZeros = '000000000';
   let digits = 0;
   while (displayScore / Math.pow(10, digits) >= 1) {

@@ -50,7 +50,7 @@ let loop2;
 let displayScore = 0;
 
 
-console.log(KeyCode.a);
+console.log((new KeyCode()).a);
 // Run on load.
 setUpForeground();
 reset();

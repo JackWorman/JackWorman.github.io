@@ -129,14 +129,13 @@ function updateScore() {
 
 function scoreAnimation() {
   displayScore++;
-  let padding = '000000000';
+  let paddingZeros = '000000000';
   let numDigits = 0;
   while (displayScore / Math.pow(10, numDigits) >= 1) {
     numDigits++;
   }
-  padding = padding.slice(0, padding.length - numDigits);
-  SPAN_SCORE.textContent = padding + displayScore;
-
+  paddingZeros = paddingZeros.slice(0, paddingZeros.length - numDigits);
+  SPAN_SCORE.textContent = paddingZeros + displayScore;
   if (displayScore >= score) {
     clearInterval(loop2);
   }

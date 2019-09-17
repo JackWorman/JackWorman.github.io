@@ -5,7 +5,7 @@ import {Fruit} from './Fruit.js';
 import {KeyCode} from './KeyCode.js';
 
 // Constants
-const CANVAS_SIZE = 612; // in pixels
+let CANVAS_SIZE = 690; // in pixels
 const GRID_SIZE = 30;
 // if (CANVAS_SIZE / GRID_SIZE !== Math.round(CANVAS_SIZE / GRID_SIZE)) {
 //   throw 'CANVAS_SIZE / GRID_SIZE is not a whole number. The canvas might render incorrectly.';
@@ -45,7 +45,11 @@ setUpForeground();
 reset();
 
 window.onresize = function() {
-
+  if (document.body.clientWidth < 690) {
+    CANVAS_FOREGROUND.width = CANVAS_FOREGROUND.height = document.body.clientWidth;
+  } else {
+    CANVAS_FOREGROUND.width = CANVAS_FOREGROUND.height = 690;
+  }
 };
 
 document.addEventListener('keydown', function(event) {

@@ -111,17 +111,17 @@ async function reset() {
   controlsEnabled = true;
 }
 
+let deltaDisplayScore = 1;
+
 function updateScore() {
-  if (score === 0) {
-    SPAN_SCORE.textContent = '000000000';
-  } else {
-    clearInterval(loop2);
-    loop2 = setInterval(scoreAnimation, MILLISECONDS_PER_SECOND / 100);
-  }
+  clearInterval(loop2);
+  deltaDisplayScore = Math.ceil((score - displayScore) / 100);
+  loop2 = setInterval(scoreAnimation, MILLISECONDS_PER_SECOND / 100);
 }
 
+
 function scoreAnimation() {
-  displayScore++;
+  displayScore += deltaDisplayScore;
   let paddingZeros = '000000000';
   let digits = 0;
   while (displayScore / Math.pow(10, digits) >= 1) {

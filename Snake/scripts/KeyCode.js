@@ -1,14 +1,12 @@
 'use strict';
 
-export class KeyCode {
-  leftArrow = 37;
-  upArrow = 38;
-  rightArrow = 39;
-  downArrow = 40;
-  a = 65;
-  w = 87;
-  d = 68;
-  s = 83;
-}
+export class KeyCode {}
 
-KeyCode.test = 666;
+KeyCode.leftArrow = 37;
+KeyCode.upArrow = 38;
+KeyCode.rightArrow = 39;
+KeyCode.downArrow = 40;
+KeyCode.a = 65;
+KeyCode.w = 87;
+KeyCode.d = 68;
+KeyCode.s = 83;

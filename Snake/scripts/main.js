@@ -23,7 +23,7 @@ const RAINBOW = [
   "rgb(148, 0, 211)",
 ];
 // Keycodes
-const keyCode = new KeyCode();
+// const keyCode = new KeyCode();
 // DOM Elements
 const SPAN_FPS = document.getElementById('span-fps');
 const SPAN_SCORE = document.getElementById('span-score');
@@ -47,8 +47,6 @@ let displayScore = 0;
 setUpForeground();
 reset();
 
-console.log(KeyCode.test);
-
 /**
  * [description]
  * @param  {[type]} event [description]
@@ -56,9 +54,9 @@ console.log(KeyCode.test);
  */
 document.addEventListener('keydown', function(event) {
   if (!controlsEnabled
-    || (event.keyCode !== keyCode.a && event.keyCode !== keyCode.w && event.keyCode !== keyCode.d
-      && event.keyCode !== keyCode.s && event.keyCode !== keyCode.leftArrow && event.keyCode !== keyCode.upArrow
-      && event.keyCode !== keyCode.rightArrow && event.keyCode !== keyCode.downArrow)
+    || (event.keyCode !== KeyCode.a && event.keyCode !== KeyCode.w && event.keyCode !== KeyCode.d
+      && event.keyCode !== KeyCode.s && event.keyCode !== KeyCode.leftArrow && event.keyCode !== KeyCode.upArrow
+      && event.keyCode !== KeyCode.rightArrow && event.keyCode !== KeyCode.downArrow)
     ) {
     return;
   }
@@ -68,25 +66,25 @@ document.addEventListener('keydown', function(event) {
   }
   let currentDirection = directionQueue.length ? directionQueue[directionQueue.length - 1] : snake.direction;
   if (currentDirection === 'left' || currentDirection === 'right') {
-    if (event.keyCode === keyCode.upArrow || event.keyCode === keyCode.w) {
+    if (event.keyCode === KeyCode.upArrow || event.keyCode === KeyCode.w) {
       directionQueue.push('up');
-    } else if (event.keyCode === keyCode.downArrow || event.keyCode === keyCode.s) {
+    } else if (event.keyCode === KeyCode.downArrow || event.keyCode === KeyCode.s) {
       directionQueue.push('down');
     }
   } else if (currentDirection === 'up' || currentDirection === 'down') {
-    if (event.keyCode === keyCode.leftArrow || event.keyCode === keyCode.a) {
+    if (event.keyCode === KeyCode.leftArrow || event.keyCode === KeyCode.a) {
       directionQueue.push('left');
-    } else if (event.keyCode === keyCode.rightArrow || event.keyCode === keyCode.d) {
+    } else if (event.keyCode === KeyCode.rightArrow || event.keyCode === KeyCode.d) {
       directionQueue.push('right');
     }
   } else if (currentDirection === 'none') {
-    if (event.keyCode === keyCode.leftArrow || event.keyCode === keyCode.a) {
+    if (event.keyCode === KeyCode.leftArrow || event.keyCode === KeyCode.a) {
       directionQueue.push('left');
-    } else if (event.keyCode === keyCode.upArrow || event.keyCode === keyCode.w) {
+    } else if (event.keyCode === KeyCode.upArrow || event.keyCode === KeyCode.w) {
       directionQueue.push('up');
-    } else if (event.keyCode === keyCode.rightArrow || event.keyCode === keyCode.d) {
+    } else if (event.keyCode === KeyCode.rightArrow || event.keyCode === KeyCode.d) {
       directionQueue.push('right');
-    } else if (event.keyCode === keyCode.downArrow || event.keyCode === keyCode.s) {
+    } else if (event.keyCode === KeyCode.downArrow || event.keyCode === KeyCode.s) {
       directionQueue.push('down');
     }
   }

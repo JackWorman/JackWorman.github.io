@@ -50,7 +50,7 @@ reset();
 document.addEventListener('keydown', function(event) {
   if (!controlsEnabled
     || (event.keyCode !== keyCode.a && event.keyCode !== keyCode.w && event.keyCode !== keyCode.d
-      && event.keyCode !== keyCode.s && event.keyCode !== keyCode.rightArrow && event.keyCode !== keyCode.upArrow
+      && event.keyCode !== keyCode.s && event.keyCode !== keyCode.leftArrow && event.keyCode !== keyCode.upArrow
       && event.keyCode !== keyCode.rightArrow && event.keyCode !== keyCode.downArrow)
     ) {
     return;
@@ -167,7 +167,7 @@ function updateHighscore() {
  * @return {[type]} [description]
  */
 function calculateFPS() {
-  if (typeof calculateFPS.deltas === 'undefined') {
+  if (typeof calculateFPS.deltas === 'undefined') { // First time setup.
     calculateFPS.deltas = [];
     calculateFPS.then = performance.now();
     return;
@@ -177,7 +177,8 @@ function calculateFPS() {
   if (calculateFPS.deltas.length > 15) {
     calculateFPS.deltas.shift();
   }
-  SPAN_FPS.textContent = 'FPS: ' + (MILLISECONDS_PER_SECOND / (calculateFPS.deltas.reduce((a, b) => (a + b)) / calculateFPS.deltas.length)).toFixed(2);
+  let averageDelta = (calculateFPS.deltas.reduce((a, b) => (a + b)) / calculateFPS.deltas.length);
+  SPAN_FPS.textContent = 'FPS: ' + (MILLISECONDS_PER_SECOND / averageDelta).toFixed(2);
   calculateFPS.then = now;
 }
 

@@ -162,6 +162,10 @@ function updateHighscore() {
   }
 }
 
+/**
+ * [calculateFPS description]
+ * @return {[type]} [description]
+ */
 function calculateFPS() {
   if (typeof calculateFPS.deltas === 'undefined') {
     calculateFPS.deltas = [];

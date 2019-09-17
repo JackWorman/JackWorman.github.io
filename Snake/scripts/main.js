@@ -131,6 +131,9 @@ function scoreAnimation() {
   }
   paddingZeros = paddingZeros.slice(0, paddingZeros.length - digits);
   SPAN_SCORE.textContent = paddingZeros + displayScore;
+  if (displayScore > localStorage.highscore) {
+    SPAN_HIGHSCORE.textContent = paddingZeros + displayScore;
+  }
   if (displayScore >= score) {
     clearInterval(loop2);
   }

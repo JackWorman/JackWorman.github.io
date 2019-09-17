@@ -59,5 +59,5 @@ export class Snake {
   //       squareLength
   //     );
   //   }
-  }
+  // }
 }

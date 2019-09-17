@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 export class Snake {
   constructor(startX, startY) {

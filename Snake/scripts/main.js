@@ -47,6 +47,13 @@ let displayScore = 0;
 setUpForeground();
 reset();
 
+console.log(KeyCode.test);
+
+/**
+ * [description]
+ * @param  {[type]} event [description]
+ * @return {[type]}       [description]
+ */
 document.addEventListener('keydown', function(event) {
   if (!controlsEnabled
     || (event.keyCode !== keyCode.a && event.keyCode !== keyCode.w && event.keyCode !== keyCode.d

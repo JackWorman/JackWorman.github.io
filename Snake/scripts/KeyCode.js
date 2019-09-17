@@ -10,3 +10,5 @@ export class KeyCode {
   d = 68;
   s = 83;
 }
+
+KeyCode.test = 666;

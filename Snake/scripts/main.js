@@ -92,6 +92,7 @@ async function reset() {
   clearInterval(loop2);
   if (typeof loop === 'undefined') {
     await Swal.fire({text: 'Use the arrow keys or WASD to move.', showConfirmButton: true});
+    await Swal.fire({text: 'Collect the fruit to gain points.\nYou get more points the faster you get the fruit.', showConfirmButton: true});
   } else { // Does not run the first time.
     await Swal.fire({text: 'Game Over', showConfirmButton: false, timer: 1000});
   }

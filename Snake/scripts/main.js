@@ -43,13 +43,16 @@ let loop2;
 let displayScore = 0;
 
 // Run on load.
+// TODO: make into ISIF
 setUpForeground();
 reset();
 
 document.addEventListener('keydown', function(event) {
   if (!controlsEnabled
-    || (event.keyCode !== 37 && event.keyCode !== 38 && event.keyCode !== 39 && event.keyCode !== 40
-    && event.keyCode !== 65 && event.keyCode !== 87 && event.keyCode !== 68 && event.keyCode !== 83)) {
+    || (event.keyCode !== keyCode.a && event.keyCode !== keyCode.w && event.keyCode !== keyCode.d
+      && event.keyCode !== keyCode.s && event.keyCode !== keyCode.rightArrow && event.keyCode !== keyCode.upArrow
+      && event.keyCode !== keyCode.rightArrow && event.keyCode !== keyCode.downArrow)
+    ) {
     return;
   }
   // Start Game.
@@ -90,7 +93,6 @@ async function reset() {
   controlsEnabled = false;
   clearInterval(loop);
   if (typeof loop !== 'undefined') { // Does not run the first time.
-    // clearInterval(loop);
     await Swal.fire({text: 'Game Over', showConfirmButton: false, timer: 1000});
   }
   directionQueue = [];

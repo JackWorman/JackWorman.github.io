@@ -2,7 +2,7 @@
 
 import {Snake} from './Snake.js';
 import {Fruit} from './Fruit.js';
-import {KeyCode} from './KeyCode2.js';
+import {KeyCode} from './KeyCode.js';
 
 // Constants
 const CANVAS_SIZE = 690; // in pixels

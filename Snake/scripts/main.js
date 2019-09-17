@@ -123,7 +123,7 @@ function scoreAnimation() {
   displayScore += deltaDisplayScore;
   if (displayScore > score) {
     displayScore = score;
-    console.log('displayScore >= score');
+    console.log('displayScore > score');
   }
   let paddingZeros = '000000000';
   let digits = 0;

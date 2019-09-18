@@ -56,7 +56,6 @@ window.onresize = function() {
       scaleFactor = 1;
       canvasSize = 690;
     }
-
   } else {
     if (document.body.clientHeight < 863.6 + 30) {
       scaleFactor = document.body.clientHeight / (863.6 + 30);

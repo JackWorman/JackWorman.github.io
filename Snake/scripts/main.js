@@ -5,10 +5,10 @@ import {Fruit} from './Fruit.js';
 import {KeyCode} from './KeyCode.js';
 
 // Constants
-let CANVAS_SIZE = 690; // in pixels
+let canvasSize = 690; // in pixels
 const GRID_SIZE = 30;
-// if (CANVAS_SIZE / GRID_SIZE !== Math.round(CANVAS_SIZE / GRID_SIZE)) {
-//   throw 'CANVAS_SIZE / GRID_SIZE is not a whole number. The canvas might render incorrectly.';
+// if (canvasSize / GRID_SIZE !== Math.round(canvasSize / GRID_SIZE)) {
+//   throw 'canvasSize / GRID_SIZE is not a whole number. The canvas might render incorrectly.';
 // }
 const FRAMES_PER_SECOND = 15;
 const MILLISECONDS_PER_SECOND = 1000;
@@ -24,6 +24,7 @@ const RAINBOW = [
 // DOM Elements
 const SPAN_FPS = document.getElementById('span-fps');
 const DIV_HEADER_CONTAINER = document.getElementById('div-header-container');
+const SPAN_TITLE = document.getElementById('span-title');
 const SPAN_SCORE = document.getElementById('span-score');
 const SPAN_HIGHSCORE = document.getElementById('span-highscore');
 const CANVAS_FOREGROUND = document.getElementById('canvas-foreground');
@@ -50,18 +51,26 @@ window.onresize = function() {
     // alter using width
     if (document.body.clientWidth < 690 + 60) {
       let scaleFactor = document.body.clientWidth / (690 + 60);
-      document.body.style.transform = 'scale(' + scaleFactor + ')';
+      canvasSize = 690 * scaleFactor;
+      SPAN_TITLE.style.fontSize = (100 * scaleFactor) + 'px';
+      SPAN_SCORE.style.fontSize = SPAN_HIGHSCORE.style.fontSize = (48 * scaleFactor) + 'px';
+      DIV_HEADER_CONTAINER.width = canvasSize + 2;
+      CANVAS_FOREGROUND.width = CANVAS_FOREGROUND.height = canvasSize;
     } else {
-      document.body.style.transform = 'scale(1)';
+      canvasSize = 690;
+      SPAN_TITLE.style.fontSize = '100px';
+      SPAN_SCORE.style.fontSize = SPAN_HIGHSCORE.style.fontSize = '48px';
+      DIV_HEADER_CONTAINER.width = canvasSize + 2;
+      CANVAS_FOREGROUND.width = CANVAS_FOREGROUND.height = canvasSize;
     }
   } else {
     // // alter using height
     // if (document.body.clientHeight < 690) {
     //   CANVAS_FOREGROUND.width = CANVAS_FOREGROUND.height = document.body.clientHeight;
     //   DIV_HEADER_CONTAINER = document.body.clientHeight + 2;
-    //   CANVAS_SIZE = document.body.clientHeight;
+    //   canvasSize = document.body.clientHeight;
     // } else {
-    //   CANVAS_SIZE = 690;
+    //   canvasSize = 690;
     //   DIV_HEADER_CONTAINER = 690 + 2;
     //   CANVAS_FOREGROUND.width = CANVAS_FOREGROUND.height = 690;
     // }
@@ -108,7 +117,7 @@ document.addEventListener('keydown', function(event) {
 }, true);
 
 function setUpForeground() {
-  CANVAS_FOREGROUND.width = CANVAS_FOREGROUND.height = CANVAS_SIZE;
+  CANVAS_FOREGROUND.width = CANVAS_FOREGROUND.height = canvasSize;
 }
 
 async function reset() {
@@ -233,13 +242,13 @@ function gameLoop() {
 function renderForeground() {
   function fillSquare(x, y, color) {
     CONTEXT_FOREGROUND.fillStyle = color;
-    let xStart = x * CANVAS_SIZE / GRID_SIZE + 0.5;
-    let yStart = y * CANVAS_SIZE / GRID_SIZE + 0.5;
-    let xLength = CANVAS_SIZE / GRID_SIZE;
-    let yLength = CANVAS_SIZE / GRID_SIZE;
+    let xStart = x * canvasSize / GRID_SIZE + 0.5;
+    let yStart = y * canvasSize / GRID_SIZE + 0.5;
+    let xLength = canvasSize / GRID_SIZE;
+    let yLength = canvasSize / GRID_SIZE;
     CONTEXT_FOREGROUND.fillRect(xStart, yStart, xLength, yLength);
   }
-  CONTEXT_FOREGROUND.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
+  CONTEXT_FOREGROUND.clearRect(0, 0, canvasSize, canvasSize);
   fillSquare(fruit.x, fruit.y, FRUIT_COLOR);
   // Render snake from head to tail.
   for (let i = snake.body.length - 1; i >= 0; i--) {

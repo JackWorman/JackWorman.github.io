@@ -32,7 +32,7 @@ html, body {
 }
 
 #div-header-container {
-  /* width: 692px; */
+  width: 692px;
   margin: 0 auto;
   user-select: none;
 }

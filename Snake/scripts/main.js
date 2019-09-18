@@ -23,6 +23,7 @@ const RAINBOW = [
 ];
 // DOM Elements
 const SPAN_FPS = document.getElementById('span-fps');
+const DIV_HEADER_CONTAINER = document.getElementById('div-header-container');
 const SPAN_SCORE = document.getElementById('span-score');
 const SPAN_HIGHSCORE = document.getElementById('span-highscore');
 const CANVAS_FOREGROUND = document.getElementById('canvas-foreground');
@@ -49,18 +50,22 @@ window.onresize = function() {
     // alter using width
     if (document.body.clientWidth < 690) {
       CANVAS_FOREGROUND.width = CANVAS_FOREGROUND.height = document.body.clientWidth;
+      DIV_HEADER_CONTAINER = document.body.clientWidth + 2;
       CANVAS_SIZE = document.body.clientWidth;
     } else {
       CANVAS_SIZE = 690;
+      DIV_HEADER_CONTAINER = 690 + 2;
       CANVAS_FOREGROUND.width = CANVAS_FOREGROUND.height = 690;
     }
   } else {
     // alter using height
     if (document.body.clientHeight < 690) {
       CANVAS_FOREGROUND.width = CANVAS_FOREGROUND.height = document.body.clientHeight;
+      DIV_HEADER_CONTAINER = document.body.clientHeight + 2;
       CANVAS_SIZE = document.body.clientHeight;
     } else {
       CANVAS_SIZE = 690;
+      DIV_HEADER_CONTAINER = 690 + 2;
       CANVAS_FOREGROUND.width = CANVAS_FOREGROUND.height = 690;
     }
   }

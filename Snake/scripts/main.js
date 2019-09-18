@@ -31,7 +31,7 @@ const CANVAS_FOREGROUND = document.getElementById('canvas-foreground');
 const CONTEXT_FOREGROUND = CANVAS_FOREGROUND.getContext('2d');
 // Globals
 let directionQueue = [];
-let snake;
+let snake = new Snake(GRID_SIZE / 2, GRID_SIZE / 2);
 let fruit = new Fruit();
 let score = 0;
 let distanceTraveled;

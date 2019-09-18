@@ -50,24 +50,16 @@ window.onresize = function() {
   if (document.body.clientWidth < document.body.clientHeight) {
     let scaleFactor;
     if (document.body.clientWidth < 690 + 60) {
-      canvasSize = 690 * scaleFactor;
       scaleFactor = document.body.clientWidth / (690 + 60);
-      // SPAN_TITLE.style.fontSize = (100 * scaleFactor) + 'px';
-      // SPAN_SCORE.style.fontSize = SPAN_HIGHSCORE.style.fontSize = (48 * scaleFactor) + 'px';
-      // DIV_HEADER_CONTAINER.style.width = (canvasSize + 2) + 'px';
-      // CANVAS_FOREGROUND.width = CANVAS_FOREGROUND.height = canvasSize;
+      canvasSize = 690 * scaleFactor;
     } else {
-      canvasSize = 690;
       scaleFactor = 1;
-      // SPAN_TITLE.style.fontSize = '100px';
-      // SPAN_SCORE.style.fontSize = SPAN_HIGHSCORE.style.fontSize = '48px';
-      // DIV_HEADER_CONTAINER.style.width = (canvasSize + 2) + 'px';
-      // CANVAS_FOREGROUND.width = CANVAS_FOREGROUND.height = canvasSize;
+      canvasSize = 690;
     }
+    SPAN_FPS.style.fontSize = (16 * scaleFactor) + 'px';
     SPAN_TITLE.style.fontSize = (100 * scaleFactor) + 'px';
     SPAN_SCORE.style.fontSize = SPAN_HIGHSCORE.style.fontSize = (48 * scaleFactor) + 'px';
     DIV_HEADER_CONTAINER.style.width = (canvasSize + 2) + 'px';
-    console.log(canvasSize);
     CANVAS_FOREGROUND.width = CANVAS_FOREGROUND.height = canvasSize;
   } else {
     // // alter using height

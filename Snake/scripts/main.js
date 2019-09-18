@@ -60,7 +60,7 @@ window.onresize = function() {
       canvasSize = 690;
       SPAN_TITLE.style.fontSize = '100px';
       SPAN_SCORE.style.fontSize = SPAN_HIGHSCORE.style.fontSize = '48px';
-      DIV_HEADER_CONTAINER.width = canvasSize + 2;
+      DIV_HEADER_CONTAINER.width = (canvasSize + 2) + 'px';
       CANVAS_FOREGROUND.width = CANVAS_FOREGROUND.height = canvasSize;
     }
   } else {

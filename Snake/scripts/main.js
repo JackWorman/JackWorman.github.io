@@ -47,8 +47,8 @@ setUpForeground();
 reset();
 
 window.onresize = function() {
+  let scaleFactor;
   if (document.body.clientWidth < document.body.clientHeight) {
-    let scaleFactor;
     if (document.body.clientWidth < 690 + 60) {
       scaleFactor = document.body.clientWidth / (690 + 60);
       canvasSize = 690 * scaleFactor;
@@ -56,23 +56,21 @@ window.onresize = function() {
       scaleFactor = 1;
       canvasSize = 690;
     }
-    SPAN_FPS.style.fontSize = (16 * scaleFactor) + 'px';
-    SPAN_TITLE.style.fontSize = (100 * scaleFactor) + 'px';
-    SPAN_SCORE.style.fontSize = SPAN_HIGHSCORE.style.fontSize = (48 * scaleFactor) + 'px';
-    DIV_HEADER_CONTAINER.style.width = (canvasSize + 2) + 'px';
-    CANVAS_FOREGROUND.width = CANVAS_FOREGROUND.height = canvasSize;
+
   } else {
-    // // alter using height
-    // if (document.body.clientHeight < 690) {
-    //   CANVAS_FOREGROUND.width = CANVAS_FOREGROUND.height = document.body.clientHeight;
-    //   DIV_HEADER_CONTAINER = document.body.clientHeight + 2;
-    //   canvasSize = document.body.clientHeight;
-    // } else {
-    //   canvasSize = 690;
-    //   DIV_HEADER_CONTAINER = 690 + 2;
-    //   CANVAS_FOREGROUND.width = CANVAS_FOREGROUND.height = 690;
-    // }
+    if (document.body.clientHeight < 863.6 + 30) {
+      scaleFactor = document.body.clientHeight / (863.6 + 30);
+      canvasSize = 690 * scaleFactor;
+    } else {
+      scaleFactor = 1;
+      canvasSize = 690;
+    }
   }
+  SPAN_FPS.style.fontSize = (16 * scaleFactor) + 'px';
+  SPAN_TITLE.style.fontSize = (100 * scaleFactor) + 'px';
+  SPAN_SCORE.style.fontSize = SPAN_HIGHSCORE.style.fontSize = (48 * scaleFactor) + 'px';
+  DIV_HEADER_CONTAINER.style.width = (canvasSize + 2) + 'px';
+  CANVAS_FOREGROUND.width = CANVAS_FOREGROUND.height = canvasSize;
   renderForeground();
 };
 

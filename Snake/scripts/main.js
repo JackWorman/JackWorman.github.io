@@ -48,8 +48,8 @@ reset();
 window.onresize = function() {
   if (document.body.clientWidth < document.body.clientHeight) {
     // alter using width
-    if (document.body.clientWidth < 690) {
-      let scaleFactor = document.body.clientWidth / 690;
+    if (document.body.clientWidth < 690 + 60) {
+      let scaleFactor = document.body.clientWidth / (690 + 60);
       document.body.style.transform = 'scale(' + scaleFactor + ')';
     } else {
       document.body.style.transform = 'scale(1)';

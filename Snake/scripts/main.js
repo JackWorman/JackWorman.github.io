@@ -50,8 +50,8 @@ window.onresize = function() {
   if (document.body.clientWidth < document.body.clientHeight) {
     let scaleFactor;
     if (document.body.clientWidth < 690 + 60) {
-      scaleFactor = document.body.clientWidth / (690 + 60);
       canvasSize = 690 * scaleFactor;
+      scaleFactor = document.body.clientWidth / (690 + 60);
       // SPAN_TITLE.style.fontSize = (100 * scaleFactor) + 'px';
       // SPAN_SCORE.style.fontSize = SPAN_HIGHSCORE.style.fontSize = (48 * scaleFactor) + 'px';
       // DIV_HEADER_CONTAINER.style.width = (canvasSize + 2) + 'px';

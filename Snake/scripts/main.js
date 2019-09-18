@@ -47,24 +47,16 @@ setUpForeground();
 reset();
 
 window.onresize = function() {
-  let scaleFactor;
-  if (document.body.clientWidth < document.body.clientHeight) {
-    if (document.body.clientWidth < 690 + 60) {
-      scaleFactor = document.body.clientWidth / (690 + 60);
-      canvasSize = 690 * scaleFactor;
-    } else {
-      scaleFactor = 1;
-      canvasSize = 690;
-    }
-  } else {
-    if (document.body.clientHeight < 863.6 + 30) {
-      scaleFactor = document.body.clientHeight / (863.6 + 30);
-      canvasSize = 690 * scaleFactor;
-    } else {
-      scaleFactor = 1;
-      canvasSize = 690;
-    }
+  let scaleFactorW = 1;
+  let scaleFactorH = 1;
+  if (document.body.clientWidth < 690 + 60) {
+    scaleFactorW = document.body.clientWidth / (690 + 60);
   }
+  if (document.body.clientHeight < 863.6 + 30) {
+    scaleFactorH = document.body.clientHeight / (863.6 + 30);
+  }
+  let scaleFactor = Math.min(scaleFactorW, scaleFactorH);
+  canvasSize = 690 * scaleFactor;
   SPAN_FPS.style.fontSize = (16 * scaleFactor) + 'px';
   SPAN_TITLE.style.fontSize = (100 * scaleFactor) + 'px';
   SPAN_SCORE.style.fontSize = SPAN_HIGHSCORE.style.fontSize = (48 * scaleFactor) + 'px';

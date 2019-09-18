@@ -59,6 +59,7 @@ document.addEventListener('keydown', function(event) {
   // Start Game.
   if (snake.direction === 'none' && directionQueue.length === 0) {
     loop = setInterval(gameLoop, MILLISECONDS_PER_SECOND / FRAMES_PER_SECOND);
+    CANVAS_FOREGROUND.style.cursor = 'none';
   }
   let currentDirection = directionQueue.length ? directionQueue[directionQueue.length - 1] : snake.direction;
   if (currentDirection === 'left' || currentDirection === 'right') {
@@ -109,6 +110,7 @@ async function reset() {
   controlsEnabled = false;
   clearInterval(loop);
   clearInterval(loop2);
+  CANVAS_FOREGROUND.style.cursor = 'auto';
   if (typeof loop === 'undefined') {
     await Swal.fire('Use the arrow keys or WASD to move.');
     await Swal.fire(

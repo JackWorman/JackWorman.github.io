@@ -43,27 +43,10 @@ let displayScore = 0;
 
 // Run on load.
 // TODO: make into ISIF
-setUpForeground();
+scaleDOM();
 reset();
 
-window.onresize = function() {
-  let scaleFactorW = 1;
-  let scaleFactorH = 1;
-  if (document.body.clientWidth < 690 + 60) {
-    scaleFactorW = document.body.clientWidth / (690 + 60);
-  }
-  if (document.body.clientHeight < 863.6 + 30) {
-    scaleFactorH = document.body.clientHeight / (863.6 + 30);
-  }
-  let scaleFactor = Math.min(scaleFactorW, scaleFactorH);
-  canvasSize = 690 * scaleFactor;
-  SPAN_FPS.style.fontSize = (16 * scaleFactor) + 'px';
-  SPAN_TITLE.style.fontSize = (100 * scaleFactor) + 'px';
-  SPAN_SCORE.style.fontSize = SPAN_HIGHSCORE.style.fontSize = (48 * scaleFactor) + 'px';
-  DIV_HEADER_CONTAINER.style.width = (canvasSize + 2) + 'px';
-  CANVAS_FOREGROUND.width = CANVAS_FOREGROUND.height = canvasSize;
-  renderForeground();
-};
+window.onresize = scaleDOM;
 
 document.addEventListener('keydown', function(event) {
   if (!controlsEnabled
@@ -103,8 +86,23 @@ document.addEventListener('keydown', function(event) {
   }
 }, true);
 
-function setUpForeground() {
+function scaleDOM() {
+  let scaleFactorW = 1;
+  let scaleFactorH = 1;
+  if (document.body.clientWidth < 690 + 60) {
+    scaleFactorW = document.body.clientWidth / (690 + 60);
+  }
+  if (document.body.clientHeight < 863.6 + 30) {
+    scaleFactorH = document.body.clientHeight / (863.6 + 30);
+  }
+  let scaleFactor = Math.min(scaleFactorW, scaleFactorH);
+  canvasSize = 690 * scaleFactor;
+  SPAN_FPS.style.fontSize = (16 * scaleFactor) + 'px';
+  SPAN_TITLE.style.fontSize = (100 * scaleFactor) + 'px';
+  SPAN_SCORE.style.fontSize = SPAN_HIGHSCORE.style.fontSize = (48 * scaleFactor) + 'px';
+  DIV_HEADER_CONTAINER.style.width = (canvasSize + 2) + 'px';
   CANVAS_FOREGROUND.width = CANVAS_FOREGROUND.height = canvasSize;
+  renderForeground();
 }
 
 async function reset() {

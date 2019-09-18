@@ -21,6 +21,7 @@ html, body {
   margin: 0;
   background-color: black;
   text-align: center;
+  transform-origin: 0 0;
 }
 
 #span-fps {

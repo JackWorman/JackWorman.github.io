@@ -51,6 +51,7 @@ window.onresize = function() {
     if (document.body.clientWidth < 690) {
       let scaleFactor = document.body.clientWidth / 690;
       document.body.style.transform = 'scale('+scaleFactor+', '+scaleFactor+')';
+      document.body.style.transform-origin = '0 0';
       // CANVAS_FOREGROUND.width = CANVAS_FOREGROUND.height = document.body.clientWidth;
       // DIV_HEADER_CONTAINER = document.body.clientWidth + 2;
       // CANVAS_SIZE = document.body.clientWidth;

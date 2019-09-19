@@ -59,11 +59,7 @@ function scaleCanvas() {
 }
 
 document.addEventListener('keydown', function(event) {
-  if (!controlsEnabled
-    || (event.keyCode !== KeyCode.a && event.keyCode !== KeyCode.w && event.keyCode !== KeyCode.d
-      && event.keyCode !== KeyCode.s && event.keyCode !== KeyCode.leftArrow && event.keyCode !== KeyCode.upArrow
-      && event.keyCode !== KeyCode.rightArrow && event.keyCode !== KeyCode.downArrow)
-    ) {
+  if (!controlsEnabled) {
     return;
   }
   // Start Game.
@@ -117,7 +113,7 @@ async function reset() {
   updateHighscore();
   score = 0;
   displayScore = 0;
-  SPAN_SCORE.textContent = '000000000';
+  SPAN_SCORE.textContent = '0'.repeat(8);
   // Setup and render foreground.
   snake = new Snake(GRID_SIZE / 2, GRID_SIZE / 2);
   fruit.placeFruit(GRID_SIZE, snake);
@@ -141,7 +137,7 @@ function scoreAnimation() {
   if (displayScore > score) {
     displayScore = score;
   }
-  let paddingZeros = '000000000';
+  let paddingZeros = '0'.repeat(8);
   let digits = 0;
   while (displayScore / Math.pow(10, digits) >= 1) {
     digits++;
@@ -164,10 +160,10 @@ function updateHighscore() {
     localStorage.highscore = score;
   }
   if (Number(localStorage.highscore) === 0) {
-    SPAN_HIGHSCORE.textContent = '000000000';
+    SPAN_HIGHSCORE.textContent = '0'.repeat(8);
   } else {
     // Calculates the amount of padding-zeros needed.
-    let paddingZeros = '000000000';
+    let paddingZeros = '0'.repeat(8);
     let count = 0;
     while (localStorage.highscore / Math.pow(10, count) >= 1) {
       count++

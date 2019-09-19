@@ -43,7 +43,7 @@ let displayScore = 0;
 
 // Run on load.
 // TODO: make into ISIF
-scaleDOM();
+scaleCanvas();
 reset();
 
 window.onresize = scaleCanvas;

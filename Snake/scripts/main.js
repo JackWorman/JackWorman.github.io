@@ -38,19 +38,15 @@ let loop2;
 let displayScore = 0;
 let deltaDisplayScore = 1;
 
-// Run on load.
-// TODO: make into ISIF
-// scaleCanvas();
-reset();
-
 /**
  * Must be done in javascript because it doesn't work in CSS calc().
  */
-let scaleCanvas = (function() {
+function scaleCanvas() {
   canvasSize = 690 * Math.min(document.body.clientWidth, document.body.clientHeight) / 900;
   CANVAS_FOREGROUND.width = CANVAS_FOREGROUND.height = canvasSize;
   renderForeground();
-})();
+};
+scaleCanvas();
 
 window.onresize = scaleCanvas;
 
@@ -229,3 +225,5 @@ function renderForeground() {
     fillSquare(snake.body[i].x, snake.body[i].y, RAINBOW[i % RAINBOW.length]);
   }
 }
+
+reset();

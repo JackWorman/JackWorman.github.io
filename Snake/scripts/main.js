@@ -120,8 +120,6 @@ async function reset() {
   controlsEnabled = true;
 }
 
-
-
 function updateScore() {
   clearInterval(loop2);
   deltaDisplayScore = Math.ceil((score - displayScore) / 200);

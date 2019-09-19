@@ -5,11 +5,7 @@ import {Fruit} from './Fruit.js';
 import {KeyCode} from './KeyCode.js';
 
 // Constants
-let canvasSize = 690; // in pixels
 const GRID_SIZE = 30;
-// if (canvasSize / GRID_SIZE !== Math.round(canvasSize / GRID_SIZE)) {
-//   throw 'canvasSize / GRID_SIZE is not a whole number. The canvas might render incorrectly.';
-// }
 const FRAMES_PER_SECOND = 15;
 const MILLISECONDS_PER_SECOND = 1000;
 const FRUIT_COLOR = 'rgb(255, 255, 255)';
@@ -23,13 +19,13 @@ const RAINBOW = [
 ];
 // DOM Elements
 const SPAN_FPS = document.getElementById('span-fps');
-const DIV_HEADER_CONTAINER = document.getElementById('div-header-container');
 const SPAN_TITLE = document.getElementById('span-title');
 const SPAN_SCORE = document.getElementById('span-score');
 const SPAN_HIGHSCORE = document.getElementById('span-highscore');
 const CANVAS_FOREGROUND = document.getElementById('canvas-foreground');
 const CONTEXT_FOREGROUND = CANVAS_FOREGROUND.getContext('2d');
 // Globals
+let canvasSize = 690; // in pixels
 let directionQueue = [];
 let snake = new Snake(GRID_SIZE / 2, GRID_SIZE / 2);
 let fruit = new Fruit();
@@ -40,23 +36,23 @@ let controlsEnabled = false;
 let loop;
 let loop2;
 let displayScore = 0;
+let deltaDisplayScore = 1;
 
 // Run on load.
 // TODO: make into ISIF
-scaleCanvas();
+// scaleCanvas();
 reset();
-
-window.onresize = scaleCanvas;
 
 /**
  * Must be done in javascript because it doesn't work in CSS calc().
- * @return {[type]} [description]
  */
-function scaleCanvas() {
+let scaleCanvas = (function scaleCanvas() {
   canvasSize = 690 * Math.min(document.body.clientWidth, document.body.clientHeight) / 900;
   CANVAS_FOREGROUND.width = CANVAS_FOREGROUND.height = canvasSize;
   renderForeground();
-}
+})();
+
+window.onresize = scaleCanvas;
 
 document.addEventListener('keydown', function(event) {
   if (!controlsEnabled
@@ -128,7 +124,7 @@ async function reset() {
   controlsEnabled = true;
 }
 
-let deltaDisplayScore = 1;
+
 
 function updateScore() {
   clearInterval(loop2);

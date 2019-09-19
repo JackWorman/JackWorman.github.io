@@ -48,9 +48,13 @@ reset();
 
 window.onresize = scaleCanvas;
 
+/**
+ * This
+ * @return {[type]} [description]
+ */
 function scaleCanvas() {
   canvasSize = 690 * Math.min(document.body.clientWidth, document.body.clientHeight) / 900;
-  CANVAS_FOREGROUND.width = CANVAS_FOREGROUND.height = canvasSize;
+  // CANVAS_FOREGROUND.width = CANVAS_FOREGROUND.height = canvasSize;
   renderForeground();
 }
 

@@ -59,7 +59,11 @@ function scaleCanvas() {
 }
 
 document.addEventListener('keydown', function(event) {
-  if (!controlsEnabled) {
+  if (!controlsEnabled
+    || (event.keyCode !== KeyCode.a && event.keyCode !== KeyCode.w && event.keyCode !== KeyCode.d
+      && event.keyCode !== KeyCode.s && event.keyCode !== KeyCode.leftArrow && event.keyCode !== KeyCode.upArrow
+      && event.keyCode !== KeyCode.rightArrow && event.keyCode !== KeyCode.downArrow)
+    ) {
     return;
   }
   // Start Game.

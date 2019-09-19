@@ -46,7 +46,7 @@ let displayScore = 0;
 scaleDOM();
 reset();
 
-window.onresize = scaleDOM;
+window.onresize = scaleCanvas;
 
 document.addEventListener('keydown', function(event) {
   if (!controlsEnabled
@@ -59,7 +59,7 @@ document.addEventListener('keydown', function(event) {
   // Start Game.
   if (snake.direction === 'none' && directionQueue.length === 0) {
     loop = setInterval(gameLoop, MILLISECONDS_PER_SECOND / FRAMES_PER_SECOND);
-    CANVAS_FOREGROUND.style.cursor = 'none';
+    document.body.style.cursor = 'none';
   }
   let currentDirection = directionQueue.length ? directionQueue[directionQueue.length - 1] : snake.direction;
   if (currentDirection === 'left' || currentDirection === 'right') {
@@ -87,7 +87,7 @@ document.addEventListener('keydown', function(event) {
   }
 }, true);
 
-function scaleDOM() {
+function scaleCanvas() {
   canvasSize = 690 * Math.min(document.body.clientWidth, document.body.clientHeight) / 900;
   CANVAS_FOREGROUND.width = CANVAS_FOREGROUND.height = canvasSize;
   renderForeground();
@@ -97,7 +97,7 @@ async function reset() {
   controlsEnabled = false;
   clearInterval(loop);
   clearInterval(loop2);
-  CANVAS_FOREGROUND.style.cursor = 'auto';
+  document.body.style.cursor = 'auto';
   if (typeof loop === 'undefined') {
     await Swal.fire('Use the arrow keys or WASD to move.');
     await Swal.fire(

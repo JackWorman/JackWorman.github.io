@@ -32,7 +32,7 @@ html, body {
 }
 
 #div-header-container {
-  width: calc(800 * 100vmin / var(--base-size) + 2px);
+  width: calc(690 * 100vmin / var(--base-size) + 2px);
   margin: 0 auto;
 }
 

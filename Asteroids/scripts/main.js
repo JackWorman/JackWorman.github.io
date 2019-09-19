@@ -34,13 +34,11 @@ function scaleCanvas() {
   render();
 };
 
-
 window.onload = () => {
   scaleCanvas();
 }
 
 window.onresize = scaleCanvas;
-
 
 // Get inputs.
 var inputs = {"mousePos": {x: 0, y: 0}};
@@ -84,8 +82,8 @@ function updateScore() {
   while (score / Math.pow(10, count) >= 1) {
     count++;
   }
-  SPAN_SCORE.textContent = 'SCORE: ';
-  for (var i = 0; i < 7 - count; i++) {
+  SPAN_SCORE.textContent = '';
+  for (var i = 0; i < 9 - count; i++) {
     SPAN_SCORE.textContent = SPAN_SCORE.textContent + '0';
   }
   SPAN_SCORE.textContent = SPAN_SCORE.textContent + score
@@ -100,8 +98,8 @@ function updateScore() {
   while (localStorage.asteroidHighscore / Math.pow(10, count) >= 1) {
     count++;
   }
-  SPAN_HIGHSCORE.textContent = 'HIGHSCORE: ';
-  for (var i = 0; i < 7 - count; i++) {
+  SPAN_HIGHSCORE.textContent = '';
+  for (var i = 0; i < 9 - count; i++) {
     SPAN_HIGHSCORE.textContent = SPAN_HIGHSCORE.textContent + '0';
   }
   SPAN_HIGHSCORE.textContent = SPAN_HIGHSCORE.textContent + localStorage.asteroidHighscore;

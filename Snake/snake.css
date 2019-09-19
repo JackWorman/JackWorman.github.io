@@ -60,6 +60,4 @@ html, body {
   display: inline-block;
   position: relative;
   border: 1px solid white;
-  width: calc(690 * 100vmin / 900);
-  height: calc(690 * 100vmin / 900);
 }

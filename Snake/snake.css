@@ -21,7 +21,6 @@ html, body {
   margin: 0;
   background-color: black;
   text-align: center;
-  transform-origin: 0 0;
 }
 
 #span-fps {
@@ -33,7 +32,7 @@ html, body {
 }
 
 #div-header-container {
-  width: 692px;
+  width: calc(690 * 100vmin / 944 + 2);
   margin: 0 auto;
   user-select: none;
 }
@@ -45,7 +44,7 @@ html, body {
 
 #div-score-container {
   font-family: 'VT323';
-  font-size: calc(48 * 100vmin / 944);;
+  font-size: calc(48 * 100vmin / 944);
   color: white;
 }
 
@@ -62,4 +61,6 @@ html, body {
   position: relative;
   cursor: none;
   border: 1px solid white;
+  width: calc(690 * 100vmin / 944);
+  height: calc(690 * 100vmin / 944);
 }

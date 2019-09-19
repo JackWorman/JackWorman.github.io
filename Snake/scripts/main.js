@@ -95,8 +95,8 @@ function scaleDOM() {
   // SPAN_FPS.style.fontSize = (16 * scaleFactor) + 'px';
   // SPAN_TITLE.style.fontSize = (100 * scaleFactor) + 'px';
   // SPAN_SCORE.style.fontSize = SPAN_HIGHSCORE.style.fontSize = (48 * scaleFactor) + 'px';
-  DIV_HEADER_CONTAINER.style.width = (canvasSize + 2) + 'px';
-  CANVAS_FOREGROUND.width = CANVAS_FOREGROUND.height = canvasSize;
+  // DIV_HEADER_CONTAINER.style.width = (canvasSize + 2) + 'px';
+  // CANVAS_FOREGROUND.width = CANVAS_FOREGROUND.height = canvasSize;
   renderForeground();
 }
 

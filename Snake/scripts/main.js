@@ -122,11 +122,11 @@ async function reset() {
 
 function updateScore() {
   clearInterval(incrementScoreInterval);
-  deltaDisplayScore = Math.ceil((score - displayScore) / 200);
   incrementScoreInterval = setInterval(incrementScore, MILLISECONDS_PER_SECOND / 100);
 }
 
 function incrementScore() {
+  deltaDisplayScore = Math.ceil((score - displayScore) / 200);
   displayScore += deltaDisplayScore;
   if (displayScore > score) {
     displayScore = score;

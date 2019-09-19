@@ -45,11 +45,16 @@ function scaleCanvas() {
   CANVAS_FOREGROUND.width = CANVAS_FOREGROUND.height = canvasSize;
   renderForeground();
 };
-scaleCanvas();
+
+
+window.onload = () => {
+  scaleCanvas();
+  reset();
+}
 
 window.onresize = scaleCanvas;
 
-document.addEventListener('keydown', function(event) {
+document.addEventListener('keydown', (event) => {
   if (!controlsEnabled
     || (event.keyCode !== KeyCode.a && event.keyCode !== KeyCode.w && event.keyCode !== KeyCode.d
       && event.keyCode !== KeyCode.s && event.keyCode !== KeyCode.leftArrow && event.keyCode !== KeyCode.upArrow
@@ -221,5 +226,3 @@ function renderForeground() {
     fillSquare(snake.body[i].x, snake.body[i].y, RAINBOW[i % RAINBOW.length]);
   }
 }
-
-reset();

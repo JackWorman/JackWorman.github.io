@@ -59,8 +59,7 @@ html, body {
 #canvas-foreground {
   display: inline-block;
   position: relative;
-  cursor: none;
   border: 1px solid white;
-  width: calc(690 * 100vmin / 944);
-  height: calc(690 * 100vmin / 944);
+  /* width: calc(690 * 100vmin / 944);
+  height: calc(690 * 100vmin / 944); */
 }

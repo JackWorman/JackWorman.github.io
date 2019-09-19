@@ -33,8 +33,8 @@ let score = 0;
 let distanceTraveled;
 let smallestDistancePossible;
 let controlsEnabled = false;
-let loop;
-let loop2;
+let gameLoopInterval;
+let incrementScoreInterval;
 let displayScore = 0;
 let deltaDisplayScore = 1;
 
@@ -60,7 +60,7 @@ document.addEventListener('keydown', function(event) {
   }
   // Start Game.
   if (snake.direction === 'none' && directionQueue.length === 0) {
-    loop = setInterval(gameLoop, MILLISECONDS_PER_SECOND / FRAMES_PER_SECOND);
+    gameLoopInterval = setInterval(gameLoop, MILLISECONDS_PER_SECOND / FRAMES_PER_SECOND);
     document.body.style.cursor = 'none';
   }
   let currentDirection = directionQueue.length ? directionQueue[directionQueue.length - 1] : snake.direction;
@@ -91,10 +91,10 @@ document.addEventListener('keydown', function(event) {
 
 async function reset() {
   controlsEnabled = false;
-  clearInterval(loop);
-  clearInterval(loop2);
+  clearInterval(gameLoopInterval);
+  clearInterval(incrementScoreInterval);
   document.body.style.cursor = 'auto';
-  if (typeof loop === 'undefined') {
+  if (typeof gameLoopInterval === 'undefined') { // Runs the first time.
     await Swal.fire('Use the arrow keys or WASD to move.');
     await Swal.fire(
       'Collect the fruit to gain points.\n'
@@ -121,12 +121,12 @@ async function reset() {
 }
 
 function updateScore() {
-  clearInterval(loop2);
+  clearInterval(incrementScoreInterval);
   deltaDisplayScore = Math.ceil((score - displayScore) / 200);
-  loop2 = setInterval(scoreAnimation, MILLISECONDS_PER_SECOND / 100);
+  incrementScoreInterval = setInterval(incrementScore, MILLISECONDS_PER_SECOND / 100);
 }
 
-function scoreAnimation() {
+function incrementScore() {
   displayScore += deltaDisplayScore;
   if (displayScore > score) {
     displayScore = score;
@@ -142,7 +142,7 @@ function scoreAnimation() {
     SPAN_HIGHSCORE.textContent = paddingZeros + displayScore;
   }
   if (displayScore >= score) {
-    clearInterval(loop2);
+    clearInterval(incrementScoreInterval);
   }
 }
 

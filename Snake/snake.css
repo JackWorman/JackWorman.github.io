@@ -32,7 +32,7 @@ html, body {
 }
 
 #div-header-container {
-  width: calc(690 * 100vmin / 944 + 2);
+  width: calc(692 * 100vmin / 944);
   margin: 0 auto;
   user-select: none;
 }

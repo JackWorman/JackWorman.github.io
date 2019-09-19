@@ -119,7 +119,7 @@ async function reset() {
   // Reset distance variables.
   distanceTraveled = 0;
   smallestDistancePossible = Math.abs(fruit.x - snake.body[0].x) + Math.abs(fruit.y - snake.body[0].y);
-  renderForeground();
+  render();
   controlsEnabled = true;
 }
 

@@ -163,6 +163,7 @@ function updateHighscore() {
   if (localStorage.highscore < score) {
     localStorage.highscore = score;
   }
+  console.log(localStorage.highscore);
   if (localStorage.highscore === 0) {
     SPAN_HIGHSCORE.textContent = '000000000';
   } else {

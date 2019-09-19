@@ -29,7 +29,7 @@ html, body {
   position: absolute;
   top: 0;
   left: 0;
-  font-size: calc(vmin / 944 * 16);
+  font-size: calc(1vmin * 2);
 }
 
 #div-header-container {

@@ -163,7 +163,7 @@ function updateHighscore() {
   if (localStorage.highscore < score) {
     localStorage.highscore = score;
   }
-  if (Number(localStorage.highscore) === '0') {
+  if (Number(localStorage.highscore) === 0) {
     SPAN_HIGHSCORE.textContent = '000000000';
   } else {
     // Calculates the amount of padding-zeros needed.

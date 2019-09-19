@@ -28,23 +28,23 @@ html, body {
   position: absolute;
   top: 0;
   left: 0;
-  font-size: calc(16 * 100vmin / 944);
+  font-size: calc(16 * 100vmin / 900);
 }
 
 #div-header-container {
-  width: calc(692 * 100vmin / 944);
+  width: calc(692 * 100vmin / 900);
   margin: 0 auto;
   user-select: none;
 }
 
 #span-title {
   font-family: 'Heavy Data';
-  font-size: calc(100 * 100vmin / 944);
+  font-size: calc(100 * 100vmin / 900);
 }
 
 #div-score-container {
   font-family: 'VT323';
-  font-size: calc(48 * 100vmin / 944);
+  font-size: calc(48 * 100vmin / 900);
   color: white;
 }
 

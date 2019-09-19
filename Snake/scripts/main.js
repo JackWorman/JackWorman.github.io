@@ -88,8 +88,7 @@ document.addEventListener('keydown', function(event) {
 }, true);
 
 function scaleDOM() {
-  let scaleFactor = Math.min(document.body.clientWidth, document.body.clientHeight) / 944;
-  canvasSize = 690 * scaleFactor;
+  canvasSize = 690 * Math.min(document.body.clientWidth, document.body.clientHeight) / 900;
   CANVAS_FOREGROUND.width = CANVAS_FOREGROUND.height = canvasSize;
   renderForeground();
 }

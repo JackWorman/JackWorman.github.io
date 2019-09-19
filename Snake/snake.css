@@ -29,6 +29,7 @@ html, body {
   position: absolute;
   top: 0;
   left: 0;
+  font-size: calc(vmin / 944 * 16);
 }
 
 #div-header-container {

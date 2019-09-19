@@ -48,6 +48,12 @@ reset();
 
 window.onresize = scaleCanvas;
 
+function scaleCanvas() {
+  canvasSize = 690 * Math.min(document.body.clientWidth, document.body.clientHeight) / 900;
+  CANVAS_FOREGROUND.width = CANVAS_FOREGROUND.height = canvasSize;
+  renderForeground();
+}
+
 document.addEventListener('keydown', function(event) {
   if (!controlsEnabled
     || (event.keyCode !== KeyCode.a && event.keyCode !== KeyCode.w && event.keyCode !== KeyCode.d
@@ -86,12 +92,6 @@ document.addEventListener('keydown', function(event) {
     }
   }
 }, true);
-
-function scaleCanvas() {
-  canvasSize = 690 * Math.min(document.body.clientWidth, document.body.clientHeight) / 900;
-  CANVAS_FOREGROUND.width = CANVAS_FOREGROUND.height = canvasSize;
-  renderForeground();
-}
 
 async function reset() {
   controlsEnabled = false;

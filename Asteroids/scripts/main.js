@@ -29,7 +29,7 @@ var scoreMultiplier;
  * Must be done in javascript because it doesn't work in CSS calc().
  */
 function scaleCanvas() {
-  canvasSize = 800 * Math.min(document.body.clientWidth, document.body.clientHeight) / 900;
+  canvasSize = 690 * Math.min(document.body.clientWidth, document.body.clientHeight) / 900;
   CANVAS_FOREGROUND.width = CANVAS_FOREGROUND.height = canvasSize;
   render();
 };

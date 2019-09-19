@@ -40,7 +40,7 @@ html, body {
 
 #span-title {
   font-family: 'Heavy Data';
-  font-size: 100px;
+  font-size: calc(1vmin * 11.2);
 }
 
 #div-score-container {

@@ -88,14 +88,8 @@ document.addEventListener('keydown', function(event) {
 }, true);
 
 function scaleDOM() {
-  let scaleFactorW = document.body.clientWidth / (690 + 60);
-  let scaleFactorH = document.body.clientHeight / (863.6 + 30);
-  let scaleFactor = Math.min(scaleFactorW, scaleFactorH);
+  let scaleFactor = Math.min(document.body.clientWidth, document.body.clientHeight) / 944;
   canvasSize = 690 * scaleFactor;
-  // SPAN_FPS.style.fontSize = (16 * scaleFactor) + 'px';
-  // SPAN_TITLE.style.fontSize = (100 * scaleFactor) + 'px';
-  // SPAN_SCORE.style.fontSize = SPAN_HIGHSCORE.style.fontSize = (48 * scaleFactor) + 'px';
-  // DIV_HEADER_CONTAINER.style.width = (canvasSize + 2) + 'px';
   CANVAS_FOREGROUND.width = CANVAS_FOREGROUND.height = canvasSize;
   renderForeground();
 }

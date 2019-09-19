@@ -117,7 +117,7 @@ async function reset() {
   updateHighscore();
   score = 0;
   displayScore = 0;
-  SPAN_SCORE.textContent = '0'.repeat(8);
+  SPAN_SCORE.textContent = '0'.repeat(9);
   // Setup and render foreground.
   snake = new Snake(GRID_SIZE / 2, GRID_SIZE / 2);
   fruit.placeFruit(GRID_SIZE, snake);
@@ -141,7 +141,7 @@ function scoreAnimation() {
   if (displayScore > score) {
     displayScore = score;
   }
-  let paddingZeros = '0'.repeat(8);
+  let paddingZeros = '0'.repeat(9);
   let digits = 0;
   while (displayScore / Math.pow(10, digits) >= 1) {
     digits++;
@@ -163,11 +163,11 @@ function updateHighscore() {
   if (localStorage.highscore < score) {
     localStorage.highscore = score;
   }
+  let paddingZeros = '0'.repeat(9);
   if (Number(localStorage.highscore) === 0) {
-    SPAN_HIGHSCORE.textContent = '0'.repeat(8);
+    SPAN_HIGHSCORE.textContent = paddingZeros;
   } else {
     // Calculates the amount of padding-zeros needed.
-    let paddingZeros = '0'.repeat(8);
     let count = 0;
     while (localStorage.highscore / Math.pow(10, count) >= 1) {
       count++

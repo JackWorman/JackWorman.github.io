@@ -108,14 +108,17 @@ function updateScore() {
 function calculateFPS() {
   if (typeof calculateFPS.deltas === 'undefined') {
     calculateFPS.deltas = [];
-    calculateFPS.then = 0;
+    calculateFPS.then = performance.now();
+    return;
   }
   var now = performance.now();
-  if (calculateFPS.deltas.length >= 100) {
+  if (calculateFPS.deltas.length > FRAMES_PER_SECOND) {
     calculateFPS.deltas.shift();
   }
   calculateFPS.deltas.push(now - calculateFPS.then);
-  SPAN_FPS.textContent = 'FPS: ' + (MILLISECONDS_PER_SECOND / (calculateFPS.deltas.reduce((a, b) => (a + b)) / calculateFPS.deltas.length)).toFixed(2);
+  let averageDelta = (calculateFPS.deltas.reduce((a, b) => (a + b)) / calculateFPS.deltas.length);
+  SPAN_FPS.textContent = 'FPS: ' + (MILLISECONDS_PER_SECOND / averageDelta).toFixed(2);
+  // SPAN_FPS.textContent = 'FPS: ' + (MILLISECONDS_PER_SECOND / (calculateFPS.deltas.reduce((a, b) => (a + b)) / calculateFPS.deltas.length)).toFixed(2);
   calculateFPS.then = now;
 }
 

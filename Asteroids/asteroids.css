@@ -1,3 +1,7 @@
+:root {
+  --base-size: 900;
+}
+
 @font-face {
 	font-family: 'Forty Second Street';
 	src: url('https://jackworman.com/Asteroids/fonts/forty-second-street.woff') format('woff');
@@ -11,35 +15,35 @@
   user-select: none;
 }
 
-body {
-  height: 100%;
-  width: 100%;
+html, body {
+  height: 100vh;
+  width: 100vw;
   margin: 0;
   background-color: black;
   text-align: center;
   color: white;
-  /* background-image: url("http://papers.co/wallpaper/papers.co-mh39-space-deep-how-many-stars-nature-36-3840x2400-4k-wallpaper.jpg"); */
 }
 
 #span-fps {
   position: absolute;
   top: 0;
   left: 0;
+  font-size: calc(16 * 100vmin / var(--base-size));
 }
 
 #div-header-container {
-  width: 802px;
+  width: calc(800 * 100vmin / var(--base-size) + 2px);
   margin: 0 auto;
 }
 
 #span-title {
   font-family: 'Forty Second Street';
-  font-size: 64px;
+  font-size: calc(64 * 100vmin / var(--base-size));
 }
 
 #div-score-container {
   font-family: 'VT323';
-  font-size: 48px;
+  font-size: calc(48 * 100vmin / var(--base-size));
 }
 
 #span-highscore {

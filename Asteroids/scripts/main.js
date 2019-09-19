@@ -6,7 +6,7 @@ import Asteroid from './asteroid.js';
 const BLACK = 'rgb(0, 0, 0)';
 const FRAMES_PER_SECOND = 60;
 const MILLISECONDS_PER_SECOND = 1000;
-const CANVAS_SIZE = 800;
+let canvasSize = 800;
 const CANVAS_FOREGROUND = document.getElementById('canvas-foreground');
 const CONTEXT_FOREGROUND = CANVAS_FOREGROUND.getContext('2d');
 const SPAN_FPS = document.getElementById('span-fps');
@@ -14,8 +14,8 @@ const SPAN_SCORE = document.getElementById('span-score');
 const SPAN_HIGHSCORE = document.getElementById('span-highscore');
 const ASTEROID_SPAWN_INTERVAL = 5000;
 
-CANVAS_FOREGROUND.width = CANVAS_SIZE;
-CANVAS_FOREGROUND.height = CANVAS_SIZE;
+CANVAS_FOREGROUND.width = canvasSize;
+CANVAS_FOREGROUND.height = canvasSize;
 
 var ship;
 var asteroids;
@@ -23,6 +23,24 @@ var timeOfLastAsteroidSpawn;
 var loop;
 var score;
 var scoreMultiplier;
+
+
+/**
+ * Must be done in javascript because it doesn't work in CSS calc().
+ */
+function scaleCanvas() {
+  canvasSize = 800 * Math.min(document.body.clientWidth, document.body.clientHeight) / 900;
+  CANVAS_FOREGROUND.width = CANVAS_FOREGROUND.height = canvasSize;
+  render();
+};
+
+
+window.onload = () => {
+  scaleCanvas();
+}
+
+window.onresize = scaleCanvas;
+
 
 // Get inputs.
 var inputs = {"mousePos": {x: 0, y: 0}};
@@ -49,8 +67,10 @@ async function reset() {
   if (typeof loop !== 'undefined') {
     clearInterval(loop);
     await Swal.fire({text: 'Game Over', showConfirmButton: false, timer: 1000});
+  } else {
+    await Swal.fire('[Instructions go here...]');
   }
-  ship = new Ship(CANVAS_SIZE / 2, CANVAS_SIZE / 2);
+  ship = new Ship(canvasSize / 2, canvasSize / 2);
   asteroids = [];
   timeOfLastAsteroidSpawn = -ASTEROID_SPAWN_INTERVAL;
   score = 0;
@@ -112,22 +132,22 @@ function gameLoop() {
   calculateFPS();
   if (performance.now() - timeOfLastAsteroidSpawn > ASTEROID_SPAWN_INTERVAL) {
     if (Math.random() < 0.5) {
-      asteroids.push(new Asteroid(-100, Math.random() * (CANVAS_SIZE + 200), 2));
+      asteroids.push(new Asteroid(-100, Math.random() * (canvasSize + 200), 2));
     } else {
-      asteroids.push(new Asteroid(Math.random() * (CANVAS_SIZE + 200), -100, 2));
+      asteroids.push(new Asteroid(Math.random() * (canvasSize + 200), -100, 2));
     }
     timeOfLastAsteroidSpawn = performance.now();
   }
   ship.shoot(inputs);
   for (var i = 0; i < asteroids.length; i++) {
-    asteroids[i].move(CANVAS_SIZE, deltaTime);
+    asteroids[i].move(canvasSize, deltaTime);
   }
-  ship.move(inputs, CANVAS_SIZE, deltaTime);
+  ship.move(inputs, canvasSize, deltaTime);
   if (ship.detectCollison(asteroids)) {
     reset();
   }
   for (var i = 0; i < ship.lasers.length; i++) {
-    if (ship.lasers[i].move(CANVAS_SIZE, deltaTime)) { // Laser faded
+    if (ship.lasers[i].move(canvasSize, deltaTime)) { // Laser faded
       scoreMultiplier = 1;
       ship.lasers.splice(i, 1);
       i--;
@@ -143,7 +163,7 @@ function gameLoop() {
 }
 
 function render() {
-  CONTEXT_FOREGROUND.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
+  CONTEXT_FOREGROUND.clearRect(0, 0, canvasSize, canvasSize);
   for (var i = 0; i < ship.lasers.length; i++) {
     ship.lasers[i].render(CONTEXT_FOREGROUND);
   }

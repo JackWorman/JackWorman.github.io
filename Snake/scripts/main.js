@@ -43,9 +43,8 @@ let displayScore = 0;
 function scaleCanvas() {
   canvasSize = 690 * Math.min(document.body.clientWidth, document.body.clientHeight) / 900;
   CANVAS_FOREGROUND.width = CANVAS_FOREGROUND.height = canvasSize;
-  renderForeground();
+  render();
 };
-
 
 window.onload = () => {
   scaleCanvas();

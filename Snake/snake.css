@@ -29,7 +29,7 @@ html, body {
   position: absolute;
   top: 0;
   left: 0;
-  font-size: calc(1vmin * 2);
+  font-size: calc(16 * 100vmin / 944);
 }
 
 #div-header-container {
@@ -40,12 +40,12 @@ html, body {
 
 #span-title {
   font-family: 'Heavy Data';
-  font-size: calc(1vmin * 11.2);
+  font-size: calc(100 * 100vmin / 944);
 }
 
 #div-score-container {
   font-family: 'VT323';
-  font-size: 48px;
+  font-size: calc(48 * 100vmin / 944);;
   color: white;
 }
 

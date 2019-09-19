@@ -36,7 +36,6 @@ let controlsEnabled = false;
 let gameLoopInterval;
 let incrementScoreInterval;
 let displayScore = 0;
-let deltaDisplayScore = 1;
 
 /**
  * Must be done in javascript because it doesn't work in CSS calc().
@@ -126,8 +125,7 @@ function updateScore() {
 }
 
 function incrementScore() {
-  deltaDisplayScore = Math.ceil((score - displayScore) / 200);
-  displayScore += deltaDisplayScore;
+  displayScore += Math.ceil((score - displayScore) / 150);
   if (displayScore > score) {
     displayScore = score;
   }

@@ -178,7 +178,7 @@ function calculateFPS() {
   }
   let now = performance.now();
   calculateFPS.deltas.push(now - calculateFPS.then);
-  if (calculateFPS.deltas.length > 15) {
+  if (calculateFPS.deltas.length > FRAMES_PER_SECOND) {
     calculateFPS.deltas.shift();
   }
   let averageDelta = (calculateFPS.deltas.reduce((a, b) => (a + b)) / calculateFPS.deltas.length);

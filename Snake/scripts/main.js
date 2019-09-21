@@ -133,16 +133,17 @@ function incrementScore() {
   if (displayScore > score) {
     displayScore = score;
   }
-  let paddingZeros = '0'.repeat(9);
   let digits = 0;
   while (displayScore / Math.pow(10, digits) >= 1) {
     digits++;
   }
-  paddingZeros = paddingZeros.slice(0, paddingZeros.length - digits);
+  let paddingZeros = '0'.repeat(9 - digits);
+  // paddingZeros = paddingZeros.slice(0, paddingZeros.length - digits);
   SPAN_SCORE.textContent = paddingZeros + displayScore;
   if (displayScore > localStorage.highscore) {
     SPAN_HIGHSCORE.textContent = paddingZeros + displayScore;
   }
+
   if (displayScore >= score) {
     clearInterval(incrementScoreInterval);
   }
@@ -164,8 +165,8 @@ function updateHighscore() {
     while (localStorage.highscore / Math.pow(10, count) >= 1) {
       count++
     }
-    paddingZeros = paddingZeros.slice(0, paddingZeros.length - count);
-    SPAN_HIGHSCORE.textContent = paddingZeros + localStorage.highscore;
+    // paddingZeros = paddingZeros.slice(0, paddingZeros.length - count);
+    SPAN_HIGHSCORE.textContent = '0'.repeat(9 - digits) + localStorage.highscore;
   }
 }
 

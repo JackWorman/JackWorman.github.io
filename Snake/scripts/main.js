@@ -130,10 +130,10 @@ function updateScore() {
 
 function incrementScore() {
   displayScore += Math.ceil((score - displayScore) / 150);
-  if (displayScore > score) {
+  if (displayScore > score) { // Stops the displayScore from incrementing above the score.
     displayScore = score;
   }
-  let digits = 0;
+  let digits = 1;
   while (displayScore / Math.pow(10, digits) >= 1) {
     digits++;
   }
@@ -141,8 +141,7 @@ function incrementScore() {
   if (displayScore > localStorage.highscore) {
     SPAN_HIGHSCORE.textContent = '0'.repeat(9 - digits) + displayScore;
   }
-  if (displayScore >= score) {
-    console.log(score);
+  if (displayScore === score) {
     clearInterval(incrementScoreInterval);
   }
 }
@@ -159,7 +158,7 @@ function updateHighscore() {
     SPAN_HIGHSCORE.textContent = paddingZeros;
   } else {
     // Calculates the amount of padding-zeros needed.
-    let digits = 0;
+    let digits = 1;
     while (localStorage.highscore / Math.pow(10, digits) >= 1) {
       digits++
     }

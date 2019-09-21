@@ -161,9 +161,9 @@ function updateHighscore() {
     SPAN_HIGHSCORE.textContent = paddingZeros;
   } else {
     // Calculates the amount of padding-zeros needed.
-    let count = 0;
-    while (localStorage.highscore / Math.pow(10, count) >= 1) {
-      count++
+    let digits = 0;
+    while (localStorage.highscore / Math.pow(10, digits) >= 1) {
+      digits++
     }
     // paddingZeros = paddingZeros.slice(0, paddingZeros.length - count);
     SPAN_HIGHSCORE.textContent = '0'.repeat(9 - digits) + localStorage.highscore;

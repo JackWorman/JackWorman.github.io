@@ -137,14 +137,12 @@ function incrementScore() {
   while (displayScore / Math.pow(10, digits) >= 1) {
     digits++;
   }
-  let paddingZeros = '0'.repeat(9 - digits);
-  // paddingZeros = paddingZeros.slice(0, paddingZeros.length - digits);
-  SPAN_SCORE.textContent = paddingZeros + displayScore;
+  SPAN_SCORE.textContent = '0'.repeat(9 - digits) + displayScore;
   if (displayScore > localStorage.highscore) {
-    SPAN_HIGHSCORE.textContent = paddingZeros + displayScore;
+    SPAN_HIGHSCORE.textContent = '0'.repeat(9 - digits) + displayScore;
   }
-
   if (displayScore >= score) {
+    console.log(score);
     clearInterval(incrementScoreInterval);
   }
 }
@@ -165,7 +163,6 @@ function updateHighscore() {
     while (localStorage.highscore / Math.pow(10, digits) >= 1) {
       digits++
     }
-    // paddingZeros = paddingZeros.slice(0, paddingZeros.length - count);
     SPAN_HIGHSCORE.textContent = '0'.repeat(9 - digits) + localStorage.highscore;
   }
 }

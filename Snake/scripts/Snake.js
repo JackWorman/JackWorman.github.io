@@ -5,12 +5,13 @@ const GROW_RATE = 6;
 
 export class Snake {
   constructor(startX, startY) {
-    this.direction = 'none';
+    Object.defineProperty(this, 'direction', {value: 'none', writable: true});
     // TODO: change body to segments
-    this.body = [];
+    Object.defineProperty(this, 'body', {value: []});
     for (let i = 0; i < STARTING_SIZE; i++) {
       this.body.push({x: startX, y: startY});
     }
+    Object.seal(this);
   }
 
   move() {

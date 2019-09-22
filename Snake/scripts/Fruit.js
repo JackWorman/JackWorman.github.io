@@ -16,7 +16,7 @@ export class Fruit {
       this.x = Math.floor(Math.random() * gridSize);
       this.y = Math.floor(Math.random() * gridSize);
       collison = false;
-      for (const part of snake.body) {
+      for (const part of snake.bodySegment) {
         if (this.x === part.x && this.y === part.y) {
           collison = true;
         }

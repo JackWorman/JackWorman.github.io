@@ -33,13 +33,13 @@ export class Snake {
   }
 
   checkCollison(gridSize) {
-    // Check if the snake hit its body.
+    // Checks if the snake hit itself.
     for (let i = 1; i < this.body.length; i++) {
       if (this.body[0].x === this.body[i].x && this.body[0].y === this.body[i].y) {
         return true;
       }
     }
-    // Check if the snake hit a wall.
+    // Checks if the snake hit a wall.
     return this.body[0].x < 0 || this.body[0].y < 0 || this.body[0].x >= gridSize || this.body[0].y >= gridSize;
   }
 

@@ -2,6 +2,7 @@
 
 import {Coordinate} from './Coordinate.js';
 
+// TODO: rename to pellot
 export class Fruit {
   constructor() {
     this.coordinate = new Coordinate(-1, -1);

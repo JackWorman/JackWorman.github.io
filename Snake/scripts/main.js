@@ -38,7 +38,7 @@ let incrementScoreInterval;
 let displayScore = 0;
 
 /**
- * Must be done in javascript because it doesn't work in CSS calc().
+ * This must be done in Javascript because it clears the canvas constantly when using calc() in CSS.
  */
 function scaleCanvas() {
   canvasSize = 690 * Math.min(document.body.clientWidth, document.body.clientHeight) / 900;

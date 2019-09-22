@@ -95,10 +95,12 @@ document.addEventListener('keydown', (event) => {
 async function reset() {
   controlsEnabled = false;
   document.body.style.cursor = 'auto';
-  if (typeof gameLoopInterval === 'undefined') { // Runs the first time.
+  // Runs the first time.
+  if (typeof gameLoopInterval === 'undefined') {
     await Swal.fire('Use the arrow keys or WASD to move.');
     await Swal.fire('Collect the fruit to gain points.\nMore points are rewarded for being efficent.');
-  } else { // Does not run the first time.
+  // Does not run the first time.
+  } else {
     await Swal.fire({text: 'Game Over!', showConfirmButton: false, timer: 1500});
   }
   directionQueue = [];

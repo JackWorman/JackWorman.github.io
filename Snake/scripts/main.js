@@ -94,8 +94,6 @@ document.addEventListener('keydown', (event) => {
 
 async function reset() {
   controlsEnabled = false;
-  clearInterval(gameLoopInterval);
-  clearInterval(incrementScoreInterval);
   document.body.style.cursor = 'auto';
   if (typeof gameLoopInterval === 'undefined') { // Runs the first time.
     await Swal.fire('Use the arrow keys or WASD to move.');
@@ -185,7 +183,6 @@ function calculateFPS() {
 
 function gameLoop() {
   calculateFPS();
-
   let direction = directionQueue.shift();
   if (direction) {
     snake.direction = direction;
@@ -194,6 +191,8 @@ function gameLoop() {
   distanceTraveled++;
   if (snake.checkCollison(GRID_SIZE)) {
     reset();
+    clearInterval(gameLoopInterval);
+    clearInterval(incrementScoreInterval);
     return;
   }
   if (snake.checkFruitEaten(fruit)) {

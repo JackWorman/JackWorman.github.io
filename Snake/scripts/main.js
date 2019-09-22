@@ -129,8 +129,9 @@ function updateScore() {
 }
 
 function incrementScore() {
-  displayScore += Math.ceil((score - displayScore) / 150);
-  if (displayScore > score) { // Stops the displayScore from incrementing above the score.
+  displayScore += Math.ceil((score - displayScore) / 100);
+  // Stops the displayScore from incrementing above the score.
+  if (displayScore > score) {
     displayScore = score;
   }
   let digits = 1;
@@ -196,7 +197,7 @@ function gameLoop() {
     return;
   }
   if (snake.checkFruitEaten(fruit)) {
-    score += Math.ceil(Math.pow(snake.body.length, 1 + smallestDistancePossible / distanceTraveled));
+    score += Math.floor(Math.pow(snake.body.length, 1 + smallestDistancePossible / distanceTraveled));
     updateScore();
     snake.grow();
     fruit.placeFruit(GRID_SIZE, snake);

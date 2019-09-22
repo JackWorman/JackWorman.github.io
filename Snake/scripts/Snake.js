@@ -34,7 +34,9 @@ export class Snake {
 
   grow() {
     for (let i = 0; i < GROW_RATE; i++) {
-      this.bodySegment.push({x: this.bodySegment[this.bodySegment.length - 1].x, y: this.bodySegment[this.bodySegment.length - 1].y});
+      this.bodySegment.push(
+        {x: this.bodySegment[this.bodySegment.length - 1].x, y: this.bodySegment[this.bodySegment.length - 1].y}
+      );
     }
   }
 
@@ -46,7 +48,10 @@ export class Snake {
       }
     }
     // Checks if the snake hit a wall.
-    return this.bodySegment[0].x < 0 || this.bodySegment[0].y < 0 || this.bodySegment[0].x >= gridSize || this.bodySegment[0].y >= gridSize;
+    return this.bodySegment[0].x < 0
+      || this.bodySegment[0].y < 0
+      || this.bodySegment[0].x >= gridSize
+      || this.bodySegment[0].y >= gridSize;
   }
 
   checkFruitEaten(fruit) {

@@ -64,7 +64,7 @@ document.addEventListener('keydown', (event) => {
   // Start Game.
   if (snake.direction === 'none' && directionQueue.length === 0) {
     gameLoopInterval = setInterval(gameLoop, MILLISECONDS_PER_SECOND / FRAMES_PER_SECOND);
-    document.bodySegment.style.cursor = 'none';
+    document.body.style.cursor = 'none';
   }
   let currentDirection = directionQueue.length ? directionQueue[directionQueue.length - 1] : snake.direction;
   if (currentDirection === 'left' || currentDirection === 'right') {
@@ -94,7 +94,7 @@ document.addEventListener('keydown', (event) => {
 
 async function reset() {
   controlsEnabled = false;
-  document.bodySegment.style.cursor = 'auto';
+  document.body.style.cursor = 'auto';
   if (typeof gameLoopInterval === 'undefined') { // Runs the first time.
     await Swal.fire('Use the arrow keys or WASD to move.');
     await Swal.fire('Collect the fruit to gain points.\n' + 'More points are rewarded for being efficent.');

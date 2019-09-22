@@ -16,7 +16,7 @@ export class Snake {
   }
 
   /**
-   * Removes the last bodySegment segment and adds a new bodySegment-segment in the direction that the snake is going. Previously, had
+   * Removes the last body-segment and adds a new body-segment in the direction that the snake is going. Previously, had
    * it moving each bodySegment-segment individually.
    */
   move() {

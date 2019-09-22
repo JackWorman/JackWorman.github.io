@@ -97,7 +97,7 @@ async function reset() {
   document.body.style.cursor = 'auto';
   if (typeof gameLoopInterval === 'undefined') { // Runs the first time.
     await Swal.fire('Use the arrow keys or WASD to move.');
-    await Swal.fire('Collect the fruit to gain points.\n' + 'More points are rewarded for being efficent.');
+    await Swal.fire('Collect the fruit to gain points.\nMore points are rewarded for being efficent.');
   } else { // Does not run the first time.
     await Swal.fire({text: 'Game Over!', showConfirmButton: false, timer: 1500});
   }
@@ -149,12 +149,11 @@ function updateHighscore() {
   if (localStorage.highscore < score) {
     localStorage.highscore = score;
   }
-  let paddingZeros = '0'.repeat(9);
   if (Number(localStorage.highscore) === 0) {
-    SPAN_HIGHSCORE.textContent = paddingZeros;
+    SPAN_HIGHSCORE.textContent = '0'.repeat(9);
   } else {
     // Calculates the amount of padding-zeros needed.
-    let digits = 1;
+    let digits = 2;
     while (localStorage.highscore / Math.pow(10, digits) >= 1) {
       digits++
     }
@@ -211,7 +210,7 @@ function render() {
     CONTEXT_FOREGROUND.fillRect(x * squareLength + 0.5, y * squareLength + 0.5, squareLength, squareLength);
   }
   fillSquare(fruit.x, fruit.y, FRUIT_COLOR);
-  // Render snake from head to tail.
+  // Renders snake from head to tail.
   for (let i = snake.bodySegment.length - 1; i >= 0; i--) {
     fillSquare(snake.bodySegment[i].x, snake.bodySegment[i].y, RAINBOW[i % RAINBOW.length]);
   }

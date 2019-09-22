@@ -187,9 +187,9 @@ function gameLoop() {
   snake.move();
   distanceTraveled++;
   if (snake.checkCollison(GRID_SIZE)) {
-    reset();
     clearInterval(gameLoopInterval);
     clearInterval(incrementScoreInterval);
+    reset();
     return;
   }
   if (snake.checkFruitEaten(fruit)) {
@@ -204,15 +204,12 @@ function gameLoop() {
 }
 
 function render() {
+  CONTEXT_FOREGROUND.clearRect(0, 0, canvasSize, canvasSize);
   function fillSquare(x, y, color) {
     CONTEXT_FOREGROUND.fillStyle = color;
-    let xStart = x * canvasSize / GRID_SIZE + 0.5;
-    let yStart = y * canvasSize / GRID_SIZE + 0.5;
-    let xLength = canvasSize / GRID_SIZE;
-    let yLength = canvasSize / GRID_SIZE;
-    CONTEXT_FOREGROUND.fillRect(xStart, yStart, xLength, yLength);
+    const squareLength = canvasSize / GRID_SIZE;
+    CONTEXT_FOREGROUND.fillRect(x * squareLength + 0.5, y * squareLength + 0.5, squareLength, squareLength);
   }
-  CONTEXT_FOREGROUND.clearRect(0, 0, canvasSize, canvasSize);
   fillSquare(fruit.x, fruit.y, FRUIT_COLOR);
   // Render snake from head to tail.
   for (let i = snake.body.length - 1; i >= 0; i--) {

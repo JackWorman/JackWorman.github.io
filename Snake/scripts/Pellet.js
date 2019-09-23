@@ -3,7 +3,7 @@
 // TODO: use coordinates
 import {Coordinate} from './Coordinate.js';
 
-export class Pellet extends Coordinate {
+export class Pellet {// extends Coordinate {
   constructor() {
     // super(-1, -1);
     Object.defineProperty(this, 'x', {value: -1, writable: true});

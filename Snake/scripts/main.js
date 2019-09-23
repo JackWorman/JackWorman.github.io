@@ -112,7 +112,7 @@ async function reset() {
   SPAN_SCORE.textContent = '0'.repeat(9);
   // Setup and render foreground.
   snake = new Snake(GRID_SIZE / 2, GRID_SIZE / 2);
-  pellet.placeFruit(GRID_SIZE, snake);
+  pellet.placePellet(GRID_SIZE, snake);
   // Reset distance variables.
   distanceTraveled = 0;
   smallestDistancePossible = Math.abs(pellet.x - snake.bodySegment[0].x) + Math.abs(pellet.y - snake.bodySegment[0].y);
@@ -197,7 +197,7 @@ function gameLoop() {
     score += Math.floor(Math.pow(snake.bodySegment.length, 1 + smallestDistancePossible / distanceTraveled));
     updateScore();
     snake.grow();
-    pellet.placeFruit(GRID_SIZE, snake);
+    pellet.placePellet(GRID_SIZE, snake);
     distanceTraveled = 0;
     smallestDistancePossible = Math.abs(pellet.x - snake.bodySegment[0].x) + Math.abs(pellet.y - snake.bodySegment[0].y);
   }

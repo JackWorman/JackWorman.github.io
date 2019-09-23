@@ -1,5 +1,6 @@
 'use strict';
 
+// TODO: use coordinates
 import {Coordinate} from './Coordinate.js';
 
 const STARTING_SIZE = 6;
@@ -54,7 +55,7 @@ export class Snake {
       || this.bodySegment[0].y >= gridSize;
   }
 
-  checkFruitEaten(fruit) {
-    return this.bodySegment[0].x === fruit.x && this.bodySegment[0].y === fruit.y;
+  checkFruitEaten(pellet) {
+    return this.bodySegment[0].x === pellet.x && this.bodySegment[0].y === pellet.y;
   }
 }

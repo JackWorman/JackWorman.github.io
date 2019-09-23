@@ -1,16 +1,17 @@
 'use strict';
 
+// TODO: use coordinates
 import {Coordinate} from './Coordinate.js';
 
-// TODO: rename to pellot
-export class Fruit {
+export class Pellet extends Coordinate {
   constructor() {
-    this.coordinate = new Coordinate(-1, -1);
-    this.x = -1;
-    this.y = -1;
+    // super(-1, -1);
+    Object.defineProperty(this, 'x', {value: -1, writable: true});
+    Object.defineProperty(this, 'y', {value: -1, writable: true});
+    Object.seal(this);
   }
 
-  placeFruit(gridSize, snake) {
+  placePellet(gridSize, snake) {
     let collison;
     do {
       this.x = Math.floor(Math.random() * gridSize);

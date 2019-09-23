@@ -1,7 +1,7 @@
 'use strict';
 
 import {Snake} from './Snake.js';
-import {Fruit} from './Fruit.js';
+import {Pellet} from './Pellet.js';
 import {KeyCode} from './KeyCode.js';
 
 // Constants
@@ -28,7 +28,7 @@ const CONTEXT_FOREGROUND = CANVAS_FOREGROUND.getContext('2d');
 let canvasSize = 690; // in pixels
 let directionQueue = [];
 let snake = new Snake(GRID_SIZE / 2, GRID_SIZE / 2);
-let fruit = new Fruit();
+let pellet = new Pellet();
 let score = 0;
 let distanceTraveled;
 let smallestDistancePossible;
@@ -98,7 +98,7 @@ async function reset() {
   // Runs the first time.
   if (typeof gameLoopInterval === 'undefined') {
     await Swal.fire('Use the arrow keys or WASD to move.');
-    await Swal.fire('Collect the fruit to gain points.\nMore points are rewarded for being efficent.');
+    await Swal.fire('Collect the pellet to gain points.\nMore points are rewarded for being efficent.');
   // Does not run the first time.
   } else {
     await Swal.fire({text: 'Game Over!', showConfirmButton: false, timer: 1500});
@@ -112,10 +112,10 @@ async function reset() {
   SPAN_SCORE.textContent = '0'.repeat(9);
   // Setup and render foreground.
   snake = new Snake(GRID_SIZE / 2, GRID_SIZE / 2);
-  fruit.placeFruit(GRID_SIZE, snake);
+  pellet.placeFruit(GRID_SIZE, snake);
   // Reset distance variables.
   distanceTraveled = 0;
-  smallestDistancePossible = Math.abs(fruit.x - snake.bodySegment[0].x) + Math.abs(fruit.y - snake.bodySegment[0].y);
+  smallestDistancePossible = Math.abs(pellet.x - snake.bodySegment[0].x) + Math.abs(pellet.y - snake.bodySegment[0].y);
   render();
   controlsEnabled = true;
 }
@@ -193,13 +193,13 @@ function gameLoop() {
     reset();
     return;
   }
-  if (snake.checkFruitEaten(fruit)) {
+  if (snake.checkFruitEaten(pellet)) {
     score += Math.floor(Math.pow(snake.bodySegment.length, 1 + smallestDistancePossible / distanceTraveled));
     updateScore();
     snake.grow();
-    fruit.placeFruit(GRID_SIZE, snake);
+    pellet.placeFruit(GRID_SIZE, snake);
     distanceTraveled = 0;
-    smallestDistancePossible = Math.abs(fruit.x - snake.bodySegment[0].x) + Math.abs(fruit.y - snake.bodySegment[0].y);
+    smallestDistancePossible = Math.abs(pellet.x - snake.bodySegment[0].x) + Math.abs(pellet.y - snake.bodySegment[0].y);
   }
   render();
 }
@@ -211,7 +211,7 @@ function render() {
     const squareLength = canvasSize / GRID_SIZE;
     CONTEXT_FOREGROUND.fillRect(x * squareLength + 0.5, y * squareLength + 0.5, squareLength, squareLength);
   }
-  fillSquare(fruit.x, fruit.y, FRUIT_COLOR);
+  fillSquare(pellet.x, pellet.y, FRUIT_COLOR);
   // Renders snake from head to tail.
   for (let i = snake.bodySegment.length - 1; i >= 0; i--) {
     fillSquare(snake.bodySegment[i].x, snake.bodySegment[i].y, RAINBOW[i % RAINBOW.length]);

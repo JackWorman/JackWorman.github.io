@@ -6,4 +6,13 @@ export class Coordinate {
     Object.defineProperty(this, 'y', {value: -1, writable: true});
     Object.seal(this);
   }
+
+  static compare(coordinate1, coordinate2) {
+    return coordinate1.x === coordinate2.x && coordinate1.y === coordinate2.y;
+  }
+
+  setCoordinate(col, row) {
+    this.col = col;
+    this.row = row;
+  }
 }

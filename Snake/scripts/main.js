@@ -37,7 +37,7 @@ let gameLoopInterval;
 let incrementScoreInterval;
 let displayedScore = 0;
 
-  console.log(typeof SPAN_FPS);
+  console.log(typeof 3);
 
 /**
  * This must be done in Javascript because it clears the canvas constantly when using calc() in CSS.

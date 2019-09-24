@@ -37,6 +37,8 @@ let gameLoopInterval;
 let incrementScoreInterval;
 let displayedScore = 0;
 
+  console.log(typeof SPAN_FPS);
+
 /**
  * This must be done in Javascript because it clears the canvas constantly when using calc() in CSS.
  */
@@ -110,10 +112,9 @@ async function reset() {
   score = 0;
   displayedScore = 0;
   SPAN_SCORE.textContent = '0'.repeat(9);
-  // Setup and render foreground.
+  // Snake and pellet.
   snake = new Snake(GRID_SIZE / 2, GRID_SIZE / 2);
   pellet.placePellet(GRID_SIZE, snake);
-  // Reset distance variables.
   distanceTraveled = 0;
   smallestDistancePossible = Math.abs(pellet.x - snake.bodySegment[0].x) + Math.abs(pellet.y - snake.bodySegment[0].y);
   render();

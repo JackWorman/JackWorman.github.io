@@ -35,7 +35,7 @@ let smallestDistancePossible;
 let controlsEnabled = false;
 let gameLoopInterval;
 let incrementScoreInterval;
-let displayScore = 0;
+let displayedScore = 0;
 
 /**
  * This must be done in Javascript because it clears the canvas constantly when using calc() in CSS.
@@ -108,7 +108,7 @@ async function reset() {
   // Reset score variables.
   updateHighscore();
   score = 0;
-  displayScore = 0;
+  displayedScore = 0;
   SPAN_SCORE.textContent = '0'.repeat(9);
   // Setup and render foreground.
   snake = new Snake(GRID_SIZE / 2, GRID_SIZE / 2);

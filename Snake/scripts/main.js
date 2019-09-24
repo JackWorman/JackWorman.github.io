@@ -126,23 +126,24 @@ function updateScore() {
 }
 
 function incrementScore() {
-  displayScore += Math.ceil((score - displayScore) / 100);
+  displayedScore += Math.ceil((score - displayedScore) / 100);
   // Stops the displayScore from incrementing above the score.
-  if (displayScore > score) {
-    displayScore = score;
+  if (displayedScore > score) {
+    displayedScore = score;
+    clearInterval(incrementScoreInterval);
   }
   // let digits = 1;
   // while (displayScore / Math.pow(10, digits) >= 1) {
   //   digits++;
   // }
   // SPAN_SCORE.textContent = '0'.repeat(9 - digits) + displayScore;
-  displayScore(SPAN_SCORE, displayScore);
+  displayScore(SPAN_SCORE, displayedScore);
   if (displayScore > localStorage.highscore) {
-    displayScore(SPAN_HIGHSCORE, displayScore);
+    displayScore(SPAN_HIGHSCORE, displayedScore);
   }
-  if (displayScore === score) {
-    clearInterval(incrementScoreInterval);
-  }
+  // if (displayedScore === score) {
+  //   clearInterval(incrementScoreInterval);
+  // }
 }
 
 function updateHighscore() {

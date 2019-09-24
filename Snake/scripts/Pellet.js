@@ -4,7 +4,7 @@ import {Coordinate} from './Coordinate.js';
 
 export class Pellet extends Coordinate {
   constructor() {
-    super(-1, -1);
+    // super(-1, -1);
     Object.seal(this);
   }
 

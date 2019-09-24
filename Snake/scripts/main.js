@@ -145,16 +145,17 @@ function updateHighscore() {
   if (localStorage.highscore < score) {
     localStorage.highscore = score;
   }
-  if (Number(localStorage.highscore) === 0) {
-    SPAN_HIGHSCORE.textContent = '0'.repeat(9);
-  } else {
-    // Calculates the amount of padding-zeros needed.
-    let digits = 2;
-    while (localStorage.highscore / Math.pow(10, digits) >= 1) {
-      digits++
-    }
-    SPAN_HIGHSCORE.textContent = '0'.repeat(9 - digits) + localStorage.highscore;
-  }
+  displayScore(SPAN_HIGHSCORE, Number(localStorage.highscore));
+  // if (Number(localStorage.highscore) === 0) {
+  //   SPAN_HIGHSCORE.textContent = '0'.repeat(9);
+  // } else {
+  //   // Calculates the amount of padding-zeros needed.
+  //   let digits = 2;
+  //   while (localStorage.highscore / Math.pow(10, digits) >= 1) {
+  //     digits++
+  //   }
+  //   SPAN_HIGHSCORE.textContent = '0'.repeat(9 - digits) + localStorage.highscore;
+  // }
 }
 
 function displayScore(domElement, score) {

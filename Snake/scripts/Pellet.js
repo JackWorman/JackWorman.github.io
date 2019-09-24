@@ -11,7 +11,7 @@ export class Pellet extends Coordinate {
   /**
    * Randomly sets the coordinates of the pellet and then checks if it is in a free space. The coordinates are randomly
    * set till it is in a valid position.
-   * @param  {Number} gridSize The length\width of the grid.
+   * @param  {number} gridSize The length\width of the grid.
    * @param  {Snake} snake    [description]
    */
   placePellet(gridSize, snake) {

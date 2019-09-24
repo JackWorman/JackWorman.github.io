@@ -14,8 +14,7 @@ export class Pellet extends Coordinate {
       this.setCoordinate(Math.floor(Math.random() * gridSize), Math.floor(Math.random() * gridSize));
       collison = false;
       for (const part of snake.bodySegment) {
-        // if (Coordinate.compare(this, part)) {
-        if (this.x === part.x && this.y === part.y) {
+        if (Coordinate.compare(this, part)) {
           collison = true;
         }
       }

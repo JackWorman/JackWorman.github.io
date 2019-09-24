@@ -13,6 +13,6 @@ export class Coordinate {
 
   setCoordinate(x, y) {
     this.x = x;
-    this.x = y;
+    this.y = y;
   }
 }

@@ -131,13 +131,14 @@ function incrementScore() {
   if (displayScore > score) {
     displayScore = score;
   }
-  let digits = 1;
-  while (displayScore / Math.pow(10, digits) >= 1) {
-    digits++;
-  }
-  SPAN_SCORE.textContent = '0'.repeat(9 - digits) + displayScore;
+  // let digits = 1;
+  // while (displayScore / Math.pow(10, digits) >= 1) {
+  //   digits++;
+  // }
+  // SPAN_SCORE.textContent = '0'.repeat(9 - digits) + displayScore;
+  displayScore(SPAN_SCORE, displayScore);
   if (displayScore > localStorage.highscore) {
-    SPAN_HIGHSCORE.textContent = '0'.repeat(9 - digits) + displayScore;
+    displayScore(SPAN_HIGHSCORE, displayScore);
   }
   if (displayScore === score) {
     clearInterval(incrementScoreInterval);
@@ -160,6 +161,19 @@ function updateHighscore() {
       digits++
     }
     SPAN_HIGHSCORE.textContent = '0'.repeat(9 - digits) + localStorage.highscore;
+  }
+}
+
+function displayScore(domElement, score) {
+  if (score === 0) {
+    domElement.textContent = '0'.repeat(9);
+  } else {
+    // Calculates the amount of padding-zeros needed.
+    let digits = 2;
+    while (score / Math.pow(10, digits) >= 1) {
+      digits++
+    }
+    domElement.textContent = '0'.repeat(9 - digits) + score;
   }
 }
 

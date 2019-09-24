@@ -132,18 +132,10 @@ function incrementScore() {
     displayedScore = score;
     clearInterval(incrementScoreInterval);
   }
-  // let digits = 1;
-  // while (displayScore / Math.pow(10, digits) >= 1) {
-  //   digits++;
-  // }
-  // SPAN_SCORE.textContent = '0'.repeat(9 - digits) + displayScore;
   displayScore(SPAN_SCORE, displayedScore);
-  if (displayScore > localStorage.highscore) {
+  if (displayedScore > localStorage.highscore) {
     displayScore(SPAN_HIGHSCORE, displayedScore);
   }
-  // if (displayedScore === score) {
-  //   clearInterval(incrementScoreInterval);
-  // }
 }
 
 function updateHighscore() {

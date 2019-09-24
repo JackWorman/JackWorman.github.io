@@ -139,7 +139,8 @@ function incrementScore() {
 }
 
 function updateHighscore() {
-  if (typeof localStorage.highscore === 'undefined') { // First time setup.
+   // First time setup.
+  if (typeof localStorage.highscore === 'undefined') {
     localStorage.highscore = 0;
   }
   if (localStorage.highscore < score) {

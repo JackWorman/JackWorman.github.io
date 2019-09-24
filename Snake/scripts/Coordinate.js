@@ -11,8 +11,8 @@ export class Coordinate {
     return coordinate1.x === coordinate2.x && coordinate1.y === coordinate2.y;
   }
 
-  setCoordinate(col, row) {
-    this.col = col;
-    this.row = row;
+  setCoordinate(x, y) {
+    this.x = x;
+    this.x = y;
   }
 }

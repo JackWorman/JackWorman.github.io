@@ -58,4 +58,14 @@ export class Snake {
   checkFruitEaten(pellet) {
     return this.bodySegment[0].x === pellet.x && this.bodySegment[0].y === pellet.y;
   }
+
+  reset(startX, startY) {
+    this.direction = 'none';
+    while (this.bodySegment.length > 0) {
+      this.bodySegment.pop();
+    }
+    for (let i = 0; i < STARTING_SIZE; i++) {
+      this.bodySegment.push({x: startX, y: startY});
+    }
+  }
 }

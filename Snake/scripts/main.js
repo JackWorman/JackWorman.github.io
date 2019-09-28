@@ -27,8 +27,8 @@ const CONTEXT_FOREGROUND = CANVAS_FOREGROUND.getContext('2d');
 // Globals
 let canvasSize = 690; // in pixels
 let directionQueue = [];
-let snake = new Snake(GRID_SIZE / 2, GRID_SIZE / 2);
-let pellet = new Pellet();
+const snake = new Snake(GRID_SIZE / 2, GRID_SIZE / 2);
+const pellet = new Pellet();
 let score = 0;
 let distanceTraveled;
 let smallestDistancePossible;
@@ -105,13 +105,14 @@ async function reset() {
   }
   directionQueue = [];
   SPAN_FPS.textContent = 'FPS: 0.00';
-  // Reset score variables.
+  // Resets score variables and displays.
   updateHighscore();
   score = 0;
   displayedScore = 0;
-  SPAN_SCORE.textContent = '0'.repeat(9);
+  displayScore(SPAN_SCORE, displayedScore)
   // Snake and pellet.
-  snake = new Snake(GRID_SIZE / 2, GRID_SIZE / 2);
+  // snake = new Snake(GRID_SIZE / 2, GRID_SIZE / 2);
+  snake.reset(GRID_SIZE / 2, GRID_SIZE / 2);
   pellet.placePellet(GRID_SIZE, snake);
   distanceTraveled = 0;
   smallestDistancePossible = Math.abs(pellet.x - snake.bodySegment[0].x) + Math.abs(pellet.y - snake.bodySegment[0].y);

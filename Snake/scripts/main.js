@@ -10,7 +10,7 @@ import {resetScore, updateScore} from './score.js';
 const GRID_SIZE = 30;
 const FRAMES_PER_SECOND = 15;
 const MILLISECONDS_PER_SECOND = 1000;
-const FRUIT_COLOR = 'rgb(255, 255, 255)';
+const PELLET_COLOR = 'rgb(255, 255, 255)';
 const RAINBOW = [
   "rgb(255, 0, 0)",
   "rgb(255, 127, 0)",
@@ -158,7 +158,7 @@ function render() {
     const squareLength = canvasSize / GRID_SIZE;
     CONTEXT_FOREGROUND.fillRect(x * squareLength + 0.5, y * squareLength + 0.5, squareLength, squareLength);
   }
-  fillSquare(pellet.x, pellet.y, FRUIT_COLOR);
+  fillSquare(pellet.x, pellet.y, PELLET_COLOR);
   // Renders snake from head to tail.
   for (let i = snake.bodySegment.length - 1; i >= 0; i--) {
     fillSquare(snake.bodySegment[i].x, snake.bodySegment[i].y, RAINBOW[i % RAINBOW.length]);

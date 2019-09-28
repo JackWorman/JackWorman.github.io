@@ -3,7 +3,7 @@
 import {Snake} from './Snake.js';
 import {Pellet} from './Pellet.js';
 import {KeyCode} from './KeyCode.js';
-import {updateScore, incrementScore, updateHighscore, displayScore} from './score.js';
+import {resetScore, updateScore, incrementScore, updateHighscore, displayScore} from './score.js';
 // import * as Score from './score.js'
 
 // Constants

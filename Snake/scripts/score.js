@@ -1,5 +1,6 @@
 const SPAN_SCORE = document.getElementById('span-score');
 const SPAN_HIGHSCORE = document.getElementById('span-highscore');
+const MILLISECONDS_PER_SECOND = 1000;
 
 let incrementScoreInterval;
 

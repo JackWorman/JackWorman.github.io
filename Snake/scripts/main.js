@@ -147,7 +147,7 @@ function gameLoop() {
   distanceTraveled++;
   if (snake.checkCollison(GRID_SIZE)) {
     clearInterval(gameLoopInterval);
-    clearInterval(incrementScoreInterval);
+    // clearInterval(incrementScoreInterval);
     reset();
     return;
   }

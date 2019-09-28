@@ -20,6 +20,9 @@ const RAINBOW = [
   "rgb(148, 0, 211)",
 ];
 // DOM Elements
+const SPAN_SCORE = document.getElementById('span-score');
+const SPAN_HIGHSCORE = document.getElementById('span-highscore');
+
 const SPAN_FPS = document.getElementById('span-fps');
 const CANVAS_FOREGROUND = document.getElementById('canvas-foreground');
 const CONTEXT_FOREGROUND = CANVAS_FOREGROUND.getContext('2d');

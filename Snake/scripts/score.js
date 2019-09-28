@@ -9,6 +9,7 @@ let displayedScore = 0;
 
 export function resetScore() {
   clearInterval(incrementScoreInterval);
+  updateHighscore();
   score = 0;
   displayedScore = 0;
   displayScore(SPAN_SCORE, score);

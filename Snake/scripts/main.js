@@ -97,7 +97,7 @@ async function reset() {
   document.body.style.cursor = 'auto';
   // Runs the first time.
   if (typeof gameLoopInterval === 'undefined') {
-    await Swal.fire('Use the arrow keys or WASD to move.');
+    await Swal.fire('Use the arrow keys\nor\nWASD to move.');
     await Swal.fire('Collect the pellet to gain points.\nMore points are rewarded for being efficent.');
   // Does not run the first time.
   } else {

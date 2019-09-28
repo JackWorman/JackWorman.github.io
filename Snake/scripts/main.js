@@ -21,9 +21,6 @@ const RAINBOW = [
 ];
 // DOM Elements
 const SPAN_FPS = document.getElementById('span-fps');
-const SPAN_TITLE = document.getElementById('span-title');
-const SPAN_SCORE = document.getElementById('span-score');
-const SPAN_HIGHSCORE = document.getElementById('span-highscore');
 const CANVAS_FOREGROUND = document.getElementById('canvas-foreground');
 const CONTEXT_FOREGROUND = CANVAS_FOREGROUND.getContext('2d');
 // Globals

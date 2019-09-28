@@ -101,7 +101,6 @@ async function reset() {
   }
   directionQueue = [];
   SPAN_FPS.textContent = 'FPS: 0.00';
-  // Resets score variables and displays.
   resetScore();
   // Snake and pellet.
   snake.reset(GRID_SIZE / 2, GRID_SIZE / 2);

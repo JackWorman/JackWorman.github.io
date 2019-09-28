@@ -1,12 +1,25 @@
 const SPAN_SCORE = document.getElementById('span-score');
 const SPAN_HIGHSCORE = document.getElementById('span-highscore');
 const MILLISECONDS_PER_SECOND = 1000;
+const INCREMENTS_PER_SECOND = 100;
 
 let incrementScoreInterval;
+let score = 0;
+let displayedScore = 0;
 
-export function updateScore() {
+export function resetScore() {
   clearInterval(incrementScoreInterval);
-  incrementScoreInterval = setInterval(incrementScore, MILLISECONDS_PER_SECOND / 100);
+  score = 0;
+  displayedScore = 0;
+  displayScore(SPAN_SCORE, score);
+}
+
+// TODO: move score variable to this module and pass any updates to score as a parameter
+export function updateScore(points) {
+  clearInterval(incrementScoreInterval);
+  score += points;
+  updateHighscore();
+  incrementScoreInterval = setInterval(incrementScore, MILLISECONDS_PER_SECOND / INCREMENTS_PER_SECOND);
 }
 
 export function incrementScore() {
@@ -22,7 +35,7 @@ export function incrementScore() {
   }
 }
 
-export function updateHighscore(score) {
+export function updateHighscore() {
   // First time setup.
   if (typeof localStorage.highscore === 'undefined') {
     localStorage.highscore = 0;

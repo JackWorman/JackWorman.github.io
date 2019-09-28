@@ -31,13 +31,13 @@ let canvasSize = 690; // in pixels
 let directionQueue = [];
 const snake = new Snake(GRID_SIZE / 2, GRID_SIZE / 2);
 const pellet = new Pellet();
-let score = 0;
+// let score = 0;
 let distanceTraveled;
 let smallestDistancePossible;
 let controlsEnabled = false;
 let gameLoopInterval;
 
-let displayedScore = 0;
+
 
 /**
  * This must be done in Javascript because it clears the canvas constantly when using calc() in CSS.
@@ -108,10 +108,8 @@ async function reset() {
   directionQueue = [];
   SPAN_FPS.textContent = 'FPS: 0.00';
   // Resets score variables and displays.
-  updateHighscore(score);
-  score = 0;
-  displayedScore = 0;
-  displayScore(SPAN_SCORE, displayedScore)
+  resetScore();
+  // displayScore(SPAN_SCORE, displayedScore)
   // Snake and pellet.
   snake.reset(GRID_SIZE / 2, GRID_SIZE / 2);
   pellet.placePellet(GRID_SIZE, snake);
@@ -152,8 +150,8 @@ function gameLoop() {
     return;
   }
   if (snake.checkFruitEaten(pellet)) {
-    score += Math.floor(Math.pow(snake.bodySegment.length, 1 + smallestDistancePossible / distanceTraveled));
-    updateScore();
+    // score += Math.floor(Math.pow(snake.bodySegment.length, 1 + smallestDistancePossible / distanceTraveled));
+    updateScore(Math.floor(Math.pow(snake.bodySegment.length, 1 + smallestDistancePossible / distanceTraveled)));
     snake.grow();
     pellet.placePellet(GRID_SIZE, snake);
     distanceTraveled = 0;

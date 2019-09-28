@@ -22,7 +22,7 @@ export function updateScore(points) {
   incrementScoreInterval = setInterval(incrementScore, MILLISECONDS_PER_SECOND / INCREMENTS_PER_SECOND);
 }
 
-export function incrementScore() {
+function incrementScore() {
   displayedScore += Math.ceil((score - displayedScore) / 100);
   // Stops the displayScore from incrementing above the score.
   if (displayedScore > score) {
@@ -35,7 +35,7 @@ export function incrementScore() {
   }
 }
 
-export function updateHighscore() {
+function updateHighscore() {
   // First time setup.
   if (typeof localStorage.highscore === 'undefined') {
     localStorage.highscore = 0;
@@ -46,7 +46,7 @@ export function updateHighscore() {
   displayScore(SPAN_HIGHSCORE, Number(localStorage.highscore));
 }
 
-export function displayScore(domElement, score) {
+function displayScore(domElement, score) {
   if (score === 0) {
     domElement.textContent = '0'.repeat(9);
   } else {

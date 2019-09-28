@@ -3,7 +3,7 @@
 import {Snake} from './Snake.js';
 import {Pellet} from './Pellet.js';
 import {KeyCode} from './KeyCode.js';
-import {resetScore, updateScore, incrementScore, updateHighscore, displayScore} from './score.js';
+import {resetScore, updateScore} from './score.js';
 // import * as Score from './score.js'
 
 // Constants
@@ -20,10 +20,10 @@ const RAINBOW = [
   "rgb(148, 0, 211)",
 ];
 // DOM Elements
-const SPAN_SCORE = document.getElementById('span-score');
-const SPAN_HIGHSCORE = document.getElementById('span-highscore');
 
+// TODO: move fps to its own module
 const SPAN_FPS = document.getElementById('span-fps');
+
 const CANVAS_FOREGROUND = document.getElementById('canvas-foreground');
 const CONTEXT_FOREGROUND = CANVAS_FOREGROUND.getContext('2d');
 // Globals
@@ -109,7 +109,6 @@ async function reset() {
   SPAN_FPS.textContent = 'FPS: 0.00';
   // Resets score variables and displays.
   resetScore();
-  // displayScore(SPAN_SCORE, displayedScore)
   // Snake and pellet.
   snake.reset(GRID_SIZE / 2, GRID_SIZE / 2);
   pellet.placePellet(GRID_SIZE, snake);
@@ -145,12 +144,10 @@ function gameLoop() {
   distanceTraveled++;
   if (snake.checkCollison(GRID_SIZE)) {
     clearInterval(gameLoopInterval);
-    // clearInterval(incrementScoreInterval);
     reset();
     return;
   }
   if (snake.checkFruitEaten(pellet)) {
-    // score += Math.floor(Math.pow(snake.bodySegment.length, 1 + smallestDistancePossible / distanceTraveled));
     updateScore(Math.floor(Math.pow(snake.bodySegment.length, 1 + smallestDistancePossible / distanceTraveled)));
     snake.grow();
     pellet.placePellet(GRID_SIZE, snake);

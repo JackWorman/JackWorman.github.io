@@ -4,6 +4,7 @@ import {Snake} from './Snake.js';
 import {Pellet} from './Pellet.js';
 import {KeyCode} from './KeyCode.js';
 import {updateScore, incrementScore, updateHighscore, displayScore} from './score.js';
+// import * as Score from './score.js'
 
 // Constants
 const GRID_SIZE = 30;
@@ -107,7 +108,7 @@ async function reset() {
   directionQueue = [];
   SPAN_FPS.textContent = 'FPS: 0.00';
   // Resets score variables and displays.
-  updateHighscore();
+  updateHighscore(score);
   score = 0;
   displayedScore = 0;
   displayScore(SPAN_SCORE, displayedScore)

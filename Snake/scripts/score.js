@@ -16,7 +16,7 @@ export function incrementScore() {
   }
 }
 
-export function updateHighscore() {
+export function updateHighscore(score) {
   // First time setup.
   if (typeof localStorage.highscore === 'undefined') {
     localStorage.highscore = 0;

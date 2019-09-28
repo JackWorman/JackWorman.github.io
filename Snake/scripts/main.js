@@ -36,7 +36,7 @@ let distanceTraveled;
 let smallestDistancePossible;
 let controlsEnabled = false;
 let gameLoopInterval;
-let incrementScoreInterval;
+
 let displayedScore = 0;
 
 /**

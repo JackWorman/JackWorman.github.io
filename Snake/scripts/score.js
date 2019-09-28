@@ -1,6 +1,8 @@
 const SPAN_SCORE = document.getElementById('span-score');
 const SPAN_HIGHSCORE = document.getElementById('span-highscore');
 
+let incrementScoreInterval;
+
 export function updateScore() {
   clearInterval(incrementScoreInterval);
   incrementScoreInterval = setInterval(incrementScore, MILLISECONDS_PER_SECOND / 100);

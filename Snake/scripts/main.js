@@ -3,6 +3,7 @@
 import {Snake} from './Snake.js';
 import {Pellet} from './Pellet.js';
 import {KeyCode} from './KeyCode.js';
+import {updateScore, incrementScore, updateHighscore, displayScore} from './score.js';
 
 // Constants
 const GRID_SIZE = 30;
@@ -111,55 +112,12 @@ async function reset() {
   displayedScore = 0;
   displayScore(SPAN_SCORE, displayedScore)
   // Snake and pellet.
-  // snake = new Snake(GRID_SIZE / 2, GRID_SIZE / 2);
   snake.reset(GRID_SIZE / 2, GRID_SIZE / 2);
   pellet.placePellet(GRID_SIZE, snake);
   distanceTraveled = 0;
   smallestDistancePossible = Math.abs(pellet.x - snake.bodySegment[0].x) + Math.abs(pellet.y - snake.bodySegment[0].y);
   render();
   controlsEnabled = true;
-}
-
-function updateScore() {
-  clearInterval(incrementScoreInterval);
-  incrementScoreInterval = setInterval(incrementScore, MILLISECONDS_PER_SECOND / 100);
-}
-
-function incrementScore() {
-  displayedScore += Math.ceil((score - displayedScore) / 100);
-  // Stops the displayScore from incrementing above the score.
-  if (displayedScore > score) {
-    displayedScore = score;
-    clearInterval(incrementScoreInterval);
-  }
-  displayScore(SPAN_SCORE, displayedScore);
-  if (displayedScore > localStorage.highscore) {
-    displayScore(SPAN_HIGHSCORE, displayedScore);
-  }
-}
-
-function updateHighscore() {
-  // First time setup.
-  if (typeof localStorage.highscore === 'undefined') {
-    localStorage.highscore = 0;
-  }
-  if (localStorage.highscore < score) {
-    localStorage.highscore = score;
-  }
-  displayScore(SPAN_HIGHSCORE, Number(localStorage.highscore));
-}
-
-function displayScore(domElement, score) {
-  if (score === 0) {
-    domElement.textContent = '0'.repeat(9);
-  } else {
-    // Calculates the amount of padding-zeros needed.
-    let digits = 2;
-    while (score / Math.pow(10, digits) >= 1) {
-      digits++
-    }
-    domElement.textContent = '0'.repeat(9 - digits) + score;
-  }
 }
 
 function calculateFPS() {

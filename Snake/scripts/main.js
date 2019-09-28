@@ -20,10 +20,7 @@ const RAINBOW = [
   "rgb(148, 0, 211)",
 ];
 // DOM Elements
-
-// TODO: move fps to its own module
-const SPAN_FPS = document.getElementById('span-fps');
-
+const SPAN_FPS = document.getElementById('span-fps'); // TODO: move fps to its own module
 const CANVAS_FOREGROUND = document.getElementById('canvas-foreground');
 const CONTEXT_FOREGROUND = CANVAS_FOREGROUND.getContext('2d');
 // Globals
@@ -31,13 +28,10 @@ let canvasSize = 690; // in pixels
 let directionQueue = [];
 const snake = new Snake(GRID_SIZE / 2, GRID_SIZE / 2);
 const pellet = new Pellet();
-// let score = 0;
 let distanceTraveled;
 let smallestDistancePossible;
 let controlsEnabled = false;
 let gameLoopInterval;
-
-
 
 /**
  * This must be done in Javascript because it clears the canvas constantly when using calc() in CSS.

@@ -23,11 +23,17 @@ export function calculate() {
     deltaTimes.shift();
   }
   const averageDeltaTime = (deltaTimes.reduce((a, b) => (a + b)) / deltaTimes.length);
-  SPAN_FPS.textContent = 'FPS: ' + (MILLISECONDS_PER_SECOND / averageDeltaTime).toFixed(DECIMALS);
+  // SPAN_FPS.textContent = 'FPS: ' + (MILLISECONDS_PER_SECOND / averageDeltaTime).toFixed(DECIMALS);
+  window.requestAnimationFrame(() => display(MILLISECONDS_PER_SECOND / averageDeltaTime));
   previousTime = currentTime;
 }
 
 export function reset() {
   initialCall = true;
-  SPAN_FPS.textContent = 'FPS: ' + (0).toFixed(DECIMALS);
+  window.requestAnimationFrame(() => display(0));
+  // SPAN_FPS.textContent = 'FPS: ' + (0).toFixed(DECIMALS);
+}
+
+function display(fps) {
+  SPAN_FPS.textContent = 'FPS: ' + fps.toFixed(DECIMALS);
 }

@@ -104,7 +104,7 @@ async function reset() {
   Score.reset();
   // Snake and pellet.
   snake.reset(GRID_SIZE / 2, GRID_SIZE / 2);
-  pellet.placePellet(GRID_SIZE, snake);
+  pellet.placePellet(GRID_SIZE, snake.bodySegments);
   distanceTraveled = 0;
   smallestDistancePossible = Math.abs(pellet.x - snake.bodySegments[0].x) + Math.abs(pellet.y - snake.bodySegments[0].y);
   render();

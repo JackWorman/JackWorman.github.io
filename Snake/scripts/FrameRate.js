@@ -5,25 +5,25 @@ const DELTA_TIMES_MAX_LENGTH = 100;
 const SPAN_FPS = document.getElementById('span-fps');
 
 let initialCall = true;
-let deltaTimes = [];
-let then;
+let deltaTimes;
+let previousTime;
 
 export function calculate() {
    // First time setup.
   if (initialCall) {
     deltaTimes = [];
-    then = performance.now();
+    previousTime = performance.now();
     initialCall = false;
     return;
   }
-  let now = performance.now();
-  deltaTimes.push(now - then);
+  let currentTime = performance.now();
+  deltaTimes.push(currentTime - previousTime);
   if (deltaTimes.length > DELTA_TIMES_MAX_LENGTH) {
     deltaTimes.shift();
   }
   let averageDeltaTime = (deltaTimes.reduce((a, b) => (a + b)) / deltaTimes.length);
   SPAN_FPS.textContent = 'FPS: ' + (MILLISECONDS_PER_SECOND / averageDeltaTime).toFixed(2);
-  then = now;
+  previousTime = currentTime;
 }
 
 export function reset() {

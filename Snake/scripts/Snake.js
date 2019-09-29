@@ -30,7 +30,7 @@ export class Snake {
       // this.bodySegments.unshift({x: this.bodySegments[0].x - 1, y: this.bodySegments[0].y});
       console.log(this.bodySegments[0].x - 1);
       let xTest = this.bodySegments[0].x - 1;
-      this.bodySegments.unshift(new Coordinate(xTest, this.bodySegments[0].y));
+      this.bodySegments.unshift(new Coordinate(14, this.bodySegments[0].y));
 
     } else if (this.direction === 'up') {
       // this.bodySegments.unshift({x: this.bodySegments[0].x, y: this.bodySegments[0].y - 1});

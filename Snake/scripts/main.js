@@ -4,7 +4,7 @@ import {Snake} from './Snake.js';
 import {Pellet} from './Pellet.js';
 import * as KeyCode from './KeyCode.js';
 import * as Score from './Score.js';
-import {calculateFPS} from './FPS.js';
+import * as FrameRate from './FrameRate.js';
 
 // Constants
 const GRID_SIZE = 30;
@@ -99,7 +99,7 @@ async function reset() {
     await Swal.fire({text: 'Game Over!', showConfirmButton: false, timer: 1500});
   }
   directionQueue = [];
-  // SPAN_FPS.textContent = 'FPS: 0.00';
+  FrameRate.reset();
   Score.reset();
   // Snake and pellet.
   snake.reset(GRID_SIZE / 2, GRID_SIZE / 2);
@@ -111,7 +111,7 @@ async function reset() {
 }
 
 function gameLoop() {
-  calculateFPS();
+  FrameRate.calculate();
   let direction = directionQueue.shift();
   if (direction) {
     snake.direction = direction;

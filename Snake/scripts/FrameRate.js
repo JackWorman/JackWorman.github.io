@@ -9,7 +9,7 @@ let initialCall = true;
 let deltaTimes;
 let previousTime;
 
-export function calculate() {
+export function update() {
    // First time setup.
   if (initialCall) {
     deltaTimes = [];

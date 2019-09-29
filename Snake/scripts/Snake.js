@@ -25,6 +25,7 @@ export class Snake {
     console.log(this.bodySegments);
     this.bodySegments.pop();
     console.log(this.bodySegments);
+    console.log(this.direction);
     if (this.direction === 'left') {
       // this.bodySegments.unshift({x: this.bodySegments[0].x - 1, y: this.bodySegments[0].y});
       this.bodySegments.unshift(new Coordinate(this.bodySegments[0].x - 1, this.bodySegments[0].y));

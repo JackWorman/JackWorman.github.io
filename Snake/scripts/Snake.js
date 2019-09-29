@@ -7,12 +7,9 @@ const STARTING_SIZE = 6;
 const GROW_RATE = 6;
 
 export class Snake {
-  constructor(startX, startY) {
+  constructor() {
     Object.defineProperty(this, 'direction', {value: 'none', writable: true});
     Object.defineProperty(this, 'bodySegments', {value: []});
-    // for (let i = 0; i < STARTING_SIZE; i++) {
-    //   this.bodySegments.push(new Coordinate(startX, startY));
-    // }
     Object.seal(this);
   }
 

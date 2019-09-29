@@ -25,7 +25,7 @@ const CONTEXT_FOREGROUND = CANVAS_FOREGROUND.getContext('2d');
 // Globals
 let canvasSize = 690; // in pixels
 let directionQueue = [];
-const snake = new Snake(GRID_SIZE / 2, GRID_SIZE / 2);
+const snake = new Snake();
 const pellet = new Pellet();
 let distanceTraveled;
 let smallestDistancePossible;

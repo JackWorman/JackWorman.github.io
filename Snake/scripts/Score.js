@@ -33,10 +33,8 @@ function incrementScore() {
     clearInterval(incrementScoreInterval);
   }
   window.requestAnimationFrame(() => displayScore(SPAN_SCORE, displayedScore));
-  // displayScore(SPAN_SCORE, displayedScore);
   if (displayedScore > localStorage.highscore) {
     window.requestAnimationFrame(() => displayScore(SPAN_HIGHSCORE, displayedScore));
-    // displayScore(SPAN_HIGHSCORE, displayedScore);
   }
 }
 
@@ -56,7 +54,7 @@ function displayScore(domElement, score) {
     domElement.textContent = '0'.repeat(PADDING_LENGTH);
   } else {
     // Calculates the amount of padding-zeros needed.
-    let digits = 2;
+    let digits = 1;
     while (score / Math.pow(10, digits) >= 1) {
       digits++
     }

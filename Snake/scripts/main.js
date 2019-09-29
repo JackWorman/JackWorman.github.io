@@ -3,7 +3,7 @@
 import {Snake} from './Snake.js';
 import {Pellet} from './Pellet.js';
 import * as KeyCode from './KeyCode.js';
-import * as Score from './score1.js'; // TODO: rename to Score.js
+import * as Score from './Score.js';
 
 // Constants
 const GRID_SIZE = 30;

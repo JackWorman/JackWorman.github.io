@@ -135,7 +135,7 @@ async function reset() {
 
 function render() {
   CONTEXT_FOREGROUND.clearRect(0, 0, canvasSize, canvasSize);
-  let fillSquare = (x, y, color) => {
+  const fillSquare = (x, y, color) => {
     CONTEXT_FOREGROUND.fillStyle = color;
     const squareLength = canvasSize / GRID_SIZE;
     CONTEXT_FOREGROUND.fillRect(x * squareLength + 0.5, y * squareLength + 0.5, squareLength, squareLength);

@@ -1,7 +1,7 @@
 'use strict';
 
 const MILLISECONDS_PER_SECOND = 1000;
-const DELTA_TIMES_MAX_LENGTH = 100;
+const DELTA_TIMES_BUFFER_SIZE = 100;
 const SPAN_FPS = document.getElementById('span-fps');
 
 let initialCall = true;
@@ -18,7 +18,7 @@ export function calculate() {
   }
   let currentTime = performance.now();
   deltaTimes.push(currentTime - previousTime);
-  if (deltaTimes.length > DELTA_TIMES_MAX_LENGTH) {
+  if (deltaTimes.length > DELTA_TIMES_BUFFER_SIZE) {
     deltaTimes.shift();
   }
   let averageDeltaTime = (deltaTimes.reduce((a, b) => (a + b)) / deltaTimes.length);

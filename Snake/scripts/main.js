@@ -43,7 +43,6 @@ function scaleCanvas() {
 
 window.onload = () => {
   scaleCanvas();
-  reset();
 }
 
 window.onresize = scaleCanvas;
@@ -146,3 +145,5 @@ function render() {
     fillSquare(snake.bodySegments[i].x, snake.bodySegments[i].y, RAINBOW[i % RAINBOW.length]);
   }
 }
+
+reset();

@@ -4,6 +4,7 @@ const SPAN_SCORE = document.getElementById('span-score');
 const SPAN_HIGHSCORE = document.getElementById('span-highscore');
 const MILLISECONDS_PER_SECOND = 1000;
 const INCREMENTS_PER_SECOND = 100;
+const PADDING_LENGTH = 9;
 
 let incrementScoreInterval;
 let score = 0;
@@ -52,13 +53,13 @@ function updateHighscore() {
 
 function displayScore(domElement, score) {
   if (score === 0) {
-    domElement.textContent = '0'.repeat(9);
+    domElement.textContent = '0'.repeat(PADDING_LENGTH);
   } else {
     // Calculates the amount of padding-zeros needed.
     let digits = 2;
     while (score / Math.pow(10, digits) >= 1) {
       digits++
     }
-    domElement.textContent = '0'.repeat(9 - digits) + score;
+    domElement.textContent = '0'.repeat(PADDING_LENGTH - digits) + score;
   }
 }

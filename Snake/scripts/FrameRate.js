@@ -28,5 +28,5 @@ export function calculate() {
 
 export function reset() {
   initialCall = true;
-  SPAN_FPS.textContent = 'FPS: 0.00';
+  SPAN_FPS.textContent = 'FPS: ' + (0).toFixed(2);
 }

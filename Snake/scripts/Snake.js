@@ -22,6 +22,7 @@ export class Snake {
    * it moving each bodySegments-segment individually.
    */
   move() {
+    console.log(this.bodySegments);
     this.bodySegments.pop();
     if (this.direction === 'left') {
       // this.bodySegments.unshift({x: this.bodySegments[0].x - 1, y: this.bodySegments[0].y});
@@ -36,6 +37,7 @@ export class Snake {
       // this.bodySegments.unshift({x: this.bodySegments[0].x, y: this.bodySegments[0].y + 1});
       this.bodySegments.unshift(new Coordinate(this.bodySegments[0].x, this.bodySegments[0].y + 1));
     }
+    console.log(this.bodySegments);
   }
 
   grow() {
@@ -50,7 +52,6 @@ export class Snake {
   }
 
   checkCollison(gridSize) {
-    console.log(this.bodySegments);
     // Checks if the snake hit itself.
     for (let i = 1; i < this.bodySegments.length; i++) {
       if (this.bodySegments[0].x === this.bodySegments[i].x && this.bodySegments[0].y === this.bodySegments[i].y) {

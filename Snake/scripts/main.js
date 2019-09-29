@@ -131,8 +131,11 @@ function gameLoop() {
     smallestDistancePossible = Math.abs(pellet.x - snake.bodySegments[0].x) + Math.abs(pellet.y - snake.bodySegments[0].y);
   }
   render();
+  // pellet.render();
+  // snake.render();
 }
 
+// TODO: remove this function and have render functions on individual objects
 function render() {
   CONTEXT_FOREGROUND.clearRect(0, 0, canvasSize, canvasSize);
   function fillSquare(x, y, color) {

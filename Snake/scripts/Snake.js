@@ -28,7 +28,9 @@ export class Snake {
     console.log(this.direction);
     if (this.direction === 'left') {
       // this.bodySegments.unshift({x: this.bodySegments[0].x - 1, y: this.bodySegments[0].y});
+      console.log(this.bodySegments[0].x - 1);
       this.bodySegments.unshift(new Coordinate(this.bodySegments[0].x - 1, this.bodySegments[0].y));
+
     } else if (this.direction === 'up') {
       // this.bodySegments.unshift({x: this.bodySegments[0].x, y: this.bodySegments[0].y - 1});
       this.bodySegments.unshift(new Coordinate(this.bodySegments[0].x, this.bodySegments[0].y - 1));

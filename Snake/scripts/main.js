@@ -89,7 +89,7 @@ document.addEventListener('keydown', (event) => {
 
 function gameLoop() {
   FrameRate.calculate();
-  let direction = directionQueue.shift();
+  const direction = directionQueue.shift();
   if (direction) {
     snake.direction = direction;
   }

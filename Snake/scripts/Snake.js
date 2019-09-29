@@ -50,6 +50,7 @@ export class Snake {
   }
 
   checkCollison(gridSize) {
+    console.log(this.bodySegments);
     // Checks if the snake hit itself.
     for (let i = 1; i < this.bodySegments.length; i++) {
       if (this.bodySegments[0].x === this.bodySegments[i].x && this.bodySegments[0].y === this.bodySegments[i].y) {

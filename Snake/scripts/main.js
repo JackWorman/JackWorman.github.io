@@ -87,6 +87,30 @@ document.addEventListener('keydown', (event) => {
   }
 }, true);
 
+function gameLoop() {
+  FrameRate.calculate();
+  let direction = directionQueue.shift();
+  if (direction) {
+    snake.direction = direction;
+  }
+  snake.move();
+  distanceTraveled++;
+  if (snake.checkCollison(GRID_SIZE)) {
+    clearInterval(gameLoopInterval);
+    reset();
+    return;
+  }
+  if (snake.checkFruitEaten(pellet)) {
+    Score.update(Math.floor(Math.pow(snake.bodySegments.length, 1 + smallestDistancePossible / distanceTraveled)));
+    snake.grow();
+    pellet.placePellet(GRID_SIZE, snake.bodySegments);
+    distanceTraveled = 0;
+    smallestDistancePossible = Math.abs(pellet.x - snake.bodySegments[0].x) + Math.abs(pellet.y - snake.bodySegments[0].y);
+  }
+  // render();
+  window.requestAnimationFrame(render)
+}
+
 async function reset() {
   controlsEnabled = false;
   document.body.style.cursor = 'auto';
@@ -110,32 +134,6 @@ async function reset() {
   controlsEnabled = true;
 }
 
-function gameLoop() {
-  FrameRate.calculate();
-  let direction = directionQueue.shift();
-  if (direction) {
-    snake.direction = direction;
-  }
-  snake.move();
-  distanceTraveled++;
-  if (snake.checkCollison(GRID_SIZE)) {
-    clearInterval(gameLoopInterval);
-    reset();
-    return;
-  }
-  if (snake.checkFruitEaten(pellet)) {
-    Score.update(Math.floor(Math.pow(snake.bodySegments.length, 1 + smallestDistancePossible / distanceTraveled)));
-    snake.grow();
-    pellet.placePellet(GRID_SIZE, snake.bodySegments);
-    distanceTraveled = 0;
-    smallestDistancePossible = Math.abs(pellet.x - snake.bodySegments[0].x) + Math.abs(pellet.y - snake.bodySegments[0].y);
-  }
-  render();
-  // pellet.render();
-  // snake.render();
-}
-
-// TODO: remove this function and have render functions on individual objects
 function render() {
   CONTEXT_FOREGROUND.clearRect(0, 0, canvasSize, canvasSize);
   function fillSquare(x, y, color) {

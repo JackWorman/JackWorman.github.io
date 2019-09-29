@@ -14,13 +14,13 @@ export class Pellet extends Coordinate {
    * @param  {number} gridSize The length\width of the grid.
    * @param  {Snake} snake    [description]
    */
-  placePellet(gridSize, snake) {
+  placePellet(gridSize, snakeBodySegments) {
     let collison;
     do {
       this.setCoordinate(Math.floor(Math.random() * gridSize), Math.floor(Math.random() * gridSize));
       collison = false;
-      for (const part of snake.bodySegment) {
-        if (Coordinate.compare(this, part)) {
+      for (const snakeBodySegment of snakeBodySegments) {
+        if (Coordinate.compare(this, snakeBodySegment)) {
           collison = true;
         }
       }

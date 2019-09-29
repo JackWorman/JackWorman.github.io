@@ -106,7 +106,7 @@ async function reset() {
   snake.reset(GRID_SIZE / 2, GRID_SIZE / 2);
   pellet.placePellet(GRID_SIZE, snake);
   distanceTraveled = 0;
-  smallestDistancePossible = Math.abs(pellet.x - snake.bodySegment[0].x) + Math.abs(pellet.y - snake.bodySegment[0].y);
+  smallestDistancePossible = Math.abs(pellet.x - snake.bodySegments[0].x) + Math.abs(pellet.y - snake.bodySegments[0].y);
   render();
   controlsEnabled = true;
 }
@@ -141,11 +141,11 @@ function gameLoop() {
     return;
   }
   if (snake.checkFruitEaten(pellet)) {
-    Score.update(Math.floor(Math.pow(snake.bodySegment.length, 1 + smallestDistancePossible / distanceTraveled)));
+    Score.update(Math.floor(Math.pow(snake.bodySegments.length, 1 + smallestDistancePossible / distanceTraveled)));
     snake.grow();
-    pellet.placePellet(GRID_SIZE, snake);
+    pellet.placePellet(GRID_SIZE, snake.bodySegments);
     distanceTraveled = 0;
-    smallestDistancePossible = Math.abs(pellet.x - snake.bodySegment[0].x) + Math.abs(pellet.y - snake.bodySegment[0].y);
+    smallestDistancePossible = Math.abs(pellet.x - snake.bodySegments[0].x) + Math.abs(pellet.y - snake.bodySegments[0].y);
   }
   render();
 }
@@ -159,7 +159,7 @@ function render() {
   }
   fillSquare(pellet.x, pellet.y, PELLET_COLOR);
   // Renders snake from head to tail.
-  for (let i = snake.bodySegment.length - 1; i >= 0; i--) {
-    fillSquare(snake.bodySegment[i].x, snake.bodySegment[i].y, RAINBOW[i % RAINBOW.length]);
+  for (let i = snake.bodySegments.length - 1; i >= 0; i--) {
+    fillSquare(snake.bodySegments[i].x, snake.bodySegments[i].y, RAINBOW[i % RAINBOW.length]);
   }
 }

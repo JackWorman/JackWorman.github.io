@@ -16,12 +16,12 @@ export function calculate() {
     initialCall = false;
     return;
   }
-  let currentTime = performance.now();
+  const currentTime = performance.now();
   deltaTimes.push(currentTime - previousTime);
   if (deltaTimes.length > DELTA_TIMES_BUFFER_SIZE) {
     deltaTimes.shift();
   }
-  let averageDeltaTime = (deltaTimes.reduce((a, b) => (a + b)) / deltaTimes.length);
+  const averageDeltaTime = (deltaTimes.reduce((a, b) => (a + b)) / deltaTimes.length);
   SPAN_FPS.textContent = 'FPS: ' + (MILLISECONDS_PER_SECOND / averageDeltaTime).toFixed(2);
   previousTime = currentTime;
 }

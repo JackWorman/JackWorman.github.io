@@ -31,9 +31,11 @@ function incrementScore() {
     displayedScore = score;
     clearInterval(incrementScoreInterval);
   }
-  displayScore(SPAN_SCORE, displayedScore);
+  window.requestAnimationFrame(() => displayScore(SPAN_SCORE, displayedScore));
+  // displayScore(SPAN_SCORE, displayedScore);
   if (displayedScore > localStorage.highscore) {
-    displayScore(SPAN_HIGHSCORE, displayedScore);
+    window.requestAnimationFrame(() => displayScore(SPAN_HIGHSCORE, displayedScore));
+    // displayScore(SPAN_HIGHSCORE, displayedScore);
   }
 }
 

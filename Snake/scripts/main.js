@@ -2,8 +2,8 @@
 
 import {Snake} from './Snake.js';
 import {Pellet} from './Pellet.js';
-import {KeyCode} from './KeyCode.js';
-// import {resetScore, updateScore} from './score.js';
+// import {KeyCode} from './KeyCode.js';
+import * as KeyCode from './KeyCode.js'
 import * as Score from './score.js'
 
 // Constants

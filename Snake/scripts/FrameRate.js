@@ -3,14 +3,16 @@
 const MILLISECONDS_PER_SECOND = 1000;
 const SPAN_FPS = document.getElementById('span-fps');
 
+let initialCall = true;
 let deltas = [];
 let then;
 
 export function calculate() {
    // First time setup.
-  if (deltas.length === 0) {
+  if (initialCall) {
     deltas = [];
     then = performance.now();
+    initialCall = false;
     return;
   }
   let now = performance.now();
@@ -24,6 +26,6 @@ export function calculate() {
 }
 
 export function reset() {
-  deltas = [];
+  initialCall = true;
   SPAN_FPS.textContent = 'FPS: 0.00';
 }

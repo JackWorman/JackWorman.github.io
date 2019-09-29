@@ -73,7 +73,7 @@ export class Snake {
       this.bodySegments.pop();
     }
     for (let i = 0; i < STARTING_SIZE; i++) {
-      this.bodySegments.push({x: startX, y: startY});
+      this.bodySegments.push(new Coordinate(startX, startY));
     }
   }
 }

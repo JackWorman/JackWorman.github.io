@@ -23,7 +23,6 @@ export function calculate() {
     deltaTimes.shift();
   }
   const averageDeltaTime = (deltaTimes.reduce((a, b) => (a + b)) / deltaTimes.length);
-  // SPAN_FPS.textContent = 'FPS: ' + (MILLISECONDS_PER_SECOND / averageDeltaTime).toFixed(DECIMALS);
   window.requestAnimationFrame(() => display(MILLISECONDS_PER_SECOND / averageDeltaTime));
   previousTime = currentTime;
 }
@@ -31,7 +30,6 @@ export function calculate() {
 export function reset() {
   initialCall = true;
   window.requestAnimationFrame(() => display(0));
-  // SPAN_FPS.textContent = 'FPS: ' + (0).toFixed(DECIMALS);
 }
 
 function display(fps) {

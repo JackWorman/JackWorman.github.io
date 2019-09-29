@@ -4,7 +4,7 @@ import {Snake} from './Snake.js';
 import {Pellet} from './Pellet.js';
 import * as KeyCode from './KeyCode.js';
 import * as Score from './Score.js';
-import {calculateFPS} from './FPS.js';
+// import {calculateFPS} from './FPS.js';
 
 // Constants
 const GRID_SIZE = 30;
@@ -109,8 +109,6 @@ async function reset() {
   render();
   controlsEnabled = true;
 }
-
-
 
 function gameLoop() {
   calculateFPS();

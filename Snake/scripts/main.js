@@ -3,8 +3,8 @@
 import {Snake} from './Snake.js';
 import {Pellet} from './Pellet.js';
 import {KeyCode} from './KeyCode.js';
-import {resetScore, updateScore} from './score.js';
-// import * as Score from './score.js'
+// import {resetScore, updateScore} from './score.js';
+import * as Score from './score.js'
 
 // Constants
 const GRID_SIZE = 30;
@@ -101,7 +101,7 @@ async function reset() {
   }
   directionQueue = [];
   SPAN_FPS.textContent = 'FPS: 0.00';
-  resetScore();
+  Score.reset();
   // Snake and pellet.
   snake.reset(GRID_SIZE / 2, GRID_SIZE / 2);
   pellet.placePellet(GRID_SIZE, snake);
@@ -141,7 +141,7 @@ function gameLoop() {
     return;
   }
   if (snake.checkFruitEaten(pellet)) {
-    updateScore(Math.floor(Math.pow(snake.bodySegment.length, 1 + smallestDistancePossible / distanceTraveled)));
+    Score.update(Math.floor(Math.pow(snake.bodySegment.length, 1 + smallestDistancePossible / distanceTraveled)));
     snake.grow();
     pellet.placePellet(GRID_SIZE, snake);
     distanceTraveled = 0;

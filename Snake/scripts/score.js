@@ -9,7 +9,7 @@ let incrementScoreInterval;
 let score = 0;
 let displayedScore = 0;
 
-export function resetScore() {
+export function reset() {
   clearInterval(incrementScoreInterval);
   updateHighscore();
   score = 0;
@@ -17,8 +17,7 @@ export function resetScore() {
   displayScore(SPAN_SCORE, score);
 }
 
-// TODO: move score variable to this module and pass any updates to score as a parameter
-export function updateScore(points) {
+export function update(points) {
   clearInterval(incrementScoreInterval);
   score += points;
   updateHighscore();

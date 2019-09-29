@@ -1,5 +1,6 @@
 'use strict';
 
+const MILLISECONDS_PER_SECOND = 1000;
 const SPAN_FPS = document.getElementById('span-fps');
 
 export function calculateFPS() {

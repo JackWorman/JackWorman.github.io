@@ -99,7 +99,7 @@ async function reset() {
     await Swal.fire({text: 'Game Over!', showConfirmButton: false, timer: 1500});
   }
   directionQueue = [];
-  SPAN_FPS.textContent = 'FPS: 0.00';
+  // SPAN_FPS.textContent = 'FPS: 0.00';
   Score.reset();
   // Snake and pellet.
   snake.reset(GRID_SIZE / 2, GRID_SIZE / 2);

@@ -4,6 +4,7 @@ import {Snake} from './Snake.js';
 import {Pellet} from './Pellet.js';
 import * as KeyCode from './KeyCode.js';
 import * as Score from './Score.js';
+import {calculateFPS} from './FPS.js';
 
 // Constants
 const GRID_SIZE = 30;
@@ -19,7 +20,6 @@ const RAINBOW = [
   "rgb(148, 0, 211)",
 ];
 // DOM Elements
-const SPAN_FPS = document.getElementById('span-fps'); // TODO: move fps to its own module
 const CANVAS_FOREGROUND = document.getElementById('canvas-foreground');
 const CONTEXT_FOREGROUND = CANVAS_FOREGROUND.getContext('2d');
 // Globals
@@ -110,21 +110,7 @@ async function reset() {
   controlsEnabled = true;
 }
 
-function calculateFPS() {
-  if (typeof calculateFPS.deltas === 'undefined') { // First time setup.
-    calculateFPS.deltas = [];
-    calculateFPS.then = performance.now();
-    return;
-  }
-  let now = performance.now();
-  calculateFPS.deltas.push(now - calculateFPS.then);
-  if (calculateFPS.deltas.length > FRAMES_PER_SECOND) {
-    calculateFPS.deltas.shift();
-  }
-  let averageDelta = (calculateFPS.deltas.reduce((a, b) => (a + b)) / calculateFPS.deltas.length);
-  SPAN_FPS.textContent = 'FPS: ' + (MILLISECONDS_PER_SECOND / averageDelta).toFixed(2);
-  calculateFPS.then = now;
-}
+
 
 function gameLoop() {
   calculateFPS();

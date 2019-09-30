@@ -33,10 +33,7 @@ let smallestDistancePossible;
 let controlsEnabled = false;
 let gameLoopInterval;
 
-
-
 window.addEventListener('load', reset);
-
 
 document.addEventListener('keydown', (event) => {
   if (!controlsEnabled
@@ -123,7 +120,7 @@ async function reset() {
   controlsEnabled = true;
 }
 
-function render() {
+const render = () => {
   CONTEXT_FOREGROUND.clearRect(0, 0, canvasSize, canvasSize);
   const fillSquare = (x, y, color) => {
     CONTEXT_FOREGROUND.fillStyle = color;

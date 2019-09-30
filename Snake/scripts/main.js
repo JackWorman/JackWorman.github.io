@@ -5,7 +5,7 @@ import {Pellet} from './Pellet.js';
 import * as KeyCode from './KeyCode.js';
 import * as Score from './Score.js';
 import * as FrameRate from './FrameRate.js';
-import {test1, test2, canvasSize} from './scaling.js';
+
 
 // Constants
 const GRID_SIZE = 30;
@@ -136,3 +136,5 @@ function render() {
     fillSquare(snake.bodySegments[i].x, snake.bodySegments[i].y, RAINBOW[i % RAINBOW.length]);
   }
 }
+
+import {test1, test2, canvasSize} from './scaling.js';

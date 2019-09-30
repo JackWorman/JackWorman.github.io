@@ -2,6 +2,8 @@
 
 const BASE_SIZE = getComputedStyle(document.documentElement).getPropertyValue('--base-size');
 const BASE_CANVAS_SIZE = 690;
+let canvasSize;
+
 /**
  * This must be done in Javascript because it clears the canvas constantly when using calc() in CSS.
  */

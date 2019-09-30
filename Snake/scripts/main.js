@@ -5,7 +5,7 @@ import {Pellet} from './Pellet.js';
 import * as KeyCode from './KeyCode.js';
 import * as Score from './Score.js';
 import * as FrameRate from './FrameRate.js';
-import * as Scaling from './scaling.js';
+import {test1, test2, canvasSize} as Scaling from './scaling.js';
 
 // Constants
 const GRID_SIZE = 30;
@@ -24,7 +24,7 @@ const RAINBOW = [
 const CANVAS_FOREGROUND = document.getElementById('canvas-foreground');
 const CONTEXT_FOREGROUND = CANVAS_FOREGROUND.getContext('2d');
 // Globals
-let canvasSize = 690; // in pixels
+// let canvasSize = 690; // in pixels
 let directionQueue = [];
 const snake = new Snake();
 const pellet = new Pellet();

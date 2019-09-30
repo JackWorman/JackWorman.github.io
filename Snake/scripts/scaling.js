@@ -11,5 +11,5 @@ function scaleCanvas() {
   window.requestAnimationFrame(render);
 };
 
-export window.addEventListener('load', scaleCanvas);
-export window.addEventListener('resize', scaleCanvas);
+export const test1 = window.addEventListener('load', scaleCanvas);
+export const test2 = window.addEventListener('resize', scaleCanvas);

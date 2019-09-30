@@ -32,6 +32,8 @@ let smallestDistancePossible;
 let controlsEnabled = false;
 let gameLoopInterval;
 
+document.documentElement.style.setProperty('--base-size', '800');
+
 /**
  * This must be done in Javascript because it clears the canvas constantly when using calc() in CSS.
  */

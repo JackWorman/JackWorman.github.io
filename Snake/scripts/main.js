@@ -43,12 +43,17 @@ function scaleCanvas() {
   window.requestAnimationFrame(render);
 };
 
-window.onload = () => {
+// window.onload = () => {
+//   scaleCanvas();
+//   reset();
+// }
+window.addEventListener('resize', () => {
   scaleCanvas();
   reset();
-}
+});
 
-window.onresize = scaleCanvas;
+// window.onresize = scaleCanvas;
+window.addEventListener('resize', scaleCanvas);
 
 document.addEventListener('keydown', (event) => {
   if (!controlsEnabled

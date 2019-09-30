@@ -33,12 +33,12 @@ let controlsEnabled = false;
 let gameLoopInterval;
 
 const BASE_SIZE = getComputedStyle(document.documentElement).getPropertyValue('--base-size');
-console.log(BASE_SIZE);
+const BASE_CANVAS_SIZE = 690;
 /**
  * This must be done in Javascript because it clears the canvas constantly when using calc() in CSS.
  */
 function scaleCanvas() {
-  canvasSize = 690 * Math.min(document.body.clientWidth, document.body.clientHeight) / BASE_SIZE;
+  canvasSize = BASE_CANVAS_SIZE * Math.min(document.body.clientWidth, document.body.clientHeight) / BASE_SIZE;
   CANVAS_FOREGROUND.width = CANVAS_FOREGROUND.height = canvasSize;
   render();
 };

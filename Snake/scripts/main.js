@@ -33,7 +33,7 @@ let controlsEnabled = false;
 let gameLoopInterval;
 
 const BASE_SIZE = getComputedStyle(document.documentElement).getPropertyValue('--base-size');
-
+console.log(BASE_SIZE);
 /**
  * This must be done in Javascript because it clears the canvas constantly when using calc() in CSS.
  */

@@ -40,7 +40,7 @@ const BASE_CANVAS_SIZE = 690;
 function scaleCanvas() {
   canvasSize = BASE_CANVAS_SIZE * Math.min(document.body.clientWidth, document.body.clientHeight) / BASE_SIZE;
   CANVAS_FOREGROUND.width = CANVAS_FOREGROUND.height = canvasSize;
-  render();
+  window.requestAnimationFrame(render);
 };
 
 window.onload = () => {
@@ -109,7 +109,7 @@ function gameLoop() {
     distanceTraveled = 0;
     smallestDistancePossible = Math.abs(pellet.x - snake.bodySegments[0].x) + Math.abs(pellet.y - snake.bodySegments[0].y);
   }
-  window.requestAnimationFrame(render)
+  window.requestAnimationFrame(render);
 }
 
 async function reset() {
@@ -131,7 +131,7 @@ async function reset() {
   pellet.placePellet(GRID_SIZE, snake.bodySegments);
   distanceTraveled = 0;
   smallestDistancePossible = Math.abs(pellet.x - snake.bodySegments[0].x) + Math.abs(pellet.y - snake.bodySegments[0].y);
-  render();
+  window.requestAnimationFrame(render);
   controlsEnabled = true;
 }
 

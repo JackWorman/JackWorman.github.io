@@ -136,5 +136,3 @@ function render() {
     fillSquare(snake.bodySegments[i].x, snake.bodySegments[i].y, RAINBOW[i % RAINBOW.length]);
   }
 }
-
-import {test1, test2, canvasSize} from './scaling.js';

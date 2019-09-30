@@ -3,7 +3,7 @@
 const BASE_SIZE = getComputedStyle(document.documentElement).getPropertyValue('--base-size');
 const BASE_CANVAS_SIZE = 690;
 const CANVAS_FOREGROUND = document.getElementById('canvas-foreground');
-export let canvasSize;
+let canvasSize;
 
 /**
  * This must be done in Javascript because it clears the canvas constantly when using calc() in CSS.
@@ -14,5 +14,5 @@ function scaleCanvas() {
   window.requestAnimationFrame(render);
 };
 
-export const test1 = window.addEventListener('load', scaleCanvas);
-export const test2 = window.addEventListener('resize', scaleCanvas);
+window.addEventListener('load', scaleCanvas);
+window.addEventListener('resize', scaleCanvas);

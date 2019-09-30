@@ -5,6 +5,7 @@ import {Pellet} from './Pellet.js';
 import * as KeyCode from './KeyCode.js';
 import * as Score from './Score.js';
 import * as FrameRate from './FrameRate.js';
+import * as Scaling from './scaling.js';
 
 // Constants
 const GRID_SIZE = 30;
@@ -32,21 +33,10 @@ let smallestDistancePossible;
 let controlsEnabled = false;
 let gameLoopInterval;
 
-const BASE_SIZE = getComputedStyle(document.documentElement).getPropertyValue('--base-size');
-const BASE_CANVAS_SIZE = 690;
-/**
- * This must be done in Javascript because it clears the canvas constantly when using calc() in CSS.
- */
-function scaleCanvas() {
-  canvasSize = BASE_CANVAS_SIZE * Math.min(document.body.clientWidth, document.body.clientHeight) / BASE_SIZE;
-  CANVAS_FOREGROUND.width = CANVAS_FOREGROUND.height = canvasSize;
-  window.requestAnimationFrame(render);
-};
 
-window.addEventListener('load', scaleCanvas);
+
 window.addEventListener('load', reset);
 
-window.addEventListener('resize', scaleCanvas);
 
 document.addEventListener('keydown', (event) => {
   if (!controlsEnabled

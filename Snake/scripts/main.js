@@ -47,7 +47,7 @@ function scaleCanvas() {
 //   scaleCanvas();
 //   reset();
 // }
-window.addEventListener('resize', () => {
+window.addEventListener('load', () => {
   scaleCanvas();
   reset();
 });

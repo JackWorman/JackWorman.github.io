@@ -5,6 +5,7 @@ import {Pellet} from './Pellet.js';
 import * as KeyCode from './KeyCode.js';
 import * as Score from './Score.js';
 import * as FrameRate from './FrameRate.js';
+import {canvasSize} from './scaling.js'
 
 
 // Constants

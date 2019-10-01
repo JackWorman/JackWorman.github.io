@@ -111,7 +111,7 @@ async function reset() {
   controlsEnabled = true;
 }
 
-function render() {
+export function render() {
   CONTEXT_FOREGROUND.clearRect(0, 0, canvasSize, canvasSize);
   const fillSquare = (x, y, color) => {
     CONTEXT_FOREGROUND.fillStyle = color;

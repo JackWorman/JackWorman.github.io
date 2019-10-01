@@ -63,7 +63,7 @@ document.addEventListener('keydown', (event) => {
       directionQueue.push('down');
     }
   }
-}, true);
+});
 
 function gameLoop() {
   FrameRate.update();

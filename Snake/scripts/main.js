@@ -120,7 +120,7 @@ async function reset() {
   controlsEnabled = true;
 }
 
-const render = () => {
+let render = () => {
   CONTEXT_FOREGROUND.clearRect(0, 0, canvasSize, canvasSize);
   const fillSquare = (x, y, color) => {
     CONTEXT_FOREGROUND.fillStyle = color;

@@ -11,15 +11,6 @@ import * as FrameRate from './FrameRate.js';
 const GRID_SIZE = 30;
 const FRAMES_PER_SECOND = 15;
 const MILLISECONDS_PER_SECOND = 1000;
-const PELLET_COLOR = 'rgb(255, 255, 255)';
-const RAINBOW = [
-  "rgb(255, 0, 0)",
-  "rgb(255, 127, 0)",
-  "rgb(255, 255, 0)",
-  "rgb(0, 255, 0)",
-  "rgb(0, 0, 255)",
-  "rgb(148, 0, 211)",
-];
 // DOM Elements
 const CANVAS_FOREGROUND = document.getElementById('canvas-foreground');
 const CONTEXT_FOREGROUND = CANVAS_FOREGROUND.getContext('2d');
@@ -127,9 +118,11 @@ let render = () => {
     const squareLength = canvasSize / GRID_SIZE;
     CONTEXT_FOREGROUND.fillRect(x * squareLength + 0.5, y * squareLength + 0.5, squareLength, squareLength);
   }
-  fillSquare(pellet.x, pellet.y, PELLET_COLOR);
+  pellet.render(fillSquare);
+  // fillSquare(pellet.x, pellet.y, PELLET_COLOR);
   // Renders snake from head to tail.
-  for (let i = snake.bodySegments.length - 1; i >= 0; i--) {
-    fillSquare(snake.bodySegments[i].x, snake.bodySegments[i].y, RAINBOW[i % RAINBOW.length]);
-  }
+  // for (let i = snake.bodySegments.length - 1; i >= 0; i--) {
+  //   fillSquare(snake.bodySegments[i].x, snake.bodySegments[i].y, RAINBOW[i % RAINBOW.length]);
+  // }
+  snake.render(fillSquare);
 }

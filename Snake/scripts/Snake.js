@@ -5,6 +5,14 @@ import {Coordinate} from './Coordinate.js';
 
 const STARTING_SIZE = 6;
 const GROW_RATE = 6;
+const SNAKE_COLORS = [
+  "rgb(255, 0, 0)",
+  "rgb(255, 127, 0)",
+  "rgb(255, 255, 0)",
+  "rgb(0, 255, 0)",
+  "rgb(0, 0, 255)",
+  "rgb(148, 0, 211)",
+];
 
 export class Snake {
   constructor() {
@@ -63,6 +71,12 @@ export class Snake {
     }
     for (let i = 0; i < STARTING_SIZE; i++) {
       this.bodySegments.push(new Coordinate(x, y));
+    }
+  }
+
+  render(fillSquare) {
+    for (let i = 0; i < this.bodySegments.length; i++) {
+      fillSquare(this.bodySegments[i].x, this.bodySegments[i].y, SNAKE_COLORS[i % SNAKE_COLORS.length]);
     }
   }
 }

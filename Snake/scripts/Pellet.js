@@ -2,6 +2,8 @@
 
 import {Coordinate} from './Coordinate.js';
 
+const PELLET_COLOR = 'rgb(255, 255, 255)';
+
 export class Pellet extends Coordinate {
   constructor() {
     super(-1, -1);
@@ -25,5 +27,9 @@ export class Pellet extends Coordinate {
         }
       }
     } while (collison);
+  }
+
+  render(fillSquare) {
+    fillSquare(this.x, this.y, PELLET_COLOR);
   }
 }

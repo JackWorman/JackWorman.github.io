@@ -5,18 +5,16 @@ import {Pellet} from './Pellet.js';
 import * as KeyCode from './KeyCode.js';
 import * as Score from './Score.js';
 import * as FrameRate from './FrameRate.js';
-import {canvasSize} from './scaling.js'
-
+import {canvasSize} from './ScaleCanvas.js'
 
 // Constants
 const GRID_SIZE = 30;
 const FRAMES_PER_SECOND = 15;
-const MILLISECONDS_PER_SECOND = 1000;
+const MILLISECONDS_PER_SECOND = 1000; // TODO: move to a conversions file
 // DOM Elements
 const CANVAS_FOREGROUND = document.getElementById('canvas-foreground');
 const CONTEXT_FOREGROUND = CANVAS_FOREGROUND.getContext('2d');
 // Globals
-// let canvasSize = 690; // in pixels
 let directionQueue = [];
 const snake = new Snake();
 const pellet = new Pellet();

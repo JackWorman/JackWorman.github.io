@@ -7,17 +7,15 @@ import * as Score from './Score.js';
 import * as FrameRate from './FrameRate.js';
 import {canvasSize} from './ScaleCanvas.js'
 
-// Constants
+const CANVAS_FOREGROUND = document.getElementById('canvas-foreground');
+const CONTEXT_FOREGROUND = CANVAS_FOREGROUND.getContext('2d');
 const GRID_SIZE = 30;
 const FRAMES_PER_SECOND = 15;
 const MILLISECONDS_PER_SECOND = 1000; // TODO: move to a conversions file
-// DOM Elements
-const CANVAS_FOREGROUND = document.getElementById('canvas-foreground');
-const CONTEXT_FOREGROUND = CANVAS_FOREGROUND.getContext('2d');
-// Globals
-let directionQueue = [];
+
 const snake = new Snake();
 const pellet = new Pellet();
+let directionQueue = [];
 let distanceTraveled;
 let smallestDistancePossible;
 let controlsEnabled = false;

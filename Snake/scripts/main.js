@@ -111,7 +111,7 @@ async function reset() {
   controlsEnabled = true;
 }
 
-let render = () => {
+function render() {
   CONTEXT_FOREGROUND.clearRect(0, 0, canvasSize, canvasSize);
   const fillSquare = (x, y, color) => {
     CONTEXT_FOREGROUND.fillStyle = color;
@@ -119,10 +119,5 @@ let render = () => {
     CONTEXT_FOREGROUND.fillRect(x * squareLength + 0.5, y * squareLength + 0.5, squareLength, squareLength);
   }
   pellet.render(fillSquare);
-  // fillSquare(pellet.x, pellet.y, PELLET_COLOR);
-  // Renders snake from head to tail.
-  // for (let i = snake.bodySegments.length - 1; i >= 0; i--) {
-  //   fillSquare(snake.bodySegments[i].x, snake.bodySegments[i].y, RAINBOW[i % RAINBOW.length]);
-  // }
   snake.render(fillSquare);
 }

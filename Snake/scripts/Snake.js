@@ -1,6 +1,5 @@
 'use strict';
 
-// TODO: use coordinates
 import {Coordinate} from './Coordinate.js';
 
 const STARTING_SIZE = 6;
@@ -75,7 +74,7 @@ export class Snake {
   }
 
   render(fillSquare) {
-    for (let i = 0; i < this.bodySegments.length; i++) {
+    for (let i = this.bodySegments.length - 1; i >= 0; i--) {
       fillSquare(this.bodySegments[i].x, this.bodySegments[i].y, SNAKE_COLORS[i % SNAKE_COLORS.length]);
     }
   }

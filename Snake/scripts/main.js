@@ -38,7 +38,7 @@ document.addEventListener('keydown', (event) => {
     gameLoopInterval = setInterval(gameLoop, MILLISECONDS_PER_SECOND / FRAMES_PER_SECOND);
     document.body.style.cursor = 'none';
   }
-  const currentDirection = directionQueue.length ? directionQueue[directionQueue.length - 1] : snake.direction;
+  const currentDirection = directionQueue.length === 0 ? snake.direction : directionQueue[directionQueue.length - 1];
   if (currentDirection === 'left' || currentDirection === 'right') {
     if (event.keyCode === KeyCode.upArrow || event.keyCode === KeyCode.w) {
       directionQueue.push('up');

@@ -16,13 +16,27 @@ export function reset() {
   score = 0;
   displayedScore = 0;
   displayScore(SPAN_SCORE, score);
+  displayScore(SPAN_HIGHSCORE, Number(localStorage.highscore));
 }
 
-export function update(points) {
-  clearInterval(incrementScoreInterval);
-  score += points;
+/**
+ * @param  {Number} additionalPoints The points to be added to the current score.
+ */
+export function update(additionalPoints) {
+  score += additionalPoints;
   updateHighscore();
+  clearInterval(incrementScoreInterval);
   incrementScoreInterval = setInterval(incrementScore, MILLISECONDS_PER_SECOND / INCREMENTS_PER_SECOND);
+}
+
+function updateHighscore() {
+  // First time setup.
+  if (typeof localStorage.highscore === 'undefined') {
+    localStorage.highscore = 0;
+  }
+  if (Number(localStorage.highscore) < score) {
+    localStorage.highscore = score;
+  }
 }
 
 function incrementScore() {
@@ -33,20 +47,9 @@ function incrementScore() {
     clearInterval(incrementScoreInterval);
   }
   window.requestAnimationFrame(() => displayScore(SPAN_SCORE, displayedScore));
-  if (displayedScore > localStorage.highscore) {
+  if (displayedScore > Number(localStorage.highscore)) {
     window.requestAnimationFrame(() => displayScore(SPAN_HIGHSCORE, displayedScore));
   }
-}
-
-function updateHighscore() {
-  // First time setup.
-  if (typeof localStorage.highscore === 'undefined') {
-    localStorage.highscore = 0;
-  }
-  if (localStorage.highscore < score) {
-    localStorage.highscore = score;
-  }
-  displayScore(SPAN_HIGHSCORE, Number(localStorage.highscore));
 }
 
 function displayScore(domElement, score) {

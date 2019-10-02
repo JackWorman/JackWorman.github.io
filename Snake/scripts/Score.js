@@ -24,7 +24,6 @@ export function reset() {
  */
 export function update(additionalPoints) {
   score += additionalPoints;
-  updateHighscore();
   clearInterval(incrementScoreInterval);
   incrementScoreInterval = setInterval(incrementScore, MILLISECONDS_PER_SECOND / INCREMENTS_PER_SECOND);
 }
@@ -32,7 +31,7 @@ export function update(additionalPoints) {
 function updateHighscore() {
   // First time setup.
   if (typeof localStorage.highscore === 'undefined') {
-    localStorage.highscore = '0';
+    localStorage.highscore = 0;
   }
   if (Number(localStorage.highscore) < score) {
     localStorage.highscore = score;
@@ -47,8 +46,7 @@ function incrementScore() {
     clearInterval(incrementScoreInterval);
   }
   window.requestAnimationFrame(() => displayScore(SPAN_SCORE, displayedScore));
-  if (displayedScore > localStorage.highscore) {
-    console.log('test');
+  if (displayedScore > Number(localStorage.highscore)) {
     window.requestAnimationFrame(() => displayScore(SPAN_HIGHSCORE, displayedScore));
   }
 }

@@ -45,10 +45,12 @@ function incrementScore() {
     displayedScore = score;
     clearInterval(incrementScoreInterval);
   }
-  window.requestAnimationFrame(() => displayScore(SPAN_SCORE, displayedScore));
-  if (displayedScore > Number(localStorage.highscore)) {
-    window.requestAnimationFrame(() => displayScore(SPAN_HIGHSCORE, displayedScore));
-  }
+  window.requestAnimationFrame(() => {
+    displayScore(SPAN_SCORE, displayedScore);
+    if (displayedScore > Number(localStorage.highscore)) {
+      displayScore(SPAN_HIGHSCORE, displayedScore);
+    }
+  });
 }
 
 function displayScore(domElement, score) {

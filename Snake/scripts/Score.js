@@ -32,7 +32,7 @@ export function update(additionalPoints) {
 function updateHighscore() {
   // First time setup.
   if (typeof localStorage.highscore === 'undefined') {
-    localStorage.highscore = 0;
+    localStorage.highscore = '0';
   }
   if (Number(localStorage.highscore) < score) {
     localStorage.highscore = score;

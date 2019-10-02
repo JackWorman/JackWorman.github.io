@@ -47,6 +47,9 @@ function incrementScore() {
     clearInterval(incrementScoreInterval);
   }
   window.requestAnimationFrame(() => displayScore(SPAN_SCORE, displayedScore));
+  console.log('---------------');
+  console.log('displayedScore: ' + displayedScore);
+  console.log('Number(localStorage.highscore): ' + Number(localStorage.highscore));
   if (displayedScore > Number(localStorage.highscore)) {
     console.log('test');
     window.requestAnimationFrame(() => displayScore(SPAN_HIGHSCORE, displayedScore));

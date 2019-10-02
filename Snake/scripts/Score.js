@@ -48,6 +48,7 @@ function incrementScore() {
   }
   window.requestAnimationFrame(() => displayScore(SPAN_SCORE, displayedScore));
   if (displayedScore > Number(localStorage.highscore)) {
+    console.log();
     window.requestAnimationFrame(() => displayScore(SPAN_HIGHSCORE, displayedScore));
   }
 }

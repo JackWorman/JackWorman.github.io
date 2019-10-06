@@ -26,6 +26,6 @@ for (const word of words) {
       }
     }
   }
-  console.log(counts);
-  alert();
 }
+
+console.log(counts.sort());

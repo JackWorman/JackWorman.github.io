@@ -24,4 +24,5 @@ for (const word of words) {
     }
   }
   console.log(counts);
+  alert();
 }

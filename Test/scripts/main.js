@@ -23,6 +23,5 @@ for (const word of words) {
       counts[word.substr(i, i + 1)]++;
     }
   }
+  console.log(counts);
 }
-
-console.log(counts);

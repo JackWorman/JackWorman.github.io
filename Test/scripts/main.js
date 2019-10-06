@@ -17,7 +17,6 @@ let counts = [];
 
 for (const word of words) {
   for (let i = 0; i < word.length; i++) {
-    alert(word.substr(i, i));
     if (typeof counts[word.substr(i, i)] === 'undefined') {
       counts[word.substr(i, i)] = 1;
     } else {

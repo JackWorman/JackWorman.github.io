@@ -17,12 +17,15 @@ const counts = [];
 
 for (const word of words) {
   for (let i = 0; i < word.length; i++) {
-    if (typeof counts[word.substr(i, 1)] === 'undefined') {
-      counts[word.substr(i, 1)] = 1;
-    } else {
-      counts[word.substr(i, 1)]++;
+    for (let j = 1; j <= word.length - i; j++) {
+      const subString = word.substr(i, j);
+      if (typeof counts[subString] === 'undefined') {
+        counts[subString] = 1;
+      } else {
+        counts[subString]++;
+      }
     }
   }
+  console.log(counts);
+  alert();
 }
-
-console.log(counts);

@@ -1,7 +1,5 @@
 'use strict';
 
-alert(loadFile('https://jackworman.com/Test/scripts/words.txt')[1]);
-
 function loadFile(filePath) {
   let result = null;
   const xmlhttp = new XMLHttpRequest();
@@ -11,4 +9,10 @@ function loadFile(filePath) {
     result = xmlhttp.responseText;
   }
   return result;
+}
+
+const words = loadFile('https://jackworman.com/Test/scripts/words.txt').split(/\s+/);
+
+for (const word in words) {
+  alert(word);
 }

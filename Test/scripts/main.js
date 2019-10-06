@@ -1,13 +1,13 @@
 'use strict';
 
-console.log(loadFile('words.txt'));
+alert(loadFile('https://jackworman.com/Test/scripts/words.txt'));
 
 function loadFile(filePath) {
-  var result = null;
-  var xmlhttp = new XMLHttpRequest();
-  xmlhttp.open("GET", 'https://jackworman.com/Test/scripts/words.txt', false);
+  let result = null;
+  const xmlhttp = new XMLHttpRequest();
+  xmlhttp.open("GET", filePath, false);
   xmlhttp.send();
-  if (xmlhttp.status==200) {
+  if (xmlhttp.status === 200) {
     result = xmlhttp.responseText;
   }
   return result;

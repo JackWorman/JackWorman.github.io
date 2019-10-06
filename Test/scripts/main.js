@@ -28,4 +28,4 @@ for (const word of words) {
   }
 }
 
-console.log(counts.sort());
+console.log(counts.sort(function(a, b){ return a.val - b.val; }));

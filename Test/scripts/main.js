@@ -16,12 +16,12 @@ const words = loadFile('https://jackworman.com/Test/scripts/words.txt').split(/\
 let counts = [];
 
 for (const word of words) {
-  for (let i = 0; i < word.length - 1; i++) {
-    alert(word.substr(i, i + 1));
-    if (typeof counts[word.substr(i, i + 1)] === 'undefined') {
-      counts[word.substr(i, i + 1)] = 1;
+  for (let i = 0; i < word.length; i++) {
+    alert(word.substr(i, i));
+    if (typeof counts[word.substr(i, i)] === 'undefined') {
+      counts[word.substr(i, i)] = 1;
     } else {
-      counts[word.substr(i, i + 1)]++;
+      counts[word.substr(i, i)]++;
     }
   }
 }

@@ -1,6 +1,6 @@
 'use strict';
 
-alert(loadFile('https://jackworman.com/Test/scripts/words.txt'));
+alert(loadFile('https://jackworman.com/Test/scripts/words.txt')[0]);
 
 function loadFile(filePath) {
   let result = null;

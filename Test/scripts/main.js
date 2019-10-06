@@ -17,10 +17,11 @@ let counts = [];
 
 for (const word of words) {
   for (let i = 0; i < word.length; i++) {
-    if (typeof counts[word.substr(i, i)] === 'undefined') {
-      counts[word.substr(i, i)] = 1;
+    if (typeof counts[word.substr(i, 1)] === 'undefined') {
+      counts[word.substr(i, 1)] = 1;
     } else {
-      counts[word.substr(i, i)]++;
+      counts[word.substr(i, 1)]++;
     }
   }
+  console.log(counts);
 }

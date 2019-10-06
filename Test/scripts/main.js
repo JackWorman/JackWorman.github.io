@@ -13,6 +13,6 @@ function loadFile(filePath) {
 
 const words = loadFile('https://jackworman.com/Test/scripts/words.txt').split(/\s+/);
 
-for (const word in words) {
+for (const word of words) {
   alert(word);
 }

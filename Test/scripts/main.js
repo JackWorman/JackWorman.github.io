@@ -13,7 +13,7 @@ function loadFile(filePath) {
 
 const words = loadFile('https://jackworman.com/Test/scripts/words.txt').split(/\s+/);
 
-let counts = [];
+const counts = [];
 
 for (const word of words) {
   for (let i = 0; i < word.length; i++) {

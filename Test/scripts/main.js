@@ -56,7 +56,7 @@ function download(strData, strFileName, strMimeType) {
 //----------------------------------------------------------------------------------------------------------------------
 
 const words = loadFile('https://jackworman.com/Test/scripts/words.txt').split(/\s+/);
-const countsHashMap;
+const countsHashMap = {};
 for (const word of words) {
   for (let start = 0; start < word.length; start++) {
     for (let length = 1; length <= word.length - start; length++) {

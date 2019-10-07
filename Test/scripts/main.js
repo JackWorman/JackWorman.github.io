@@ -72,7 +72,7 @@ for (const word of words) {
 
 const counts = [];
 for (const countsHashMapKey in countsHashMap) {
-  countsArray.push({letterCombination: countsHashMapKey, count: countsHashMap[countsHashMapKey]});
+  counts.push({letterCombination: countsHashMapKey, count: countsHashMap[countsHashMapKey]});
 }
 counts.sort((a, b) => b.count - a.count);
 

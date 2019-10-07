@@ -11,23 +11,6 @@ function loadFile(filePath) {
   return result;
 }
 
-const words = loadFile('https://jackworman.com/Test/scripts/words.txt').split(/\s+/);
-
-const counts = [];
-
-for (const word of words) {
-  for (let i = 0; i < word.length; i++) {
-    for (let j = 1; j <= word.length - i; j++) {
-      const subString = word.substr(i, j);
-      if (typeof counts[subString] === 'undefined') {
-        counts[subString] = 1;
-      } else {
-        counts[subString]++;
-      }
-    }
-  }
-}
-
 function download(strData, strFileName, strMimeType) {
   var D = document,
       A = arguments,
@@ -68,9 +51,34 @@ function download(strData, strFileName, strMimeType) {
   return true;
 }
 
-let downLoadString = '';
+//----------------------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------
+
+const words = loadFile('https://jackworman.com/Test/scripts/words.txt').split(/\s+/);
+const counts = [];
+for (const word of words) {
+  for (let i = 0; i < word.length; i++) {
+    for (let j = 1; j <= word.length - i; j++) {
+      const subString = word.substr(i, j);
+      if (typeof counts[subString] === 'undefined') {
+        counts[subString] = 1;
+      } else {
+        counts[subString]++;
+      }
+    }
+  }
+}
+
+const counts2 = [];
 for (const key in counts) {
-  downLoadString += key + ' - ' + counts[key] + '\n';
+  counts2.append({letterCombination: key, count: counts[key]});
+}
+counts2.sort((a, b) => a.count - b.count);
+
+let downLoadString = '';
+for (const count2 of counts2) {
+  downLoadString += count2.letterCombination + ' - ' + count2.count + '\n';
 }
 
 download(downLoadString, 'counts.txt', 'text/plain')

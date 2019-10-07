@@ -74,7 +74,17 @@ const counts = [];
 for (const countsHashMapKey in countsHashMap) {
   counts.push({letterCombination: countsHashMapKey, count: countsHashMap[countsHashMapKey]});
 }
-counts.sort((a, b) => b.count - a.count);
+counts.sort((a, b) => {
+  if (b.count - a.count !== 0) {
+    return b.count - a.count;
+  }
+  if(a.letterCombination < b.letterCombination) {
+    return -1;
+  }
+  if(a.letterCombination > b.letterCombination) {
+    return 1;
+  }
+});
 
 let downLoadString = '';
 for (let i = 0; i < counts.length; i++) {

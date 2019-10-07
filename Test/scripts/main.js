@@ -78,12 +78,13 @@ counts.sort((a, b) => {
   if (b.count - a.count !== 0) {
     return b.count - a.count;
   }
-  if(a.letterCombination < b.letterCombination) {
-    return -1;
-  }
-  if(a.letterCombination > b.letterCombination) {
-    return 1;
-  }
+  return a.letterCombination.localeCompare(b.letterCombination)
+  // if(a.letterCombination < b.letterCombination) {
+  //   return -1;
+  // }
+  // if(a.letterCombination > b.letterCombination) {
+  //   return 1;
+  // }
 });
 
 let downLoadString = '';

@@ -83,7 +83,7 @@ counts.sort((a, b) => {
 
 let downLoadString = '';
 for (let i = 0; i < counts.length; i++) {
-  downLoadString += counts[i].letterCombination + '' + counts[i].count + '\n';
+  downLoadString += counts[i].letterCombination + ' ' + counts[i].count + '\n';
 }
 
 downloadFile(downLoadString, 'counts.txt', 'text/plain');

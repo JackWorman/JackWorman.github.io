@@ -56,29 +56,29 @@ function download(strData, strFileName, strMimeType) {
 //----------------------------------------------------------------------------------------------------------------------
 
 const words = loadFile('https://jackworman.com/Test/scripts/words.txt').split(/\s+/);
-const counts = [];
+const countsHashMap;
 for (const word of words) {
-  for (let i = 0; i < word.length; i++) {
-    for (let j = 1; j <= word.length - i; j++) {
-      const subString = word.substr(i, j);
-      if (typeof counts[subString] === 'undefined') {
-        counts[subString] = 1;
+  for (let start = 0; start < word.length; start++) {
+    for (let length = 1; length <= word.length - start; length++) {
+      const subString = word.substr(start, length);
+      if (typeof countsHashMap[subString] === 'undefined') {
+        countsHashMap[subString] = 1;
       } else {
-        counts[subString]++;
+        countsHashMap[subString]++;
       }
     }
   }
 }
 
-const counts2 = [];
-for (const key in counts) {
-  counts2.push({letterCombination: key, count: counts[key]});
+const counts = [];
+for (const countsHashMapKey in countsHashMap) {
+  countsArray.push({letterCombination: countsHashMapKey, count: countsHashMap[countsHashMapKey]});
 }
-counts2.sort((a, b) => b.count - a.count);
+counts.sort((a, b) => b.count - a.count);
 
 let downLoadString = '';
-for (let i = 0; i < counts2.length; i++) {
-  downLoadString += counts2[i].letterCombination + ' - ' + counts2[i].count + '\n';
+for (let i = 0; i < counts.length; i++) {
+  downLoadString += counts[i].letterCombination + ' - ' + counts[i].count + '\n';
 }
 
 download(downLoadString, 'counts.txt', 'text/plain')

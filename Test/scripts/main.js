@@ -81,4 +81,4 @@ for (let i = 0; i < counts.length; i++) {
   downLoadString += counts[i].letterCombination + ' - ' + counts[i].count + '\n';
 }
 
-download(downLoadString, 'counts.txt', 'text/plain')
+download(downLoadString, 'counts.txt', 'text/plain');

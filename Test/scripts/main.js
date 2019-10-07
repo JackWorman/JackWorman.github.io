@@ -72,7 +72,7 @@ for (const word of words) {
 
 const counts2 = [];
 for (const key in counts) {
-  counts2.append({letterCombination: key, count: counts[key]});
+  counts2.push({letterCombination: key, count: counts[key]});
 }
 counts2.sort((a, b) => a.count - b.count);
 

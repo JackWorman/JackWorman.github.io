@@ -11,7 +11,7 @@ function loadFile(filePath) {
   return result;
 }
 
-function download(strData, strFileName, strMimeType) {
+function downloadFile(strData, strFileName, strMimeType) {
   var D = document,
       A = arguments,
       a = D.createElement("a"),
@@ -78,18 +78,12 @@ counts.sort((a, b) => {
   if (b.count - a.count !== 0) {
     return b.count - a.count;
   }
-  return a.letterCombination.localeCompare(b.letterCombination)
-  // if(a.letterCombination < b.letterCombination) {
-  //   return -1;
-  // }
-  // if(a.letterCombination > b.letterCombination) {
-  //   return 1;
-  // }
+  return a.letterCombination.localeCompare(b.letterCombination);
 });
 
 let downLoadString = '';
 for (let i = 0; i < counts.length; i++) {
-  downLoadString += counts[i].letterCombination + ' - ' + counts[i].count + '\n';
+  downLoadString += counts[i].letterCombination + '' + counts[i].count + '\n';
 }
 
-download(downLoadString, 'counts.txt', 'text/plain');
+downloadFile(downLoadString, 'counts.txt', 'text/plain');

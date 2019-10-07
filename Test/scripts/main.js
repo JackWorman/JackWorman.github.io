@@ -74,11 +74,11 @@ const counts2 = [];
 for (const key in counts) {
   counts2.push({letterCombination: key, count: counts[key]});
 }
-counts2.sort((a, b) => a.count - b.count);
+counts2.sort((a, b) => b.count - a.count);
 
 let downLoadString = '';
-for (const count2 of counts2) {
-  downLoadString += count2.letterCombination + ' - ' + count2.count + '\n';
+for (let i = 0; i < counts2.length; i++) {
+  downLoadString += counts2[i].letterCombination + ' - ' + counts2[i].count + '\n';
 }
 
 download(downLoadString, 'counts.txt', 'text/plain')

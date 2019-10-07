@@ -68,6 +68,9 @@ function download(strData, strFileName, strMimeType) {
   return true;
 }
 
-let downLoadString = 'blash';
+let downLoadString = '';
+for (const key in counts) {
+  downLoadString += key + ' - ' + counts[key] + '\n';
+}
 
 download(downLoadString, 'counts.txt', 'text/plain')

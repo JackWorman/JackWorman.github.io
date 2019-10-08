@@ -90,7 +90,7 @@ function getNextLetterCounts() {
   const nextLetterCounts = {};
   const alphabet = 'abcdefghijklmnopqrstuvwxyz';
   for (let i = 0; i < alphabet.length; i++) {
-    let letter = alphabet.charAt(letter);
+    let letter = alphabet.charAt(i);
     nextLetterCounts[letter] = {};
     for (const word of words) {
       for (let i = 0; i < word.length; i++) {

@@ -87,6 +87,7 @@ function downloadFile(strData, strFileName, strMimeType) {
 // }
 // downloadFile(downLoadString, 'counts.txt', 'text/plain');
 
+const words = loadFile('https://jackworman.com/Test/scripts/words.txt').split(/\s+/);
 const countsHashMap2 = {};
 const alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
 for (const letter of alphabet) {

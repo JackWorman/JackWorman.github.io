@@ -11,6 +11,7 @@ function loadFile(filePath) {
   return result;
 }
 
+// TODO: clean up code (codied from internet)
 function downloadFile(strData, strFileName, strMimeType) {
   var D = document,
       A = arguments,
@@ -51,70 +52,68 @@ function downloadFile(strData, strFileName, strMimeType) {
   return true;
 }
 
-//----------------------------------------------------------------------------------------------------------------------
-//----------------------------------------------------------------------------------------------------------------------
-//----------------------------------------------------------------------------------------------------------------------
-
-// const words = loadFile('https://jackworman.com/Test/scripts/words.txt').split(/\s+/);
-// const countsHashMap = {};
-// for (const word of words) {
-//   for (let start = 0; start < word.length; start++) {
-//     for (let length = 1; length <= word.length - start; length++) {
-//       const subString = word.substr(start, length);
-//       if (typeof countsHashMap[subString] === 'undefined') {
-//         countsHashMap[subString] = 1;
-//       } else {
-//         countsHashMap[subString]++;
-//       }
-//     }
-//   }
-// }
-//
-// const counts = [];
-// for (const countsHashMapKey in countsHashMap) {
-//   counts.push({letterCombination: countsHashMapKey, count: countsHashMap[countsHashMapKey]});
-// }
-// counts.sort((a, b) => {
-//   if (b.count - a.count !== 0) {
-//     return b.count - a.count;
-//   }
-//   return a.letterCombination.localeCompare(b.letterCombination);
-// });
-//
-// let downLoadString = '';
-// for (let i = 0; i < counts.length; i++) {
-//   downLoadString += counts[i].letterCombination + ' ' + counts[i].count + '\n';
-// }
-// downloadFile(downLoadString, 'counts.txt', 'text/plain');
-
-const words = loadFile('https://jackworman.com/Test/scripts/words.txt').split(/\s+/);
-const countsHashMap2 = {};
-const alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
-for (const letter of alphabet) {
-  countsHashMap2[letter] = {};
+function getSubstringCounts() {
+  const words = loadFile('https://jackworman.com/Test/scripts/words.txt').split(/\s+/);
+  const countsHashMap = {};
   for (const word of words) {
-    for (let i = 0; i < word.length; i++) {
-      if (word.charAt(i) === letter) {
-        let nextLetter = word.charAt(i + 1);
-        if (nextLetter === '') {
-          nextLetter = 'space';
-        }
-        if (typeof countsHashMap2[letter][nextLetter] === 'undefined') {
-          countsHashMap2[letter][nextLetter] = 1;
+    for (let start = 0; start < word.length; start++) {
+      for (let length = 1; length <= word.length - start; length++) {
+        const subString = word.substr(start, length);
+        if (typeof countsHashMap[subString] === 'undefined') {
+          countsHashMap[subString] = 1;
         } else {
-          countsHashMap2[letter][nextLetter]++;
+          countsHashMap[subString]++;
         }
       }
     }
   }
-}
-
-let downLoadString = '';
-for (const letter in countsHashMap2) {
-  for (const nextLetter in countsHashMap2[letter]) {
-    downLoadString += letter + ' ' + nextLetter + ' ' + countsHashMap2[letter][nextLetter] + '\n';
+  const counts = [];
+  for (const countsHashMapKey in countsHashMap) {
+    counts.push({letterCombination: countsHashMapKey, count: countsHashMap[countsHashMapKey]});
   }
-}
-downloadFile(downLoadString, 'NextLetterCounts.txt', 'text/plain');
+  counts.sort((a, b) => {
+    if (b.count - a.count !== 0) {
+      return b.count - a.count;
+    }
+    return a.letterCombination.localeCompare(b.letterCombination);
+  });
 
-console.log(countsHashMap2);
+  let downLoadString = '';
+  for (let i = 0; i < counts.length; i++) {
+    downLoadString += counts[i].letterCombination + ' ' + counts[i].count + '\n';
+  }
+  downloadFile(downLoadString, 'counts.txt', 'text/plain');
+}
+
+function getNextLetterCounts() {
+  const words = loadFile('https://jackworman.com/Test/scripts/words.txt').split(/\s+/);
+  const nextLetterCounts = {};
+  const alphabet = 'abcdefghijklmnopqrstuvwxyz';
+  for (let i = 0; i < alphabet.length; i++) {
+    let letter = alphabet.charAt(letter);
+    nextLetterCounts[letter] = {};
+    for (const word of words) {
+      for (let i = 0; i < word.length; i++) {
+        if (word.charAt(i) === letter) {
+          let nextLetter = word.charAt(i + 1);
+          if (nextLetter === '') {
+            nextLetter = 'space';
+          }
+          if (typeof nextLetterCounts[letter][nextLetter] === 'undefined') {
+            nextLetterCounts[letter][nextLetter] = 1;
+          } else {
+            nextLetterCounts[letter][nextLetter]++;
+          }
+        }
+      }
+    }
+  }
+  let downLoadString = '';
+  for (const letter in nextLetterCounts) {
+    for (const nextLetter in nextLetterCounts[letter]) {
+      downLoadString += letter + ' ' + nextLetter + ' ' + nextLetterCounts[letter][nextLetter] + '\n';
+    }
+  }
+  downloadFile(downLoadString, 'NextLetterCounts.txt', 'text/plain');
+}
+getNextLetterCounts();

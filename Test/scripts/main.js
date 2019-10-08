@@ -111,7 +111,7 @@ for (const letter of alphabet) {
 
 let downLoadString = '';
 for (const letter in countsHashMap2) {
-  for (const nextLetter in countsHashMap2[countsHashMap2Key]) {
+  for (const nextLetter in countsHashMap2[letter]) {
     downLoadString += letter + ' ' + letter2 + ' ' + countsHashMap2[letter][nextLetter] + '\n';
   }
 }

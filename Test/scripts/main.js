@@ -55,35 +55,57 @@ function downloadFile(strData, strFileName, strMimeType) {
 //----------------------------------------------------------------------------------------------------------------------
 //----------------------------------------------------------------------------------------------------------------------
 
-const words = loadFile('https://jackworman.com/Test/scripts/words.txt').split(/\s+/);
-const countsHashMap = {};
-for (const word of words) {
-  for (let start = 0; start < word.length; start++) {
-    for (let length = 1; length <= word.length - start; length++) {
-      const subString = word.substr(start, length);
-      if (typeof countsHashMap[subString] === 'undefined') {
-        countsHashMap[subString] = 1;
-      } else {
-        countsHashMap[subString]++;
+// const words = loadFile('https://jackworman.com/Test/scripts/words.txt').split(/\s+/);
+// const countsHashMap = {};
+// for (const word of words) {
+//   for (let start = 0; start < word.length; start++) {
+//     for (let length = 1; length <= word.length - start; length++) {
+//       const subString = word.substr(start, length);
+//       if (typeof countsHashMap[subString] === 'undefined') {
+//         countsHashMap[subString] = 1;
+//       } else {
+//         countsHashMap[subString]++;
+//       }
+//     }
+//   }
+// }
+//
+// const counts = [];
+// for (const countsHashMapKey in countsHashMap) {
+//   counts.push({letterCombination: countsHashMapKey, count: countsHashMap[countsHashMapKey]});
+// }
+// counts.sort((a, b) => {
+//   if (b.count - a.count !== 0) {
+//     return b.count - a.count;
+//   }
+//   return a.letterCombination.localeCompare(b.letterCombination);
+// });
+//
+// let downLoadString = '';
+// for (let i = 0; i < counts.length; i++) {
+//   downLoadString += counts[i].letterCombination + ' ' + counts[i].count + '\n';
+// }
+// downloadFile(downLoadString, 'counts.txt', 'text/plain');
+
+const countsHashMap2 = {};
+const alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
+for (const letter of alphabet) {
+  countsHashMap2[letter] = {};
+  for (const word of words) {
+    for (let i = 0; i < word.length; i++) {
+      if (word.charat(i) === letter) {
+        let nextLetter = word.charat(i + 1);
+        if (nextLetter === '') {
+          nextLetter = 'space';
+        }
+        if (typeof countsHashMap2[letter][nextLetter] === 'undefined') {
+          countsHashMap2[letter][nextLetter] = 1;
+        } else {
+          countsHashMap2[letter][nextLetter]++;
+        }
       }
     }
   }
 }
 
-const counts = [];
-for (const countsHashMapKey in countsHashMap) {
-  counts.push({letterCombination: countsHashMapKey, count: countsHashMap[countsHashMapKey]});
-}
-counts.sort((a, b) => {
-  if (b.count - a.count !== 0) {
-    return b.count - a.count;
-  }
-  return a.letterCombination.localeCompare(b.letterCombination);
-});
-
-let downLoadString = '';
-for (let i = 0; i < counts.length; i++) {
-  downLoadString += counts[i].letterCombination + ' ' + counts[i].count + '\n';
-}
-
-downloadFile(downLoadString, 'counts.txt', 'text/plain');
+console.log(countsHashMap2);

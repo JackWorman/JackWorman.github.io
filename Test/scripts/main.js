@@ -94,8 +94,8 @@ for (const letter of alphabet) {
   countsHashMap2[letter] = {};
   for (const word of words) {
     for (let i = 0; i < word.length; i++) {
-      if (word.charat(i) === letter) {
-        let nextLetter = word.charat(i + 1);
+      if (word.charAt(i) === letter) {
+        let nextLetter = word.charAt(i + 1);
         if (nextLetter === '') {
           nextLetter = 'space';
         }

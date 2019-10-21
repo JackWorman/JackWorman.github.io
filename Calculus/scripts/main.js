@@ -16,7 +16,7 @@ CONTEXT_1.strokeStyle = 'white';
 CONTEXT_1.lineWidth = 3;
 
 
-CANVAS_1.addEventListener('mousedown', (e) => {
+CANVAS_1.addEventListener('mousedown', e => {
   isDrawing = true;
   x = e.clientX - boundingClientRect.left;
   y = e.clientY - boundingClientRect.top;
@@ -24,7 +24,7 @@ CANVAS_1.addEventListener('mousedown', (e) => {
   CONTEXT_1.moveTo(x, y);
 });
 
-CANVAS_1.addEventListener('mousemove', (e) => {
+CANVAS_1.addEventListener('mousemove', e => {
   if (isDrawing) {
     x = e.clientX - boundingClientRect.left;
     y = e.clientY - boundingClientRect.top;
@@ -37,7 +37,7 @@ CANVAS_1.addEventListener('mousemove', (e) => {
   }
 });
 
-CANVAS_1.addEventListener('mouseup', (e) => {
+CANVAS_1.addEventListener('mouseup', e => {
   if (isDrawing) {
     isDrawing = true;
     x = e.clientX - boundingClientRect.left;

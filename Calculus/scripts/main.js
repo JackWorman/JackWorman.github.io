@@ -6,14 +6,14 @@ const CONTEXT_1 = CANVAS_1.getContext('2d');
 const CONTEXT_2 = CANVAS_2.getContext('2d');
 const CONTEXT_3 = CANVAS_3.getContext('2d');
 
-CANVAS_1.addEventListener('mousemove', function() {
+CANVAS_1.addEventListener('mousemove', () => {
   alert('mousemove');
-}
+});
 
-CANVAS_2.addEventListener('mousedown', function() {
+CANVAS_2.addEventListener('mousedown', () => {
   alert('mousedown');
-}
+});
 
-CANVAS_3.addEventListener('mouseup', function() {
+CANVAS_3.addEventListener('mouseup', () => {
   alert('mouseup');
-}
+});

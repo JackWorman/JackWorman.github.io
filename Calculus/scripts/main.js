@@ -38,7 +38,7 @@ CANVAS_1.addEventListener('mousemove', e => {
 
 CANVAS_1.addEventListener('mouseup', e => {
   if (isDrawing) {
-    isDrawing = true;
+    isDrawing = false;
     canvasCoordinates = {x: e.clientX - boundingClientRect.left, y: e.clientY - boundingClientRect.top};
     CONTEXT_1.lineTo(canvasCoordinates.x, canvasCoordinates.y);
     CONTEXT_1.stroke();

@@ -5,3 +5,15 @@ const CANVAS_3 = document.getElementById('canvas-3');
 const CONTEXT_1 = CANVAS_1.getContext('2d');
 const CONTEXT_2 = CANVAS_2.getContext('2d');
 const CONTEXT_3 = CANVAS_3.getContext('2d');
+
+CANVAS_1.addEventListener('mousemove', function() {
+  alert('mousemove');
+}
+
+CANVAS_2.addEventListener('mousedown', function() {
+  alert('mousedown');
+}
+
+CANVAS_3.addEventListener('mouseup', function() {
+  alert('mouseup');
+}

@@ -12,8 +12,8 @@ let x = 0;
 let y = 0;
 
 
-CANVAS_1.strokeStyle = 'white';
-CANVAS_1.lineWidth = 3;
+CONTEXT_1.strokeStyle = 'white';
+CONTEXT_1.lineWidth = 3;
 
 
 CANVAS_1.addEventListener('mousedown', (e) => {

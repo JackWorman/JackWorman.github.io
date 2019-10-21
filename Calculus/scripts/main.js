@@ -23,6 +23,7 @@ CANVAS_1.addEventListener('mousedown', e => {
   CONTEXT_1.lineWidth = 3;
   CONTEXT_1.beginPath();
   CONTEXT_1.moveTo(canvasCoordinates.x, canvasCoordinates.y);
+  console.log(e);
 });
 
 CANVAS_1.addEventListener('mousemove', e => {

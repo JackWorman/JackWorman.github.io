@@ -18,6 +18,7 @@ let y = 0;
 
 CANVAS_1.addEventListener('mousedown', e => {
   isDrawing = true;
+  canvasCoordinates = {x: e.clientX - boundingClientRect.left, y: e.clientY - boundingClientRect.top};
   CONTEXT_1.strokeStyle = 'white';
   CONTEXT_1.lineWidth = 3;
   CONTEXT_1.beginPath();

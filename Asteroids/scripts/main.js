@@ -50,6 +50,9 @@ onmousedown = (e) => {
   }
 }
 onmouseup = (e) => {
+
+
+  // TODO: fix
   if (e.button === 1) {
     inputs['leftMouseDown'] = false;
   } else if (e.button === 2) {

@@ -42,10 +42,10 @@ export default class Ship {
     }
     var xDirection = 0;
     var yDirection = 0;
-    if (inputs[65]) xDirection--;
-    if (inputs[68]) xDirection++;
-    if (inputs[87]) yDirection--;
-    if (inputs[83]) yDirection++;
+    if (inputs[65] || inputs[37]) xDirection--;
+    if (inputs[68] || inputs[39]) xDirection++;
+    if (inputs[87] || inputs[38]) yDirection--;
+    if (inputs[83] || inputs[40]) yDirection++;
     var angle = Math.atan2(yDirection, xDirection);
     if (xDirection !== 0 || yDirection !== 0) {
       this.x += this.speed * deltaTime / MILLISECONDS_PER_SECOND * Math.cos(angle);

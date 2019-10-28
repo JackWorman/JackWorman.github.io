@@ -58,7 +58,7 @@ export default class Ship {
   }
 
   shoot(inputs) {
-    if ((inputs['leftMouseDown'] || inputs[32]) && performance.now() - this.timeOfLastShot > this.shootRate) {
+    if ((inputs['leftMouseDown'] || inputs['rightMouseDown'] || inputs[32]) && performance.now() - this.timeOfLastShot > this.shootRate) {
       this.timeOfLastShot = performance.now();
       var angle = Math.atan2(inputs["mousePos"].y - this.y, inputs["mousePos"].x - this.x);
       this.lasers.push(new Laser(this.x, this.y, 2400, angle));

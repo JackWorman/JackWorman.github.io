@@ -40,21 +40,23 @@ window.onload = () => {
 window.onresize = scaleCanvas;
 
 // Get inputs.
-var inputs = {"mousePos": {x: 0, y: 0}};
+var inputs = {'mousePos': {x: 0, y: 0}};
 onkeydown = onkeyup = (e) => {
-  e = e || event; // to deal with IE
   inputs[e.keyCode] = e.type == 'keydown';
 }
 onmousedown = onmouseup = (e) => {
   console.log(e);
   if (e.buttons === 1) {
     inputs['leftMouseDown'] = true;
-  } else {
+  } else if (e.buttons === 2) {
+    inputs['rightMouseDown'] = true;
+  } else if (e.buttons === 0) {
     inputs['leftMouseDown'] = false;
+    inputs['rightMouseDown'] = false;
   }
 }
 onmousemove = (e) => {
-  var rect = CANVAS_FOREGROUND.getBoundingClientRect();
+  let rect = CANVAS_FOREGROUND.getBoundingClientRect();
   inputs["mousePos"] = {
     x: e.clientX - rect.left,
     y: e.clientY - rect.top
@@ -66,7 +68,7 @@ async function reset() {
     clearInterval(loop);
     await Swal.fire({text: 'Game Over', showConfirmButton: false, timer: 1000});
   } else {
-    await Swal.fire('[Instructions go here...]');
+    await Swal.fire('Controlls\nWASD to move.\nMouse to aim and shoot.');
   }
   ship = new Ship(canvasSize / 2, canvasSize / 2);
   asteroids = [];

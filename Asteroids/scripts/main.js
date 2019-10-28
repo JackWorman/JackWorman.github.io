@@ -51,9 +51,9 @@ onmousedown = (e) => {
 }
 onmouseup = (e) => {
   if (e.which === 1) {
-    inputs['leftMouseDown'] = true;
+    inputs['leftMouseDown'] = false;
   } else if (e.which === 3) {
-    inputs['rightMouseDown'] = true;
+    inputs['rightMouseDown'] = false;
   }
 }
 onmousemove = (e) => {

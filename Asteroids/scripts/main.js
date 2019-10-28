@@ -30,17 +30,15 @@ var scoreMultiplier;
 function scaleCanvas() {
   canvasSize = 690 * Math.min(document.body.clientWidth, document.body.clientHeight) / 900;
   CANVAS_FOREGROUND.width = CANVAS_FOREGROUND.height = canvasSize;
-  render();
+  render(); // TODO: ship not made yet onload
 };
 
-window.onload = () => {
+window.onload = window.onresize = () => {
   scaleCanvas();
 }
 
-window.onresize = scaleCanvas;
-
 // Get inputs.
-var inputs = {'mousePos': {x: 0, y: 0}};
+let inputs = {'mousePos': {x: 0, y: 0}};
 onkeydown = onkeyup = (e) => {
   inputs[e.keyCode] = e.type == 'keydown';
 }

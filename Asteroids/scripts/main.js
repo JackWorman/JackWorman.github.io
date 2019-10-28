@@ -24,7 +24,6 @@ var loop;
 var score;
 var scoreMultiplier;
 
-
 /**
  * Must be done in javascript because it doesn't work in CSS calc().
  */
@@ -42,18 +41,19 @@ window.onresize = scaleCanvas;
 
 // Get inputs.
 var inputs = {"mousePos": {x: 0, y: 0}};
-onkeydown = onkeyup = function(e) {
+onkeydown = onkeyup = (e) => {
   e = e || event; // to deal with IE
   inputs[e.keyCode] = e.type == 'keydown';
 }
-onmousedown = onmouseup = function(e) {
+onmousedown = onmouseup = (e) => {
+  console.log(e);
   if (e.buttons === 1) {
     inputs['leftMouseDown'] = true;
   } else {
     inputs['leftMouseDown'] = false;
   }
 }
-onmousemove = function(e) {
+onmousemove = (e) => {
   var rect = CANVAS_FOREGROUND.getBoundingClientRect();
   inputs["mousePos"] = {
     x: e.clientX - rect.left,

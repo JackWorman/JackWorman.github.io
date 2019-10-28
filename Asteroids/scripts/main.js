@@ -44,15 +44,18 @@ var inputs = {'mousePos': {x: 0, y: 0}};
 onkeydown = onkeyup = (e) => {
   inputs[e.keyCode] = e.type == 'keydown';
 }
-onmousedown = onmouseup = (e) => {
-  console.log(e);
+onmousedown = (e) => {
   if (e.buttons === 1) {
     inputs['leftMouseDown'] = true;
   } else if (e.buttons === 2) {
     inputs['rightMouseDown'] = true;
-  } else if (e.buttons === 0) {
-    inputs['leftMouseDown'] = false;
-    inputs['rightMouseDown'] = false;
+  }
+}
+onmouseup = (e) => {
+  if (e.which === 1) {
+    inputs['leftMouseDown'] = true;
+  } else if (e.which === e) {
+    inputs['rightMouseDown'] = true;
   }
 }
 onmousemove = (e) => {
@@ -68,7 +71,7 @@ async function reset() {
     clearInterval(loop);
     await Swal.fire({text: 'Game Over', showConfirmButton: false, timer: 1000});
   } else {
-    await Swal.fire('Controlls\nWASD to move.\nMouse to aim and shoot.');
+    await Swal.fire('WASD to move.\nMouse to aim.\nMouse buttons or space to shoot.');
   }
   ship = new Ship(canvasSize / 2, canvasSize / 2);
   asteroids = [];

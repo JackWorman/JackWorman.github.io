@@ -50,6 +50,7 @@ onmousedown = (e) => {
   }
 }
 onmouseup = (e) => {
+  console.log(e);
   if (e.which === 1) {
     inputs['leftMouseDown'] = false;
   } else if (e.which === 3) {

@@ -43,16 +43,13 @@ onkeydown = onkeyup = (e) => {
   inputs[e.keyCode] = e.type == 'keydown';
 }
 onmousedown = (e) => {
-  if (e.buttons === 1) {
+  if (e.button === 0) {
     inputs['leftMouseDown'] = true;
   } else if (e.buttons === 2) {
     inputs['rightMouseDown'] = true;
   }
 }
 onmouseup = (e) => {
-  console.log(`==========`);
-  console.log(`e.button: ` + e.button);
-  console.log(`e.buttons: ` + e.buttons);
   if (e.button === 0) {
     inputs['leftMouseDown'] = false;
   } else if (e.button === 2) {

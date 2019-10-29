@@ -45,7 +45,7 @@ onkeydown = onkeyup = (e) => {
 onmousedown = (e) => {
   if (e.button === 0) {
     inputs['leftMouseDown'] = true;
-  } else if (e.buttons === 2) {
+  } else if (e.button === 2) {
     inputs['rightMouseDown'] = true;
   }
 }

@@ -27,7 +27,7 @@ onmousemove = function(e) {
   board.render(mouseCoordinate, selectedCoordinate, moveCoordinates);
 }
 
-CANVAS_CONTAINER.addEventListener('click', function() {
+CANVAS_CONTAINER.addEventListener('mouseup', function() {
   // Checks if the selectedCoordinate were selected.
   if (Coordinate.compare(selectedCoordinate, mouseCoordinate)) {
     selectedCoordinate.setCoordinate(UNDEFINED, UNDEFINED);

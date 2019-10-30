@@ -38,20 +38,20 @@ window.onload = window.onresize = () => {
 }
 
 // Get inputs.
-let inputs = {`mousePos`: {x: 0, y: 0}};
+let inputs = {'mousePos': {x: 0, y: 0}};
 onkeydown = onkeyup = (e) => {
   inputs[e.keyCode] = e.type === `keydown`;
 }
 onmousedown = onmouseup = (e) => {
   if (e.button === 0) {
-    inputs[`leftMouseDown`] = e.type === `mousedown`;
+    inputs['leftMouseDown'] = e.type === `mousedown`;
   } else if (e.button === 2) {
     inputs[`rightMouseDown`] = e.type === `mousedown`;
   }
 }
 onmousemove = (e) => {
   let rect = CANVAS_FOREGROUND.getBoundingClientRect();
-  inputs["mousePos"] = {x: e.clientX - rect.left, y: e.clientY - rect.top};
+  inputs['mousePos'] = {x: e.clientX - rect.left, y: e.clientY - rect.top};
 }
 
 async function reset() {

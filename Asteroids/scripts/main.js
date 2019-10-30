@@ -100,22 +100,6 @@ function updateScore() {
   SPAN_HIGHSCORE.textContent = SPAN_HIGHSCORE.textContent + localStorage.asteroidHighscore;
 }
 
-function calculateFPS() {
-  if (typeof calculateFPS.deltas === 'undefined') {
-    calculateFPS.deltas = [];
-    calculateFPS.then = performance.now();
-    return;
-  }
-  let now = performance.now();
-  if (calculateFPS.deltas.length > FRAMES_PER_SECOND) {
-    calculateFPS.deltas.shift();
-  }
-  calculateFPS.deltas.push(now - calculateFPS.then);
-  let averageDelta = (calculateFPS.deltas.reduce((a, b) => (a + b)) / calculateFPS.deltas.length);
-  SPAN_FPS.textContent = 'FPS: ' + (MILLISECONDS_PER_SECOND / averageDelta).toFixed(2);
-  calculateFPS.then = now;
-}
-
 function gameLoop() {
   if (typeof gameLoop.then === 'undefined') {
     gameLoop.then = 0;

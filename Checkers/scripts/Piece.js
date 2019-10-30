@@ -37,7 +37,7 @@ export class Piece {
 
   // TODO: make a Move class
   calculateMoves(pieces, jumpsAvailable) {
-    const calculateMove = function(pieces, moves, col, row) {
+    const calculateMove = (pieces, moves, col, row) => {
       if (is2DArrayDefined(pieces, col, row) && pieces[col][row] === 'empty') {
         moves.push({col: col, row: row, jumps: []});
       }
@@ -60,7 +60,7 @@ export class Piece {
   }
 
   calculateJumps(pieces, col, row, jumps) {
-    const calculateJump = function(pieces, col, row, dCol, dRow, moves, jumps, piece) {
+    const calculateJump = (pieces, col, row, dCol, dRow, moves, jumps, piece) => {
       // Stops repeat jumps.
       for (const jump of jumps) {
         if (jump.col === col + dCol && jump.row === row + dRow) {

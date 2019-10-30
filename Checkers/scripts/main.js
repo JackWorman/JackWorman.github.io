@@ -18,7 +18,7 @@ let moveCoordinates = [];
 let pieces = [];
 let turn = PLAYER_1;
 
-onmousemove = function(e) {
+onmousemove = (e) => {
   let boundingClientRect = CANVAS_CONTAINER.getBoundingClientRect();
   mouseCoordinate.setCoordinate(
     Math.floor((e.clientX - boundingClientRect.left) / SQUARE_SIZE),
@@ -27,7 +27,7 @@ onmousemove = function(e) {
   board.render(mouseCoordinate, selectedCoordinate, moveCoordinates);
 }
 
-CANVAS_CONTAINER.addEventListener('mouseup', function() {
+CANVAS_CONTAINER.addEventListener('mouseup', () => {
   // Checks if the selectedCoordinate were selected.
   if (Coordinate.compare(selectedCoordinate, mouseCoordinate)) {
     selectedCoordinate.setCoordinate(UNDEFINED, UNDEFINED);
@@ -56,7 +56,7 @@ CANVAS_CONTAINER.addEventListener('mouseup', function() {
   board.render(mouseCoordinate, selectedCoordinate, moveCoordinates);
 });
 
-onkeyup = function(e) {
+onkeyup = (e) => {
   if (e.keyCode === ESCAPE_KEYCODE) {
     selectedCoordinate.setCoordinate(UNDEFINED, UNDEFINED);
     moveCoordinates = [];
@@ -64,7 +64,7 @@ onkeyup = function(e) {
   }
 }
 
-const initializeGame = (function() {
+const initializeGame = (() => {
   CANVAS_CONTAINER.style.width = CANVAS_CONTAINER.style.height = (CANVAS_SIZE + 2) + 'px';
   Piece.initialize(CANVAS_SIZE, SQUARE_SIZE);
   resetGame();

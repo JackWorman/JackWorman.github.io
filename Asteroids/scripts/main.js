@@ -17,12 +17,12 @@ const ASTEROID_SPAWN_INTERVAL = 5000;
 CANVAS_FOREGROUND.width = canvasSize;
 CANVAS_FOREGROUND.height = canvasSize;
 
-var ship;
-var asteroids;
-var timeOfLastAsteroidSpawn;
-var loop;
-var score;
-var scoreMultiplier;
+let ship;
+let asteroids;
+let timeOfLastAsteroidSpawn;
+let loop;
+let score;
+let scoreMultiplier;
 
 /**
  * Must be done in javascript because it doesn't work in CSS calc().
@@ -71,12 +71,12 @@ async function reset() {
 }
 
 function updateScore() {
-  var count = 1;
+  let count = 1;
   while (score / Math.pow(10, count) >= 1) {
     count++;
   }
   SPAN_SCORE.textContent = '';
-  for (var i = 0; i < 9 - count; i++) {
+  for (let i = 0; i < 9 - count; i++) {
     SPAN_SCORE.textContent = SPAN_SCORE.textContent + '0';
   }
   SPAN_SCORE.textContent = SPAN_SCORE.textContent + score
@@ -92,7 +92,7 @@ function updateScore() {
     count++;
   }
   SPAN_HIGHSCORE.textContent = '';
-  for (var i = 0; i < 9 - count; i++) {
+  for (let i = 0; i < 9 - count; i++) {
     SPAN_HIGHSCORE.textContent = SPAN_HIGHSCORE.textContent + '0';
   }
   SPAN_HIGHSCORE.textContent = SPAN_HIGHSCORE.textContent + localStorage.asteroidHighscore;
@@ -104,7 +104,7 @@ function calculateFPS() {
     calculateFPS.then = performance.now();
     return;
   }
-  var now = performance.now();
+  let now = performance.now();
   if (calculateFPS.deltas.length > FRAMES_PER_SECOND) {
     calculateFPS.deltas.shift();
   }
@@ -118,8 +118,8 @@ function gameLoop() {
   if (typeof gameLoop.then === 'undefined') {
     gameLoop.then = 0;
   }
-  var now = performance.now();
-  var deltaTime = now - gameLoop.then;
+  let now = performance.now();
+  let deltaTime = now - gameLoop.then;
   gameLoop.then = now;
 
   calculateFPS();
@@ -132,14 +132,14 @@ function gameLoop() {
     timeOfLastAsteroidSpawn = performance.now();
   }
   ship.shoot(inputs);
-  for (var i = 0; i < asteroids.length; i++) {
+  for (let i = 0; i < asteroids.length; i++) {
     asteroids[i].move(canvasSize, deltaTime);
   }
   ship.move(inputs, canvasSize, deltaTime);
   if (ship.detectCollison(asteroids)) {
     reset();
   }
-  for (var i = 0; i < ship.lasers.length; i++) {
+  for (let i = 0; i < ship.lasers.length; i++) {
     if (ship.lasers[i].move(canvasSize, deltaTime)) { // Laser faded
       scoreMultiplier = 1;
       ship.lasers.splice(i, 1);
@@ -157,11 +157,11 @@ function gameLoop() {
 
 function render() {
   CONTEXT_FOREGROUND.clearRect(0, 0, canvasSize, canvasSize);
-  for (var i = 0; i < ship.lasers.length; i++) {
+  for (let i = 0; i < ship.lasers.length; i++) {
     ship.lasers[i].render(CONTEXT_FOREGROUND);
   }
   ship.render(CONTEXT_FOREGROUND, inputs["mousePos"]);
-  for (var i = 0; i < asteroids.length; i++) {
+  for (let i = 0; i < asteroids.length; i++) {
     asteroids[i].render(CONTEXT_FOREGROUND);
   }
   // CONTEXT_FOREGROUND.font = "20px Georgia";

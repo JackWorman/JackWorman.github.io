@@ -1,6 +1,6 @@
 `use strict`;
 
-import Ship from `./ship.js`;
+import Ship from './ship.js';
 import Asteroid from `./asteroid.js`;
 import * as FrameRate from `./FrameRate.js`;
 

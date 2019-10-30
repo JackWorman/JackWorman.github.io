@@ -10,7 +10,6 @@ const MILLISECONDS_PER_SECOND = 1000;
 let canvasSize = 800;
 const CANVAS_FOREGROUND = document.getElementById('canvas-foreground');
 const CONTEXT_FOREGROUND = CANVAS_FOREGROUND.getContext('2d');
-const SPAN_FPS = document.getElementById('span-fps');
 const SPAN_SCORE = document.getElementById('span-score');
 const SPAN_HIGHSCORE = document.getElementById('span-highscore');
 const ASTEROID_SPAWN_INTERVAL = 5000;

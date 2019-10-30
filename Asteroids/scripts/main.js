@@ -44,14 +44,14 @@ onkeydown = onkeyup = (e) => {
 }
 onmousedown = onmouseup = (e) => {
   if (e.button === 0) {
-    inputs['leftMouseDown'] = e.type === `mousedown`;
+    inputs[`leftMouseDown`] = e.type === `mousedown`;
   } else if (e.button === 2) {
     inputs[`rightMouseDown`] = e.type === `mousedown`;
   }
 }
 onmousemove = (e) => {
   let rect = CANVAS_FOREGROUND.getBoundingClientRect();
-  inputs['mousePos'] = {x: e.clientX - rect.left, y: e.clientY - rect.top};
+  inputs[`mousePos`] = {x: e.clientX - rect.left, y: e.clientY - rect.top};
 }
 
 async function reset() {
@@ -78,9 +78,9 @@ function updateScore() {
   }
   SPAN_SCORE.textContent = ``;
   for (let i = 0; i < 9 - count; i++) {
-    SPAN_SCORE.textContent = SPAN_SCORE.textContent + `0`;
+    SPAN_SCORE.textContent += `0`;
   }
-  SPAN_SCORE.textContent = SPAN_SCORE.textContent + score
+  SPAN_SCORE.textContent += score;
   // Update highscore SPAN_HIGHSCORE
   if (typeof localStorage.asteroidHighscore === `undefined`) {
     localStorage.asteroidHighscore = 0;
@@ -94,9 +94,9 @@ function updateScore() {
   }
   SPAN_HIGHSCORE.textContent = ``;
   for (let i = 0; i < 9 - count; i++) {
-    SPAN_HIGHSCORE.textContent = SPAN_HIGHSCORE.textContent + `0`;
+    SPAN_HIGHSCORE.textContent += `0`;
   }
-  SPAN_HIGHSCORE.textContent = SPAN_HIGHSCORE.textContent + localStorage.asteroidHighscore;
+  SPAN_HIGHSCORE.textContent += localStorage.asteroidHighscore;
 }
 
 function gameLoop() {
@@ -145,13 +145,13 @@ function render() {
   for (let i = 0; i < ship.lasers.length; i++) {
     ship.lasers[i].render(CONTEXT_FOREGROUND);
   }
-  ship.render(CONTEXT_FOREGROUND, inputs["mousePos"]);
+  ship.render(CONTEXT_FOREGROUND, inputs[`mousePos`]);
   for (let i = 0; i < asteroids.length; i++) {
     asteroids[i].render(CONTEXT_FOREGROUND);
   }
-  // CONTEXT_FOREGROUND.font = "20px Georgia";
+  // CONTEXT_FOREGROUND.font = `20px Georgia`;
   CONTEXT_FOREGROUND.strokeStyle = `rgb(255, 255, 255)`;
-  CONTEXT_FOREGROUND.strokeText(`x` + scoreMultiplier, 50, 50);
+  CONTEXT_FOREGROUND.strokeText(`x${scoreMultiplier}`, 50, 50);
 }
 
 reset();

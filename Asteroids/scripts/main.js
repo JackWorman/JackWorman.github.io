@@ -1,8 +1,8 @@
-`use strict`;
+'use strict';
 
 import Ship from './ship.js';
-import Asteroid from `./asteroid.js`;
-import * as FrameRate from `./FrameRate.js`;
+import Asteroid from './asteroid.js';
+import * as FrameRate from './FrameRate.js';
 
 const BLACK = `rgb(0, 0, 0)`;
 const FRAMES_PER_SECOND = 60;

@@ -1,17 +1,17 @@
-'use strict';
+`use strict`;
 
-import Ship from './ship.js';
-import Asteroid from './asteroid.js';
-import * as FrameRate from './FrameRate.js';
+import Ship from `./ship.js`;
+import Asteroid from `./asteroid.js`;
+import * as FrameRate from `./FrameRate.js`;
 
-const BLACK = 'rgb(0, 0, 0)';
+const BLACK = `rgb(0, 0, 0)`;
 const FRAMES_PER_SECOND = 60;
 const MILLISECONDS_PER_SECOND = 1000;
 let canvasSize = 800;
-const CANVAS_FOREGROUND = document.getElementById('canvas-foreground');
-const CONTEXT_FOREGROUND = CANVAS_FOREGROUND.getContext('2d');
-const SPAN_SCORE = document.getElementById('span-score');
-const SPAN_HIGHSCORE = document.getElementById('span-highscore');
+const CANVAS_FOREGROUND = document.getElementById(`canvas-foreground`);
+const CONTEXT_FOREGROUND = CANVAS_FOREGROUND.getContext(`2d`);
+const SPAN_SCORE = document.getElementById(`span-score`);
+const SPAN_HIGHSCORE = document.getElementById(`span-highscore`);
 const ASTEROID_SPAWN_INTERVAL = 5000;
 
 CANVAS_FOREGROUND.width = canvasSize;
@@ -25,7 +25,7 @@ let score;
 let scoreMultiplier;
 
 /**
- * Must be done in javascript because it doesn't work in CSS calc().
+ * Must be done in javascript because it doesn`t work in CSS calc().
  */
 function scaleCanvas() {
   canvasSize = 690 * Math.min(document.body.clientWidth, document.body.clientHeight) / 900;
@@ -38,15 +38,15 @@ window.onload = window.onresize = () => {
 }
 
 // Get inputs.
-let inputs = {'mousePos': {x: 0, y: 0}};
+let inputs = {`mousePos`: {x: 0, y: 0}};
 onkeydown = onkeyup = (e) => {
-  inputs[e.keyCode] = e.type === 'keydown';
+  inputs[e.keyCode] = e.type === `keydown`;
 }
 onmousedown = onmouseup = (e) => {
   if (e.button === 0) {
-    inputs['leftMouseDown'] = e.type === `mousedown`;
+    inputs[`leftMouseDown`] = e.type === `mousedown`;
   } else if (e.button === 2) {
-    inputs['rightMouseDown'] = e.type === `mousedown`;
+    inputs[`rightMouseDown`] = e.type === `mousedown`;
   }
 }
 onmousemove = (e) => {
@@ -55,11 +55,11 @@ onmousemove = (e) => {
 }
 
 async function reset() {
-  if (typeof loop !== 'undefined') {
+  if (typeof loop !== `undefined`) {
     clearInterval(loop);
-    await Swal.fire({text: 'Game Over', showConfirmButton: false, timer: 1000});
+    await Swal.fire({text: `Game Over`, showConfirmButton: false, timer: 1000});
   } else {
-    await Swal.fire('WASD to move.\nMouse to aim.\nMouse buttons or space to shoot.');
+    await Swal.fire(`WASD to move.\nMouse to aim.\nMouse buttons or space to shoot.`);
   }
   FrameRate.reset();
   ship = new Ship(canvasSize / 2, canvasSize / 2);
@@ -76,13 +76,13 @@ function updateScore() {
   while (score / Math.pow(10, count) >= 1) {
     count++;
   }
-  SPAN_SCORE.textContent = '';
+  SPAN_SCORE.textContent = ``;
   for (let i = 0; i < 9 - count; i++) {
-    SPAN_SCORE.textContent = SPAN_SCORE.textContent + '0';
+    SPAN_SCORE.textContent = SPAN_SCORE.textContent + `0`;
   }
   SPAN_SCORE.textContent = SPAN_SCORE.textContent + score
   // Update highscore SPAN_HIGHSCORE
-  if (typeof localStorage.asteroidHighscore === 'undefined') {
+  if (typeof localStorage.asteroidHighscore === `undefined`) {
     localStorage.asteroidHighscore = 0;
   }
   if (localStorage.asteroidHighscore < score) {
@@ -92,15 +92,15 @@ function updateScore() {
   while (localStorage.asteroidHighscore / Math.pow(10, count) >= 1) {
     count++;
   }
-  SPAN_HIGHSCORE.textContent = '';
+  SPAN_HIGHSCORE.textContent = ``;
   for (let i = 0; i < 9 - count; i++) {
-    SPAN_HIGHSCORE.textContent = SPAN_HIGHSCORE.textContent + '0';
+    SPAN_HIGHSCORE.textContent = SPAN_HIGHSCORE.textContent + `0`;
   }
   SPAN_HIGHSCORE.textContent = SPAN_HIGHSCORE.textContent + localStorage.asteroidHighscore;
 }
 
 function gameLoop() {
-  if (typeof gameLoop.then === 'undefined') {
+  if (typeof gameLoop.then === `undefined`) {
     gameLoop.then = 0;
   }
   let now = performance.now();
@@ -150,8 +150,8 @@ function render() {
     asteroids[i].render(CONTEXT_FOREGROUND);
   }
   // CONTEXT_FOREGROUND.font = "20px Georgia";
-  CONTEXT_FOREGROUND.strokeStyle = 'rgb(255, 255, 255)';
-  CONTEXT_FOREGROUND.strokeText('x' + scoreMultiplier, 50, 50);
+  CONTEXT_FOREGROUND.strokeStyle = `rgb(255, 255, 255)`;
+  CONTEXT_FOREGROUND.strokeText(`x` + scoreMultiplier, 50, 50);
 }
 
 reset();

@@ -3,7 +3,7 @@
 const MILLISECONDS_PER_SECOND = 1000;
 const DELTA_TIMES_BUFFER_SIZE = 100;
 const DECIMALS = 2;
-const SPAN_FPS = document.getElementById('span-fps');
+const SPAN_FPS = document.getElementById(`span-fps`);
 
 let initialCall = true;
 let deltaTimes;
@@ -33,5 +33,5 @@ export function reset() {
 }
 
 function display(fps) {
-  SPAN_FPS.textContent = 'FPS: ' + fps.toFixed(DECIMALS);
+  SPAN_FPS.textContent = `FPS: ${fps.toFixed(DECIMALS)}`;
 }

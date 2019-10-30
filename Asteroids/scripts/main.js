@@ -2,6 +2,7 @@
 
 import Ship from './ship.js';
 import Asteroid from './asteroid.js';
+import * as FrameRate from './FrameRate.js';
 
 const BLACK = 'rgb(0, 0, 0)';
 const FRAMES_PER_SECOND = 60;
@@ -61,6 +62,7 @@ async function reset() {
   } else {
     await Swal.fire('WASD to move.\nMouse to aim.\nMouse buttons or space to shoot.');
   }
+  FrameRate.reset();
   ship = new Ship(canvasSize / 2, canvasSize / 2);
   asteroids = [];
   timeOfLastAsteroidSpawn = -ASTEROID_SPAWN_INTERVAL;
@@ -121,8 +123,8 @@ function gameLoop() {
   let now = performance.now();
   let deltaTime = now - gameLoop.then;
   gameLoop.then = now;
-
-  calculateFPS();
+  FrameRate.update();
+  // calculateFPS();
   if (performance.now() - timeOfLastAsteroidSpawn > ASTEROID_SPAWN_INTERVAL) {
     if (Math.random() < 0.5) {
       asteroids.push(new Asteroid(-100, Math.random() * (canvasSize + 200), 2));

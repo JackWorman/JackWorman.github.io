@@ -30,10 +30,10 @@ let scoreMultiplier;
 function scaleCanvas() {
   canvasSize = 690 * Math.min(document.body.clientWidth, document.body.clientHeight) / 900;
   CANVAS_FOREGROUND.width = CANVAS_FOREGROUND.height = canvasSize;
-  render(); // TODO: ship not made yet onload
+  render();
 };
 
-window.onload = window.onresize = () => {
+window.onresize = () => {
   scaleCanvas();
 }
 
@@ -68,6 +68,7 @@ async function reset() {
   score = 0;
   scoreMultiplier = 1;
   updateScore();
+  scaleCanvas();
   loop = setInterval(gameLoop, MILLISECONDS_PER_SECOND / FRAMES_PER_SECOND);
 }
 

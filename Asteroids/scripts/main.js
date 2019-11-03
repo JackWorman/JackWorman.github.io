@@ -18,7 +18,7 @@ const ASTEROID_SPAWN_INTERVAL = 5000;
 CANVAS_FOREGROUND.width = canvasSize;
 CANVAS_FOREGROUND.height = canvasSize;
 
-let ship;
+let ship = new Ship(canvasSize / 2, canvasSize / 2);
 let asteroids;
 let timeOfLastAsteroidSpawn;
 let gameLoopInterval;
@@ -33,7 +33,7 @@ function scaleCanvas() {
   render();
 };
 
-window.onresize = () => {
+window.onload = window.onresize = () => {
   scaleCanvas();
 }
 
@@ -67,7 +67,6 @@ async function reset() {
   timeOfLastAsteroidSpawn = -ASTEROID_SPAWN_INTERVAL;
   scoreMultiplier = 1;
   Score.reset();
-  scaleCanvas();
   gameLoopInterval = setInterval(gameLoop, MILLISECONDS_PER_SECOND / FRAMES_PER_SECOND);
 }
 

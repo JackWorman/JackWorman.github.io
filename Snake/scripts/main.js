@@ -5,7 +5,7 @@ import {Pellet} from './Pellet.js';
 import * as KeyCode from './KeyCode.js';
 import * as Score from './Score.js';
 import * as FrameRate from './FrameRate.js';
-import {canvasSize} from './ScaleCanvas.js'
+import {canvasSize} from './ScaleCanvas.js';
 
 const CANVAS_FOREGROUND = document.getElementById('canvas-foreground');
 const CONTEXT_FOREGROUND = CANVAS_FOREGROUND.getContext('2d');

@@ -3,12 +3,13 @@
 import Ship from "./ship.js";
 import Asteroid from "./asteroid.js";
 import * as FrameRate from "./FrameRate.js";
-import * as Score from './Score.js';
+import * as Score from "./Score.js";
+import {canvasSize} from "./ScaleCanvas.js";
 
 const BLACK = `rgb(0, 0, 0)`;
 const FRAMES_PER_SECOND = 60;
 const MILLISECONDS_PER_SECOND = 1000;
-let canvasSize = 800;
+// let canvasSize = 800;
 const CANVAS_FOREGROUND = document.getElementById(`canvas-foreground`);
 const CONTEXT_FOREGROUND = CANVAS_FOREGROUND.getContext(`2d`);
 const SPAN_SCORE = document.getElementById(`span-score`);
@@ -24,18 +25,18 @@ let timeOfLastAsteroidSpawn;
 let gameLoopInterval;
 let scoreMultiplier;
 
-/**
- * Must be done in javascript because it doesn`t work in CSS calc().
- */
-function scaleCanvas() {
-  canvasSize = 690 * Math.min(document.body.clientWidth, document.body.clientHeight) / 900;
-  CANVAS_FOREGROUND.width = CANVAS_FOREGROUND.height = canvasSize;
-  render();
-};
-
-window.onload = window.onresize = () => {
-  scaleCanvas();
-}
+// /**
+//  * Must be done in javascript because it doesn`t work in CSS calc().
+//  */
+// function scaleCanvas() {
+//   canvasSize = 690 * Math.min(document.body.clientWidth, document.body.clientHeight) / 900;
+//   CANVAS_FOREGROUND.width = CANVAS_FOREGROUND.height = canvasSize;
+//   render();
+// };
+//
+// window.onload = window.onresize = () => {
+//   scaleCanvas();
+// }
 
 // Get inputs.
 let inputs = {"mousePos": {x: 0, y: 0}};
@@ -109,7 +110,7 @@ function gameLoop() {
   requestAnimationFrame(render);
 }
 
-function render() {
+export function render() {
   CONTEXT_FOREGROUND.clearRect(0, 0, canvasSize, canvasSize);
   for (let i = 0; i < ship.lasers.length; i++) {
     ship.lasers[i].render(CONTEXT_FOREGROUND);

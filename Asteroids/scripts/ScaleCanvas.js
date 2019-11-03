@@ -22,5 +22,5 @@ export function scaleCanvas() {
 };
 
 // window.onload = scaleCanvas;
-window.addEventListener(`load`, scaleCanvas);
+window.addEventListener(`DOMContentLoaded`, scaleCanvas);
 window.addEventListener(`resize`, scaleCanvas);

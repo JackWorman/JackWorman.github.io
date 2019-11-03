@@ -4,7 +4,7 @@ import Ship from "./ship.js";
 import Asteroid from "./asteroid.js";
 import * as FrameRate from "./FrameRate.js";
 import * as Score from "./Score.js";
-import {canvasSize} from "./ScaleCanvas.js";
+import {canvasSize, scaleCanvas} from "./ScaleCanvas.js";
 
 const BLACK = `rgb(0, 0, 0)`;
 const FRAMES_PER_SECOND = 60;
@@ -124,4 +124,5 @@ export function render() {
   CONTEXT_FOREGROUND.strokeText(`x${scoreMultiplier}`, 50, 50);
 }
 
+scaleCanvas();
 reset();

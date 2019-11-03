@@ -21,7 +21,7 @@ CANVAS_FOREGROUND.height = canvasSize;
 let ship;
 let asteroids;
 let timeOfLastAsteroidSpawn;
-let loop;
+let gameLoopInterval;
 let scoreMultiplier;
 
 /**
@@ -55,10 +55,10 @@ onmousemove = (e) => {
 }
 
 async function reset() {
-  if (typeof loop === `undefined`) {
+  if (typeof gameLoopInterval === `undefined`) {
     await Swal.fire(`WASD to move.\nMouse to aim.\nMouse buttons or space to shoot.`);
   } else {
-    clearInterval(loop);
+    clearInterval(gameLoopInterval);
     await Swal.fire({text: `Game Over`, showConfirmButton: false, timer: 1000});
   }
   FrameRate.reset();
@@ -68,7 +68,7 @@ async function reset() {
   scoreMultiplier = 1;
   Score.reset();
   scaleCanvas();
-  loop = setInterval(gameLoop, MILLISECONDS_PER_SECOND / FRAMES_PER_SECOND);
+  gameLoopInterval = setInterval(gameLoop, MILLISECONDS_PER_SECOND / FRAMES_PER_SECOND);
 }
 
 function gameLoop() {
@@ -79,7 +79,6 @@ function gameLoop() {
   let deltaTime = now - gameLoop.then;
   gameLoop.then = now;
   FrameRate.update();
-  // calculateFPS();
   if (performance.now() - timeOfLastAsteroidSpawn > ASTEROID_SPAWN_INTERVAL) {
     if (Math.random() < 0.5) {
       asteroids.push(new Asteroid(-100, Math.random() * (canvasSize + 200), 2));

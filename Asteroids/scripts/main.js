@@ -21,7 +21,7 @@ let ship;
 let asteroids;
 let timeOfLastAsteroidSpawn;
 let loop;
-let score;
+// let score;
 let scoreMultiplier;
 
 /**
@@ -55,19 +55,20 @@ onmousemove = (e) => {
 }
 
 async function reset() {
-  if (typeof loop !== `undefined`) {
+  if (typeof loop === `undefined`) {
+    await Swal.fire(`WASD to move.\nMouse to aim.\nMouse buttons or space to shoot.`);
+  } else {
     clearInterval(loop);
     await Swal.fire({text: `Game Over`, showConfirmButton: false, timer: 1000});
-  } else {
-    await Swal.fire(`WASD to move.\nMouse to aim.\nMouse buttons or space to shoot.`);
   }
   FrameRate.reset();
   ship = new Ship(canvasSize / 2, canvasSize / 2);
   asteroids = [];
   timeOfLastAsteroidSpawn = -ASTEROID_SPAWN_INTERVAL;
-  score = 0;
+  // score = 0;
   scoreMultiplier = 1;
-  updateScore();
+  // updateScore();
+  Score.reset();
   scaleCanvas();
   loop = setInterval(gameLoop, MILLISECONDS_PER_SECOND / FRAMES_PER_SECOND);
 }
@@ -131,8 +132,9 @@ function gameLoop() {
       ship.lasers.splice(i, 1);
       i--;
     } else if (ship.lasers[i].detectCollison(asteroids)) { // Laser hit an asteroid
-      score += asteroids.length * scoreMultiplier;
-      updateScore();
+      // score += asteroids.length * scoreMultiplier;
+      // updateScore();
+      Score.update(asteroids.length * scoreMultiplier);
       scoreMultiplier++;
       ship.lasers.splice(i, 1);
       i--;

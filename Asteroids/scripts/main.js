@@ -4,6 +4,7 @@ import Ship from "./ship.js";
 import Asteroid from "./asteroid.js";
 import * as FrameRate from "./FrameRate.js";
 import * as Score from "./Score.js";
+import {canvasSize} from "./ScaleCanvas.js";
 
 const BLACK = `rgb(0, 0, 0)`;
 const FRAMES_PER_SECOND = 60;
@@ -20,7 +21,6 @@ CANVAS_FOREGROUND.height = canvasSize;
 
 let ship = new Ship(canvasSize / 2, canvasSize / 2);
 let asteroids = [];
-import {canvasSize} from "./ScaleCanvas.js";
 let timeOfLastAsteroidSpawn;
 let gameLoopInterval;
 let scoreMultiplier;

@@ -6,7 +6,7 @@ const BASE_SIZE = getComputedStyle(document.documentElement).getPropertyValue(`-
 const BASE_CANVAS_SIZE = 690;
 const CANVAS_FOREGROUND = document.getElementById(`canvas-foreground`);
 
-export let canvasSize;
+export let canvasSize = 800;
 
 /**
  * This must be done in Javascript because it clears the canvas constantly when using calc() in CSS.

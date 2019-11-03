@@ -15,9 +15,9 @@ const CONTEXT_FOREGROUND = CANVAS_FOREGROUND.getContext(`2d`);
 const SPAN_SCORE = document.getElementById(`span-score`);
 const SPAN_HIGHSCORE = document.getElementById(`span-highscore`);
 const ASTEROID_SPAWN_INTERVAL = 5000;
-
-CANVAS_FOREGROUND.width = canvasSize;
-CANVAS_FOREGROUND.height = canvasSize;
+//
+// CANVAS_FOREGROUND.width = canvasSize;
+// CANVAS_FOREGROUND.height = canvasSize;
 
 let ship = new Ship(canvasSize / 2, canvasSize / 2);
 let asteroids = [];

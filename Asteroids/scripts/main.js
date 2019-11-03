@@ -22,7 +22,6 @@ let ship;
 let asteroids;
 let timeOfLastAsteroidSpawn;
 let loop;
-// let score;
 let scoreMultiplier;
 
 /**
@@ -66,40 +65,10 @@ async function reset() {
   ship = new Ship(canvasSize / 2, canvasSize / 2);
   asteroids = [];
   timeOfLastAsteroidSpawn = -ASTEROID_SPAWN_INTERVAL;
-  // score = 0;
   scoreMultiplier = 1;
-  // updateScore();
   Score.reset();
   scaleCanvas();
   loop = setInterval(gameLoop, MILLISECONDS_PER_SECOND / FRAMES_PER_SECOND);
-}
-
-function updateScore() {
-  let count = 1;
-  while (score / Math.pow(10, count) >= 1) {
-    count++;
-  }
-  SPAN_SCORE.textContent = ``;
-  for (let i = 0; i < 9 - count; i++) {
-    SPAN_SCORE.textContent += `0`;
-  }
-  SPAN_SCORE.textContent += score;
-  // Update highscore SPAN_HIGHSCORE
-  if (typeof localStorage.asteroidHighscore === `undefined`) {
-    localStorage.asteroidHighscore = 0;
-  }
-  if (localStorage.asteroidHighscore < score) {
-    localStorage.asteroidHighscore = score;
-  }
-  count = 1;
-  while (localStorage.asteroidHighscore / Math.pow(10, count) >= 1) {
-    count++;
-  }
-  SPAN_HIGHSCORE.textContent = ``;
-  for (let i = 0; i < 9 - count; i++) {
-    SPAN_HIGHSCORE.textContent += `0`;
-  }
-  SPAN_HIGHSCORE.textContent += localStorage.asteroidHighscore;
 }
 
 function gameLoop() {
@@ -133,8 +102,6 @@ function gameLoop() {
       ship.lasers.splice(i, 1);
       i--;
     } else if (ship.lasers[i].detectCollison(asteroids)) { // Laser hit an asteroid
-      // score += asteroids.length * scoreMultiplier;
-      // updateScore();
       Score.update(asteroids.length * scoreMultiplier);
       scoreMultiplier++;
       ship.lasers.splice(i, 1);

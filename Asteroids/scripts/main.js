@@ -19,7 +19,7 @@ CANVAS_FOREGROUND.width = canvasSize;
 CANVAS_FOREGROUND.height = canvasSize;
 
 let ship = new Ship(canvasSize / 2, canvasSize / 2);
-let asteroids;
+let asteroids = [];
 let timeOfLastAsteroidSpawn;
 let gameLoopInterval;
 let scoreMultiplier;

@@ -1,8 +1,8 @@
-'use strict';
+"use strict";
 
-import Ship from './ship.js';
-import Asteroid from './asteroid.js';
-import * as FrameRate from './FrameRate.js';
+import Ship from "./ship.js";
+import Asteroid from "./asteroid.js";
+import * as FrameRate from "./FrameRate.js";
 
 const BLACK = `rgb(0, 0, 0)`;
 const FRAMES_PER_SECOND = 60;
@@ -38,7 +38,7 @@ window.onresize = () => {
 }
 
 // Get inputs.
-let inputs = {'mousePos': {x: 0, y: 0}};
+let inputs = {"mousePos": {x: 0, y: 0}};
 onkeydown = onkeyup = (e) => {
   inputs[e.keyCode] = e.type === `keydown`;
 }

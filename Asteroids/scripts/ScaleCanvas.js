@@ -1,6 +1,6 @@
-`use strict`;
+"use strict";
 
-import {render} from `./main.js`;
+import {render} from "./main.js";
 
 const BASE_SIZE = getComputedStyle(document.documentElement).getPropertyValue(`--base-size`);
 const BASE_CANVAS_SIZE = 690;

@@ -15,6 +15,7 @@ function scaleCanvas() {
   canvasSize = BASE_CANVAS_SIZE * Math.min(document.body.clientWidth, document.body.clientHeight) / BASE_SIZE;
   CANVAS_FOREGROUND.width = CANVAS_FOREGROUND.height = canvasSize;
   window.requestAnimationFrame(render);
+  bin.console(canvasSize)
 };
 
 window.onload = scaleCanvas;

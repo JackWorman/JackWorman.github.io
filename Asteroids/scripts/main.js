@@ -9,34 +9,17 @@ import {canvasSize, scaleCanvas} from "./ScaleCanvas.js";
 const BLACK = `rgb(0, 0, 0)`;
 const FRAMES_PER_SECOND = 60;
 const MILLISECONDS_PER_SECOND = 1000;
-// let canvasSize = 800;
 const CANVAS_FOREGROUND = document.getElementById(`canvas-foreground`);
 const CONTEXT_FOREGROUND = CANVAS_FOREGROUND.getContext(`2d`);
 const SPAN_SCORE = document.getElementById(`span-score`);
 const SPAN_HIGHSCORE = document.getElementById(`span-highscore`);
 const ASTEROID_SPAWN_INTERVAL = 5000;
-//
-// CANVAS_FOREGROUND.width = canvasSize;
-// CANVAS_FOREGROUND.height = canvasSize;
 
 let ship = new Ship(canvasSize / 2, canvasSize / 2);
 let asteroids = [];
 let timeOfLastAsteroidSpawn;
 let gameLoopInterval;
 let scoreMultiplier;
-
-// /**
-//  * Must be done in javascript because it doesn`t work in CSS calc().
-//  */
-// function scaleCanvas() {
-//   canvasSize = 690 * Math.min(document.body.clientWidth, document.body.clientHeight) / 900;
-//   CANVAS_FOREGROUND.width = CANVAS_FOREGROUND.height = canvasSize;
-//   render();
-// };
-//
-// window.onload = window.onresize = () => {
-//   scaleCanvas();
-// }
 
 // Get inputs.
 let inputs = {"mousePos": {x: 0, y: 0}};

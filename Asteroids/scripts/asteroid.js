@@ -27,13 +27,13 @@ export default class Asteroid {
   }
 
   render(context) {
-    var sides = 10;
+    let sides = 10;
     context.beginPath();
-    var angle = 2 * Math.PI / sides;
+    let angle = 2 * Math.PI / sides;
     context.translate(this.x, this.y);
     context.rotate(this.rotationAngle);
     context.moveTo(this.radius, 0);
-    for (var i = 1; i < sides; i++) {
+    for (let i = 1; i < sides; i++) {
       context.lineTo(this.radius * Math.cos(angle * i), this.radius * Math.sin(angle * i));
     }
     context.closePath();

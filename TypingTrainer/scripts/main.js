@@ -11,8 +11,10 @@ function loadFile(filePath) {
   }
 }
 
+const DIV_TEXT = document.getElementById('div-text');
 const lines = loadFile(`https://jackworman.com/TypingTrainer/NextLetterCounts.txt`).split(/\n/);
 const letterCounts = {};
+let allLetterCount = 0;
 
 for (const line of lines) {
   const letter = line.charAt(0);
@@ -22,5 +24,21 @@ for (const line of lines) {
   } else {
     letterCounts[letter] += Number(words[2]);
   }
+  allLetterCount += Number(words[2]);
 }
-console.log(letterCounts);
+
+let text = ``;
+for (let i = 0; i < 1000; i++) {
+  let rand = Math.floor(Math.random() * allLetterCount);
+  let count = 0;
+  for (const letter in letterCounts) {
+    count += letterCounts[letter];
+    if (rand < count) {
+      text += letter;
+      break;
+    }
+  }
+}
+DIV_TEXT.textContent = text;
+
+// console.log(letterCounts);

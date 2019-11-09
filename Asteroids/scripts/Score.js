@@ -1,7 +1,7 @@
-'use strict';
+"use strict";
 
-const SPAN_SCORE = document.getElementById('span-score');
-const SPAN_HIGHSCORE = document.getElementById('span-highscore');
+const SPAN_SCORE = document.getElementById(`span-score`);
+const SPAN_HIGHSCORE = document.getElementById(`span-highscore`);
 const MILLISECONDS_PER_SECOND = 1000;
 const INCREMENTS_PER_SECOND = 100;
 const PADDING_LENGTH = 9;
@@ -20,7 +20,7 @@ export function reset() {
 }
 
 /**
- * @param  {Number} additionalPoints The points to be added to the current score.
+ * @param {Number} additionalPoints The points to be added to the current score.
  */
 export function update(additionalPoints) {
   score += additionalPoints;
@@ -30,7 +30,7 @@ export function update(additionalPoints) {
 
 function updateHighscore() {
   // First time setup.
-  if (typeof localStorage.highscore === 'undefined') {
+  if (typeof localStorage.highscore === `undefined`) {
     localStorage.highscore = 0;
   }
   if (Number(localStorage.highscore) < score) {
@@ -55,13 +55,13 @@ function incrementScore() {
 
 function displayScore(domElement, score) {
   if (score === 0) {
-    domElement.textContent = '0'.repeat(PADDING_LENGTH);
+    domElement.textContent = `0`.repeat(PADDING_LENGTH);
   } else {
     // Calculates the amount of padding-zeros needed.
     let digits = 1;
     while (score / Math.pow(10, digits) >= 1) {
       digits++
     }
-    domElement.textContent = '0'.repeat(PADDING_LENGTH - digits) + score;
+    domElement.textContent = `0`.repeat(PADDING_LENGTH - digits) + score;
   }
 }

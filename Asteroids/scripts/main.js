@@ -55,12 +55,14 @@ async function reset() {
 }
 
 function gameLoop() {
+
   if (typeof gameLoop.then === `undefined`) {
     gameLoop.then = 0;
   }
   let now = performance.now();
   let deltaTime = now - gameLoop.then;
   gameLoop.then = now;
+
   FrameRate.update();
   if (performance.now() - timeOfLastAsteroidSpawn > ASTEROID_SPAWN_INTERVAL) {
     if (Math.random() < 0.5) {

@@ -1,7 +1,7 @@
 "use strict";
 
 function loadFile(filePath) {
-  const xmlHttpRequest = new xmlHttpRequestRequest();
+  const xmlHttpRequest = new XMLHttpRequest();
   xmlHttpRequest.open(`GET`, filePath, false);
   xmlHttpRequest.send();
   if (xmlHttpRequest.status === 200) {

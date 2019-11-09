@@ -15,12 +15,6 @@ export function scaleCanvas() {
   canvasSize = BASE_CANVAS_SIZE * Math.min(document.body.clientWidth, document.body.clientHeight) / BASE_SIZE;
   CANVAS_FOREGROUND.width = CANVAS_FOREGROUND.height = canvasSize;
   window.requestAnimationFrame(render);
-  console.log(`==========`);
-  console.log(`canvasSize: ${canvasSize}`);
-  console.log(`width: ${document.body.clientWidth}`);
-  console.log(`height: ${document.body.clientHeight}`);
 };
 
-// window.onload = scaleCanvas;
-// window.addEventListener(`DOMContentLoaded`, scaleCanvas);
 window.addEventListener(`resize`, scaleCanvas);

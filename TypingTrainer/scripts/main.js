@@ -13,3 +13,9 @@ function loadFile(filePath) {
 
 const lines = loadFile(`https://jackworman.com/TypingTrainer/NextLetterCounts.txt`).split(/\n/);
 console.log(lines);
+const letterCounts = {};
+
+for (const line of lines) {
+  const letter = line.charAt(0);
+  letterCounts[]
+}

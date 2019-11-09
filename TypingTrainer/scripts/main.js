@@ -17,7 +17,7 @@ const letterCounts = {};
 for (const line of lines) {
   const letter = line.charAt(0);
   const words = line.split(/\s/);
-  if (typeof letterCounts[letter] === 'undefined') {
+  if (typeof letterCounts[letter] === `undefined`) {
     letterCounts[letter] = Number(words[2]);
   } else {
     letterCounts[letter] += Number(words[2]);

@@ -51,7 +51,7 @@ for (let i = 0; i < 1000; i++) {
           if (words[1] === `space`) {
             text += ` `;
           } else {
-            text += letter;
+            text += words[1];
           }
           break;
         }

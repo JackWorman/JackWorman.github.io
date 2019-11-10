@@ -46,4 +46,4 @@ TEXTAREA.addEventListener(`change`, (event) => {
       SPAN_CHARACTER.classList.add(`incorrect`);
     }
   }
-}
+});

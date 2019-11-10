@@ -69,9 +69,16 @@ TEXTAREA.addEventListener(`input`, (event) => {
   }
   // Check if done.
   if (TEXTAREA.value.length === SPAN_CHARACTERS.length) {
-    clearInterval(updateWPMInterval);
-    clearInterval(toggleIndicatorInterval);
+    reset();
     alert(`Done.`);
-    TEXTAREA.value = ``;
   }
 });
+
+function reset() {
+  clearInterval(updateWPMInterval);
+  clearInterval(toggleIndicatorInterval);
+  TEXTAREA.value = ``;
+  setUpText();
+  startTyping = false;
+  toggleIndicatorInterval = setInterval(toggleIndicator, MILLISECONDS_PER_SECOND / 3);
+}

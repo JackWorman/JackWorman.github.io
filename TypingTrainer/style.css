@@ -7,6 +7,10 @@ html, body {
   color: white;
 }
 
+#span-title {
+  font-size: 50px;
+}
+
 div {
   width: 50vw;
   margin: 0 auto;

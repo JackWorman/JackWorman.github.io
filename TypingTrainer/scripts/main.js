@@ -67,8 +67,10 @@ TEXTAREA.addEventListener(`input`, (event) => {
       SPAN_CHARACTER.classList.add(`incorrect`);
     }
   }
-});
-
-document.addEventListener(`load`, (event) => {
-  TEXTAREA.value = ``;
+  // Check if done.
+  if (TEXTAREA.value.length === SPAN_CHARACTERS.length) {
+    clearInterval(updateWPMInterval);
+    clearInterval(toggleIndicatorInterval);
+    alert(`Done.`);
+  }
 });

@@ -35,3 +35,15 @@ function toggleIndicator() {
   const SPAN_CHARACTER = document.getElementById(`span-character-${TEXTAREA.value.length + 1}`);
   SPAN_CHARACTER.classList.toggle(`indicator`);
 }
+
+TEXTAREA.addEventListener(`change`, (event) => {
+  for (let i = 0; i < TEXTAREA.value.length; i++) {
+    const SPAN_CHARACTER = document.getElementById(`span-character-${i + 1}`);
+    SPAN_CHARACTER.classList.remove(`indicator`);
+    if (TEXTAREA.value.charAt(i) === SPAN_CHARACTER.textContent) {
+      SPAN_CHARACTER.classList.add(`correct`);
+    } else {
+      SPAN_CHARACTER.classList.add(`incorrect`);
+    }
+  }
+}

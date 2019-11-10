@@ -17,3 +17,11 @@ div {
   background-color: white;
   color: black
 }
+
+.correct {
+  background: green;
+}
+
+.incorrect {
+  background: red;
+}

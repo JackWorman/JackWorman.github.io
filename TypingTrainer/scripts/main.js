@@ -37,7 +37,7 @@ function toggleIndicator() {
   const SPAN_CHARACTER = document.getElementById(`span-character-${TEXTAREA.value.length + 1}`);
   SPAN_CHARACTER.classList.toggle(`indicator`);
   let wpm = (TEXTAREA.value.length / 5) / (((performance.now() - startTime) / 1000) / 60);
-  SPAN_WPM.textContent = `WPM: ${wpm}`
+  SPAN_WPM.textContent = `WPM: ${Math.round(wpm)}`;
 }
 
 let startTyping = false;

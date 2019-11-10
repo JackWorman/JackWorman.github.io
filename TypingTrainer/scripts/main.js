@@ -13,9 +13,9 @@ function loadFile(filePath) {
 
 const DIV_TEXT = document.getElementById(`div-text`);
 const words = loadFile(`https://jackworman.com/TypingTrainer/words.txt`).split(/\n/);
-let text = ``;
-for (let i = 0; i < 100; i++) {
-  text += `${words[Math.floor(Math.random() * words.length)]} `;
+let text = `${words[Math.floor(Math.random() * words.length)]} `;
+for (let i = 0; i < 49; i++) {
+  text += ` ${words[Math.floor(Math.random() * words.length)]}`;
 }
 DIV_TEXT.textContent = text;
 

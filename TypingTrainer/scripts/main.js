@@ -36,7 +36,7 @@ function toggleIndicator() {
   SPAN_CHARACTER.classList.toggle(`indicator`);
 }
 
-TEXTAREA.addEventListener(`change`, (event) => {
+TEXTAREA.addEventListener(`input`, (event) => {
   for (let i = 0; i < TEXTAREA.value.length; i++) {
     const SPAN_CHARACTER = document.getElementById(`span-character-${i + 1}`);
     SPAN_CHARACTER.classList.remove(`indicator`);

@@ -49,7 +49,7 @@ for (let i = 0; i < 1000; i++) {
         count += words[2];
         if (rand < count) {
           if (words[1] === `space`) {
-            text += words[1];
+            text += ` `;
           } else {
             text += words[1];
           }

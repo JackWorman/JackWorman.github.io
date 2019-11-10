@@ -1,6 +1,8 @@
 "use strict";
 
 const MILLISECONDS_PER_SECOND = 1000;
+const DIV_TEXT = document.getElementById(`div-text`);
+const TEXTAREA = document.getElementById(`textarea`)
 
 function loadFile(filePath) {
   const xmlHttpRequest = new XMLHttpRequest();
@@ -13,7 +15,7 @@ function loadFile(filePath) {
   }
 }
 
-const DIV_TEXT = document.getElementById(`div-text`);
+
 const words = loadFile(`https://jackworman.com/TypingTrainer/words.txt`).split(/\n/);
 let text = words[Math.floor(Math.random() * words.length)];
 for (let i = 0; i < 24; i++) {
@@ -27,8 +29,9 @@ for (const character of text) {
   DIV_TEXT.appendChild(span);
 }
 
-let toggleIndicatorInterval = setInterval(toggleIndicator, MILLISECONDS_PER_SECOND / 2);
+let toggleIndicatorInterval = setInterval(toggleIndicator, MILLISECONDS_PER_SECOND / 3);
 
 function toggleIndicator() {
-  document.getElementById(`span-character-${document.getElementById(`textarea`).value.length + 1}`).classList.toggle(`indicator`);
+  const SPAN_CHARACTER = document.getElementById(`span-character-${TEXTAREA.value.length + 1}`);
+  SPAN_CHARACTER.classList.toggle(`indicator`);
 }

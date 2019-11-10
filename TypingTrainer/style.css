@@ -10,6 +10,7 @@ html, body {
 div {
   width: 50vw;
   margin: 0 auto;
+  font-size: 20px;
 }
 
 .indicator {

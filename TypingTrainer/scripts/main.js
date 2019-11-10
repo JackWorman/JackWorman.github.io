@@ -11,6 +11,7 @@ function loadFile(filePath) {
   }
 }
 
+const DIV_TEXT = document.getElementById(`div-text`);
 const words = loadFile(`https://jackworman.com/TypingTrainer/words.txt`).split(/\n/);
 let text = ``;
 for (let i = 0; i < 100; i++) {
@@ -18,8 +19,6 @@ for (let i = 0; i < 100; i++) {
 }
 DIV_TEXT.textContent = text;
 
-
-// const DIV_TEXT = document.getElementById(`div-text`);
 // const lines = loadFile(`https://jackworman.com/TypingTrainer/NextLetterCounts.txt`).split(/\n/);
 // const letterCounts = {};
 // let allLetterCount = 0;

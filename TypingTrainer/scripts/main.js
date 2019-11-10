@@ -27,8 +27,8 @@ for (const character of text) {
   DIV_TEXT.appendChild(span);
 }
 
-toggleIndicatorInterval = setInterval(toggleIndicator, MILLISECONDS_PER_SECOND / 2);
+let toggleIndicatorInterval = setInterval(toggleIndicator, MILLISECONDS_PER_SECOND / 2);
 
 function toggleIndicator() {
-  document.getElementById(`div-text-${document.getElementById(`textarea`).value.length + 1}`).classList.toggle(`indicator`);
+  document.getElementById(`span-character-${document.getElementById(`textarea`).value.length + 1}`).classList.toggle(`indicator`);
 }

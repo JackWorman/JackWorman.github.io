@@ -37,9 +37,12 @@ function toggleIndicator() {
 }
 
 TEXTAREA.addEventListener(`input`, (event) => {
+  const SPAN_CHARACTERS = DIV_TEXT.getElementsByTagName(`span`);
+  for (const SPAN_CHARACTER of SPAN_CHARACTERS) {
+    SPAN_CHARACTER.classList.remove(`indicator`, `correct`, `incorrect`);
+  }
   for (let i = 0; i < TEXTAREA.value.length; i++) {
     const SPAN_CHARACTER = document.getElementById(`span-character-${i + 1}`);
-    SPAN_CHARACTER.classList.remove(`indicator`);
     if (TEXTAREA.value.charAt(i) === SPAN_CHARACTER.textContent) {
       SPAN_CHARACTER.classList.add(`correct`);
     } else {

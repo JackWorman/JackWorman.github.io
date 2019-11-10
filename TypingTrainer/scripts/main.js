@@ -1,5 +1,7 @@
 "use strict";
 
+const MILLISECONDS_PER_SECOND = 1000;
+
 function loadFile(filePath) {
   const xmlHttpRequest = new XMLHttpRequest();
   xmlHttpRequest.open(`GET`, filePath, false);

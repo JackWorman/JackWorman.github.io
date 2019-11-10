@@ -13,16 +13,19 @@ function loadFile(filePath) {
 
 const DIV_TEXT = document.getElementById(`div-text`);
 const words = loadFile(`https://jackworman.com/TypingTrainer/words.txt`).split(/\n/);
-let text = `${words[Math.floor(Math.random() * words.length)]}`;
-for (let i = 0; i < 49; i++) {
+let text = words[Math.floor(Math.random() * words.length)];
+for (let i = 0; i < 24; i++) {
   text += ` ${words[Math.floor(Math.random() * words.length)]}`;
 }
-
+let count = 1;
 for (const character of text) {
   const span = document.createElement(`span`);
+  span.setAttribute(`id`, `span-character-${count++}`);
   span.textContent = character;
   DIV_TEXT.appendChild(span);
 }
+
+
 
 // obj = document.createElement('prop');
 //     document.body.appendChild(obj);

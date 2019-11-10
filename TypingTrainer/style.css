@@ -14,5 +14,6 @@ div {
 }
 
 .indicator {
-  background-color: gray;
+  background-color: white;
+  color: black
 }

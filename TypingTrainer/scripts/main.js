@@ -46,7 +46,7 @@ for (let i = 0; i < 1000; i++) {
     for (const line of lines) {
       if (line.charAt(0) === previousLetter) {
         const words = line.split(/\s/);
-        count += words[2];
+        count += Number(words[2]);
         if (rand < count) {
           if (words[1] === `space`) {
             text += ` `;

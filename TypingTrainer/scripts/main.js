@@ -20,7 +20,7 @@ function loadFile(filePath) {
 function setUpText() {
   const words = loadFile(`https://jackworman.com/TypingTrainer/words.txt`).split(/\n/);
   let text = words[Math.floor(Math.random() * words.length)];
-  for (let i = 0; i < 24; i++) {
+  for (let i = 0; i < 14; i++) {
     text += ` ${words[Math.floor(Math.random() * words.length)]}`;
   }
   let count = 1;
@@ -72,5 +72,6 @@ TEXTAREA.addEventListener(`input`, (event) => {
     clearInterval(updateWPMInterval);
     clearInterval(toggleIndicatorInterval);
     alert(`Done.`);
+    TEXTAREA.value = ``;
   }
 });

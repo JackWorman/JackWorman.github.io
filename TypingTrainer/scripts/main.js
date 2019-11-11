@@ -107,6 +107,7 @@ document.addEventListener(`keypress`, (event) => {
     if (event.keyCode === 8) {
       if (userInput.length === 0) {
         userInput = userInput.substring(0, str.length - 1);
+        alert(userInput);
       }
     } else {
       userInput += String.fromCharCode(event.keyCode);

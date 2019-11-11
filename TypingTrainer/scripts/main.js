@@ -70,25 +70,25 @@ function loadFile(filePath) {
 
 
 function setUpText() {
-  const words = loadFile(`https://jackworman.com/TypingTrainer/words.txt`).then((response) => {
-    return response.split(/\n/);
+  loadFile(`https://jackworman.com/TypingTrainer/words.txt`).then((response) => {
+    const words = response.split(/\n/);
+    let text = words[Math.floor(Math.random() * words.length)];
+    for (let i = 0; i < 9; i++) {
+      text += ` ${words[Math.floor(Math.random() * words.length)]}`;
+    }
+    let count = 1;
+    for (const character of text) {
+      const span = document.createElement(`span`);
+      span.setAttribute(`id`, `span-character-${count++}`);
+      span.textContent = character;
+      DIV_TEXT.appendChild(span);
+    }
   }, function(error) {
     console.error("Failed!", error);
   });
 
   // const words = loadFile(`https://jackworman.com/TypingTrainer/words.txt`).split(/\n/);
-  console.log(words);
-  let text = words[Math.floor(Math.random() * words.length)];
-  for (let i = 0; i < 9; i++) {
-    text += ` ${words[Math.floor(Math.random() * words.length)]}`;
-  }
-  let count = 1;
-  for (const character of text) {
-    const span = document.createElement(`span`);
-    span.setAttribute(`id`, `span-character-${count++}`);
-    span.textContent = character;
-    DIV_TEXT.appendChild(span);
-  }
+
 }
 
 function toggleIndicator() {

@@ -70,12 +70,11 @@ function loadFile(filePath) {
 
 
 function setUpText() {
-  let words;
-  loadFile(`https://jackworman.com/TypingTrainer/words.txt`).then(function(response) {
-    words = response.split(/\n/);
+  const words = loadFile(`https://jackworman.com/TypingTrainer/words.txt`).then((response) => {
+    return response.split(/\n/);
   }, function(error) {
     console.error("Failed!", error);
-  })
+  });
 
   // const words = loadFile(`https://jackworman.com/TypingTrainer/words.txt`).split(/\n/);
   console.log(words);

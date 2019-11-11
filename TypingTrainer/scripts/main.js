@@ -103,8 +103,14 @@ function reset() {
 reset();
 
 
-document.addEventListener(`keypress`, (e) => {
-    userInput += String.fromCharCode(e.keyCode);
+document.addEventListener(`keypress`, (event) => {
+    if (event.keyCode === 8) {
+      if (userInput.length === 0) {
+        userInput = userInput.substring(0, str.length - 1);
+      }
+    } else {
+      userInput += String.fromCharCode(event.keyCode);
+    }
 
     if (!startTyping) {
       startTyping = true;

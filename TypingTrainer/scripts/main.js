@@ -6,6 +6,7 @@ const DIV_TEXT = document.getElementById(`div-text`);
 const TEXTAREA = document.getElementById(`textarea`);
 const SPAN_WPM = document.getElementById(`span-wpm`);
 
+let toggleIndicatorInterval;
 let updateWPMInterval;
 let startTime;
 let startTyping = false;

@@ -77,6 +77,7 @@ TEXTAREA.addEventListener(`input`, (event) => {
 function reset() {
   clearInterval(updateWPMInterval);
   clearInterval(toggleIndicatorInterval);
+  DIV_TEXT.innerHTML = ``;
   TEXTAREA.value = ``;
   setUpText();
   startTyping = false;

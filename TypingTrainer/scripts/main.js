@@ -15,14 +15,14 @@ function loadFile(filePath) {
   return new Promise((resolve, reject) => {
     const xmlHttpRequest = new XMLHttpRequest();
     xmlHttpRequest.open(`GET`, filePath);
-    req.onload = () => {
-      if (req.status == 200) {
-        resolve(req.response);
+    xmlHttpRequest.onload = () => {
+      if (xmlHttpRequest.status == 200) {
+        resolve(xmlHttpRequest.response);
       } else {
-        reject(Error(req.statusText));
+        reject(Error(xmlHttpRequest.statusText));
       }
     };
-    req.onerror = () => {
+    xmlHttpRequest.onerror = () => {
       reject(Error("Network Error"));
     };
     xmlHttpRequest.send();

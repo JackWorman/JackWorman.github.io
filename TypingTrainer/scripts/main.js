@@ -6,6 +6,10 @@ const DIV_TEXT = document.getElementById(`div-text`);
 const TEXTAREA = document.getElementById(`textarea`);
 const SPAN_WPM = document.getElementById(`span-wpm`);
 
+let updateWPMInterval;
+let startTime;
+let startTyping = false;
+
 function loadFile(filePath) {
   const xmlHttpRequest = new XMLHttpRequest();
   xmlHttpRequest.open(`GET`, filePath, false);
@@ -31,16 +35,12 @@ function setUpText() {
     DIV_TEXT.appendChild(span);
   }
 }
-setUpText();
 
-let toggleIndicatorInterval = setInterval(toggleIndicator, MILLISECONDS_PER_SECOND / 3);
 function toggleIndicator() {
   const SPAN_CHARACTER = document.getElementById(`span-character-${TEXTAREA.value.length + 1}`);
   SPAN_CHARACTER.classList.toggle(`indicator`);
 }
 
-let updateWPMInterval;
-let startTime;
 function updateWPM() {
   const words = TEXTAREA.value.length / 5;
   const minutes = (performance.now() - startTime) / MILLISECONDS_PER_SECOND / SECONDS_PER_MINUTE;
@@ -48,7 +48,6 @@ function updateWPM() {
   SPAN_WPM.textContent = `WPM: ${Math.round(wpm)}`;
 }
 
-let startTyping = false;
 TEXTAREA.addEventListener(`input`, (event) => {
   if (!startTyping) {
     startTyping = true;
@@ -83,3 +82,5 @@ function reset() {
   startTyping = false;
   toggleIndicatorInterval = setInterval(toggleIndicator, MILLISECONDS_PER_SECOND / 3);
 }
+
+reset();

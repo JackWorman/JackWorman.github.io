@@ -11,9 +11,9 @@ let updateWPMInterval;
 let startTime;
 let startTyping = false;
 
-async function loadFile(filePath) {
+function loadFile(filePath) {
   const xmlHttpRequest = new XMLHttpRequest();
-  await xmlHttpRequest.open(`GET`, filePath);
+  xmlHttpRequest.open(`GET`, filePath);
   xmlHttpRequest.send();
   if (xmlHttpRequest.status === 200) {
     return xmlHttpRequest.responseText;

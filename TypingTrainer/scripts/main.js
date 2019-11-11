@@ -54,10 +54,12 @@ TEXTAREA.addEventListener(`input`, (event) => {
     startTime = performance.now();
     updateWPMInterval = setInterval(updateWPM, MILLISECONDS_PER_SECOND / 10);
   }
+  // Clears all classes from each span_character.
   const SPAN_CHARACTERS = DIV_TEXT.getElementsByTagName(`span`);
   for (const SPAN_CHARACTER of SPAN_CHARACTERS) {
     SPAN_CHARACTER.classList.remove(`indicator`, `correct`, `incorrect`);
   }
+  // Checks if each letter is correct or incorrect.
   for (let i = 0; i < TEXTAREA.value.length; i++) {
     const SPAN_CHARACTER = document.getElementById(`span-character-${i + 1}`);
     if (TEXTAREA.value.charAt(i) === SPAN_CHARACTER.textContent) {

@@ -93,10 +93,40 @@ function reset() {
   clearInterval(updateWPMInterval);
   clearInterval(toggleIndicatorInterval);
   DIV_TEXT.innerHTML = ``;
-  TEXTAREA.value = ``;
+  userInput = ``;
   startTyping = false;
   setUpText();
   toggleIndicatorInterval = setInterval(toggleIndicator, MILLISECONDS_PER_SECOND / 3);
 }
 
 reset();
+
+let userInput = ``;
+document.addEventListener(`keypress`, (e) => {
+    userInput += String.fromCharCode(e.keyCode);
+
+    if (!startTyping) {
+      startTyping = true;
+      startTime = performance.now();
+      updateWPMInterval = setInterval(updateWPM, MILLISECONDS_PER_SECOND / 10);
+    }
+    // Clears all classes from each span_character.
+    const SPAN_CHARACTERS = DIV_TEXT.getElementsByTagName(`span`);
+    for (const SPAN_CHARACTER of SPAN_CHARACTERS) {
+      SPAN_CHARACTER.classList.remove(`indicator`, `correct`, `incorrect`);
+    }
+    // Checks if each letter is correct or incorrect.
+    for (let i = 0; i < userInput.length; i++) {
+      const SPAN_CHARACTER = document.getElementById(`span-character-${i + 1}`);
+      if (userInput.charAt(i) === SPAN_CHARACTER.textContent) {
+        SPAN_CHARACTER.classList.add(`correct`);
+      } else {
+        SPAN_CHARACTER.classList.add(`incorrect`);
+      }
+    }
+    // Check if done.
+    if (userInput.length === SPAN_CHARACTERS.length) {
+      reset();
+      alert(`Done.`);
+    }
+});

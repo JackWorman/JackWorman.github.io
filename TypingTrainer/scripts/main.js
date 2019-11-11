@@ -24,7 +24,7 @@ function loadFile(filePath) {
 function setUpText() {
   const words = loadFile(`https://jackworman.com/TypingTrainer/words.txt`).split(/\n/);
   let text = words[Math.floor(Math.random() * words.length)];
-  for (let i = 0; i < 14; i++) {
+  for (let i = 0; i < 9; i++) {
     text += ` ${words[Math.floor(Math.random() * words.length)]}`;
   }
   let count = 1;

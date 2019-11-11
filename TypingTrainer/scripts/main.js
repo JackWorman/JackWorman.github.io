@@ -27,47 +27,7 @@ function loadFile(filePath) {
     };
     xmlHttpRequest.send();
   });
-
-
-
-  // if (xmlHttpRequest.status === 200) {
-  //   return xmlHttpRequest.responseText;
-  // } else {
-  //   // Error
-  // }
 }
-
-// function get(url) {
-//   // Return a new promise.
-//   return new Promise(function(resolve, reject) {
-//     // Do the usual XHR stuff
-//     var req = new XMLHttpRequest();
-//     req.open('GET', url);
-//
-//     req.onload = function() {
-//       // This is called even on 404 etc
-//       // so check the status
-//       if (req.status == 200) {
-//         // Resolve the promise with the response text
-//         resolve(req.response);
-//       }
-//       else {
-//         // Otherwise reject with the status text
-//         // which will hopefully be a meaningful error
-//         reject(Error(req.statusText));
-//       }
-//     };
-//
-//     // Handle network errors
-//     req.onerror = function() {
-//       reject(Error("Network Error"));
-//     };
-//
-//     // Make the request
-//     req.send();
-//   });
-// }
-
 
 function setUpText() {
   loadFile(`https://jackworman.com/TypingTrainer/words.txt`).then((response) => {
@@ -86,14 +46,13 @@ function setUpText() {
   }, function(error) {
     console.error("Failed!", error);
   });
-
-  // const words = loadFile(`https://jackworman.com/TypingTrainer/words.txt`).split(/\n/);
-
 }
 
 function toggleIndicator() {
   const SPAN_CHARACTER = document.getElementById(`span-character-${TEXTAREA.value.length + 1}`);
-  SPAN_CHARACTER.classList.toggle(`indicator`);
+  if (SPAN_CHARACTER !== null) {
+    SPAN_CHARACTER.classList.toggle(`indicator`);
+  }
 }
 
 function updateWPM() {
@@ -135,8 +94,8 @@ function reset() {
   clearInterval(toggleIndicatorInterval);
   DIV_TEXT.innerHTML = ``;
   TEXTAREA.value = ``;
-  setUpText();
   startTyping = false;
+  setUpText();
   toggleIndicatorInterval = setInterval(toggleIndicator, MILLISECONDS_PER_SECOND / 3);
 }
 

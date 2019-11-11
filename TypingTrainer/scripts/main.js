@@ -12,18 +12,73 @@ let startTime;
 let startTyping = false;
 
 function loadFile(filePath) {
-  const xmlHttpRequest = new XMLHttpRequest();
-  xmlHttpRequest.open(`GET`, filePath, false);
-  xmlHttpRequest.send();
-  if (xmlHttpRequest.status === 200) {
-    return xmlHttpRequest.responseText;
-  } else {
-    // Error
-  }
+  return new Promise((resolve, reject) => {
+    const xmlHttpRequest = new XMLHttpRequest();
+    xmlHttpRequest.open(`GET`, filePath);
+    req.onload = () => {
+      if (req.status == 200) {
+        resolve(req.response);
+      } else {
+        reject(Error(req.statusText));
+      }
+    };
+    req.onerror = () => {
+      reject(Error("Network Error"));
+    };
+    xmlHttpRequest.send();
+  });
+
+
+
+  // if (xmlHttpRequest.status === 200) {
+  //   return xmlHttpRequest.responseText;
+  // } else {
+  //   // Error
+  // }
 }
 
+// function get(url) {
+//   // Return a new promise.
+//   return new Promise(function(resolve, reject) {
+//     // Do the usual XHR stuff
+//     var req = new XMLHttpRequest();
+//     req.open('GET', url);
+//
+//     req.onload = function() {
+//       // This is called even on 404 etc
+//       // so check the status
+//       if (req.status == 200) {
+//         // Resolve the promise with the response text
+//         resolve(req.response);
+//       }
+//       else {
+//         // Otherwise reject with the status text
+//         // which will hopefully be a meaningful error
+//         reject(Error(req.statusText));
+//       }
+//     };
+//
+//     // Handle network errors
+//     req.onerror = function() {
+//       reject(Error("Network Error"));
+//     };
+//
+//     // Make the request
+//     req.send();
+//   });
+// }
+
+
 function setUpText() {
-  const words = loadFile(`https://jackworman.com/TypingTrainer/words.txt`).split(/\n/);
+  let words;
+  loadFile(`https://jackworman.com/TypingTrainer/words.txt`).then(function(response) {
+    words = response.split(/\n/);
+  }, function(error) {
+    console.error("Failed!", error);
+  })
+
+  // const words = loadFile(`https://jackworman.com/TypingTrainer/words.txt`).split(/\n/);
+  console.log(words);
   let text = words[Math.floor(Math.random() * words.length)];
   for (let i = 0; i < 9; i++) {
     text += ` ${words[Math.floor(Math.random() * words.length)]}`;

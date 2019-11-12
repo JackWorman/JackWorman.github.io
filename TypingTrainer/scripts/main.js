@@ -79,9 +79,6 @@ function reset() {
 reset();
 
 document.addEventListener(`keydown`, (event) => {
-  if (!textSetUp) {
-    return;
-  }
   // Checks for an invalid key.
   if (!textSetUp || !(event.keyCode >= 65 && event.keyCode <= 90) && event.keyCode !== 8 && event.keyCode !== 32) {
     return;
@@ -95,26 +92,31 @@ document.addEventListener(`keydown`, (event) => {
   if (event.keyCode === 8) {
     event.preventDefault(); // Stops the browser from going to the previous page.
     if (userInput.length !== 0) {
-      // todo: remove class on span-character-{userInput.length}
       userInput = userInput.substring(0, userInput.length - 1);
+      document.getElementById(`span-character-${userInput.length + 1}`).remove(`indicator`, `correct`, `incorrect`);
     }
   } else {
     userInput += event.key;
-  }
-  // Clears all classes from each span_character.
-  const SPAN_CHARACTERS = DIV_TEXT.getElementsByTagName(`span`);
-  for (const SPAN_CHARACTER of SPAN_CHARACTERS) {
-    SPAN_CHARACTER.classList.remove(`indicator`, `correct`, `incorrect`);
-  }
-  // Checks if each letter is correct or incorrect.
-  for (let i = 0; i < userInput.length; i++) {
-    const SPAN_CHARACTER = document.getElementById(`span-character-${i + 1}`);
-    if (userInput.charAt(i) === SPAN_CHARACTER.textContent) {
-      SPAN_CHARACTER.classList.add(`correct`);
+    if (event.key === document.getElementById(`span-character-${userInput.length}`).textContent) {
+      document.getElementById(`span-character-${userInput.length}`).remove(`correct`);
     } else {
-      SPAN_CHARACTER.classList.add(`incorrect`);
+      document.getElementById(`span-character-${userInput.length}`).remove(`incorrect`);
     }
   }
+  // // Clears all classes from each span_character.
+  // const SPAN_CHARACTERS = DIV_TEXT.getElementsByTagName(`span`);
+  // for (const SPAN_CHARACTER of SPAN_CHARACTERS) {
+  //   SPAN_CHARACTER.classList.remove(`indicator`, `correct`, `incorrect`);
+  // }
+  // Checks if each letter is correct or incorrect.
+  // for (let i = 0; i < userInput.length; i++) {
+  //   const SPAN_CHARACTER = document.getElementById(`span-character-${i + 1}`);
+  //   if (userInput.charAt(i) === SPAN_CHARACTER.textContent) {
+  //     SPAN_CHARACTER.classList.add(`correct`);
+  //   } else {
+  //     SPAN_CHARACTER.classList.add(`incorrect`);
+  //   }
+  // }
   // Check if done.
   if (userInput.length === SPAN_CHARACTERS.length) {
     alert(`WPM: ${updateWPM()}`);

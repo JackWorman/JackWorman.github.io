@@ -12,6 +12,8 @@ let startTime;
 let startTyping = false;
 let userInput = ``;
 
+let shiftPressed = false;
+
 function loadFile(filePath) {
   return new Promise((resolve, reject) => {
     const xmlHttpRequest = new XMLHttpRequest();
@@ -75,7 +77,7 @@ function reset() {
 
 reset();
 
-document.addEventListener(`keypress`, (event) => {
+document.addEventListener(`keydown`, (event) => {
     if (!(event.keyCode >= 65 && event.keyCode <= 90) && event.keyCode !== 8 && event.keyCode !== 32) {
       return;
     }
@@ -85,9 +87,11 @@ document.addEventListener(`keypress`, (event) => {
         userInput = userInput.substring(0, userInput.length - 1);
       }
     } else {
-      userInput += String.fromCharCode(event.keyCode).toLowerCase();
+      // if (shiftPressed) {
+        userInput += String.fromCharCode(event.keyCode).toLowerCase();
+      // }
     }
-    console.log(userInput);
+    console.log(event);
     if (!startTyping) {
       startTyping = true;
       startTime = performance.now();

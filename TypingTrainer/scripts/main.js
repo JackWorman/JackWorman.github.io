@@ -75,7 +75,7 @@ function reset() {
 
 reset();
 
-document.addEventListener(`keydown`, (event) => {
+document.addEventListener(`keypress`, (event) => {
     if (!((event.keyCode >= 65 && event.keyCode <= 90) || event.keyCode === 8 || event.keyCode === 32)) {
       return;
     }

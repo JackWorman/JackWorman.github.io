@@ -63,6 +63,7 @@ function updateWPM() {
   const minutes = (performance.now() - startTime) / MILLISECONDS_PER_SECOND / SECONDS_PER_MINUTE;
   const wpm = words / minutes;
   SPAN_WPM.textContent = `WPM: ${Math.round(wpm)}`;
+  return wpm;
 }
 
 function reset() {
@@ -110,7 +111,7 @@ document.addEventListener(`keydown`, (event) => {
     }
     // Check if done.
     if (userInput.length === SPAN_CHARACTERS.length) {
+      alert(`WPM: ${updateWPM()}`);
       reset();
-      alert(`Done.`);
     }
 });

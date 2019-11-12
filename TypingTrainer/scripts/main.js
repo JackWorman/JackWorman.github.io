@@ -46,19 +46,15 @@ function setUpText() {
       span.textContent = character;
       DIV_TEXT.appendChild(span);
     }
-    textSetUp = true;
+    toggleIndicatorInterval = setInterval(toggleIndicator, MILLISECONDS_PER_SECOND / 3);
   }, function(error) {
     console.error("Failed!", error);
   });
 }
 
 function toggleIndicator() {
-  if (textSetUp) {
-    const SPAN_CHARACTER = document.getElementById(`span-character-${userInput.length + 1}`);
-    SPAN_CHARACTER.classList.toggle(`indicator`);
-  }
-  // if (SPAN_CHARACTER !== null) {
-  // }
+  const SPAN_CHARACTER = document.getElementById(`span-character-${userInput.length + 1}`);
+  SPAN_CHARACTER.classList.toggle(`indicator`);
 }
 
 function updateWPM() {
@@ -76,7 +72,6 @@ function reset() {
   userInput = ``;
   startTyping = false;
   setUpText();
-  toggleIndicatorInterval = setInterval(toggleIndicator, MILLISECONDS_PER_SECOND / 3);
 }
 
 reset();

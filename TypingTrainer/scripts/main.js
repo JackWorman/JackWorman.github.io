@@ -87,11 +87,9 @@ document.addEventListener(`keydown`, (event) => {
         userInput = userInput.substring(0, userInput.length - 1);
       }
     } else {
-      // if (shiftPressed) {
-        userInput += String.fromCharCode(event.keyCode).toLowerCase();
-      // }
+      userInput += event.key;
     }
-    console.log(event);
+    console.log(userInput);
     if (!startTyping) {
       startTyping = true;
       startTime = performance.now();

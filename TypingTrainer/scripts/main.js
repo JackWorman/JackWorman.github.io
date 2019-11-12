@@ -11,7 +11,7 @@ let updateWPMInterval;
 let startTime;
 let startTyping = false;
 let userInput = ``;
-
+let textSetUp = false;
 let shiftPressed = false;
 
 function loadFile(filePath) {
@@ -46,16 +46,19 @@ function setUpText() {
       span.textContent = character;
       DIV_TEXT.appendChild(span);
     }
+    textSetUp = true;
   }, function(error) {
     console.error("Failed!", error);
   });
 }
 
 function toggleIndicator() {
-  const SPAN_CHARACTER = document.getElementById(`span-character-${userInput.length + 1}`);
-  if (SPAN_CHARACTER !== null) {
+  if (textSetUp) {
+    const SPAN_CHARACTER = document.getElementById(`span-character-${userInput.length + 1}`);
     SPAN_CHARACTER.classList.toggle(`indicator`);
   }
+  // if (SPAN_CHARACTER !== null) {
+  // }
 }
 
 function updateWPM() {
@@ -79,6 +82,9 @@ function reset() {
 reset();
 
 document.addEventListener(`keydown`, (event) => {
+  if (!textSetUp) {
+    return;
+  }
   // Checks for an invalid key.
   if (!(event.keyCode >= 65 && event.keyCode <= 90) && event.keyCode !== 8 && event.keyCode !== 32) {
     return;

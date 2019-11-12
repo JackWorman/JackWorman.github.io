@@ -107,8 +107,7 @@ document.addEventListener(`keydown`, (event) => {
     if (event.keyCode === 8) {
       event.preventDefault();
       if (userInput.length !== 0) {
-        userInput = userInput.substring(0, str.length - 1);
-
+        userInput = userInput.substring(0, userInput.length - 1);
       }
       console.log(userInput);
     } else {

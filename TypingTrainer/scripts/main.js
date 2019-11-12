@@ -59,7 +59,7 @@ function toggleIndicator() {
 }
 
 function updateWPM() {
-  const words = (userInput.length - 1) / 5;
+  const words = userInput.length === 0 ? 0 : (userInput.length - 1) / 5;
   const minutes = (performance.now() - startTime) / MILLISECONDS_PER_SECOND / SECONDS_PER_MINUTE;
   const wpm = words / minutes;
   SPAN_WPM.textContent = `WPM: ${Math.round(wpm)}`;

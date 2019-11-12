@@ -111,7 +111,7 @@ document.addEventListener(`keydown`, (event) => {
       }
       console.log(userInput);
     } else {
-      userInput += String.fromCharCode(event.keyCode);
+      userInput += String.fromCharCode(event.keyCode).toLowerCase();
       console.log(userInput);
     }
 

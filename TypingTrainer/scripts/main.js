@@ -93,32 +93,20 @@ document.addEventListener(`keydown`, (event) => {
     event.preventDefault(); // Stops the browser from going to the previous page.
     if (userInput.length !== 0) {
       userInput = userInput.substring(0, userInput.length - 1);
-      document.getElementById(`span-character-${userInput.length + 2}`).classList.remove(`indicator`);
       document.getElementById(`span-character-${userInput.length + 1}`).classList.remove(`correct`, `incorrect`);
+      document.getElementById(`span-character-${userInput.length + 2}`).classList.remove(`indicator`);
     }
   } else {
     userInput += event.key;
-    document.getElementById(`span-character-${userInput.length}`).classList.remove(`indicator`);
-    if (event.key === document.getElementById(`span-character-${userInput.length}`).textContent) {
-      document.getElementById(`span-character-${userInput.length}`).classList.add(`correct`);
+    const SPAN_CHARACTER = document.getElementById(`span-character-${userInput.length}`);
+    SPAN_CHARACTER.classList.remove(`indicator`);
+    if (event.key === SPAN_CHARACTER.textContent) {
+      SPAN_CHARACTER.classList.add(`correct`);
     } else {
-      document.getElementById(`span-character-${userInput.length}`).classList.add(`incorrect`);
+      SPAN_CHARACTER.classList.add(`incorrect`);
+      // TODO: insert the incorrect letter 
     }
   }
-  // // Clears all classes from each span_character.
-  // const SPAN_CHARACTERS = DIV_TEXT.getElementsByTagName(`span`);
-  // for (const SPAN_CHARACTER of SPAN_CHARACTERS) {
-  //   SPAN_CHARACTER.classList.remove(`indicator`, `correct`, `incorrect`);
-  // }
-  // Checks if each letter is correct or incorrect.
-  // for (let i = 0; i < userInput.length; i++) {
-  //   const SPAN_CHARACTER = document.getElementById(`span-character-${i + 1}`);
-  //   if (userInput.charAt(i) === SPAN_CHARACTER.textContent) {
-  //     SPAN_CHARACTER.classList.add(`correct`);
-  //   } else {
-  //     SPAN_CHARACTER.classList.add(`incorrect`);
-  //   }
-  // }
   // Check if done.
   const SPAN_CHARACTERS = DIV_TEXT.getElementsByTagName(`span`);
   if (userInput.length === SPAN_CHARACTERS.length) {

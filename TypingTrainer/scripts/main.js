@@ -118,6 +118,7 @@ document.addEventListener(`keydown`, (event) => {
   //   }
   // }
   // Check if done.
+  const SPAN_CHARACTERS = DIV_TEXT.getElementsByTagName(`span`);
   if (userInput.length === SPAN_CHARACTERS.length) {
     alert(`WPM: ${updateWPM()}`);
     reset();

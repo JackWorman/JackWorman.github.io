@@ -82,14 +82,13 @@ document.addEventListener(`keydown`, (event) => {
       return;
     }
     if (event.keyCode === 8) {
-      event.preventDefault();
+      event.preventDefault(); // Stops the browser from going to the previous page.
       if (userInput.length !== 0) {
         userInput = userInput.substring(0, userInput.length - 1);
       }
     } else {
       userInput += event.key;
     }
-    console.log(userInput);
     if (!startTyping) {
       startTyping = true;
       startTime = performance.now();

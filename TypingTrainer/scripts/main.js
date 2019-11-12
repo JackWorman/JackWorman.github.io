@@ -106,7 +106,7 @@ reset();
 document.addEventListener(`keydown`, (event) => {
     if (event.keyCode === 8) {
       event.preventDefault();
-      if (userInput.length === 0) {
+      if (userInput.length !== 0) {
         userInput = userInput.substring(0, str.length - 1);
         alert(userInput);
       }

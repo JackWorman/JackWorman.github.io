@@ -47,6 +47,7 @@ function setUpText() {
       DIV_TEXT.appendChild(span);
     }
     toggleIndicatorInterval = setInterval(toggleIndicator, MILLISECONDS_PER_SECOND / 3);
+    textSetUp = true;
   }, function(error) {
     console.error("Failed!", error);
   });
@@ -69,6 +70,7 @@ function reset() {
   clearInterval(updateWPMInterval);
   clearInterval(toggleIndicatorInterval);
   DIV_TEXT.innerHTML = ``;
+  textSetUp = false
   userInput = ``;
   startTyping = false;
   setUpText();

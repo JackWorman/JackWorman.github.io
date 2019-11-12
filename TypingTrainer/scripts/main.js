@@ -79,40 +79,42 @@ function reset() {
 reset();
 
 document.addEventListener(`keydown`, (event) => {
-    if (!(event.keyCode >= 65 && event.keyCode <= 90) && event.keyCode !== 8 && event.keyCode !== 32) {
-      return;
+  // Checks for an invalid key.
+  if (!(event.keyCode >= 65 && event.keyCode <= 90) && event.keyCode !== 8 && event.keyCode !== 32) {
+    return;
+  }
+  // First time check
+  if (!startTyping) {
+    startTyping = true;
+    startTime = performance.now();
+    updateWPMInterval = setInterval(updateWPM, MILLISECONDS_PER_SECOND / 10);
+  }
+  if (event.keyCode === 8) {
+    event.preventDefault(); // Stops the browser from going to the previous page.
+    if (userInput.length !== 0) {
+      // todo: remove class on span-character-{userInput.length}
+      userInput = userInput.substring(0, userInput.length - 1);
     }
-    if (event.keyCode === 8) {
-      event.preventDefault(); // Stops the browser from going to the previous page.
-      if (userInput.length !== 0) {
-        // todo: remove class on span-character-{userInput.length}
-        userInput = userInput.substring(0, userInput.length - 1);
-      }
+  } else {
+    userInput += event.key;
+  }
+  // Clears all classes from each span_character.
+  const SPAN_CHARACTERS = DIV_TEXT.getElementsByTagName(`span`);
+  for (const SPAN_CHARACTER of SPAN_CHARACTERS) {
+    SPAN_CHARACTER.classList.remove(`indicator`, `correct`, `incorrect`);
+  }
+  // Checks if each letter is correct or incorrect.
+  for (let i = 0; i < userInput.length; i++) {
+    const SPAN_CHARACTER = document.getElementById(`span-character-${i + 1}`);
+    if (userInput.charAt(i) === SPAN_CHARACTER.textContent) {
+      SPAN_CHARACTER.classList.add(`correct`);
     } else {
-      userInput += event.key;
+      SPAN_CHARACTER.classList.add(`incorrect`);
     }
-    if (!startTyping) {
-      startTyping = true;
-      startTime = performance.now();
-      updateWPMInterval = setInterval(updateWPM, MILLISECONDS_PER_SECOND / 10);
-    }
-    // Clears all classes from each span_character.
-    const SPAN_CHARACTERS = DIV_TEXT.getElementsByTagName(`span`);
-    for (const SPAN_CHARACTER of SPAN_CHARACTERS) {
-      SPAN_CHARACTER.classList.remove(`indicator`, `correct`, `incorrect`);
-    }
-    // Checks if each letter is correct or incorrect.
-    for (let i = 0; i < userInput.length; i++) {
-      const SPAN_CHARACTER = document.getElementById(`span-character-${i + 1}`);
-      if (userInput.charAt(i) === SPAN_CHARACTER.textContent) {
-        SPAN_CHARACTER.classList.add(`correct`);
-      } else {
-        SPAN_CHARACTER.classList.add(`incorrect`);
-      }
-    }
-    // Check if done.
-    if (userInput.length === SPAN_CHARACTERS.length) {
-      alert(`WPM: ${updateWPM()}`);
-      reset();
-    }
+  }
+  // Check if done.
+  if (userInput.length === SPAN_CHARACTERS.length) {
+    alert(`WPM: ${updateWPM()}`);
+    reset();
+  }
 });

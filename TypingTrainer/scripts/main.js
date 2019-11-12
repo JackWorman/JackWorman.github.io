@@ -36,7 +36,7 @@ function setUpText() {
   loadFile(`https://jackworman.com/TypingTrainer/words.txt`).then((response) => {
     const words = response.split(/\n/);
     let text = words[Math.floor(Math.random() * words.length)];
-    for (let i = 1; i <= 5; i++) {
+    for (let i = 1; i < 5; i++) {
       text += ` ${words[Math.floor(Math.random() * words.length)]}`;
     }
     let count = 1;
@@ -104,7 +104,7 @@ document.addEventListener(`keydown`, (event) => {
       SPAN_CHARACTER.classList.add(`correct`);
     } else {
       SPAN_CHARACTER.classList.add(`incorrect`);
-      // TODO: insert the incorrect letter 
+      // TODO: insert the incorrect letter
     }
   }
   // Check if done.

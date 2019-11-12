@@ -93,7 +93,8 @@ document.addEventListener(`keydown`, (event) => {
     event.preventDefault(); // Stops the browser from going to the previous page.
     if (userInput.length !== 0) {
       userInput = userInput.substring(0, userInput.length - 1);
-      document.getElementById(`span-character-${userInput.length + 1}`).classList.remove(`indicator`, `correct`, `incorrect`);
+      document.getElementById(`span-character-${userInput.length + 2}`).classList.remove(`indicator`);
+      document.getElementById(`span-character-${userInput.length + 1}`).classList.remove(`correct`, `incorrect`);
     }
   } else {
     userInput += event.key;

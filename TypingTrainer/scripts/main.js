@@ -98,9 +98,9 @@ document.addEventListener(`keydown`, (event) => {
   } else {
     userInput += event.key;
     if (event.key === document.getElementById(`span-character-${userInput.length}`).textContent) {
-      document.getElementById(`span-character-${userInput.length}`).remove(`correct`);
+      document.getElementById(`span-character-${userInput.length}`).classList.add(`correct`);
     } else {
-      document.getElementById(`span-character-${userInput.length}`).remove(`incorrect`);
+      document.getElementById(`span-character-${userInput.length}`).classList.add(`incorrect`);
     }
   }
   // // Clears all classes from each span_character.

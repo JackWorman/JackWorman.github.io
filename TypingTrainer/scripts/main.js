@@ -108,10 +108,12 @@ document.addEventListener(`keydown`, (event) => {
       event.preventDefault();
       if (userInput.length !== 0) {
         userInput = userInput.substring(0, str.length - 1);
-        alert(userInput);
+
       }
+      console.log(userInput);
     } else {
       userInput += String.fromCharCode(event.keyCode);
+      console.log(userInput);
     }
 
     if (!startTyping) {

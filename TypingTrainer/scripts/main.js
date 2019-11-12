@@ -76,17 +76,18 @@ function reset() {
 reset();
 
 document.addEventListener(`keydown`, (event) => {
+    if (!((event.keyCode >= 65 && event.keyCode <= 90) || event.keyCode === 8 || event.keyCode === 32)) {
+      return;
+    }
     if (event.keyCode === 8) {
       event.preventDefault();
       if (userInput.length !== 0) {
         userInput = userInput.substring(0, userInput.length - 1);
       }
-      console.log(userInput);
     } else {
       userInput += String.fromCharCode(event.keyCode).toLowerCase();
-      console.log(userInput);
     }
-
+    console.log(userInput);
     if (!startTyping) {
       startTyping = true;
       startTime = performance.now();

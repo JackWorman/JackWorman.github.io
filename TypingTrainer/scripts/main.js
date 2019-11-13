@@ -57,7 +57,9 @@ function setUpText() {
 
 function toggleIndicator() {
   const SPAN_CHARACTER = document.getElementById(`span-character-${indicatorLocation}`);
-  SPAN_CHARACTER.classList.toggle(`indicator`);
+  if (SPAN_CHARACTER === null) {
+    SPAN_CHARACTER.classList.toggle(`indicator`);
+  }
 }
 
 function updateWPM() {
@@ -107,7 +109,6 @@ document.addEventListener(`keydown`, (event) => {
     }
   } else {
     userInput += event.key;
-    // SPAN_CHARACTER.classList.remove(`indicator`);
     if (event.key === SPAN_CHARACTER.textContent) {
       SPAN_CHARACTER.classList.remove(`indicator`);
       SPAN_CHARACTER.classList.add(`correct`);

@@ -2,14 +2,14 @@
 
 const MILLISECONDS_PER_SECOND = 1000;
 const SECONDS_PER_MINUTE = 60;
-const DIV_TEXT = document.getElementById(`div-text`);
-// const TEXTAREA = document.getElementById(`textarea`);
+const DIV_TEXT = document.getElementById(`div-text-container`);
 const SPAN_WPM = document.getElementById(`span-wpm`);
 
 let toggleIndicatorInterval;
 let updateWPMInterval;
 let startTime;
 let startTyping = false;
+let text = ``;
 let userInput = ``;
 let textSetUp = false;
 let shiftPressed = false;
@@ -35,7 +35,7 @@ function loadFile(filePath) {
 function setUpText() {
   loadFile(`https://jackworman.com/TypingTrainer/words.txt`).then((response) => {
     const words = response.split(/\n/);
-    let text = words[Math.floor(Math.random() * words.length)];
+    text = words[Math.floor(Math.random() * words.length)];
     for (let i = 1; i < 5; i++) {
       text += ` ${words[Math.floor(Math.random() * words.length)]}`;
     }
@@ -113,7 +113,7 @@ document.addEventListener(`keydown`, (event) => {
   }
   // Check if done.
   const SPAN_CHARACTERS = DIV_TEXT.getElementsByTagName(`span`);
-  if (userInput.length === SPAN_CHARACTERS.length) {
+  if (userInput === text) {
     alert(`WPM: ${updateWPM()}`);
     reset();
   }

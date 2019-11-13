@@ -70,7 +70,7 @@ function reset() {
   clearInterval(updateWPMInterval);
   clearInterval(toggleIndicatorInterval);
   DIV_TEXT.innerHTML = ``;
-  textSetUp = false
+  textSetUp = false;
   userInput = ``;
   startTyping = false;
   setUpText();
@@ -103,7 +103,12 @@ document.addEventListener(`keydown`, (event) => {
     if (event.key === SPAN_CHARACTER.textContent) {
       SPAN_CHARACTER.classList.add(`correct`);
     } else {
-      SPAN_CHARACTER.classList.add(`incorrect`);
+      // SPAN_CHARACTER.classList.add(`incorrect`);
+      const span = document.createElement(`span`);
+      span.setAttribute(`id`, `span-character-bad`);
+      span.textContent = character;
+      span.classList.add('incorrect');
+      SPAN_CHARACTER.parentNode.insertBefore(span, referenceNode.nextSibling);
       // TODO: insert the incorrect letter
     }
   }

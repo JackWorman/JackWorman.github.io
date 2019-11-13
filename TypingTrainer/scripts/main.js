@@ -92,25 +92,29 @@ document.addEventListener(`keydown`, (event) => {
     startTime = performance.now();
     updateWPMInterval = setInterval(updateWPM, MILLISECONDS_PER_SECOND / 10);
   }
+  const SPAN_CHARACTER = document.getElementById(`span-character-${indicatorLocation}`);
   if (event.keyCode === 8) {
     event.preventDefault(); // Stops the browser from going to the previous page.
     if (userInput.length !== 0) {
       userInput = userInput.substring(0, userInput.length - 1);
-      document.getElementById(`span-character-${userInput.length + 1}`).classList.remove(`correct`, `incorrect`);
-      document.getElementById(`span-character-${userInput.length + 2}`).classList.remove(`indicator`);
+      if (SPAN_CHARACTER.previousSibling.classList.contains(`incorrect`)) {
+        DIV_TEXT.removeChild(SPAN_CHARACTER.previousSibling);
+      } else {
+        indicatorLocation--;
+        document.getElementById(`span-character-${indicatorLocation}`).classList.remove(`correct`, `incorrect`);
+        document.getElementById(`span-character-${indicatorLocation + 1}`).classList.remove(`indicator`);
+      }
     }
   } else {
     userInput += event.key;
-    const SPAN_CHARACTER = document.getElementById(`span-character-${indicatorLocation}`);
     // SPAN_CHARACTER.classList.remove(`indicator`);
     if (event.key === SPAN_CHARACTER.textContent) {
       SPAN_CHARACTER.classList.remove(`indicator`);
       SPAN_CHARACTER.classList.add(`correct`);
       indicatorLocation++;
     } else {
-      // SPAN_CHARACTER.classList.add(`incorrect`);
       const span = document.createElement(`span`);
-      span.setAttribute(`id`, `span-character-bad`);
+      // span.setAttribute(`id`, `span-character-bad`);
       span.textContent = event.key;
       span.classList.add(`incorrect`);
       SPAN_CHARACTER.insertAdjacentElement(`beforebegin`, span);

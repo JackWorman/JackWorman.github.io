@@ -103,12 +103,12 @@ document.addEventListener(`keydown`, (event) => {
     if (event.key === SPAN_CHARACTER.textContent) {
       SPAN_CHARACTER.classList.add(`correct`);
     } else {
-      // SPAN_CHARACTER.classList.add(`incorrect`);
-      const span = document.createElement(`span`);
-      span.setAttribute(`id`, `span-character-bad`);
-      span.textContent = event.key;
-      span.classList.add('incorrect');
-      SPAN_CHARACTER.insertAdjacentElement(`beforebegin`, span);
+      SPAN_CHARACTER.classList.add(`incorrect`);
+      // const span = document.createElement(`span`);
+      // span.setAttribute(`id`, `span-character-bad`);
+      // span.textContent = event.key;
+      // span.classList.add(`incorrect`);
+      // SPAN_CHARACTER.insertAdjacentElement(`beforebegin`, span);
     }
   }
   // Check if done.

@@ -57,7 +57,7 @@ function setUpText() {
 
 function toggleIndicator() {
   const SPAN_CHARACTER = document.getElementById(`span-character-${indicatorLocation}`);
-  if (SPAN_CHARACTER === null) {
+  if (SPAN_CHARACTER !== null) {
     SPAN_CHARACTER.classList.toggle(`indicator`);
   }
 }
@@ -95,6 +95,9 @@ document.addEventListener(`keydown`, (event) => {
     updateWPMInterval = setInterval(updateWPM, MILLISECONDS_PER_SECOND / 10);
   }
   const SPAN_CHARACTER = document.getElementById(`span-character-${indicatorLocation}`);
+  if (SPAN_CHARACTER === null) {
+    return;
+  }
   if (event.keyCode === 8) {
     event.preventDefault(); // Stops the browser from going to the previous page.
     if (userInput.length !== 0) {

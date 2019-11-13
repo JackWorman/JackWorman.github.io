@@ -14,6 +14,8 @@ let userInput = ``;
 let textSetUp = false;
 let shiftPressed = false;
 
+let indicatorLocation = 1;
+
 function loadFile(filePath) {
   return new Promise((resolve, reject) => {
     const xmlHttpRequest = new XMLHttpRequest();
@@ -54,7 +56,7 @@ function setUpText() {
 }
 
 function toggleIndicator() {
-  const SPAN_CHARACTER = document.getElementById(`span-character-${userInput.length + 1}`);
+  const SPAN_CHARACTER = document.getElementById(`span-character-${indicatorLocation}`);
   SPAN_CHARACTER.classList.toggle(`indicator`);
 }
 
@@ -73,6 +75,7 @@ function reset() {
   textSetUp = false;
   userInput = ``;
   startTyping = false;
+  indicatorLocation = 1;
   setUpText();
 }
 
@@ -98,21 +101,22 @@ document.addEventListener(`keydown`, (event) => {
     }
   } else {
     userInput += event.key;
-    const SPAN_CHARACTER = document.getElementById(`span-character-${userInput.length}`);
-    SPAN_CHARACTER.classList.remove(`indicator`);
+    const SPAN_CHARACTER = document.getElementById(`span-character-${indicatorLocation}`);
+    // SPAN_CHARACTER.classList.remove(`indicator`);
     if (event.key === SPAN_CHARACTER.textContent) {
+      SPAN_CHARACTER.classList.remove(`indicator`);
       SPAN_CHARACTER.classList.add(`correct`);
+      indicatorLocation++;
     } else {
-      SPAN_CHARACTER.classList.add(`incorrect`);
-      // const span = document.createElement(`span`);
-      // span.setAttribute(`id`, `span-character-bad`);
-      // span.textContent = event.key;
-      // span.classList.add(`incorrect`);
-      // SPAN_CHARACTER.insertAdjacentElement(`beforebegin`, span);
+      // SPAN_CHARACTER.classList.add(`incorrect`);
+      const span = document.createElement(`span`);
+      span.setAttribute(`id`, `span-character-bad`);
+      span.textContent = event.key;
+      span.classList.add(`incorrect`);
+      SPAN_CHARACTER.insertAdjacentElement(`beforebegin`, span);
     }
   }
   // Check if done.
-  const SPAN_CHARACTERS = DIV_TEXT.getElementsByTagName(`span`);
   if (userInput === text) {
     alert(`WPM: ${updateWPM()}`);
     reset();

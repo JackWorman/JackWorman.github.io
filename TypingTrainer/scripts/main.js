@@ -106,7 +106,7 @@ document.addEventListener(`keydown`, (event) => {
       // SPAN_CHARACTER.classList.add(`incorrect`);
       const span = document.createElement(`span`);
       span.setAttribute(`id`, `span-character-bad`);
-      span.textContent = character;
+      span.textContent = event.key;
       span.classList.add('incorrect');
       SPAN_CHARACTER.parentNode.insertBefore(span, referenceNode.nextSibling);
       // TODO: insert the incorrect letter

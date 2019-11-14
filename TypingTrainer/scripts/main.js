@@ -38,10 +38,7 @@ function setUpText() {
   loadFile(`https://jackworman.com/TypingTrainer/words.txt`).then((response) => {
     const words = response.split(/\n/);
     text = words[Math.floor(Math.random() * words.length)];
-    // for (let i = 1; i < 5; i++) {
-    //   text += ` ${words[Math.floor(Math.random() * words.length)]}`;
-    // }
-    while (text.length <= 100) {
+    while (text.length <= 20) { // Math.max(100, avgWPM*5/2)
       text += ` ${words[Math.floor(Math.random() * words.length)]}`;
     }
     let count = 1;
@@ -91,34 +88,37 @@ document.addEventListener(`keydown`, (event) => {
   if (!textSetUp || !(event.keyCode >= 65 && event.keyCode <= 90) && event.keyCode !== 8 && event.keyCode !== 32) {
     return;
   }
+  event.preventDefault(); // Stops the browser from going to the previous page.
   // First time check
   if (!startTyping) {
     startTyping = true;
     startTime = performance.now();
     updateWPMInterval = setInterval(updateWPM, MILLISECONDS_PER_SECOND / 10);
   }
-  const SPAN_CHARACTER = document.getElementById(`span-character-${indicatorLocation}`);
-  if (SPAN_CHARACTER === null) {
-    return;
-  }
+  // const SPAN_CHARACTER = document.getElementById(`span-character-${indicatorLocation}`);
+  const SPAN_CHARACTER = DIV_TEXT.childNodes[indicatorLocation];
+  // if (SPAN_CHARACTER === null) {
+  //   if (event.keyCode === 8) {
+  //     userInput = userInput.substring(0, userInput.length - 1);
+  //   }
+  // }
   if (event.keyCode === 8) {
-    event.preventDefault(); // Stops the browser from going to the previous page.
     if (userInput.length !== 0) {
       userInput = userInput.substring(0, userInput.length - 1);
+      indicatorLocation--;
       if (SPAN_CHARACTER.previousSibling.classList.contains(`incorrect`)) {
         DIV_TEXT.removeChild(SPAN_CHARACTER.previousSibling);
       } else {
-        indicatorLocation--;
-        document.getElementById(`span-character-${indicatorLocation}`).classList.remove(`correct`, `incorrect`);
-        document.getElementById(`span-character-${indicatorLocation + 1}`).classList.remove(`indicator`);
+        DIV_TEXT.childNodes[indicatorLocation].classList.remove(`correct`, `incorrect`);
+        DIV_TEXT.childNodes[indicatorLocation + 1].classList.remove(`indicator`);
       }
     }
   } else {
     userInput += event.key;
+    indicatorLocation++;
     if (event.key === SPAN_CHARACTER.textContent) {
       SPAN_CHARACTER.classList.remove(`indicator`);
       SPAN_CHARACTER.classList.add(`correct`);
-      indicatorLocation++;
     } else {
       const spanIncorrectCharacter = document.createElement(`span`);
       spanIncorrectCharacter.textContent = event.key;

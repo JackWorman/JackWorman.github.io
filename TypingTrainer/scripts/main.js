@@ -65,8 +65,8 @@ function toggleIndicator() {
 function updateWPM() {
   const words = userInput.length === 0 ? 0 : (userInput.length - 1) / 5;
   const minutes = (performance.now() - startTime) / MILLISECONDS_PER_SECOND / SECONDS_PER_MINUTE;
-  const wpm = words / minutes;
-  SPAN_WPM.textContent = `WPM: ${Math.round(wpm)}`;
+  const wpm = Math.round(words / minutes);
+  SPAN_WPM.textContent = `WPM: ${wpm}`;
   return wpm;
 }
 
@@ -117,11 +117,10 @@ document.addEventListener(`keydown`, (event) => {
       SPAN_CHARACTER.classList.add(`correct`);
       indicatorLocation++;
     } else {
-      const span = document.createElement(`span`);
-      // span.setAttribute(`id`, `span-character-bad`);
-      span.textContent = event.key;
-      span.classList.add(`incorrect`);
-      SPAN_CHARACTER.insertAdjacentElement(`beforebegin`, span);
+      const spanIncorrectCharacter = document.createElement(`span`);
+      spanIncorrectCharacter.textContent = event.key;
+      spanIncorrectCharacter.classList.add(`incorrect`);
+      SPAN_CHARACTER.insertAdjacentElement(`beforebegin`, spanIncorrectCharacter);
     }
   }
   // Check if done.

@@ -6,7 +6,7 @@ const DIV_TEXT = document.getElementById(`div-text-container`);
 const SPAN_WPM = document.getElementById(`span-wpm`);
 const SPAN_AVERAGE_WPM = document.getElementById(`span-average-wpm`);
 
-localStorage.charcters = 0;
+localStorage.characters = 0;
 localStorage.time = 0;
 
 let toggleIndicatorInterval;
@@ -138,7 +138,7 @@ document.addEventListener(`keydown`, (event) => {
   // Check if done.
   if (userInput === text) {
     alert(`WPM: ${updateWPM()}`);
-    localStorage.characters = Number(localStorage.charcters) + (text.length - 1);
+    localStorage.characters = Number(localStorage.characters) + (text.length - 1);
     localStorage.time = Number(localStorage.time) + (performance.now() - startTime);
     SPAN_AVERAGE_WPM.textContent = `WPM ${(Number(localStorage.charcters) / 5) / (Number(localStorage.time) / 1000 / 60)}`;
     reset();

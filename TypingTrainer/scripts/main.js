@@ -38,7 +38,10 @@ function setUpText() {
   loadFile(`https://jackworman.com/TypingTrainer/words.txt`).then((response) => {
     const words = response.split(/\n/);
     text = words[Math.floor(Math.random() * words.length)];
-    for (let i = 1; i < 5; i++) {
+    // for (let i = 1; i < 5; i++) {
+    //   text += ` ${words[Math.floor(Math.random() * words.length)]}`;
+    // }
+    while (text.length <= 100) {
       text += ` ${words[Math.floor(Math.random() * words.length)]}`;
     }
     let count = 1;

@@ -57,7 +57,7 @@ function setUpText() {
 
 function toggleIndicator() {
   const spanIndicatedCharacter = DIV_TEXT.childNodes[indicatorLocation];
-  if (spanIndicatedCharacter !== null) {
+  if (typeof spanIndicatedCharacter !== `undefined`) {
     spanIndicatedCharacter.classList.toggle(`indicator`);
   }
 }

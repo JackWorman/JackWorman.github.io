@@ -99,7 +99,9 @@ document.addEventListener(`keydown`, (event) => {
   if (event.keyCode === 8 && userInput.length !== 0) {
     userInput = userInput.substring(0, userInput.length - 1);
     indicatorLocation--;
-    if (spanIndicatedCharacter.previousSibling.classList.contains(`incorrect`)) {
+    if (typeof spanIndicatedCharacter === `undefined`) {
+      DIV_TEXT.removeChild(DIV_TEXT.lastChild);
+    } else if (spanIndicatedCharacter.previousSibling.classList.contains(`incorrect`)) {
       DIV_TEXT.removeChild(spanIndicatedCharacter.previousSibling);
     } else {
       DIV_TEXT.childNodes[indicatorLocation].classList.remove(`correct`, `incorrect`);

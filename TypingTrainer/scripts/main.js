@@ -95,23 +95,25 @@ document.addEventListener(`keydown`, (event) => {
     startTime = performance.now();
     updateWPMInterval = setInterval(updateWPM, MILLISECONDS_PER_SECOND / 10);
   }
-  // const SPAN_CHARACTER = document.getElementById(`span-character-${indicatorLocation}`);
   const spanIndicatedCharacter = DIV_TEXT.childNodes[indicatorLocation];
-  if (event.keyCode === 8) {
-    if (userInput.length !== 0) {
-      userInput = userInput.substring(0, userInput.length - 1);
-      indicatorLocation--;
-      if (spanIndicatedCharacter.previousSibling.classList.contains(`incorrect`)) {
-        DIV_TEXT.removeChild(spanIndicatedCharacter.previousSibling);
-      } else {
-        DIV_TEXT.childNodes[indicatorLocation].classList.remove(`correct`, `incorrect`);
-        DIV_TEXT.childNodes[indicatorLocation + 1].classList.remove(`indicator`);
-      }
+  if (event.keyCode === 8 && userInput.length !== 0) {
+    userInput = userInput.substring(0, userInput.length - 1);
+    indicatorLocation--;
+    if (spanIndicatedCharacter.previousSibling.classList.contains(`incorrect`)) {
+      DIV_TEXT.removeChild(spanIndicatedCharacter.previousSibling);
+    } else {
+      DIV_TEXT.childNodes[indicatorLocation].classList.remove(`correct`, `incorrect`);
+      DIV_TEXT.childNodes[indicatorLocation + 1].classList.remove(`indicator`);
     }
   } else {
     userInput += event.key;
     indicatorLocation++;
-    if (event.key === spanIndicatedCharacter.textContent) {
+    if (typeof spanIndicatedCharacter === `undefined`) {
+      const spanIncorrectCharacter = document.createElement(`span`);
+      spanIncorrectCharacter.textContent = event.key;
+      spanIncorrectCharacter.classList.add(`incorrect`);
+      spanIndicatedCharacter.insertAdjacentElement(`beforebegin`, spanIncorrectCharacter);
+    } else if (event.key === spanIndicatedCharacter.textContent) {
       spanIndicatedCharacter.classList.remove(`indicator`);
       spanIndicatedCharacter.classList.add(`correct`);
     } else {

@@ -56,9 +56,9 @@ function setUpText() {
 }
 
 function toggleIndicator() {
-  const SPAN_CHARACTER = document.getElementById(`span-character-${indicatorLocation}`);
-  if (SPAN_CHARACTER !== null) {
-    SPAN_CHARACTER.classList.toggle(`indicator`);
+  const spanIndicatedCharacter = DIV_TEXT.childNodes[indicatorLocation];
+  if (spanIndicatedCharacter !== null) {
+    spanIndicatedCharacter.classList.toggle(`indicator`);
   }
 }
 

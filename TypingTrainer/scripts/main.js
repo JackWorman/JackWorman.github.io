@@ -140,7 +140,7 @@ document.addEventListener(`keydown`, (event) => {
     alert(`WPM: ${updateWPM()}`);
     localStorage.characters = Number(localStorage.characters) + (text.length - 1);
     localStorage.time = Number(localStorage.time) + (performance.now() - startTime);
-    SPAN_AVERAGE_WPM.textContent = `WPM ${(Number(localStorage.charcters) / 5) / (Number(localStorage.time) / 1000 / 60)}`;
+    SPAN_AVERAGE_WPM.textContent = `WPM ${(Number(localStorage.characters) / 5) / (Number(localStorage.time) / 1000 / 60)}`;
     reset();
   }
 });

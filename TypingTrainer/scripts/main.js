@@ -6,6 +6,9 @@ const DIV_TEXT = document.getElementById(`div-text-container`);
 const SPAN_WPM = document.getElementById(`span-wpm`);
 const SPAN_AVERAGE_WPM = document.getElementById(`span-average-wpm`);
 
+localStorage.charcters = 0;
+localStorage.time = 0;
+
 let toggleIndicatorInterval;
 let updateWPMInterval;
 let startTime;

@@ -42,7 +42,7 @@ function setUpText() {
   loadFile(`https://jackworman.com/TypingTrainer/words.txt`).then((response) => {
     const words = response.split(/\n/);
     text = words[Math.floor(Math.random() * words.length)];
-    while (text.length <= 20) { // Math.max(100, avgWPM*5/2)
+    while (text.length <= Math.max(50, (Number(localStorage.characters) / 5) / (Number(localStorage.time) / 1000 / 60) / 2)) { // 
       text += ` ${words[Math.floor(Math.random() * words.length)]}`;
     }
     let count = 1;
@@ -140,7 +140,7 @@ document.addEventListener(`keydown`, (event) => {
     alert(`WPM: ${updateWPM()}`);
     localStorage.characters = Number(localStorage.characters) + (text.length - 1);
     localStorage.time = Number(localStorage.time) + (performance.now() - startTime);
-    SPAN_AVERAGE_WPM.textContent = `WPM ${(Number(localStorage.characters) / 5) / (Number(localStorage.time) / 1000 / 60)}`;
+    SPAN_AVERAGE_WPM.textContent = `WPM ${Math.round((Number(localStorage.characters) / 5) / (Number(localStorage.time) / 1000 / 60))}`;
     reset();
   }
 });

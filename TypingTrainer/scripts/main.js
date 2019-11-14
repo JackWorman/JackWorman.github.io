@@ -14,7 +14,7 @@ let userInput = ``;
 let textSetUp = false;
 let shiftPressed = false;
 
-let indicatorLocation = 1;
+let indicatorLocation = 0;
 
 function loadFile(filePath) {
   return new Promise((resolve, reject) => {
@@ -77,7 +77,7 @@ function reset() {
   textSetUp = false;
   userInput = ``;
   startTyping = false;
-  indicatorLocation = 1;
+  indicatorLocation = 0;
   setUpText();
 }
 
@@ -96,18 +96,13 @@ document.addEventListener(`keydown`, (event) => {
     updateWPMInterval = setInterval(updateWPM, MILLISECONDS_PER_SECOND / 10);
   }
   // const SPAN_CHARACTER = document.getElementById(`span-character-${indicatorLocation}`);
-  const SPAN_CHARACTER = DIV_TEXT.childNodes[indicatorLocation];
-  // if (SPAN_CHARACTER === null) {
-  //   if (event.keyCode === 8) {
-  //     userInput = userInput.substring(0, userInput.length - 1);
-  //   }
-  // }
+  const spanIndicatedCharacter = DIV_TEXT.childNodes[indicatorLocation];
   if (event.keyCode === 8) {
     if (userInput.length !== 0) {
       userInput = userInput.substring(0, userInput.length - 1);
       indicatorLocation--;
-      if (SPAN_CHARACTER.previousSibling.classList.contains(`incorrect`)) {
-        DIV_TEXT.removeChild(SPAN_CHARACTER.previousSibling);
+      if (spanIndicatedCharacter.previousSibling.classList.contains(`incorrect`)) {
+        DIV_TEXT.removeChild(spanIndicatedCharacter.previousSibling);
       } else {
         DIV_TEXT.childNodes[indicatorLocation].classList.remove(`correct`, `incorrect`);
         DIV_TEXT.childNodes[indicatorLocation + 1].classList.remove(`indicator`);
@@ -116,14 +111,14 @@ document.addEventListener(`keydown`, (event) => {
   } else {
     userInput += event.key;
     indicatorLocation++;
-    if (event.key === SPAN_CHARACTER.textContent) {
-      SPAN_CHARACTER.classList.remove(`indicator`);
-      SPAN_CHARACTER.classList.add(`correct`);
+    if (event.key === spanIndicatedCharacter.textContent) {
+      spanIndicatedCharacter.classList.remove(`indicator`);
+      spanIndicatedCharacter.classList.add(`correct`);
     } else {
       const spanIncorrectCharacter = document.createElement(`span`);
       spanIncorrectCharacter.textContent = event.key;
       spanIncorrectCharacter.classList.add(`incorrect`);
-      SPAN_CHARACTER.insertAdjacentElement(`beforebegin`, spanIncorrectCharacter);
+      spanIndicatedCharacter.insertAdjacentElement(`beforebegin`, spanIncorrectCharacter);
     }
   }
   // Check if done.

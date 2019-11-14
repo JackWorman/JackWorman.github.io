@@ -96,20 +96,22 @@ document.addEventListener(`keydown`, (event) => {
     updateWPMInterval = setInterval(updateWPM, MILLISECONDS_PER_SECOND / 10);
   }
   const spanIndicatedCharacter = DIV_TEXT.childNodes[indicatorLocation];
-  if (event.keyCode === 8 && userInput.length !== 0) {
-    userInput = userInput.substring(0, userInput.length - 1);
-    indicatorLocation--;
-    if (typeof spanIndicatedCharacter === `undefined`) {
-      if (DIV_TEXT.lastChild.classList.contains(`incorrect`)) {
-        DIV_TEXT.removeChild(DIV_TEXT.lastChild);
+  if (event.keyCode === 8) {
+    if (userInput.length !== 0) {
+      userInput = userInput.substring(0, userInput.length - 1);
+      indicatorLocation--;
+      if (typeof spanIndicatedCharacter === `undefined`) {
+        if (DIV_TEXT.lastChild.classList.contains(`incorrect`)) {
+          DIV_TEXT.removeChild(DIV_TEXT.lastChild);
+        } else {
+          DIV_TEXT.childNodes[indicatorLocation].classList.remove(`correct`);
+        }
+      } else if (spanIndicatedCharacter.previousSibling.classList.contains(`incorrect`)) {
+        DIV_TEXT.removeChild(spanIndicatedCharacter.previousSibling);
       } else {
         DIV_TEXT.childNodes[indicatorLocation].classList.remove(`correct`);
+        DIV_TEXT.childNodes[indicatorLocation + 1].classList.remove(`indicator`);
       }
-    } else if (spanIndicatedCharacter.previousSibling.classList.contains(`incorrect`)) {
-      DIV_TEXT.removeChild(spanIndicatedCharacter.previousSibling);
-    } else {
-      DIV_TEXT.childNodes[indicatorLocation].classList.remove(`correct`);
-      DIV_TEXT.childNodes[indicatorLocation + 1].classList.remove(`indicator`);
     }
   } else {
     userInput += event.key;

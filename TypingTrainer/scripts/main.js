@@ -112,7 +112,7 @@ document.addEventListener(`keydown`, (event) => {
       const spanIncorrectCharacter = document.createElement(`span`);
       spanIncorrectCharacter.textContent = event.key;
       spanIncorrectCharacter.classList.add(`incorrect`);
-      DIV_TEXT.childNodes[indicatorLocation - 1].insertAdjacentElement(`beforebegin`, spanIncorrectCharacter);
+      DIV_TEXT.childNodes[indicatorLocation - 2].insertAdjacentElement(`beforebegin`, spanIncorrectCharacter);
     } else if (event.key === spanIndicatedCharacter.textContent) {
       spanIndicatedCharacter.classList.remove(`indicator`);
       spanIndicatedCharacter.classList.add(`correct`);

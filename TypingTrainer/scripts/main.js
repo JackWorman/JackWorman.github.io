@@ -100,11 +100,15 @@ document.addEventListener(`keydown`, (event) => {
     userInput = userInput.substring(0, userInput.length - 1);
     indicatorLocation--;
     if (typeof spanIndicatedCharacter === `undefined`) {
-      DIV_TEXT.removeChild(DIV_TEXT.lastChild);
+      if (DIV_TEXT.lastChild.classList.contains(`incorrect`)) {
+        DIV_TEXT.removeChild(DIV_TEXT.lastChild);
+      } else {
+        DIV_TEXT.childNodes[indicatorLocation].classList.remove(`correct`);
+      }
     } else if (spanIndicatedCharacter.previousSibling.classList.contains(`incorrect`)) {
       DIV_TEXT.removeChild(spanIndicatedCharacter.previousSibling);
     } else {
-      DIV_TEXT.childNodes[indicatorLocation].classList.remove(`correct`, `incorrect`);
+      DIV_TEXT.childNodes[indicatorLocation].classList.remove(`correct`);
       DIV_TEXT.childNodes[indicatorLocation + 1].classList.remove(`indicator`);
     }
   } else {

@@ -115,7 +115,7 @@ document.addEventListener(`keydown`, (event) => {
     }
   }
   // Check if done.
-  if (userInput === text) {
+  if (userInput.length === text.length) {
     alert(`WPM: ${updateWPM()}`);
     const words = Number(localStorage.getItem(`words`)) + ((text.length - 1)/5);
     localStorage.setItem(`words`, words);

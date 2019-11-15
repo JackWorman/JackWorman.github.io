@@ -101,7 +101,7 @@ document.addEventListener(`keydown`, (event) => {
       userInput = userInput.substring(0, userInput.length - 1);
       indicatorLocation--;
       DIV_TEXT.childNodes[indicatorLocation].classList.remove(`correct`, `incorrect`);
-      if (indicatorLocation === text.length - 1) {
+      if (indicatorLocation !== text.length - 1) {
         DIV_TEXT.childNodes[indicatorLocation + 1].classList.remove(`indicator`);
       }
     }

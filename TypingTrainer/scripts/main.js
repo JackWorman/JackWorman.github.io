@@ -96,15 +96,17 @@ document.addEventListener(`keydown`, (event) => {
     startTime = performance.now();
     updateWPMInterval = setInterval(updateWPM, MILLISECONDS_PER_SECOND / 10);
   }
-  const spanIndicatedCharacter = DIV_TEXT.childNodes[indicatorLocation];
   if (event.keyCode === 8) {
     if (userInput.length !== 0) {
       userInput = userInput.substring(0, userInput.length - 1);
       indicatorLocation--;
       DIV_TEXT.childNodes[indicatorLocation].classList.remove(`correct`, `incorrect`);
-      DIV_TEXT.childNodes[indicatorLocation + 1].classList.remove(`indicator`);
+      if (indicatorLocation === text.length - 1) {
+        DIV_TEXT.childNodes[indicatorLocation + 1].classList.remove(`indicator`);
+      }
     }
-  } else {
+  } else if (userInput.length !== text.length) {
+    const spanIndicatedCharacter = DIV_TEXT.childNodes[indicatorLocation];
     userInput += event.key;
     indicatorLocation++;
     spanIndicatedCharacter.classList.remove(`indicator`);
@@ -115,7 +117,7 @@ document.addEventListener(`keydown`, (event) => {
     }
   }
   // Check if done.
-  if (userInput.length === text.length) {
+  if (userInput === text) {
     alert(`WPM: ${updateWPM()}`);
     const words = Number(localStorage.getItem(`words`)) + ((text.length - 1)/5);
     localStorage.setItem(`words`, words);

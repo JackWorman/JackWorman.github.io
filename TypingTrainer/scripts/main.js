@@ -116,6 +116,8 @@ document.addEventListener(`keydown`, (event) => {
       spanIndicatedCharacter.classList.add(`incorrect`);
     }
   }
+  clearInterval(toggleIndicatorInterval);
+  toggleIndicatorInterval = setInterval(toggleIndicator, MILLISECONDS_PER_SECOND / 3);
   // Check if done.
   if (userInput === text) {
     alert(`WPM: ${updateWPM()}`);

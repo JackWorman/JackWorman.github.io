@@ -38,8 +38,10 @@ function setUpText() {
   loadFile(`https://jackworman.com/TypingTrainer/words.txt`).then((response) => {
     const words = response.split(/\n/);
     text = words[Math.floor(Math.random() * words.length)];
+    console.log(text);
     while (text.length <= 20) { // Math.max(100, avgWPM*5/2)
       text += ` ${words[Math.floor(Math.random() * words.length)]}`;
+      console.log(text);
     }
     let count = 1;
     for (const character of text) {

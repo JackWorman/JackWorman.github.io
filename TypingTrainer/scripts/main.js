@@ -43,7 +43,6 @@ function setUpText() {
     text = words[Math.floor(Math.random() * words.length)];
     while (text.length <= Math.max(50, Number(localStorage.getItem(`wpm`)) * 5 / 2)) {
       text += ` ${words[Math.floor(Math.random() * words.length)]}`;
-      console.log(text);
     }
     for (const character of text) {
       const spanCharacter = document.createElement(`span`);

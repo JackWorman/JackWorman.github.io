@@ -24,7 +24,7 @@ function loadFile(filePath) {
     const xmlHttpRequest = new XMLHttpRequest();
     xmlHttpRequest.open(`GET`, filePath);
     xmlHttpRequest.onload = () => {
-      if (xmlHttpRequest.status == 200) {
+      if (xmlHttpRequest.status === 200) {
         resolve(xmlHttpRequest.response);
       } else {
         reject(Error(xmlHttpRequest.statusText));
@@ -51,7 +51,7 @@ function setUpText() {
     }
     toggleIndicatorInterval = setInterval(toggleIndicator, MILLISECONDS_PER_SECOND / 3);
     textSetUp = true;
-  }, function(error) {
+  }, (error) => {
     console.error("Failed!", error);
   });
 }

@@ -4,6 +4,11 @@ const MILLISECONDS_PER_SECOND = 1000;
 const SECONDS_PER_MINUTE = 60;
 const DIV_TEXT = document.getElementById(`div-text-container`);
 const SPAN_WPM = document.getElementById(`span-wpm`);
+const SPAN_AVERAGE_WPM = document.getElementById(`span-average-wpm`);
+
+localStorage.setItem(`words`, 0);
+localStorage.setItem(`minutes`, 0);
+localStorage.setItem(`wpm`, 0);
 
 let toggleIndicatorInterval;
 let updateWPMInterval;
@@ -12,8 +17,6 @@ let startTyping = false;
 let text = ``;
 let userInput = ``;
 let textSetUp = false;
-let shiftPressed = false;
-
 let indicatorLocation = 0;
 
 function loadFile(filePath) {
@@ -38,17 +41,14 @@ function setUpText() {
   loadFile(`https://jackworman.com/TypingTrainer/words.txt`).then((response) => {
     const words = response.split(/\n/);
     text = words[Math.floor(Math.random() * words.length)];
-    console.log(text);
-    while (text.length <= 20) { // Math.max(100, avgWPM*5/2)
+    while (text.length <= Math.max(50, Number(localStorage.getItem(`wpm`)) / 2)) {
       text += ` ${words[Math.floor(Math.random() * words.length)]}`;
       console.log(text);
     }
-    let count = 1;
     for (const character of text) {
-      const span = document.createElement(`span`);
-      span.setAttribute(`id`, `span-character-${count++}`);
-      span.textContent = character;
-      DIV_TEXT.appendChild(span);
+      const spanCharacter = document.createElement(`span`);
+      spanCharacter.textContent = character;
+      DIV_TEXT.appendChild(spanCharacter);
     }
     toggleIndicatorInterval = setInterval(toggleIndicator, MILLISECONDS_PER_SECOND / 3);
     textSetUp = true;
@@ -97,45 +97,38 @@ document.addEventListener(`keydown`, (event) => {
     startTime = performance.now();
     updateWPMInterval = setInterval(updateWPM, MILLISECONDS_PER_SECOND / 10);
   }
-  const spanIndicatedCharacter = DIV_TEXT.childNodes[indicatorLocation];
   if (event.keyCode === 8) {
     if (userInput.length !== 0) {
       userInput = userInput.substring(0, userInput.length - 1);
       indicatorLocation--;
-      if (typeof spanIndicatedCharacter === `undefined`) {
-        if (DIV_TEXT.lastChild.classList.contains(`incorrect`)) {
-          DIV_TEXT.removeChild(DIV_TEXT.lastChild);
-        } else {
-          DIV_TEXT.childNodes[indicatorLocation].classList.remove(`correct`);
-        }
-      } else if (spanIndicatedCharacter.previousSibling.classList.contains(`incorrect`)) {
-        DIV_TEXT.removeChild(spanIndicatedCharacter.previousSibling);
-      } else {
-        DIV_TEXT.childNodes[indicatorLocation].classList.remove(`correct`);
+      DIV_TEXT.childNodes[indicatorLocation].classList.remove(`correct`, `incorrect`);
+      if (indicatorLocation !== text.length - 1) {
         DIV_TEXT.childNodes[indicatorLocation + 1].classList.remove(`indicator`);
       }
     }
-  } else {
+  } else if (userInput.length !== text.length) {
+    const spanIndicatedCharacter = DIV_TEXT.childNodes[indicatorLocation];
     userInput += event.key;
     indicatorLocation++;
-    if (typeof spanIndicatedCharacter === `undefined`) {
-      const spanIncorrectCharacter = document.createElement(`span`);
-      spanIncorrectCharacter.textContent = event.key;
-      spanIncorrectCharacter.classList.add(`incorrect`);
-      DIV_TEXT.childNodes[indicatorLocation - 2].insertAdjacentElement(`afterend`, spanIncorrectCharacter);
-    } else if (event.key === spanIndicatedCharacter.textContent) {
-      spanIndicatedCharacter.classList.remove(`indicator`);
+    spanIndicatedCharacter.classList.remove(`indicator`);
+    if (event.key === spanIndicatedCharacter.textContent) {
       spanIndicatedCharacter.classList.add(`correct`);
     } else {
-      const spanIncorrectCharacter = document.createElement(`span`);
-      spanIncorrectCharacter.textContent = event.key;
-      spanIncorrectCharacter.classList.add(`incorrect`);
-      spanIndicatedCharacter.insertAdjacentElement(`beforebegin`, spanIncorrectCharacter);
+      spanIndicatedCharacter.classList.add(`incorrect`);
     }
   }
+  clearInterval(toggleIndicatorInterval);
+  toggleIndicatorInterval = setInterval(toggleIndicator, MILLISECONDS_PER_SECOND / 3);
   // Check if done.
   if (userInput === text) {
     alert(`WPM: ${updateWPM()}`);
+    const words = Number(localStorage.getItem(`words`)) + ((text.length - 1)/5);
+    localStorage.setItem(`words`, words);
+    const minutes = Number(localStorage.getItem(`minutes`)) + ((performance.now() - startTime) / 1000 / 60);
+    localStorage.setItem(`minutes`, minutes);
+    const wpm = words / minutes;
+    localStorage.setItem(`wpm`, wpm);
+    SPAN_AVERAGE_WPM.textContent = `Average WPM: ${Math.round(wpm)}`;
     reset();
   }
 });

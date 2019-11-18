@@ -1,3 +1,5 @@
+"use strict";
+
 class Matrix {
   constructor(numRows, numCols) {
     this.numRows = numRows;

@@ -1,0 +1,45 @@
+:root {
+  --base-size: 900;
+}
+
+@font-face {
+  font-family: 'Heavy Data';
+  src: url('https://jackworman.com/Snake/fonts/heavy-data.ttf');
+}
+@font-face {
+	font-family: 'VT323';
+	src: url('https://jackworman.com/Snake/fonts/vt323.ttf') format('truetype');
+}
+
+.rainbow {
+  background-image: -webkit-gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, #2ff), color-stop(0.6, #2f2),color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22) );
+  background-image: gradient( linear, left top, right top, color-stop(0, #f22), color-stop(0.15, #f2f), color-stop(0.3, #22f), color-stop(0.45, #2ff), color-stop(0.6, #2f2),color-stop(0.75, #2f2), color-stop(0.9, #ff2), color-stop(1, #f22) );
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+html, body {
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+  background-color: black;
+  text-align: center;
+}
+
+#div-header-container {
+  width: calc(690 * 100vmin / var(--base-size) + 2px);
+  margin: 0 auto;
+  user-select: none;
+}
+
+#span-title {
+  font-family: 'Heavy Data';
+  font-size: calc(100 * 100vmin / var(--base-size));
+}
+
+#canvas-game {
+  display: inline-block;
+  position: relative;
+  border: 1px solid white;
+}

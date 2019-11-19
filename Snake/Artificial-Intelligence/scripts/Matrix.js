@@ -19,7 +19,7 @@ class Matrix {
 
   static add(m1, m2) {
     if (m1.numRows !== m2.numRows || m1.numCols !== m2.numCols) {
-      throw 'Matrix sizes are not equal.';
+      throw `Matrix sizes are not equal.`;
     } else {
       const answer = new Matrix(m1.numRows, m1.numCols);
       for (let row = 0; row < answer.numRows; row++) {
@@ -33,7 +33,7 @@ class Matrix {
 
   static subtract(m1, m2) {
     if (m1.numRows !== m2.numRows || m1.numCols !== m2.numCols) {
-      throw 'Matrix sizes are not equal.';
+      throw `Matrix sizes are not equal.`;
     } else {
       const answer = new Matrix(m1.numRows, m1.numCols);
       for (let row = 0; row < answer.numRows; row++) {
@@ -47,7 +47,7 @@ class Matrix {
 
   static multiply(m1, m2) {
     if (m1.numCols !== m2.numRows) {
-      throw 'Matrix sizes are incompatible.';
+      throw `Matrix sizes are incompatible.`;
     } else {
       const answer = new Matrix(m1.numRows, m2.numCols);
       for (let row = 0; row < answer.numRows; row++) {

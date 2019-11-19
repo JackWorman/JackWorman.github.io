@@ -43,7 +43,7 @@ for (let i = 0; i < 10000; i++) {
   sample.push(gaussianRandom());
 }
 
-const arrAvg = arr => arr.reduce((a,b) => a + b, 0) / arr.lengt
+const arrAvg = arr => arr.reduce((a,b) => a + b, 0) / arr.length;
 
 console.log(`mean: ${arrAvg(sample)}`);
 console.log(`stdev: ${sample.stanDeviate()}`);

@@ -3,7 +3,7 @@ function gaussian(mean, stdev) {
   let use_last = false;
   return function() {
     let y1;
-    if(use_last) {
+    if (use_last) {
       y1 = y2;
       use_last = false;
     } else {

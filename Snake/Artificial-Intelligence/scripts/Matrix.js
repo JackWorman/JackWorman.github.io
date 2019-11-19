@@ -63,8 +63,8 @@ class Matrix {
 
   printToConsole() {
     let output = ``;
-    for (let row = 0; row < answer.numRows; row++) {
-      for (let col = 0; col < answer.numCols; col++) {
+    for (let row = 0; row < this.numRows; row++) {
+      for (let col = 0; col < this.numCols; col++) {
         output += `${this.elements[row][col]} `;
       }
       output += `\n`;

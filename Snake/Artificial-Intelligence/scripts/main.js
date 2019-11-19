@@ -63,7 +63,7 @@ document.addEventListener(`keydown`, (event) => {
 });
 
 function gameLoop() {
-  FrameRate.update();
+  // FrameRate.update();
   const direction = directionQueue.shift();
   if (typeof direction !== `undefined`) {
     snake.direction = direction;
@@ -76,7 +76,7 @@ function gameLoop() {
     return;
   }
   if (snake.checkFruitEaten(pellet)) {
-    Score.update(Math.floor(Math.pow(snake.bodySegments.length, 1 + smallestDistancePossible / distanceTraveled)));
+    // Score.update(Math.floor(Math.pow(snake.bodySegments.length, 1 + smallestDistancePossible / distanceTraveled)));
     snake.grow();
     pellet.placePellet(GRID_SIZE, snake.bodySegments);
     distanceTraveled = 0;
@@ -97,8 +97,8 @@ async function reset() {
     await Swal.fire({text: `Game Over!`, showConfirmButton: false, timer: 1500});
   }
   directionQueue = [];
-  FrameRate.reset();
-  Score.reset();
+  // FrameRate.reset();
+  // Score.reset();
   // Snake and pellet.
   snake.reset(GRID_SIZE / 2, GRID_SIZE / 2);
   pellet.placePellet(GRID_SIZE, snake.bodySegments);

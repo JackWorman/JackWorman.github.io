@@ -39,7 +39,7 @@ Array.prototype.stanDeviate = function() {
 const gaussianRandom = this.gaussian(50, 100);
 const sample = [];
 
-for (let i = 0; i < 1000000; i++) {
+for (let i = 0; i < 100000000; i++) {
   sample.push(gaussianRandom());
 }
 

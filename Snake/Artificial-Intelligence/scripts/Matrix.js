@@ -73,19 +73,20 @@ class Matrix {
   }
 }
 
-const elements = [
+
+const m1 = new Matrix(3, 3);
+m1.setElements([
   [1, 2, 3],
   [4, 5, 6],
   [7, 8, 9]
-];
-const m1 = new Matrix(3, 3);
-m1.setElements(elements);
-m1.printToConsole();
+]);
 
-// const m2 = [
-//   [3, 2, 1],
-//   [4, 5, 6],
-//   [9, 8, 7]
-// ];
-//
-// const m3 =
+const m2 = new Matrix(3, 3);
+m1.setElements(
+  [1, 2, 3],
+  [4, 5, 6],
+  [7, 8, 9]
+]);
+
+
+Matrix.add(m1, m2).printToConsole();

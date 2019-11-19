@@ -73,20 +73,17 @@ class Matrix {
   }
 }
 
-
-const m1 = new Matrix(3, 3);
-m1.setElements([
-  [1, 2, 3],
-  [4, 5, 6],
-  [7, 8, 9]
-]);
-
-const m2 = new Matrix(3, 1);
-m2.setElements([
-  [1],
-  [4],
-  [7]
-]);
-
-
-Matrix.multiply(m1, m2).printToConsole();
+// // Test
+// const m1 = new Matrix(3, 3);
+// m1.setElements([
+//   [1, 2, 3],
+//   [4, 5, 6],
+//   [7, 8, 9]
+// ]);
+// const m2 = new Matrix(3, 1);
+// m2.setElements([
+//   [1],
+//   [4],
+//   [7]
+// ]);
+// Matrix.multiply(m1, m2).printToConsole();

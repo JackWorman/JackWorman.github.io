@@ -89,4 +89,4 @@ m2.setElements([
 ]);
 
 
-Matrix.add(m1, m2).printToConsole();
+Matrix.subtract(m1, m2).printToConsole();

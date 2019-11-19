@@ -1,6 +1,6 @@
 "use strict";
 
-class Matrix {
+export class Matrix {
   constructor(numRows, numCols) {
     this.numRows = numRows;
     this.numCols = numCols;

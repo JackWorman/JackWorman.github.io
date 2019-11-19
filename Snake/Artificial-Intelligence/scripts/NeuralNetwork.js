@@ -1,9 +1,11 @@
 "use strict";
 
+import {Matrix} from "./Matrix.js";
+import {gaussianRandom} from "./GaussianRandom.js";
 
-let gaussianRandom = this.gaussian(0, 2);
+const nextGaussianRandom = gaussianRandom(0, 1);
 
-class NeuralNetwork {
+export class NeuralNetwork {
   constructor(numInputNodes, numHiddenLayerNodes, numOutputNodes) {
     this.i = new Matrix(numInputNodes, 1);
     this.w1 = new Matrix(numHiddenLayerNodes, numInputNodes);
@@ -18,15 +20,15 @@ class NeuralNetwork {
   initializeWeightsAndBiases() {
     for (let row = 0; row < this.w1.numRows; row++) {
       for (let col = 0; col < this.w1.numCols; col++) {
-        this.w1.elements[row][col] = gaussianRandom();
+        this.w1.elements[row][col] = nextGaussianRandom();
       }
-      this.b1.elements[row][0] = 0.01;
+      this.b1.elements[row][0] = 0;
     }
     for (let row = 0; row < this.w2.numRows; row++) {
       for (let col = 0; col < this.w2.numCols; col++) {
-        this.w2.elements[row][col] = gaussianRandom();
+        this.w2.elements[row][col] = nextGaussianRandom();
       }
-      this.b2.elements[row][0] = 0.01;
+      this.b2.elements[row][0] = 0;
     }
   }
 
@@ -47,22 +49,22 @@ class NeuralNetwork {
     for (let row = 0; row < this.w1.numRows; row++) {
       for (let col = 0; col < this.w1.numCols; col++) {
         if (rate <= Math.random()) {
-            this.w1.elements[row][col] += gaussianRandom();
+            this.w1.elements[row][col] += nextGaussianRandom();
         }
       }
       if (rate <= Math.random()) {
-          this.b1.elements[row][0] += gaussianRandom();
+          this.b1.elements[row][0] += nextGaussianRandom();
       }
     }
     // Mutate the second set of weights and biases.
     for (let row = 0; row < this.w2.numRows; row++) {
       for (let col = 0; col < this.w2.numCols; col++) {
         if (rate <= Math.random()) {
-            this.w2.elements[row][col] += gaussianRandom();
+            this.w2.elements[row][col] += nextGaussianRandom();
         }
       }
       if (rate <= Math.random()) {
-          this.b2.elements[row][0] += gaussianRandom();
+          this.b2.elements[row][0] += nextGaussianRandom();
       }
     }
   }

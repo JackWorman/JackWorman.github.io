@@ -13,6 +13,10 @@ class Matrix {
     }
   }
 
+  setElements(elements) {
+    this.elements = elements;
+  }
+
   static add(m1, m2) {
     if (m1.numRows !== m2.numRows || m1.numCols !== m2.numCols) {
       throw 'Matrix sizes are not equal.';
@@ -67,3 +71,20 @@ class Matrix {
     }
   }
 }
+
+const elements = [
+  [1, 2, 3],
+  [4, 5, 6],
+  [7, 8, 9]
+];
+const m1 = new Matrix(3, 3);
+m1.setElements(elements);
+m1.printToConsole();
+
+// const m2 = [
+//   [3, 2, 1],
+//   [4, 5, 6],
+//   [9, 8, 7]
+// ];
+//
+// const m3 =

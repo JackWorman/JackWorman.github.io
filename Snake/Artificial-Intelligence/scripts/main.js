@@ -3,8 +3,8 @@
 import {Snake} from "../../scripts/Snake.js";
 import {Pellet} from "../../scripts/Pellet.js";
 import * as KeyCode from "../../scripts/KeyCode.js";
-import * as Score from "../../scripts/Score.js";
-import * as FrameRate from "../../scripts/FrameRate.js";
+// import * as Score from "../../scripts/Score.js";
+// import * as FrameRate from "../../scripts/FrameRate.js";
 // import {canvasSize} from "../../scripts/ScaleCanvas.js";
 
 const CANVAS_FOREGROUND = document.getElementById(`canvas-game`);

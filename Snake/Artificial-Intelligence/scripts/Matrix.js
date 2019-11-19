@@ -69,6 +69,7 @@ class Matrix {
       }
       output += `\n`;
     }
+    console.log(output);
   }
 }
 

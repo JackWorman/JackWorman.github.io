@@ -81,7 +81,7 @@ m1.setElements([
   [7, 8, 9]
 ]);
 
-const m2 = new Matrix(3, 3);
+const m2 = new Matrix(3, 1);
 m2.setElements([
   [1],
   [4],

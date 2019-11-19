@@ -7,7 +7,7 @@ import * as Score from "../../scripts/Score.js";
 import * as FrameRate from "../../scripts/FrameRate.js";
 import {canvasSize} from "../../scripts/ScaleCanvas.js";
 
-const CANVAS_FOREGROUND = document.getElementById(`canvas-foreground`);
+const CANVAS_FOREGROUND = document.getElementById(`canvas-game`);
 const CONTEXT_FOREGROUND = CANVAS_FOREGROUND.getContext(`2d`);
 const GRID_SIZE = 30;
 const FRAMES_PER_SECOND = 15;

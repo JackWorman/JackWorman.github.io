@@ -3,45 +3,36 @@
 import {NeuralNetwork} from "./NeuralNetwork.js";
 
 class EvolutionaryAlgorithm {
-  constructor(numNeuralNetworks, numInputsPerNetwork, numHiddenLayerNodes, numOutputsPerNetwork) {
-    this.neuralNetworks = new Array(numNeuralNetworks);
+  constructor(numNeuralNetworks, inputLayerSize, hiddenLayerSize, outputLayerSize) {
+    this.neuralNetworks = [];
     for (let i = 0; i < numNeuralNetworks; i++) {
-      this.neuralNetworks[i] = new NeuralNetwork(numInputsPerNetwork, numHiddenLayerNodes, numOutputsPerNetwork);
+      this.neuralNetworks.push(new NeuralNetwork(inputLayerSize, hiddenLayerSize, outputLayerSize));
     }
     this.mutationRate = 0.2;
-    this.survivalRate = 0.01;
+    this.generation = 0;
+    this.species = 0;
   }
 
   initializeAllNeuralNetworks() {
-    for (let i = 0; i < this.neuralNetworks.length; i++) {
-      this.neuralNetworks[i].initializeWeightsAndBiases();
+    for (const neuralNetwork of this.neuralNetworks) {
+      neuralNetwork.initializeWeightsAndBiases();
     }
-    this.gen = 0;
-    this.species = -1;
   }
 
   sort() {
-    this.neuralNetworks.sort((a, b) => { return b.fitness - a.fitness });
+    this.neuralNetworks.sort((a, b) => { return b.fitness - a.fitness; });
   }
 
   mutate() {
-    // TODO: add survivalRate variable
-    for (let i = 0; i < 9; i++) { // runs 9 times
-      for (let j = 0; j < this.neuralNetworks.length * 0.1; j++) { // runs 200 times
-        for (let row = 0; row < this.neuralNetworks[i].w1.numRows; row++) {
-          for (let col = 0; col < this.neuralNetworks[i].w1.numCols; col++) {
-            this.neuralNetworks[this.neuralNetworks.length * 0.1 + (i * 200) + j].w1.elements[row][col] = this.neuralNetworks[j].w1.elements[row][col];
-          }
-          this.neuralNetworks[this.neuralNetworks.length * 0.1 + (i * 200) + j].b1.elements[row][col] = this.neuralNetworks[j].b1.elements[row][col];
-        }
-        for (let row = 0; row < this.neuralNetworks[i].w2.numRows; row++) {
-          for (let col = 0; col < this.neuralNetworks[i].w2.numCols; col++) {
-            this.neuralNetworks[this.neuralNetworks.length * 0.1 + (i * 200) + j].w2.elements[row][col] = this.neuralNetworks[j].w2.elements[row][col];
-          }
-          this.neuralNetworks[this.neuralNetworks.length * 0.1 + (i * 200) + j].b2.elements[row][col] = this.neuralNetworks[j].b2.elements[row][col];
-        }
-        this.neuralNetworks[this.neuralNetworks.length * 0.1 + (i * 200) + j].mutate(this.mutationRate);
-      }
+    // Remove the last 1800 neural networks.
+    this.neuralNetworks.splice(200);
+    // Copy the first 200 neural networks 9 times.
+    for (let i = 0; i < 9; i++) {
+      this.neuralNetworks.concat(this.neuralNetworks);
+    }
+    // Mutate the last 1800 neural networks.
+    for (let i = 200; i < this.neuralNetworks.length; i++) {
+      this.neuralNetworks[i].mutate(this.mutationRate);
     }
   }
 }

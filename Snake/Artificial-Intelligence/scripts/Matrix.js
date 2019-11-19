@@ -82,7 +82,7 @@ m1.setElements([
 ]);
 
 const m2 = new Matrix(3, 3);
-m1.setElements(
+m1.setElements([
   [1, 2, 3],
   [4, 5, 6],
   [7, 8, 9]

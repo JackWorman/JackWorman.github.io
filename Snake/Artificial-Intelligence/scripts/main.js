@@ -13,6 +13,8 @@ const GRID_SIZE = 30;
 const FRAMES_PER_SECOND = 15;
 const MILLISECONDS_PER_SECOND = 1000; // TODO: move to a conversions file
 
+let canvasSize = 600;
+
 const snake = new Snake();
 const pellet = new Pellet();
 let directionQueue = [];

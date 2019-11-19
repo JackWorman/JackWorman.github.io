@@ -1,27 +1,7 @@
-function gaussian(mean, stdev) {
-  var y2;
-  var use_last = false;
-  return function() {
-    var y1;
-    if(use_last) {
-      y1 = y2;
-      use_last = false;
-    } else {
-      var x1, x2, w;
-      do {
-        x1 = 2.0 * Math.random() - 1.0;
-        x2 = 2.0 * Math.random() - 1.0;
-        w  = x1 * x1 + x2 * x2;
-      } while(w >= 1.0);
-      w = Math.sqrt((-2.0 * Math.log(w)) / w);
-      y1 = x1 * w;
-      y2 = x2 * w;
-      use_last = true;
-    }
-    return mean + stdev * y1;
-  }
-}
-var gaussianRandom = this.gaussian(0, 2);
+"use strict";
+
+
+let gaussianRandom = this.gaussian(0, 2);
 
 class NeuralNetwork {
   constructor(numInputNodes, numHiddenLayerNodes, numOutputNodes) {
@@ -36,14 +16,14 @@ class NeuralNetwork {
   }
 
   initializeWeightsAndBiases() {
-    for (var row = 0; row < this.w1.numRows; row++) {
-      for (var col = 0; col < this.w1.numCols; col++) {
+    for (let row = 0; row < this.w1.numRows; row++) {
+      for (let col = 0; col < this.w1.numCols; col++) {
         this.w1.elements[row][col] = gaussianRandom();
       }
       this.b1.elements[row][0] = 0.01;
     }
-    for (var row = 0; row < this.w2.numRows; row++) {
-      for (var col = 0; col < this.w2.numCols; col++) {
+    for (let row = 0; row < this.w2.numRows; row++) {
+      for (let col = 0; col < this.w2.numCols; col++) {
         this.w2.elements[row][col] = gaussianRandom();
       }
       this.b2.elements[row][0] = 0.01;
@@ -56,7 +36,7 @@ class NeuralNetwork {
   }
 
   sigmoid(m) {
-    for (var row = 0; row < m.numRows; row++) {
+    for (let row = 0; row < m.numRows; row++) {
       m.elements[row][0] = 1 / (1 + Math.pow(Math.E, -1 * m.elements[row][0]));
     }
     return m;
@@ -64,8 +44,8 @@ class NeuralNetwork {
 
   mutate(rate) {
     // Mutate the first set of weights and biases.
-    for (var row = 0; row < this.w1.numRows; row++) {
-      for (var col = 0; col < this.w1.numCols; col++) {
+    for (let row = 0; row < this.w1.numRows; row++) {
+      for (let col = 0; col < this.w1.numCols; col++) {
         if (rate <= Math.random()) {
             this.w1.elements[row][col] += gaussianRandom();
         }
@@ -75,8 +55,8 @@ class NeuralNetwork {
       }
     }
     // Mutate the second set of weights and biases.
-    for (var row = 0; row < this.w2.numRows; row++) {
-      for (var col = 0; col < this.w2.numCols; col++) {
+    for (let row = 0; row < this.w2.numRows; row++) {
+      for (let col = 0; col < this.w2.numCols; col++) {
         if (rate <= Math.random()) {
             this.w2.elements[row][col] += gaussianRandom();
         }

@@ -1,7 +1,3 @@
-:root {
-  --base-size: 900;
-}
-
 @font-face {
   font-family: 'Heavy Data';
   src: url('https://jackworman.com/Snake/fonts/heavy-data.ttf');
@@ -28,17 +24,17 @@ html, body {
 }
 
 #div-header-container {
-  width: calc(690 * 100vmin / var(--base-size) + 2px);
+  width: 690px;
   margin: 0 auto;
   user-select: none;
 }
 
 #span-title {
   font-family: 'Heavy Data';
-  font-size: calc(100 * 100vmin / var(--base-size));
+  font-size: 100;
 }
 
-#canvas-game {
+#canvas-game, #canvas-neural-network {
   display: inline-block;
   position: relative;
   border: 1px solid white;

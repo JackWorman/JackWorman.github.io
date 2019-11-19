@@ -14,6 +14,7 @@ const FRAMES_PER_SECOND = 15;
 const MILLISECONDS_PER_SECOND = 1000; // TODO: move to a conversions file
 
 let canvasSize = 600;
+CANVAS_FOREGROUND.width = CANVAS_FOREGROUND.height = canvasSize;
 
 const snake = new Snake();
 const pellet = new Pellet();

@@ -36,7 +36,7 @@ Array.prototype.stanDeviate = function() {
           })/this.length));
 };
 
-const gaussianRandom = this.gaussian(0, 2);
+const gaussianRandom = this.gaussian(50, 100);
 const sample = [];
 
 for (let i = 0; i < 10000; i++) {

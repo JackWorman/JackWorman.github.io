@@ -1,5 +1,6 @@
 "use strict";
 
+import {EvolutionaryAlgorithm} from "EvolutionaryAlgorithm.js";
 import {Snake} from "../../scripts/Snake.js";
 import {Pellet} from "../../scripts/Pellet.js";
 import * as KeyCode from "../../scripts/KeyCode.js";
@@ -24,49 +25,15 @@ let smallestDistancePossible;
 let controlsEnabled = false;
 let gameLoopInterval;
 
+const evolutionaryAlgorithm = new EvolutionaryAlgorithm(2000, 28, 16, 4);
+evolutionaryAlgorithm.initializeAllNeuralNetworks();
+
 window.addEventListener(`load`, reset);
 
-document.addEventListener(`keydown`, (event) => {
-  if (!controlsEnabled
-    || (event.keyCode !== KeyCode.a && event.keyCode !== KeyCode.w && event.keyCode !== KeyCode.d
-      && event.keyCode !== KeyCode.s && event.keyCode !== KeyCode.leftArrow && event.keyCode !== KeyCode.upArrow
-      && event.keyCode !== KeyCode.rightArrow && event.keyCode !== KeyCode.downArrow)
-    ) {
-    return;
-  }
-  // Start Game.
-  if (snake.direction === `none` && directionQueue.length === 0) {
-    gameLoopInterval = setInterval(gameLoop, MILLISECONDS_PER_SECOND / FRAMES_PER_SECOND);
-    document.body.style.cursor = `none`;
-  }
-  const currentDirection = directionQueue.length === 0 ? snake.direction : directionQueue[directionQueue.length - 1];
-  if (currentDirection === `left` || currentDirection === `right`) {
-    if (event.keyCode === KeyCode.upArrow || event.keyCode === KeyCode.w) {
-      directionQueue.push(`up`);
-    } else if (event.keyCode === KeyCode.downArrow || event.keyCode === KeyCode.s) {
-      directionQueue.push(`down`);
-    }
-  } else if (currentDirection === `up` || currentDirection === `down`) {
-    if (event.keyCode === KeyCode.leftArrow || event.keyCode === KeyCode.a) {
-      directionQueue.push(`left`);
-    } else if (event.keyCode === KeyCode.rightArrow || event.keyCode === KeyCode.d) {
-      directionQueue.push(`right`);
-    }
-  } else if (currentDirection === `none`) {
-    if (event.keyCode === KeyCode.leftArrow || event.keyCode === KeyCode.a) {
-      directionQueue.push(`left`);
-    } else if (event.keyCode === KeyCode.upArrow || event.keyCode === KeyCode.w) {
-      directionQueue.push(`up`);
-    } else if (event.keyCode === KeyCode.rightArrow || event.keyCode === KeyCode.d) {
-      directionQueue.push(`right`);
-    } else if (event.keyCode === KeyCode.downArrow || event.keyCode === KeyCode.s) {
-      directionQueue.push(`down`);
-    }
-  }
-});
-
 function gameLoop() {
-  // FrameRate.update();
+  updateInputLayer();
+  evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].calculateOutputs();
+  getDirectionFromOutputLayer();
   const direction = directionQueue.shift();
   if (typeof direction !== `undefined`) {
     snake.direction = direction;
@@ -79,7 +46,7 @@ function gameLoop() {
     return;
   }
   if (snake.checkFruitEaten(pellet)) {
-    // Score.update(Math.floor(Math.pow(snake.bodySegments.length, 1 + smallestDistancePossible / distanceTraveled)));
+    evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].fitness += Math.floor(Math.pow(snake.bodySegments.length, 1 + smallestDistancePossible / distanceTraveled));
     snake.grow();
     pellet.placePellet(GRID_SIZE, snake.bodySegments);
     distanceTraveled = 0;
@@ -98,11 +65,15 @@ async function reset() {
   // Does not run the first time.
   } else {
     await Swal.fire({text: `Game Over!`, showConfirmButton: false, timer: 1500});
+    evolutionaryAlgorithm.specie++;
+    if (evolutionaryAlgorithm.specie === 2000) {
+      evolutionaryAlgorithm.specie = 0;
+      evolutionaryAlgorithm.generation++;
+      evolutionaryAlgorithm.sort();
+      evolutionaryAlgorithm.mutate();
+    }
   }
   directionQueue = [];
-  // FrameRate.reset();
-  // Score.reset();
-  // Snake and pellet.
   snake.reset(GRID_SIZE / 2, GRID_SIZE / 2);
   pellet.placePellet(GRID_SIZE, snake.bodySegments);
   distanceTraveled = 0;
@@ -111,7 +82,7 @@ async function reset() {
   controlsEnabled = true;
 }
 
-export function render() {
+function render() {
   CONTEXT_FOREGROUND.clearRect(0, 0, canvasSize, canvasSize);
   const fillSquare = (x, y, color) => {
     CONTEXT_FOREGROUND.fillStyle = color;
@@ -120,4 +91,89 @@ export function render() {
   }
   pellet.render(fillSquare);
   snake.render(fillSquare);
+}
+
+function updateInputLayer() {
+  const inputLayer = evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].i.elements;
+  // Distance from wall, body, and fruit nodes.
+  let count = 0;
+  for (let x = -1; x <= 1; x++) {
+    for (let y = -1; y <= 1; y++) {
+      if (x !== 0 || y !== 0) {
+        inputLayer[count++][0] = detectWall(x, y);
+        inputLayer[count++][0] = detectBody(x, y);
+        inputLayer[count++][0] = detectFruit(x, y);
+      }
+    }
+  }
+  // Current direction nodes.
+  inputLayer[24][0] = (snake.direction === `left`  ? 1 : 0);
+  inputLayer[25][0] = (snake.direction === `up`    ? 1 : 0);
+  inputLayer[26][0] = (snake.direction === `right` ? 1 : 0);
+  inputLayer[27][0] = (snake.direction === `down`  ? 1 : 0);
+}
+
+function detectWall(horizontal, vertical) {
+  let count = 0;
+  while (true) {
+    count++;
+    const testPoint = {x: snake[0].x + count * horizontal, y: snake[0].y + count * vertical};
+    // Check for wall.
+    if (testPoint.x < 0 || testPoint.x >= 30 || testPoint.y < 0 || testPoint.y >= 30) {
+      return 1 - count / GRID_SIZE;
+    }
+  }
+}
+
+function detectBody(horizontal, vertical) {
+  let count = 0;
+  while (true) {
+    count++;
+    const testPoint = {x: snake[0].x + count * horizontal, y: snake[0].y + count * vertical};
+    // Check for wall.
+    if (testPoint.x < 0 || testPoint.x >= 30 || testPoint.y < 0 || testPoint.y >= 30) {
+      return 0;
+    }
+    // Check for snake body.
+    for (const body of snake) {
+      if (testPoint.x === body.x && testPoint.y === body.y) {
+        return 1 - count / GRID_SIZE;
+      }
+    }
+  }
+}
+
+function detectFruit(horizontal, vertical) {
+  let count = 0;
+  while (true) {
+    count++;
+    const testPoint = {x: snake[0].x + count * horizontal, y: snake[0].y + count * vertical};
+    // Check for wall.
+    if (testPoint.x < 0 || testPoint.x >= 30 || testPoint.y < 0 || testPoint.y >= 30) {
+      return 0;
+    }
+    // Check for fruit.
+    if (testPoint.x === fruit.x && testPoint.y === fruit.y) {
+      return 1 - count / GRID_SIZE;
+    }
+  }
+}
+
+function getDirectionFromOutputLayer() {
+  const outputLayer = evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].o.elements;
+  const outputLayerDirections = [
+    {dirction: `left`,  intensity: outputLayer[0][0]},
+    {dirction: `up`,    intensity: outputLayer[1][0]},
+    {dirction: `right`, intensity: outputLayer[2][0]},
+    {dirction: `down`,  intensity: outputLayer[3][0]}
+  ];
+  outputLayerDirections.sort((a, b) => { return b.intensity - a.intensity; });
+  if ( snake.direction === `left`  && outputLayerDirections[0].direction === `right`
+    || snake.direction === `up`    && outputLayerDirections[0].direction === `down`
+    || snake.direction === `right` && outputLayerDirections[0].direction === `left`
+    || snake.direction === `down`  && outputLayerDirections[0].direction === `up`) {
+    directionQueue.push(outputLayerDirections[1].direction);
+  } else {
+    directionQueue.push(outputLayerDirections[0].direction);
+  }
 }

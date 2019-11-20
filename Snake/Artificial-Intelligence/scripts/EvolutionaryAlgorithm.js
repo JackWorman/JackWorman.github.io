@@ -10,7 +10,7 @@ class EvolutionaryAlgorithm {
     }
     this.mutationRate = 0.2;
     this.generation = 0;
-    this.species = 0;
+    this.specie = 0;
   }
 
   initializeAllNeuralNetworks() {

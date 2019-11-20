@@ -120,7 +120,6 @@ document.addEventListener(`keydown`, (event) => {
   toggleIndicatorInterval = setInterval(toggleIndicator, MILLISECONDS_PER_SECOND / 3);
   // Check if done.
   if (userInput === text) {
-    alert(`WPM: ${updateWPM()}`);
     const words = Number(localStorage.getItem(`words`)) + ((text.length - 1)/5);
     localStorage.setItem(`words`, words);
     const minutes = Number(localStorage.getItem(`minutes`)) + ((performance.now() - startTime) / 1000 / 60);
@@ -128,6 +127,7 @@ document.addEventListener(`keydown`, (event) => {
     const wpm = words / minutes;
     localStorage.setItem(`wpm`, wpm);
     SPAN_AVERAGE_WPM.textContent = `Average WPM: ${Math.round(wpm)}`;
+    alert(`WPM: ${updateWPM()}`);
     reset();
   }
 });

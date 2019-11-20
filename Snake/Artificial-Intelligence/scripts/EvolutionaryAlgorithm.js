@@ -2,7 +2,7 @@
 
 import {NeuralNetwork} from "./NeuralNetwork.js";
 
-class EvolutionaryAlgorithm {
+export class EvolutionaryAlgorithm {
   constructor(numNeuralNetworks, inputLayerSize, hiddenLayerSize, outputLayerSize) {
     this.neuralNetworks = [];
     for (let i = 0; i < numNeuralNetworks; i++) {

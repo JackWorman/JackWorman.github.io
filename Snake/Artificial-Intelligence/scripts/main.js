@@ -154,7 +154,7 @@ function detectFruit(horizontal, vertical) {
       return 0;
     }
     // Check for fruit.
-    if (testPoint.x === fruit.x && testPoint.y === fruit.y) {
+    if (testPoint.x === pellet.x && testPoint.y === pellet.y) {
       return 1 - count / GRID_SIZE;
     }
   }

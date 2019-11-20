@@ -80,6 +80,7 @@ async function reset() {
   smallestDistancePossible = Math.abs(pellet.x - snake.bodySegments[0].x) + Math.abs(pellet.y - snake.bodySegments[0].y);
   window.requestAnimationFrame(render);
   controlsEnabled = true;
+  gameLoopInterval = setInterval(gameLoop, MILLISECONDS_PER_SECOND / FRAMES_PER_SECOND);
 }
 
 function render() {

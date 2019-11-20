@@ -1,6 +1,6 @@
 "use strict";
 
-import {EvolutionaryAlgorithm} from "EvolutionaryAlgorithm.js";
+import {EvolutionaryAlgorithm} from "./EvolutionaryAlgorithm.js";
 import {Snake} from "../../scripts/Snake.js";
 import {Pellet} from "../../scripts/Pellet.js";
 import * as KeyCode from "../../scripts/KeyCode.js";

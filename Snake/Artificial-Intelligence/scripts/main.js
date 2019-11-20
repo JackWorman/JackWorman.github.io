@@ -130,13 +130,13 @@ function detectBody(horizontal, vertical) {
   let count = 0;
   while (true) {
     count++;
-    const testPoint = {x: snake[0].x + count * horizontal, y: snake[0].y + count * vertical};
+    const testPoint = {x: snake.bodySegments[0].x + count * horizontal, y: snake.bodySegments[0].y + count * vertical};
     // Check for wall.
     if (testPoint.x < 0 || testPoint.x >= 30 || testPoint.y < 0 || testPoint.y >= 30) {
       return 0;
     }
     // Check for snake body.
-    for (const body of snake) {
+    for (const body of snake.bodySegments) {
       if (testPoint.x === body.x && testPoint.y === body.y) {
         return 1 - count / GRID_SIZE;
       }

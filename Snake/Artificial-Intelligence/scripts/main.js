@@ -5,14 +5,14 @@ import {Snake} from "../../scripts/Snake.js";
 import {Pellet} from "../../scripts/Pellet.js";
 
 const SPAN_GEN_SPECIE = document.getElementById(`span-gen-specie`);
-const CANVAS_FOREGROUND = document.getElementById(`canvas-game`);
-const CONTEXT_FOREGROUND = CANVAS_FOREGROUND.getContext(`2d`);
+const CANVAS_GAME = document.getElementById(`canvas-game`);
+const CONTEXT_GAME = CANVAS_GAME.getContext(`2d`);
 const GRID_SIZE = 30;
 const FRAMES_PER_SECOND = 120;
-const MILLISECONDS_PER_SECOND = 1000; // TODO: move to a conversions file
+const MILLISECONDS_PER_SECOND = 1000;
 
 let canvasSize = 600;
-CANVAS_FOREGROUND.width = CANVAS_FOREGROUND.height = canvasSize;
+CANVAS_GAME.width = CANVAS_GAME.height = canvasSize;
 
 const snake = new Snake();
 const pellet = new Pellet();
@@ -94,11 +94,11 @@ async function reset() {
 }
 
 function render() {
-  CONTEXT_FOREGROUND.clearRect(0, 0, canvasSize, canvasSize);
+  CONTEXT_GAME.clearRect(0, 0, canvasSize, canvasSize);
   const fillSquare = (x, y, color) => {
-    CONTEXT_FOREGROUND.fillStyle = color;
+    CONTEXT_GAME.fillStyle = color;
     const squareLength = canvasSize / GRID_SIZE;
-    CONTEXT_FOREGROUND.fillRect(x * squareLength + 0.5, y * squareLength + 0.5, squareLength, squareLength);
+    CONTEXT_GAME.fillRect(x * squareLength + 0.5, y * squareLength + 0.5, squareLength, squareLength);
   }
   pellet.render(fillSquare);
   snake.render(fillSquare);

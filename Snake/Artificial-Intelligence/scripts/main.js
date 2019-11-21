@@ -79,6 +79,7 @@ async function reset() {
 
       evolutionaryAlgorithm.specie = 0;
       evolutionaryAlgorithm.generation++;
+      evolutionaryAlgorithm.clearFitness();
     }
   }
   moves = 0;

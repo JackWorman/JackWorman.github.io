@@ -36,4 +36,10 @@ export class EvolutionaryAlgorithm {
       this.neuralNetworks[i].mutate(this.mutationRate);
     }
   }
+
+  clearFitness() {
+    for (let i = 0; i < this.neuralNetworks.length; i++) {
+      this.neuralNetworks[i].fitness = 0;
+    }
+  }
 }

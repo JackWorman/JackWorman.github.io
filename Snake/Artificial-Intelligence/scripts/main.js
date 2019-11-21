@@ -50,7 +50,9 @@ function reset() {
       evolutionaryAlgorithm.specie = 0;
       evolutionaryAlgorithm.generation++;
       evolutionaryAlgorithm.clearFitness();
-      alert(`Generation done.`);
+      if (evolutionaryAlgorithm.generation % 10 === 0) {
+        alert(`Generation done.`);
+      }
     }
   }
   SPAN_GEN_SPECIE.textContent = `Generation: ${evolutionaryAlgorithm.generation}, Species: ${evolutionaryAlgorithm.specie}/1999`;

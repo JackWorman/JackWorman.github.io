@@ -182,4 +182,5 @@ function getDirectionFromOutputLayer() {
   } else {
     directionQueue.push(outputLayerDirections[0].direction);
   }
+  console.log(directionQueue);
 }

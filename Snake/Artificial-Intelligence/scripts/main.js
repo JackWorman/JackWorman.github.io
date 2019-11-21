@@ -19,7 +19,10 @@ const pellet = new Pellet();
 let distanceTraveled;
 let smallestDistancePossible;
 
-let evolutionaryAlgorithm;
+let evolutionaryAlgorithm = new EvolutionaryAlgorithm(2000, 28, 16, 4);
+evolutionaryAlgorithm.initializeAllNeuralNetworks();
+
+let started = false;
 
 window.addEventListener(`load`, learningLoop);
 
@@ -49,10 +52,9 @@ function gameLoop() {
 
 async function reset() {
   // Runs the first time.
-  if (typeof evolutionaryAlgorithm === `undefined`) {
+  if (!started) {
+    started = true;
     await Swal.fire(`Start training:`);
-    evolutionaryAlgorithm = new EvolutionaryAlgorithm(2000, 28, 16, 4);
-    evolutionaryAlgorithm.initializeAllNeuralNetworks();
   // Does not run the first time.
   } else {
     evolutionaryAlgorithm.specie++;

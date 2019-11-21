@@ -50,7 +50,7 @@ function reset() {
       evolutionaryAlgorithm.specie = 0;
       evolutionaryAlgorithm.generation++;
       evolutionaryAlgorithm.clearFitness();
-      if (evolutionaryAlgorithm.generation % 10 === 0) {
+      if (evolutionaryAlgorithm.generation % 100 === 0) {
         alert(`Generation done.`);
       }
     }

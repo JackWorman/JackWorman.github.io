@@ -50,7 +50,7 @@ function reset() {
       evolutionaryAlgorithm.specie = 0;
       evolutionaryAlgorithm.generation++;
       evolutionaryAlgorithm.clearFitness();
-      if (evolutionaryAlgorithm.generation % 1000 === 0) {
+      if (evolutionaryAlgorithm.generation % 10000 === 0) {
         alert(`Generation done.`);
       }
     }
@@ -78,7 +78,7 @@ function gameLoop() {
     distanceTraveled = 0;
   }
   evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].fitness += 1; // just for surviing
-  window.requestAnimationFrame(render);
+  // window.requestAnimationFrame(render);
   return true;
 }
 

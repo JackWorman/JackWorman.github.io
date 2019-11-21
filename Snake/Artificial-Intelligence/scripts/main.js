@@ -40,7 +40,7 @@ function gameLoop() {
   }
   snake.move();
   distanceTraveled++;
-  if (snake.checkCollison(GRID_SIZE) || ++moves >= 1000) {
+  if (snake.checkCollison(GRID_SIZE) || ++moves >= 500) {
     clearInterval(gameLoopInterval);
     reset();
     return;

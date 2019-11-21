@@ -173,7 +173,6 @@ function getDirectionFromOutputLayer() {
     {dirction: `right`, intensity: outputLayer[2][0]},
     {dirction: `down`,  intensity: outputLayer[3][0]}
   ];
-  console.log(outputLayerDirections);
   outputLayerDirections.sort((a, b) => { return b.intensity - a.intensity; });
   if ( snake.direction === `left`  && outputLayerDirections[0].direction === `right`
     || snake.direction === `up`    && outputLayerDirections[0].direction === `down`
@@ -183,5 +182,6 @@ function getDirectionFromOutputLayer() {
   } else {
     directionQueue.push(outputLayerDirections[0].direction);
   }
+  console.log(outputLayerDirections);
   console.log(directionQueue);
 }

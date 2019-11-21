@@ -25,13 +25,12 @@ export class EvolutionaryAlgorithm {
 
   mutate() {
     // Remove the last 1800 neural networks.
-    this.neuralNetworks = this.neuralNetworks.splice(200);
-    console.log(this.neuralNetworks);
+    this.neuralNetworks.splice(200);
+    const copy = this.neuralNetworks.slice(0);
     // Copy the first 200 neural networks 9 times.
     for (let i = 0; i < 9; i++) {
-      this.neuralNetworks = this.neuralNetworks.concat(this.neuralNetworks);
+      this.neuralNetworks = this.neuralNetworks.concat(copy);
     }
-    console.log(this.neuralNetworks);
     // Mutate the last 1800 neural networks.
     for (let i = 200; i < this.neuralNetworks.length; i++) {
       this.neuralNetworks[i].mutate(this.mutationRate);

@@ -8,6 +8,7 @@ import * as KeyCode from "../../scripts/KeyCode.js";
 // import * as FrameRate from "../../scripts/FrameRate.js";
 // import {canvasSize} from "../../scripts/ScaleCanvas.js";
 
+const SPAN_GEN_SPECIE = document.getElementById(`span-gen-specie`);
 const CANVAS_FOREGROUND = document.getElementById(`canvas-game`);
 const CONTEXT_FOREGROUND = CANVAS_FOREGROUND.getContext(`2d`);
 const GRID_SIZE = 30;
@@ -86,6 +87,7 @@ async function reset() {
   smallestDistancePossible = Math.abs(pellet.x - snake.bodySegments[0].x) + Math.abs(pellet.y - snake.bodySegments[0].y);
   window.requestAnimationFrame(render);
   controlsEnabled = true;
+  SPAN_GEN_SPECIE.textContent = `Generation: ${evolutionaryAlgorithm.generation}, Species: ${evolutionaryAlgorithm.specie}/1999`;
   gameLoopInterval = setInterval(gameLoop, MILLISECONDS_PER_SECOND / FRAMES_PER_SECOND);
 }
 

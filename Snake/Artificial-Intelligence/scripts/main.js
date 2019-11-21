@@ -39,6 +39,7 @@ function reset() {
   // Does not run the first time.
   } else {
     evolutionaryAlgorithm.specie++;
+    alert(`Specie done.`);
     if (evolutionaryAlgorithm.specie === 2000) {
       evolutionaryAlgorithm.sort();
       evolutionaryAlgorithm.mutate();

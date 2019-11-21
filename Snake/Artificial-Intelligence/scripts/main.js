@@ -9,7 +9,7 @@ const SPAN_GEN_SPECIE = document.getElementById(`span-gen-specie`);
 const CANVAS_FOREGROUND = document.getElementById(`canvas-game`);
 const CONTEXT_FOREGROUND = CANVAS_FOREGROUND.getContext(`2d`);
 const GRID_SIZE = 30;
-const FRAMES_PER_SECOND = 60;
+const FRAMES_PER_SECOND = 120;
 const MILLISECONDS_PER_SECOND = 1000; // TODO: move to a conversions file
 
 let canvasSize = 600;

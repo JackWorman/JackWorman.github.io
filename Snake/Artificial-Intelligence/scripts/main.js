@@ -50,12 +50,11 @@ function reset() {
       evolutionaryAlgorithm.specie = 0;
       evolutionaryAlgorithm.generation++;
       evolutionaryAlgorithm.clearFitness();
+      alert(`Generation done.`);
     }
   }
   SPAN_GEN_SPECIE.textContent = `Generation: ${evolutionaryAlgorithm.generation}, Species: ${evolutionaryAlgorithm.specie}/1999`;
-  console.log(`test1`);
   snake.reset(GRID_SIZE / 2, GRID_SIZE / 2);
-  console.log(`test2`);
   pellet.placePellet(GRID_SIZE, snake.bodySegments);
   distanceTraveled = 0;
   smallestDistancePossible = Math.abs(pellet.x - snake.bodySegments[0].x) + Math.abs(pellet.y - snake.bodySegments[0].y);

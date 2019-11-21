@@ -65,6 +65,10 @@ async function reset() {
   // Does not run the first time.
   } else {
     await Swal.fire({text: `Game Over!`, showConfirmButton: false, timer: 1500});
+    console.log(`==============================`);
+    console.log(`Generation: ${evolutionaryAlgorithm.generation}`);
+    console.log(`Specie: ${evolutionaryAlgorithm.specie}`);
+    console.log(`Fitness: ${evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].fitness}`);
     evolutionaryAlgorithm.specie++;
     if (evolutionaryAlgorithm.specie === 2000) {
       evolutionaryAlgorithm.specie = 0;

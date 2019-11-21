@@ -24,8 +24,6 @@ evolutionaryAlgorithm.initializeAllNeuralNetworks();
 
 let started = false;
 
-window.addEventListener(`load`, learningLoop);
-
 function learningLoop() {
   while (true) {
     reset();
@@ -33,11 +31,11 @@ function learningLoop() {
   }
 }
 
-async function reset() {
+function reset() {
   // Runs the first time.
   if (!started) {
     started = true;
-    await Swal.fire(`Start training:`);
+    // await Swal.fire(`Start training:`);
   // Does not run the first time.
   } else {
     evolutionaryAlgorithm.specie++;
@@ -178,3 +176,5 @@ function getDirectionFromOutputLayer() {
     return outputLayerDirections[0].direction;
   }
 }
+
+window.addEventListener(`load`, learningLoop);

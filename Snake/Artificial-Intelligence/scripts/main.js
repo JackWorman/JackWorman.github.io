@@ -4,9 +4,6 @@ import {EvolutionaryAlgorithm} from "./EvolutionaryAlgorithm.js";
 import {Snake} from "../../scripts/Snake.js";
 import {Pellet} from "../../scripts/Pellet.js";
 import * as KeyCode from "../../scripts/KeyCode.js";
-// import * as Score from "../../scripts/Score.js";
-// import * as FrameRate from "../../scripts/FrameRate.js";
-// import {canvasSize} from "../../scripts/ScaleCanvas.js";
 
 const SPAN_GEN_SPECIE = document.getElementById(`span-gen-specie`);
 const CANVAS_FOREGROUND = document.getElementById(`canvas-game`);
@@ -29,6 +26,8 @@ let gameLoopInterval;
 const evolutionaryAlgorithm = new EvolutionaryAlgorithm(2000, 28, 16, 4);
 evolutionaryAlgorithm.initializeAllNeuralNetworks();
 
+let moves = 0;
+
 window.addEventListener(`load`, reset);
 
 function gameLoop() {
@@ -41,7 +40,7 @@ function gameLoop() {
   }
   snake.move();
   distanceTraveled++;
-  if (snake.checkCollison(GRID_SIZE)) {
+  if (snake.checkCollison(GRID_SIZE) || ++moves >= 1000) {
     clearInterval(gameLoopInterval);
     reset();
     return;
@@ -52,7 +51,9 @@ function gameLoop() {
     pellet.placePellet(GRID_SIZE, snake.bodySegments);
     distanceTraveled = 0;
     smallestDistancePossible = Math.abs(pellet.x - snake.bodySegments[0].x) + Math.abs(pellet.y - snake.bodySegments[0].y);
+    moves = 0;
   }
+  evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].fitness++; // just for surviing
   window.requestAnimationFrame(render);
 }
 
@@ -80,6 +81,7 @@ async function reset() {
       evolutionaryAlgorithm.generation++;
     }
   }
+  moves = 0;
   directionQueue = [];
   snake.reset(GRID_SIZE / 2, GRID_SIZE / 2);
   pellet.placePellet(GRID_SIZE, snake.bodySegments);

@@ -75,7 +75,7 @@ function gameLoop() {
     reset();
     return;
   }
-  if (snake.checkFruitEaten(pellet)) {
+  if (snake.checkPelletEaten(pellet)) {
     Score.update(Math.floor(Math.pow(snake.bodySegments.length, 1 + smallestDistancePossible / distanceTraveled)));
     snake.grow();
     pellet.placePellet(GRID_SIZE, snake.bodySegments);

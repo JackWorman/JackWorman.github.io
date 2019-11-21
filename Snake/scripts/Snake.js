@@ -59,7 +59,7 @@ export class Snake {
       || this.bodySegments[0].y >= gridSize;
   }
 
-  checkFruitEaten(pellet) {
+  checkPelletEaten(pellet) {
     return Coordinate.compare(this.bodySegments[0], pellet);
   }
 

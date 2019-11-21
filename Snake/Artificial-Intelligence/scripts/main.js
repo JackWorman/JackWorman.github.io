@@ -3,7 +3,6 @@
 import {EvolutionaryAlgorithm} from "./EvolutionaryAlgorithm.js";
 import {Snake} from "../../scripts/Snake.js";
 import {Pellet} from "../../scripts/Pellet.js";
-import * as KeyCode from "../../scripts/KeyCode.js";
 
 const SPAN_GEN_SPECIE = document.getElementById(`span-gen-specie`);
 const CANVAS_FOREGROUND = document.getElementById(`canvas-game`);
@@ -45,7 +44,7 @@ function gameLoop() {
     reset();
     return;
   }
-  if (snake.checkFruitEaten(pellet)) {
+  if (snake.checkPelletEaten(pellet)) {
     evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].fitness += Math.floor(Math.pow(snake.bodySegments.length, 1 + smallestDistancePossible / distanceTraveled));
     snake.grow();
     pellet.placePellet(GRID_SIZE, snake.bodySegments);

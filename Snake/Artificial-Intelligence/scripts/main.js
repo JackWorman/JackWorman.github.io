@@ -31,25 +31,6 @@ function learningLoop() {
   while (gameLoop());
 }
 
-function gameLoop() {
-  updateInputLayer();
-  evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].calculateOutputs();
-  snake.direction = getDirectionFromOutputLayer();
-  snake.move();
-  if (snake.checkCollison(GRID_SIZE) || ++distanceTraveled >= 250) {
-    return false;
-  }
-  if (snake.checkPelletEaten(pellet)) {
-    evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].fitness += 10;
-    snake.grow();
-    pellet.placePellet(GRID_SIZE, snake.bodySegments);
-    distanceTraveled = 0;
-  }
-  evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].fitness += 1; // just for surviing
-  window.requestAnimationFrame(render);
-  return true;
-}
-
 async function reset() {
   // Runs the first time.
   if (!started) {
@@ -77,6 +58,25 @@ async function reset() {
   distanceTraveled = 0;
   smallestDistancePossible = Math.abs(pellet.x - snake.bodySegments[0].x) + Math.abs(pellet.y - snake.bodySegments[0].y);
   window.requestAnimationFrame(render);
+}
+
+function gameLoop() {
+  updateInputLayer();
+  evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].calculateOutputs();
+  snake.direction = getDirectionFromOutputLayer();
+  snake.move();
+  if (snake.checkCollison(GRID_SIZE) || ++distanceTraveled >= 250) {
+    return false;
+  }
+  if (snake.checkPelletEaten(pellet)) {
+    evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].fitness += 10;
+    snake.grow();
+    pellet.placePellet(GRID_SIZE, snake.bodySegments);
+    distanceTraveled = 0;
+  }
+  evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].fitness += 1; // just for surviing
+  window.requestAnimationFrame(render);
+  return true;
 }
 
 function render() {

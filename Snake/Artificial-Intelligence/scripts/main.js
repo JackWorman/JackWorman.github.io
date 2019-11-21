@@ -11,7 +11,7 @@ import * as KeyCode from "../../scripts/KeyCode.js";
 const CANVAS_FOREGROUND = document.getElementById(`canvas-game`);
 const CONTEXT_FOREGROUND = CANVAS_FOREGROUND.getContext(`2d`);
 const GRID_SIZE = 30;
-const FRAMES_PER_SECOND = 30;
+const FRAMES_PER_SECOND = 60;
 const MILLISECONDS_PER_SECOND = 1000; // TODO: move to a conversions file
 
 let canvasSize = 600;
@@ -65,16 +65,18 @@ async function reset() {
   // Does not run the first time.
   } else {
     // await Swal.fire({text: `Game Over!`, showConfirmButton: false, timer: 1500});
-    console.log(`==============================`);
-    console.log(`Generation: ${evolutionaryAlgorithm.generation}`);
-    console.log(`Specie: ${evolutionaryAlgorithm.specie}`);
-    console.log(`Fitness: ${evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].fitness}`);
+
     evolutionaryAlgorithm.specie++;
     if (evolutionaryAlgorithm.specie === 2000) {
-      evolutionaryAlgorithm.specie = 0;
-      evolutionaryAlgorithm.generation++;
       evolutionaryAlgorithm.sort();
       evolutionaryAlgorithm.mutate();
+
+      console.log(`==============================`);
+      console.log(`Generation: ${evolutionaryAlgorithm.generation}`);
+      console.log(`Best Fitness: ${evolutionaryAlgorithm.neuralNetworks[0].fitness}`);
+
+      evolutionaryAlgorithm.specie = 0;
+      evolutionaryAlgorithm.generation++;
     }
   }
   directionQueue = [];

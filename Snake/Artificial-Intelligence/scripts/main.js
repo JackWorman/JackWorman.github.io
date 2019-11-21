@@ -31,10 +31,7 @@ function learningLoop() {
 function gameLoop() {
   updateInputLayer();
   evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].calculateOutputs();
-  const nextDirection = getDirectionFromOutputLayer();
-  if (typeof direction !== `undefined`) {
-    snake.direction = direction;
-  }
+  snake.direction = getDirectionFromOutputLayer();
   snake.move();
   if (snake.checkCollison(GRID_SIZE) || ++distanceTraveled >= 250) {
     return false;

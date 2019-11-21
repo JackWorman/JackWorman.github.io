@@ -11,7 +11,7 @@ import * as KeyCode from "../../scripts/KeyCode.js";
 const CANVAS_FOREGROUND = document.getElementById(`canvas-game`);
 const CONTEXT_FOREGROUND = CANVAS_FOREGROUND.getContext(`2d`);
 const GRID_SIZE = 30;
-const FRAMES_PER_SECOND = 15;
+const FRAMES_PER_SECOND = 30;
 const MILLISECONDS_PER_SECOND = 1000; // TODO: move to a conversions file
 
 let canvasSize = 600;
@@ -35,7 +35,6 @@ function gameLoop() {
   evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].calculateOutputs();
   getDirectionFromOutputLayer();
   const direction = directionQueue.shift();
-  console.log(direction);
   if (typeof direction !== `undefined`) {
     snake.direction = direction;
   }
@@ -65,7 +64,7 @@ async function reset() {
     await Swal.fire(`Collect the pellet to gain points.\nMore points are rewarded for being efficent.`);
   // Does not run the first time.
   } else {
-    await Swal.fire({text: `Game Over!`, showConfirmButton: false, timer: 1500});
+    // await Swal.fire({text: `Game Over!`, showConfirmButton: false, timer: 1500});
     console.log(`==============================`);
     console.log(`Generation: ${evolutionaryAlgorithm.generation}`);
     console.log(`Specie: ${evolutionaryAlgorithm.specie}`);

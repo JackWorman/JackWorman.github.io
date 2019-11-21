@@ -53,7 +53,7 @@ function gameLoop() {
     smallestDistancePossible = Math.abs(pellet.x - snake.bodySegments[0].x) + Math.abs(pellet.y - snake.bodySegments[0].y);
     moves = 0;
   }
-  evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].fitness++; // just for surviing
+  evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].fitness += 0.1; // just for surviing
   window.requestAnimationFrame(render);
 }
 

@@ -8,7 +8,7 @@ const SPAN_GEN_SPECIE = document.getElementById(`span-gen-specie`);
 const CANVAS_GAME = document.getElementById(`canvas-game`);
 const CONTEXT_GAME = CANVAS_GAME.getContext(`2d`);
 const GRID_SIZE = 30;
-const FRAMES_PER_SECOND = 120;
+const FRAMES_PER_SECOND = 15;
 const MILLISECONDS_PER_SECOND = 1000;
 
 let canvasSize = 600;
@@ -16,57 +16,47 @@ CANVAS_GAME.width = CANVAS_GAME.height = canvasSize;
 
 const snake = new Snake();
 const pellet = new Pellet();
-let directionQueue = [];
 let distanceTraveled;
 let smallestDistancePossible;
-let controlsEnabled = false;
-let gameLoopInterval;
 
 const evolutionaryAlgorithm = new EvolutionaryAlgorithm(2000, 28, 16, 4);
 evolutionaryAlgorithm.initializeAllNeuralNetworks();
 
-let moves = 0;
+window.addEventListener(`load`, learningLoop);
 
-window.addEventListener(`load`, reset);
+function learningLoop() {
+  reset();
+  while (gameLoop());
+}
 
 function gameLoop() {
   updateInputLayer();
   evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].calculateOutputs();
-  getDirectionFromOutputLayer();
-  const direction = directionQueue.shift();
+  const nextDirection = getDirectionFromOutputLayer();
   if (typeof direction !== `undefined`) {
     snake.direction = direction;
   }
   snake.move();
-  distanceTraveled++;
-  if (snake.checkCollison(GRID_SIZE) || ++moves >= 250) {
-    clearInterval(gameLoopInterval);
-    reset();
-    return;
+  if (snake.checkCollison(GRID_SIZE) || ++distanceTraveled >= 250) {
+    return false;
   }
   if (snake.checkPelletEaten(pellet)) {
-    evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].fitness += Math.floor(Math.pow(snake.bodySegments.length, 1 + smallestDistancePossible / distanceTraveled));
+    evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].fitness += 10;
     snake.grow();
     pellet.placePellet(GRID_SIZE, snake.bodySegments);
     distanceTraveled = 0;
-    smallestDistancePossible = Math.abs(pellet.x - snake.bodySegments[0].x) + Math.abs(pellet.y - snake.bodySegments[0].y);
-    moves = 0;
   }
-  evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].fitness += 0.1; // just for surviing
+  evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].fitness += 1; // just for surviing
   window.requestAnimationFrame(render);
+  return true;
 }
 
 async function reset() {
-  controlsEnabled = false;
-  document.body.style.cursor = `auto`;
   // Runs the first time.
   if (typeof gameLoopInterval === `undefined`) {
     await Swal.fire(`Use the arrow keys\nor\nWASD to move.`);
-    await Swal.fire(`Collect the pellet to gain points.\nMore points are rewarded for being efficent.`);
   // Does not run the first time.
   } else {
-    // await Swal.fire({text: `Game Over!`, showConfirmButton: false, timer: 1500});
-
     evolutionaryAlgorithm.specie++;
     if (evolutionaryAlgorithm.specie === 2000) {
       evolutionaryAlgorithm.sort();
@@ -81,16 +71,13 @@ async function reset() {
       evolutionaryAlgorithm.clearFitness();
     }
   }
+  SPAN_GEN_SPECIE.textContent = `Generation: ${evolutionaryAlgorithm.generation}, Species: ${evolutionaryAlgorithm.specie}/1999`;
   moves = 0;
-  directionQueue = [];
   snake.reset(GRID_SIZE / 2, GRID_SIZE / 2);
   pellet.placePellet(GRID_SIZE, snake.bodySegments);
   distanceTraveled = 0;
   smallestDistancePossible = Math.abs(pellet.x - snake.bodySegments[0].x) + Math.abs(pellet.y - snake.bodySegments[0].y);
   window.requestAnimationFrame(render);
-  controlsEnabled = true;
-  SPAN_GEN_SPECIE.textContent = `Generation: ${evolutionaryAlgorithm.generation}, Species: ${evolutionaryAlgorithm.specie}/1999`;
-  gameLoopInterval = setInterval(gameLoop, MILLISECONDS_PER_SECOND / FRAMES_PER_SECOND);
 }
 
 function render() {
@@ -183,8 +170,8 @@ function getDirectionFromOutputLayer() {
     || snake.direction === `up`    && outputLayerDirections[0].direction === `down`
     || snake.direction === `right` && outputLayerDirections[0].direction === `left`
     || snake.direction === `down`  && outputLayerDirections[0].direction === `up`) {
-    directionQueue.push(outputLayerDirections[1].direction);
+    return outputLayerDirections[1].direction;
   } else {
-    directionQueue.push(outputLayerDirections[0].direction);
+    return outputLayerDirections[0].direction;
   }
 }

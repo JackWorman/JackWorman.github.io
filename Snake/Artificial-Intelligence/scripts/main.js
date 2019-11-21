@@ -35,6 +35,7 @@ function gameLoop() {
   evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].calculateOutputs();
   getDirectionFromOutputLayer();
   const direction = directionQueue.shift();
+  console.log(direction);
   if (typeof direction !== `undefined`) {
     snake.direction = direction;
   }

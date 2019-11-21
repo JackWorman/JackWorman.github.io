@@ -168,10 +168,10 @@ function detectFruit(horizontal, vertical) {
 function getDirectionFromOutputLayer() {
   const outputLayer = evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].o.elements;
   const outputLayerDirections = [
-    {dirction: `left`,  intensity: outputLayer[0][0]},
-    {dirction: `up`,    intensity: outputLayer[1][0]},
-    {dirction: `right`, intensity: outputLayer[2][0]},
-    {dirction: `down`,  intensity: outputLayer[3][0]}
+    {direction: `left`,  intensity: outputLayer[0][0]},
+    {direction: `up`,    intensity: outputLayer[1][0]},
+    {direction: `right`, intensity: outputLayer[2][0]},
+    {direction: `down`,  intensity: outputLayer[3][0]}
   ];
   outputLayerDirections.sort((a, b) => { return b.intensity - a.intensity; });
   if ( snake.direction === `left`  && outputLayerDirections[0].direction === `right`
@@ -182,6 +182,4 @@ function getDirectionFromOutputLayer() {
   } else {
     directionQueue.push(outputLayerDirections[0].direction);
   }
-  console.log(outputLayerDirections);
-  console.log(directionQueue);
 }

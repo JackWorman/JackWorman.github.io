@@ -24,6 +24,10 @@ evolutionaryAlgorithm.initializeAllNeuralNetworks();
 
 let started = false;
 
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 function learningLoop() {
   reset();
   // while (gameLoop());

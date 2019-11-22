@@ -38,11 +38,11 @@ function reset() {
     evolutionaryAlgorithm.specie++;
     if (evolutionaryAlgorithm.specie === 2000) {
       evolutionaryAlgorithm.sort();
-
+      alert();
       console.log(`==============================`);
       console.log(`Generation: ${evolutionaryAlgorithm.generation}`);
       console.log(`Best Fitness: ${evolutionaryAlgorithm.neuralNetworks[0].fitness}`);
-      console.log(evolutionaryAlgorithm.neuralNetworks);
+      // console.log(evolutionaryAlgorithm.neuralNetworks);
 
       evolutionaryAlgorithm.mutate();
       evolutionaryAlgorithm.specie = 0;

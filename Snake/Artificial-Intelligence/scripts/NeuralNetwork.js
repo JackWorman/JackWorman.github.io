@@ -48,22 +48,22 @@ export class NeuralNetwork {
     // Mutate the first set of weights and biases.
     for (let row = 0; row < this.w1.numRows; row++) {
       for (let col = 0; col < this.w1.numCols; col++) {
-        if (rate <= Math.random()) {
+        if (Math.random() < rate) {
             this.w1.elements[row][col] += nextGaussianRandom();
         }
       }
-      if (rate <= Math.random()) {
+      if (Math.random() < rate) {
           this.b1.elements[row][0] += nextGaussianRandom();
       }
     }
     // Mutate the second set of weights and biases.
     for (let row = 0; row < this.w2.numRows; row++) {
       for (let col = 0; col < this.w2.numCols; col++) {
-        if (rate <= Math.random()) {
+        if (Math.random() < rate) {
             this.w2.elements[row][col] += nextGaussianRandom();
         }
       }
-      if (rate <= Math.random()) {
+      if (Math.random() < rate) {
           this.b2.elements[row][0] += nextGaussianRandom();
       }
     }

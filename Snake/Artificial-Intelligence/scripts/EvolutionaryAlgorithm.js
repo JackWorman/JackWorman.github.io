@@ -26,6 +26,7 @@ export class EvolutionaryAlgorithm {
       fitnesses.push(this.neuralNetworks[i].fitness);
     }
     console.log(fitnesses);
+    console.log(this.neuralNetworks);
   }
 
   // TODO: use difference selection

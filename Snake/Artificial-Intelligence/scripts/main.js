@@ -27,7 +27,8 @@ let started = false;
 function learningLoop() {
   while (true) {
     reset();
-    while (gameLoop());
+    gameLoop();
+    // while (gameLoop());
   }
 }
 
@@ -50,7 +51,7 @@ function reset() {
       evolutionaryAlgorithm.specie = 0;
       evolutionaryAlgorithm.generation++;
       evolutionaryAlgorithm.clearFitness();
-      if (evolutionaryAlgorithm.generation % 10000 === 0) {
+      if (evolutionaryAlgorithm.generation % 1 === 0) {
         alert(`Generation done.`);
       }
     }
@@ -69,7 +70,8 @@ function gameLoop() {
   snake.direction = getDirectionFromOutputLayer();
   snake.move();
   if (snake.checkCollison(GRID_SIZE) || ++distanceTraveled >= 250) {
-    return false;
+    // return false;
+    return;
   }
   if (snake.checkPelletEaten(pellet)) {
     evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].fitness += 10;
@@ -79,7 +81,8 @@ function gameLoop() {
   }
   evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].fitness += 1; // just for surviing
   // window.requestAnimationFrame(render);
-  return true;
+  window.setTimeout(gameLoop, 0);
+  // return true;
 }
 
 function render() {

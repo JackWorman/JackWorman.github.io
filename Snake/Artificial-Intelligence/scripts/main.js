@@ -51,7 +51,7 @@ function reset() {
       console.log(fitnesses);
       console.log(evolutionaryAlgorithm.neuralNetworks);
 
-      alert();
+
       console.log(`==============================`);
       console.log(`Generation: ${evolutionaryAlgorithm.generation}`);
       console.log(`Best Fitness: ${evolutionaryAlgorithm.neuralNetworks[0].fitness}`);
@@ -61,6 +61,9 @@ function reset() {
       evolutionaryAlgorithm.specie = 0;
       evolutionaryAlgorithm.generation++;
       evolutionaryAlgorithm.clearFitness();
+
+      console.log(evolutionaryAlgorithm.neuralNetworks);
+      alert();
       // if (evolutionaryAlgorithm.generation % 10000 === 0) {
       //   alert(`Generation done.`);
       // }

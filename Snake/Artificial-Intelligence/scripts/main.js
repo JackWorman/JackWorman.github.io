@@ -77,6 +77,7 @@ function gameLoop() {
   }
   evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].fitness += 1;
   if (evolutionaryAlgorithm.specie === 0) {
+    window.requestAnimationFrame(render);
     window.setTimeout(gameLoop, MILLISECONDS_PER_SECOND / FRAMES_PER_SECOND);
   } else {
     window.setTimeout(gameLoop);

@@ -61,7 +61,8 @@ function reset() {
   pellet.placePellet(GRID_SIZE, snake.bodySegments);
   distanceTraveled = 0;
   smallestDistancePossible = Math.abs(pellet.x - snake.bodySegments[0].x) + Math.abs(pellet.y - snake.bodySegments[0].y);
-  window.requestAnimationFrame(render);
+  gameLoop();
+  // window.requestAnimationFrame(render);
 }
 
 function gameLoop() {
@@ -71,7 +72,7 @@ function gameLoop() {
   snake.move();
   if (snake.checkCollison(GRID_SIZE) || ++distanceTraveled >= 250) {
     // return false;
-    return;
+    reset();
   }
   if (snake.checkPelletEaten(pellet)) {
     evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].fitness += 10;

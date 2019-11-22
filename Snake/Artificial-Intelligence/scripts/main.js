@@ -25,11 +25,12 @@ evolutionaryAlgorithm.initializeAllNeuralNetworks();
 let started = false;
 
 function learningLoop() {
-  while (true) {
-    reset();
-    gameLoop();
-    // while (gameLoop());
-  }
+  reset();
+  // while (true) {
+  //   reset();
+  //   gameLoop();
+  //   // while (gameLoop());
+  // }
 }
 
 function reset() {

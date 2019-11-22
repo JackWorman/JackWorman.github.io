@@ -21,12 +21,6 @@ export class EvolutionaryAlgorithm {
 
   sort() {
     this.neuralNetworks.sort((a, b) => { return b.fitness - a.fitness; });
-    const fitnesses = [];
-    for (let i = 0; i < this.neuralNetworks.length; i++) {
-      fitnesses.push(this.neuralNetworks[i].fitness);
-    }
-    console.log(fitnesses);
-    console.log(this.neuralNetworks);
   }
 
   // TODO: use difference selection

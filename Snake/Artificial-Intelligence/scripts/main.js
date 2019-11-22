@@ -42,6 +42,15 @@ function reset() {
     evolutionaryAlgorithm.specie++;
     if (evolutionaryAlgorithm.specie === 2000) {
       evolutionaryAlgorithm.sort();
+
+
+      const fitnesses = [];
+      for (let i = 0; i < evolutionaryAlgorithm.neuralNetworks.length; i++) {
+        fitnesses.push(evolutionaryAlgorithm.neuralNetworks[i].fitness);
+      }
+      console.log(fitnesses);
+      console.log(evolutionaryAlgorithm.neuralNetworks);
+
       alert();
       console.log(`==============================`);
       console.log(`Generation: ${evolutionaryAlgorithm.generation}`);

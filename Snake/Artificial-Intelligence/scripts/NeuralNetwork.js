@@ -3,7 +3,7 @@
 import {Matrix} from "./Matrix.js";
 import {gaussianRandom} from "./GaussianRandom.js";
 
-const nextGaussianRandom = gaussianRandom(0, 3);
+const nextGaussianRandom = gaussianRandom(0, 5);
 
 export class NeuralNetwork {
   constructor(numInputNodes, numHiddenLayerNodes, numOutputNodes) {

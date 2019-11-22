@@ -23,6 +23,7 @@ export class EvolutionaryAlgorithm {
     this.neuralNetworks.sort((a, b) => { return b.fitness - a.fitness; });
   }
 
+  // TODO: use difference selection
   mutate() {
     // Remove the last 1950 neural networks.
     this.neuralNetworks.splice(50);

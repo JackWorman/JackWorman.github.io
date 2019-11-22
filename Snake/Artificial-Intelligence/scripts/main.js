@@ -27,7 +27,7 @@ let started = false;
 function learningLoop() {
   reset();
   while (gameLoop());
-  window.setTimeout(learningLoop, 0);
+  window.setTimeout(learningLoop);
 }
 
 function reset() {
@@ -49,9 +49,9 @@ function reset() {
       evolutionaryAlgorithm.specie = 0;
       evolutionaryAlgorithm.generation++;
       evolutionaryAlgorithm.clearFitness();
-      if (evolutionaryAlgorithm.generation % 10 === 0) {
-        alert(`Generation done.`);
-      }
+      // if (evolutionaryAlgorithm.generation % 10000 === 0) {
+      //   alert(`Generation done.`);
+      // }
     }
   }
   SPAN_GEN_SPECIE.textContent = `Generation: ${evolutionaryAlgorithm.generation}, Species: ${evolutionaryAlgorithm.specie}/1999`;

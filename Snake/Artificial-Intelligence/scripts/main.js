@@ -23,7 +23,7 @@ let evolutionaryAlgorithm = new EvolutionaryAlgorithm(2000, 28, 16, 4);
 evolutionaryAlgorithm.initializeAllNeuralNetworks();
 
 let started = false;
-let showTraining = false;
+let showTraining = true;
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));

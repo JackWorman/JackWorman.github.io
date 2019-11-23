@@ -29,9 +29,9 @@ function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-function learningLoop() {
+async function learningLoop() {
   reset();
-  while (gameLoop());
+  while (await gameLoop());
   window.setTimeout(learningLoop);
 }
 
@@ -63,7 +63,7 @@ function reset() {
   } else {
     started = true;
   }
-  SPAN_GEN_SPECIE.textContent = `Generation: ${evolutionaryAlgorithm.generation}, Species: ${evolutionaryAlgorithm.specie}/1999`;
+  SPAN_GEN_SPECIE.textContent = `Generation: ${evolutionaryAlgorithm.generation}, Species: ${evolutionaryAlgorithm.specie + 1}/2000`;
   snake.reset(GRID_SIZE / 2, GRID_SIZE / 2);
   pellet.placePellet(GRID_SIZE, snake.bodySegments);
   distanceTraveled = 0;

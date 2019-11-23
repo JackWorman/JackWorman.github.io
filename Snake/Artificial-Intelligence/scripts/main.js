@@ -29,6 +29,10 @@ function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
+function toggleShowTraining() {
+  showTraining = !showTraining;
+}
+
 async function learningLoop() {
   reset();
   while (await gameLoop());
@@ -58,7 +62,7 @@ function reset() {
       evolutionaryAlgorithm.clearFitness();
 
       console.log(evolutionaryAlgorithm.neuralNetworks);
-      alert();
+      // alert();
     }
   } else {
     started = true;

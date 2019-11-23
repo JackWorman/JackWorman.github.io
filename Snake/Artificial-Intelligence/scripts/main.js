@@ -23,26 +23,24 @@ let evolutionaryAlgorithm = new EvolutionaryAlgorithm(2000, 28, 16, 4);
 evolutionaryAlgorithm.initializeAllNeuralNetworks();
 
 let started = false;
+let showTraining = false;
 
 function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 function learningLoop() {
   reset();
-  // while (gameLoop());
+  while (gameLoop());
+  window.setTimeout(learningLoop);
 }
 
 function reset() {
   // Runs the first time.
-  if (!started) {
-    started = true;
-  // Does not run the first time.
-  } else {
+  if (started) {
     evolutionaryAlgorithm.specie++;
     if (evolutionaryAlgorithm.specie === 2000) {
       evolutionaryAlgorithm.sort();
-
 
       const fitnesses = [];
       for (let i = 0; i < evolutionaryAlgorithm.neuralNetworks.length; i++) {
@@ -50,12 +48,9 @@ function reset() {
       }
       console.log(fitnesses);
       console.log(evolutionaryAlgorithm.neuralNetworks);
-
-
       console.log(`==============================`);
       console.log(`Generation: ${evolutionaryAlgorithm.generation}`);
       console.log(`Best Fitness: ${evolutionaryAlgorithm.neuralNetworks[0].fitness}`);
-      // console.log(evolutionaryAlgorithm.neuralNetworks);
 
       evolutionaryAlgorithm.mutate();
       evolutionaryAlgorithm.specie = 0;
@@ -64,10 +59,9 @@ function reset() {
 
       console.log(evolutionaryAlgorithm.neuralNetworks);
       alert();
-      // if (evolutionaryAlgorithm.generation % 10000 === 0) {
-      //   alert(`Generation done.`);
-      // }
     }
+  } else {
+    started = true;
   }
   SPAN_GEN_SPECIE.textContent = `Generation: ${evolutionaryAlgorithm.generation}, Species: ${evolutionaryAlgorithm.specie}/1999`;
   snake.reset(GRID_SIZE / 2, GRID_SIZE / 2);
@@ -78,13 +72,13 @@ function reset() {
   gameLoop();
 }
 
-function gameLoop() {
+async function gameLoop() {
   updateInputLayer();
   evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].calculateOutputs();
   snake.direction = getDirectionFromOutputLayer();
   snake.move();
   if (snake.checkCollison(GRID_SIZE) || ++distanceTraveled >= 250) {
-    return reset();
+    return false;
   }
   if (snake.checkPelletEaten(pellet)) {
     evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].fitness += 10;
@@ -93,12 +87,11 @@ function gameLoop() {
     distanceTraveled = 0;
   }
   evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].fitness += 1;
-  if (evolutionaryAlgorithm.specie === 0) {
+  if (showTraining) {
     window.requestAnimationFrame(render);
-    window.setTimeout(gameLoop, MILLISECONDS_PER_SECOND / FRAMES_PER_SECOND);
-  } else {
-    window.setTimeout(gameLoop);
+    await sleep(MILLISECONDS_PER_SECOND / FRAMES_PER_SECOND);
   }
+  return true;
 }
 
 function render() {
@@ -197,4 +190,4 @@ function getDirectionFromOutputLayer() {
   }
 }
 
-window.addEventListener(`load`, reset);
+window.addEventListener(`load`, learningLoop);

@@ -149,7 +149,7 @@ function detectWall(horizontal, vertical) {
     };
     // Check for wall.
     if (testPoint.x < 0 || testPoint.x >= 30 || testPoint.y < 0 || testPoint.y >= 30) {
-      return 1 - count / (GRID_SIZE - 1);
+      return 1 - (count - 1) / (GRID_SIZE - 1);
     }
   }
 }

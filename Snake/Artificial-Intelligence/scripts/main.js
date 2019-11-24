@@ -37,7 +37,7 @@ BUTTON_TOGGLE_SHOW_TRAINING.addEventListener(`click`, () => {
 });
 
 async function learningLoop() {
-  reset();
+  await reset();
   while (await gameLoop());
   window.setTimeout(learningLoop);
 }

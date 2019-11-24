@@ -23,19 +23,22 @@ export class EvolutionaryAlgorithm {
     this.neuralNetworks.sort((a, b) => { return b.fitness - a.fitness; });
   }
 
-  // TODO: use difference selection
   mutate() {
+    console.log(`mutate():`);
     // Remove the last 1950 neural networks.
     this.neuralNetworks.splice(50);
+    console.log(this.neuralNetworks);
     const copy = this.neuralNetworks.slice(0);
     // Copy the first 200 neural networks 9 times.
     for (let i = 0; i < 39; i++) {
       this.neuralNetworks = this.neuralNetworks.concat(copy);
     }
+    console.log(this.neuralNetworks);
     // Mutate the last 1800 neural networks.
     for (let i = 50; i < this.neuralNetworks.length; i++) {
       this.neuralNetworks[i].mutate(this.mutationRate);
     }
+    console.log(this.neuralNetworks);
   }
 
   clearFitness() {

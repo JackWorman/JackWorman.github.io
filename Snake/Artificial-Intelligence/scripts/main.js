@@ -48,13 +48,12 @@ async function reset() {
       evolutionaryAlgorithm.generation++;
 
       evolutionaryAlgorithm.sort();
-      // console.log(`==============================`);
-      // console.log(`Generation: ${evolutionaryAlgorithm.generation}`);
-      // console.log(`Best Fitness: ${evolutionaryAlgorithm.neuralNetworks[0].fitness}`);
-
-
       evolutionaryAlgorithm.mutate();
-      evolutionaryAlgorithm.clearFitness();
+
+      console.log(`==============================`);
+      console.log(`Generation: ${evolutionaryAlgorithm.generation}`);
+      console.log(`Best Fitness: ${evolutionaryAlgorithm.neuralNetworks[0].fitness}`);
+      // evolutionaryAlgorithm.clearFitness();
     }
   } else {
     started = true;
@@ -65,7 +64,7 @@ async function reset() {
   distanceTraveled = 0;
 
   evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].fitness = 0;
-  console.log(`Starting Fitness ${evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].fitness}`);
+  // console.log(`Starting Fitness ${evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].fitness}`);
 
   if (showTraining) {
     window.requestAnimationFrame(render);

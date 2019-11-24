@@ -55,6 +55,8 @@ async function reset() {
 
       evolutionaryAlgorithm.mutate();
       evolutionaryAlgorithm.clearFitness();
+      console.log(evolutionaryAlgorithm.neuralNetworks);
+      alert(`last alert`);
     }
   } else {
     started = true;

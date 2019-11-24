@@ -44,24 +44,16 @@ async function reset() {
     console.log(`Fitness: ${evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].fitness}`);
     evolutionaryAlgorithm.specie++;
     if (evolutionaryAlgorithm.specie === 2000) {
-      evolutionaryAlgorithm.sort();
+      evolutionaryAlgorithm.specie = 0;
+      evolutionaryAlgorithm.generation++;
 
-      // const fitnesses = [];
-      // for (let i = 0; i < evolutionaryAlgorithm.neuralNetworks.length; i++) {
-      //   fitnesses.push(evolutionaryAlgorithm.neuralNetworks[i].fitness);
-      // }
-      // console.log(fitnesses);
-      // console.log(evolutionaryAlgorithm.neuralNetworks);
+      evolutionaryAlgorithm.sort();
       console.log(`==============================`);
       console.log(`Generation: ${evolutionaryAlgorithm.generation}`);
       console.log(`Best Fitness: ${evolutionaryAlgorithm.neuralNetworks[0].fitness}`);
 
-      evolutionaryAlgorithm.mutate();
-      evolutionaryAlgorithm.specie = 0;
-      evolutionaryAlgorithm.generation++;
       evolutionaryAlgorithm.clearFitness();
-
-      console.log(evolutionaryAlgorithm.neuralNetworks);
+      evolutionaryAlgorithm.mutate();
     }
   } else {
     started = true;
@@ -70,6 +62,8 @@ async function reset() {
   snake.reset(GRID_SIZE / 2, GRID_SIZE / 2);
   pellet.placePellet(GRID_SIZE, snake.bodySegments);
   distanceTraveled = 0;
+
+  console.log(evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie]);
 
   if (showTraining) {
     window.requestAnimationFrame(render);

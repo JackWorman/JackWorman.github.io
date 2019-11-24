@@ -47,14 +47,14 @@ async function reset() {
       evolutionaryAlgorithm.specie = 0;
       evolutionaryAlgorithm.generation++;
 
-      await evolutionaryAlgorithm.sort();
+      evolutionaryAlgorithm.sort();
       // console.log(`==============================`);
       // console.log(`Generation: ${evolutionaryAlgorithm.generation}`);
       // console.log(`Best Fitness: ${evolutionaryAlgorithm.neuralNetworks[0].fitness}`);
 
 
-      await evolutionaryAlgorithm.mutate();
-      await evolutionaryAlgorithm.clearFitness();
+      evolutionaryAlgorithm.mutate();
+      evolutionaryAlgorithm.clearFitness();
     }
   } else {
     started = true;
@@ -64,7 +64,7 @@ async function reset() {
   pellet.placePellet(GRID_SIZE, snake.bodySegments);
   distanceTraveled = 0;
 
-  // evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].fitness = 0;
+  evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].fitness = 0;
   console.log(`Starting Fitness ${evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].fitness}`);
 
   if (showTraining) {

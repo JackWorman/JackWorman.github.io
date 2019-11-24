@@ -41,7 +41,7 @@ async function learningLoop() {
 async function reset() {
   // Runs the first time.
   if (started) {
-    console.log(`Fitness: ${evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].fitness}`);
+    // console.log(`Fitness: ${evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].fitness}`);
     evolutionaryAlgorithm.specie++;
     if (evolutionaryAlgorithm.specie === 2000) {
       evolutionaryAlgorithm.specie = 0;

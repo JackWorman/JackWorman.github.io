@@ -75,6 +75,10 @@ function reset() {
   distanceTraveled = 0;
   smallestDistancePossible = Math.abs(pellet.x - snake.bodySegments[0].x) + Math.abs(pellet.y - snake.bodySegments[0].y);
 
+  if (showTraining) {
+    window.requestAnimationFrame(render);
+    await sleep(MILLISECONDS_PER_SECOND / FRAMES_PER_SECOND);
+  }
   gameLoop();
 }
 

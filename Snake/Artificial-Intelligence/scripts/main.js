@@ -63,7 +63,7 @@ async function reset() {
   pellet.placePellet(GRID_SIZE, snake.bodySegments);
   distanceTraveled = 0;
 
-  console.log(evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie]);
+  console.log(`Starting Fitness ${evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].fitness}`);
 
   if (showTraining) {
     window.requestAnimationFrame(render);

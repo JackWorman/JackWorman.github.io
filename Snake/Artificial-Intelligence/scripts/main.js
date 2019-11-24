@@ -42,7 +42,7 @@ async function learningLoop() {
   window.setTimeout(learningLoop);
 }
 
-function reset() {
+async function reset() {
   // Runs the first time.
   if (started) {
     evolutionaryAlgorithm.specie++;

@@ -79,7 +79,7 @@ async function reset() {
     window.requestAnimationFrame(render);
     await sleep(MILLISECONDS_PER_SECOND / FRAMES_PER_SECOND);
   }
-  gameLoop();
+  // gameLoop();
 }
 
 async function gameLoop() {
@@ -228,7 +228,7 @@ function showInputLayer() {
   const inputLayer = evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].i.elements;
   console.log(`====================`);
   for (let i = 0; i < DIRECTIONS.length; i++) {
-    console.log(`${DIRECTIONS[i]}:`);
+    console.log(`***${DIRECTIONS[i]}***`);
     for (let j = 0; j < 3; j++) {
       console.log(`${DETECTORS[j]}: ${inputLayer[3*i + j][0]}`);
     }

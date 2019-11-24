@@ -85,8 +85,8 @@ async function reset() {
 async function gameLoop() {
   updateInputLayer();
 
-  showInputLayer();
-  alert(`Input Layer`);
+  // showInputLayer();
+  // alert(`Input Layer`);
 
   evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].calculateOutputs();
   snake.direction = getDirectionFromOutputLayer();

@@ -47,16 +47,14 @@ async function reset() {
       evolutionaryAlgorithm.specie = 0;
       evolutionaryAlgorithm.generation++;
 
-      evolutionaryAlgorithm.sort();
+      await evolutionaryAlgorithm.sort();
       // console.log(`==============================`);
       // console.log(`Generation: ${evolutionaryAlgorithm.generation}`);
       // console.log(`Best Fitness: ${evolutionaryAlgorithm.neuralNetworks[0].fitness}`);
 
 
-      evolutionaryAlgorithm.mutate();
-      evolutionaryAlgorithm.clearFitness();
-      console.log(evolutionaryAlgorithm.neuralNetworks);
-      alert(`last alert`);
+      await evolutionaryAlgorithm.mutate();
+      await evolutionaryAlgorithm.clearFitness();
     }
   } else {
     started = true;
@@ -66,6 +64,7 @@ async function reset() {
   pellet.placePellet(GRID_SIZE, snake.bodySegments);
   distanceTraveled = 0;
 
+  // evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].fitness = 0;
   console.log(`Starting Fitness ${evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].fitness}`);
 
   if (showTraining) {
@@ -76,10 +75,6 @@ async function reset() {
 
 async function gameLoop() {
   updateInputLayer();
-
-  // showInputLayer();
-  // alert(`Input Layer`);
-
   evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].calculateOutputs();
   snake.direction = getDirectionFromOutputLayer();
   snake.move();

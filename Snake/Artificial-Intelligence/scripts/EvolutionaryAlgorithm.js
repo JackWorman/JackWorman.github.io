@@ -22,6 +22,7 @@ export class EvolutionaryAlgorithm {
   sort() {
     console.log(`Before sort():`)
     console.log(this.neuralNetworks);
+    alert(`sort`);
     this.neuralNetworks.sort((a, b) => { return b.fitness - a.fitness; });
     console.log(`After sort():`)
     console.log(this.neuralNetworks);

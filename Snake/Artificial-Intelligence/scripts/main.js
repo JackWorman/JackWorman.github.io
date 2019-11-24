@@ -48,9 +48,9 @@ async function reset() {
       evolutionaryAlgorithm.generation++;
 
       evolutionaryAlgorithm.sort();
-      console.log(`==============================`);
-      console.log(`Generation: ${evolutionaryAlgorithm.generation}`);
-      console.log(`Best Fitness: ${evolutionaryAlgorithm.neuralNetworks[0].fitness}`);
+      // console.log(`==============================`);
+      // console.log(`Generation: ${evolutionaryAlgorithm.generation}`);
+      // console.log(`Best Fitness: ${evolutionaryAlgorithm.neuralNetworks[0].fitness}`);
 
 
       evolutionaryAlgorithm.mutate();

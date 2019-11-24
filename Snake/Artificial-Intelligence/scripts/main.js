@@ -139,10 +139,13 @@ function detectWall(horizontal, vertical) {
   let count = 0;
   while (true) {
     count++;
-    const testPoint = {x: snake.bodySegments[0].x + count * horizontal, y: snake.bodySegments[0].y + count * vertical};
+    const testPoint = {
+      x: snake.bodySegments[0].x + count * horizontal,
+      y: snake.bodySegments[0].y + count * vertical
+    };
     // Check for wall.
     if (testPoint.x < 0 || testPoint.x >= 30 || testPoint.y < 0 || testPoint.y >= 30) {
-      return 1 - count / GRID_SIZE;
+      return 1 - count / (GRID_SIZE - 1);
     }
   }
 }

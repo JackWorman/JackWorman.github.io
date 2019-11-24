@@ -8,25 +8,21 @@ const BUTTON_TOGGLE_SHOW_TRAINING = document.getElementById(`button-toggle-show-
 const SPAN_GEN_SPECIE = document.getElementById(`span-gen-specie`);
 const CANVAS_GAME = document.getElementById(`canvas-game`);
 const CONTEXT_GAME = CANVAS_GAME.getContext(`2d`);
-const GRID_SIZE = 30;
-const FRAMES_PER_SECOND = 15;
+
+const FRAMES_PER_SECOND = 10;
 const MILLISECONDS_PER_SECOND = 1000;
 
-let canvasSize = 600;
-CANVAS_GAME.width = CANVAS_GAME.height = canvasSize;
-
+const GRID_SIZE = 30;
 const snake = new Snake();
 const pellet = new Pellet();
-let distanceTraveled;
-let smallestDistancePossible;
-
-let evolutionaryAlgorithm = new EvolutionaryAlgorithm(2000, 28, 16, 4);
+const evolutionaryAlgorithm = new EvolutionaryAlgorithm(2000, 28, 16, 4);
 evolutionaryAlgorithm.initializeAllNeuralNetworks();
 
+let distanceTraveled;
 let started = false;
 let showTraining = true;
-
-
+let canvasSize = 600;
+CANVAS_GAME.width = CANVAS_GAME.height = canvasSize;
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -45,16 +41,17 @@ async function learningLoop() {
 async function reset() {
   // Runs the first time.
   if (started) {
+    console.log(`Fitness: ${evolutionaryAlgorithm.neuralNetworks[specie].fitness}`);
     evolutionaryAlgorithm.specie++;
     if (evolutionaryAlgorithm.specie === 2000) {
       evolutionaryAlgorithm.sort();
 
-      const fitnesses = [];
-      for (let i = 0; i < evolutionaryAlgorithm.neuralNetworks.length; i++) {
-        fitnesses.push(evolutionaryAlgorithm.neuralNetworks[i].fitness);
-      }
-      console.log(fitnesses);
-      console.log(evolutionaryAlgorithm.neuralNetworks);
+      // const fitnesses = [];
+      // for (let i = 0; i < evolutionaryAlgorithm.neuralNetworks.length; i++) {
+      //   fitnesses.push(evolutionaryAlgorithm.neuralNetworks[i].fitness);
+      // }
+      // console.log(fitnesses);
+      // console.log(evolutionaryAlgorithm.neuralNetworks);
       console.log(`==============================`);
       console.log(`Generation: ${evolutionaryAlgorithm.generation}`);
       console.log(`Best Fitness: ${evolutionaryAlgorithm.neuralNetworks[0].fitness}`);
@@ -73,13 +70,11 @@ async function reset() {
   snake.reset(GRID_SIZE / 2, GRID_SIZE / 2);
   pellet.placePellet(GRID_SIZE, snake.bodySegments);
   distanceTraveled = 0;
-  smallestDistancePossible = Math.abs(pellet.x - snake.bodySegments[0].x) + Math.abs(pellet.y - snake.bodySegments[0].y);
 
   if (showTraining) {
     window.requestAnimationFrame(render);
     await sleep(MILLISECONDS_PER_SECOND / FRAMES_PER_SECOND);
   }
-  // gameLoop();
 }
 
 async function gameLoop() {
@@ -92,6 +87,10 @@ async function gameLoop() {
   snake.direction = getDirectionFromOutputLayer();
   snake.move();
   if (snake.checkCollison(GRID_SIZE) || ++distanceTraveled >= 250) {
+    if (showTraining) {
+      window.requestAnimationFrame(render);
+      await sleep(MILLISECONDS_PER_SECOND / FRAMES_PER_SECOND);
+    }
     return false;
   }
   if (snake.checkPelletEaten(pellet)) {

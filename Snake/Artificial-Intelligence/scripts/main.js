@@ -26,6 +26,8 @@ evolutionaryAlgorithm.initializeAllNeuralNetworks();
 let started = false;
 let showTraining = true;
 
+
+
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
@@ -63,7 +65,6 @@ function reset() {
       evolutionaryAlgorithm.clearFitness();
 
       console.log(evolutionaryAlgorithm.neuralNetworks);
-      // alert();
     }
   } else {
     started = true;
@@ -79,6 +80,10 @@ function reset() {
 
 async function gameLoop() {
   updateInputLayer();
+
+  showInputLayer();
+  alert(`Input Layer`);
+
   evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].calculateOutputs();
   snake.direction = getDirectionFromOutputLayer();
   snake.move();
@@ -196,3 +201,29 @@ function getDirectionFromOutputLayer() {
 }
 
 window.addEventListener(`load`, learningLoop);
+
+function showInputLayer() {
+  const DIRECTIONS = [
+    `Up-Left`,
+    `Left`,
+    `Down-Left`,
+    `Up`,
+    `Down`,
+    `Up-Right`,
+    `Right`,
+    `Down-Right`
+  ];
+  const DETECTORS = [
+    `Wall`,
+    `Body`,
+    `Fruit`
+  ];
+  const inputLayer = evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].i.elements;
+  console.log(`====================`);
+  for (let i = 0; i < DIRECTIONS.length; i++) {
+    console.log(`${DIRECTIONS[i]}:`);
+    for (let j = 0; j < 3; j++) {
+      console.log(`${DETECTORS[j]}: ${inputLayer[3*i + j][0]}`);
+    }
+  }
+}

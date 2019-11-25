@@ -24,6 +24,9 @@ let showTraining = true;
 let canvasSize = 600;
 CANVAS_GAME.width = CANVAS_GAME.height = canvasSize;
 
+let apples = 0;
+let steps = 0;
+
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
@@ -42,6 +45,7 @@ async function reset() {
   // Runs the first time.
   if (started) {
     // console.log(`Fitness: ${evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].fitness}`);
+    evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].fitness = steps + (Math.pow(2, apples) + Math.pow(apples, 2.1) * 500) - (Math.pow(apples, 1.2) * Math.pow(0.25 * steps, 1.3));
     evolutionaryAlgorithm.specie++;
     if (evolutionaryAlgorithm.specie === 2000) {
       evolutionaryAlgorithm.specie = 0;
@@ -62,6 +66,8 @@ async function reset() {
   snake.reset(GRID_SIZE / 2, GRID_SIZE / 2);
   pellet.placePellet(GRID_SIZE, snake.bodySegments);
   distanceTraveled = 0;
+  apples = 0;
+  steps = 0;
 
   evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].fitness = 0;
   // console.log(`Starting Fitness ${evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].fitness}`);
@@ -73,6 +79,7 @@ async function reset() {
 }
 
 async function gameLoop() {
+  steps++;
   updateInputLayer();
   evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].calculateOutputs();
   snake.direction = getDirectionFromOutputLayer();
@@ -85,12 +92,13 @@ async function gameLoop() {
     return false;
   }
   if (snake.checkPelletEaten(pellet)) {
-    evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].fitness += 10;
+    // evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].fitness += 10;
     snake.grow();
     pellet.placePellet(GRID_SIZE, snake.bodySegments);
     distanceTraveled = 0;
+    apples++;
   }
-  evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].fitness += 1;
+  // evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].fitness += 1;
   if (showTraining) {
     window.requestAnimationFrame(render);
     await sleep(MILLISECONDS_PER_SECOND / FRAMES_PER_SECOND);

@@ -83,7 +83,7 @@ async function gameLoop() {
   evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].calculateOutputs();
   snake.direction = getDirectionFromOutputLayer();
   snake.move();
-  if (snake.checkCollison(GRID_SIZE) || ++distanceTraveled >= 100) {
+  if (snake.checkCollison(GRID_SIZE) || ++distanceTraveled >= 250) {
     if (showTraining) {
       window.requestAnimationFrame(render);
       await sleep(MILLISECONDS_PER_SECOND / FRAMES_PER_SECOND);

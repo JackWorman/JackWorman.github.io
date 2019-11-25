@@ -30,14 +30,20 @@ export class EvolutionaryAlgorithm {
         proportionalWeights.push(i);
       }
     }
+    console.log(proportionalWeights);
+    alert();
     // let newNeuralNetworks = [];
     for (let i = 0; i < 2000; i++) {
       const index = proportionalWeights[proportionalWeights.length * Math.random()];
       this.neuralNetworks.push(this.neuralNetworks[index]);
       // newNeuralNetworks[i].mutate(this.mutationRate);
     }
+    console.log(this.neuralNetworks);
+    alert();
     // this.neuralNetworks = newNeuralNetworks;
     this.neuralNetworks.splice(0, 2000);
+    console.log(this.neuralNetworks);
+    alert();
   }
 
   mutate() {

@@ -3,7 +3,7 @@
 import {Matrix} from "./Matrix.js";
 import {gaussianRandom} from "./GaussianRandom.js";
 
-const nextGaussianRandom = gaussianRandom(0, 5);
+const nextGaussianRandom = gaussianRandom(0, 1);
 
 export class NeuralNetwork {
   constructor(numInputNodes, numHiddenLayerNodes, numOutputNodes) {
@@ -33,13 +33,20 @@ export class NeuralNetwork {
   }
 
   calculateOutputs() {
-    this.hL = this.sigmoid(Matrix.add(Matrix.multiply(this.w1, this.i), this.b1));
+    this.hL = this.relu(Matrix.add(Matrix.multiply(this.w1, this.i), this.b1));
     this.o = this.sigmoid(Matrix.add(Matrix.multiply(this.w2, this.hL), this.b2));
   }
 
   sigmoid(m) {
     for (let row = 0; row < m.numRows; row++) {
       m.elements[row][0] = 1 / (1 + Math.pow(Math.E, -1 * m.elements[row][0]));
+    }
+    return m;
+  }
+
+  relu(m) {
+    for (let row = 0; row < m.numRows; row++) {
+      m.elements[row][0] = Math.max(0, m.elements[row][0]);
     }
     return m;
   }
@@ -53,7 +60,7 @@ export class NeuralNetwork {
         }
       }
       if (Math.random() < rate) {
-          this.b1.elements[row][0] += nextGaussianRandom();
+          // this.b1.elements[row][0] += nextGaussianRandom();
       }
     }
     // Mutate the second set of weights and biases.
@@ -64,7 +71,7 @@ export class NeuralNetwork {
         }
       }
       if (Math.random() < rate) {
-          this.b2.elements[row][0] += nextGaussianRandom();
+          // this.b2.elements[row][0] += nextGaussianRandom();
       }
     }
   }

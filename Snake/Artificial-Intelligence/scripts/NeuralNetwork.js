@@ -60,7 +60,7 @@ export class NeuralNetwork {
         }
       }
       if (Math.random() < rate) {
-          // this.b1.elements[row][0] += nextGaussianRandom();
+          this.b1.elements[row][0] += nextGaussianRandom();
       }
     }
     // Mutate the second set of weights and biases.
@@ -71,7 +71,7 @@ export class NeuralNetwork {
         }
       }
       if (Math.random() < rate) {
-          // this.b2.elements[row][0] += nextGaussianRandom();
+          this.b2.elements[row][0] += nextGaussianRandom();
       }
     }
   }

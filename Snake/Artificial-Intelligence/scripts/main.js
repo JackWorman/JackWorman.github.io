@@ -52,7 +52,9 @@ async function reset() {
       console.log(`Generation: ${evolutionaryAlgorithm.generation}`);
       console.log(`Best Fitness: ${evolutionaryAlgorithm.neuralNetworks[0].fitness}`);
       // evolutionaryAlgorithm.mutate();
+      await console.log(evolutionaryAlgorithm.neuralNetworks);
       evolutionaryAlgorithm.proportionalSelection();
+      await console.log(evolutionaryAlgorithm.neuralNetworks);
       // evolutionaryAlgorithm.clearFitness();
     }
   } else {

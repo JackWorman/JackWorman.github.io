@@ -79,12 +79,11 @@ async function reset() {
 }
 
 async function gameLoop() {
-  steps++;
   updateInputLayer();
   evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].calculateOutputs();
   snake.direction = getDirectionFromOutputLayer();
   snake.move();
-  if (snake.checkCollison(GRID_SIZE) || ++distanceTraveled >= 250) {
+  if (snake.checkCollison(GRID_SIZE) || ++distanceTraveled >= 100) {
     if (showTraining) {
       window.requestAnimationFrame(render);
       await sleep(MILLISECONDS_PER_SECOND / FRAMES_PER_SECOND);
@@ -98,6 +97,7 @@ async function gameLoop() {
     distanceTraveled = 0;
     apples++;
   }
+  steps++;
   // evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].fitness += 1;
   if (showTraining) {
     window.requestAnimationFrame(render);

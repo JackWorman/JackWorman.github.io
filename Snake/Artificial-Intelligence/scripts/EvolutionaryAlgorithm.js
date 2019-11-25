@@ -8,7 +8,7 @@ export class EvolutionaryAlgorithm {
     for (let i = 0; i < numNeuralNetworks; i++) {
       this.neuralNetworks.push(new NeuralNetwork(inputLayerSize, hiddenLayerSize, outputLayerSize));
     }
-    this.mutationRate = 0.2;
+    this.mutationRate = 0.02;
     this.generation = 0;
     this.specie = 0;
   }

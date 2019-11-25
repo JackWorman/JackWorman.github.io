@@ -53,8 +53,10 @@ async function reset() {
       console.log(`Best Fitness: ${evolutionaryAlgorithm.neuralNetworks[0].fitness}`);
       // evolutionaryAlgorithm.mutate();
       await console.log(evolutionaryAlgorithm.neuralNetworks);
+      alert();
       evolutionaryAlgorithm.proportionalSelection();
       await console.log(evolutionaryAlgorithm.neuralNetworks);
+      alert();
       // evolutionaryAlgorithm.clearFitness();
     }
   } else {

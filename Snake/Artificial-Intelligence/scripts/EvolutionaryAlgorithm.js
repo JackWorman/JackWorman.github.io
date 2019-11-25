@@ -23,6 +23,22 @@ export class EvolutionaryAlgorithm {
     this.neuralNetworks.sort((a, b) => { return b.fitness - a.fitness; });
   }
 
+  proportionalSelection() {
+    let proportionalWeights = [];
+    for (let i = 0; i < this.neuralNetworks.length; i++) {
+      for (let j = 0; j < this.neuralNetworks[i].fitness; j++) {
+        proportionalWeights.push(i);
+      }
+    }
+    let newNeuralNetworks = [];
+    for (let i = 0; i < 2000; i++) {
+      const index = proportionalWeights[proportionalWeights.length * Math.random()];
+      newNeuralNetworks.push(this.neuralNetworks[index]);
+      newNeuralNetworks[i].mutate(this.mutationRate);
+    }
+    this.neuralNetworks = newNeuralNetworks;
+  }
+
   mutate() {
     // Remove the last 1950 neural networks.
     this.neuralNetworks.splice(50);

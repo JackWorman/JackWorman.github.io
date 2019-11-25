@@ -48,11 +48,11 @@ async function reset() {
       evolutionaryAlgorithm.generation++;
 
       evolutionaryAlgorithm.sort();
-      evolutionaryAlgorithm.mutate();
-
       console.log(`==============================`);
       console.log(`Generation: ${evolutionaryAlgorithm.generation}`);
       console.log(`Best Fitness: ${evolutionaryAlgorithm.neuralNetworks[0].fitness}`);
+      // evolutionaryAlgorithm.mutate();
+      evolutionaryAlgorithm.proportionalSelection();
       // evolutionaryAlgorithm.clearFitness();
     }
   } else {

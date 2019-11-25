@@ -31,22 +31,17 @@ export class EvolutionaryAlgorithm {
       }
     }
     for (let i = 0; i < 2000; i++) {
-      const index = proportionalWeights[proportionalWeights.length * Math.random()];
+      const index = proportionalWeights[Math.floor(proportionalWeights.length * Math.random())];
       const copyNN = this.neuralNetworks[index];
       this.neuralNetworks.push(copyNN);
 
-      console.log(this.neuralNetworks[0]);
-      console.log(`index: ${index}`);
-      console.log(this.neuralNetworks[index]);
-      console.log(this.neuralNetworks);
-      alert();
+      // console.log(this.neuralNetworks[0]);
+      // console.log(`index: ${index}`);
+      // console.log(this.neuralNetworks[index]);
+      // console.log(this.neuralNetworks);
+      // alert();
     }
-    console.log(this.neuralNetworks);
-    alert();
-    // this.neuralNetworks = newNeuralNetworks;
     this.neuralNetworks.splice(0, 2000);
-    console.log(this.neuralNetworks);
-    alert();
   }
 
   mutate() {

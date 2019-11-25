@@ -35,7 +35,7 @@ BUTTON_TOGGLE_SHOW_TRAINING.addEventListener(`click`, () => {
 async function learningLoop() {
   await reset();
   while (await gameLoop());
-  window.setTimeout(learningLoop);
+  window.setTimeout(learningLoop); // Keeps the browser from freezing.
 }
 
 async function reset() {

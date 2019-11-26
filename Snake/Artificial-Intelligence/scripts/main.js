@@ -275,17 +275,18 @@ function renderNeuralNetwork() {
   }
   // Render input layer.
   for (let i = 0; i < 28; i++) {
-    const intensity = (1 - evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].i.elements[i][0]) * 255;
+    const intensity = evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].i.elements[i][0] * 255;
     CONTEXT_NEURAL_NETWORK.beginPath();
     CONTEXT_NEURAL_NETWORK.arc(canvasSize/6, canvasSize/(28 + 1)*(i + 1), 8, 0, 2*Math.PI);
     CONTEXT_NEURAL_NETWORK.closePath();
+    CONTEXT_NEURAL_NETWORK.strokeStyle = `rgb(255, 255, 255)`;
     CONTEXT_NEURAL_NETWORK.stroke();
     CONTEXT_NEURAL_NETWORK.fillStyle = `rgb(${intensity}, ${intensity}, ${intensity})`;
     CONTEXT_NEURAL_NETWORK.fill();
   }
   // Render hidden layer.
   for (let i = 0; i < 16; i++) {
-    const intensity = (1 - evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].hL.elements[i][0]) * 255;
+    const intensity = evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].hL.elements[i][0] * 255;
     CONTEXT_NEURAL_NETWORK.beginPath();
     CONTEXT_NEURAL_NETWORK.arc(canvasSize/2, canvasSize/(16 + 1)*(i + 1), 8, 0, 2*Math.PI);
     CONTEXT_NEURAL_NETWORK.closePath();
@@ -296,7 +297,7 @@ function renderNeuralNetwork() {
   }
   // Render output layer.
   for (let i = 0; i < 4; i++) {
-    const intensity = (1 - evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].o.elements[i][0]) * 255;
+    const intensity = evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].o.elements[i][0] * 255;
     CONTEXT_NEURAL_NETWORK.beginPath();
     CONTEXT_NEURAL_NETWORK.arc(5*canvasSize/6, canvasSize/(4 + 1)*(i + 1), 8, 0, 2*Math.PI);
     CONTEXT_NEURAL_NETWORK.closePath();

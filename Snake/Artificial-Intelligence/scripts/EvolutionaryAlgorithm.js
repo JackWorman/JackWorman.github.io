@@ -31,14 +31,14 @@ export class EvolutionaryAlgorithm {
       }
     }
     // Copues
-    for (let i = 0; i < 2000; i++) {
+    for (let i = 0; i < 1950; i++) {
       const index = proportionalWeights[Math.floor(proportionalWeights.length * Math.random())];
       const copyNN = this.neuralNetworks[index];
       copyNN.mutate(this.mutationRate);
       this.neuralNetworks.push(copyNN);
     }
-    // Removes the old generation.
-    this.neuralNetworks.splice(0, 2000);
+    // Elitism: Remove all but the first 50 agents.
+    this.neuralNetworks.splice(50, 2000);
   }
 
   mutate() {

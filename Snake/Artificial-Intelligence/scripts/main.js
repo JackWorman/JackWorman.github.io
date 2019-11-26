@@ -8,19 +8,24 @@ const BUTTON_TOGGLE_SHOW_TRAINING = document.getElementById(`button-toggle-show-
 const SPAN_GEN_SPECIE = document.getElementById(`span-gen-specie`);
 const CANVAS_GAME = document.getElementById(`canvas-game`);
 const CONTEXT_GAME = CANVAS_GAME.getContext(`2d`);
+const CANVAS_NEURAL_NETWORK = document.getElementById(`canvas-neural-network`);
+const CONTEXT_NEURAL_NETWORK = CANVAS_NEURAL_NETWORK.getContext(`2d`);
 
-const FRAMES_PER_SECOND = 10;
 const MILLISECONDS_PER_SECOND = 1000;
-
+const FRAMES_PER_SECOND = 10;
 const GRID_SIZE = 30;
+
 const snake = new Snake();
 const pellet = new Pellet();
 const evolutionaryAlgorithm = new EvolutionaryAlgorithm(2000, 28, 16, 4);
 
-let started = false;
-let showTraining = true;
 let canvasSize = 600;
 CANVAS_GAME.width = CANVAS_GAME.height = canvasSize;
+CANVAS_NEURAL_NETWORK.width = 300;
+CANVAS_NEURAL_NETWORK.height = 600;
+
+let showTraining = true;
+let started = false;
 let hunger;
 let apples;
 let steps;

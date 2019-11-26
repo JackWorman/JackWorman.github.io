@@ -256,7 +256,7 @@ function renderNeuralNetwork() {
       } else {
         CONTEXT_NEURAL_NETWORK.strokeStyle = `rgb(0, 0, 255, ${intensity})`;
       }
-      CONTEXT_NEURAL_NETWORK.lineWidth = 10 * Math.abs(evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].w1.elements[j][i]);
+      // CONTEXT_NEURAL_NETWORK.lineWidth = 5 * Math.abs(evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].w1.elements[j][i]);
       CONTEXT_NEURAL_NETWORK.stroke();
     }
   }
@@ -273,10 +273,7 @@ function renderNeuralNetwork() {
       } else {
         CONTEXT_NEURAL_NETWORK.strokeStyle = `rgb(0, 0, 255, ${intensity})`;
       }
-      CONTEXT_NEURAL_NETWORK.lineWidth = 5 * Math.abs(evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].w2.elements[j][i]);
-      console.log(`=====`);
-      console.log(2 * Math.abs(evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].w2.elements[j][i]));
-      console.log(CONTEXT_NEURAL_NETWORK.lineWidth);
+      // CONTEXT_NEURAL_NETWORK.lineWidth = 5 * Math.abs(evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].w2.elements[j][i]);
       CONTEXT_NEURAL_NETWORK.stroke();
     }
   }

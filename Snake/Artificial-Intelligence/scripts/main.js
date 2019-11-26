@@ -50,7 +50,7 @@ async function reset() {
   if (started) {
     evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].fitness = steps + (Math.pow(2, apples) + Math.pow(apples, 2.1) * 500) - (Math.pow(apples, 1.2) * Math.pow(0.25 * steps, 1.3));
     // evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].fitness = steps + Math.pow(apples, 2) + Math.pow(2, apples);
-    console.log(evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie]);
+    // console.log(evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie]);
     evolutionaryAlgorithm.specie++;
     if (evolutionaryAlgorithm.specie === 2000) {
       evolutionaryAlgorithm.specie = 0;

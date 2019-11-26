@@ -243,6 +243,26 @@ function showInputLayer() {
 
 function renderNeuralNetwork() {
   CONTEXT_NEURAL_NETWORK.clearRect(0, 0, canvasSize, canvasSize);
+  // Render weights between input layer and hidden layer.
+  for (let i = 0; i < 28; i++) {
+    for (let j = 0; j < 16; j++) {
+      CONTEXT_NEURAL_NETWORK.beginPath();
+      CONTEXT_NEURAL_NETWORK.moveTo(canvasSize/6, canvasSize/(28 + 1)*(i + 1));
+      CONTEXT_NEURAL_NETWORK.lineTo(canvasSize/2, canvasSize/(16 + 1)*(j + 1));
+      CONTEXT_NEURAL_NETWORK.closePath();
+      CONTEXT_NEURAL_NETWORK.stroke();
+    }
+  }
+  // Render weights between hidden layer and output layer.
+  for (let i = 0; i < 16; i++) {
+    for (let j = 0; j < 4; j++) {
+      CONTEXT_NEURAL_NETWORK.beginPath();
+      CONTEXT_NEURAL_NETWORK.moveTo(canvasSize/2, canvasSize/(16 + 1)*(i + 1));
+      CONTEXT_NEURAL_NETWORK.lineTo(5*canvasSize/6, canvasSize/(4 + 1)*(j + 1));
+      CONTEXT_NEURAL_NETWORK.closePath();
+      CONTEXT_NEURAL_NETWORK.stroke();
+    }
+  }
   // Render input layer.
   for (let i = 0; i < 28; i++) {
     const intensity = (1 - evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].i.elements[i][0]) * 255;
@@ -275,25 +295,5 @@ function renderNeuralNetwork() {
     CONTEXT_NEURAL_NETWORK.stroke();
     CONTEXT_NEURAL_NETWORK.fillStyle = `rgb(${intensity}, ${intensity}, ${intensity})`;
     CONTEXT_NEURAL_NETWORK.fill();
-  }
-
-  for (let i = 0; i < 28; i++) {
-    for (let j = 0; j < 16; j++) {
-      CONTEXT_NEURAL_NETWORK.beginPath();
-      CONTEXT_NEURAL_NETWORK.moveTo(canvasSize/6, canvasSize/(28 + 1)*(i + 1));
-      CONTEXT_NEURAL_NETWORK.lineTo(canvasSize/2, canvasSize/(16 + 1)*(j + 1));
-      CONTEXT_NEURAL_NETWORK.closePath();
-      CONTEXT_NEURAL_NETWORK.stroke();
-    }
-  }
-
-  for (let i = 0; i < 16; i++) {
-    for (let j = 0; j < 4; j++) {
-      CONTEXT_NEURAL_NETWORK.beginPath();
-      CONTEXT_NEURAL_NETWORK.moveTo(canvasSize/2, canvasSize/(16 + 1)*(i + 1));
-      CONTEXT_NEURAL_NETWORK.lineTo(5*canvasSize/6, canvasSize/(4 + 1)*(j + 1));
-      CONTEXT_NEURAL_NETWORK.closePath();
-      CONTEXT_NEURAL_NETWORK.stroke();
-    }
   }
 }

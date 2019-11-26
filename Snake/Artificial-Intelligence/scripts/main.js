@@ -246,11 +246,11 @@ function renderNeuralNetwork() {
   // Render input layer.
   for (let i = 0; i < 28; i++) {
     const intensity = (1 - evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].i.elements[i][0]) * 255;
-    contextBrainsForeground.beginPath();
-    contextBrainsForeground.arc(canvasSize/6, canvasSize/28 * (i+1), 10, 0, 2*Math.PI);
-    contextBrainsForeground.strokeStyle = `rgb(${intensity}, ${intensity}, ${intensity})`;
-    contextBrainsForeground.stroke();
-    contextBrainsForeground.fillStyle = `rgb(${intensity}, ${intensity}, ${intensity})`;
-    contextBrainsForeground.fill();
+    CONTEXT_NEURAL_NETWORK.beginPath();
+    CONTEXT_NEURAL_NETWORK.arc(canvasSize/6, canvasSize/28 * (i+1), 10, 0, 2*Math.PI);
+    CONTEXT_NEURAL_NETWORK.strokeStyle = `rgb(${intensity}, ${intensity}, ${intensity})`;
+    CONTEXT_NEURAL_NETWORK.stroke();
+    CONTEXT_NEURAL_NETWORK.fillStyle = `rgb(${intensity}, ${intensity}, ${intensity})`;
+    CONTEXT_NEURAL_NETWORK.fill();
   }
 }

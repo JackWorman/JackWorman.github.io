@@ -16,7 +16,6 @@ const GRID_SIZE = 30;
 const snake = new Snake();
 const pellet = new Pellet();
 const evolutionaryAlgorithm = new EvolutionaryAlgorithm(2000, 28, 16, 4);
-evolutionaryAlgorithm.initializeAllNeuralNetworks();
 
 let hunger = 0;
 let started = false;
@@ -44,7 +43,6 @@ async function learningLoop() {
 async function reset() {
   // Runs the first time.
   if (started) {
-    // console.log(`Fitness: ${evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].fitness}`);
     evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].fitness = steps + (Math.pow(2, apples) + Math.pow(apples, 2.1) * 500) - (Math.pow(apples, 1.2) * Math.pow(0.25 * steps, 1.3));
     evolutionaryAlgorithm.specie++;
     if (evolutionaryAlgorithm.specie === 2000) {
@@ -59,6 +57,7 @@ async function reset() {
     }
   } else {
     started = true;
+    evolutionaryAlgorithm.initializeAllNeuralNetworks();
   }
   SPAN_GEN_SPECIE.textContent = `Generation: ${evolutionaryAlgorithm.generation}, Species: ${evolutionaryAlgorithm.specie + 1}/2000`;
   snake.reset(GRID_SIZE / 2, GRID_SIZE / 2);
@@ -87,15 +86,13 @@ async function gameLoop() {
     }
     return false;
   }
+  steps++;
   if (snake.checkPelletEaten(pellet)) {
-    // evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].fitness += 10;
     snake.grow();
     pellet.placePellet(GRID_SIZE, snake.bodySegments);
     hunger = 0;
     apples++;
   }
-  steps++;
-  // evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].fitness += 1;
   if (showTraining) {
     window.requestAnimationFrame(render);
     await sleep(MILLISECONDS_PER_SECOND / FRAMES_PER_SECOND);

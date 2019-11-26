@@ -38,7 +38,7 @@ export class EvolutionaryAlgorithm {
       this.neuralNetworks.push(copyNN);
     }
     // Elitism: Remove all but the first 50 agents.
-    this.neuralNetworks.splice(50, 2000);
+    this.neuralNetworks.splice(50, 1950);
   }
 
   mutate() {

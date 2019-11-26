@@ -17,14 +17,13 @@ const snake = new Snake();
 const pellet = new Pellet();
 const evolutionaryAlgorithm = new EvolutionaryAlgorithm(2000, 28, 16, 4);
 
-let hunger = 0;
 let started = false;
 let showTraining = true;
 let canvasSize = 600;
 CANVAS_GAME.width = CANVAS_GAME.height = canvasSize;
-
-let apples = 0;
-let steps = 0;
+let hunger;
+let apples;
+let steps;
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -44,7 +43,7 @@ async function reset() {
   // Runs the first time.
   if (started) {
     // evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].fitness = steps + (Math.pow(2, apples) + Math.pow(apples, 2.1) * 500) - (Math.pow(apples, 1.2) * Math.pow(0.25 * steps, 1.3));
-    evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].fitness = steps + 10*apples;
+    evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].fitness = steps + Math.pow(apples, 2) + Math.pow(2, apples);
     evolutionaryAlgorithm.specie++;
     if (evolutionaryAlgorithm.specie === 2000) {
       evolutionaryAlgorithm.specie = 0;

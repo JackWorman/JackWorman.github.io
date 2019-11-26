@@ -35,6 +35,8 @@ function sleep(ms) {
 
 BUTTON_TOGGLE_SHOW_TRAINING.addEventListener(`click`, () => {
   showTraining = !showTraining;
+  CONTEXT_GAME.clearRect(0, 0, canvasSize, canvasSize);
+  CONTEXT_NEURAL_NETWORK.clearRect(0, 0, canvasSize, canvasSize);
 });
 
 async function learningLoop() {
@@ -74,6 +76,7 @@ async function reset() {
 
   if (showTraining) {
     window.requestAnimationFrame(render);
+    window.requestAnimationFrame(renderNeuralNetwork);
     await sleep(MILLISECONDS_PER_SECOND / FRAMES_PER_SECOND);
   }
 }
@@ -99,6 +102,7 @@ async function gameLoop() {
   }
   if (showTraining) {
     window.requestAnimationFrame(render);
+    window.requestAnimationFrame(renderNeuralNetwork);
     await sleep(MILLISECONDS_PER_SECOND / FRAMES_PER_SECOND);
   }
   return true;
@@ -234,5 +238,19 @@ function showInputLayer() {
     for (let j = 0; j < 3; j++) {
       console.log(`${DETECTORS[j]}: ${inputLayer[3*i + j][0]}`);
     }
+  }
+}
+
+function renderNeuralNetwork() {
+  CONTEXT_NEURAL_NETWORK.clearRect(0, 0, canvasSize, canvasSize);
+  // Render input layer.
+  for (let i = 0; i < 28; i++) {
+    const intensity = (1 - evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].i.elements[i][0]) * 255;
+    contextBrainsForeground.beginPath();
+    contextBrainsForeground.arc(canvasSize/6, canvasSize/28 * (i+1), 10, 0, 2*Math.PI);
+    contextBrainsForeground.strokeStyle = `rgb(${intensity}, ${intensity}, ${intensity})`;
+    contextBrainsForeground.stroke();
+    contextBrainsForeground.fillStyle = `rgb(${intensity}, ${intensity}, ${intensity})`;
+    contextBrainsForeground.fill();
   }
 }

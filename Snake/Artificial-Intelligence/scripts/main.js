@@ -266,7 +266,7 @@ function renderNeuralNetwork() {
       CONTEXT_NEURAL_NETWORK.moveTo(canvasSize/2, canvasSize/(16 + 1)*(i + 1));
       CONTEXT_NEURAL_NETWORK.lineTo(5*canvasSize/6, canvasSize/(4 + 1)*(j + 1));
       CONTEXT_NEURAL_NETWORK.closePath();
-      const intensity = evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].hL.elements[i][0] * evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].w2.elements[j][i];
+      const intensity = evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].hL.elements[i][0] * Math.abs(evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].w2.elements[j][i]);
       if (evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].w2.elements[j][i] < 0) {
         CONTEXT_NEURAL_NETWORK.strokeStyle = `rgb(255, 0, 0, ${intensity})`;
       } else {

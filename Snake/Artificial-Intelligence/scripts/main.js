@@ -57,7 +57,7 @@ async function reset() {
     }
   } else {
     started = true;
-    evolutionaryAlgorithm.initializeAllNeuralNetworks();
+    evolutionaryAlgorithm.initialize();
   }
   SPAN_GEN_SPECIE.textContent = `Generation: ${evolutionaryAlgorithm.generation}, Species: ${evolutionaryAlgorithm.specie + 1}/2000`;
   snake.reset(GRID_SIZE / 2, GRID_SIZE / 2);

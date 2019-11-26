@@ -13,10 +13,30 @@ export class EvolutionaryAlgorithm {
     this.specie = 0;
   }
 
-  initializeAllNeuralNetworks() {
+  initialize() {
     for (const neuralNetwork of this.neuralNetworks) {
       neuralNetwork.initializeWeightsAndBiases();
     }
+  }
+
+  evaluateFitness() {
+
+  }
+
+  selectParents() {
+
+  }
+
+  crossover() {
+
+  }
+
+  mutate2() {
+
+  }
+
+  elitism() {
+
   }
 
   sort() {

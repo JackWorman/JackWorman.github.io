@@ -21,14 +21,14 @@ export class NeuralNetwork {
     for (let row = 0; row < this.w1.numRows; row++) {
       for (let col = 0; col < this.w1.numCols; col++) {
         // this.w1.elements[row][col] = nextGaussianRandom();
-        this.w1.elements[row][col] = Math.floor(Math.random() * 2) - 1;
+        this.w1.elements[row][col] = Math.random()*2 - 1;
       }
       this.b1.elements[row][0] = 0;
     }
     for (let row = 0; row < this.w2.numRows; row++) {
       for (let col = 0; col < this.w2.numCols; col++) {
         // this.w2.elements[row][col] = nextGaussianRandom();
-        this.w2.elements[row][col] = Math.floor(Math.random() * 2) - 1;
+        this.w2.elements[row][col] = Math.random()*2 - 1;
       }
       this.b2.elements[row][0] = 0;
     }

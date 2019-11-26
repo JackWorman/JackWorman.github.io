@@ -250,10 +250,11 @@ function renderNeuralNetwork() {
       CONTEXT_NEURAL_NETWORK.moveTo(canvasSize/6, canvasSize/(28 + 1)*(i + 1));
       CONTEXT_NEURAL_NETWORK.lineTo(canvasSize/2, canvasSize/(16 + 1)*(j + 1));
       CONTEXT_NEURAL_NETWORK.closePath();
+      const intensity = evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].i.elements[i][0];
       if (evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].w1.elements[j][i] < 0) {
-        CONTEXT_NEURAL_NETWORK.strokeStyle = `rgb(255, 0, 0)`;
+        CONTEXT_NEURAL_NETWORK.strokeStyle = `rgb(255, 0, 0, ${intensity})`;
       } else {
-        CONTEXT_NEURAL_NETWORK.strokeStyle = `rgb(0, 0, 255)`;
+        CONTEXT_NEURAL_NETWORK.strokeStyle = `rgb(0, 0, 255, ${intensity})`;
       }
       CONTEXT_NEURAL_NETWORK.stroke();
     }
@@ -265,10 +266,11 @@ function renderNeuralNetwork() {
       CONTEXT_NEURAL_NETWORK.moveTo(canvasSize/2, canvasSize/(16 + 1)*(i + 1));
       CONTEXT_NEURAL_NETWORK.lineTo(5*canvasSize/6, canvasSize/(4 + 1)*(j + 1));
       CONTEXT_NEURAL_NETWORK.closePath();
+      const intensity = evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].i.elements[i][0];
       if (evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].w2.elements[j][i] < 0) {
-        CONTEXT_NEURAL_NETWORK.strokeStyle = `rgb(255, 0, 0)`;
+        CONTEXT_NEURAL_NETWORK.strokeStyle = `rgb(255, 0, 0, ${intensity})`;
       } else {
-        CONTEXT_NEURAL_NETWORK.strokeStyle = `rgb(0, 0, 255)`;
+        CONTEXT_NEURAL_NETWORK.strokeStyle = `rgb(0, 0, 255, ${intensity})`;
       }
       CONTEXT_NEURAL_NETWORK.stroke();
     }

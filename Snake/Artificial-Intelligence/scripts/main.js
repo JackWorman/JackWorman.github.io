@@ -18,7 +18,7 @@ const pellet = new Pellet();
 const evolutionaryAlgorithm = new EvolutionaryAlgorithm(2000, 28, 16, 4);
 evolutionaryAlgorithm.initializeAllNeuralNetworks();
 
-let distanceTraveled;
+let hunger = 0;
 let started = false;
 let showTraining = true;
 let canvasSize = 600;
@@ -55,9 +55,7 @@ async function reset() {
       console.log(`==============================`);
       console.log(`Generation: ${evolutionaryAlgorithm.generation}`);
       console.log(`Best Fitness: ${evolutionaryAlgorithm.neuralNetworks[0].fitness}`);
-      // evolutionaryAlgorithm.mutate();
-      evolutionaryAlgorithm.proportionalSelection();
-      // evolutionaryAlgorithm.clearFitness();
+      evolutionaryAlgorithm.proportionalSelectionMutate();
     }
   } else {
     started = true;
@@ -65,12 +63,11 @@ async function reset() {
   SPAN_GEN_SPECIE.textContent = `Generation: ${evolutionaryAlgorithm.generation}, Species: ${evolutionaryAlgorithm.specie + 1}/2000`;
   snake.reset(GRID_SIZE / 2, GRID_SIZE / 2);
   pellet.placePellet(GRID_SIZE, snake.bodySegments);
-  distanceTraveled = 0;
+  hunger = 0;
   apples = 0;
   steps = 0;
 
   evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].fitness = 0;
-  // console.log(`Starting Fitness ${evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].fitness}`);
 
   if (showTraining) {
     window.requestAnimationFrame(render);
@@ -83,7 +80,7 @@ async function gameLoop() {
   evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].calculateOutputs();
   snake.direction = getDirectionFromOutputLayer();
   snake.move();
-  if (snake.checkCollison(GRID_SIZE) || ++distanceTraveled >= 250) {
+  if (snake.checkCollison(GRID_SIZE) || ++hunger === 250) {
     if (showTraining) {
       window.requestAnimationFrame(render);
       await sleep(MILLISECONDS_PER_SECOND / FRAMES_PER_SECOND);
@@ -94,7 +91,7 @@ async function gameLoop() {
     // evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].fitness += 10;
     snake.grow();
     pellet.placePellet(GRID_SIZE, snake.bodySegments);
-    distanceTraveled = 0;
+    hunger = 0;
     apples++;
   }
   steps++;

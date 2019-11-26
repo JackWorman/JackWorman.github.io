@@ -248,6 +248,7 @@ function renderNeuralNetwork() {
     const intensity = (1 - evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].i.elements[i][0]) * 255;
     CONTEXT_NEURAL_NETWORK.beginPath();
     CONTEXT_NEURAL_NETWORK.arc(canvasSize/6, canvasSize/(28 + 1)*(i + 1), 8, 0, 2*Math.PI);
+    CONTEXT_NEURAL_NETWORK.closePath();
     CONTEXT_NEURAL_NETWORK.strokeStyle = `rgb(255, 255, 255)`;
     CONTEXT_NEURAL_NETWORK.stroke();
     CONTEXT_NEURAL_NETWORK.fillStyle = `rgb(${intensity}, ${intensity}, ${intensity})`;
@@ -258,6 +259,7 @@ function renderNeuralNetwork() {
     const intensity = (1 - evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].hL.elements[i][0]) * 255;
     CONTEXT_NEURAL_NETWORK.beginPath();
     CONTEXT_NEURAL_NETWORK.arc(canvasSize/2, canvasSize/(16 + 1)*(i + 1), 8, 0, 2*Math.PI);
+    CONTEXT_NEURAL_NETWORK.closePath();
     CONTEXT_NEURAL_NETWORK.strokeStyle = `rgb(255, 255, 255)`;
     CONTEXT_NEURAL_NETWORK.stroke();
     CONTEXT_NEURAL_NETWORK.fillStyle = `rgb(${intensity}, ${intensity}, ${intensity})`;
@@ -268,9 +270,30 @@ function renderNeuralNetwork() {
     const intensity = (1 - evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].o.elements[i][0]) * 255;
     CONTEXT_NEURAL_NETWORK.beginPath();
     CONTEXT_NEURAL_NETWORK.arc(5*canvasSize/6, canvasSize/(4 + 1)*(i + 1), 8, 0, 2*Math.PI);
+    CONTEXT_NEURAL_NETWORK.closePath();
     CONTEXT_NEURAL_NETWORK.strokeStyle = `rgb(255, 255, 255)`;
     CONTEXT_NEURAL_NETWORK.stroke();
     CONTEXT_NEURAL_NETWORK.fillStyle = `rgb(${intensity}, ${intensity}, ${intensity})`;
     CONTEXT_NEURAL_NETWORK.fill();
+  }
+
+  for (let i = 0; i < 28; i++) {
+    for (let j = 0; j < 16; j++) {
+      CONTEXT_NEURAL_NETWORK.beginPath();
+      CONTEXT_NEURAL_NETWORK.moveTo(canvasSize/6, canvasSize/(28 + 1)*(i + 1));
+      CONTEXT_NEURAL_NETWORK.lineTo(canvasSize/2, canvasSize/(16 + 1)*(j + 1));
+      CONTEXT_NEURAL_NETWORK.closePath();
+      CONTEXT_NEURAL_NETWORK.stroke();
+    }
+  }
+
+  for (let i = 0; i < 16; i++) {
+    for (let j = 0; j < 4; j++) {
+      CONTEXT_NEURAL_NETWORK.beginPath();
+      CONTEXT_NEURAL_NETWORK.moveTo(canvasSize/2, canvasSize/(16 + 1)*(i + 1));
+      CONTEXT_NEURAL_NETWORK.lineTo(5*canvasSize/6, canvasSize/(4 + 1)*(j + 1));
+      CONTEXT_NEURAL_NETWORK.closePath();
+      CONTEXT_NEURAL_NETWORK.stroke();
+    }
   }
 }

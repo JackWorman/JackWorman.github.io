@@ -250,6 +250,11 @@ function renderNeuralNetwork() {
       CONTEXT_NEURAL_NETWORK.moveTo(canvasSize/6, canvasSize/(28 + 1)*(i + 1));
       CONTEXT_NEURAL_NETWORK.lineTo(canvasSize/2, canvasSize/(16 + 1)*(j + 1));
       CONTEXT_NEURAL_NETWORK.closePath();
+      if (evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].w.elements[j][i] < 0) {
+        CONTEXT_NEURAL_NETWORK.strokeStyle = `rgb(255, 0, 0)`;
+      } else {
+        CONTEXT_NEURAL_NETWORK.strokeStyle = `rgb(0, 0, 255)`;
+      }
       CONTEXT_NEURAL_NETWORK.stroke();
     }
   }
@@ -269,7 +274,6 @@ function renderNeuralNetwork() {
     CONTEXT_NEURAL_NETWORK.beginPath();
     CONTEXT_NEURAL_NETWORK.arc(canvasSize/6, canvasSize/(28 + 1)*(i + 1), 8, 0, 2*Math.PI);
     CONTEXT_NEURAL_NETWORK.closePath();
-    CONTEXT_NEURAL_NETWORK.strokeStyle = `rgb(255, 255, 255)`;
     CONTEXT_NEURAL_NETWORK.stroke();
     CONTEXT_NEURAL_NETWORK.fillStyle = `rgb(${intensity}, ${intensity}, ${intensity})`;
     CONTEXT_NEURAL_NETWORK.fill();

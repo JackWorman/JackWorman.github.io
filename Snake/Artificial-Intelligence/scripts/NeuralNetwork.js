@@ -20,20 +20,22 @@ export class NeuralNetwork {
   initializeWeightsAndBiases() {
     for (let row = 0; row < this.w1.numRows; row++) {
       for (let col = 0; col < this.w1.numCols; col++) {
-        this.w1.elements[row][col] = nextGaussianRandom();
+        // this.w1.elements[row][col] = nextGaussianRandom();
+        this.w1.elements[row][col] = Math.floor(Math.random() * 2) - 1;
       }
       this.b1.elements[row][0] = 0;
     }
     for (let row = 0; row < this.w2.numRows; row++) {
       for (let col = 0; col < this.w2.numCols; col++) {
-        this.w2.elements[row][col] = nextGaussianRandom();
+        // this.w2.elements[row][col] = nextGaussianRandom();
+        this.w2.elements[row][col] = Math.floor(Math.random() * 2) - 1;
       }
       this.b2.elements[row][0] = 0;
     }
   }
 
   calculateOutputs() {
-    this.hL = this.relu(Matrix.add(Matrix.multiply(this.w1, this.i), this.b1));
+    this.hL = this.sigmoid(Matrix.add(Matrix.multiply(this.w1, this.i), this.b1));
     this.o = this.sigmoid(Matrix.add(Matrix.multiply(this.w2, this.hL), this.b2));
   }
 

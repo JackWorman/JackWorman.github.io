@@ -49,7 +49,7 @@ async function learningLoop() {
 async function reset() {
   // Runs the first time.
   if (started) {
-    evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].fitness = steps + (Math.pow(2, apples) + Math.pow(apples, 2.1) * 500) - (Math.pow(apples, 1.2) * Math.pow(0.25 * steps, 1.3));
+    evolutionaryAlgorithm.evaluateFitness(apples, steps);
     // evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].fitness = steps + Math.pow(apples, 2) + Math.pow(2, apples);
     // console.log(evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie]);
     evolutionaryAlgorithm.specie++;
@@ -90,6 +90,8 @@ async function gameLoop() {
   evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].calculateOutputs();
   snake.direction = getDirectionFromOutputLayer(evolutionaryAlgorithm, snake);
   snake.move();
+  steps++;
+  // Check if the snake dies.
   if (snake.checkCollison(GRID_SIZE) || ++hunger === 250) {
     if (showTraining) {
       window.requestAnimationFrame(() => {
@@ -98,14 +100,13 @@ async function gameLoop() {
       });
       await sleep(MILLISECONDS_PER_SECOND / FRAMES_PER_SECOND);
     }
-    return false;
+    return false; // The snake is not alive.
   }
-  steps++;
   if (snake.checkPelletEaten(pellet)) {
+    apples++;
     snake.grow();
     pellet.placePellet(GRID_SIZE, snake.bodySegments);
     hunger = 0;
-    apples++;
   }
   if (showTraining) {
     window.requestAnimationFrame(() => {
@@ -114,7 +115,7 @@ async function gameLoop() {
     });
     await sleep(MILLISECONDS_PER_SECOND / FRAMES_PER_SECOND);
   }
-  return true;
+  return true; // The snake is alive.
 }
 
 function render() {

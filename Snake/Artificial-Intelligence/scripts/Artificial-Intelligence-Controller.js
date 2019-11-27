@@ -1,5 +1,7 @@
 "use strict";
 
+import {GRID_SIZE} from "./main.js";
+
 export function updateInputLayer(evolutionaryAlgorithm, snake, pellet) {
   const inputLayer = evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].i.elements;
   // Distance from wall, body, and fruit nodes.

@@ -14,7 +14,7 @@ const CONTEXT_NEURAL_NETWORK = CANVAS_NEURAL_NETWORK.getContext(`2d`);
 
 const MILLISECONDS_PER_SECOND = 1000;
 const FRAMES_PER_SECOND = 10;
-const GRID_SIZE = 30;
+export const GRID_SIZE = 30;
 
 const snake = new Snake();
 const pellet = new Pellet();

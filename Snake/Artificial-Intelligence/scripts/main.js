@@ -61,7 +61,11 @@ async function reset() {
       console.log(`==============================`);
       console.log(`Generation: ${evolutionaryAlgorithm.generation}`);
       console.log(`Best Fitness: ${evolutionaryAlgorithm.neuralNetworks[0].fitness}`);
-      evolutionaryAlgorithm.proportionalSelectionMutate();
+      // evolutionaryAlgorithm.proportionalSelectionMutate();
+      evolutionaryAlgorithm.selectParents();
+      evolutionaryAlgorithm.crossover();
+      evolutionaryAlgorithm.mutate2();
+      evolutionaryAlgorithm.elitism();
     }
   } else {
     started = true;

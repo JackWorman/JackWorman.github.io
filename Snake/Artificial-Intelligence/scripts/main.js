@@ -30,6 +30,8 @@ let hunger;
 let apples;
 let steps;
 
+let bestFitnesses = [];
+
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
@@ -50,21 +52,20 @@ async function reset() {
   // Runs the first time.
   if (started) {
     evolutionaryAlgorithm.evaluateFitness(apples, steps);
-    // evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].fitness = steps + Math.pow(apples, 2) + Math.pow(2, apples);
-    // console.log(evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie]);
     evolutionaryAlgorithm.specie++;
     if (evolutionaryAlgorithm.specie === 2000) {
       evolutionaryAlgorithm.specie = 0;
       evolutionaryAlgorithm.generation++;
 
       evolutionaryAlgorithm.sort();
+      bestFitnesses.push(evolutionaryAlgorithm.neuralNetworks[0].fitness);
       console.log(`==============================`);
       console.log(`Generation: ${evolutionaryAlgorithm.generation}`);
       console.log(`Best Fitness: ${evolutionaryAlgorithm.neuralNetworks[0].fitness}`);
-      // evolutionaryAlgorithm.proportionalSelectionMutate();
+      console.log(`Average Best Fitness: ${bestFitnesses.reduce((a, b) => a + b, 0) / bestFitnesses.length}`);
       evolutionaryAlgorithm.selectParents();
       evolutionaryAlgorithm.crossover();
-      evolutionaryAlgorithm.mutate2();
+      evolutionaryAlgorithm.mutate();
       evolutionaryAlgorithm.elitism();
     }
   } else {

@@ -13,8 +13,8 @@ export class EvolutionaryAlgorithm {
     this.specie = 0;
 
 
-      this.parent1s = [];
-      this.parent2s = [];
+    this.parent1s = [];
+    this.parent2s = [];
   }
 
   initialize() {
@@ -29,6 +29,10 @@ export class EvolutionaryAlgorithm {
       steps
       + (Math.pow(2, apples) + Math.pow(apples, 2.1) * 500)
       - (Math.pow(apples, 1.2) * Math.pow(0.25 * steps, 1.3));
+  }
+
+  sort() {
+    this.neuralNetworks.sort((a, b) => { return b.fitness - a.fitness; });
   }
 
   selectParents() {
@@ -83,7 +87,7 @@ export class EvolutionaryAlgorithm {
     }
   }
 
-  mutate2() {
+  mutate() {
     for (let i = 2000; i < this.neuralNetworks.length; i++) {
       this.neuralNetworks[i].mutate(this.mutationRate);
     }
@@ -91,41 +95,5 @@ export class EvolutionaryAlgorithm {
 
   elitism() {
     this.neuralNetworks.splice(50, 1950);
-  }
-
-  sort() {
-    this.neuralNetworks.sort((a, b) => { return b.fitness - a.fitness; });
-  }
-
-  proportionalSelectionMutate() {
-    const proportionalWeights = [];
-    for (let i = 0; i < this.neuralNetworks.length; i++) {
-      for (let j = 0; j < this.neuralNetworks[i].fitness; j++) {
-        proportionalWeights.push(i);
-      }
-    }
-    // Copues
-    for (let i = 0; i < 1950; i++) {
-      const index = proportionalWeights[Math.floor(proportionalWeights.length * Math.random())];
-      const copyNN = this.neuralNetworks[index];
-      copyNN.mutate(this.mutationRate);
-      this.neuralNetworks.push(copyNN);
-    }
-    // Elitism: Remove all but the first 50 agents.
-    this.neuralNetworks.splice(50, 1950);
-  }
-
-  mutate() {
-    // Remove the last 1950 neural networks.
-    this.neuralNetworks.splice(50);
-    const copy = this.neuralNetworks.slice(0);
-    // Copy the first 200 neural networks 9 times.
-    for (let i = 0; i < 39; i++) {
-      this.neuralNetworks = this.neuralNetworks.concat(copy);
-    }
-    // Mutate the last 1800 neural networks.
-    for (let i = 50; i < this.neuralNetworks.length; i++) {
-      this.neuralNetworks[i].mutate(this.mutationRate);
-    }
   }
 }

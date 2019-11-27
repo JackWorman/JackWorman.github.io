@@ -90,7 +90,7 @@ export function getDirectionFromOutputLayer(evolutionaryAlgorithm, snake) {
   }
 }
 
-export function renderNeuralNetwork(evolutionaryAlgorithm) {
+export function renderNeuralNetwork(evolutionaryAlgorithm, snake) {
   CONTEXT_NEURAL_NETWORK.clearRect(0, 0, canvasSize, canvasSize);
   // Render weights between input layer and hidden layer.
   for (let i = 0; i < 28; i++) {
@@ -158,6 +158,42 @@ export function renderNeuralNetwork(evolutionaryAlgorithm) {
     CONTEXT_NEURAL_NETWORK.lineWidth = 1;
     CONTEXT_NEURAL_NETWORK.stroke();
     CONTEXT_NEURAL_NETWORK.fillStyle = `rgb(${intensity}, ${intensity}, ${intensity})`;
+    if (snake.direction === `left` && i === 0) {
+      CONTEXT_NEURAL_NETWORK.fillStyle = `rgb(0, 255, 0)`;
+    } else if (snake.direction === `up` && i === 1) {
+      CONTEXT_NEURAL_NETWORK.fillStyle = `rgb(0, 255, 0)`;
+    } else if (snake.direction === `right` && i === 2) {
+      CONTEXT_NEURAL_NETWORK.fillStyle = `rgb(0, 255, 0)`;
+    } else if (snake.direction === `down` && i === 3) {
+      CONTEXT_NEURAL_NETWORK.fillStyle = `rgb(0, 255, 0)`;
+    }
     CONTEXT_NEURAL_NETWORK.fill();
   }
+}
+
+function showInputLayer() {
+  const DIRECTIONS = [
+    `Up-Left`,
+    `Left`,
+    `Down-Left`,
+    `Up`,
+    `Down`,
+    `Up-Right`,
+    `Right`,
+    `Down-Right`
+  ];
+  const DETECTORS = [
+    `Wall`,
+    `Body`,
+    `Fruit`
+  ];
+  const inputLayer = evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].i.elements;
+  console.log(`====================`);
+  for (let i = 0; i < DIRECTIONS.length; i++) {
+    console.log(`***${DIRECTIONS[i]}***`);
+    for (let j = 0; j < 3; j++) {
+      console.log(`${DETECTORS[j]}: ${inputLayer[3*i + j][0]}`);
+    }
+  }
+  alert();
 }

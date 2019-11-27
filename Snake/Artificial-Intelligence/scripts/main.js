@@ -79,7 +79,7 @@ async function reset() {
   if (showTraining) {
     window.requestAnimationFrame(() => {
       render();
-      renderNeuralNetwork(evolutionaryAlgorithm);
+      renderNeuralNetwork(evolutionaryAlgorithm, snake);
     });
     await sleep(MILLISECONDS_PER_SECOND / FRAMES_PER_SECOND);
   }
@@ -87,7 +87,6 @@ async function reset() {
 
 async function gameLoop() {
   updateInputLayer(evolutionaryAlgorithm, snake, pellet);
-  showInputLayer();
   evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].calculateOutputs();
   snake.direction = getDirectionFromOutputLayer(evolutionaryAlgorithm, snake);
   snake.move();
@@ -95,7 +94,7 @@ async function gameLoop() {
     if (showTraining) {
       window.requestAnimationFrame(() => {
         render();
-        renderNeuralNetwork(evolutionaryAlgorithm);
+        renderNeuralNetwork(evolutionaryAlgorithm, snake);
       });
       await sleep(MILLISECONDS_PER_SECOND / FRAMES_PER_SECOND);
     }
@@ -111,7 +110,7 @@ async function gameLoop() {
   if (showTraining) {
     window.requestAnimationFrame(() => {
       render();
-      renderNeuralNetwork(evolutionaryAlgorithm);
+      renderNeuralNetwork(evolutionaryAlgorithm, snake);
     });
     await sleep(MILLISECONDS_PER_SECOND / FRAMES_PER_SECOND);
   }
@@ -130,30 +129,3 @@ function render() {
 }
 
 window.addEventListener(`load`, learningLoop);
-
-function showInputLayer() {
-  const DIRECTIONS = [
-    `Up-Left`,
-    `Left`,
-    `Down-Left`,
-    `Up`,
-    `Down`,
-    `Up-Right`,
-    `Right`,
-    `Down-Right`
-  ];
-  const DETECTORS = [
-    `Wall`,
-    `Body`,
-    `Fruit`
-  ];
-  const inputLayer = evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].i.elements;
-  console.log(`====================`);
-  for (let i = 0; i < DIRECTIONS.length; i++) {
-    console.log(`***${DIRECTIONS[i]}***`);
-    for (let j = 0; j < 3; j++) {
-      console.log(`${DETECTORS[j]}: ${inputLayer[3*i + j][0]}`);
-    }
-  }
-  alert();
-}

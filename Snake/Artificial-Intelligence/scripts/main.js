@@ -20,7 +20,7 @@ const snake = new Snake();
 const pellet = new Pellet();
 const evolutionaryAlgorithm = new EvolutionaryAlgorithm(2000, 28, 16, 4);
 
-let canvasSize = 600;
+export let canvasSize = 600;
 CANVAS_GAME.width = CANVAS_GAME.height = canvasSize;
 CANVAS_NEURAL_NETWORK.width = CANVAS_NEURAL_NETWORK.height = 600;
 
@@ -79,7 +79,7 @@ async function reset() {
   if (showTraining) {
     window.requestAnimationFrame(() => {
       render();
-      renderNeuralNetwork();
+      renderNeuralNetwork(evolutionaryAlgorithm);
     });
     await sleep(MILLISECONDS_PER_SECOND / FRAMES_PER_SECOND);
   }
@@ -94,7 +94,7 @@ async function gameLoop() {
     if (showTraining) {
       window.requestAnimationFrame(() => {
         render();
-        renderNeuralNetwork();
+        renderNeuralNetwork(evolutionaryAlgorithm);
       });
       await sleep(MILLISECONDS_PER_SECOND / FRAMES_PER_SECOND);
     }
@@ -110,7 +110,7 @@ async function gameLoop() {
   if (showTraining) {
     window.requestAnimationFrame(() => {
       render();
-      renderNeuralNetwork();
+      renderNeuralNetwork(evolutionaryAlgorithm);
     });
     await sleep(MILLISECONDS_PER_SECOND / FRAMES_PER_SECOND);
   }
@@ -127,25 +127,6 @@ function render() {
   pellet.render(fillSquare);
   snake.render(fillSquare);
 }
-
-// function getDirectionFromOutputLayer() {
-//   const outputLayer = evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].o.elements;
-//   const outputLayerDirections = [
-//     {direction: `left`,  intensity: outputLayer[0][0]},
-//     {direction: `up`,    intensity: outputLayer[1][0]},
-//     {direction: `right`, intensity: outputLayer[2][0]},
-//     {direction: `down`,  intensity: outputLayer[3][0]}
-//   ];
-//   outputLayerDirections.sort((a, b) => { return b.intensity - a.intensity; });
-//   if ( snake.direction === `left`  && outputLayerDirections[0].direction === `right`
-//     || snake.direction === `up`    && outputLayerDirections[0].direction === `down`
-//     || snake.direction === `right` && outputLayerDirections[0].direction === `left`
-//     || snake.direction === `down`  && outputLayerDirections[0].direction === `up`) {
-//     return outputLayerDirections[1].direction;
-//   } else {
-//     return outputLayerDirections[0].direction;
-//   }
-// }
 
 window.addEventListener(`load`, learningLoop);
 
@@ -172,79 +153,5 @@ function showInputLayer() {
     for (let j = 0; j < 3; j++) {
       console.log(`${DETECTORS[j]}: ${inputLayer[3*i + j][0]}`);
     }
-  }
-}
-
-function renderNeuralNetwork() {
-  CONTEXT_NEURAL_NETWORK.clearRect(0, 0, canvasSize, canvasSize);
-  // Render weights between input layer and hidden layer.
-  for (let i = 0; i < 28; i++) {
-    for (let j = 0; j < 16; j++) {
-      CONTEXT_NEURAL_NETWORK.beginPath();
-      CONTEXT_NEURAL_NETWORK.moveTo(canvasSize/6, canvasSize/(28 + 1)*(i + 1));
-      CONTEXT_NEURAL_NETWORK.lineTo(canvasSize/2, canvasSize/(16 + 1)*(j + 1));
-      CONTEXT_NEURAL_NETWORK.closePath();
-      const intensity = evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].i.elements[i][0];
-      if (evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].w1.elements[j][i] < 0) {
-        CONTEXT_NEURAL_NETWORK.strokeStyle = `rgb(255, 0, 0, ${intensity})`;
-      } else {
-        CONTEXT_NEURAL_NETWORK.strokeStyle = `rgb(0, 0, 255, ${intensity})`;
-      }
-      // CONTEXT_NEURAL_NETWORK.lineWidth = 5 * Math.abs(evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].w1.elements[j][i]);
-      CONTEXT_NEURAL_NETWORK.stroke();
-    }
-  }
-  // Render weights between hidden layer and output layer.
-  for (let i = 0; i < 16; i++) {
-    for (let j = 0; j < 4; j++) {
-      CONTEXT_NEURAL_NETWORK.beginPath();
-      CONTEXT_NEURAL_NETWORK.moveTo(canvasSize/2, canvasSize/(16 + 1)*(i + 1));
-      CONTEXT_NEURAL_NETWORK.lineTo(5*canvasSize/6, canvasSize/(4 + 1)*(j + 1));
-      CONTEXT_NEURAL_NETWORK.closePath();
-      const intensity = evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].hL.elements[i][0];
-      if (evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].w2.elements[j][i] < 0) {
-        CONTEXT_NEURAL_NETWORK.strokeStyle = `rgb(255, 0, 0, ${intensity})`;
-      } else {
-        CONTEXT_NEURAL_NETWORK.strokeStyle = `rgb(0, 0, 255, ${intensity})`;
-      }
-      // CONTEXT_NEURAL_NETWORK.lineWidth = 5 * Math.abs(evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].w2.elements[j][i]);
-      CONTEXT_NEURAL_NETWORK.stroke();
-    }
-  }
-  // Render input layer.
-  for (let i = 0; i < 28; i++) {
-    const intensity = evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].i.elements[i][0] * 255;
-    CONTEXT_NEURAL_NETWORK.beginPath();
-    CONTEXT_NEURAL_NETWORK.arc(canvasSize/6, canvasSize/(28 + 1)*(i + 1), 8, 0, 2*Math.PI);
-    CONTEXT_NEURAL_NETWORK.closePath();
-    CONTEXT_NEURAL_NETWORK.strokeStyle = `rgb(255, 255, 255)`;
-    CONTEXT_NEURAL_NETWORK.lineWidth = 1;
-    CONTEXT_NEURAL_NETWORK.stroke();
-    CONTEXT_NEURAL_NETWORK.fillStyle = `rgb(${intensity}, ${intensity}, ${intensity})`;
-    CONTEXT_NEURAL_NETWORK.fill();
-  }
-  // Render hidden layer.
-  for (let i = 0; i < 16; i++) {
-    const intensity = evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].hL.elements[i][0] * 255;
-    CONTEXT_NEURAL_NETWORK.beginPath();
-    CONTEXT_NEURAL_NETWORK.arc(canvasSize/2, canvasSize/(16 + 1)*(i + 1), 8, 0, 2*Math.PI);
-    CONTEXT_NEURAL_NETWORK.closePath();
-    CONTEXT_NEURAL_NETWORK.strokeStyle = `rgb(255, 255, 255)`;
-    CONTEXT_NEURAL_NETWORK.lineWidth = 1;
-    CONTEXT_NEURAL_NETWORK.stroke();
-    CONTEXT_NEURAL_NETWORK.fillStyle = `rgb(${intensity}, ${intensity}, ${intensity})`;
-    CONTEXT_NEURAL_NETWORK.fill();
-  }
-  // Render output layer.
-  for (let i = 0; i < 4; i++) {
-    const intensity = evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].o.elements[i][0] * 255;
-    CONTEXT_NEURAL_NETWORK.beginPath();
-    CONTEXT_NEURAL_NETWORK.arc(5*canvasSize/6, canvasSize/(4 + 1)*(i + 1), 8, 0, 2*Math.PI);
-    CONTEXT_NEURAL_NETWORK.closePath();
-    CONTEXT_NEURAL_NETWORK.strokeStyle = `rgb(255, 255, 255)`;
-    CONTEXT_NEURAL_NETWORK.lineWidth = 1;
-    CONTEXT_NEURAL_NETWORK.stroke();
-    CONTEXT_NEURAL_NETWORK.fillStyle = `rgb(${intensity}, ${intensity}, ${intensity})`;
-    CONTEXT_NEURAL_NETWORK.fill();
   }
 }

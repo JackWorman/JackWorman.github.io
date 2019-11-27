@@ -68,7 +68,7 @@ function detectFruit(horizontal, vertical, snake, pellet) {
   }
 }
 
-function getDirectionFromOutputLayer() {
+export function getDirectionFromOutputLayer(evolutionaryAlgorithm, snake) {
   const outputLayer = evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].o.elements;
   const outputLayerDirections = [
     {direction: `left`,  intensity: outputLayer[0][0]},

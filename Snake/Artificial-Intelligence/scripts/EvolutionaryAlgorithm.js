@@ -54,29 +54,29 @@ export class EvolutionaryAlgorithm {
       for (let row = 0; row < child.w1.numRows; row++) {
         for (let col = 0; col < child.w1.numCols; col++) {
           if (Math.random() < 0.5) {
-            child.w1.elements[row][col] = parent1s[i].w1.elements[row][col];
+            child.w1.elements[row][col] = this.parent1s[i].w1.elements[row][col];
           } else {
-            child.w1.elements[row][col] = parent2s[i].w1.elements[row][col];
+            child.w1.elements[row][col] = this.parent2s[i].w1.elements[row][col];
           }
         }
         if (Math.random() < 0.5) {
-          child.b1.elements[row][0] = parent1s[i].b1.elements[row][0];
+          child.b1.elements[row][0] = this.parent1s[i].b1.elements[row][0];
         } else {
-          child.b1.elements[row][0] = parent2s[i].b1.elements[row][0];
+          child.b1.elements[row][0] = this.parent2s[i].b1.elements[row][0];
         }
       }
       for (let row = 0; row < child.w2.numRows; row++) {
         for (let col = 0; col < child.w2.numCols; col++) {
           if (Math.random() < 0.5) {
-            child.w2.elements[row][col] = parent1s[i].w2.elements[row][col];
+            child.w2.elements[row][col] = this.parent1s[i].w2.elements[row][col];
           } else {
-            child.w2.elements[row][col] = parent2s[i].w2.elements[row][col];
+            child.w2.elements[row][col] = this.parent2s[i].w2.elements[row][col];
           }
         }
         if (Math.random() < 0.5) {
-          child.b2.elements[row][0] = parent1s[i].b2.elements[row][0];
+          child.b2.elements[row][0] = this.parent1s[i].b2.elements[row][0];
         } else {
-          child.b2.elements[row][0] = parent2s[i].b2.elements[row][0];
+          child.b2.elements[row][0] = this.parent2s[i].b2.elements[row][0];
         }
       }
       this.neuralNetworks.push(child);

@@ -32,7 +32,7 @@ function detectWall(horizontal, vertical, snake) {
     const testPoint = {x: snake.bodySegments[0].x + count * horizontal, y: snake.bodySegments[0].y + count * vertical};
     // Check for wall.
     if (testPoint.x < 0 || testPoint.x >= 30 || testPoint.y < 0 || testPoint.y >= 30) {
-      return 1 - count / GRID_SIZE;
+      return 1 - (count - 1) / (GRID_SIZE - 1);
     }
   }
 }
@@ -49,7 +49,7 @@ function detectBody(horizontal, vertical, snake) {
     // Check for snake body.
     for (const body of snake.bodySegments) {
       if (testPoint.x === body.x && testPoint.y === body.y) {
-        return 1 - count / GRID_SIZE;
+        return 1 - (count - 1) / (GRID_SIZE - 1);
       }
     }
   }
@@ -66,7 +66,7 @@ function detectFruit(horizontal, vertical, snake, pellet) {
     }
     // Check for fruit.
     if (testPoint.x === pellet.x && testPoint.y === pellet.y) {
-      return 1 - count / GRID_SIZE;
+      return 1 - (count - 1) / (GRID_SIZE - 1);
     }
   }
 }

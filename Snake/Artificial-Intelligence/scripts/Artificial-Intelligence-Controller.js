@@ -1,15 +1,15 @@
 "use strict";
 
-function updateInputLayer() {
+export function updateInputLayer(evolutionaryAlgorithm, snake, pellet) {
   const inputLayer = evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].i.elements;
   // Distance from wall, body, and fruit nodes.
   let count = 0;
   for (let x = -1; x <= 1; x++) {
     for (let y = -1; y <= 1; y++) {
       if (x !== 0 || y !== 0) {
-        inputLayer[count++][0] = detectWall(x, y);
-        inputLayer[count++][0] = detectBody(x, y);
-        inputLayer[count++][0] = detectFruit(x, y);
+        inputLayer[count++][0] = detectWall(x, y, snake);
+        inputLayer[count++][0] = detectBody(x, y, snake);
+        inputLayer[count++][0] = detectFruit(x, y, snake, pellet);
       }
     }
   }
@@ -20,7 +20,7 @@ function updateInputLayer() {
   inputLayer[27][0] = (snake.direction === `down`  ? 1 : 0);
 }
 
-function detectWall(horizontal, vertical) {
+function detectWall(horizontal, vertical, snake) {
   let count = 0;
   while (true) {
     count++;
@@ -32,7 +32,7 @@ function detectWall(horizontal, vertical) {
   }
 }
 
-function detectBody(horizontal, vertical) {
+function detectBody(horizontal, vertical, snake) {
   let count = 0;
   while (true) {
     count++;
@@ -50,7 +50,7 @@ function detectBody(horizontal, vertical) {
   }
 }
 
-function detectFruit(horizontal, vertical) {
+function detectFruit(horizontal, vertical, snake, pellet) {
   let count = 0;
   while (true) {
     count++;

@@ -154,4 +154,5 @@ function showInputLayer() {
       console.log(`${DETECTORS[j]}: ${inputLayer[3*i + j][0]}`);
     }
   }
+  alert();
 }

@@ -11,6 +11,10 @@ export class EvolutionaryAlgorithm {
     this.mutationRate = 0.02;
     this.generation = 0;
     this.specie = 0;
+
+
+      this.parent1s = [];
+      this.parent2s = [];
   }
 
   initialize() {

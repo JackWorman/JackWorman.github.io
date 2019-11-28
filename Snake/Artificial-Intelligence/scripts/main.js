@@ -36,6 +36,8 @@ let showMode = `all`;
 
 let canvasCleared = true;
 
+let round = 0;
+
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
@@ -78,7 +80,10 @@ async function learningLoop() {
 function reset() {
   if (started) {
     evolutionaryAlgorithm.evaluateFitness(apples, steps);
-    evolutionaryAlgorithm.specie++;
+    if (++round === 5) {
+      round = 0;
+      evolutionaryAlgorithm.specie++;
+    }
     if (evolutionaryAlgorithm.specie === 2000) {
       evolutionaryAlgorithm.specie = 0;
       evolutionaryAlgorithm.generation++;

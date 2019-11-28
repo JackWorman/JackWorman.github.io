@@ -5,6 +5,7 @@ import {EvolutionaryAlgorithm} from "./EvolutionaryAlgorithm.js";
 import {Snake} from "../../scripts/Snake.js";
 import {Pellet} from "../../scripts/Pellet.js";
 
+const BUTTON_TOGGLE_SHOW_BEST = document.getElementById(`button-toggle-show-best`);
 const BUTTON_TOGGLE_SHOW_TRAINING = document.getElementById(`button-toggle-show-training`);
 const SPAN_GEN_SPECIE = document.getElementById(`span-gen-specie`);
 const CANVAS_GAME = document.getElementById(`canvas-game`);
@@ -25,6 +26,7 @@ CANVAS_GAME.width = CANVAS_GAME.height = canvasSize;
 CANVAS_NEURAL_NETWORK.width = CANVAS_NEURAL_NETWORK.height = 600;
 
 let showTraining = true;
+let showBest = true;
 let started = false;
 let hunger;
 let apples;
@@ -33,6 +35,12 @@ let steps;
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
+
+BUTTON_TOGGLE_SHOW_BEST.addEventListener(`click`, () => {
+  showBest = !showBest;
+  CONTEXT_GAME.clearRect(0, 0, canvasSize, canvasSize);
+  CONTEXT_NEURAL_NETWORK.clearRect(0, 0, canvasSize, canvasSize);
+});
 
 BUTTON_TOGGLE_SHOW_TRAINING.addEventListener(`click`, () => {
   showTraining = !showTraining;
@@ -78,7 +86,7 @@ async function reset() {
   apples = 0;
   steps = 0;
 
-  if (showTraining || evolutionaryAlgorithm.specie === 0) {
+  if (showTraining || (showBest && evolutionaryAlgorithm.specie === 0)) {
     window.requestAnimationFrame(() => {
       render();
       renderNeuralNetwork(evolutionaryAlgorithm, snake);
@@ -95,7 +103,7 @@ async function gameLoop() {
   steps++;
   // Check if the snake dies.
   if (snake.checkCollison(GRID_SIZE) || hunger++ === GRID_SIZE*GRID_SIZE/2) {
-    if (showTraining) {
+    if (showTraining || (showBest && evolutionaryAlgorithm.specie === 0)) {
       window.requestAnimationFrame(() => {
         render();
         renderNeuralNetwork(evolutionaryAlgorithm, snake);
@@ -110,7 +118,7 @@ async function gameLoop() {
     pellet.placePellet(GRID_SIZE, snake.bodySegments);
     hunger = 0;
   }
-  if (showTraining || evolutionaryAlgorithm.specie === 0) {
+  if (showTraining || (showBest && evolutionaryAlgorithm.specie === 0)) {
     window.requestAnimationFrame(() => {
       render();
       renderNeuralNetwork(evolutionaryAlgorithm, snake);

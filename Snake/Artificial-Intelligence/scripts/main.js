@@ -122,17 +122,19 @@ async function gameLoop() {
   snake.direction = getDirectionFromOutputLayer(evolutionaryAlgorithm, snake);
   snake.move();
   steps++;
-  // Check if the snake dies.
-  if (snake.checkCollison(GRID_SIZE) || ++hunger === GRID_SIZE*GRID_SIZE/2) {
-    return false; // The snake is not alive.
-  }
+  hunger++;
+  // // Check if the snake dies.
+  // if (snake.checkCollison(GRID_SIZE) || ++hunger === GRID_SIZE*GRID_SIZE/2) {
+  //   return false; // The snake is not alive.
+  // }
   if (snake.checkPelletEaten(pellet)) {
     apples++;
     snake.grow();
     pellet.placePellet(GRID_SIZE, snake.bodySegments);
     hunger = 0;
   }
-  return true; // The snake is alive.
+  // return true; // The snake is alive.
+  return !(snake.checkCollison(GRID_SIZE) || hunger === GRID_SIZE*GRID_SIZE/2);
 }
 
 function render() {

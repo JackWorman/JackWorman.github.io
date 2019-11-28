@@ -56,7 +56,7 @@ export class NeuralNetwork {
     for (let row = 0; row < this.w1.numRows; row++) {
       for (let col = 0; col < this.w1.numCols; col++) {
         if (Math.random() < rate) {
-            this.w1.elements[row][col] += nextGaussianRandom()/10;
+            this.w1.elements[row][col] += nextGaussianRandom();
             if (this.w1.elements[row][col] < -1) {
               this.w1.elements[row][col] = -1;
             }
@@ -73,7 +73,7 @@ export class NeuralNetwork {
     for (let row = 0; row < this.w2.numRows; row++) {
       for (let col = 0; col < this.w2.numCols; col++) {
         if (Math.random() < rate) {
-            this.w2.elements[row][col] += nextGaussianRandom()/10;
+            this.w2.elements[row][col] += nextGaussianRandom();
             if (this.w2.elements[row][col] < -1) {
               this.w2.elements[row][col] = -1;
             }

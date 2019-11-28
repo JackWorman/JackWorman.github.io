@@ -97,7 +97,7 @@ async function gameLoop() {
   snake.move();
   steps++;
   // Check if the snake dies.
-  if (snake.checkCollison(GRID_SIZE) || hunger++ === GRID_SIZE*GRID_SIZE) {
+  if (snake.checkCollison(GRID_SIZE) || hunger++ === GRID_SIZE*GRID_SIZE/2) {
     if (showTraining) {
       window.requestAnimationFrame(() => {
         render();

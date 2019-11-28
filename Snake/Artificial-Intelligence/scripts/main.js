@@ -13,7 +13,7 @@ const CANVAS_NEURAL_NETWORK = document.getElementById(`canvas-neural-network`);
 const CONTEXT_NEURAL_NETWORK = CANVAS_NEURAL_NETWORK.getContext(`2d`);
 
 const MILLISECONDS_PER_SECOND = 1000;
-const FRAMES_PER_SECOND = 20;
+const FRAMES_PER_SECOND = 15;
 export const GRID_SIZE = 30;
 
 const snake = new Snake();

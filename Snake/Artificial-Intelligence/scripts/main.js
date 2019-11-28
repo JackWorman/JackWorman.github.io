@@ -56,8 +56,8 @@ BUTTON_TOGGLE_SHOW.addEventListener(`click`, () => {
 });
 
 async function learningLoop() {
-  await reset();
-  while (await gameLoop()) {
+  reset();
+  do {
     if (showMode === `all` || (showMode === `best` && evolutionaryAlgorithm.specie === 0)) {
       canvasCleared = false;
       window.requestAnimationFrame(() => {
@@ -66,7 +66,7 @@ async function learningLoop() {
       });
       await sleep(MILLISECONDS_PER_SECOND / FRAMES_PER_SECOND);
     }
-  };
+  } while (gameLoop());
   if (!canvasCleared) {
     canvasCleared = true;
     CONTEXT_GAME.clearRect(0, 0, canvasSize, canvasSize);
@@ -75,8 +75,7 @@ async function learningLoop() {
   window.setTimeout(learningLoop); // Keeps the browser from freezing.
 }
 
-async function reset() {
-  // Runs the first time.
+function reset() {
   if (started) {
     evolutionaryAlgorithm.evaluateFitness(apples, steps);
     evolutionaryAlgorithm.specie++;
@@ -106,34 +105,21 @@ async function reset() {
   hunger = 0;
   apples = 0;
   steps = 0;
-
-  if (showMode === `all` || (showMode === `best` && evolutionaryAlgorithm.specie === 0)) {
-    window.requestAnimationFrame(() => {
-      render();
-      renderNeuralNetwork(evolutionaryAlgorithm, snake);
-    });
-    await sleep(MILLISECONDS_PER_SECOND / FRAMES_PER_SECOND);
-  }
 }
 
-async function gameLoop() {
+function gameLoop() {
   updateInputLayer(evolutionaryAlgorithm, snake, pellet);
   evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].calculateOutputs();
   snake.direction = getDirectionFromOutputLayer(evolutionaryAlgorithm, snake);
   snake.move();
   steps++;
   hunger++;
-  // // Check if the snake dies.
-  // if (snake.checkCollison(GRID_SIZE) || ++hunger === GRID_SIZE*GRID_SIZE/2) {
-  //   return false; // The snake is not alive.
-  // }
   if (snake.checkPelletEaten(pellet)) {
     apples++;
     snake.grow();
     pellet.placePellet(GRID_SIZE, snake.bodySegments);
     hunger = 0;
   }
-  // return true; // The snake is alive.
   return !(snake.checkCollison(GRID_SIZE) || hunger === GRID_SIZE*GRID_SIZE/2);
 }
 

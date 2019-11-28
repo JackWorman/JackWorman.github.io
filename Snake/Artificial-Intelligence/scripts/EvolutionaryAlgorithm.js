@@ -8,7 +8,7 @@ export class EvolutionaryAlgorithm {
     for (let i = 0; i < numNeuralNetworks; i++) {
       this.neuralNetworks.push(new NeuralNetwork(inputLayerSize, hiddenLayerSize, outputLayerSize));
     }
-    this.mutationRate = 0.02;
+    this.mutationRate = 0.05;
     this.generation = 0;
     this.specie = 0;
     this.parent1s = [];
@@ -93,5 +93,11 @@ export class EvolutionaryAlgorithm {
 
   elitism() {
     this.neuralNetworks.splice(50, 1950);
+  }
+
+  clearFitness() {
+    for (const neuralNetwork of this.neuralNetworks) {
+      neuralNetwork.fitness = 0;
+    }
   }
 }

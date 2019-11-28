@@ -67,6 +67,7 @@ async function reset() {
       evolutionaryAlgorithm.crossover();
       evolutionaryAlgorithm.mutate();
       evolutionaryAlgorithm.elitism();
+      evolutionaryAlgorithm.clearFitness();
     }
   } else {
     started = true;
@@ -78,8 +79,6 @@ async function reset() {
   hunger = 0;
   apples = 0;
   steps = 0;
-
-  evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].fitness = 0;
 
   if (showTraining) {
     window.requestAnimationFrame(() => {

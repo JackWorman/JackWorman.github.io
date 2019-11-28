@@ -61,8 +61,8 @@ async function reset() {
       bestFitnesses.push(evolutionaryAlgorithm.neuralNetworks[0].fitness);
       console.log(`==============================`);
       console.log(`Generation: ${evolutionaryAlgorithm.generation}`);
-      console.log(`Best Fitness: ${evolutionaryAlgorithm.neuralNetworks[0].fitness}`);
-      console.log(`Average Best Fitness: ${bestFitnesses.reduce((a, b) => a + b, 0) / bestFitnesses.length}`);
+      console.log(`Best Fitness: ${Math.round(evolutionaryAlgorithm.neuralNetworks[0].fitness)}`);
+      console.log(`Average Best Fitness: ${Math.round(bestFitnesses.reduce((a, b) => a + b, 0) / bestFitnesses.length)}`);
       evolutionaryAlgorithm.selectParents();
       evolutionaryAlgorithm.crossover();
       evolutionaryAlgorithm.mutate();

@@ -30,10 +30,6 @@ let hunger;
 let apples;
 let steps;
 
-let bestFitnesses = [];
-let bestReplay = [];
-let replayBuffer = [];
-
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }

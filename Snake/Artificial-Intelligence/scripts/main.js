@@ -14,7 +14,7 @@ const CANVAS_NEURAL_NETWORK = document.getElementById(`canvas-neural-network`);
 const CONTEXT_NEURAL_NETWORK = CANVAS_NEURAL_NETWORK.getContext(`2d`);
 
 const MILLISECONDS_PER_SECOND = 1000;
-const FRAMES_PER_SECOND = 15;
+const FRAMES_PER_SECOND = 20;
 export const GRID_SIZE = 30;
 
 const snake = new Snake();
@@ -51,7 +51,15 @@ BUTTON_TOGGLE_SHOW_TRAINING.addEventListener(`click`, () => {
 
 async function learningLoop() {
   await reset();
-  while (await gameLoop());
+  while (await gameLoop()) {
+    if (showTraining || (showBest && evolutionaryAlgorithm.specie === 0)) {
+      window.requestAnimationFrame(() => {
+        render();
+        renderNeuralNetwork(evolutionaryAlgorithm, snake);
+      });
+      await sleep(MILLISECONDS_PER_SECOND / FRAMES_PER_SECOND);
+    }
+  };
   window.setTimeout(learningLoop); // Keeps the browser from freezing.
 }
 
@@ -103,14 +111,7 @@ async function gameLoop() {
   snake.move();
   steps++;
   // Check if the snake dies.
-  if (snake.checkCollison(GRID_SIZE) || hunger++ === GRID_SIZE*GRID_SIZE/2) {
-    if (showTraining || (showBest && evolutionaryAlgorithm.specie === 0)) {
-      window.requestAnimationFrame(() => {
-        render();
-        renderNeuralNetwork(evolutionaryAlgorithm, snake);
-      });
-      await sleep(MILLISECONDS_PER_SECOND / FRAMES_PER_SECOND);
-    }
+  if (snake.checkCollison(GRID_SIZE) || ++hunger === GRID_SIZE*GRID_SIZE/2) {
     return false; // The snake is not alive.
   }
   if (snake.checkPelletEaten(pellet)) {
@@ -118,13 +119,6 @@ async function gameLoop() {
     snake.grow();
     pellet.placePellet(GRID_SIZE, snake.bodySegments);
     hunger = 0;
-  }
-  if (showTraining || (showBest && evolutionaryAlgorithm.specie === 0)) {
-    window.requestAnimationFrame(() => {
-      render();
-      renderNeuralNetwork(evolutionaryAlgorithm, snake);
-    });
-    await sleep(MILLISECONDS_PER_SECOND / FRAMES_PER_SECOND);
   }
   return true; // The snake is alive.
 }

@@ -107,7 +107,7 @@ async function reset() {
   apples = 0;
   steps = 0;
 
-  if (showTraining || (showBest && evolutionaryAlgorithm.specie === 0)) {
+  if (showMode === `all` || (showMode === `best` && evolutionaryAlgorithm.specie === 0)) {
     window.requestAnimationFrame(() => {
       render();
       renderNeuralNetwork(evolutionaryAlgorithm, snake);

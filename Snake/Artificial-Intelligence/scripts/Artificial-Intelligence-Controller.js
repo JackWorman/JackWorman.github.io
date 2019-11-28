@@ -6,7 +6,7 @@ const CANVAS_NEURAL_NETWORK = document.getElementById(`canvas-neural-network`);
 const CONTEXT_NEURAL_NETWORK = CANVAS_NEURAL_NETWORK.getContext(`2d`);
 
 export function updateInputLayer(evolutionaryAlgorithm, snake, pellet) {
-  const inputLayer = evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].i.elements;
+  const inputLayer = evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].inputLayer.elements;
   // Distance from wall, body, and fruit nodes.
   let count = 0;
   for (let x = -1; x <= 1; x++) {
@@ -72,7 +72,7 @@ function detectFruit(horizontal, vertical, snake, pellet) {
 }
 
 export function getDirectionFromOutputLayer(evolutionaryAlgorithm, snake) {
-  const outputLayer = evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].o.elements;
+  const outputLayer = evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].outputLayer.elements;
   const outputLayerDirections = [
     {direction: `left`,  intensity: outputLayer[0][0]},
     {direction: `up`,    intensity: outputLayer[1][0]},
@@ -99,8 +99,8 @@ export function renderNeuralNetwork(evolutionaryAlgorithm, snake) {
       CONTEXT_NEURAL_NETWORK.moveTo(canvasSize/6, canvasSize/(28 + 1)*(i + 1));
       CONTEXT_NEURAL_NETWORK.lineTo(canvasSize/2, canvasSize/(16 + 1)*(j + 1));
       CONTEXT_NEURAL_NETWORK.closePath();
-      const intensity = evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].i.elements[i][0];
-      if (evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].w1.elements[j][i] < 0) {
+      const intensity = evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].inputLayer.elements[i][0];
+      if (evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].weights1.elements[j][i] < 0) {
         CONTEXT_NEURAL_NETWORK.strokeStyle = `rgb(255, 0, 0, ${intensity})`;
       } else {
         CONTEXT_NEURAL_NETWORK.strokeStyle = `rgb(0, 0, 255, ${intensity})`;
@@ -115,8 +115,8 @@ export function renderNeuralNetwork(evolutionaryAlgorithm, snake) {
       CONTEXT_NEURAL_NETWORK.moveTo(canvasSize/2, canvasSize/(16 + 1)*(i + 1));
       CONTEXT_NEURAL_NETWORK.lineTo(5*canvasSize/6, canvasSize/(4 + 1)*(j + 1));
       CONTEXT_NEURAL_NETWORK.closePath();
-      const intensity = evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].hL.elements[i][0];
-      if (evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].w2.elements[j][i] < 0) {
+      const intensity = evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].hiddenLayer1.elements[i][0];
+      if (evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].weights2.elements[j][i] < 0) {
         CONTEXT_NEURAL_NETWORK.strokeStyle = `rgb(255, 0, 0, ${intensity})`;
       } else {
         CONTEXT_NEURAL_NETWORK.strokeStyle = `rgb(0, 0, 255, ${intensity})`;
@@ -126,7 +126,7 @@ export function renderNeuralNetwork(evolutionaryAlgorithm, snake) {
   }
   // Render input layer.
   for (let i = 0; i < 28; i++) {
-    const intensity = evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].i.elements[i][0] * 255;
+    const intensity = evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].inputLayer.elements[i][0] * 255;
     CONTEXT_NEURAL_NETWORK.beginPath();
     CONTEXT_NEURAL_NETWORK.arc(canvasSize/6, canvasSize/(28 + 1)*(i + 1), 8, 0, 2*Math.PI);
     CONTEXT_NEURAL_NETWORK.closePath();
@@ -138,7 +138,7 @@ export function renderNeuralNetwork(evolutionaryAlgorithm, snake) {
   }
   // Render hidden layer.
   for (let i = 0; i < 16; i++) {
-    const intensity = evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].hL.elements[i][0] * 255;
+    const intensity = evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].hiddenLayer1.elements[i][0] * 255;
     CONTEXT_NEURAL_NETWORK.beginPath();
     CONTEXT_NEURAL_NETWORK.arc(canvasSize/2, canvasSize/(16 + 1)*(i + 1), 8, 0, 2*Math.PI);
     CONTEXT_NEURAL_NETWORK.closePath();
@@ -150,7 +150,7 @@ export function renderNeuralNetwork(evolutionaryAlgorithm, snake) {
   }
   // Render output layer.
   for (let i = 0; i < 4; i++) {
-    const intensity = evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].o.elements[i][0] * 255;
+    const intensity = evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].outputLayer.elements[i][0] * 255;
     CONTEXT_NEURAL_NETWORK.beginPath();
     CONTEXT_NEURAL_NETWORK.arc(5*canvasSize/6, canvasSize/(4 + 1)*(i + 1), 8, 0, 2*Math.PI);
     CONTEXT_NEURAL_NETWORK.closePath();
@@ -187,7 +187,7 @@ function showInputLayer() {
     `Body`,
     `Fruit`
   ];
-  const inputLayer = evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].i.elements;
+  const inputLayer = evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].inputLayer.elements;
   console.log(`====================`);
   for (let i = 0; i < DIRECTIONS.length; i++) {
     console.log(`***${DIRECTIONS[i]}***`);

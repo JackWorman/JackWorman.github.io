@@ -31,6 +31,7 @@ let started = false;
 let hunger;
 let apples;
 let steps;
+let bestFitnesses = [];
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));

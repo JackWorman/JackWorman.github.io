@@ -42,13 +42,13 @@ function sleep(ms) {
 
 BUTTON_TOGGLE_SHOW.addEventListener(`click`, () => {
   if (showMode === `all`) {
-    showMode === `best`;
+    showMode = `best`;
     BUTTON_TOGGLE_SHOW.textContent = `Showing Best`;
   } else if (showMode === `best`) {
-    showMode === `off`;
+    showMode = `off`;
     BUTTON_TOGGLE_SHOW.textContent = `Showing Off`;
   } else if (showMode === `off`) {
-    showMode === `all`;
+    showMode = `all`;
     BUTTON_TOGGLE_SHOW.textContent = `Showing All`;
   }
   CONTEXT_GAME.clearRect(0, 0, canvasSize, canvasSize);

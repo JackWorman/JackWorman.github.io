@@ -13,7 +13,7 @@ const CANVAS_NEURAL_NETWORK = document.getElementById(`canvas-neural-network`);
 const CONTEXT_NEURAL_NETWORK = CANVAS_NEURAL_NETWORK.getContext(`2d`);
 
 const MILLISECONDS_PER_SECOND = 1000;
-const FRAMES_PER_SECOND = 10;
+const FRAMES_PER_SECOND = 15;
 export const GRID_SIZE = 30;
 
 const snake = new Snake();
@@ -31,6 +31,8 @@ let apples;
 let steps;
 
 let bestFitnesses = [];
+let bestReplay = [];
+let replayBuffer = [];
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -80,7 +82,7 @@ async function reset() {
   apples = 0;
   steps = 0;
 
-  if (showTraining) {
+  if (showTraining || evolutionaryAlgorithm.specie === 0) {
     window.requestAnimationFrame(() => {
       render();
       renderNeuralNetwork(evolutionaryAlgorithm, snake);
@@ -112,7 +114,7 @@ async function gameLoop() {
     pellet.placePellet(GRID_SIZE, snake.bodySegments);
     hunger = 0;
   }
-  if (showTraining) {
+  if (showTraining || evolutionaryAlgorithm.specie === 0) {
     window.requestAnimationFrame(() => {
       render();
       renderNeuralNetwork(evolutionaryAlgorithm, snake);

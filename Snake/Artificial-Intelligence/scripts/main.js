@@ -33,6 +33,8 @@ let apples;
 let steps;
 let bestFitnesses = [];
 
+let canvasCleared = true;
+
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
@@ -53,6 +55,7 @@ async function learningLoop() {
   await reset();
   while (await gameLoop()) {
     if (showTraining || (showBest && evolutionaryAlgorithm.specie === 0)) {
+      canvasCleared = false;
       window.requestAnimationFrame(() => {
         render();
         renderNeuralNetwork(evolutionaryAlgorithm, snake);
@@ -60,6 +63,11 @@ async function learningLoop() {
       await sleep(MILLISECONDS_PER_SECOND / FRAMES_PER_SECOND);
     }
   };
+  if (!canvasCleared) {
+    canvasCleared = true;
+    CONTEXT_GAME.clearRect(0, 0, canvasSize, canvasSize);
+    CONTEXT_NEURAL_NETWORK.clearRect(0, 0, canvasSize, canvasSize);
+  }
   window.setTimeout(learningLoop); // Keeps the browser from freezing.
 }
 

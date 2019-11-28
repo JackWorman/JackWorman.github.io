@@ -5,8 +5,7 @@ import {EvolutionaryAlgorithm} from "./EvolutionaryAlgorithm.js";
 import {Snake} from "../../scripts/Snake.js";
 import {Pellet} from "../../scripts/Pellet.js";
 
-const BUTTON_TOGGLE_SHOW_BEST = document.getElementById(`button-toggle-show-best`);
-const BUTTON_TOGGLE_SHOW_TRAINING = document.getElementById(`button-toggle-show-training`);
+const BUTTON_TOGGLE_SHOW = document.getElementById(`button-toggle-show`);
 const SPAN_GEN_SPECIE = document.getElementById(`span-gen-specie`);
 const CANVAS_GAME = document.getElementById(`canvas-game`);
 const CONTEXT_GAME = CANVAS_GAME.getContext(`2d`);
@@ -33,20 +32,25 @@ let apples;
 let steps;
 let bestFitnesses = [];
 
+let showMode = `all`;
+
 let canvasCleared = true;
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-BUTTON_TOGGLE_SHOW_BEST.addEventListener(`click`, () => {
-  showBest = !showBest;
-  CONTEXT_GAME.clearRect(0, 0, canvasSize, canvasSize);
-  CONTEXT_NEURAL_NETWORK.clearRect(0, 0, canvasSize, canvasSize);
-});
-
-BUTTON_TOGGLE_SHOW_TRAINING.addEventListener(`click`, () => {
-  showTraining = !showTraining;
+BUTTON_TOGGLE_SHOW.addEventListener(`click`, () => {
+  if (showMode === `all`) {
+    showMode === `best`;
+    BUTTON_TOGGLE_SHOW.textContent = `Showing Best`;
+  } else if (showMode === `best`) {
+    showMode === `off`;
+    BUTTON_TOGGLE_SHOW.textContent = `Showing Off`;
+  } else if (showMode === `off`) {
+    showMode === `all`;
+    BUTTON_TOGGLE_SHOW.textContent = `Showing All`;
+  }
   CONTEXT_GAME.clearRect(0, 0, canvasSize, canvasSize);
   CONTEXT_NEURAL_NETWORK.clearRect(0, 0, canvasSize, canvasSize);
 });
@@ -54,7 +58,7 @@ BUTTON_TOGGLE_SHOW_TRAINING.addEventListener(`click`, () => {
 async function learningLoop() {
   await reset();
   while (await gameLoop()) {
-    if (showTraining || (showBest && evolutionaryAlgorithm.specie === 0)) {
+    if (showMode === `all` || (showMode === `best` && evolutionaryAlgorithm.specie === 0)) {
       canvasCleared = false;
       window.requestAnimationFrame(() => {
         render();

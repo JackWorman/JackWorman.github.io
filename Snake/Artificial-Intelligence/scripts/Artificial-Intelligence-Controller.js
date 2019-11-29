@@ -101,8 +101,8 @@ export function renderNeuralNetwork(evolutionaryAlgorithm, snake) {
       const layer2Size = neuralNetwork.layers[i + 1].numRows;
       for (let k = 0; k < layer2Size; k++) {
         CONTEXT_NEURAL_NETWORK.beginPath();
-        CONTEXT_NEURAL_NETWORK.moveTo(canvasSize*((i+1)/neuralNetwork.layers.length), canvasSize/(layer1Size + 1)*(j + 1));
-        CONTEXT_NEURAL_NETWORK.lineTo(canvasSize*((i+2)/neuralNetwork.layers.length), canvasSize/(layer2Size + 1)*(k + 1));
+        CONTEXT_NEURAL_NETWORK.moveTo(canvasSize*((i+1)/(neuralNetwork.layers.length + 1)), canvasSize/(layer1Size + 1)*(j + 1));
+        CONTEXT_NEURAL_NETWORK.lineTo(canvasSize*((i+2)/(neuralNetwork.layers.length + 1)), canvasSize/(layer2Size + 1)*(k + 1));
         CONTEXT_NEURAL_NETWORK.closePath();
         const intensity = neuralNetwork.layers[i].elements[j][0];
         if (neuralNetwork.weights[i].elements[k][j] < 0) {
@@ -120,7 +120,7 @@ export function renderNeuralNetwork(evolutionaryAlgorithm, snake) {
     for (let j = 0; j < layerSize; j++) {
       const intensity = neuralNetwork.layers[i].elements[j][0] * 255;
       CONTEXT_NEURAL_NETWORK.beginPath();
-      CONTEXT_NEURAL_NETWORK.arc(canvasSize*((i+1)/neuralNetwork.layers.length), canvasSize/(layerSize + 1)*(j + 1), 8, 0, 2*Math.PI);
+      CONTEXT_NEURAL_NETWORK.arc(canvasSize*((i+1)/(neuralNetwork.layers.length + 1)), canvasSize/(layerSize + 1)*(j + 1), 8, 0, 2*Math.PI);
       CONTEXT_NEURAL_NETWORK.closePath();
       CONTEXT_NEURAL_NETWORK.strokeStyle = `rgb(255, 255, 255)`;
       CONTEXT_NEURAL_NETWORK.lineWidth = 1;

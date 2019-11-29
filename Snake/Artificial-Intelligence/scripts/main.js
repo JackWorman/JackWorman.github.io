@@ -80,7 +80,7 @@ async function learningLoop() {
 function reset() {
   if (started) {
     evolutionaryAlgorithm.evaluateFitness(apples, steps);
-    if (++round === 5) {
+    if (++round === 10) {
       round = 0;
       evolutionaryAlgorithm.specie++;
     }

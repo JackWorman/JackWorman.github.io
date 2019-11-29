@@ -33,19 +33,32 @@ export class EvolutionaryAlgorithm {
   }
 
   selectParents() {
+    let totalFitness = 0;
+    for (const neuralNetwork of this.neuralNetworks) {
+      totalFitness += neuralNetwork.fitness;
+    }
+
     this.parent1s = [];
     this.parent2s = [];
-    const proportionalWeights = [];
-    for (let i = 0; i < this.neuralNetworks.length; i++) {
-      for (let j = 0; j < this.neuralNetworks[i].fitness; j++) {
-        proportionalWeights.push(i);
-      }
-    }
     for (let i = 0; i < 1950; i++) {
-      const index1 = proportionalWeights[Math.floor(proportionalWeights.length * Math.random())];
-      const index2 = proportionalWeights[Math.floor(proportionalWeights.length * Math.random())];
-      this.parent1s.push(this.neuralNetworks[index1]);
-      this.parent2s.push(this.neuralNetworks[index2]);
+      let fitnessCutoff = Math.random() * totalFitness;
+      let accumulatedFitness = 0;
+      for (const neuralNetwork of this.neuralNetworks) {
+        accumulatedFitness += neuralNetwork.fitness;
+        if (fitnessCutoff < accumulatedFitness) {
+          this.parent1s.push(neuralNetwork);
+          break;
+        }
+      }
+      fitnessCutoff = Math.random() * totalFitness;
+      accumulatedFitness = 0;
+      for (const neuralNetwork of this.neuralNetworks) {
+        accumulatedFitness += neuralNetwork.fitness;
+        if (fitnessCutoff < accumulatedFitness) {
+          this.parent2s.push(neuralNetwork);
+          break;
+        }
+      }
     }
   }
 

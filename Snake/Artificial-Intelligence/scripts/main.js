@@ -18,7 +18,7 @@ export const GRID_SIZE = 30;
 
 const snake = new Snake();
 const pellet = new Pellet();
-const evolutionaryAlgorithm = new EvolutionaryAlgorithm(2000, 28, 16, 4);
+const evolutionaryAlgorithm = new EvolutionaryAlgorithm(2000, [28, 20, 12, 4]);
 
 export let canvasSize = 600;
 CANVAS_GAME.width = CANVAS_GAME.height = canvasSize;

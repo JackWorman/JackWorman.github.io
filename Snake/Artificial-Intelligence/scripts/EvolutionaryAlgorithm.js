@@ -3,10 +3,10 @@
 import {NeuralNetwork} from "./NeuralNetwork.js";
 
 export class EvolutionaryAlgorithm {
-  constructor(numNeuralNetworks, inputLayerSize, hiddenLayerSize, outputLayerSize) {
+  constructor(numNeuralNetworks, layerSizes) {
     this.neuralNetworks = [];
     for (let i = 0; i < numNeuralNetworks; i++) {
-      this.neuralNetworks.push(new NeuralNetwork(inputLayerSize, hiddenLayerSize, outputLayerSize));
+      this.neuralNetworks.push(new NeuralNetwork(layerSizes));
     }
     this.mutationRate = 0.02;
     this.generation = 0;
@@ -64,35 +64,51 @@ export class EvolutionaryAlgorithm {
 
   crossover() {
     for (let i = 0; i < 1950; i++) {
-      const child = new NeuralNetwork(28, 16, 4);
-      for (let row = 0; row < child.weights1.numRows; row++) {
-        for (let col = 0; col < child.weights1.numCols; col++) {
+      const child = new NeuralNetwork([28, 20, 12, 4]);
+      for (let j = 0; j < child.weights.length; j++) {
+        for (let row = 0; row < child.weights[j].numRows; row++) {
+          for (let col = 0; col < child.weights[j].numCols; col++) {
+            if (Math.random() < 0.5) {
+              child.weights[j].elements[row][col] = this.parent1s[i].weights[j].elements[row][col];
+            } else {
+              child.weights[j].elements[row][col] = this.parent2s[i].weights[j].elements[row][col];
+            }
+          }
           if (Math.random() < 0.5) {
-            child.weights1.elements[row][col] = this.parent1s[i].weights1.elements[row][col];
+            child.biases[j].elements[row][0] = this.parent1s[i].biases[j].elements[row][0];
           } else {
-            child.weights1.elements[row][col] = this.parent2s[i].weights1.elements[row][col];
+            child.biases[j].elements[row][0] = this.parent2s[i].biases[j].elements[row][0];
           }
         }
-        if (Math.random() < 0.5) {
-          child.biases1.elements[row][0] = this.parent1s[i].biases1.elements[row][0];
-        } else {
-          child.biases1.elements[row][0] = this.parent2s[i].biases1.elements[row][0];
-        }
       }
-      for (let row = 0; row < child.weights2.numRows; row++) {
-        for (let col = 0; col < child.weights2.numCols; col++) {
-          if (Math.random() < 0.5) {
-            child.weights2.elements[row][col] = this.parent1s[i].weights2.elements[row][col];
-          } else {
-            child.weights2.elements[row][col] = this.parent2s[i].weights2.elements[row][col];
-          }
-        }
-        if (Math.random() < 0.5) {
-          child.biases2.elements[row][0] = this.parent1s[i].biases2.elements[row][0];
-        } else {
-          child.biases2.elements[row][0] = this.parent2s[i].biases2.elements[row][0];
-        }
-      }
+      // for (let row = 0; row < child.weights1.numRows; row++) {
+      //   for (let col = 0; col < child.weights1.numCols; col++) {
+      //     if (Math.random() < 0.5) {
+        //       child.weights1.elements[row][col] = this.parent1s[i].weights1.elements[row][col];
+      //     } else {
+      //       child.weights1.elements[row][col] = this.parent2s[i].weights1.elements[row][col];
+      //     }
+      //   }
+      //   if (Math.random() < 0.5) {
+      //     child.biases1.elements[row][0] = this.parent1s[i].biases1.elements[row][0];
+      //   } else {
+      //     child.biases1.elements[row][0] = this.parent2s[i].biases1.elements[row][0];
+      //   }
+      // }
+      // for (let row = 0; row < child.weights2.numRows; row++) {
+      //   for (let col = 0; col < child.weights2.numCols; col++) {
+      //     if (Math.random() < 0.5) {
+      //       child.weights2.elements[row][col] = this.parent1s[i].weights2.elements[row][col];
+      //     } else {
+      //       child.weights2.elements[row][col] = this.parent2s[i].weights2.elements[row][col];
+      //     }
+      //   }
+      //   if (Math.random() < 0.5) {
+      //     child.biases2.elements[row][0] = this.parent1s[i].biases2.elements[row][0];
+      //   } else {
+      //     child.biases2.elements[row][0] = this.parent2s[i].biases2.elements[row][0];
+      //   }
+      // }
       this.neuralNetworks.push(child);
     }
   }

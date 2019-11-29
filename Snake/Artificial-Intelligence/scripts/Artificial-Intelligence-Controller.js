@@ -6,7 +6,7 @@ const CANVAS_NEURAL_NETWORK = document.getElementById(`canvas-neural-network`);
 const CONTEXT_NEURAL_NETWORK = CANVAS_NEURAL_NETWORK.getContext(`2d`);
 
 export function updateInputLayer(evolutionaryAlgorithm, snake, pellet) {
-  const inputLayer = evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].inputLayer.elements;
+  const inputLayer = evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].layers[0].elements;
   // Distance from wall, body, and fruit nodes.
   let count = 0;
   for (let x = -1; x <= 1; x++) {
@@ -72,7 +72,8 @@ function detectFruit(horizontal, vertical, snake, pellet) {
 }
 
 export function getDirectionFromOutputLayer(evolutionaryAlgorithm, snake) {
-  const outputLayer = evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].outputLayer.elements;
+  const outputLayer = evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie]
+    .layers[evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].layers.length - 1].elements;
   const outputLayerDirections = [
     {direction: `left`,  intensity: outputLayer[0][0]},
     {direction: `up`,    intensity: outputLayer[1][0]},
@@ -92,83 +93,121 @@ export function getDirectionFromOutputLayer(evolutionaryAlgorithm, snake) {
 
 export function renderNeuralNetwork(evolutionaryAlgorithm, snake) {
   CONTEXT_NEURAL_NETWORK.clearRect(0, 0, canvasSize, canvasSize);
-  // Render weights between input layer and hidden layer.
-  for (let i = 0; i < 28; i++) {
-    for (let j = 0; j < 16; j++) {
-      CONTEXT_NEURAL_NETWORK.beginPath();
-      CONTEXT_NEURAL_NETWORK.moveTo(canvasSize/6, canvasSize/(28 + 1)*(i + 1));
-      CONTEXT_NEURAL_NETWORK.lineTo(canvasSize/2, canvasSize/(16 + 1)*(j + 1));
-      CONTEXT_NEURAL_NETWORK.closePath();
-      const intensity = evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].inputLayer.elements[i][0];
-      if (evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].weights1.elements[j][i] < 0) {
-        CONTEXT_NEURAL_NETWORK.strokeStyle = `rgb(255, 0, 0, ${intensity})`;
-      } else {
-        CONTEXT_NEURAL_NETWORK.strokeStyle = `rgb(0, 0, 255, ${intensity})`;
+
+  const neuralNetwork = evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie];
+  for (let i = 0; i < neuralNetwork.weights.length; i++) {
+    const layer1Size = neuralNetwork.layers[i].numRows;
+    for (let j = 0; j < layer1Size; j++) {
+      const layer2Size = neuralNetwork.layers[i + 1].numRows;
+      for (let k = 0; k < layer2Size; k++) {
+        CONTEXT_NEURAL_NETWORK.beginPath();
+        CONTEXT_NEURAL_NETWORK.moveTo(canvasSize*((i+1)/neuralNetwork.layers.length), canvasSize/(layer1Size + 1)*(j + 1));
+        CONTEXT_NEURAL_NETWORK.lineTo(canvasSize*((i+2)/neuralNetwork.layers.length), canvasSize/(layer2Size + 1)*(k + 1));
+        CONTEXT_NEURAL_NETWORK.closePath();
+        const intensity = neuralNetwork.layers[i].elements[j][0];
+        if (neuralNetwork.weights[i].elements[k][j] < 0) {
+          CONTEXT_NEURAL_NETWORK.strokeStyle = `rgb(255, 0, 0, ${intensity})`;
+        } else {
+          CONTEXT_NEURAL_NETWORK.strokeStyle = `rgb(0, 0, 255, ${intensity})`;
+        }
+        CONTEXT_NEURAL_NETWORK.stroke();
       }
-      CONTEXT_NEURAL_NETWORK.stroke();
     }
   }
-  // Render weights between hidden layer and output layer.
-  for (let i = 0; i < 16; i++) {
-    for (let j = 0; j < 4; j++) {
+
+  for (let i = 0; i < neuralNetwork.layers.length; i++) {
+    const layerSize = neuralNetwork.layers[i].numRows;
+    for (let j = 0; j < layerSize; j++) {
+      const intensity = neuralNetwork.layers[i].elements[j][0] * 255;
       CONTEXT_NEURAL_NETWORK.beginPath();
-      CONTEXT_NEURAL_NETWORK.moveTo(canvasSize/2, canvasSize/(16 + 1)*(i + 1));
-      CONTEXT_NEURAL_NETWORK.lineTo(5*canvasSize/6, canvasSize/(4 + 1)*(j + 1));
+      CONTEXT_NEURAL_NETWORK.arc(canvasSize*((i+1)/neuralNetwork.layers.length), canvasSize/(layerSize + 1)*(j + 1), 8, 0, 2*Math.PI);
       CONTEXT_NEURAL_NETWORK.closePath();
-      const intensity = evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].hiddenLayer1.elements[i][0];
-      if (evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].weights2.elements[j][i] < 0) {
-        CONTEXT_NEURAL_NETWORK.strokeStyle = `rgb(255, 0, 0, ${intensity})`;
-      } else {
-        CONTEXT_NEURAL_NETWORK.strokeStyle = `rgb(0, 0, 255, ${intensity})`;
-      }
+      CONTEXT_NEURAL_NETWORK.strokeStyle = `rgb(255, 255, 255)`;
+      CONTEXT_NEURAL_NETWORK.lineWidth = 1;
       CONTEXT_NEURAL_NETWORK.stroke();
+      CONTEXT_NEURAL_NETWORK.fillStyle = `rgb(${intensity}, ${intensity}, ${intensity})`;
+      CONTEXT_NEURAL_NETWORK.fill();
     }
   }
-  // Render input layer.
-  for (let i = 0; i < 28; i++) {
-    const intensity = evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].inputLayer.elements[i][0] * 255;
-    CONTEXT_NEURAL_NETWORK.beginPath();
-    CONTEXT_NEURAL_NETWORK.arc(canvasSize/6, canvasSize/(28 + 1)*(i + 1), 8, 0, 2*Math.PI);
-    CONTEXT_NEURAL_NETWORK.closePath();
-    CONTEXT_NEURAL_NETWORK.strokeStyle = `rgb(255, 255, 255)`;
-    CONTEXT_NEURAL_NETWORK.lineWidth = 1;
-    CONTEXT_NEURAL_NETWORK.stroke();
-    CONTEXT_NEURAL_NETWORK.fillStyle = `rgb(${intensity}, ${intensity}, ${intensity})`;
-    CONTEXT_NEURAL_NETWORK.fill();
-  }
-  // Render hidden layer.
-  for (let i = 0; i < 16; i++) {
-    const intensity = evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].hiddenLayer1.elements[i][0] * 255;
-    CONTEXT_NEURAL_NETWORK.beginPath();
-    CONTEXT_NEURAL_NETWORK.arc(canvasSize/2, canvasSize/(16 + 1)*(i + 1), 8, 0, 2*Math.PI);
-    CONTEXT_NEURAL_NETWORK.closePath();
-    CONTEXT_NEURAL_NETWORK.strokeStyle = `rgb(255, 255, 255)`;
-    CONTEXT_NEURAL_NETWORK.lineWidth = 1;
-    CONTEXT_NEURAL_NETWORK.stroke();
-    CONTEXT_NEURAL_NETWORK.fillStyle = `rgb(${intensity}, ${intensity}, ${intensity})`;
-    CONTEXT_NEURAL_NETWORK.fill();
-  }
-  // Render output layer.
-  for (let i = 0; i < 4; i++) {
-    const intensity = evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].outputLayer.elements[i][0] * 255;
-    CONTEXT_NEURAL_NETWORK.beginPath();
-    CONTEXT_NEURAL_NETWORK.arc(5*canvasSize/6, canvasSize/(4 + 1)*(i + 1), 8, 0, 2*Math.PI);
-    CONTEXT_NEURAL_NETWORK.closePath();
-    CONTEXT_NEURAL_NETWORK.strokeStyle = `rgb(255, 255, 255)`;
-    CONTEXT_NEURAL_NETWORK.lineWidth = 1;
-    CONTEXT_NEURAL_NETWORK.stroke();
-    CONTEXT_NEURAL_NETWORK.fillStyle = `rgb(${intensity}, ${intensity}, ${intensity})`;
-    if (snake.direction === `left` && i === 0) {
-      CONTEXT_NEURAL_NETWORK.fillStyle = `rgb(0, 255, 0)`;
-    } else if (snake.direction === `up` && i === 1) {
-      CONTEXT_NEURAL_NETWORK.fillStyle = `rgb(0, 255, 0)`;
-    } else if (snake.direction === `right` && i === 2) {
-      CONTEXT_NEURAL_NETWORK.fillStyle = `rgb(0, 255, 0)`;
-    } else if (snake.direction === `down` && i === 3) {
-      CONTEXT_NEURAL_NETWORK.fillStyle = `rgb(0, 255, 0)`;
-    }
-    CONTEXT_NEURAL_NETWORK.fill();
-  }
+
+
+  // // Render weights between input layer and hidden layer.
+  // for (let i = 0; i < 28; i++) {
+  //   for (let j = 0; j < 16; j++) {
+  //     CONTEXT_NEURAL_NETWORK.beginPath();
+  //     CONTEXT_NEURAL_NETWORK.moveTo(canvasSize/6, canvasSize/(28 + 1)*(i + 1));
+  //     CONTEXT_NEURAL_NETWORK.lineTo(canvasSize/2, canvasSize/(16 + 1)*(j + 1));
+  //     CONTEXT_NEURAL_NETWORK.closePath();
+  //     const intensity = evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].inputLayer.elements[i][0];
+  //     if (evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].weights1.elements[j][i] < 0) {
+  //       CONTEXT_NEURAL_NETWORK.strokeStyle = `rgb(255, 0, 0, ${intensity})`;
+  //     } else {
+  //       CONTEXT_NEURAL_NETWORK.strokeStyle = `rgb(0, 0, 255, ${intensity})`;
+  //     }
+  //     CONTEXT_NEURAL_NETWORK.stroke();
+  //   }
+  // }
+  // // Render weights between hidden layer and output layer.
+  // for (let i = 0; i < 16; i++) {
+  //   for (let j = 0; j < 4; j++) {
+  //     CONTEXT_NEURAL_NETWORK.beginPath();
+  //     CONTEXT_NEURAL_NETWORK.moveTo(canvasSize/2, canvasSize/(16 + 1)*(i + 1));
+  //     CONTEXT_NEURAL_NETWORK.lineTo(5*canvasSize/6, canvasSize/(4 + 1)*(j + 1));
+  //     CONTEXT_NEURAL_NETWORK.closePath();
+  //     const intensity = evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].hiddenLayer1.elements[i][0];
+  //     if (evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].weights2.elements[j][i] < 0) {
+  //       CONTEXT_NEURAL_NETWORK.strokeStyle = `rgb(255, 0, 0, ${intensity})`;
+  //     } else {
+  //       CONTEXT_NEURAL_NETWORK.strokeStyle = `rgb(0, 0, 255, ${intensity})`;
+  //     }
+  //     CONTEXT_NEURAL_NETWORK.stroke();
+  //   }
+  // }
+  // // Render input layer.
+  // for (let i = 0; i < 28; i++) {
+  //   const intensity = evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].inputLayer.elements[i][0] * 255;
+  //   CONTEXT_NEURAL_NETWORK.beginPath();
+  //   CONTEXT_NEURAL_NETWORK.arc(canvasSize/6, canvasSize/(28 + 1)*(i + 1), 8, 0, 2*Math.PI);
+  //   CONTEXT_NEURAL_NETWORK.closePath();
+  //   CONTEXT_NEURAL_NETWORK.strokeStyle = `rgb(255, 255, 255)`;
+  //   CONTEXT_NEURAL_NETWORK.lineWidth = 1;
+  //   CONTEXT_NEURAL_NETWORK.stroke();
+  //   CONTEXT_NEURAL_NETWORK.fillStyle = `rgb(${intensity}, ${intensity}, ${intensity})`;
+  //   CONTEXT_NEURAL_NETWORK.fill();
+  // }
+  // // Render hidden layer.
+  // for (let i = 0; i < 16; i++) {
+  //   const intensity = evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].hiddenLayer1.elements[i][0] * 255;
+  //   CONTEXT_NEURAL_NETWORK.beginPath();
+  //   CONTEXT_NEURAL_NETWORK.arc(canvasSize/2, canvasSize/(16 + 1)*(i + 1), 8, 0, 2*Math.PI);
+  //   CONTEXT_NEURAL_NETWORK.closePath();
+  //   CONTEXT_NEURAL_NETWORK.strokeStyle = `rgb(255, 255, 255)`;
+  //   CONTEXT_NEURAL_NETWORK.lineWidth = 1;
+  //   CONTEXT_NEURAL_NETWORK.stroke();
+  //   CONTEXT_NEURAL_NETWORK.fillStyle = `rgb(${intensity}, ${intensity}, ${intensity})`;
+  //   CONTEXT_NEURAL_NETWORK.fill();
+  // }
+  // // Render output layer.
+  // for (let i = 0; i < 4; i++) {
+  //   const intensity = evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].outputLayer.elements[i][0] * 255;
+  //   CONTEXT_NEURAL_NETWORK.beginPath();
+  //   CONTEXT_NEURAL_NETWORK.arc(5*canvasSize/6, canvasSize/(4 + 1)*(i + 1), 8, 0, 2*Math.PI);
+  //   CONTEXT_NEURAL_NETWORK.closePath();
+  //   CONTEXT_NEURAL_NETWORK.strokeStyle = `rgb(255, 255, 255)`;
+  //   CONTEXT_NEURAL_NETWORK.lineWidth = 1;
+  //   CONTEXT_NEURAL_NETWORK.stroke();
+  //   CONTEXT_NEURAL_NETWORK.fillStyle = `rgb(${intensity}, ${intensity}, ${intensity})`;
+  //   if (snake.direction === `left` && i === 0) {
+  //     CONTEXT_NEURAL_NETWORK.fillStyle = `rgb(0, 255, 0)`;
+  //   } else if (snake.direction === `up` && i === 1) {
+  //     CONTEXT_NEURAL_NETWORK.fillStyle = `rgb(0, 255, 0)`;
+  //   } else if (snake.direction === `right` && i === 2) {
+  //     CONTEXT_NEURAL_NETWORK.fillStyle = `rgb(0, 255, 0)`;
+  //   } else if (snake.direction === `down` && i === 3) {
+  //     CONTEXT_NEURAL_NETWORK.fillStyle = `rgb(0, 255, 0)`;
+  //   }
+  //   CONTEXT_NEURAL_NETWORK.fill();
+  // }
 }
 
 function showInputLayer() {
@@ -187,7 +226,7 @@ function showInputLayer() {
     `Body`,
     `Fruit`
   ];
-  const inputLayer = evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].inputLayer.elements;
+  const inputLayer = evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].layers[0].elements;
   console.log(`====================`);
   for (let i = 0; i < DIRECTIONS.length; i++) {
     console.log(`***${DIRECTIONS[i]}***`);

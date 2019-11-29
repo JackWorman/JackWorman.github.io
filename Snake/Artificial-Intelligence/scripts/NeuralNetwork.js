@@ -8,12 +8,15 @@ const nextGaussianRandom = gaussianRandom(0, 1);
 export class NeuralNetwork {
   constructor(numInputNodes, numHiddenLayerNodes, numOutputNodes) {
     this.inputLayer = new Matrix(numInputNodes, 1);
+    
     this.weights1 = new Matrix(numHiddenLayerNodes, numInputNodes);
     this.biases1 = new Matrix(numHiddenLayerNodes, 1);
     this.hiddenLayer1 = new Matrix(numHiddenLayerNodes, 1);
+
     this.weights2 = new Matrix(numOutputNodes, numHiddenLayerNodes);
     this.biases2 = new Matrix(numOutputNodes, 1);
     this.outputLayer = new Matrix(numOutputNodes, 1);
+
     this.fitness = 0;
   }
 

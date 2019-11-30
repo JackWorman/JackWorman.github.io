@@ -16,13 +16,13 @@ const MILLISECONDS_PER_SECOND = 1000;
 
 // Settings
 const FRAMES_PER_SECOND = 15;
-export const GRID_SIZE = 30;
+export const GRID_SIZE = 10;
 const POPULATION_SIZE = 2000;
 const LAYER_SIZES = [28, 20, 12, 4];
 const MUTATION_RATE = 0.02;
 const ELITISM_RATE = 0.025;
-const ROUNDS_PER_AGENT_PER_GENERATION = 10;
-const MAX_HUNGER = 900;
+const ROUNDS_PER_AGENT_PER_GENERATION = 100;
+const MAX_HUNGER = GRID_SIZE*GRID_SIZE;
 
 const snake = new Snake();
 const pellet = new Pellet();
@@ -93,7 +93,7 @@ async function learningLoop() {
   for (let i = 0; i < ROUNDS_PER_AGENT_PER_GENERATION; i++) {
     reset();
     do {
-      if (showMode === `all` || (showMode === `best` && evolutionaryAlgorithm.specie === 0)) {
+      if (showMode === `all` || (showMode === `best` && evolutionaryAlgorithm.specie === 0 && round === 0)) {
         canvasCleared = false;
         window.requestAnimationFrame(() => {
           render();

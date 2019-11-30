@@ -73,7 +73,7 @@ async function learningLoop() {
     for (let i = 0; i < ROUNDS_PER_AGENT_PER_GENERATION; i++) {
       resetGame();
       do {
-        renderAll();
+        await renderAll();
       } while (gameLoop());
       evolutionaryAlgorithm.evaluateFitness(apples, steps);
       const nowTime = performance.now();
@@ -92,7 +92,7 @@ async function learningLoop() {
   // window.setTimeout(learningLoop); // Keeps the browser from freezing.
 }
 
-function renderAll() {
+async function renderAll() {
   if (showMode === `all` || (showMode === `best` && evolutionaryAlgorithm.specie === 0 && i === 0)) {
     canvasCleared = false;
     window.requestAnimationFrame(() => {

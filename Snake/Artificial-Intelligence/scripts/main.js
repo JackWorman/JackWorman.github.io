@@ -103,6 +103,9 @@ async function learningLoop() {
       }
     } while (gameLoop());
     evolutionaryAlgorithm.evaluateFitness(apples, steps);
+    if (i % 20 === 0) {
+      await sleep(0);
+    }
   }
   if (!canvasCleared) {
     canvasCleared = true;

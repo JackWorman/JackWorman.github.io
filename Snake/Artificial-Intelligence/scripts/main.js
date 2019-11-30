@@ -16,7 +16,7 @@ const MILLISECONDS_PER_SECOND = 1000;
 
 // Settings
 const FRAMES_PER_SECOND = 15;
-export const GRID_SIZE = 10;
+export const GRID_SIZE = 30;
 const POPULATION_SIZE = 2000;
 const LAYER_SIZES = [28, 20, 12, 4];
 const MUTATION_RATE = 0.02;
@@ -44,7 +44,6 @@ let showMode = `all`;
 
 let canvasCleared = true;
 
-let round = 0;
 let snakeCopies = [];
 
 function sleep(ms) {
@@ -69,7 +68,6 @@ BUTTON_TOGGLE_SHOW.addEventListener(`click`, () => {
 async function learningLoop() {
   if (started) {
     evolutionaryAlgorithm.specie++;
-    SPAN_GEN_SPECIE.textContent = `Generation: ${evolutionaryAlgorithm.generation}, Species: ${evolutionaryAlgorithm.specie + 1}/${POPULATION_SIZE}`;
     if (evolutionaryAlgorithm.specie === POPULATION_SIZE) {
       evolutionaryAlgorithm.specie = 0;
       evolutionaryAlgorithm.generation++;
@@ -86,6 +84,7 @@ async function learningLoop() {
       evolutionaryAlgorithm.elitism();
       evolutionaryAlgorithm.clearFitness();
     }
+    SPAN_GEN_SPECIE.textContent = `Generation: ${evolutionaryAlgorithm.generation}, Species: ${evolutionaryAlgorithm.specie + 1}/${POPULATION_SIZE}`;
   } else {
     started = true;
     evolutionaryAlgorithm.initialize();
@@ -93,7 +92,7 @@ async function learningLoop() {
   for (let i = 0; i < ROUNDS_PER_AGENT_PER_GENERATION; i++) {
     reset();
     do {
-      if (showMode === `all` || (showMode === `best` && evolutionaryAlgorithm.specie === 0 && round === 0)) {
+      if (showMode === `all` || (showMode === `best` && evolutionaryAlgorithm.specie === 0 && i === 0)) {
         canvasCleared = false;
         window.requestAnimationFrame(() => {
           render();

@@ -5,6 +5,9 @@ import {gaussianRandom} from "./GaussianRandom.js";
 
 const nextGaussianRandom = gaussianRandom(0, 1);
 
+const WEIGHT_MIN = -2;
+const WEIGHT_MAX = 2;
+
 export class NeuralNetwork {
   constructor(layerSizes) {
     this.layers = [];
@@ -61,11 +64,11 @@ export class NeuralNetwork {
         for (let col = 0; col < this.weights[i].numCols; col++) {
           if (Math.random() < rate) {
             this.weights[i].elements[row][col] += nextGaussianRandom();
-            if (this.weights[i].elements[row][col] < -1) {
-              this.weights[i].elements[row][col] = -1;
+            if (this.weights[i].elements[row][col] < WEIGHT_MIN) {
+              this.weights[i].elements[row][col] = WEIGHT_MIN;
             }
-            if (this.weights[i].elements[row][col] > 1) {
-              this.weights[i].elements[row][col] = 1;
+            if (this.weights[i].elements[row][col] > WEIGHT_MAX) {
+              this.weights[i].elements[row][col] = WEIGHT_MAX;
             }
           }
         }

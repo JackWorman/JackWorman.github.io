@@ -3,12 +3,12 @@
 import {NeuralNetwork} from "./NeuralNetwork.js";
 
 export class EvolutionaryAlgorithm {
-  constructor(numNeuralNetworks, layerSizes) {
+  constructor(numNeuralNetworks, layerSizes, mutationRate) {
     this.neuralNetworks = [];
     for (let i = 0; i < numNeuralNetworks; i++) {
       this.neuralNetworks.push(new NeuralNetwork(layerSizes));
     }
-    this.mutationRate = 0.02;
+    this.mutationRate = mutationRate;
     this.generation = 0;
     this.specie = 0;
     this.parent1s = [];
@@ -22,11 +22,10 @@ export class EvolutionaryAlgorithm {
   }
 
   evaluateFitness(apples, steps) {
-    this.neuralNetworks[this.specie].fitness +=
-      // Math.pow(apples, 2);
-      steps
-      + (Math.pow(2, apples) + Math.pow(apples, 2.1)*500)
-      - (Math.pow(apples, 1.2) * Math.pow(0.25 * steps, 1.3));
+    this.neuralNetworks[this.specie].fitness += Math.pow(apples, 4);
+      // steps
+      // + (Math.pow(2, apples) + Math.pow(apples, 2.1)*500)
+      // - (Math.pow(apples, 1.2) * Math.pow(0.25 * steps, 1.3));
   }
 
   sort() {

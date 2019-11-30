@@ -13,12 +13,19 @@ const CANVAS_NEURAL_NETWORK = document.getElementById(`canvas-neural-network`);
 const CONTEXT_NEURAL_NETWORK = CANVAS_NEURAL_NETWORK.getContext(`2d`);
 
 const MILLISECONDS_PER_SECOND = 1000;
+
+// Settings
 const FRAMES_PER_SECOND = 15;
 export const GRID_SIZE = 30;
+const POPULATION_SIZE = 2000;
+const LAYER_SIZES = [28, 20, 12, 4];
+const MUTATION_RATE = 0.02;
+const ROUNDS_PER_AGENT_PER_GENERATION = 10;
+const MAX_HUNGER = 900;
 
 const snake = new Snake();
 const pellet = new Pellet();
-const evolutionaryAlgorithm = new EvolutionaryAlgorithm(2000, [28, 20, 12, 4]);
+const evolutionaryAlgorithm = new EvolutionaryAlgorithm(POPULATION_SIZE, LAYER_SIZES, MUTATION_RATE);
 
 export let canvasSize = 600;
 CANVAS_GAME.width = CANVAS_GAME.height = canvasSize;
@@ -80,11 +87,11 @@ async function learningLoop() {
 function reset() {
   if (started) {
     evolutionaryAlgorithm.evaluateFitness(apples, steps);
-    if (++round === 10) {
+    if (++round === ROUNDS_PER_AGENT_PER_GENERATION) {
       round = 0;
       evolutionaryAlgorithm.specie++;
     }
-    if (evolutionaryAlgorithm.specie === 2000) {
+    if (evolutionaryAlgorithm.specie === POPULATION_SIZE) {
       evolutionaryAlgorithm.specie = 0;
       evolutionaryAlgorithm.generation++;
 
@@ -104,7 +111,7 @@ function reset() {
     started = true;
     evolutionaryAlgorithm.initialize();
   }
-  SPAN_GEN_SPECIE.textContent = `Generation: ${evolutionaryAlgorithm.generation}, Species: ${evolutionaryAlgorithm.specie + 1}/2000`;
+  SPAN_GEN_SPECIE.textContent = `Generation: ${evolutionaryAlgorithm.generation}, Species: ${evolutionaryAlgorithm.specie + 1}/${POPULATION_SIZE}`;
   snake.reset(GRID_SIZE / 2, GRID_SIZE / 2);
   pellet.placePellet(GRID_SIZE, snake.bodySegments);
   hunger = 0;
@@ -112,6 +119,9 @@ function reset() {
   steps = 0;
 }
 
+let snakeCopies = [];
+// TODO: add a feature that kills the snake immediately after getting stuck in a loop,
+//       but give it all the steps it would have gotten
 function gameLoop() {
   updateInputLayer(evolutionaryAlgorithm, snake, pellet);
   evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].calculateOutputs();
@@ -124,8 +134,29 @@ function gameLoop() {
     snake.grow();
     pellet.placePellet(GRID_SIZE, snake.bodySegments);
     hunger = 0;
+    snakeCopies = [];
   }
-  return !(snake.checkCollison(GRID_SIZE) || hunger === GRID_SIZE*GRID_SIZE/2);
+
+  newSnakeCopy = [];
+  for (const body of snake.bodySegments) {
+    newSnakeCopy.push({x: body.x, y: body.y});
+  }
+  let snakesMatch = true;
+  for (const snakeCopy of snakeCopies) {
+    snakesMatch = true;
+    for (let i = 0; i < newSnakeCopy.length; i++) {
+      if (newSnakeCopy[i].x !== snakeCopy[i].x || newSnakeCopy[i].y !== snakeCopy[i].y) {
+        snakesMatch = false;
+        break;
+      }
+    }
+    if (snakesMatch) {
+      break;
+    }
+  }
+  snakeCopies.push(newSnakeCopy);
+
+  return !(snake.checkCollison(GRID_SIZE) || hunger === MAX_HUNGER || snakesMatch);
 }
 
 function render() {
@@ -140,3 +171,32 @@ function render() {
 }
 
 window.addEventListener(`load`, learningLoop);
+
+function checkRepeat() {
+  // Add position to tracker.
+  let snakeCopy = [];
+  for (let i = 0; i < snake.length; i++) {
+    snakeCopy.push(new Point(snake[i].x, snake[i].y));
+  }
+  let fruitCopy = new Point(fruit.x, fruit.y);
+  positions.push(new PositionTracker(fruitCopy, snakeCopy));
+  // check if this position has occured before
+  for (let i = 0; i < positions.length - 1; i++) {
+    if (fruit.x !== positions[i].fruit.x || fruit.y !== positions[i].fruit.y) {
+      continue;
+    }
+    if (snake.length !== positions[i].snake.length) {
+      continue;
+    }
+    let isSnakeSame = true;
+    for (let j = 0; j < snake.length; j++) {
+      if (snake[j].x !== positions[i].snake[j].x || snake[j].y !== positions[i].snake[j].y) {
+        isSnakeSame = false;
+        break;
+      }
+    }
+    if (!isSnakeSame) continue;
+    // It has repeated if it gets here.
+    reset();
+  }
+}

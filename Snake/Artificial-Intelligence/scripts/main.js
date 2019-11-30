@@ -72,9 +72,7 @@ async function learningLoop() {
     await resetEA();
     for (let i = 0; i < ROUNDS_PER_AGENT_PER_GENERATION; i++) {
       resetGame(i);
-      do {
-        await renderAll();
-      } while (gameLoop());
+      do { await renderAll(); } while (gameLoop());
       evolutionaryAlgorithm.evaluateFitness(apples, steps);
       const nowTime = performance.now();
       if (nowTime - previousTime > 100) {

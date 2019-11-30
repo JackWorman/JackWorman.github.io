@@ -65,7 +65,45 @@ BUTTON_TOGGLE_SHOW.addEventListener(`click`, () => {
   CONTEXT_NEURAL_NETWORK.clearRect(0, 0, canvasSize, canvasSize);
 });
 
+let previousTime = performance.now();
+
 async function learningLoop() {
+  while (true) {
+    resetEA();
+    for (let i = 0; i < ROUNDS_PER_AGENT_PER_GENERATION; i++) {
+      resetGame();
+      do {
+        renderAll();
+      } while (gameLoop());
+      evolutionaryAlgorithm.evaluateFitness(apples, steps);
+      const nowTime = performance.now();
+      if (nowTime - previousTime > 200) {
+        await sleep(0);
+        previousTime = performance.now();
+      }
+    }
+  }
+
+  // if (!canvasCleared) {
+  //   canvasCleared = true;
+  //   CONTEXT_GAME.clearRect(0, 0, canvasSize, canvasSize);
+  //   CONTEXT_NEURAL_NETWORK.clearRect(0, 0, canvasSize, canvasSize);
+  // }
+  // window.setTimeout(learningLoop); // Keeps the browser from freezing.
+}
+
+function renderAll() {
+  if (showMode === `all` || (showMode === `best` && evolutionaryAlgorithm.specie === 0 && i === 0)) {
+    canvasCleared = false;
+    window.requestAnimationFrame(() => {
+      render();
+      renderNeuralNetwork(evolutionaryAlgorithm, snake);
+    });
+    await sleep(MILLISECONDS_PER_SECOND / FRAMES_PER_SECOND);
+  }
+}
+
+function resetEA() {
   if (started) {
     evolutionaryAlgorithm.specie++;
     if (evolutionaryAlgorithm.specie === POPULATION_SIZE) {
@@ -89,32 +127,9 @@ async function learningLoop() {
     started = true;
     evolutionaryAlgorithm.initialize();
   }
-  for (let i = 0; i < ROUNDS_PER_AGENT_PER_GENERATION; i++) {
-    reset();
-    do {
-      if (showMode === `all` || (showMode === `best` && evolutionaryAlgorithm.specie === 0 && i === 0)) {
-        canvasCleared = false;
-        window.requestAnimationFrame(() => {
-          render();
-          renderNeuralNetwork(evolutionaryAlgorithm, snake);
-        });
-        await sleep(MILLISECONDS_PER_SECOND / FRAMES_PER_SECOND);
-      }
-    } while (gameLoop());
-    evolutionaryAlgorithm.evaluateFitness(apples, steps);
-    if (i % 20 === 0) {
-      await sleep(0);
-    }
-  }
-  if (!canvasCleared) {
-    canvasCleared = true;
-    CONTEXT_GAME.clearRect(0, 0, canvasSize, canvasSize);
-    CONTEXT_NEURAL_NETWORK.clearRect(0, 0, canvasSize, canvasSize);
-  }
-  window.setTimeout(learningLoop); // Keeps the browser from freezing.
 }
 
-function reset() {
+function resetGame() {
   snake.reset(GRID_SIZE / 2, GRID_SIZE / 2);
   pellet.placePellet(GRID_SIZE, snake.bodySegments);
   hunger = 0;

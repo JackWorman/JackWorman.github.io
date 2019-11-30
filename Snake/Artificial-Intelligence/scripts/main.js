@@ -68,12 +68,8 @@ BUTTON_TOGGLE_SHOW.addEventListener(`click`, () => {
 
 async function learningLoop() {
   if (started) {
-    // evolutionaryAlgorithm.evaluateFitness(apples, steps);
-    // if (++round === ROUNDS_PER_AGENT_PER_GENERATION) {
-    //   round = 0;
-    //   evolutionaryAlgorithm.specie++;
-    // }
     evolutionaryAlgorithm.specie++;
+    SPAN_GEN_SPECIE.textContent = `Generation: ${evolutionaryAlgorithm.generation}, Species: ${evolutionaryAlgorithm.specie + 1}/${POPULATION_SIZE}`;
     if (evolutionaryAlgorithm.specie === POPULATION_SIZE) {
       evolutionaryAlgorithm.specie = 0;
       evolutionaryAlgorithm.generation++;
@@ -107,18 +103,16 @@ async function learningLoop() {
       }
     } while (gameLoop());
     evolutionaryAlgorithm.evaluateFitness(apples, steps);
-    // if (!canvasCleared) {
-    //   canvasCleared = true;
-    //   CONTEXT_GAME.clearRect(0, 0, canvasSize, canvasSize);
-    //   CONTEXT_NEURAL_NETWORK.clearRect(0, 0, canvasSize, canvasSize);
-    // }
+  }
+  if (!canvasCleared) {
+    canvasCleared = true;
+    CONTEXT_GAME.clearRect(0, 0, canvasSize, canvasSize);
+    CONTEXT_NEURAL_NETWORK.clearRect(0, 0, canvasSize, canvasSize);
   }
   window.setTimeout(learningLoop); // Keeps the browser from freezing.
 }
 
 function reset() {
-
-  SPAN_GEN_SPECIE.textContent = `Generation: ${evolutionaryAlgorithm.generation}, Species: ${evolutionaryAlgorithm.specie + 1}/${POPULATION_SIZE}`;
   snake.reset(GRID_SIZE / 2, GRID_SIZE / 2);
   pellet.placePellet(GRID_SIZE, snake.bodySegments);
   hunger = 0;

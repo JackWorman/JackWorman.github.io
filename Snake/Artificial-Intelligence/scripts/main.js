@@ -69,7 +69,7 @@ let previousTime = performance.now();
 
 async function learningLoop() {
   while (true) {
-    await resetEA();
+    resetEA();
     for (let i = 0; i < ROUNDS_PER_AGENT_PER_GENERATION; i++) {
       resetGame(i);
       do { await renderAll(); } while (gameLoop());
@@ -101,7 +101,7 @@ async function renderAll(i) {
   }
 }
 
-async function resetEA() {
+function resetEA() {
   if (started) {
     evolutionaryAlgorithm.specie++;
     if (evolutionaryAlgorithm.specie === POPULATION_SIZE) {
@@ -120,7 +120,7 @@ async function resetEA() {
       evolutionaryAlgorithm.elitism();
       evolutionaryAlgorithm.clearFitness();
     }
-    await SPAN_GEN_SPECIE.textContent = `Generation: ${evolutionaryAlgorithm.generation}, Species: ${evolutionaryAlgorithm.specie + 1}/${POPULATION_SIZE}`;
+    SPAN_GEN_SPECIE.textContent = `Generation: ${evolutionaryAlgorithm.generation}, Species: ${evolutionaryAlgorithm.specie + 1}/${POPULATION_SIZE}`;
   } else {
     started = true;
     evolutionaryAlgorithm.initialize();

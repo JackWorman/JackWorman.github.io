@@ -69,7 +69,7 @@ let previousTime = performance.now();
 
 async function learningLoop() {
   while (true) {
-    resetEA();
+    await resetEA();
     for (let i = 0; i < ROUNDS_PER_AGENT_PER_GENERATION; i++) {
       resetGame(i);
       do {
@@ -103,7 +103,7 @@ async function renderAll(i) {
   }
 }
 
-function resetEA() {
+async function resetEA() {
   if (started) {
     evolutionaryAlgorithm.specie++;
     if (evolutionaryAlgorithm.specie === POPULATION_SIZE) {
@@ -122,7 +122,7 @@ function resetEA() {
       evolutionaryAlgorithm.elitism();
       evolutionaryAlgorithm.clearFitness();
     }
-    SPAN_GEN_SPECIE.textContent = `Generation: ${evolutionaryAlgorithm.generation}, Species: ${evolutionaryAlgorithm.specie + 1}/${POPULATION_SIZE}`;
+    await SPAN_GEN_SPECIE.textContent = `Generation: ${evolutionaryAlgorithm.generation}, Species: ${evolutionaryAlgorithm.specie + 1}/${POPULATION_SIZE}`;
   } else {
     started = true;
     evolutionaryAlgorithm.initialize();
@@ -167,7 +167,7 @@ function gameLoop() {
       }
     }
     if (snakesMatch) {
-      break;
+      return false;
     }
   }
   snakeCopies.push(newSnakeCopy);

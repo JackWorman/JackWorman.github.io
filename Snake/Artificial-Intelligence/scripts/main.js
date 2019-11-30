@@ -142,7 +142,7 @@ function gameLoop() {
   for (const body of snake.bodySegments) {
     newSnakeCopy.push({x: body.x, y: body.y});
   }
-  let snakesMatch = true;
+  let snakesMatch = false;
   for (const snakeCopy of snakeCopies) {
     snakesMatch = true;
     for (let i = 0; i < newSnakeCopy.length; i++) {
@@ -172,32 +172,3 @@ function render() {
 }
 
 window.addEventListener(`load`, learningLoop);
-
-function checkRepeat() {
-  // Add position to tracker.
-  let snakeCopy = [];
-  for (let i = 0; i < snake.length; i++) {
-    snakeCopy.push(new Point(snake[i].x, snake[i].y));
-  }
-  let fruitCopy = new Point(fruit.x, fruit.y);
-  positions.push(new PositionTracker(fruitCopy, snakeCopy));
-  // check if this position has occured before
-  for (let i = 0; i < positions.length - 1; i++) {
-    if (fruit.x !== positions[i].fruit.x || fruit.y !== positions[i].fruit.y) {
-      continue;
-    }
-    if (snake.length !== positions[i].snake.length) {
-      continue;
-    }
-    let isSnakeSame = true;
-    for (let j = 0; j < snake.length; j++) {
-      if (snake[j].x !== positions[i].snake[j].x || snake[j].y !== positions[i].snake[j].y) {
-        isSnakeSame = false;
-        break;
-      }
-    }
-    if (!isSnakeSame) continue;
-    // It has repeated if it gets here.
-    reset();
-  }
-}

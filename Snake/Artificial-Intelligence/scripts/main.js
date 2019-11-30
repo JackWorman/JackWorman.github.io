@@ -20,12 +20,13 @@ export const GRID_SIZE = 30;
 const POPULATION_SIZE = 2000;
 const LAYER_SIZES = [28, 20, 12, 4];
 const MUTATION_RATE = 0.02;
+const ELITISM_RATE = 0.025;
 const ROUNDS_PER_AGENT_PER_GENERATION = 10;
 const MAX_HUNGER = 900;
 
 const snake = new Snake();
 const pellet = new Pellet();
-const evolutionaryAlgorithm = new EvolutionaryAlgorithm(POPULATION_SIZE, LAYER_SIZES, MUTATION_RATE);
+const evolutionaryAlgorithm = new EvolutionaryAlgorithm(POPULATION_SIZE, LAYER_SIZES, MUTATION_RATE, ELITISM_RATE);
 
 export let canvasSize = 600;
 CANVAS_GAME.width = CANVAS_GAME.height = canvasSize;

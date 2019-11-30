@@ -151,6 +151,7 @@ function gameLoop() {
       }
     }
     if (snakesMatch) {
+      snakeCopies = [];
       break;
     }
   }

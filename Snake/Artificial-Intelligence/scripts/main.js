@@ -71,7 +71,7 @@ async function learningLoop() {
   while (true) {
     resetEA();
     for (let i = 0; i < ROUNDS_PER_AGENT_PER_GENERATION; i++) {
-      resetGame();
+      resetGame(i);
       do {
         await renderAll();
       } while (gameLoop());
@@ -92,7 +92,7 @@ async function learningLoop() {
   // window.setTimeout(learningLoop); // Keeps the browser from freezing.
 }
 
-async function renderAll() {
+async function renderAll(i) {
   if (showMode === `all` || (showMode === `best` && evolutionaryAlgorithm.specie === 0 && i === 0)) {
     canvasCleared = false;
     window.requestAnimationFrame(() => {

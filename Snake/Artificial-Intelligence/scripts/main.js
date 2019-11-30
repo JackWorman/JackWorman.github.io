@@ -45,6 +45,7 @@ let showMode = `all`;
 let canvasCleared = true;
 
 let round = 0;
+let snakeCopies = [];
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -66,32 +67,13 @@ BUTTON_TOGGLE_SHOW.addEventListener(`click`, () => {
 });
 
 async function learningLoop() {
-  reset();
-  do {
-    if (showMode === `all` || (showMode === `best` && evolutionaryAlgorithm.specie === 0)) {
-      canvasCleared = false;
-      window.requestAnimationFrame(() => {
-        render();
-        renderNeuralNetwork(evolutionaryAlgorithm, snake);
-      });
-      await sleep(MILLISECONDS_PER_SECOND / FRAMES_PER_SECOND);
-    }
-  } while (gameLoop());
-  if (!canvasCleared) {
-    canvasCleared = true;
-    CONTEXT_GAME.clearRect(0, 0, canvasSize, canvasSize);
-    CONTEXT_NEURAL_NETWORK.clearRect(0, 0, canvasSize, canvasSize);
-  }
-  window.setTimeout(learningLoop); // Keeps the browser from freezing.
-}
-
-function reset() {
   if (started) {
-    evolutionaryAlgorithm.evaluateFitness(apples, steps);
-    if (++round === ROUNDS_PER_AGENT_PER_GENERATION) {
-      round = 0;
-      evolutionaryAlgorithm.specie++;
-    }
+    // evolutionaryAlgorithm.evaluateFitness(apples, steps);
+    // if (++round === ROUNDS_PER_AGENT_PER_GENERATION) {
+    //   round = 0;
+    //   evolutionaryAlgorithm.specie++;
+    // }
+    evolutionaryAlgorithm.specie++;
     if (evolutionaryAlgorithm.specie === POPULATION_SIZE) {
       evolutionaryAlgorithm.specie = 0;
       evolutionaryAlgorithm.generation++;
@@ -112,6 +94,30 @@ function reset() {
     started = true;
     evolutionaryAlgorithm.initialize();
   }
+  for (let i = 0; i < ROUNDS_PER_AGENT_PER_GENERATION; i++) {
+    reset();
+    do {
+      if (showMode === `all` || (showMode === `best` && evolutionaryAlgorithm.specie === 0)) {
+        canvasCleared = false;
+        window.requestAnimationFrame(() => {
+          render();
+          renderNeuralNetwork(evolutionaryAlgorithm, snake);
+        });
+        await sleep(MILLISECONDS_PER_SECOND / FRAMES_PER_SECOND);
+      }
+    } while (gameLoop());
+    evolutionaryAlgorithm.evaluateFitness(apples, steps);
+    // if (!canvasCleared) {
+    //   canvasCleared = true;
+    //   CONTEXT_GAME.clearRect(0, 0, canvasSize, canvasSize);
+    //   CONTEXT_NEURAL_NETWORK.clearRect(0, 0, canvasSize, canvasSize);
+    // }
+  }
+  window.setTimeout(learningLoop); // Keeps the browser from freezing.
+}
+
+function reset() {
+
   SPAN_GEN_SPECIE.textContent = `Generation: ${evolutionaryAlgorithm.generation}, Species: ${evolutionaryAlgorithm.specie + 1}/${POPULATION_SIZE}`;
   snake.reset(GRID_SIZE / 2, GRID_SIZE / 2);
   pellet.placePellet(GRID_SIZE, snake.bodySegments);
@@ -121,9 +127,6 @@ function reset() {
   snakeCopies = [];
 }
 
-let snakeCopies = [];
-// TODO: add a feature that kills the snake immediately after getting stuck in a loop,
-//       but give it all the steps it would have gotten
 function gameLoop() {
   updateInputLayer(evolutionaryAlgorithm, snake, pellet);
   evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].calculateOutputs();

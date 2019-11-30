@@ -137,7 +137,7 @@ function gameLoop() {
     snakeCopies = [];
   }
 
-  newSnakeCopy = [];
+  let newSnakeCopy = [];
   for (const body of snake.bodySegments) {
     newSnakeCopy.push({x: body.x, y: body.y});
   }

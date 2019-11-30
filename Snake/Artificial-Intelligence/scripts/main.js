@@ -75,7 +75,7 @@ async function learningLoop() {
       do { await renderAll(); } while (gameLoop());
       evolutionaryAlgorithm.evaluateFitness(apples, steps);
       const nowTime = performance.now();
-      if (nowTime - previousTime > 1000) {
+      if (nowTime - previousTime > 250) {
         await sleep(0);
         previousTime = performance.now();
       }

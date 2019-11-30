@@ -117,6 +117,7 @@ function reset() {
   hunger = 0;
   apples = 0;
   steps = 0;
+  snakeCopies = [];
 }
 
 let snakeCopies = [];
@@ -151,7 +152,6 @@ function gameLoop() {
       }
     }
     if (snakesMatch) {
-      snakeCopies = [];
       break;
     }
   }

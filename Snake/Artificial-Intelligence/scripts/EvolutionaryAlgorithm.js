@@ -24,13 +24,8 @@ export class EvolutionaryAlgorithm {
     }
   }
 
-  evaluateFitness(apples, steps) {
-    this.neuralNetworks[this.specie].fitness +=
-      Math.pow(2, apples);
-      // Math.pow(apples, 4);
-      // steps
-      // + (Math.pow(2, apples) + Math.pow(apples, 2.1)*500)
-      // - (Math.pow(apples, 1.2) * Math.pow(0.25 * steps, 1.3));
+  evaluateFitness(apples) {
+    this.neuralNetworks[this.specie].fitness = Math.pow(2, apples);
   }
 
   sort() {

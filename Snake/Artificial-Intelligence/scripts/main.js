@@ -37,7 +37,6 @@ let showBest = true;
 let started = false;
 let hunger;
 let apples;
-let steps;
 let bestFitnesses = [];
 
 let showMode = `all`;
@@ -50,7 +49,7 @@ function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-BUTTON_TOGGLE_SHOW.addEventListener(`click`, () => {
+BUTTON_TOGGLE_SHOW.addEventListener(`click`, async () => {
   if (showMode === `all`) {
     showMode = `best`;
     BUTTON_TOGGLE_SHOW.textContent = `Showing Best`;
@@ -61,48 +60,36 @@ BUTTON_TOGGLE_SHOW.addEventListener(`click`, () => {
     showMode = `all`;
     BUTTON_TOGGLE_SHOW.textContent = `Showing All`;
   }
+  await sleep(0);
   CONTEXT_GAME.clearRect(0, 0, canvasSize, canvasSize);
   CONTEXT_NEURAL_NETWORK.clearRect(0, 0, canvasSize, canvasSize);
 });
 
-let previousTime = performance.now();
-
-async function learningLoop() {
+async function evolutionaryAlgorithmLoop() {
+  let previousTime = performance.now();
   while (true) {
     resetEA();
-    for (let i = 0; i < ROUNDS_PER_AGENT_PER_GENERATION; i++) {
-      resetGame(i);
-      do { await renderAll(); } while (gameLoop());
-      evolutionaryAlgorithm.evaluateFitness(apples, steps);
-      const nowTime = performance.now();
-      if (nowTime - previousTime > 250) {
+    for (let round = 0; round < ROUNDS_PER_AGENT_PER_GENERATION; round++) {
+      resetGame(round);
+      do { await render(); } while (gameLoop());
+      // Pause the loop every second, so that the browser does not crash.
+      if (performance.now() - previousTime > 1000) {
         await sleep(0);
         previousTime = performance.now();
       }
     }
   }
-
   // if (!canvasCleared) {
   //   canvasCleared = true;
   //   CONTEXT_GAME.clearRect(0, 0, canvasSize, canvasSize);
   //   CONTEXT_NEURAL_NETWORK.clearRect(0, 0, canvasSize, canvasSize);
   // }
-  // window.setTimeout(learningLoop); // Keeps the browser from freezing.
-}
-
-async function renderAll(i) {
-  if (showMode === `all` || (showMode === `best` && evolutionaryAlgorithm.specie === 0 && i === 0)) {
-    canvasCleared = false;
-    window.requestAnimationFrame(() => {
-      render();
-      renderNeuralNetwork(evolutionaryAlgorithm, snake);
-    });
-    await sleep(MILLISECONDS_PER_SECOND / FRAMES_PER_SECOND);
-  }
 }
 
 function resetEA() {
   if (started) {
+    evolutionaryAlgorithm.evaluateFitness(apples);
+    apples = 0;
     evolutionaryAlgorithm.specie++;
     if (evolutionaryAlgorithm.specie === POPULATION_SIZE) {
       evolutionaryAlgorithm.specie = 0;
@@ -131,8 +118,6 @@ function resetGame() {
   snake.reset(GRID_SIZE / 2, GRID_SIZE / 2);
   pellet.placePellet(GRID_SIZE, snake.bodySegments);
   hunger = 0;
-  apples = 0;
-  steps = 0;
   snakeCopies = [];
 }
 
@@ -141,7 +126,6 @@ function gameLoop() {
   evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].calculateOutputs();
   snake.direction = getDirectionFromOutputLayer(evolutionaryAlgorithm, snake);
   snake.move();
-  steps++;
   hunger++;
   if (snake.checkPelletEaten(pellet)) {
     apples++;
@@ -173,7 +157,18 @@ function gameLoop() {
   return !(snake.checkCollison(GRID_SIZE) || hunger === MAX_HUNGER || snakesMatch);
 }
 
-function render() {
+async function render(round) {
+  if (showMode === `all` || (showMode === `best` && evolutionaryAlgorithm.specie === 0 && round === 0)) {
+    canvasCleared = false;
+    window.requestAnimationFrame(() => {
+      renderGame();
+      renderNeuralNetwork(evolutionaryAlgorithm, snake);
+    });
+    await sleep(MILLISECONDS_PER_SECOND / FRAMES_PER_SECOND);
+  }
+}
+
+function renderGame() {
   CONTEXT_GAME.clearRect(0, 0, canvasSize, canvasSize);
   const fillSquare = (x, y, color) => {
     CONTEXT_GAME.fillStyle = color;
@@ -184,4 +179,4 @@ function render() {
   snake.render(fillSquare);
 }
 
-window.addEventListener(`load`, learningLoop);
+window.addEventListener(`load`, evolutionaryAlgorithmLoop);

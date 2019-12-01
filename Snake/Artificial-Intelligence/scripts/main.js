@@ -38,32 +38,12 @@ let started = false;
 let hunger;
 let apples;
 let bestFitnesses = [];
-
 let showMode = `all`;
-
-let canvasCleared = true;
-
 let snakeCopies = [];
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
-
-BUTTON_TOGGLE_SHOW.addEventListener(`click`, async () => {
-  if (showMode === `all`) {
-    showMode = `best`;
-    BUTTON_TOGGLE_SHOW.textContent = `Showing Best`;
-  } else if (showMode === `best`) {
-    showMode = `off`;
-    BUTTON_TOGGLE_SHOW.textContent = `Showing Off`;
-  } else if (showMode === `off`) {
-    showMode = `all`;
-    BUTTON_TOGGLE_SHOW.textContent = `Showing All`;
-  }
-  await sleep(0);
-  CONTEXT_GAME.clearRect(0, 0, canvasSize, canvasSize);
-  CONTEXT_NEURAL_NETWORK.clearRect(0, 0, canvasSize, canvasSize);
-});
 
 async function evolutionaryAlgorithmLoop() {
   let previousTime = performance.now();
@@ -73,17 +53,12 @@ async function evolutionaryAlgorithmLoop() {
       resetGame(round);
       do { await render(); } while (gameLoop());
       // Pause the loop every second, so that the browser does not crash.
-      if (performance.now() - previousTime > 1000) {
+      if (performance.now() - previousTime > MILLISECONDS_PER_SECOND) {
         await sleep(0);
         previousTime = performance.now();
       }
     }
   }
-  // if (!canvasCleared) {
-  //   canvasCleared = true;
-  //   CONTEXT_GAME.clearRect(0, 0, canvasSize, canvasSize);
-  //   CONTEXT_NEURAL_NETWORK.clearRect(0, 0, canvasSize, canvasSize);
-  // }
 }
 
 function resetEA() {
@@ -159,7 +134,6 @@ function gameLoop() {
 
 async function render(round) {
   if (showMode === `all` || (showMode === `best` && evolutionaryAlgorithm.specie === 0 && round === 0)) {
-    canvasCleared = false;
     window.requestAnimationFrame(() => {
       renderGame();
       renderNeuralNetwork(evolutionaryAlgorithm, snake);
@@ -178,5 +152,21 @@ function renderGame() {
   pellet.render(fillSquare);
   snake.render(fillSquare);
 }
+
+BUTTON_TOGGLE_SHOW.addEventListener(`click`, async () => {
+  if (showMode === `all`) {
+    showMode = `best`;
+    BUTTON_TOGGLE_SHOW.textContent = `Showing Best`;
+  } else if (showMode === `best`) {
+    showMode = `off`;
+    BUTTON_TOGGLE_SHOW.textContent = `Showing Off`;
+  } else if (showMode === `off`) {
+    showMode = `all`;
+    BUTTON_TOGGLE_SHOW.textContent = `Showing All`;
+  }
+  await sleep(0); // Pause to ensure the canvases do not get overwritten after being cleared.
+  CONTEXT_GAME.clearRect(0, 0, canvasSize, canvasSize);
+  CONTEXT_NEURAL_NETWORK.clearRect(0, 0, canvasSize, canvasSize);
+});
 
 window.addEventListener(`load`, evolutionaryAlgorithmLoop);

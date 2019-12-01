@@ -25,7 +25,7 @@ export class EvolutionaryAlgorithm {
   }
 
   evaluateFitness(apples) {
-    this.neuralNetworks[this.specie].fitness = Math.pow(apples, 4);
+    this.neuralNetworks[this.specie].fitness = Math.pow(apples, 2);
   }
 
   sort() {
@@ -66,6 +66,7 @@ export class EvolutionaryAlgorithm {
     for (let i = 0; i < this.populationSize - Math.round(this.elitismRate * this.populationSize); i++) {
       const child = new NeuralNetwork(this.layerSizes);
       for (let j = 0; j < child.weights.length; j++) {
+        // Loop over the matrixes.
         for (let row = 0; row < child.weights[j].numRows; row++) {
           for (let col = 0; col < child.weights[j].numCols; col++) {
             if (Math.random() < 0.5) {

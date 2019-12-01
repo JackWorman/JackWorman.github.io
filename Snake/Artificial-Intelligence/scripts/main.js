@@ -14,9 +14,10 @@ const CONTEXT_NEURAL_NETWORK = CANVAS_NEURAL_NETWORK.getContext(`2d`);
 
 const MILLISECONDS_PER_SECOND = 1000;
 
-// Settings
+// Game Settings
 const FRAMES_PER_SECOND = 15;
 export const GRID_SIZE = 30;
+// EA Settings
 const POPULATION_SIZE = 2000;
 const LAYER_SIZES = [28, 20, 12, 4];
 const MUTATION_RATE = 0.02;
@@ -69,7 +70,6 @@ function resetEA() {
     if (evolutionaryAlgorithm.specie === POPULATION_SIZE) {
       evolutionaryAlgorithm.specie = 0;
       evolutionaryAlgorithm.generation++;
-
       evolutionaryAlgorithm.sort();
       bestFitnesses.push(evolutionaryAlgorithm.neuralNetworks[0].fitness);
       console.log(`==============================`);

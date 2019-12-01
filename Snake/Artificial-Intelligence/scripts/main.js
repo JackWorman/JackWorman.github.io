@@ -52,7 +52,9 @@ async function evolutionaryAlgorithmLoop() {
     resetEA();
     for (let round = 0; round < ROUNDS_PER_AGENT_PER_GENERATION; round++) {
       resetGame(round);
-      while (await gameLoop());
+      do {
+        await render(round);
+      } while (gameLoop());
       // Pauses the loop every second, so that the browser does not crash.
       if (performance.now() - previousTime > 500) {
         await sleep(0);
@@ -96,8 +98,7 @@ function resetGame() {
   snakeCopies = [];
 }
 
-async function gameLoop() {
-  await render();
+function gameLoop() {
   updateInputLayer(evolutionaryAlgorithm, snake, pellet);
   evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].calculateOutputs();
   snake.direction = getDirectionFromOutputLayer(evolutionaryAlgorithm, snake);
@@ -111,6 +112,7 @@ async function gameLoop() {
     snakeCopies = [];
   }
 
+  // TODO: make this a function checkRepeatedPosition()
   let newSnakeCopy = [];
   for (const body of snake.bodySegments) {
     newSnakeCopy.push({x: body.x, y: body.y});

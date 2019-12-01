@@ -55,11 +55,16 @@ async function evolutionaryAlgorithmLoop() {
       do {
         await render(round);
       } while (gameLoop());
-      // Pauses the loop every 500ms, so that the browser does not crash.
-      if (performance.now() - previousTime > 500) {
-        await sleep(0);
-        previousTime = performance.now();
+      // Clear canvas after showing best snake.
+      if (showMode === `best` && evolutionaryAlgorithm.specie === 0 && round === 0) {
+        CONTEXT_GAME.clearRect(0, 0, canvasSize, canvasSize);
+        CONTEXT_NEURAL_NETWORK.clearRect(0, 0, canvasSize, canvasSize);
       }
+    }
+    // Pauses the loop every 500ms, so that the browser does not crash.
+    if (performance.now() - previousTime > 500) {
+      await sleep(0);
+      previousTime = performance.now();
     }
   }
 }
@@ -111,13 +116,15 @@ function gameLoop() {
     hunger = 0;
     snakeCopies = [];
   }
+  return !(snake.checkCollison(GRID_SIZE) || hunger === MAX_HUNGER || checkRepeatedPosition());
+}
 
-  // TODO: make this a function checkRepeatedPosition()
-  let newSnakeCopy = [];
+function checkRepeatedPosition() {
+  const newSnakeCopy = [];
   for (const body of snake.bodySegments) {
     newSnakeCopy.push({x: body.x, y: body.y});
   }
-  let snakesMatch = false;
+  let snakesMatch;
   for (const snakeCopy of snakeCopies) {
     snakesMatch = true;
     for (let i = 0; i < newSnakeCopy.length; i++) {
@@ -127,12 +134,11 @@ function gameLoop() {
       }
     }
     if (snakesMatch) {
-      return false;
+      return true;
     }
   }
   snakeCopies.push(newSnakeCopy);
-
-  return !(snake.checkCollison(GRID_SIZE) || hunger === MAX_HUNGER || snakesMatch);
+  return false;
 }
 
 async function render(round) {
@@ -167,7 +173,7 @@ BUTTON_TOGGLE_SHOW.addEventListener(`click`, async () => {
     showMode = `all`;
     BUTTON_TOGGLE_SHOW.textContent = `Showing All`;
   }
-  await sleep(0); // Pause to ensure the canvases do not get overwritten after being cleared.
+  await sleep(0); // Pauses to ensure the canvases do not get overwritten after being cleared.
   CONTEXT_GAME.clearRect(0, 0, canvasSize, canvasSize);
   CONTEXT_NEURAL_NETWORK.clearRect(0, 0, canvasSize, canvasSize);
 });

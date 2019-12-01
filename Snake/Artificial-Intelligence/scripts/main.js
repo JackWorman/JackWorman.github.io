@@ -80,8 +80,8 @@ function resetEA() {
       bestFitnesses.push(evolutionaryAlgorithm.neuralNetworks[0].fitness);
       console.log(`==============================`);
       console.log(`Generation: ${evolutionaryAlgorithm.generation}`);
-      console.log(`Best Fitness: ${Number(Math.round(evolutionaryAlgorithm.neuralNetworks[0].fitness).toLocaleString())}`);
-      console.log(`Average Best Fitness: ${Math.round(bestFitnesses.reduce((a, b) => a + b, 0) / bestFitnesses.length).toLocaleString()}`);
+      console.log(`Best Fitness: ${Number(Math.round(evolutionaryAlgorithm.neuralNetworks[0].fitness)).toLocaleString()}`);
+      console.log(`Average Best Fitness: ${Number(Math.round(bestFitnesses.reduce((a, b) => a + b, 0) / bestFitnesses.length)).toLocaleString()}`);
       evolutionaryAlgorithm.selectParents();
       evolutionaryAlgorithm.crossover();
       evolutionaryAlgorithm.mutate();

@@ -65,7 +65,6 @@ async function evolutionaryAlgorithmLoop() {
 function resetEA() {
   if (started) {
     evolutionaryAlgorithm.evaluateFitness(apples);
-    apples = 0;
     evolutionaryAlgorithm.specie++;
     if (evolutionaryAlgorithm.specie === POPULATION_SIZE) {
       evolutionaryAlgorithm.specie = 0;
@@ -87,6 +86,7 @@ function resetEA() {
     started = true;
     evolutionaryAlgorithm.initialize();
   }
+  apples = 0;
 }
 
 function resetGame() {

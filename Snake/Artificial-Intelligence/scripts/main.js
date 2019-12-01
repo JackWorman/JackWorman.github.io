@@ -55,7 +55,7 @@ async function evolutionaryAlgorithmLoop() {
       do {
         await render(round);
       } while (gameLoop());
-      // Pauses the loop every second, so that the browser does not crash.
+      // Pauses the loop every 500ms, so that the browser does not crash.
       if (performance.now() - previousTime > 500) {
         await sleep(0);
         previousTime = performance.now();

@@ -88,7 +88,8 @@ function resetEA() {
       evolutionaryAlgorithm.elitism();
       evolutionaryAlgorithm.clearFitness();
     }
-    SPAN_GEN_SPECIE.textContent = `Generation: ${evolutionaryAlgorithm.generation}, Species: ${evolutionaryAlgorithm.specie + 1}/${POPULATION_SIZE}`;
+    SPAN_GEN_SPECIE.textContent =
+      `Generation: ${evolutionaryAlgorithm.generation}, Species: ${evolutionaryAlgorithm.specie + 1}/${POPULATION_SIZE}, Test: 0/${ROUNDS_PER_AGENT_PER_GENERATION}`;
   } else {
     started = true;
     evolutionaryAlgorithm.initialize();
@@ -143,6 +144,8 @@ function checkRepeatedPosition() {
 
 async function render(round) {
   if (showMode === `all` || (showMode === `best` && evolutionaryAlgorithm.specie === 0 && round === 0)) {
+    SPAN_GEN_SPECIE.textContent =
+      `Generation: ${evolutionaryAlgorithm.generation}, Species: ${evolutionaryAlgorithm.specie + 1}/${POPULATION_SIZE}, Test: ${round + 1}/${ROUNDS_PER_AGENT_PER_GENERATION}`;
     window.requestAnimationFrame(() => {
       renderGame();
       renderNeuralNetwork(evolutionaryAlgorithm, snake);

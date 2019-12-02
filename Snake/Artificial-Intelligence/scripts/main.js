@@ -89,7 +89,7 @@ function resetEA() {
       evolutionaryAlgorithm.clearFitness();
     }
     SPAN_GEN_SPECIE.textContent =
-      `Generation: ${evolutionaryAlgorithm.generation}, Species: ${evolutionaryAlgorithm.specie + 1}/${POPULATION_SIZE}, Test: 0/${ROUNDS_PER_AGENT_PER_GENERATION}`;
+      `Generation: ${evolutionaryAlgorithm.generation}, Species: ${evolutionaryAlgorithm.specie + 1}/${POPULATION_SIZE}, Test: 1/${ROUNDS_PER_AGENT_PER_GENERATION}`;
   } else {
     started = true;
     evolutionaryAlgorithm.initialize();

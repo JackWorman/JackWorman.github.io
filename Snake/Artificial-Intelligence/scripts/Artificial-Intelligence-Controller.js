@@ -150,7 +150,7 @@ export function renderNeuralNetwork(evolutionaryAlgorithm, snake) {
       CONTEXT_NEURAL_NETWORK.font = "10px Arial";
       CONTEXT_NEURAL_NETWORK.strokeStyle = `rgb(255, 255, 255)`;
       CONTEXT_NEURAL_NETWORK.fillStyle = `rgb(255, 255, 255)`;
-      CONTEXT_NEURAL_NETWORK.fillText(`${DIRECTIONS[i]} ${DETECTORS[j]}`, -30 + canvasSize*((1)/(neuralNetwork.layers.length + 1)), 10 + canvasSize/(28 + 1)*(i + 1));
+      CONTEXT_NEURAL_NETWORK.fillText(`${DIRECTIONS[i]} ${DETECTORS[j]}`, -100 + canvasSize*((1)/(neuralNetwork.layers.length + 1)), 10 + canvasSize/(28 + 1)*((3*i + j) + 1));
     }
   }
 

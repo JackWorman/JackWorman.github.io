@@ -130,6 +130,7 @@ export function renderNeuralNetwork(evolutionaryAlgorithm, snake) {
       CONTEXT_NEURAL_NETWORK.fill();
     }
   }
+
   const DIRECTIONS = [
     `Up-Left`,
     `Left`,
@@ -150,7 +151,8 @@ export function renderNeuralNetwork(evolutionaryAlgorithm, snake) {
       CONTEXT_NEURAL_NETWORK.font = "10px Arial";
       CONTEXT_NEURAL_NETWORK.strokeStyle = `rgb(255, 255, 255)`;
       CONTEXT_NEURAL_NETWORK.fillStyle = `rgb(255, 255, 255)`;
-      CONTEXT_NEURAL_NETWORK.fillText(`${DIRECTIONS[i]} ${DETECTORS[j]}`, -100 + canvasSize*((1)/(neuralNetwork.layers.length + 1)), 10 + canvasSize/(28 + 1)*((3*i + j) + 1));
+      CONTEXT_NEURAL_NETWORK.textAlign="right";
+      CONTEXT_NEURAL_NETWORK.fillText(`${DIRECTIONS[i]} ${DETECTORS[j]}`, -16 + canvasSize*((1)/(neuralNetwork.layers.length + 1)), 10 + canvasSize/(28 + 1)*((3*i + j) + 1));
     }
   }
 
@@ -159,6 +161,7 @@ export function renderNeuralNetwork(evolutionaryAlgorithm, snake) {
     CONTEXT_NEURAL_NETWORK.font = "30px Arial";
     CONTEXT_NEURAL_NETWORK.strokeStyle = `rgb(255, 255, 255)`;
     CONTEXT_NEURAL_NETWORK.fillStyle = `rgb(255, 255, 255)`;
+    CONTEXT_NEURAL_NETWORK.textAlign="start";
     CONTEXT_NEURAL_NETWORK.fillText(OUTPUT_NODE_LABELS[i], 16 + canvasSize*((neuralNetwork.layers.length)/(neuralNetwork.layers.length + 1)), canvasSize/(4 + 1)*(i + 1));
   }
 }

@@ -25,7 +25,7 @@ export class EvolutionaryAlgorithm {
   }
 
   evaluateFitness(apples) {
-    this.neuralNetworks[this.specie].fitness = Math.pow(apples, 1);
+    this.neuralNetworks[this.specie].fitness = Math.pow(apples, 2);
   }
 
   sort() {

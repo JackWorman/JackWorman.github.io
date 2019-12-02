@@ -156,8 +156,12 @@ export function renderNeuralNetwork(evolutionaryAlgorithm, snake) {
       CONTEXT_NEURAL_NETWORK.fillText(`${DIRECTIONS[i]} ${DETECTORS[j]}`, -16 + canvasSize*((1)/(neuralNetwork.layers.length + 1)), canvasSize/(28 + 1)*((3*i + j) + 1));
     }
   }
-
   const OUTPUT_NODE_LABELS = [`Left`, `Up`, `Right`, `Down`];
+  for (let i = 24; i < 28; i++) {
+    CONTEXT_NEURAL_NETWORK.fillText(OUTPUT_NODE_LABELS[i%4], -16 + canvasSize*((1)/(neuralNetwork.layers.length + 1)), canvasSize/(28 + 1)*((i) + 1));
+  }
+
+  // const OUTPUT_NODE_LABELS = [`Left`, `Up`, `Right`, `Down`];
   for (let i = 0; i < 4; i++) {
     CONTEXT_NEURAL_NETWORK.font = "30px Arial";
     CONTEXT_NEURAL_NETWORK.strokeStyle = `rgb(255, 255, 255)`;

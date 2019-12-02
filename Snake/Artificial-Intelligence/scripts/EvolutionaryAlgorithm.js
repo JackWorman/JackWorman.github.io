@@ -33,11 +33,12 @@ export class EvolutionaryAlgorithm {
   }
 
   selectParents() {
+    // Calculate the sum of every neural networks fitness.
     let totalFitness = 0;
     for (const neuralNetwork of this.neuralNetworks) {
       totalFitness += neuralNetwork.fitness;
     }
-
+    // Use the total fitness to select the parents randomly and porportional to their fitness.
     this.parent1s = [];
     this.parent2s = [];
     for (let i = 0; i < this.populationSize - Math.round(this.elitismRate * this.populationSize); i++) {
@@ -92,6 +93,9 @@ export class EvolutionaryAlgorithm {
     }
   }
 
+  /**
+   * Remove the poor performing neural networks. Keeps the best 'elitismRate'% to survive to the next generation.
+   */
   elitism() {
     this.neuralNetworks.splice(Math.round(this.elitismRate * this.populationSize), this.populationSize - Math.round(this.elitismRate * this.populationSize));
   }

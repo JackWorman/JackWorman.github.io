@@ -146,13 +146,19 @@ export function renderNeuralNetwork(evolutionaryAlgorithm, snake) {
     `Body`,
     `Fruit`
   ];
+  // let inputNodeLabels = [];
+  // for (let i = 0; i < DIRECTIONS.length; i++) {
+  //   for (let j = 0; j < DETECTORS.length; j++) {
+  //     inputNodeLabels.push(`${DIRECTIONS[i]} ${DETECTORS[j]}`);
+  //   }
+  // }
   for (let i = 0; i < DIRECTIONS.length; i++) {
     for (let j = 0; j < DETECTORS.length; j++) {
-      CONTEXT_NEURAL_NETWORK.font = "12px Arial";
+      CONTEXT_NEURAL_NETWORK.font = `12px Arial`;
       CONTEXT_NEURAL_NETWORK.strokeStyle = `rgb(255, 255, 255)`;
       CONTEXT_NEURAL_NETWORK.fillStyle = `rgb(255, 255, 255)`;
-      CONTEXT_NEURAL_NETWORK.textAlign="right";
-      CONTEXT_NEURAL_NETWORK.textBaseline = 'middle';
+      CONTEXT_NEURAL_NETWORK.textAlign = `right`;
+      CONTEXT_NEURAL_NETWORK.textBaseline = `middle`;
       CONTEXT_NEURAL_NETWORK.fillText(`${DIRECTIONS[i]} ${DETECTORS[j]}`, -16 + canvasSize*((1)/(neuralNetwork.layers.length + 1)), canvasSize/(28 + 1)*((3*i + j) + 1));
     }
   }
@@ -160,14 +166,12 @@ export function renderNeuralNetwork(evolutionaryAlgorithm, snake) {
   for (let i = 24; i < 28; i++) {
     CONTEXT_NEURAL_NETWORK.fillText(OUTPUT_NODE_LABELS[i%4], -16 + canvasSize*((1)/(neuralNetwork.layers.length + 1)), canvasSize/(28 + 1)*((i) + 1));
   }
-
-  // const OUTPUT_NODE_LABELS = [`Left`, `Up`, `Right`, `Down`];
   for (let i = 0; i < 4; i++) {
-    CONTEXT_NEURAL_NETWORK.font = "12px Arial";
+    CONTEXT_NEURAL_NETWORK.font = `12px Arial`;
     CONTEXT_NEURAL_NETWORK.strokeStyle = `rgb(255, 255, 255)`;
     CONTEXT_NEURAL_NETWORK.fillStyle = `rgb(255, 255, 255)`;
-    CONTEXT_NEURAL_NETWORK.textAlign="start";
-    CONTEXT_NEURAL_NETWORK.textBaseline = 'middle';
+    CONTEXT_NEURAL_NETWORK.textAlign = `start`;
+    CONTEXT_NEURAL_NETWORK.textBaseline = `middle`;
     CONTEXT_NEURAL_NETWORK.fillText(OUTPUT_NODE_LABELS[i], 16 + canvasSize*((neuralNetwork.layers.length)/(neuralNetwork.layers.length + 1)), canvasSize/(4 + 1)*(i + 1));
   }
 }

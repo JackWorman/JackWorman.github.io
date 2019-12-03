@@ -18,7 +18,7 @@ const MILLISECONDS_PER_SECOND = 1000;
 const FRAMES_PER_SECOND = 15;
 export const GRID_SIZE = 30;
 // EA Settings
-const POPULATION_SIZE = 500;
+const POPULATION_SIZE = 280;
 const LAYER_SIZES = [28, 20, 12, 4];
 const MUTATION_RATE = 0.02;
 const ELITISM_RATE = 0.01;

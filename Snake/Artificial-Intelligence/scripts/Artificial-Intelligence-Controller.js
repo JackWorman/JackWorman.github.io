@@ -163,7 +163,7 @@ export function renderNeuralNetwork(evolutionaryAlgorithm, snake) {
 
   // const OUTPUT_NODE_LABELS = [`Left`, `Up`, `Right`, `Down`];
   for (let i = 0; i < 4; i++) {
-    CONTEXT_NEURAL_NETWORK.font = "30px Arial";
+    CONTEXT_NEURAL_NETWORK.font = "10px Arial";
     CONTEXT_NEURAL_NETWORK.strokeStyle = `rgb(255, 255, 255)`;
     CONTEXT_NEURAL_NETWORK.fillStyle = `rgb(255, 255, 255)`;
     CONTEXT_NEURAL_NETWORK.textAlign="start";

@@ -102,6 +102,7 @@ function resetGame() {
   pellet.placePellet(GRID_SIZE, snake.bodySegments);
   hunger = 0;
   snakeCopies = [];
+  apples = 0;
 }
 
 function gameLoop() {

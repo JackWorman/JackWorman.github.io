@@ -61,11 +61,11 @@ async function evolutionaryAlgorithmLoop() {
         CONTEXT_GAME.clearRect(0, 0, canvasSize, canvasSize);
         CONTEXT_NEURAL_NETWORK.clearRect(0, 0, canvasSize, canvasSize);
       }
-    }
-    // Pauses the loop every 250ms, so that the browser does not crash.
-    if (performance.now() - previousTime > 250) {
-      await sleep(0);
-      previousTime = performance.now();
+      // Pauses the loop every 333ms, so that the browser does not crash.
+      if (performance.now() - previousTime > 333) {
+        await sleep(0);
+        previousTime = performance.now();
+      }
     }
   }
 }

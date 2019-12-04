@@ -55,6 +55,7 @@ async function evolutionaryAlgorithmLoop() {
       do {
         await render(round);
       } while (gameLoop());
+      evolutionaryAlgorithm.evaluateFitness(apples);
       // Clear canvas after showing best snake.
       if (showMode === `best` && evolutionaryAlgorithm.specie === 0 && round === 0) {
         CONTEXT_GAME.clearRect(0, 0, canvasSize, canvasSize);
@@ -71,7 +72,6 @@ async function evolutionaryAlgorithmLoop() {
 
 function resetEA() {
   if (started) {
-    evolutionaryAlgorithm.evaluateFitness(apples);
     evolutionaryAlgorithm.specie++;
     if (evolutionaryAlgorithm.specie === POPULATION_SIZE) {
       evolutionaryAlgorithm.specie = 0;

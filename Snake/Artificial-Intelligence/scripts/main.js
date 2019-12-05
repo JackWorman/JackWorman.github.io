@@ -187,7 +187,7 @@ BUTTON_TOGGLE_SHOW.addEventListener(`click`, async () => {
 window.addEventListener(`mousemove`, () => {
   pauseTime = 100;
   clearTimeout(setUserInactiveTimeout);
-  setUserInactiveTimeout = setTimeout(() => { pauseTime = 5000; }), 10000);
+  setUserInactiveTimeout = setTimeout(() => { pauseTime = 5000; }, 10000);
 });
 
 window.addEventListener(`load`, evolutionaryAlgorithmLoop);

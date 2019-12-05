@@ -78,8 +78,6 @@ function resetEA() {
   if (started) {
     evolutionaryAlgorithm.specie++;
     if (evolutionaryAlgorithm.specie === POPULATION_SIZE) {
-      evolutionaryAlgorithm.specie = 0;
-      evolutionaryAlgorithm.generation++;
       evolutionaryAlgorithm.sort();
       bestFitnesses.push(evolutionaryAlgorithm.neuralNetworks[0].fitness);
       console.log(`==============================`);
@@ -91,6 +89,8 @@ function resetEA() {
       evolutionaryAlgorithm.mutate();
       evolutionaryAlgorithm.elitism();
       evolutionaryAlgorithm.clearFitness();
+      evolutionaryAlgorithm.specie = 0;
+      evolutionaryAlgorithm.generation++;
     }
     SPAN_GEN_SPECIE.textContent = `Generation: ${evolutionaryAlgorithm.generation}, Species: ${evolutionaryAlgorithm.specie + 1}/${POPULATION_SIZE}, Test: 1/${ROUNDS_PER_AGENT_PER_GENERATION}`;
   } else {

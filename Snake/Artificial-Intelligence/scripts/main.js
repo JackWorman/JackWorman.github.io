@@ -42,6 +42,9 @@ let bestFitnesses = [];
 let showMode = `all`;
 let snakeCopies = [];
 
+let pauseTime = 100;
+let setUserInactiveTimeout;
+
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
@@ -181,17 +184,10 @@ BUTTON_TOGGLE_SHOW.addEventListener(`click`, async () => {
   CONTEXT_NEURAL_NETWORK.clearRect(0, 0, canvasSize, canvasSize);
 });
 
-let pauseTime = 100;
-let setUserInactiveTimeout;
-
-function setUserInactive() {
-  pauseTime = 2000;
-}
-
 window.addEventListener(`mousemove`, () => {
   pauseTime = 100;
   clearTimeout(setUserInactiveTimeout);
-  setUserInactiveTimeout = setTimeout(setUserInactive, 15000);
+  setUserInactiveTimeout = setTimeout(() => { pauseTime = 5000; }), 10000);
 });
 
 window.addEventListener(`load`, evolutionaryAlgorithmLoop);

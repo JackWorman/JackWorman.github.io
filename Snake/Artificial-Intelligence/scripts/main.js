@@ -211,14 +211,17 @@ window.addEventListener(`mousemove`, () => {
 window.addEventListener(`load`, evolutionaryAlgorithmLoop);
 
 function renderGraph() {
-  if (bestFitnesses.length < 2) return;
   CONTEXT_GRAPH.clearRect(0, 0, canvasSize, canvasSize);
   const maxFitness = Math.max(...bestFitnesses);
 
-  for (let i = 0; i < bestFitnesses.length - 1; i++) {
+  for (let i = 0; i < bestFitnesses.length; i++) {
     CONTEXT_GRAPH.beginPath();
-    CONTEXT_GRAPH.moveTo(canvasSize*i/(bestFitnesses.length - 1), canvasSize - canvasSize*bestFitnesses[i]/maxFitness);
-    CONTEXT_GRAPH.lineTo(canvasSize*(i + 1)/(bestFitnesses.length - 1), canvasSize - canvasSize*bestFitnesses[i + 1]/maxFitness);
+    if (i === 0) {
+      CONTEXT_GRAPH.moveTo(0, canvasSize);
+    } else {
+      CONTEXT_GRAPH.moveTo(canvasSize*(i + 1)/(bestFitnesses.length), canvasSize - canvasSize*bestFitnesses[i]/maxFitness);
+    }
+    CONTEXT_GRAPH.lineTo(canvasSize*(i + 2)/(bestFitnesses.length), canvasSize - canvasSize*bestFitnesses[i + 1]/maxFitness);
     CONTEXT_GRAPH.closePath();
     CONTEXT_GRAPH.strokeStyle = `rgb(255, 255, 255)`;
     CONTEXT_GRAPH.stroke();

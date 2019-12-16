@@ -212,7 +212,7 @@ window.addEventListener(`load`, evolutionaryAlgorithmLoop);
 
 function renderGraph() {
   CONTEXT_GRAPH.clearRect(0, 0, canvasSize, canvasSize);
-  if (maxFitness.length < 2) return;
+  if (bestFitnesses.length < 2) return;
   const maxFitness = Math.max(...bestFitnesses);
 
   for (let i = 0; i < bestFitnesses.length - 1; i++) {

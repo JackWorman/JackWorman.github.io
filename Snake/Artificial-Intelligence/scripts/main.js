@@ -33,7 +33,8 @@ const evolutionaryAlgorithm = new EvolutionaryAlgorithm(POPULATION_SIZE, LAYER_S
 
 export let canvasSize = 600;
 CANVAS_GAME.width = CANVAS_GAME.height = canvasSize;
-CANVAS_NEURAL_NETWORK.width = CANVAS_NEURAL_NETWORK.height = 600;
+CANVAS_NEURAL_NETWORK.width = CANVAS_NEURAL_NETWORK.height = canvasSize;
+CANVAS_GRAPH.width = CANVAS_GRAPH.height = canvasSize;
 
 let showTraining = true;
 let showBest = true;

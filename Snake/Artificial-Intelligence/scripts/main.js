@@ -211,8 +211,8 @@ window.addEventListener(`mousemove`, () => {
 window.addEventListener(`load`, evolutionaryAlgorithmLoop);
 
 function renderGraph() {
-  CONTEXT_GRAPH.clearRect(0, 0, canvasSize, canvasSize);
   if (bestFitnesses.length < 2) return;
+  CONTEXT_GRAPH.clearRect(0, 0, canvasSize, canvasSize);
   const maxFitness = Math.max(...bestFitnesses);
 
   for (let i = 0; i < bestFitnesses.length - 1; i++) {

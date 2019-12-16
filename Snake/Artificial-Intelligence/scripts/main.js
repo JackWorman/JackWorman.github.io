@@ -216,7 +216,7 @@ function renderGraph() {
 
   CONTEXT_GRAPH.beginPath();
   CONTEXT_GRAPH.moveTo(0, canvasSize);
-  for (let i = 0; i < bestFitnesses.length; i++) {
+  for (let i = 0; i < bestFitnesses.length - 1; i++) {
     CONTEXT_GRAPH.lineTo(canvasSize*(i + 1)/bestFitnesses.length, canvasSize - canvasSize*bestFitnesses[i]/maxFitness);
   }
   CONTEXT_GRAPH.closePath();

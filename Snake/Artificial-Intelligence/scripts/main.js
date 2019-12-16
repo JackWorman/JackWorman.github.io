@@ -219,7 +219,6 @@ function renderGraph() {
   for (let i = 0; i < bestFitnesses.length - 1; i++) {
     CONTEXT_GRAPH.lineTo(canvasSize*(i + 1)/(bestFitnesses.length - 1), canvasSize - canvasSize*bestFitnesses[i]/maxFitness);
   }
-  CONTEXT_GRAPH.closePath();
 
   CONTEXT_GRAPH.strokeStyle = `rgb(255, 255, 255)`;
   CONTEXT_GRAPH.stroke();

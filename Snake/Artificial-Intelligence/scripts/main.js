@@ -11,6 +11,8 @@ const CANVAS_GAME = document.getElementById(`canvas-game`);
 const CONTEXT_GAME = CANVAS_GAME.getContext(`2d`);
 const CANVAS_NEURAL_NETWORK = document.getElementById(`canvas-neural-network`);
 const CONTEXT_NEURAL_NETWORK = CANVAS_NEURAL_NETWORK.getContext(`2d`);
+const CANVAS_GRAPH = document.getElementById(`canvas-graph`);
+const CONTEXT_GRAPH = CANVAS_NEURAL_NETWORK.getContext(`2d`);
 
 const MILLISECONDS_PER_SECOND = 1000;
 
@@ -19,7 +21,7 @@ const FRAMES_PER_SECOND = 15;
 export const GRID_SIZE = 30;
 // EA Settings
 const POPULATION_SIZE = 280;
-const LAYER_SIZES = [28, 20, 12, 4];
+const LAYER_SIZES = [28, 22, 16, 10, 4];
 const MUTATION_RATE = 0.02;
 const ELITISM_RATE = 0.01;
 const ROUNDS_PER_AGENT_PER_GENERATION = 50;
@@ -45,10 +47,20 @@ let snakeCopies = [];
 let pauseTime = 100;
 let setUserInactiveTimeout;
 
-function sleep(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
+/**
+ * Pauses the execution of a function for a given amount of milliseconds. This allows other operations to be performed
+ * in the mean time.
+ *
+ * Note: The time asleep will likely be longer then the specified duration because the function will be placed at the
+ *       end of the exectuion queue once the timeout ends.
+ */
+function sleep(milliseconds) {
+  return new Promise((resolve) => setTimeout(resolve, milliseconds));
 }
 
+/**
+ * Learning loop.
+ */
 async function evolutionaryAlgorithmLoop() {
   let previousTime = performance.now();
   while (true) {
@@ -74,6 +86,9 @@ async function evolutionaryAlgorithmLoop() {
   }
 }
 
+/**
+ * Ran when a generation ends.
+ */
 function resetEA() {
   if (started) {
     evolutionaryAlgorithm.specie++;

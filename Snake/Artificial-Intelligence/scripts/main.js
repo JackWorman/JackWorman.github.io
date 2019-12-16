@@ -216,11 +216,11 @@ function renderGraph() {
   const maxFitness = Math.max(...bestFitnesses);
 
   for (let i = 0; i < bestFitnesses.length - 1; i++) {
-    CONTEXT_NEURAL_NETWORK.beginPath();
-    CONTEXT_NEURAL_NETWORK.moveTo(canvasSize*i/(bestFitnesses.length - 1), canvasSize*bestFitnesses[i]/maxFitness);
-    CONTEXT_NEURAL_NETWORK.lineTo(canvasSize*(i + 1)/(bestFitnesses.length - 1), canvasSize*bestFitnesses[i + 1]/maxFitness);
-    CONTEXT_NEURAL_NETWORK.closePath();
-    CONTEXT_NEURAL_NETWORK.strokeStyle = `rgb(255, 255, 255)`;
-    CONTEXT_NEURAL_NETWORK.stroke();
+    CONTEXT_GRAPH.beginPath();
+    CONTEXT_GRAPH.moveTo(canvasSize*i/(bestFitnesses.length - 1), canvasSize*bestFitnesses[i]/maxFitness);
+    CONTEXT_GRAPH.lineTo(canvasSize*(i + 1)/(bestFitnesses.length - 1), canvasSize*bestFitnesses[i + 1]/maxFitness);
+    CONTEXT_GRAPH.closePath();
+    CONTEXT_GRAPH.strokeStyle = `rgb(255, 255, 255)`;
+    CONTEXT_GRAPH.stroke();
   }
 }

@@ -41,7 +41,7 @@ let showBest = true;
 let started = false;
 let hunger;
 let apples;
-let bestFitnesses = [];
+let bestFitnesses = [0];
 let showMode = `all`;
 let snakeCopies = [];
 
@@ -216,11 +216,11 @@ function renderGraph() {
 
   CONTEXT_GRAPH.beginPath();
   CONTEXT_GRAPH.moveTo(0, canvasSize);
-  CONTEXT_GRAPH.lineTo(canvasSize*1/bestFitnesses.length, canvasSize - canvasSize*bestFitnesses[0]/maxFitness);
-  for (let i = 1; i < bestFitnesses.length; i++) {
+  for (let i = 0; i < bestFitnesses.length; i++) {
     CONTEXT_GRAPH.lineTo(canvasSize*(i + 1)/bestFitnesses.length, canvasSize - canvasSize*bestFitnesses[i]/maxFitness);
   }
   CONTEXT_GRAPH.closePath();
+  
   CONTEXT_GRAPH.strokeStyle = `rgb(255, 255, 255)`;
   CONTEXT_GRAPH.stroke();
 }

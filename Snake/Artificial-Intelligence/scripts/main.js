@@ -109,6 +109,7 @@ function resetEA() {
       evolutionaryAlgorithm.generation++;
     }
     SPAN_GEN_SPECIE.textContent = `Generation: ${evolutionaryAlgorithm.generation}, Species: ${evolutionaryAlgorithm.specie + 1}/${POPULATION_SIZE}, Test: 1/${ROUNDS_PER_AGENT_PER_GENERATION}`;
+    renderGraph();
   } else {
     started = true;
     evolutionaryAlgorithm.initialize();
@@ -208,3 +209,18 @@ window.addEventListener(`mousemove`, () => {
 });
 
 window.addEventListener(`load`, evolutionaryAlgorithmLoop);
+
+function renderGraph() {
+  CONTEXT_GRAPH.clearRect(0, 0, canvasSize, canvasSize);
+  if (maxFitness.length < 2) return;
+  const maxFitness = Math.max(...bestFitnesses);
+
+  for (let i = 0; i < bestFitnesses.length - 1; i++) {
+    CONTEXT_NEURAL_NETWORK.beginPath();
+    CONTEXT_NEURAL_NETWORK.moveTo(canvasSize*i/(bestFitnesses.length - 1), canvasSize*bestFitnesses[i]/maxFitness);
+    CONTEXT_NEURAL_NETWORK.lineTo(canvasSize*(i + 1)/(bestFitnesses.length - 1), canvasSize*bestFitnesses[i + 1]/maxFitness);
+    CONTEXT_NEURAL_NETWORK.closePath();
+    CONTEXT_NEURAL_NETWORK.strokeStyle = `rgb(255, 255, 255)`;
+    CONTEXT_NEURAL_NETWORK.stroke();
+  }
+}

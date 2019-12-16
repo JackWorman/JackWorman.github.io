@@ -217,8 +217,8 @@ function renderGraph() {
 
   for (let i = 0; i < bestFitnesses.length - 1; i++) {
     CONTEXT_GRAPH.beginPath();
-    CONTEXT_GRAPH.moveTo(canvasSize*i/(bestFitnesses.length - 1), canvasSize*bestFitnesses[i]/maxFitness);
-    CONTEXT_GRAPH.lineTo(canvasSize*(i + 1)/(bestFitnesses.length - 1), canvasSize*bestFitnesses[i + 1]/maxFitness);
+    CONTEXT_GRAPH.moveTo(canvasSize*i/(bestFitnesses.length - 1), canvasSize - canvasSize*bestFitnesses[i]/maxFitness);
+    CONTEXT_GRAPH.lineTo(canvasSize*(i + 1)/(bestFitnesses.length - 1), canvasSize - canvasSize*bestFitnesses[i + 1]/maxFitness);
     CONTEXT_GRAPH.closePath();
     CONTEXT_GRAPH.strokeStyle = `rgb(255, 255, 255)`;
     CONTEXT_GRAPH.stroke();

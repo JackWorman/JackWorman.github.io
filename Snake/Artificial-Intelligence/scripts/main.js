@@ -41,7 +41,7 @@ let showBest = true;
 let started = false;
 let hunger;
 let apples;
-let bestFitnesses = [0];
+let bestFitnesses = [];
 let showMode = `all`;
 let snakeCopies = [];
 

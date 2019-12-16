@@ -214,7 +214,7 @@ function renderGraph() {
   CONTEXT_GRAPH.clearRect(0, 0, canvasSize, canvasSize);
   const maxFitness = Math.max(...bestFitnesses);
 
-  for (let i = 0; i < bestFitnesses.length; i++) {
+  for (let i = 0; i < bestFitnesses.length - 1; i++) {
     CONTEXT_GRAPH.beginPath();
     if (i === 0) {
       CONTEXT_GRAPH.moveTo(0, canvasSize);

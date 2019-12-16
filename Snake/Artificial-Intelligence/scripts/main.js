@@ -218,14 +218,14 @@ function renderGraph() {
   CONTEXT_GRAPH.fillStyle = `rgb(255, 255, 255)`;
   CONTEXT_GRAPH.textAlign = `left`;
   CONTEXT_GRAPH.textBaseline = `middle`;
-  CONTEXT_GRAPH.fillText(`Best Fitnesses vs. Generation`, 16, 16);
-  CONTEXT_GRAPH.fillText(`Best Fitness: ${maxFitness.toLocaleString()}`, 16, 32);
+  CONTEXT_GRAPH.fillText(`Best Fitnesses vs. Generation`, 10, 16);
+  CONTEXT_GRAPH.fillText(`Best Fitness: ${maxFitness.toLocaleString()}`, 10, 32);
+
   CONTEXT_GRAPH.beginPath();
   CONTEXT_GRAPH.moveTo(0, canvasSize);
   for (let i = 0; i < bestFitnesses.length; i++) {
     CONTEXT_GRAPH.lineTo(canvasSize * (i + 1)/(bestFitnesses.length), canvasSize - canvasSize * bestFitnesses[i]/maxFitness);
   }
-
   CONTEXT_GRAPH.strokeStyle = `rgb(255, 255, 255)`;
   CONTEXT_GRAPH.stroke();
 }

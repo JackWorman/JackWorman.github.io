@@ -213,7 +213,13 @@ window.addEventListener(`load`, evolutionaryAlgorithmLoop);
 function renderGraph() {
   CONTEXT_GRAPH.clearRect(0, 0, canvasSize, canvasSize);
   const maxFitness = Math.max(...bestFitnesses);
-
+  CONTEXT_GRAPH.font = `12px Arial`;
+  CONTEXT_GRAPH.strokeStyle = `rgb(255, 255, 255)`;
+  CONTEXT_GRAPH.fillStyle = `rgb(255, 255, 255)`;
+  CONTEXT_GRAPH.textAlign = `left`;
+  CONTEXT_GRAPH.textBaseline = `middle`;
+  CONTEXT_GRAPH.fillText(`Best Fitnesses vs. Generation`, 16, 16);
+  CONTEXT_GRAPH.fillText(`Best Fitness: ${maxFitness.toLocaleString()}`, 16, 32);
   CONTEXT_GRAPH.beginPath();
   CONTEXT_GRAPH.moveTo(0, canvasSize);
   for (let i = 0; i < bestFitnesses.length; i++) {

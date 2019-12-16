@@ -12,7 +12,7 @@ const CONTEXT_GAME = CANVAS_GAME.getContext(`2d`);
 const CANVAS_NEURAL_NETWORK = document.getElementById(`canvas-neural-network`);
 const CONTEXT_NEURAL_NETWORK = CANVAS_NEURAL_NETWORK.getContext(`2d`);
 const CANVAS_GRAPH = document.getElementById(`canvas-graph`);
-const CONTEXT_GRAPH = CANVAS_NEURAL_NETWORK.getContext(`2d`);
+const CONTEXT_GRAPH = CANVAS_GRAPH.getContext(`2d`);
 
 const MILLISECONDS_PER_SECOND = 1000;
 

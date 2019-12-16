@@ -96,6 +96,7 @@ function resetEA() {
     if (evolutionaryAlgorithm.specie === POPULATION_SIZE) {
       evolutionaryAlgorithm.sort();
       bestFitnesses.push(evolutionaryAlgorithm.neuralNetworks[0].fitness);
+      renderGraph();
       console.log(`==============================`);
       console.log(`Generation: ${evolutionaryAlgorithm.generation}`);
       console.log(`Best Fitness: ${Number(Math.round(evolutionaryAlgorithm.neuralNetworks[0].fitness)).toLocaleString()}`);
@@ -109,7 +110,6 @@ function resetEA() {
       evolutionaryAlgorithm.generation++;
     }
     SPAN_GEN_SPECIE.textContent = `Generation: ${evolutionaryAlgorithm.generation}, Species: ${evolutionaryAlgorithm.specie + 1}/${POPULATION_SIZE}, Test: 1/${ROUNDS_PER_AGENT_PER_GENERATION}`;
-    renderGraph();
   } else {
     started = true;
     evolutionaryAlgorithm.initialize();
@@ -220,7 +220,7 @@ function renderGraph() {
     CONTEXT_GRAPH.lineTo(canvasSize*(i + 1)/bestFitnesses.length, canvasSize - canvasSize*bestFitnesses[i]/maxFitness);
   }
   CONTEXT_GRAPH.closePath();
-  
+
   CONTEXT_GRAPH.strokeStyle = `rgb(255, 255, 255)`;
   CONTEXT_GRAPH.stroke();
 }

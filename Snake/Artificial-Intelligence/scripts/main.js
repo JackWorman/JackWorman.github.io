@@ -217,7 +217,7 @@ function renderGraph() {
   CONTEXT_GRAPH.beginPath();
   CONTEXT_GRAPH.moveTo(0, canvasSize);
   for (let i = 0; i < bestFitnesses.length; i++) {
-    CONTEXT_GRAPH.lineTo(canvasSize * (i + 1)/(bestFitnesses.length - 1), canvasSize - canvasSize * bestFitnesses[i]/maxFitness);
+    CONTEXT_GRAPH.lineTo(canvasSize * (i + 1)/(bestFitnesses.length), canvasSize - canvasSize * bestFitnesses[i]/maxFitness);
   }
 
   CONTEXT_GRAPH.strokeStyle = `rgb(255, 255, 255)`;

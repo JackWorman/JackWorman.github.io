@@ -218,8 +218,8 @@ function renderGraph() {
   CONTEXT_GRAPH.moveTo(0, canvasSize);
   CONTEXT_GRAPH.lineTo(canvasSize*1/bestFitnesses.length, canvasSize - canvasSize*bestFitnesses[i + 1]/maxFitness);
   for (let i = 0; i < bestFitnesses.length - 1; i++) {
-    CONTEXT_GRAPH.moveTo(canvasSize*(i + 1)/bestFitnesses.length, canvasSize - canvasSize*bestFitnesses[i + 1]/maxFitness);
-    CONTEXT_GRAPH.lineTo(canvasSize*(i + 2)/bestFitnesses.length, canvasSize - canvasSize*bestFitnesses[i + 2]/maxFitness);
+    CONTEXT_GRAPH.moveTo(canvasSize*(i + 1)/bestFitnesses.length, canvasSize - canvasSize*bestFitnesses[i]/maxFitness);
+    CONTEXT_GRAPH.lineTo(canvasSize*(i + 2)/bestFitnesses.length, canvasSize - canvasSize*bestFitnesses[i + 1]/maxFitness);
   }
   CONTEXT_GRAPH.closePath();
   CONTEXT_GRAPH.strokeStyle = `rgb(255, 255, 255)`;

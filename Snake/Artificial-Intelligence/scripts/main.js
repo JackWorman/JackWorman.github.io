@@ -202,7 +202,7 @@ window.addEventListener(`mousemove`, () => {
 window.addEventListener(`load`, evolutionaryAlgorithmLoop);
 
 CANVAS_GRAPH.addEventListener(`mouseout`, (event) => {
-  // CONTEXT_GRAPH.clearRect(0, 0, canvasSize, canvasSize);
+  CONTEXT_GRAPH.clearRect(0, 0, canvasSize, canvasSize);
 });
 
 CANVAS_GRAPH.addEventListener(`mousemove`, (event) => {
@@ -213,7 +213,6 @@ CANVAS_GRAPH.addEventListener(`mousemove`, (event) => {
     if (mousePos.x > canvasSize * i/bestFitnesses.length + canvasSize * 1/bestFitnesses.length/2
       && mousePos.x <= canvasSize * (i + 1)/bestFitnesses.length + canvasSize * 1/bestFitnesses.length/2) {
       renderGraph();
-      CONTEXT_GRAPH.clearRect(0, 0, canvasSize, canvasSize);
       CONTEXT_GRAPH.beginPath();
       CONTEXT_GRAPH.moveTo(0, canvasSize - canvasSize * bestFitnesses[i]/maxFitness);
       CONTEXT_GRAPH.lineTo(canvasSize, canvasSize - canvasSize * bestFitnesses[i]/maxFitness);

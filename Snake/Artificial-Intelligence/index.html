@@ -12,7 +12,11 @@
       <br />
       <span id="span-gen-specie" class="rainbow">Generation: 0, Species: 1/2000, Test: 1/100</span>
     </div>
-    <button id="button-toggle-show">Showing All</button>
+    <select id="select-view-settings">
+      <option selected value="all">Show All Tests</option>
+      <option value="best">Only Show Best</option>
+      <option value="nothing">Show Nothing</option>
+    </select>
     <div id="div-canvas-container">
       <canvas id="canvas-neural-network"></canvas>
       <canvas id="canvas-game"></canvas>

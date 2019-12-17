@@ -201,6 +201,23 @@ window.addEventListener(`mousemove`, () => {
 
 window.addEventListener(`load`, evolutionaryAlgorithmLoop);
 
+CANVAS_GRAPH.addEventListener(`mousemove`, (evt) => {
+  const rect = CANVAS_GRAPH.getBoundingClientRect();
+  const mousePos = {
+    x: evt.clientX - rect.left,
+    y: evt.clientY - rect.right
+  };
+  console.log(mousePos);
+});
+
+function getMousePos(canvas, evt) {
+        var rect = canvas.getBoundingClientRect();
+        return {
+          x: evt.clientX - rect.left,
+          y: evt.clientY - rect.top
+        };
+      }
+
 function renderGraph() {
   CONTEXT_GRAPH.clearRect(0, 0, canvasSize, canvasSize);
   const maxFitness = Math.max(...bestFitnesses);

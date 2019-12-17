@@ -201,27 +201,45 @@ window.addEventListener(`mousemove`, () => {
 
 window.addEventListener(`load`, evolutionaryAlgorithmLoop);
 
-CANVAS_GRAPH.addEventListener(`mousemove`, (evt) => {
+CANVAS_GRAPH.addEventListener(`mousemove`, (event) => {
   const rect = CANVAS_GRAPH.getBoundingClientRect();
-  const mousePos = {
-    x: evt.clientX - rect.left,
-    y: evt.clientY - rect.right
-  };
-  console.log(mousePos);
+  // const mousePos = {
+  //   x: evt.clientX - rect.left,
+  //   y: evt.clientY - rect.right
+  // };
+  console.log(relMouseCoords(event));
+
+  for (let i = 0; i < bestFitnesses.length; i++) {
+    if (mousePos.x > canvasSize * i/bestFitnesses.length && mousePos.x <= canvasSize * (i + 1)/bestFitnesses.length) {
+
+      break;
+    }
+  }
 });
 
-function getMousePos(canvas, evt) {
-        var rect = canvas.getBoundingClientRect();
-        return {
-          x: evt.clientX - rect.left,
-          y: evt.clientY - rect.top
-        };
-      }
+function relMouseCoords(event){
+    var totalOffsetX = 0;
+    var totalOffsetY = 0;
+    var canvasX = 0;
+    var canvasY = 0;
+    var currentElement = this;
+
+    do{
+        totalOffsetX += currentElement.offsetLeft - currentElement.scrollLeft;
+        totalOffsetY += currentElement.offsetTop - currentElement.scrollTop;
+    }
+    while(currentElement = currentElement.offsetParent)
+
+    canvasX = event.pageX - totalOffsetX;
+    canvasY = event.pageY - totalOffsetY;
+
+    return {x:canvasX, y:canvasY}
+}
 
 function renderGraph() {
   CONTEXT_GRAPH.clearRect(0, 0, canvasSize, canvasSize);
   const maxFitness = Math.max(...bestFitnesses);
-  CONTEXT_GRAPH.font = `12px Arial`;
+  CONTEXT_GRAPH.font = `14px Arial`;
   CONTEXT_GRAPH.strokeStyle = `rgb(255, 255, 255)`;
   CONTEXT_GRAPH.fillStyle = `rgb(255, 255, 255)`;
   CONTEXT_GRAPH.textAlign = `left`;

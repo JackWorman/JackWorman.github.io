@@ -213,7 +213,7 @@ CANVAS_GRAPH.addEventListener(`mousemove`, (event) => {
   for (let i = 0; i < bestFitnesses.length; i++) {
     const x = canvasSize*i/(bestFitnesses.length - 1);
     const y = canvasSize - canvasSize*bestFitnesses[i]/maxFitness;
-    if (mousePos.x > canvasSize * i/bestFitnesses.length + hoverXOffset && mousePos.x <= x + hoverXOffset) {
+    if (mousePos.x > x - hoverXOffset && mousePos.x <= x + hoverXOffset) {
       renderGraph();
       CONTEXT_GRAPH.beginPath();
       CONTEXT_GRAPH.moveTo(0, y);

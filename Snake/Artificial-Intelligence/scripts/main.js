@@ -208,7 +208,8 @@ CANVAS_GRAPH.addEventListener(`mousemove`, (event) => {
   const maxFitness = Math.max(...bestFitnesses);
   CONTEXT_GRAPH.clearRect(0, 0, canvasSize, canvasSize);
   for (let i = 0; i < bestFitnesses.length; i++) {
-    if (mousePos.x > canvasSize * i/bestFitnesses.length && mousePos.x <= canvasSize * (i + 1)/bestFitnesses.length) {
+    if (mousePos.x > canvasSize * i/bestFitnesses.length + canvasSize * (i + 1)/bestFitnesses.length/2
+      && mousePos.x <= canvasSize * (i + 1)/bestFitnesses.length + canvasSize * (i + 1)/bestFitnesses.length/2) {
       CONTEXT_GRAPH.beginPath();
       CONTEXT_GRAPH.moveTo(0, canvasSize - canvasSize * bestFitnesses[i]/maxFitness);
       CONTEXT_GRAPH.lineTo(canvasSize, canvasSize - canvasSize * bestFitnesses[i]/maxFitness);
@@ -217,8 +218,20 @@ CANVAS_GRAPH.addEventListener(`mousemove`, (event) => {
       CONTEXT_GRAPH.strokeStyle = `rgb(255, 0, 0)`;
       CONTEXT_GRAPH.stroke();
       CONTEXT_GRAPH.fillStyle = `rgb(255, 0, 0)`;
-      CONTEXT_GRAPH.textAlign = `right`;
-      CONTEXT_GRAPH.fillText(`(${i}, ${bestFitnesses[i]})`, canvasSize * (i + 1)/(bestFitnesses.length) - 5, canvasSize - canvasSize * bestFitnesses[i]/maxFitness - 12);
+
+      if (mousePos.x < canvasSize/2 && mousePos.y < canvasSize/2) {
+        CONTEXT_GRAPH.textAlign = `left`;
+        CONTEXT_GRAPH.fillText(`(${i}, ${bestFitnesses[i]})`, canvasSize * (i + 1)/(bestFitnesses.length) + 5, canvasSize - canvasSize * bestFitnesses[i]/maxFitness + 12);
+      } else if (mousePos.x < canvasSize/2 && mousePos.y >= canvasSize/2) {
+        CONTEXT_GRAPH.textAlign = `left`;
+        CONTEXT_GRAPH.fillText(`(${i}, ${bestFitnesses[i]})`, canvasSize * (i + 1)/(bestFitnesses.length) + 5, canvasSize - canvasSize * bestFitnesses[i]/maxFitness - 12);
+      } else if (mousePos.x >= canvasSize/2 && mousePos.y < canvasSize/2) {
+        CONTEXT_GRAPH.textAlign = `right`;
+        CONTEXT_GRAPH.fillText(`(${i}, ${bestFitnesses[i]})`, canvasSize * (i + 1)/(bestFitnesses.length) - 5, canvasSize - canvasSize * bestFitnesses[i]/maxFitness + 12);
+      } else if (mousePos.x >= canvasSize/2 && mousePos.y >= canvasSize/2) {
+        CONTEXT_GRAPH.textAlign = `right`;
+        CONTEXT_GRAPH.fillText(`(${i}, ${bestFitnesses[i]})`, canvasSize * (i + 1)/(bestFitnesses.length) - 5, canvasSize - canvasSize * bestFitnesses[i]/maxFitness - 12);
+      }
       renderGraph(false);
       break;
     }

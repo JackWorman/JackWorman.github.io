@@ -211,7 +211,7 @@ CANVAS_GRAPH.addEventListener(`mousemove`, (event) => {
     if (mousePos.x > canvasSize * i/bestFitnesses.length && mousePos.x <= canvasSize * (i + 1)/bestFitnesses.length) {
       CONTEXT_GRAPH.beginPath();
       CONTEXT_GRAPH.moveTo(0, canvasSize - canvasSize * bestFitnesses[i]/maxFitness);
-      CONTEXT_GRAPH.lineTo(canvasSize, canvasSize - canvasSize * bestFitnesses[i]/maxFitness));
+      CONTEXT_GRAPH.lineTo(canvasSize, canvasSize - canvasSize * bestFitnesses[i]/maxFitness);
       CONTEXT_GRAPH.moveTo(canvasSize * (i + 1)/(bestFitnesses.length), 0);
       CONTEXT_GRAPH.lineTo(canvasSize * (i + 1)/(bestFitnesses.length), canvasSize);
       CONTEXT_GRAPH.strokeStyle = `rgb(255, 0, 0)`;

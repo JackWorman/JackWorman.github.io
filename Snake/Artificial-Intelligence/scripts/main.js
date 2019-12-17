@@ -206,8 +206,9 @@ CANVAS_GRAPH.addEventListener(`mouseout`, (event) => {
 });
 
 CANVAS_GRAPH.addEventListener(`mousemove`, (event) => {
-  const mousePos = CANVAS_GRAPH.relMouseCoords(event);
+  if (bestFitnesses.length < 2) return;
   const maxFitness = Math.max(...bestFitnesses);
+  const mousePos = CANVAS_GRAPH.relMouseCoords(event);
 
   const hoverXOffset = canvasSize*1/(bestFitnesses.length - 1)/2;
   for (let i = 0; i < bestFitnesses.length; i++) {

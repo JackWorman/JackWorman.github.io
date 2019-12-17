@@ -96,7 +96,7 @@ function resetEA() {
     if (evolutionaryAlgorithm.specie === POPULATION_SIZE) {
       evolutionaryAlgorithm.sort();
       bestFitnesses.push(evolutionaryAlgorithm.neuralNetworks[0].fitness);
-      renderGraph(true);
+      renderGraph();
       console.log(`==============================`);
       console.log(`Generation: ${evolutionaryAlgorithm.generation}`);
       console.log(`Best Fitness: ${Number(Math.round(evolutionaryAlgorithm.neuralNetworks[0].fitness)).toLocaleString()}`);
@@ -201,14 +201,18 @@ window.addEventListener(`mousemove`, () => {
 
 window.addEventListener(`load`, evolutionaryAlgorithmLoop);
 
-CANVAS_GRAPH.addEventListener(`mousemove`, (event) => {
-  const rect = CANVAS_GRAPH.getBoundingClientRect();
-  const mousePos = CANVAS_GRAPH.relMouseCoords(event);
+CANVAS_GRAPH.addEventListener(`mouseout`, (event) => {
+  CONTEXT_GRAPH.clearRect(0, 0, canvasSize, canvasSize);
+});
 
+CANVAS_GRAPH.addEventListener(`mousemove`, (event) => {
+  const mousePos = CANVAS_GRAPH.relMouseCoords(event);
   const maxFitness = Math.max(...bestFitnesses);
+
   for (let i = 0; i < bestFitnesses.length; i++) {
     if (mousePos.x > canvasSize * i/bestFitnesses.length + canvasSize * 1/bestFitnesses.length/2
       && mousePos.x <= canvasSize * (i + 1)/bestFitnesses.length + canvasSize * 1/bestFitnesses.length/2) {
+      renderGraph();
       CONTEXT_GRAPH.clearRect(0, 0, canvasSize, canvasSize);
       CONTEXT_GRAPH.beginPath();
       CONTEXT_GRAPH.moveTo(0, canvasSize - canvasSize * bestFitnesses[i]/maxFitness);
@@ -219,20 +223,22 @@ CANVAS_GRAPH.addEventListener(`mousemove`, (event) => {
       CONTEXT_GRAPH.stroke();
       CONTEXT_GRAPH.fillStyle = `rgb(255, 0, 0)`;
 
-      if (mousePos.x < canvasSize/2 && mousePos.y < canvasSize/2) {
+      const x = canvasSize * (i + 1)/(bestFitnesses.length);
+      const y = canvasSize - canvasSize * bestFitnesses[i]/maxFitness;
+
+      if (x < canvasSize/2 && y < canvasSize/2) {
         CONTEXT_GRAPH.textAlign = `left`;
         CONTEXT_GRAPH.fillText(`(${i}, ${bestFitnesses[i]})`, canvasSize * (i + 1)/(bestFitnesses.length) + 5, canvasSize - canvasSize * bestFitnesses[i]/maxFitness + 12);
-      } else if (mousePos.x < canvasSize/2 && mousePos.y >= canvasSize/2) {
+      } else if (x < canvasSize/2 && y >= canvasSize/2) {
         CONTEXT_GRAPH.textAlign = `left`;
         CONTEXT_GRAPH.fillText(`(${i}, ${bestFitnesses[i]})`, canvasSize * (i + 1)/(bestFitnesses.length) + 5, canvasSize - canvasSize * bestFitnesses[i]/maxFitness - 12);
-      } else if (mousePos.x >= canvasSize/2 && mousePos.y < canvasSize/2) {
+      } else if (x >= canvasSize/2 && y < canvasSize/2) {
         CONTEXT_GRAPH.textAlign = `right`;
         CONTEXT_GRAPH.fillText(`(${i}, ${bestFitnesses[i]})`, canvasSize * (i + 1)/(bestFitnesses.length) - 5, canvasSize - canvasSize * bestFitnesses[i]/maxFitness + 12);
-      } else if (mousePos.x >= canvasSize/2 && mousePos.y >= canvasSize/2) {
+      } else if (x >= canvasSize/2 && y >= canvasSize/2) {
         CONTEXT_GRAPH.textAlign = `right`;
         CONTEXT_GRAPH.fillText(`(${i}, ${bestFitnesses[i]})`, canvasSize * (i + 1)/(bestFitnesses.length) - 5, canvasSize - canvasSize * bestFitnesses[i]/maxFitness - 12);
       }
-      renderGraph(false);
       break;
     }
   }
@@ -257,10 +263,8 @@ function relMouseCoords(event) {
 }
 HTMLCanvasElement.prototype.relMouseCoords = relMouseCoords;
 
-function renderGraph(clearCanvas) {
-  if (clearCanvas) {
-    CONTEXT_GRAPH.clearRect(0, 0, canvasSize, canvasSize);
-  }
+function renderGraph() {
+  CONTEXT_GRAPH.clearRect(0, 0, canvasSize, canvasSize);
   const maxFitness = Math.max(...bestFitnesses);
   CONTEXT_GRAPH.font = `14px Arial`;
   CONTEXT_GRAPH.strokeStyle = `rgb(255, 255, 255)`;

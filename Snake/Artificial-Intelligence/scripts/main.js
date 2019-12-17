@@ -202,7 +202,7 @@ window.addEventListener(`mousemove`, () => {
 window.addEventListener(`load`, evolutionaryAlgorithmLoop);
 
 CANVAS_GRAPH.addEventListener(`mouseout`, (event) => {
-  CONTEXT_GRAPH.clearRect(0, 0, canvasSize, canvasSize);
+  // CONTEXT_GRAPH.clearRect(0, 0, canvasSize, canvasSize);
 });
 
 CANVAS_GRAPH.addEventListener(`mousemove`, (event) => {

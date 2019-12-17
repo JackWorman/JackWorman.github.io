@@ -5,7 +5,7 @@ import {EvolutionaryAlgorithm} from "./EvolutionaryAlgorithm.js";
 import {Snake} from "../../scripts/Snake.js";
 import {Pellet} from "../../scripts/Pellet.js";
 
-const SELECT_VIEW_SETTINGS = document.getElementById(`select-view-settings`);
+const SELECT_SETTINGS = document.getElementById(`select-settings`);
 const SPAN_GEN_SPECIE = document.getElementById(`span-gen-specie`);
 const CANVAS_GAME = document.getElementById(`canvas-game`);
 const CONTEXT_GAME = CANVAS_GAME.getContext(`2d`);
@@ -186,12 +186,12 @@ function renderGame() {
   snake.render(fillSquare);
 }
 
-SELECT_VIEW_SETTINGS.addEventListener(`change`, async () => {
-  if (SELECT_VIEW_SETTINGS.value === `all`) {
+SELECT_SETTINGS.addEventListener(`change`, async () => {
+  if (SELECT_SETTINGS.value === `all`) {
     showMode = `all`;
-  } else if (SELECT_VIEW_SETTINGS.value === `best`) {
+  } else if (SELECT_SETTINGS.value === `best`) {
     showMode = `best`;
-  } else if (SELECT_VIEW_SETTINGS.value === `off`) {
+  } else if (SELECT_SETTINGS.value === `off`) {
     showMode = `off`;
   }
   await sleep(0); // Pauses to ensure the canvases do not get overwritten after being cleared.

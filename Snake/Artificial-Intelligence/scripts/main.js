@@ -209,10 +209,10 @@ CANVAS_GRAPH.addEventListener(`mousemove`, (event) => {
   const mousePos = CANVAS_GRAPH.relMouseCoords(event);
   const maxFitness = Math.max(...bestFitnesses);
 
-  const hoverXOffset = canvasSize * 1/bestFitnesses.length/2;
+  const hoverXOffset = canvasSize*1/(bestFitnesses.length - 1)/2;
   for (let i = 0; i < bestFitnesses.length; i++) {
-    const x = canvasSize * (i + 1)/bestFitnesses.length;
-    const y = canvasSize - canvasSize * bestFitnesses[i]/maxFitness;
+    const x = canvasSize*i/(bestFitnesses.length - 1);
+    const y = canvasSize - canvasSize*bestFitnesses[i]/maxFitness;
     if (mousePos.x > canvasSize * i/bestFitnesses.length + hoverXOffset && mousePos.x <= x + hoverXOffset) {
       renderGraph();
       CONTEXT_GRAPH.beginPath();
@@ -278,9 +278,9 @@ function renderGraph() {
   CONTEXT_GRAPH.fillText(`Overall Best Fitness: ${maxFitness.toLocaleString()}`, 10, 32);
 
   CONTEXT_GRAPH.beginPath();
-  CONTEXT_GRAPH.moveTo(canvasSize*1/(bestFitnesses.length - 1), canvasSize - canvasSize*bestFitnesses[0]/maxFitness);
+  CONTEXT_GRAPH.moveTo(0, canvasSize - canvasSize*bestFitnesses[0]/maxFitness);
   for (let i = 1; i < bestFitnesses.length; i++) {
-    CONTEXT_GRAPH.lineTo(canvasSize*(i + 1)/(bestFitnesses.length - 1), canvasSize - canvasSize*bestFitnesses[i]/maxFitness);
+    CONTEXT_GRAPH.lineTo(canvasSize*i/(bestFitnesses.length - 1), canvasSize - canvasSize*bestFitnesses[i]/maxFitness);
   }
   // CONTEXT_GRAPH.moveTo(0, canvasSize);
   // for (let i = 0; i < bestFitnesses.length; i++) {

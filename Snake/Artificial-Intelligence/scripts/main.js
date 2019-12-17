@@ -207,7 +207,7 @@ CANVAS_GRAPH.addEventListener(`mousemove`, (event) => {
   //   x: evt.clientX - rect.left,
   //   y: evt.clientY - rect.right
   // };
-  console.log(relMouseCoords(event));
+  console.log(CANVAS_GRAPH.relMouseCoords(event));
 
   for (let i = 0; i < bestFitnesses.length; i++) {
     if (mousePos.x > canvasSize * i/bestFitnesses.length && mousePos.x <= canvasSize * (i + 1)/bestFitnesses.length) {
@@ -217,7 +217,7 @@ CANVAS_GRAPH.addEventListener(`mousemove`, (event) => {
   }
 });
 
-function relMouseCoords(event){
+function relMouseCoords(event) {
     var totalOffsetX = 0;
     var totalOffsetY = 0;
     var canvasX = 0;
@@ -235,6 +235,7 @@ function relMouseCoords(event){
 
     return {x:canvasX, y:canvasY}
 }
+HTMLCanvasElement.prototype.relMouseCoords = relMouseCoords;
 
 function renderGraph() {
   CONTEXT_GRAPH.clearRect(0, 0, canvasSize, canvasSize);

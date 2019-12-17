@@ -210,7 +210,7 @@ function renderGraph() {
   CONTEXT_GRAPH.textAlign = `left`;
   CONTEXT_GRAPH.textBaseline = `middle`;
   CONTEXT_GRAPH.fillText(`Best Fitnesses vs. Generation`, 10, 16);
-  CONTEXT_GRAPH.fillText(`Best Fitness: ${maxFitness.toLocaleString()}`, 10, 32);
+  CONTEXT_GRAPH.fillText(`Overall Best Fitness: ${maxFitness.toLocaleString()}`, 10, 32);
 
   CONTEXT_GRAPH.beginPath();
   CONTEXT_GRAPH.moveTo(0, canvasSize);

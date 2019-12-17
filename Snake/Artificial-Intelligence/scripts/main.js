@@ -208,8 +208,8 @@ CANVAS_GRAPH.addEventListener(`mousemove`, (event) => {
   const maxFitness = Math.max(...bestFitnesses);
   CONTEXT_GRAPH.clearRect(0, 0, canvasSize, canvasSize);
   for (let i = 0; i < bestFitnesses.length; i++) {
-    if (mousePos.x > canvasSize * i/bestFitnesses.length + canvasSize * (i + 1)/bestFitnesses.length/2
-      && mousePos.x <= canvasSize * (i + 1)/bestFitnesses.length + canvasSize * (i + 1)/bestFitnesses.length/2) {
+    if (mousePos.x > canvasSize * i/bestFitnesses.length + canvasSize * 1/bestFitnesses.length/2
+      && mousePos.x <= canvasSize * (i + 1)/bestFitnesses.length + canvasSize * 1/bestFitnesses.length/2) {
       CONTEXT_GRAPH.beginPath();
       CONTEXT_GRAPH.moveTo(0, canvasSize - canvasSize * bestFitnesses[i]/maxFitness);
       CONTEXT_GRAPH.lineTo(canvasSize, canvasSize - canvasSize * bestFitnesses[i]/maxFitness);

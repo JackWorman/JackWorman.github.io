@@ -220,7 +220,7 @@ CANVAS_GRAPH.addEventListener(`mousemove`, (event) => {
       CONTEXT_GRAPH.lineTo(canvasSize, y);
       CONTEXT_GRAPH.moveTo(x, 0);
       CONTEXT_GRAPH.lineTo(x, canvasSize);
-      
+
       CONTEXT_GRAPH.strokeStyle = `rgb(255, 0, 0)`;
       CONTEXT_GRAPH.stroke();
 
@@ -250,7 +250,7 @@ function relMouseCoords(event) {
   let totalOffsetY = 0;
   let canvasX = 0;
   let canvasY = 0;
-  const currentElement = this;
+  let currentElement = this;
 
   do {
     totalOffsetX += currentElement.offsetLeft - currentElement.scrollLeft;

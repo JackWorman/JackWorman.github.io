@@ -96,7 +96,7 @@ function resetEA() {
     if (evolutionaryAlgorithm.specie === POPULATION_SIZE) {
       evolutionaryAlgorithm.sort();
       bestFitnesses.push(evolutionaryAlgorithm.neuralNetworks[0].fitness);
-      renderGraph();
+      renderGraph(true);
       console.log(`==============================`);
       console.log(`Generation: ${evolutionaryAlgorithm.generation}`);
       console.log(`Best Fitness: ${Number(Math.round(evolutionaryAlgorithm.neuralNetworks[0].fitness)).toLocaleString()}`);
@@ -203,15 +203,15 @@ window.addEventListener(`load`, evolutionaryAlgorithmLoop);
 
 CANVAS_GRAPH.addEventListener(`mousemove`, (event) => {
   const rect = CANVAS_GRAPH.getBoundingClientRect();
-  // const mousePos = {
-  //   x: evt.clientX - rect.left,
-  //   y: evt.clientY - rect.right
-  // };
-  console.log(CANVAS_GRAPH.relMouseCoords(event));
+  const mousePos = CANVAS_GRAPH.relMouseCoords(event);
+
+  const maxFitness = Math.max(...bestFitnesses);
 
   for (let i = 0; i < bestFitnesses.length; i++) {
     if (mousePos.x > canvasSize * i/bestFitnesses.length && mousePos.x <= canvasSize * (i + 1)/bestFitnesses.length) {
-
+      CONTEXT_GRAPH.textAlign = `right`;
+      CONTEXT_GRAPH.fillText(`(${i}, ${bestFitnesses[i]})`, canvasSize * (i + 1)/(bestFitnesses.length) - 5, canvasSize - canvasSize * bestFitnesses[i]/maxFitness) - 5;
+      renderGraph(false);
       break;
     }
   }
@@ -224,11 +224,10 @@ function relMouseCoords(event) {
     var canvasY = 0;
     var currentElement = this;
 
-    do{
+    do {
         totalOffsetX += currentElement.offsetLeft - currentElement.scrollLeft;
         totalOffsetY += currentElement.offsetTop - currentElement.scrollTop;
-    }
-    while(currentElement = currentElement.offsetParent)
+    } while (currentElement = currentElement.offsetParent);
 
     canvasX = event.pageX - totalOffsetX;
     canvasY = event.pageY - totalOffsetY;
@@ -237,8 +236,10 @@ function relMouseCoords(event) {
 }
 HTMLCanvasElement.prototype.relMouseCoords = relMouseCoords;
 
-function renderGraph() {
-  CONTEXT_GRAPH.clearRect(0, 0, canvasSize, canvasSize);
+function renderGraph(clearCanvas) {
+  if (clearCanvas) {
+    CONTEXT_GRAPH.clearRect(0, 0, canvasSize, canvasSize);
+  }
   const maxFitness = Math.max(...bestFitnesses);
   CONTEXT_GRAPH.font = `14px Arial`;
   CONTEXT_GRAPH.strokeStyle = `rgb(255, 255, 255)`;

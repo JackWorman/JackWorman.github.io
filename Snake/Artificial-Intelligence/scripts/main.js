@@ -265,20 +265,27 @@ HTMLCanvasElement.prototype.relMouseCoords = relMouseCoords;
 
 function renderGraph() {
   CONTEXT_GRAPH.clearRect(0, 0, canvasSize, canvasSize);
-  const maxFitness = Math.max(...bestFitnesses);
   CONTEXT_GRAPH.font = `14px Arial`;
   CONTEXT_GRAPH.strokeStyle = `rgb(255, 255, 255)`;
   CONTEXT_GRAPH.fillStyle = `rgb(255, 255, 255)`;
   CONTEXT_GRAPH.textAlign = `left`;
   CONTEXT_GRAPH.textBaseline = `middle`;
   CONTEXT_GRAPH.fillText(`Best Fitnesses vs. Generation`, 10, 16);
+  if (bestFitnesses.length < 2) {
+    return;
+  }
+  const maxFitness = Math.max(...bestFitnesses);
   CONTEXT_GRAPH.fillText(`Overall Best Fitness: ${maxFitness.toLocaleString()}`, 10, 32);
 
   CONTEXT_GRAPH.beginPath();
-  CONTEXT_GRAPH.moveTo(0, canvasSize);
-  for (let i = 0; i < bestFitnesses.length; i++) {
-    CONTEXT_GRAPH.lineTo(canvasSize * (i + 1)/(bestFitnesses.length), canvasSize - canvasSize * bestFitnesses[i]/maxFitness);
+  CONTEXT_GRAPH.moveTo(canvasSize*1/(bestFitnesses.length - 1), canvasSize - canvasSize*bestFitnesses[0]/maxFitness);
+  for (let i = 1; i < bestFitnesses.length; i++) {
+    CONTEXT_GRAPH.lineTo(canvasSize*(i + 1)/(bestFitnesses.length - 1), canvasSize - canvasSize*bestFitnesses[i]/maxFitness);
   }
+  // CONTEXT_GRAPH.moveTo(0, canvasSize);
+  // for (let i = 0; i < bestFitnesses.length; i++) {
+  //   CONTEXT_GRAPH.lineTo(canvasSize * (i + 1)/bestFitnesses.length, canvasSize - canvasSize * bestFitnesses[i]/maxFitness);
+  // }
   CONTEXT_GRAPH.strokeStyle = `rgb(255, 255, 255)`;
   CONTEXT_GRAPH.stroke();
 }

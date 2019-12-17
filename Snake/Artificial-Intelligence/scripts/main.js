@@ -220,44 +220,46 @@ CANVAS_GRAPH.addEventListener(`mousemove`, (event) => {
       CONTEXT_GRAPH.lineTo(canvasSize, y);
       CONTEXT_GRAPH.moveTo(x, 0);
       CONTEXT_GRAPH.lineTo(x, canvasSize);
+      
       CONTEXT_GRAPH.strokeStyle = `rgb(255, 0, 0)`;
       CONTEXT_GRAPH.stroke();
-      CONTEXT_GRAPH.fillStyle = `rgb(255, 0, 0)`;
 
-      if (x < canvasSize/2 && y < canvasSize/2) {
+      let xOffset;
+      if (x < canvasSize/2) {
         CONTEXT_GRAPH.textAlign = `left`;
-        CONTEXT_GRAPH.fillText(`(${i}, ${bestFitnesses[i]})`, x + 5, y + 12);
-      } else if (x < canvasSize/2 && y >= canvasSize/2) {
-        CONTEXT_GRAPH.textAlign = `left`;
-        CONTEXT_GRAPH.fillText(`(${i}, ${bestFitnesses[i]})`, x + 5, y - 12);
-      } else if (x >= canvasSize/2 && y < canvasSize/2) {
+        xOffset = 5;
+      } else {
         CONTEXT_GRAPH.textAlign = `right`;
-        CONTEXT_GRAPH.fillText(`(${i}, ${bestFitnesses[i]})`, x - 5, y + 12);
-      } else if (x >= canvasSize/2 && y >= canvasSize/2) {
-        CONTEXT_GRAPH.textAlign = `right`;
-        CONTEXT_GRAPH.fillText(`(${i}, ${bestFitnesses[i]})`, x - 5, y - 12);
+        xOffset = -5;
       }
+      let yOffset;
+      if (y < canvasSize/2) {
+        yOffset = 12;
+      } else {
+        yOffset = -12;
+      }
+      CONTEXT_GRAPH.fillStyle = `rgb(255, 0, 0)`;
+      CONTEXT_GRAPH.fillText(`(${i}, ${bestFitnesses[i]})`, x + xOffset, y + yOffset);
       break;
     }
   }
 });
 
 function relMouseCoords(event) {
-    var totalOffsetX = 0;
-    var totalOffsetY = 0;
-    var canvasX = 0;
-    var canvasY = 0;
-    var currentElement = this;
+  let totalOffsetX = 0;
+  let totalOffsetY = 0;
+  let canvasX = 0;
+  let canvasY = 0;
+  const currentElement = this;
 
-    do {
-        totalOffsetX += currentElement.offsetLeft - currentElement.scrollLeft;
-        totalOffsetY += currentElement.offsetTop - currentElement.scrollTop;
-    } while (currentElement = currentElement.offsetParent);
+  do {
+    totalOffsetX += currentElement.offsetLeft - currentElement.scrollLeft;
+    totalOffsetY += currentElement.offsetTop - currentElement.scrollTop;
+  } while (currentElement = currentElement.offsetParent);
 
-    canvasX = event.pageX - totalOffsetX;
-    canvasY = event.pageY - totalOffsetY;
-
-    return {x:canvasX, y:canvasY}
+  canvasX = event.pageX - totalOffsetX;
+  canvasY = event.pageY - totalOffsetY;
+  return {x: canvasX, y: canvasY};
 }
 HTMLCanvasElement.prototype.relMouseCoords = relMouseCoords;
 

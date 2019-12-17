@@ -209,11 +209,12 @@ CANVAS_GRAPH.addEventListener(`mousemove`, (event) => {
   const mousePos = CANVAS_GRAPH.relMouseCoords(event);
   const maxFitness = Math.max(...bestFitnesses);
 
+  const hoverXOffset = canvasSize * 1/bestFitnesses.length/2;
   for (let i = 0; i < bestFitnesses.length; i++) {
-    const x = canvasSize * (i + 1)/(bestFitnesses.length);
+    const x = canvasSize * (i + 1)/bestFitnesses.length;
     const y = canvasSize - canvasSize * bestFitnesses[i]/maxFitness;
-    if (mousePos.x > canvasSize * i/bestFitnesses.length + canvasSize * 1/bestFitnesses.length/2
-      && mousePos.x <= x + canvasSize * 1/bestFitnesses.length/2) {
+    if (mousePos.x > canvasSize * i/bestFitnesses.length + hoverXOffset
+      && mousePos.x <= x + hoverXOffset) {
       renderGraph();
       CONTEXT_GRAPH.beginPath();
       CONTEXT_GRAPH.moveTo(0, y);

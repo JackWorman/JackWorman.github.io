@@ -21,7 +21,7 @@ const FRAMES_PER_SECOND = 15;
 export const GRID_SIZE = 30;
 // EA Settings
 const POPULATION_SIZE = 280;
-const LAYER_SIZES = [28, 22, 16, 10, 4];
+const LAYER_SIZES = [28, 20, 12, 4];
 const MUTATION_RATE = 0.02;
 const ELITISM_RATE = 0.01;
 const ROUNDS_PER_AGENT_PER_GENERATION = 50;
@@ -213,8 +213,7 @@ CANVAS_GRAPH.addEventListener(`mousemove`, (event) => {
   for (let i = 0; i < bestFitnesses.length; i++) {
     const x = canvasSize * (i + 1)/bestFitnesses.length;
     const y = canvasSize - canvasSize * bestFitnesses[i]/maxFitness;
-    if (mousePos.x > canvasSize * i/bestFitnesses.length + hoverXOffset
-      && mousePos.x <= x + hoverXOffset) {
+    if (mousePos.x > canvasSize * i/bestFitnesses.length + hoverXOffset && mousePos.x <= x + hoverXOffset) {
       renderGraph();
       CONTEXT_GRAPH.beginPath();
       CONTEXT_GRAPH.moveTo(0, y);

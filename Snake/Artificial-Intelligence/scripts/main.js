@@ -5,7 +5,7 @@ import {EvolutionaryAlgorithm} from "./EvolutionaryAlgorithm.js";
 import {Snake} from "../../scripts/Snake.js";
 import {Pellet} from "../../scripts/Pellet.js";
 
-const BUTTON_TOGGLE_SHOW = document.getElementById(`button-toggle-show`);
+const SELECT_VIEW_SETTINGS = document.getElementById(`select-view-settings`);
 const SPAN_GEN_SPECIE = document.getElementById(`span-gen-specie`);
 const CANVAS_GAME = document.getElementById(`canvas-game`);
 const CONTEXT_GAME = CANVAS_GAME.getContext(`2d`);
@@ -186,16 +186,13 @@ function renderGame() {
   snake.render(fillSquare);
 }
 
-BUTTON_TOGGLE_SHOW.addEventListener(`click`, async () => {
-  if (showMode === `all`) {
-    showMode = `best`;
-    BUTTON_TOGGLE_SHOW.textContent = `Showing Best`;
-  } else if (showMode === `best`) {
-    showMode = `off`;
-    BUTTON_TOGGLE_SHOW.textContent = `Showing Off`;
-  } else if (showMode === `off`) {
+SELECT_VIEW_SETTINGS.addEventListener(`change`, async () => {
+  if (SELECT_VIEW_SETTINGS.value === `all`) {
     showMode = `all`;
-    BUTTON_TOGGLE_SHOW.textContent = `Showing All`;
+  } else if (SELECT_VIEW_SETTINGS.value === `best`) {
+    showMode = `best`;
+  } else if (SELECT_VIEW_SETTINGS.value === `off`) {
+    showMode = `off`;
   }
   await sleep(0); // Pauses to ensure the canvases do not get overwritten after being cleared.
   CONTEXT_GAME.clearRect(0, 0, canvasSize, canvasSize);

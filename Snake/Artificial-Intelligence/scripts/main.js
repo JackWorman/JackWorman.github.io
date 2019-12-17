@@ -206,11 +206,11 @@ CANVAS_GRAPH.addEventListener(`mousemove`, (event) => {
   const mousePos = CANVAS_GRAPH.relMouseCoords(event);
 
   const maxFitness = Math.max(...bestFitnesses);
-
+  CONTEXT_GRAPH.clearRect(0, 0, canvasSize, canvasSize);
   for (let i = 0; i < bestFitnesses.length; i++) {
     if (mousePos.x > canvasSize * i/bestFitnesses.length && mousePos.x <= canvasSize * (i + 1)/bestFitnesses.length) {
       CONTEXT_GRAPH.textAlign = `right`;
-      CONTEXT_GRAPH.fillText(`(${i}, ${bestFitnesses[i]})`, canvasSize * (i + 1)/(bestFitnesses.length) - 5, canvasSize - canvasSize * bestFitnesses[i]/maxFitness) - 5;
+      CONTEXT_GRAPH.fillText(`(${i}, ${bestFitnesses[i]})`, canvasSize * (i + 1)/(bestFitnesses.length) - 5, canvasSize - canvasSize * bestFitnesses[i]/maxFitness) - 12;
       renderGraph(false);
       break;
     }

@@ -202,7 +202,7 @@ window.addEventListener(`mousemove`, () => {
 window.addEventListener(`load`, evolutionaryAlgorithmLoop);
 
 CANVAS_GRAPH.addEventListener(`mouseout`, (event) => {
-  CONTEXT_GRAPH.clearRect(0, 0, canvasSize, canvasSize);
+  renderGraph();
 });
 
 CANVAS_GRAPH.addEventListener(`mousemove`, (event) => {
@@ -210,33 +210,32 @@ CANVAS_GRAPH.addEventListener(`mousemove`, (event) => {
   const maxFitness = Math.max(...bestFitnesses);
 
   for (let i = 0; i < bestFitnesses.length; i++) {
+    const x = canvasSize * (i + 1)/(bestFitnesses.length);
+    const y = canvasSize - canvasSize * bestFitnesses[i]/maxFitness;
     if (mousePos.x > canvasSize * i/bestFitnesses.length + canvasSize * 1/bestFitnesses.length/2
-      && mousePos.x <= canvasSize * (i + 1)/bestFitnesses.length + canvasSize * 1/bestFitnesses.length/2) {
+      && mousePos.x <= x + canvasSize * 1/bestFitnesses.length/2) {
       renderGraph();
       CONTEXT_GRAPH.beginPath();
-      CONTEXT_GRAPH.moveTo(0, canvasSize - canvasSize * bestFitnesses[i]/maxFitness);
-      CONTEXT_GRAPH.lineTo(canvasSize, canvasSize - canvasSize * bestFitnesses[i]/maxFitness);
-      CONTEXT_GRAPH.moveTo(canvasSize * (i + 1)/(bestFitnesses.length), 0);
-      CONTEXT_GRAPH.lineTo(canvasSize * (i + 1)/(bestFitnesses.length), canvasSize);
+      CONTEXT_GRAPH.moveTo(0, y);
+      CONTEXT_GRAPH.lineTo(canvasSize, y);
+      CONTEXT_GRAPH.moveTo(x, 0);
+      CONTEXT_GRAPH.lineTo(x, canvasSize);
       CONTEXT_GRAPH.strokeStyle = `rgb(255, 0, 0)`;
       CONTEXT_GRAPH.stroke();
       CONTEXT_GRAPH.fillStyle = `rgb(255, 0, 0)`;
 
-      const x = canvasSize * (i + 1)/(bestFitnesses.length);
-      const y = canvasSize - canvasSize * bestFitnesses[i]/maxFitness;
-
       if (x < canvasSize/2 && y < canvasSize/2) {
         CONTEXT_GRAPH.textAlign = `left`;
-        CONTEXT_GRAPH.fillText(`(${i}, ${bestFitnesses[i]})`, canvasSize * (i + 1)/(bestFitnesses.length) + 5, canvasSize - canvasSize * bestFitnesses[i]/maxFitness + 12);
+        CONTEXT_GRAPH.fillText(`(${i}, ${bestFitnesses[i]})`, x + 5, y + 12);
       } else if (x < canvasSize/2 && y >= canvasSize/2) {
         CONTEXT_GRAPH.textAlign = `left`;
-        CONTEXT_GRAPH.fillText(`(${i}, ${bestFitnesses[i]})`, canvasSize * (i + 1)/(bestFitnesses.length) + 5, canvasSize - canvasSize * bestFitnesses[i]/maxFitness - 12);
+        CONTEXT_GRAPH.fillText(`(${i}, ${bestFitnesses[i]})`, x + 5, y - 12);
       } else if (x >= canvasSize/2 && y < canvasSize/2) {
         CONTEXT_GRAPH.textAlign = `right`;
-        CONTEXT_GRAPH.fillText(`(${i}, ${bestFitnesses[i]})`, canvasSize * (i + 1)/(bestFitnesses.length) - 5, canvasSize - canvasSize * bestFitnesses[i]/maxFitness + 12);
+        CONTEXT_GRAPH.fillText(`(${i}, ${bestFitnesses[i]})`, x - 5, y + 12);
       } else if (x >= canvasSize/2 && y >= canvasSize/2) {
         CONTEXT_GRAPH.textAlign = `right`;
-        CONTEXT_GRAPH.fillText(`(${i}, ${bestFitnesses[i]})`, canvasSize * (i + 1)/(bestFitnesses.length) - 5, canvasSize - canvasSize * bestFitnesses[i]/maxFitness - 12);
+        CONTEXT_GRAPH.fillText(`(${i}, ${bestFitnesses[i]})`, x - 5, y - 12);
       }
       break;
     }

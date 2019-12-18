@@ -19,6 +19,7 @@ const MILLISECONDS_PER_SECOND = 1000;
 // Game Settings
 const FRAMES_PER_SECOND = 15;
 export const GRID_SIZE = 30;
+const PAUSE_TIME = 50;
 // EA Settings
 const POPULATION_SIZE = 280;
 const LAYER_SIZES = [28, 20, 12, 4];
@@ -41,11 +42,8 @@ let started = false;
 let hunger;
 let apples;
 let bestFitnesses = [];
-let showMode = `off`;
+let showMode = `all`;
 let snakeCopies = [];
-
-const PAUSE_TIME = 50;
-let setUserInactiveTimeout;
 
 /**
  * Pauses the execution of a function for a given amount of milliseconds. This allows other operations to be performed

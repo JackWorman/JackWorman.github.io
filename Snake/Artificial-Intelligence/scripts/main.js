@@ -234,15 +234,15 @@ CANVAS_GRAPH.addEventListener(`mousemove`, (event) => {
     const y = canvasSize - canvasSize*bestFitnesses[i]/maxFitness;
     if (mousePos.x > x - hoverXOffset && mousePos.x <= x + hoverXOffset) {
       renderGraph();
+      // Draws the crosshairs.
       CONTEXT_GRAPH.beginPath();
       CONTEXT_GRAPH.moveTo(0, y);
       CONTEXT_GRAPH.lineTo(canvasSize, y);
       CONTEXT_GRAPH.moveTo(x, 0);
       CONTEXT_GRAPH.lineTo(x, canvasSize);
-
       CONTEXT_GRAPH.strokeStyle = `rgb(255, 0, 0)`;
       CONTEXT_GRAPH.stroke();
-
+      // Draws the coordinate.
       let xOffset = (x < canvasSize/2) ? 5 : -5;
       CONTEXT_GRAPH.textAlign = (x < canvasSize/2) ? `left` : `right`;
       let yOffset = (y < canvasSize/2) ? 12 : -12;
@@ -272,24 +272,24 @@ function relMouseCoords(event) {
 HTMLCanvasElement.prototype.relMouseCoords = relMouseCoords;
 
 function renderGraph() {
+  const WHITE = `rgb(255, 255, 255)`;
   CONTEXT_GRAPH.clearRect(0, 0, canvasSize, canvasSize);
   CONTEXT_GRAPH.font = `14px Arial`;
-  CONTEXT_GRAPH.strokeStyle = `rgb(255, 255, 255)`;
-  CONTEXT_GRAPH.fillStyle = `rgb(255, 255, 255)`;
+  CONTEXT_GRAPH.strokeStyle = WHITE;
+  CONTEXT_GRAPH.fillStyle = WHITE;
   CONTEXT_GRAPH.textAlign = `left`;
   CONTEXT_GRAPH.textBaseline = `middle`;
   CONTEXT_GRAPH.fillText(`Best Fitnesses vs. Generation`, 10, 16);
-  if (bestFitnesses.length < 2) {
-    return;
-  }
+  if (bestFitnesses.length === 0) return;
   const maxFitness = Math.max(...bestFitnesses);
-  CONTEXT_GRAPH.fillText(`Overall Best Fitness: ${maxFitness.toLocaleString()}`, 10, 32);
+  CONTEXT_GRAPH.fillText(`Overall Best Fitness: ${maxFitness.toLocaleString()}`, 10, 40);
+  if (bestFitnesses.length === 1) return;
 
   CONTEXT_GRAPH.beginPath();
   CONTEXT_GRAPH.moveTo(0, canvasSize - canvasSize*bestFitnesses[0]/maxFitness);
   for (let i = 1; i < bestFitnesses.length; i++) {
     CONTEXT_GRAPH.lineTo(canvasSize*i/(bestFitnesses.length - 1), canvasSize - canvasSize*bestFitnesses[i]/maxFitness);
   }
-  CONTEXT_GRAPH.strokeStyle = `rgb(255, 255, 255)`;
+  CONTEXT_GRAPH.strokeStyle = WHITE;
   CONTEXT_GRAPH.stroke();
 }

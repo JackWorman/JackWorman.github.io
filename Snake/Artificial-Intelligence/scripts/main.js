@@ -44,7 +44,7 @@ let bestFitnesses = [];
 let showMode = `off`;
 let snakeCopies = [];
 
-let pauseTime = 50; //47.68489819274236
+const PAUSE_TIME = 50;
 let setUserInactiveTimeout;
 
 /**
@@ -84,7 +84,7 @@ async function evolutionaryAlgorithmLoop() {
         Species: ${evolutionaryAlgorithm.specie + 1}/${POPULATION_SIZE},
         Test: ${test + 1}/${TESTS_PER_AGENT_PER_GENERATION}`;
       // Pauses the loop ever once in a while, so that the browser does not crash.
-      if (performance.now() - previousTime > pauseTime) {
+      if (performance.now() - previousTime > PAUSE_TIME) {
         await sleep(0);
         previousTime = performance.now();
       }
@@ -133,8 +133,6 @@ let count = 0;
 let testStartTime = performance.now();
 
 function gameLoop() {
-  if (count++ === 0) testStartTime = performance.now();
-  if (count === 1000000) alert(count / (performance.now() - testStartTime));
   updateInputLayer(evolutionaryAlgorithm, snake, pellet);
   evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].calculateOutputs();
   snake.direction = getDirectionFromOutputLayer(evolutionaryAlgorithm, snake);

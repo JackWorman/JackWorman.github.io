@@ -94,7 +94,12 @@ export function getDirectionFromOutputLayer(evolutionaryAlgorithm, snake) {
 export function renderNeuralNetwork(evolutionaryAlgorithm, snake) {
   CONTEXT_NEURAL_NETWORK.clearRect(0, 0, canvasSize, canvasSize);
   const neuralNetwork = evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie];
-  // Render weights.
+  renderWeights(neuralNetwork);
+  renderNodes(neuralNetwork, evolutionaryAlgorithm);
+  renderLabels(neuralNetwork);
+}
+
+function renderWeights(neuralNetwork) {
   for (let i = 0; i < neuralNetwork.weights.length; i++) {
     const layer1Size = neuralNetwork.layers[i].numRows;
     for (let j = 0; j < layer1Size; j++) {
@@ -114,7 +119,9 @@ export function renderNeuralNetwork(evolutionaryAlgorithm, snake) {
       }
     }
   }
-  // Render nodes.
+}
+
+function renderNodes(neuralNetwork, evolutionaryAlgorithm) {
   for (let i = 0; i < neuralNetwork.layers.length; i++) {
     const layerSize = neuralNetwork.layers[i].numRows;
     for (let j = 0; j < layerSize; j++) {
@@ -142,7 +149,9 @@ export function renderNeuralNetwork(evolutionaryAlgorithm, snake) {
       CONTEXT_NEURAL_NETWORK.fill();
     }
   }
-  // Render labels.
+}
+
+function renderLabels(neuralNetwork) {
   const DIRECTIONS = [
     `Up-Left`,
     `Left`,
@@ -180,5 +189,4 @@ export function renderNeuralNetwork(evolutionaryAlgorithm, snake) {
     CONTEXT_NEURAL_NETWORK.textBaseline = `middle`;
     CONTEXT_NEURAL_NETWORK.fillText(OUTPUT_NODE_LABELS[i], 16 + canvasSize*((neuralNetwork.layers.length)/(neuralNetwork.layers.length + 1)), canvasSize/(4 + 1)*(i + 1));
   }
-  alert();
 }

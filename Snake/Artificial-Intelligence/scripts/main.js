@@ -24,7 +24,7 @@ const POPULATION_SIZE = 280;
 const LAYER_SIZES = [28, 20, 12, 4];
 const MUTATION_RATE = 0.02;
 const ELITISM_RATE = 0.01;
-const ROUNDS_PER_AGENT_PER_GENERATION = 50;
+const TESTS_PER_AGENT_PER_GENERATION = 50;
 const MAX_HUNGER = GRID_SIZE*GRID_SIZE;
 
 const snake = new Snake();
@@ -37,7 +37,6 @@ CANVAS_NEURAL_NETWORK.width = CANVAS_NEURAL_NETWORK.height = canvasSize;
 CANVAS_GRAPH.width = CANVAS_GRAPH.height = canvasSize;
 
 let showTraining = true;
-let showBest = true;
 let started = false;
 let hunger;
 let apples;
@@ -53,7 +52,7 @@ let setUserInactiveTimeout;
  * in the mean time.
  *
  * Note: The time asleep will likely be longer then the specified duration because the function will be placed at the
- *       end of the exectuion queue once the timeout ends.
+ *       end of the execution queue once the timeout ends.
  */
 function sleep(milliseconds) {
   return new Promise((resolve) => setTimeout(resolve, milliseconds));
@@ -66,18 +65,18 @@ async function evolutionaryAlgorithmLoop() {
   let previousTime = performance.now();
   while (true) {
     resetEA();
-    for (let round = 0; round < ROUNDS_PER_AGENT_PER_GENERATION; round++) {
-      resetGame(round);
+    for (let test = 0; test < TESTS_PER_AGENT_PER_GENERATION; test++) {
+      resetGame(test);
       do {
-        await render(round);
+        await render(test);
       } while (gameLoop());
       evolutionaryAlgorithm.evaluateFitness(apples);
       // Clear canvas after showing best snake.
-      if (showMode === `best` && evolutionaryAlgorithm.specie === 0 && round === 0) {
+      if (showMode === `best` && evolutionaryAlgorithm.specie === 0 && test === 0) {
         CONTEXT_GAME.clearRect(0, 0, canvasSize, canvasSize);
         CONTEXT_NEURAL_NETWORK.clearRect(0, 0, canvasSize, canvasSize);
       }
-      SPAN_GEN_SPECIE.textContent = `Generation: ${evolutionaryAlgorithm.generation}, Species: ${evolutionaryAlgorithm.specie + 1}/${POPULATION_SIZE}, Test: ${round}/${ROUNDS_PER_AGENT_PER_GENERATION}`;
+      SPAN_GEN_SPECIE.textContent = `Generation: ${evolutionaryAlgorithm.generation}, Species: ${evolutionaryAlgorithm.specie + 1}/${POPULATION_SIZE}, Test: ${test + 1}/${TESTS_PER_AGENT_PER_GENERATION}`;
       // Pauses the loop every 333ms, so that the browser does not crash.
       if (performance.now() - previousTime > pauseTime) {
         await sleep(0);
@@ -97,10 +96,6 @@ function resetEA() {
       evolutionaryAlgorithm.sort();
       bestFitnesses.push(evolutionaryAlgorithm.neuralNetworks[0].fitness);
       renderGraph();
-      console.log(`==============================`);
-      console.log(`Generation: ${evolutionaryAlgorithm.generation}`);
-      console.log(`Best Fitness: ${Number(Math.round(evolutionaryAlgorithm.neuralNetworks[0].fitness)).toLocaleString()}`);
-      console.log(`Average Best Fitness: ${Number(Math.round(bestFitnesses.reduce((a, b) => a + b, 0) / bestFitnesses.length)).toLocaleString()}`);
       evolutionaryAlgorithm.selectParents();
       evolutionaryAlgorithm.crossover();
       evolutionaryAlgorithm.mutate();
@@ -109,7 +104,7 @@ function resetEA() {
       evolutionaryAlgorithm.specie = 0;
       evolutionaryAlgorithm.generation++;
     }
-    SPAN_GEN_SPECIE.textContent = `Generation: ${evolutionaryAlgorithm.generation}, Species: ${evolutionaryAlgorithm.specie + 1}/${POPULATION_SIZE}, Test: 1/${ROUNDS_PER_AGENT_PER_GENERATION}`;
+    SPAN_GEN_SPECIE.textContent = `Generation: ${evolutionaryAlgorithm.generation}, Species: ${evolutionaryAlgorithm.specie + 1}/${POPULATION_SIZE}, Test: 1/${TESTS_PER_AGENT_PER_GENERATION}`;
   } else {
     started = true;
     evolutionaryAlgorithm.initialize();
@@ -163,10 +158,12 @@ function checkRepeatedPosition() {
   return false;
 }
 
-async function render(round) {
-  if (showMode === `all` || (showMode === `best` && evolutionaryAlgorithm.specie === 0 && round === 0)) {
+async function render(test) {
+  if (showMode === `all` || (showMode === `best` && evolutionaryAlgorithm.specie === 0 && test === 0)) {
     SPAN_GEN_SPECIE.textContent =
-      `Generation: ${evolutionaryAlgorithm.generation}, Species: ${evolutionaryAlgorithm.specie + 1}/${POPULATION_SIZE}, Test: ${round + 1}/${ROUNDS_PER_AGENT_PER_GENERATION}`;
+      `Generation: ${evolutionaryAlgorithm.generation}, ` +
+      `Species: ${evolutionaryAlgorithm.specie + 1}/${POPULATION_SIZE}, ` +
+      `Test: ${test + 1}/${TESTS_PER_AGENT_PER_GENERATION}`;
     window.requestAnimationFrame(() => {
       renderGame();
       renderNeuralNetwork(evolutionaryAlgorithm, snake);
@@ -193,6 +190,10 @@ SELECT_VIEW_SETTINGS.addEventListener(`change`, async () => {
   CONTEXT_NEURAL_NETWORK.clearRect(0, 0, canvasSize, canvasSize);
 });
 
+/**
+ * Sets the pause time to 100ms. Also, sets a timeout that will increase the pause time to 5s after a minute has passed
+ * without the user moving the mouse.
+ */
 window.addEventListener(`mousemove`, () => {
   pauseTime = 100;
   clearTimeout(setUserInactiveTimeout);
@@ -283,10 +284,6 @@ function renderGraph() {
   for (let i = 1; i < bestFitnesses.length; i++) {
     CONTEXT_GRAPH.lineTo(canvasSize*i/(bestFitnesses.length - 1), canvasSize - canvasSize*bestFitnesses[i]/maxFitness);
   }
-  // CONTEXT_GRAPH.moveTo(0, canvasSize);
-  // for (let i = 0; i < bestFitnesses.length; i++) {
-  //   CONTEXT_GRAPH.lineTo(canvasSize * (i + 1)/bestFitnesses.length, canvasSize - canvasSize * bestFitnesses[i]/maxFitness);
-  // }
   CONTEXT_GRAPH.strokeStyle = `rgb(255, 255, 255)`;
   CONTEXT_GRAPH.stroke();
 }

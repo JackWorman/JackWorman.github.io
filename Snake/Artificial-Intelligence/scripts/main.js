@@ -53,6 +53,9 @@ let setUserInactiveTimeout;
  *
  * Note: The time asleep will likely be longer then the specified duration because the function will be placed at the
  *       end of the execution queue once the timeout ends.
+ *
+ * @param  {Number}  milliseconds
+ * @return {Promise}
  */
 function sleep(milliseconds) {
   return new Promise((resolve) => setTimeout(resolve, milliseconds));
@@ -71,7 +74,7 @@ async function evolutionaryAlgorithmLoop() {
         await render(test);
       } while (gameLoop());
       evolutionaryAlgorithm.evaluateFitness(apples);
-      // Clear canvas after showing best snake.
+      // Clears canvases after showing best snake.
       if (showMode === `best` && evolutionaryAlgorithm.specie === 0 && test === 0) {
         CONTEXT_GAME.clearRect(0, 0, canvasSize, canvasSize);
         CONTEXT_NEURAL_NETWORK.clearRect(0, 0, canvasSize, canvasSize);
@@ -80,7 +83,7 @@ async function evolutionaryAlgorithmLoop() {
         `Generation: ${evolutionaryAlgorithm.generation},
         Species: ${evolutionaryAlgorithm.specie + 1}/${POPULATION_SIZE},
         Test: ${test + 1}/${TESTS_PER_AGENT_PER_GENERATION}`;
-      // Pauses the loop every 333ms, so that the browser does not crash.
+      // Pauses the loop ever once in a while, so that the browser does not crash.
       if (performance.now() - previousTime > pauseTime) {
         await sleep(0);
         previousTime = performance.now();
@@ -142,18 +145,26 @@ function gameLoop() {
   return !(snake.checkCollison(GRID_SIZE) || hunger === MAX_HUNGER || checkRepeatedPosition());
 }
 
+/**
+ * Checks if the position the snake is in currently matches any previous positions it has been in since the last apple
+ * it has collected. This is used to kill snakes if they get caught in a loop.
+ *
+ * @return {Boolean} true = repeated position, false = unqiue position
+ */
 function checkRepeatedPosition() {
   const newSnakeCopy = [];
   for (const body of snake.bodySegments) {
     newSnakeCopy.push({x: body.x, y: body.y});
   }
   let snakesMatch;
+  // Iterate over all previous snake positions.
   for (const snakeCopy of snakeCopies) {
     snakesMatch = true;
+    // Check each body part of the current snake against the respective body part of the copy.
     for (let i = 0; i < newSnakeCopy.length; i++) {
       if (newSnakeCopy[i].x !== snakeCopy[i].x || newSnakeCopy[i].y !== snakeCopy[i].y) {
         snakesMatch = false;
-        break;
+        break; // One difference is all that is needed to confirm uniqueness.
       }
     }
     if (snakesMatch) {

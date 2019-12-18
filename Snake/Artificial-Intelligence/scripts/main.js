@@ -44,7 +44,7 @@ let bestFitnesses = [];
 let showMode = `off`;
 let snakeCopies = [];
 
-let pauseTime = 100;
+let pauseTime = 5000; //47.68489819274236
 let setUserInactiveTimeout;
 
 /**

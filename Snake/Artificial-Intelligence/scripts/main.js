@@ -41,7 +41,7 @@ let started = false;
 let hunger;
 let apples;
 let bestFitnesses = [];
-let showMode = `all`;
+let showMode = `off`;
 let snakeCopies = [];
 
 let pauseTime = 100;
@@ -129,7 +129,12 @@ function resetGame() {
   apples = 0;
 }
 
+let count = 0;
+let testStartTime = performance.now();
+
 function gameLoop() {
+  if (count++ === 0) testStartTime = performance.now();
+  if (count === 1000000) alert(count / (performance.now() - testStartTime));
   updateInputLayer(evolutionaryAlgorithm, snake, pellet);
   evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].calculateOutputs();
   snake.direction = getDirectionFromOutputLayer(evolutionaryAlgorithm, snake);
@@ -212,9 +217,9 @@ SELECT_VIEW_SETTINGS.addEventListener(`change`, async () => {
  * without the user moving the mouse.
  */
 window.addEventListener(`mousemove`, () => {
-  pauseTime = 100;
-  clearTimeout(setUserInactiveTimeout);
-  setUserInactiveTimeout = setTimeout(() => { pauseTime = 5000; }, 60000);
+  // pauseTime = 100;
+  // clearTimeout(setUserInactiveTimeout);
+  // setUserInactiveTimeout = setTimeout(() => { pauseTime = 5000; }, 60000);
 });
 
 window.addEventListener(`load`, evolutionaryAlgorithmLoop);

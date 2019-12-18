@@ -76,7 +76,10 @@ async function evolutionaryAlgorithmLoop() {
         CONTEXT_GAME.clearRect(0, 0, canvasSize, canvasSize);
         CONTEXT_NEURAL_NETWORK.clearRect(0, 0, canvasSize, canvasSize);
       }
-      SPAN_GEN_SPECIE.textContent = `Generation: ${evolutionaryAlgorithm.generation}, Species: ${evolutionaryAlgorithm.specie + 1}/${POPULATION_SIZE}, Test: ${test + 1}/${TESTS_PER_AGENT_PER_GENERATION}`;
+      SPAN_GEN_SPECIE.textContent =
+        `Generation: ${evolutionaryAlgorithm.generation},
+        Species: ${evolutionaryAlgorithm.specie + 1}/${POPULATION_SIZE},
+        Test: ${test + 1}/${TESTS_PER_AGENT_PER_GENERATION}`;
       // Pauses the loop every 333ms, so that the browser does not crash.
       if (performance.now() - previousTime > pauseTime) {
         await sleep(0);
@@ -104,7 +107,10 @@ function resetEA() {
       evolutionaryAlgorithm.specie = 0;
       evolutionaryAlgorithm.generation++;
     }
-    SPAN_GEN_SPECIE.textContent = `Generation: ${evolutionaryAlgorithm.generation}, Species: ${evolutionaryAlgorithm.specie + 1}/${POPULATION_SIZE}, Test: 1/${TESTS_PER_AGENT_PER_GENERATION}`;
+    SPAN_GEN_SPECIE.textContent =
+      `Generation: ${evolutionaryAlgorithm.generation},
+      Species: ${evolutionaryAlgorithm.specie + 1}/${POPULATION_SIZE},
+      Test: 1/${TESTS_PER_AGENT_PER_GENERATION}`;
   } else {
     started = true;
     evolutionaryAlgorithm.initialize();

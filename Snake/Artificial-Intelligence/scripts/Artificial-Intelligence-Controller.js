@@ -180,4 +180,5 @@ export function renderNeuralNetwork(evolutionaryAlgorithm, snake) {
     CONTEXT_NEURAL_NETWORK.textBaseline = `middle`;
     CONTEXT_NEURAL_NETWORK.fillText(OUTPUT_NODE_LABELS[i], 16 + canvasSize*((neuralNetwork.layers.length)/(neuralNetwork.layers.length + 1)), canvasSize/(4 + 1)*(i + 1));
   }
+  alert();
 }

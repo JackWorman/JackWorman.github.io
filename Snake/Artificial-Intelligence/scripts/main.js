@@ -243,20 +243,9 @@ CANVAS_GRAPH.addEventListener(`mousemove`, (event) => {
       CONTEXT_GRAPH.strokeStyle = `rgb(255, 0, 0)`;
       CONTEXT_GRAPH.stroke();
 
-      let xOffset;
-      if (x < canvasSize/2) {
-        CONTEXT_GRAPH.textAlign = `left`;
-        xOffset = 5;
-      } else {
-        CONTEXT_GRAPH.textAlign = `right`;
-        xOffset = -5;
-      }
-      let yOffset;
-      if (y < canvasSize/2) {
-        yOffset = 12;
-      } else {
-        yOffset = -12;
-      }
+      let xOffset = (x < canvasSize/2) ? 5 : -5;
+      CONTEXT_GRAPH.textAlign = (x < canvasSize/2) ? `left` : `right`;
+      let yOffset = (y < canvasSize/2) ? 12 : -12;
       CONTEXT_GRAPH.fillStyle = `rgb(255, 0, 0)`;
       CONTEXT_GRAPH.fillText(`(${i}, ${bestFitnesses[i]})`, x + xOffset, y + yOffset);
       break;

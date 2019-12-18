@@ -161,9 +161,9 @@ function checkRepeatedPosition() {
 async function render(test) {
   if (showMode === `all` || (showMode === `best` && evolutionaryAlgorithm.specie === 0 && test === 0)) {
     SPAN_GEN_SPECIE.textContent =
-      `Generation: ${evolutionaryAlgorithm.generation}, ` +
-      `Species: ${evolutionaryAlgorithm.specie + 1}/${POPULATION_SIZE}, ` +
-      `Test: ${test + 1}/${TESTS_PER_AGENT_PER_GENERATION}`;
+      `Generation: ${evolutionaryAlgorithm.generation},
+      Species: ${evolutionaryAlgorithm.specie + 1}/${POPULATION_SIZE},
+      Test: ${test + 1}/${TESTS_PER_AGENT_PER_GENERATION}`;
     window.requestAnimationFrame(() => {
       renderGame();
       renderNeuralNetwork(evolutionaryAlgorithm, snake);

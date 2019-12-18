@@ -44,7 +44,7 @@ let bestFitnesses = [];
 let showMode = `off`;
 let snakeCopies = [];
 
-let pauseTime = 100; //47.68489819274236
+let pauseTime = 50; //47.68489819274236
 let setUserInactiveTimeout;
 
 /**
@@ -210,16 +210,6 @@ SELECT_VIEW_SETTINGS.addEventListener(`change`, async () => {
   await sleep(0); // Pauses to ensure the canvases do not get overwritten after being cleared.
   CONTEXT_GAME.clearRect(0, 0, canvasSize, canvasSize);
   CONTEXT_NEURAL_NETWORK.clearRect(0, 0, canvasSize, canvasSize);
-});
-
-/**
- * Sets the pause time to 100ms. Also, sets a timeout that will increase the pause time to 5s after a minute has passed
- * without the user moving the mouse.
- */
-window.addEventListener(`mousemove`, () => {
-  // pauseTime = 100;
-  // clearTimeout(setUserInactiveTimeout);
-  // setUserInactiveTimeout = setTimeout(() => { pauseTime = 5000; }, 60000);
 });
 
 window.addEventListener(`load`, evolutionaryAlgorithmLoop);

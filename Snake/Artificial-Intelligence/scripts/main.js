@@ -101,6 +101,7 @@ function resetEA() {
     if (evolutionaryAlgorithm.specie === POPULATION_SIZE) {
       evolutionaryAlgorithm.sort();
       bestFitnesses.push(evolutionaryAlgorithm.neuralNetworks[0].fitness);
+      renderGraph();
       evolutionaryAlgorithm.selectParents();
       evolutionaryAlgorithm.crossover();
       evolutionaryAlgorithm.mutate();
@@ -115,9 +116,9 @@ function resetEA() {
       Test: 1/${TESTS_PER_AGENT_PER_GENERATION}`;
   } else {
     started = true;
+    renderGraph();
     evolutionaryAlgorithm.initialize();
   }
-  renderGraph();
   apples = 0;
 }
 

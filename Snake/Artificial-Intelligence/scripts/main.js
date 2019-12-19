@@ -258,6 +258,7 @@ CANVAS_GRAPH.addEventListener(`mousemove`, (event) => {
       CONTEXT_GRAPH.textAlign = (x < canvasSize/2) ? `left` : `right`;
       let yOffset = (y < canvasSize/2) ? 12 : -12;
       CONTEXT_GRAPH.fillStyle = `rgb(255, 0, 0)`;
+      CONTEXT_GRAPH.font = `bold 14px Arial`;
       CONTEXT_GRAPH.fillText(`(${i}, ${bestFitnesses[i]})`, x + xOffset, y + yOffset);
       break;
     }
@@ -285,7 +286,7 @@ HTMLCanvasElement.prototype.relMouseCoords = relMouseCoords;
 function renderGraph() {
   const WHITE = `rgb(255, 255, 255)`;
   CONTEXT_GRAPH.clearRect(0, 0, canvasSize, canvasSize);
-  CONTEXT_GRAPH.font = `bold 14px Arial`;
+  CONTEXT_GRAPH.font = `14px Arial`;
   CONTEXT_GRAPH.strokeStyle = WHITE;
   CONTEXT_GRAPH.fillStyle = WHITE;
   CONTEXT_GRAPH.textAlign = `left`;

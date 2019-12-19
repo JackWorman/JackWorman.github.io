@@ -91,7 +91,9 @@ async function evolutionaryAlgorithmLoop() {
 }
 
 /**
- * Ran when a generation ends.
+ * Gets the evolutionary algorithm set up for the next generation.
+ *
+ * TODO: change name to setUpNextGeneration()
  */
 function resetEA() {
   if (started) {
@@ -99,7 +101,6 @@ function resetEA() {
     if (evolutionaryAlgorithm.specie === POPULATION_SIZE) {
       evolutionaryAlgorithm.sort();
       bestFitnesses.push(evolutionaryAlgorithm.neuralNetworks[0].fitness);
-      renderGraph();
       evolutionaryAlgorithm.selectParents();
       evolutionaryAlgorithm.crossover();
       evolutionaryAlgorithm.mutate();
@@ -113,13 +114,16 @@ function resetEA() {
       Species: ${evolutionaryAlgorithm.specie + 1}/${POPULATION_SIZE},
       Test: 1/${TESTS_PER_AGENT_PER_GENERATION}`;
   } else {
-    renderGraph();
     started = true;
     evolutionaryAlgorithm.initialize();
   }
+  renderGraph();
   apples = 0;
 }
 
+/**
+ * Gets set up for the next game to start.
+ */
 function resetGame() {
   snake.reset(GRID_SIZE / 2, GRID_SIZE / 2);
   pellet.placePellet(GRID_SIZE, snake.bodySegments);
@@ -128,9 +132,11 @@ function resetGame() {
   apples = 0;
 }
 
-let count = 0;
-let testStartTime = performance.now();
-
+/**
+ * Processes one move in the game.
+ *
+ * @return {Boolean} true = snake is alive, false = snake is dead
+ */
 function gameLoop() {
   updateInputLayer(evolutionaryAlgorithm, snake, pellet);
   evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].calculateOutputs();
@@ -177,6 +183,11 @@ function checkRepeatedPosition() {
   return false;
 }
 
+/**
+ * Renders the current frame of the game and neural network onto their respective canvases.
+ *
+ * @param  {Number} test The test number of the specie being tested currently.
+ */
 async function render(test) {
   if (showMode === `all` || (showMode === `best` && evolutionaryAlgorithm.specie === 0 && test === 0)) {
     SPAN_GEN_SPECIE.textContent =
@@ -191,6 +202,9 @@ async function render(test) {
   }
 }
 
+/**
+ * Renders the current frame of the game.
+ */
 function renderGame() {
   CONTEXT_GAME.clearRect(0, 0, canvasSize, canvasSize);
   const fillSquare = (x, y, color) => {
@@ -210,6 +224,11 @@ SELECT_VIEW_SETTINGS.addEventListener(`change`, async () => {
 });
 
 window.addEventListener(`load`, evolutionaryAlgorithmLoop);
+
+
+////////////////////
+//////////////////// Move to own module
+////////////////////
 
 CANVAS_GRAPH.addEventListener(`mouseout`, (event) => {
   renderGraph();
@@ -266,7 +285,7 @@ HTMLCanvasElement.prototype.relMouseCoords = relMouseCoords;
 function renderGraph() {
   const WHITE = `rgb(255, 255, 255)`;
   CONTEXT_GRAPH.clearRect(0, 0, canvasSize, canvasSize);
-  CONTEXT_GRAPH.font = `14px Arial`;
+  CONTEXT_GRAPH.font = `bold 14px Arial`;
   CONTEXT_GRAPH.strokeStyle = WHITE;
   CONTEXT_GRAPH.fillStyle = WHITE;
   CONTEXT_GRAPH.textAlign = `left`;

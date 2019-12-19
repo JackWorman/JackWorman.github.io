@@ -91,6 +91,8 @@ export function getDirectionFromOutputLayer(evolutionaryAlgorithm, snake) {
   }
 }
 
+// TODO: make renderNeuralNetwork its own module
+
 export function renderNeuralNetwork(evolutionaryAlgorithm) {
   CONTEXT_NEURAL_NETWORK.clearRect(0, 0, canvasSize, canvasSize);
   const neuralNetwork = evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie];

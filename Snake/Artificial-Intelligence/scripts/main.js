@@ -113,6 +113,7 @@ function resetEA() {
       Species: ${evolutionaryAlgorithm.specie + 1}/${POPULATION_SIZE},
       Test: 1/${TESTS_PER_AGENT_PER_GENERATION}`;
   } else {
+    renderGraph();
     started = true;
     evolutionaryAlgorithm.initialize();
   }
@@ -270,7 +271,11 @@ function renderGraph() {
   CONTEXT_GRAPH.fillStyle = WHITE;
   CONTEXT_GRAPH.textAlign = `left`;
   CONTEXT_GRAPH.textBaseline = `middle`;
-  CONTEXT_GRAPH.fillText(`Best Fitnesses vs. Generation`, 10, 16);
+  if (bestFitnesses.length < 2) {
+    CONTEXT_GRAPH.fillText(`Best Fitnesses vs. Generation (Note: Needs at least two data points.)`, 10, 16);
+  } else {
+    CONTEXT_GRAPH.fillText(`Best Fitnesses vs. Generation`, 10, 16);
+  }
   if (bestFitnesses.length === 0) return;
   const maxFitness = Math.max(...bestFitnesses);
   CONTEXT_GRAPH.fillText(`Overall Best Fitness: ${maxFitness.toLocaleString()}`, 10, 40);

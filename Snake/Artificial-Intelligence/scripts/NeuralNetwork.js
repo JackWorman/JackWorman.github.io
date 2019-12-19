@@ -5,8 +5,8 @@ import {gaussianRandom} from "./GaussianRandom.js";
 
 const nextGaussianRandom = gaussianRandom(0, 1);
 
-const WEIGHT_MIN = -2;
-const WEIGHT_MAX = 2;
+const WEIGHT_MIN = -1000;
+const WEIGHT_MAX = 1000;
 
 export class NeuralNetwork {
   constructor(layerSizes) {

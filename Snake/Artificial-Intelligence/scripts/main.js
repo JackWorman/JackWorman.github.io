@@ -19,7 +19,7 @@ const MILLISECONDS_PER_SECOND = 1000;
 // Game Settings
 const FRAMES_PER_SECOND = 15;
 export const GRID_SIZE = 30;
-const PAUSE_TIME = 50;
+const PAUSE_INTERVAL = 50;
 // EA Settings
 const POPULATION_SIZE = 280;
 const LAYER_SIZES = [28, 20, 12, 4];
@@ -65,7 +65,7 @@ function sleep(milliseconds) {
 async function evolutionaryAlgorithmLoop() {
   let previousTime = performance.now();
   while (true) {
-    resetEA();
+    setUpNextGeneration();
     for (let test = 0; test < TESTS_PER_AGENT_PER_GENERATION; test++) {
       resetGame(test);
       do {
@@ -82,7 +82,7 @@ async function evolutionaryAlgorithmLoop() {
         Species: ${evolutionaryAlgorithm.specie + 1}/${POPULATION_SIZE},
         Test: ${test + 1}/${TESTS_PER_AGENT_PER_GENERATION}`;
       // Pauses the loop ever once in a while, so that the browser does not crash.
-      if (performance.now() - previousTime > PAUSE_TIME) {
+      if (performance.now() - previousTime > PAUSE_INTERVAL) {
         await sleep(0);
         previousTime = performance.now();
       }
@@ -93,9 +93,9 @@ async function evolutionaryAlgorithmLoop() {
 /**
  * Gets the evolutionary algorithm set up for the next generation.
  *
- * TODO: change name to setUpNextGeneration()
+ * TODO: move to EvolutionaryAlgorithm.js ???
  */
-function resetEA() {
+function setUpNextGeneration() {
   if (started) {
     evolutionaryAlgorithm.specie++;
     if (evolutionaryAlgorithm.specie === POPULATION_SIZE) {

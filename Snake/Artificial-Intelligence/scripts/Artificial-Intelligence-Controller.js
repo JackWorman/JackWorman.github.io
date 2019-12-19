@@ -19,10 +19,10 @@ export function updateInputLayer(evolutionaryAlgorithm, snake, pellet) {
     }
   }
   // Current direction nodes.
-  inputLayer[24][0] = (snake.direction === `left`  ? 1 : 0);
-  inputLayer[25][0] = (snake.direction === `up`    ? 1 : 0);
-  inputLayer[26][0] = (snake.direction === `right` ? 1 : 0);
-  inputLayer[27][0] = (snake.direction === `down`  ? 1 : 0);
+  inputLayer[24][0] = (snake.direction === `left`)  ? 1 : 0;
+  inputLayer[25][0] = (snake.direction === `up`)    ? 1 : 0;
+  inputLayer[26][0] = (snake.direction === `right`) ? 1 : 0;
+  inputLayer[27][0] = (snake.direction === `down`)  ? 1 : 0;
 }
 
 function detectWall(horizontal, vertical, snake) {
@@ -91,7 +91,7 @@ export function getDirectionFromOutputLayer(evolutionaryAlgorithm, snake) {
   }
 }
 
-export function renderNeuralNetwork(evolutionaryAlgorithm, snake) {
+export function renderNeuralNetwork(evolutionaryAlgorithm) {
   CONTEXT_NEURAL_NETWORK.clearRect(0, 0, canvasSize, canvasSize);
   const neuralNetwork = evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie];
   renderWeights(neuralNetwork);
@@ -127,7 +127,7 @@ function renderNodes(neuralNetwork, evolutionaryAlgorithm) {
     for (let j = 0; j < layerSize; j++) {
       const intensity = neuralNetwork.layers[i].elements[j][0] * 255;
       CONTEXT_NEURAL_NETWORK.beginPath();
-      CONTEXT_NEURAL_NETWORK.arc(canvasSize*((i+1)/(neuralNetwork.layers.length + 1)), canvasSize/(layerSize + 1)*(j + 1), 8, 0, 2*Math.PI);
+      CONTEXT_NEURAL_NETWORK.arc(canvasSize*((i + 1)/(neuralNetwork.layers.length + 1)), canvasSize/(layerSize + 1)*(j + 1), 8, 0, 2*Math.PI);
       CONTEXT_NEURAL_NETWORK.closePath();
       CONTEXT_NEURAL_NETWORK.strokeStyle = `rgb(255, 255, 255)`;
       CONTEXT_NEURAL_NETWORK.lineWidth = 1;
@@ -152,41 +152,39 @@ function renderNodes(neuralNetwork, evolutionaryAlgorithm) {
 }
 
 function renderLabels(neuralNetwork) {
-  const DIRECTIONS = [
-    `Up-Left`,
-    `Left`,
-    `Down-Left`,
-    `Up`,
-    `Down`,
-    `Up-Right`,
-    `Right`,
-    `Down-Right`
-  ];
-  const DETECTORS = [
-    `Wall`,
-    `Body`,
-    `Fruit`
-  ];
+  const WHITE = `rgb(255, 255, 255)`;
+  CONTEXT_NEURAL_NETWORK.font = `12px Arial`;
+  CONTEXT_NEURAL_NETWORK.strokeStyle = WHITE;
+  CONTEXT_NEURAL_NETWORK.fillStyle = WHITE;
+  CONTEXT_NEURAL_NETWORK.textBaseline = `middle`;
+  // Render detector input labels.
+  const DIRECTIONS = [`Up-Left`, `Left`, `Down-Left`, `Up`, `Down`, `Up-Right`, `Right`, `Down-Right`];
+  const DETECTORS = [`Wall`, `Body`, `Fruit`];
   for (let i = 0; i < DIRECTIONS.length; i++) {
     for (let j = 0; j < DETECTORS.length; j++) {
-      CONTEXT_NEURAL_NETWORK.font = `12px Arial`;
-      CONTEXT_NEURAL_NETWORK.strokeStyle = `rgb(255, 255, 255)`;
-      CONTEXT_NEURAL_NETWORK.fillStyle = `rgb(255, 255, 255)`;
       CONTEXT_NEURAL_NETWORK.textAlign = `right`;
-      CONTEXT_NEURAL_NETWORK.textBaseline = `middle`;
-      CONTEXT_NEURAL_NETWORK.fillText(`${DIRECTIONS[i]} ${DETECTORS[j]}`, -16 + canvasSize*((1)/(neuralNetwork.layers.length + 1)), canvasSize/(28 + 1)*((3*i + j) + 1));
+      CONTEXT_NEURAL_NETWORK.fillText(
+        `${DIRECTIONS[i]} ${DETECTORS[j]}`,
+        -16 + canvasSize*((1)/(neuralNetwork.layers.length + 1)),
+        canvasSize/(28 + 1)*((3*i + j) + 1)
+      );
     }
   }
+  // Render current direction labels.
   const OUTPUT_NODE_LABELS = [`Left`, `Up`, `Right`, `Down`];
   for (let i = 24; i < 28; i++) {
-    CONTEXT_NEURAL_NETWORK.fillText(OUTPUT_NODE_LABELS[i%4], -16 + canvasSize*((1)/(neuralNetwork.layers.length + 1)), canvasSize/(28 + 1)*((i) + 1));
+    CONTEXT_NEURAL_NETWORK.fillText(
+      OUTPUT_NODE_LABELS[i%4],
+      -16 + canvasSize*((1)/(neuralNetwork.layers.length + 1)),
+      canvasSize/(28 + 1)*((i) + 1)
+    );
   }
   for (let i = 0; i < 4; i++) {
-    CONTEXT_NEURAL_NETWORK.font = `12px Arial`;
-    CONTEXT_NEURAL_NETWORK.strokeStyle = `rgb(255, 255, 255)`;
-    CONTEXT_NEURAL_NETWORK.fillStyle = `rgb(255, 255, 255)`;
-    CONTEXT_NEURAL_NETWORK.textAlign = `start`;
-    CONTEXT_NEURAL_NETWORK.textBaseline = `middle`;
-    CONTEXT_NEURAL_NETWORK.fillText(OUTPUT_NODE_LABELS[i], 16 + canvasSize*((neuralNetwork.layers.length)/(neuralNetwork.layers.length + 1)), canvasSize/(4 + 1)*(i + 1));
+    CONTEXT_NEURAL_NETWORK.textAlign = `left`;
+    CONTEXT_NEURAL_NETWORK.fillText(
+      OUTPUT_NODE_LABELS[i],
+      16 + canvasSize*((neuralNetwork.layers.length)/(neuralNetwork.layers.length + 1)),
+      canvasSize/(4 + 1)*(i + 1)
+    );
   }
 }

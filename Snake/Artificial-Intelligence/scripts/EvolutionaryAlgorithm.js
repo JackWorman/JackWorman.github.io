@@ -123,7 +123,7 @@ export class EvolutionaryAlgorithm {
           }
         }
       }
-      neuralNetwork1.diversity = Math.sqrt(diversity);
+      neuralNetwork1.diversity = Math.sqrt(neuralNetwork1.diversity);
       console.log(neuralNetwork1.diversity);
     }
   }

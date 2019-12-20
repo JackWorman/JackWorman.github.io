@@ -109,22 +109,27 @@ export class EvolutionaryAlgorithm {
     }
   }
 
+  /**
+   * diversity = average of distance from all other NN's
+   */
   calculateDiversity() {
     const diversities = [];
     for (const neuralNetwork1 of this.neuralNetworks) {
-      neuralNetwork1.diversity = 0;
-      for (let i = 0; i < neuralNetwork1.weights.length; i++) {
-        for (const neuralNetwork2 of this.neuralNetworks) {
+      const distances = [];
+      for (const neuralNetwork2 of this.neuralNetworks) {
+        let distance = 0;
+        for (let i = 0; i < neuralNetwork1.weights.length; i++) { // Layers
           // Loop over the matrixes.
           for (let row = 0; row < neuralNetwork1.weights[i].numRows; row++) {
             for (let col = 0; col < neuralNetwork1.weights[i].numCols; col++) {
-              neuralNetwork1.diversity += Math.pow(neuralNetwork2.weights[i].elements[row][col] - neuralNetwork1.weights[i].elements[row][col], 2);
+              distance += Math.pow(neuralNetwork2.weights[i].elements[row][col] - neuralNetwork1.weights[i].elements[row][col], 2);
             }
-            neuralNetwork1.diversity += Math.pow(neuralNetwork2.biases[i].elements[row][0] - neuralNetwork1.biases[i].elements[row][0], 2);
+            distance += Math.pow(neuralNetwork2.biases[i].elements[row][0] - neuralNetwork1.biases[i].elements[row][0], 2);
           }
         }
+        distances.push(Math.sqrt(distance));
       }
-      neuralNetwork1.diversity = Math.sqrt(neuralNetwork1.diversity);
+      neuralNetwork1.diversity = distances.reduce((a,b) => a + b, 0) / distances;
       diversities.push(neuralNetwork1.diversity);
     }
     diversities.sort((a, b) => { return b.fitness - a.fitness; });

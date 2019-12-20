@@ -129,7 +129,7 @@ export class EvolutionaryAlgorithm {
         }
         distances.push(Math.sqrt(distance));
       }
-      neuralNetwork1.diversity = distances.reduce((a,b) => a + b, 0) / distances;
+      neuralNetwork1.diversity = distances.reduce((a,b) => a + b, 0) / distances.length;
       diversities.push(neuralNetwork1.diversity);
     }
     diversities.sort((a, b) => { return b.fitness - a.fitness; });

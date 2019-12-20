@@ -103,6 +103,7 @@ function setUpNextGeneration() {
       evolutionaryAlgorithm.sort();
       bestFitnesses.push(evolutionaryAlgorithm.neuralNetworks[0].fitness);
       renderGraph();
+      evolutionaryAlgorithm.calculateDiversity();
       evolutionaryAlgorithm.selectParents();
       evolutionaryAlgorithm.crossover();
       evolutionaryAlgorithm.mutate();

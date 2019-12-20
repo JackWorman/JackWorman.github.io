@@ -97,12 +97,34 @@ export class EvolutionaryAlgorithm {
    * Remove the poor performing neural networks. Keeps the best 'elitismRate'% to survive to the next generation.
    */
   elitism() {
-    this.neuralNetworks.splice(Math.round(this.elitismRate * this.populationSize), this.populationSize - Math.round(this.elitismRate * this.populationSize));
+    this.neuralNetworks.splice(
+      Math.round(this.elitismRate * this.populationSize),
+      this.populationSize - Math.round(this.elitismRate * this.populationSize)
+    );
   }
 
   clearFitness() {
     for (const neuralNetwork of this.neuralNetworks) {
       neuralNetwork.fitness = 0;
     }
+  }
+
+  calculateDiversity() {
+    for (const neuralNetwork1 of this.neuralNetworks) {
+      neuralNetwork1.diversity = 0;
+      for (let i = 0; i < neuralNetwork1.weights.length; i++) {
+        // Loop over the matrixes.
+        for (let row = 0; row < neuralNetwork1.weights[i].numRows; row++) {
+          for (let col = 0; col < neuralNetwork1.weights[i].numCols; col++) {
+            for (const neuralNetwork2 of this.neuralNetworks) {
+              neuralNetwork1.diversity += Math.pow(neuralNetwork2.weights[i].elements[row][col] - neuralNetwork1.weights[i].elements[row][col], 2);
+            }
+          }
+          neuralNetwork1.diversity += Math.pow(neuralNetwork2.biases[i].elements[row][0] - neuralNetwork1.biases[i].elements[row][0], 2);
+        }
+      }
+    }
+    neuralNetwork1.diversity = Math.sqrt(diversity);
+    console.log(neuralNetwork1.diversity);
   }
 }

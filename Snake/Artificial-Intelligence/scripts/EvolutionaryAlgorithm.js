@@ -113,18 +113,18 @@ export class EvolutionaryAlgorithm {
     for (const neuralNetwork1 of this.neuralNetworks) {
       neuralNetwork1.diversity = 0;
       for (let i = 0; i < neuralNetwork1.weights.length; i++) {
-        // Loop over the matrixes.
-        for (let row = 0; row < neuralNetwork1.weights[i].numRows; row++) {
-          for (let col = 0; col < neuralNetwork1.weights[i].numCols; col++) {
-            for (const neuralNetwork2 of this.neuralNetworks) {
+        for (const neuralNetwork2 of this.neuralNetworks) {
+          // Loop over the matrixes.
+          for (let row = 0; row < neuralNetwork1.weights[i].numRows; row++) {
+            for (let col = 0; col < neuralNetwork1.weights[i].numCols; col++) {
               neuralNetwork1.diversity += Math.pow(neuralNetwork2.weights[i].elements[row][col] - neuralNetwork1.weights[i].elements[row][col], 2);
             }
+            neuralNetwork1.diversity += Math.pow(neuralNetwork2.biases[i].elements[row][0] - neuralNetwork1.biases[i].elements[row][0], 2);
           }
-          neuralNetwork1.diversity += Math.pow(neuralNetwork2.biases[i].elements[row][0] - neuralNetwork1.biases[i].elements[row][0], 2);
         }
       }
+      neuralNetwork1.diversity = Math.sqrt(diversity);
+      console.log(neuralNetwork1.diversity);
     }
-    neuralNetwork1.diversity = Math.sqrt(diversity);
-    console.log(neuralNetwork1.diversity);
   }
 }

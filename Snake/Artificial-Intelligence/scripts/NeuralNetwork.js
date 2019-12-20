@@ -34,7 +34,7 @@ export class NeuralNetwork {
     }
   }
 
-  calculateOutputs() {
+  propagateForward() {
     for (let i = 1; i < this.layers.length; i++) {
       if (i === this.layers.length - 1) {
         this.layers[i] = this.sigmoid(Matrix.add(Matrix.multiply(this.weights[i - 1], this.layers[i - 1]), this.biases[i - 1]));

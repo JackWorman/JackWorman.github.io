@@ -110,6 +110,7 @@ export class EvolutionaryAlgorithm {
   }
 
   calculateDiversity() {
+    const diversities = [];
     for (const neuralNetwork1 of this.neuralNetworks) {
       neuralNetwork1.diversity = 0;
       for (let i = 0; i < neuralNetwork1.weights.length; i++) {
@@ -124,7 +125,8 @@ export class EvolutionaryAlgorithm {
         }
       }
       neuralNetwork1.diversity = Math.sqrt(neuralNetwork1.diversity);
-      console.log(neuralNetwork1.diversity);
+      diversities.push(neuralNetwork1.diversity);
     }
+    console.log(`Average Diversity: ${diversities.reduce((a,b) => a + b, 0) / diversities.length}`);
   }
 }

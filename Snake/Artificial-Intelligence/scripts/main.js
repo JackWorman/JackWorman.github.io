@@ -42,7 +42,7 @@ let showTraining = true;
 let started = false;
 let hunger;
 let apples;
-let bestFitnesses = [];
+export let bestFitnesses = [];
 let showMode = `all`;
 let snakeCopies = [];
 

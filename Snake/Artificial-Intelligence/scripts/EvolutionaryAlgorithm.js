@@ -127,6 +127,9 @@ export class EvolutionaryAlgorithm {
       neuralNetwork1.diversity = Math.sqrt(neuralNetwork1.diversity);
       diversities.push(neuralNetwork1.diversity);
     }
+    diversities.sort((a, b) => { return b.fitness - a.fitness; });
+    console.log(`==========`);
+    console.log(diversities);
     console.log(`Average Diversity: ${diversities.reduce((a,b) => a + b, 0) / diversities.length}`);
   }
 }

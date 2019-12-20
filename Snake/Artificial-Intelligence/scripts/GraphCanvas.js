@@ -1,5 +1,7 @@
 "use strict";
 
+import {canvasSize} from "./main.js";
+
 const CANVAS_GRAPH = document.getElementById(`canvas-graph`);
 const CONTEXT_GRAPH = CANVAS_GRAPH.getContext(`2d`);
 

@@ -32,11 +32,14 @@ export class EvolutionaryAlgorithm {
     this.neuralNetworks.sort((a, b) => { return b.fitness - a.fitness; });
   }
 
+  /**
+   * Chooses parents via roulette wheel of fitness times diversity.
+   */
   selectParents() {
     // Calculate the sum of every neural networks fitness.
     let totalFitness = 0;
     for (const neuralNetwork of this.neuralNetworks) {
-      totalFitness += neuralNetwork.fitness;
+      totalFitness += neuralNetwork.fitness * neuralNetwork.diversity;
     }
     // Use the total fitness to select the parents randomly and porportional to their fitness.
     this.parent1s = [];
@@ -45,7 +48,7 @@ export class EvolutionaryAlgorithm {
       let fitnessCutoff = Math.random() * totalFitness;
       let accumulatedFitness = 0;
       for (const neuralNetwork of this.neuralNetworks) {
-        accumulatedFitness += neuralNetwork.fitness;
+        accumulatedFitness += neuralNetwork.fitness * neuralNetwork.diversity;
         if (fitnessCutoff < accumulatedFitness) {
           this.parent1s.push(neuralNetwork);
           break;
@@ -54,7 +57,7 @@ export class EvolutionaryAlgorithm {
       fitnessCutoff = Math.random() * totalFitness;
       accumulatedFitness = 0;
       for (const neuralNetwork of this.neuralNetworks) {
-        accumulatedFitness += neuralNetwork.fitness;
+        accumulatedFitness += neuralNetwork.fitness * neuralNetwork.diversity;
         if (fitnessCutoff < accumulatedFitness) {
           this.parent2s.push(neuralNetwork);
           break;

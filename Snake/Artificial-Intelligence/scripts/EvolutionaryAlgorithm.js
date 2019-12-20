@@ -135,6 +135,6 @@ export class EvolutionaryAlgorithm {
     diversities.sort((a, b) => { return b.fitness - a.fitness; });
     console.log(`==========`);
     console.log(diversities);
-    console.log(`Average Diversity: ${diversities.reduce((a,b) => a + b, 0) / diversities.length}`);
+    console.log(`${Math.min(...diversities)} - ${diversities.reduce((a,b) => a + b, 0) / diversities.length} - ${Math.max(...diversities)}`);
   }
 }

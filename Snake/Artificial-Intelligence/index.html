@@ -10,7 +10,7 @@
     <div id="div-header-container">
       <span id="span-title" class="rainbow">Evolutionary Algorithm</span>
       <br />
-      <span id="span-gen-specie" class="rainbow">Generation: 0, Species: 1/2000, Test: 1/100</span>
+      <span id="span-gen-specie">Generation: 0, Species: 1/2000, Test: 1/100</span>
     </div>
     <select id="select-view-settings">
       <option selected value="all">Show All Tests</option>
@@ -21,6 +21,17 @@
       <canvas id="canvas-graph"></canvas>
       <canvas id="canvas-neural-network"></canvas>
       <canvas id="canvas-game"></canvas>
+    </div>
+    <div id="div-settings-container">
+      Hidden Layer Sizes <input type="text" name="hidden-layer-sizes" value="20, 12">
+      <br />
+      Population Size: <input type="number" name="population-size" min="1" max="2000" step="20" value="280" />
+      <br />
+      Mutation Rate: <input type="number" name="mutation-rate" min="0.01" max="1" step="0.01" value="0.05" />
+      <br />
+      Elitism Rate: <input type="number" name="elitism-rate" min="0.01" max="1" step="0.01" value="0.01" />
+      <br />
+      Tests per Agent per Generation: <input type="number" name="population-size" min="1" max="1000" step="10" value="50" />
     </div>
   </body>
 </html>

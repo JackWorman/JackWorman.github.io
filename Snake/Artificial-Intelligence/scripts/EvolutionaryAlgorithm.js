@@ -66,6 +66,15 @@ export class EvolutionaryAlgorithm {
     }
   }
 
+  selectParentsViaRank() {
+    let totalFitness = 0;
+    for (let i = 0; i < this.neuralNetworks.length; i++) {
+      totalFitness += i + 1;
+    }
+    this.parent1s = [];
+    this.parent2s = [];
+  }
+
   crossover() {
     for (let i = 0; i < this.populationSize - Math.round(this.elitismRate * this.populationSize); i++) {
       const child = new NeuralNetwork(this.layerSizes);

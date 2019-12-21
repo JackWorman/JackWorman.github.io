@@ -21,6 +21,7 @@ html, body {
   margin: 0;
   background-color: black;
   text-align: center;
+  color: white;
 }
 
 #div-header-container {

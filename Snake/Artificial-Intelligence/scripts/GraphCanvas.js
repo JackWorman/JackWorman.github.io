@@ -52,10 +52,11 @@ export function renderGraph() {
 
 function renderCrosshair(event) {
   if (bestFitnesses.length < 2) return;
+  const RED = `rgb(255, 0, 0)`;
   const maxFitness = Math.max(...bestFitnesses);
   const mousePos = CANVAS_GRAPH.relMouseCoords(event);
 
-  const hoverXOffset = canvasSize*1/(bestFitnesses.length - 1)/2;
+  const hoverXOffset = canvasSize/(bestFitnesses.length - 1)/2;
   for (let i = 0; i < bestFitnesses.length; i++) {
     const x = canvasSize*i/(bestFitnesses.length - 1);
     const y = canvasSize - canvasSize*bestFitnesses[i]/maxFitness;
@@ -67,13 +68,13 @@ function renderCrosshair(event) {
       CONTEXT_GRAPH.lineTo(canvasSize, y);
       CONTEXT_GRAPH.moveTo(x, 0);
       CONTEXT_GRAPH.lineTo(x, canvasSize);
-      CONTEXT_GRAPH.strokeStyle = `rgb(255, 0, 0)`;
+      CONTEXT_GRAPH.strokeStyle = RED;
       CONTEXT_GRAPH.stroke();
       // Draws the coordinate.
       let xOffset = (x < canvasSize/2) ? 5 : -5;
       CONTEXT_GRAPH.textAlign = (x < canvasSize/2) ? `left` : `right`;
       let yOffset = (y < canvasSize/2) ? 12 : -12;
-      CONTEXT_GRAPH.fillStyle = `rgb(255, 0, 0)`;
+      CONTEXT_GRAPH.fillStyle = RED;
       CONTEXT_GRAPH.font = `bold 14px Arial`;
       CONTEXT_GRAPH.fillText(`(${i}, ${bestFitnesses[i]})`, x + xOffset, y + yOffset);
       break;
@@ -81,8 +82,6 @@ function renderCrosshair(event) {
   }
 }
 
-CANVAS_GRAPH.addEventListener(`mousemove`, (event) => {
-  renderCrosshair(event);
-});
+CANVAS_GRAPH.addEventListener(`mousemove`, renderCrosshair(event));
 
 CANVAS_GRAPH.addEventListener(`mouseout`, renderGraph);

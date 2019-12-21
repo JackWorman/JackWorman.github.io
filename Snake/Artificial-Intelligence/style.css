@@ -40,3 +40,12 @@ canvas {
   position: relative;
   border: 1px solid white;
 }
+
+#div-settings-container {
+  text-align: left;
+
+}
+
+input {
+  float: right;
+}

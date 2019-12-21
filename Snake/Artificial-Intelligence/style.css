@@ -46,6 +46,10 @@ canvas {
   width: 600;
 }
 
+#div-settings-container span {
+  display: block;
+}
+
 input {
   float: right;
 }

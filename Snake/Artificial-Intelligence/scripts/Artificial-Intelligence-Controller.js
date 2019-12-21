@@ -126,6 +126,7 @@ function renderWeights(neuralNetwork) {
 function renderNodes(neuralNetwork, evolutionaryAlgorithm) {
   for (let i = 0; i < neuralNetwork.layers.length; i++) {
     const layerSize = neuralNetwork.layers[i].numRows;
+    alert(`layerSize ${layerSize}`);
     for (let j = 0; j < layerSize; j++) {
       const intensity = neuralNetwork.layers[i].elements[j][0] * 255;
       CONTEXT_NEURAL_NETWORK.beginPath();

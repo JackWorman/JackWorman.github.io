@@ -22,16 +22,16 @@ const FRAMES_PER_SECOND = 15;
 export const GRID_SIZE = 30;
 const PAUSE_INTERVAL = 50;
 // EA Settings
-const POPULATION_SIZE = 280;
-const LAYER_SIZES = [28, 20, 12, 4];
-const MUTATION_RATE = 0.02;
-const ELITISM_RATE = 0.01;
-const TESTS_PER_AGENT_PER_GENERATION = 50;
+let POPULATION_SIZE = 280;
+let LAYER_SIZES = [28, 20, 12, 4];
+let MUTATION_RATE = 0.02;
+let ELITISM_RATE = 0.01;
+let TESTS_PER_AGENT_PER_GENERATION = 50;
 const MAX_HUNGER = GRID_SIZE*GRID_SIZE;
 
 const snake = new Snake();
 const pellet = new Pellet();
-const evolutionaryAlgorithm = new EvolutionaryAlgorithm(POPULATION_SIZE, LAYER_SIZES, MUTATION_RATE, ELITISM_RATE);
+let evolutionaryAlgorithm = new EvolutionaryAlgorithm(POPULATION_SIZE, LAYER_SIZES, MUTATION_RATE, ELITISM_RATE);
 
 export let canvasSize = 600;
 CANVAS_GAME.width = CANVAS_GAME.height = canvasSize;
@@ -226,6 +226,15 @@ SELECT_VIEW_SETTINGS.addEventListener(`change`, async () => {
   CONTEXT_NEURAL_NETWORK.clearRect(0, 0, canvasSize, canvasSize);
 });
 
-// window.addEventListener(`load`, evolutionaryAlgorithmLoop);
+document.getElementById(`button-start`).addEventListener(`click`, () => {
+  POPULATION_SIZE = document.getElementsByName('population-size')[0].value;
+  LAYER_SIZES = document.getElementsByName('hidden-layer-sizes')[0].value.replace(/\s+/g, '').split(',');
+  LAYER_SIZES.unshift(28);
+  LAYER_SIZES.push(4);
+  MUTATION_RATE = document.getElementsByName('mutation-rate')[0].value;
+  ELITISM_RATE = document.getElementsByName('elitism-rate')[0].value;
+  TESTS_PER_AGENT_PER_GENERATION = document.getElementsByName('tests')[0].value;
 
-document.getElementById(`button-start`).addEventListener(`click`, evolutionaryAlgorithmLoop);
+  evolutionaryAlgorithm = new EvolutionaryAlgorithm(POPULATION_SIZE, LAYER_SIZES, MUTATION_RATE, ELITISM_RATE);
+  evolutionaryAlgorithmLoop();
+});

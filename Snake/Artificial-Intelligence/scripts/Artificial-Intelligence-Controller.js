@@ -130,7 +130,7 @@ function renderNodes(neuralNetwork, evolutionaryAlgorithm) {
       const intensity = neuralNetwork.layers[i].elements[j][0] * 255;
       CONTEXT_NEURAL_NETWORK.beginPath();
       CONTEXT_NEURAL_NETWORK.arc(canvasSize*((i + 1)/(neuralNetwork.layers.length + 1)), canvasSize/(layerSize + 1)*(j + 1), 8, 0, 2*Math.PI);
-      alert(`${canvasSize*((i + 1)/(neuralNetwork.layers.length + 1))} - ${canvasSize/(layerSize + 1)*(j + 1)}`);
+      alert(`layerSize-${layerSize} canvasSize-${canvasSize} j-${j}`);
       CONTEXT_NEURAL_NETWORK.closePath();
       CONTEXT_NEURAL_NETWORK.strokeStyle = `rgb(255, 255, 255)`;
       CONTEXT_NEURAL_NETWORK.lineWidth = 1;

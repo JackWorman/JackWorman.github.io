@@ -43,7 +43,7 @@ canvas {
 
 #div-settings-container {
   text-align: left;
-
+  width: 600;
 }
 
 input {

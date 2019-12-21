@@ -235,6 +235,7 @@ document.getElementById(`button-start`).addEventListener(`click`, () => {
     LAYER_SIZES[i] = parseInt(LAYER_SIZES[i]);
   }
   alert(LAYER_SIZES);
+  alert([28, 20, 12, 4]);
   // LAYER_SIZES = [28, 20, 12, 4];
   MUTATION_RATE = document.getElementsByName('mutation-rate')[0].value;
   ELITISM_RATE = document.getElementsByName('elitism-rate')[0].value;

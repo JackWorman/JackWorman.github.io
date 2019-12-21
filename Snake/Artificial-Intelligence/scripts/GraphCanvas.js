@@ -23,11 +23,34 @@ function relMouseCoords(event) {
 }
 HTMLCanvasElement.prototype.relMouseCoords = relMouseCoords;
 
-CANVAS_GRAPH.addEventListener(`mouseout`, (event) => {
-  renderGraph();
-});
+export function renderGraph() {
+  const WHITE = `rgb(255, 255, 255)`;
+  CONTEXT_GRAPH.clearRect(0, 0, canvasSize, canvasSize);
+  CONTEXT_GRAPH.font = `14px Arial`;
+  CONTEXT_GRAPH.strokeStyle = WHITE;
+  CONTEXT_GRAPH.fillStyle = WHITE;
+  CONTEXT_GRAPH.textAlign = `left`;
+  CONTEXT_GRAPH.textBaseline = `middle`;
+  if (bestFitnesses.length < 2) {
+    CONTEXT_GRAPH.fillText(`Best Fitnesses vs. Generation (Note: Needs at least two data points.)`, 10, 16);
+  } else {
+    CONTEXT_GRAPH.fillText(`Best Fitnesses vs. Generation`, 10, 16);
+  }
+  if (bestFitnesses.length === 0) return;
+  const maxFitness = Math.max(...bestFitnesses);
+  CONTEXT_GRAPH.fillText(`Overall Best Fitness: ${maxFitness.toLocaleString()}`, 10, 40);
+  if (bestFitnesses.length === 1) return;
 
-CANVAS_GRAPH.addEventListener(`mousemove`, (event) => {
+  CONTEXT_GRAPH.beginPath();
+  CONTEXT_GRAPH.moveTo(0, canvasSize - canvasSize*bestFitnesses[0]/maxFitness);
+  for (let i = 1; i < bestFitnesses.length; i++) {
+    CONTEXT_GRAPH.lineTo(canvasSize*i/(bestFitnesses.length - 1), canvasSize - canvasSize*bestFitnesses[i]/maxFitness);
+  }
+  CONTEXT_GRAPH.strokeStyle = WHITE;
+  CONTEXT_GRAPH.stroke();
+}
+
+function renderCrosshair(event) {
   if (bestFitnesses.length < 2) return;
   const maxFitness = Math.max(...bestFitnesses);
   const mousePos = CANVAS_GRAPH.relMouseCoords(event);
@@ -56,31 +79,10 @@ CANVAS_GRAPH.addEventListener(`mousemove`, (event) => {
       break;
     }
   }
+}
+
+CANVAS_GRAPH.addEventListener(`mousemove`, (event) => {
+  renderCrosshair(event);
 });
 
-export function renderGraph() {
-  const WHITE = `rgb(255, 255, 255)`;
-  CONTEXT_GRAPH.clearRect(0, 0, canvasSize, canvasSize);
-  CONTEXT_GRAPH.font = `14px Arial`;
-  CONTEXT_GRAPH.strokeStyle = WHITE;
-  CONTEXT_GRAPH.fillStyle = WHITE;
-  CONTEXT_GRAPH.textAlign = `left`;
-  CONTEXT_GRAPH.textBaseline = `middle`;
-  if (bestFitnesses.length < 2) {
-    CONTEXT_GRAPH.fillText(`Best Fitnesses vs. Generation (Note: Needs at least two data points.)`, 10, 16);
-  } else {
-    CONTEXT_GRAPH.fillText(`Best Fitnesses vs. Generation`, 10, 16);
-  }
-  if (bestFitnesses.length === 0) return;
-  const maxFitness = Math.max(...bestFitnesses);
-  CONTEXT_GRAPH.fillText(`Overall Best Fitness: ${maxFitness.toLocaleString()}`, 10, 40);
-  if (bestFitnesses.length === 1) return;
-
-  CONTEXT_GRAPH.beginPath();
-  CONTEXT_GRAPH.moveTo(0, canvasSize - canvasSize*bestFitnesses[0]/maxFitness);
-  for (let i = 1; i < bestFitnesses.length; i++) {
-    CONTEXT_GRAPH.lineTo(canvasSize*i/(bestFitnesses.length - 1), canvasSize - canvasSize*bestFitnesses[i]/maxFitness);
-  }
-  CONTEXT_GRAPH.strokeStyle = WHITE;
-  CONTEXT_GRAPH.stroke();
-}
+CANVAS_GRAPH.addEventListener(`mouseout`, renderGraph);

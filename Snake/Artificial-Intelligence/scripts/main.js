@@ -231,13 +231,9 @@ document.getElementById(`button-start`).addEventListener(`click`, () => {
   LAYER_SIZES = document.getElementsByName('hidden-layer-sizes')[0].value.replace(/\s+/g, '').split(',');
   LAYER_SIZES.unshift(28);
   LAYER_SIZES.push(4);
-  alert(LAYER_SIZES);
   for (let i = 0; i < LAYER_SIZES; i++) {
     LAYER_SIZES[i] = parseInt(LAYER_SIZES[i]);
   }
-  alert(LAYER_SIZES);
-  alert([28, 20, 12, 4]);
-  LAYER_SIZES = [28, 20, 12, 4];
   MUTATION_RATE = document.getElementsByName('mutation-rate')[0].value;
   ELITISM_RATE = document.getElementsByName('elitism-rate')[0].value;
   TESTS_PER_AGENT_PER_GENERATION = document.getElementsByName('tests')[0].value;

@@ -226,4 +226,6 @@ SELECT_VIEW_SETTINGS.addEventListener(`change`, async () => {
   CONTEXT_NEURAL_NETWORK.clearRect(0, 0, canvasSize, canvasSize);
 });
 
-window.addEventListener(`load`, evolutionaryAlgorithmLoop);
+// window.addEventListener(`load`, evolutionaryAlgorithmLoop);
+
+document.getElementById(`button-start`).addEventListener(`click`, evolutionaryAlgorithmLoop);

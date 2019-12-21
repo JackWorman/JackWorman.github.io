@@ -82,6 +82,6 @@ function renderCrosshair(event) {
   }
 }
 
-CANVAS_GRAPH.addEventListener(`mousemove`, renderCrosshair(event));
+CANVAS_GRAPH.addEventListener(`mousemove`, (event) => { renderCrosshair(event); });
 
 CANVAS_GRAPH.addEventListener(`mouseout`, renderGraph);

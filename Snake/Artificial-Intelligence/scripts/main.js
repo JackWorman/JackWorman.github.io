@@ -231,6 +231,7 @@ document.getElementById(`button-start`).addEventListener(`click`, () => {
   LAYER_SIZES = document.getElementsByName('hidden-layer-sizes')[0].value.replace(/\s+/g, '').split(',');
   LAYER_SIZES.unshift(28);
   LAYER_SIZES.push(4);
+  alert(LAYER_SIZES);
   for (let i = 0; i < LAYER_SIZES; i++) {
     LAYER_SIZES[i] = parseInt(LAYER_SIZES[i]);
   }

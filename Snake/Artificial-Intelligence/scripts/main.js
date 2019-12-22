@@ -232,7 +232,7 @@ document.getElementById(`button-start`).addEventListener(`click`, () => {
   LAYER_SIZES.unshift(28);
   LAYER_SIZES.push(4);
   for (let i = 0; i < LAYER_SIZES; i++) {
-    LAYER_SIZES[i] = parseFloat(LAYER_SIZES[i]);
+    LAYER_SIZES[i] = new Number(LAYER_SIZES[i]).valueOf();
   }
   MUTATION_RATE = document.getElementsByName('mutation-rate')[0].value;
   ELITISM_RATE = document.getElementsByName('elitism-rate')[0].value;

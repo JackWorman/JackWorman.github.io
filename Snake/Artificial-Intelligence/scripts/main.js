@@ -219,7 +219,7 @@ function renderGame() {
   snake.render(fillSquare);
 }
 
-document.querySelector(`input[name=view-mode]`).addEventListener(`change`, async () => {
+document.querySelectorAll(`input[name=view-mode]`).addEventListener(`change`, async () => {
 // SELECT_VIEW_SETTINGS.addEventListener(`change`, async () => {
   showMode = document.querySelector('input[name=view-mode]:checked').value;
   // showMode = SELECT_VIEW_SETTINGS.value;

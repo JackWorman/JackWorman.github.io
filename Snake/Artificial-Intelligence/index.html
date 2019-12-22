@@ -29,19 +29,21 @@
       </span>
       <span>
         Population Size:
-        <input type="number" name="population-size" min="1" max="2000" step="20" value="280" />
+        <input type="number" name="population-size" min="1" step="20" value="280" />
       </span>
       <span>
         Mutation Rate:
-        <input type="number" name="mutation-rate" min="0.01" max="1" step="0.01" value="0.05" />
+        <!-- <input type="number" name="mutation-rate" min="0" max="100" step="1" value="5" /> -->
+        <input type="range" name="mutation-rate" min="0" max="100" value="5" />
       </span>
       <span>
         Elitism Rate:
-        <input type="number" name="elitism-rate" min="0.01" max="1" step="0.01" value="0.01" />
+        <!-- <input type="number" name="elitism-rate" min="0" max="100" step="1" value="1" /> -->
+        <input type="range" name="elitism-rate" min="0" max="100" value="5" />
       </span>
       <span>
         Tests per Agent per Generation:
-        <input type="number" name="tests" min="1" max="1000" step="10" value="50" />
+        <input type="number" name="tests" min="1" step="10" value="50" />
       </span>
       <button id="button-start">Start</button>
     </div>

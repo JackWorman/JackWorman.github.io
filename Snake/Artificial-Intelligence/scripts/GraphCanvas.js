@@ -38,7 +38,7 @@ export function renderGraph() {
   }
   if (bestFitnesses.length === 0) return;
   const maxFitness = Math.max(...bestFitnesses);
-  CONTEXT_GRAPH.fillText(`Overall Best Fitness: ${maxFitness.toLocaleString()}`, 10, 40);
+  CONTEXT_GRAPH.fillText(`Overall Best Fitness: ${maxFitness.toLocaleString(undefined, {maximumFractionDigits: 2})}`, 10, 40);
   if (bestFitnesses.length === 1) return;
 
   CONTEXT_GRAPH.beginPath();
@@ -76,7 +76,11 @@ function renderCrosshair(event) {
       let yOffset = (y < canvasSize/2) ? 12 : -12;
       CONTEXT_GRAPH.fillStyle = RED;
       CONTEXT_GRAPH.font = `bold 14px Arial`;
-      CONTEXT_GRAPH.fillText(`(${i}, ${bestFitnesses[i]})`, x + xOffset, y + yOffset);
+      CONTEXT_GRAPH.fillText(
+        `(${i}, ${bestFitnesses[i].toLocaleString(undefined, {maximumFractionDigits: 2})})`,
+        x + xOffset,
+        y + yOffset
+      );
       break;
     }
   }

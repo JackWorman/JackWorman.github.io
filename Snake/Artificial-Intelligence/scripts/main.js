@@ -226,7 +226,9 @@ SELECT_VIEW_SETTINGS.addEventListener(`change`, async () => {
   CONTEXT_NEURAL_NETWORK.clearRect(0, 0, canvasSize, canvasSize);
 });
 
+let flag = false;
 document.getElementById(`button-start`).addEventListener(`click`, () => {
+  if (flag) return
   POPULATION_SIZE = Number(document.getElementsByName('population-size')[0].value);
   LAYER_SIZES = document.getElementsByName('hidden-layer-sizes')[0].value.replace(/\s+/g, '').split(',').map(x => Number(x));
   LAYER_SIZES.unshift(28);
@@ -235,10 +237,7 @@ document.getElementById(`button-start`).addEventListener(`click`, () => {
   ELITISM_RATE =  Number(document.getElementsByName('elitism-rate')[0].value);
   TESTS_PER_AGENT_PER_GENERATION =  Number(document.getElementsByName('tests')[0].value);
 
-  if (POPULATION_SIZE >= 1 && POPULATION_SIZE <= 10000) {
-
-  }
-
+  flag = true;
   evolutionaryAlgorithm = new EvolutionaryAlgorithm(POPULATION_SIZE, LAYER_SIZES, MUTATION_RATE, ELITISM_RATE);
   evolutionaryAlgorithmLoop();
 });

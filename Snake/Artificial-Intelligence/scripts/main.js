@@ -101,7 +101,7 @@ function setUpNextGeneration() {
     evolutionaryAlgorithm.specie++;
     if (evolutionaryAlgorithm.specie === POPULATION_SIZE) {
       evolutionaryAlgorithm.sort();
-      bestFitnesses.push(Math.round(evolutionaryAlgorithm.neuralNetworks[0].fitness/TESTS_PER_AGENT_PER_GENERATION));
+      bestFitnesses.push(evolutionaryAlgorithm.neuralNetworks[0].fitness/TESTS_PER_AGENT_PER_GENERATION);
       renderGraph();
       evolutionaryAlgorithm.calculateDiversity();
       evolutionaryAlgorithm.selectParents();
@@ -229,9 +229,6 @@ SELECT_VIEW_SETTINGS.addEventListener(`change`, async () => {
 document.getElementById(`button-start`).addEventListener(`click`, () => {
   POPULATION_SIZE =  Number(document.getElementsByName('population-size')[0].value);
   LAYER_SIZES = document.getElementsByName('hidden-layer-sizes')[0].value.replace(/\s+/g, '').split(',').map(x => Number(x));
-  // for (let i = 0; i < LAYER_SIZES.length; i++) {
-  //   LAYER_SIZES[i] = Number(LAYER_SIZES[i])
-  // }
   LAYER_SIZES.unshift(28);
   LAYER_SIZES.push(4);
   MUTATION_RATE = Number(document.getElementsByName('mutation-rate')[0].value);

@@ -46,6 +46,7 @@ export let bestFitnesses = [];
 let showMode = `all`;
 let snakeCopies = [];
 let previousTime = performance.now();
+let flag = false;
 
 /**
  * Pauses the execution of a function for a given amount of milliseconds. This allows other operations to be performed
@@ -219,29 +220,25 @@ function renderGame() {
   snake.render(fillSquare);
 }
 
-document.querySelectorAll("input[name=view-mode]").forEach(element => element.addEventListener(`change`, async () => {
-  // SELECT_VIEW_SETTINGS.addEventListener(`change`, async () => {
-  showMode = document.querySelector('input[name=view-mode]:checked').value;
-  // showMode = SELECT_VIEW_SETTINGS.value;
+document.querySelectorAll(`input[name=view-mode]`).forEach(element => element.addEventListener(`change`, async () => {
+  showMode = document.querySelector(`input[name=view-mode]:checked`).value;
   await sleep(0); // Pauses to ensure the canvases do not get overwritten after being cleared.
   CONTEXT_GAME.clearRect(0, 0, canvasSize, canvasSize);
   CONTEXT_NEURAL_NETWORK.clearRect(0, 0, canvasSize, canvasSize);
 }));
 
-
-let flag = false;
 document.getElementById(`button-start`).addEventListener(`click`, () => {
   if (flag) return;
 
-  POPULATION_SIZE = Number.parseInt(document.getElementsByName('population-size')[0].value);
-  LAYER_SIZES = document.getElementsByName('hidden-layer-sizes')[0].value.replace(/\s+/g, '').split(',').map(x => Number.parseInt(x));
+  POPULATION_SIZE = Number.parseInt(document.getElementsByName(`population-size`)[0].value);
+  LAYER_SIZES = document.getElementsByName(`hidden-layer-sizes`)[0].value.replace(/\s+/g, ``).split(`,`).map(x => Number.parseInt(x));
   LAYER_SIZES.unshift(28);
   LAYER_SIZES.push(4);
   // TODO: LAYER_SIZES verification
-  MUTATION_RATE = Number.parseFloat(document.getElementsByName('mutation-rate')[0].value)/100;
-  ELITISM_RATE = Number.parseFloat(document.getElementsByName('elitism-rate')[0].value)/100;
+  MUTATION_RATE = Number.parseFloat(document.getElementsByName(`mutation-rate`)[0].value)/100;
+  ELITISM_RATE = Number.parseFloat(document.getElementsByName(`elitism-rate`)[0].value)/100;
+  TESTS_PER_AGENT_PER_GENERATION =  Number.parseInt(document.getElementsByName(`tests`)[0].value);
 
-  TESTS_PER_AGENT_PER_GENERATION =  Number.parseInt(document.getElementsByName('tests')[0].value);
   if (
     POPULATION_SIZE < 1
     || MUTATION_RATE < 0 || MUTATION_RATE > 100

@@ -219,14 +219,15 @@ function renderGame() {
   snake.render(fillSquare);
 }
 
-document.querySelectorAll("input[name=view-mode]").addEventListener(`change`, async () => {
-// SELECT_VIEW_SETTINGS.addEventListener(`change`, async () => {
+document.querySelectorAll("input[name=view-mode]").forEach(element => element.addEventListener(`change`, async () => {
+  // SELECT_VIEW_SETTINGS.addEventListener(`change`, async () => {
   showMode = document.querySelector('input[name=view-mode]:checked').value;
   // showMode = SELECT_VIEW_SETTINGS.value;
   await sleep(0); // Pauses to ensure the canvases do not get overwritten after being cleared.
   CONTEXT_GAME.clearRect(0, 0, canvasSize, canvasSize);
   CONTEXT_NEURAL_NETWORK.clearRect(0, 0, canvasSize, canvasSize);
-});
+}));
+
 
 let flag = false;
 document.getElementById(`button-start`).addEventListener(`click`, () => {

@@ -231,10 +231,10 @@ document.getElementById(`button-start`).addEventListener(`click`, () => {
   LAYER_SIZES = document.getElementsByName('hidden-layer-sizes')[0].value.replace(/\s+/g, '').split(',');
   LAYER_SIZES.unshift(28);
   LAYER_SIZES.push(4);
-  for (let i = 0; i < LAYER_SIZES; i++) {
-    LAYER_SIZES[i] = new Number(LAYER_SIZES[i]).valueOf();
-    alert(`${i}  |  ${typeof LAYER_SIZES[i]}`);
-  }
+  alert(`${0}  |  ${typeof LAYER_SIZES[0]}`);
+  alert(`${1}  |  ${typeof LAYER_SIZES[1]}`);
+  alert(`${2}  |  ${typeof LAYER_SIZES[2]}`);
+  alert(`${3}  |  ${typeof LAYER_SIZES[3]}`);
   MUTATION_RATE = document.getElementsByName('mutation-rate')[0].value;
   ELITISM_RATE = document.getElementsByName('elitism-rate')[0].value;
   TESTS_PER_AGENT_PER_GENERATION = document.getElementsByName('tests')[0].value;

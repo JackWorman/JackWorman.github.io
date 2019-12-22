@@ -231,25 +231,28 @@ document.getElementById(`button-start`).addEventListener(`click`, () => {
   if (flag) return;
 
   POPULATION_SIZE = Number.parseInt(document.getElementsByName('population-size')[0].value);
-  if (POPULATION_SIZE < 1) return;
-
   LAYER_SIZES = document.getElementsByName('hidden-layer-sizes')[0].value.replace(/\s+/g, '').split(',').map(x => Number.parseInt(x));
   LAYER_SIZES.unshift(28);
   LAYER_SIZES.push(4);
-
+  // TODO: LAYER_SIZES verification
   MUTATION_RATE = Number.parseFloat(document.getElementsByName('mutation-rate')[0].value)/100;
-  if (MUTATION_RATE < 0 || MUTATION_RATE > 100) return;
-
   ELITISM_RATE = Number.parseFloat(document.getElementsByName('elitism-rate')[0].value)/100;
-  if (ELITISM_RATE < 0 || ELITISM_RATE > 100) return;
 
   TESTS_PER_AGENT_PER_GENERATION =  Number.parseInt(document.getElementsByName('tests')[0].value);
-  if (TESTS_PER_AGENT_PER_GENERATION < 0) return;
+  if (
+    POPULATION_SIZE < 1
+    || MUTATION_RATE < 0 || MUTATION_RATE > 100
+    || ELITISM_RATE < 0 || ELITISM_RATE > 100
+    || TESTS_PER_AGENT_PER_GENERATION < 0
+  ) {
+    alert(`Error: One or more invalid inputs.`);
+    return;
+  }
+
+  flag = true;
 
   document.getElementById(`div-settings-container`).style.display = `none`;
   document.getElementById(`div-tester`).style.display = `block`;
-
-  flag = true;
   evolutionaryAlgorithm = new EvolutionaryAlgorithm(POPULATION_SIZE, LAYER_SIZES, MUTATION_RATE, ELITISM_RATE);
   evolutionaryAlgorithmLoop();
 });

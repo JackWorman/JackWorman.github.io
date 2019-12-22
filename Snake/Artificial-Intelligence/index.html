@@ -9,18 +9,19 @@
   <body>
     <div id="div-header-container">
       <span id="span-title" class="rainbow">Evolutionary Algorithm</span>
-      <br />
-      <span id="span-gen-specie">Generation: 0, Species: 1/2000, Test: 1/100</span>
     </div>
-    <select id="select-view-settings">
-      <option selected value="all">Show All Tests</option>
-      <option value="best">Only Show Best</option>
-      <option value="off">Show Nothing</option>
-    </select>
-    <div id="div-canvas-container" style="display: none;">
-      <canvas id="canvas-graph"></canvas>
-      <canvas id="canvas-neural-network"></canvas>
-      <canvas id="canvas-game"></canvas>
+    <div id="div-tester" style="display: none;">
+      <span id="span-gen-specie">Generation: 0, Species: 1/?, Test: 1/?</span>
+      <select id="select-view-settings">
+        <option selected value="all">Show All Tests</option>
+        <option value="best">Only Show Best</option>
+        <option value="off">Show Nothing</option>
+      </select>
+      <div id="div-canvas-container">
+        <canvas id="canvas-graph"></canvas>
+        <canvas id="canvas-neural-network"></canvas>
+        <canvas id="canvas-game"></canvas>
+      </div>
     </div>
     <div id="div-settings-container">
       <span>

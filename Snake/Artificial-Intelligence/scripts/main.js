@@ -233,6 +233,7 @@ document.getElementById(`button-start`).addEventListener(`click`, () => {
   LAYER_SIZES.push(4);
   for (let i = 0; i < LAYER_SIZES; i++) {
     LAYER_SIZES[i] = new Number(LAYER_SIZES[i]).valueOf();
+    alert(`${i}  |  ${typeof LAYER_SIZES[i]}`);
   }
   MUTATION_RATE = document.getElementsByName('mutation-rate')[0].value;
   ELITISM_RATE = document.getElementsByName('elitism-rate')[0].value;

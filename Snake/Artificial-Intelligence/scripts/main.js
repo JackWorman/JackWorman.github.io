@@ -71,7 +71,7 @@ async function evolutionaryAlgorithmLoop() {
       resetGame(test);
       do {
         await render(test);
-      } while (gameLoop());
+      } while (await gameLoop());
       evolutionaryAlgorithm.evaluateFitness(apples);
       // Clears canvases after showing best snake.
       if (showMode === `best` && evolutionaryAlgorithm.specie === 0 && test === 0) {

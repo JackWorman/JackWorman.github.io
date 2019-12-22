@@ -228,14 +228,23 @@ SELECT_VIEW_SETTINGS.addEventListener(`change`, async () => {
 
 let flag = false;
 document.getElementById(`button-start`).addEventListener(`click`, () => {
-  if (flag) return
-  POPULATION_SIZE = Number(document.getElementsByName('population-size')[0].value);
-  LAYER_SIZES = document.getElementsByName('hidden-layer-sizes')[0].value.replace(/\s+/g, '').split(',').map(x => Number(x));
+  if (flag) return;
+
+  POPULATION_SIZE = Number.parseInt(document.getElementsByName('population-size')[0].value);
+  if (POPULATION_SIZE < 1) return;
+
+  LAYER_SIZES = document.getElementsByName('hidden-layer-sizes')[0].value.replace(/\s+/g, '').split(',').map(x => Number.parseInt(x));
   LAYER_SIZES.unshift(28);
   LAYER_SIZES.push(4);
-  MUTATION_RATE = Number(document.getElementsByName('mutation-rate')[0].value);
-  ELITISM_RATE =  Number(document.getElementsByName('elitism-rate')[0].value);
-  TESTS_PER_AGENT_PER_GENERATION =  Number(document.getElementsByName('tests')[0].value);
+
+  MUTATION_RATE = Number.parseFloat(document.getElementsByName('mutation-rate')[0].value)/100;
+  if (MUTATION_RATE < 0 || MUTATION_RATE > 100) return;
+
+  ELITISM_RATE = Number.parseFloat(document.getElementsByName('elitism-rate')[0].value)/100;
+  if (ELITISM_RATE < 0 || ELITISM_RATE > 100) return;
+
+  TESTS_PER_AGENT_PER_GENERATION =  Number.parseInt(document.getElementsByName('tests')[0].value);
+  if (TESTS_PER_AGENT_PER_GENERATION < 0) return;
 
   flag = true;
   evolutionaryAlgorithm = new EvolutionaryAlgorithm(POPULATION_SIZE, LAYER_SIZES, MUTATION_RATE, ELITISM_RATE);

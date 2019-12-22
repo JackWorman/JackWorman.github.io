@@ -235,7 +235,7 @@ document.getElementById(`button-start`).addEventListener(`click`, () => {
   ELITISM_RATE =  Number(document.getElementsByName('elitism-rate')[0].value);
   TESTS_PER_AGENT_PER_GENERATION =  Number(document.getElementsByName('tests')[0].value);
 
-  if () {
+  if (POPULATION_SIZE >= 1 && POPULATION_SIZE <= 10000) {
 
   }
 

@@ -246,6 +246,9 @@ document.getElementById(`button-start`).addEventListener(`click`, () => {
   TESTS_PER_AGENT_PER_GENERATION =  Number.parseInt(document.getElementsByName('tests')[0].value);
   if (TESTS_PER_AGENT_PER_GENERATION < 0) return;
 
+  document.getElementById(`div-settings-container`).style.display = `none`;
+  document.getElementById(`div-canvas-container`).style.display = `block`;
+
   flag = true;
   evolutionaryAlgorithm = new EvolutionaryAlgorithm(POPULATION_SIZE, LAYER_SIZES, MUTATION_RATE, ELITISM_RATE);
   evolutionaryAlgorithmLoop();

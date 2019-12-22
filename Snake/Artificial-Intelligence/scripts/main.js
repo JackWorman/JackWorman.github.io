@@ -135,7 +135,7 @@ function resetGame() {
  *
  * @return {Boolean} true = snake is alive, false = snake is dead
  */
-function gameLoop() {
+async function gameLoop() {
   // Pauses the loop ever once in a while, so that the browser does not crash.
   if (performance.now() - previousTime > PAUSE_INTERVAL) {
     await sleep(0);

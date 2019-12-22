@@ -45,6 +45,7 @@ let apples;
 export let bestFitnesses = [];
 let showMode = `all`;
 let snakeCopies = [];
+let previousTime = performance.now();
 
 /**
  * Pauses the execution of a function for a given amount of milliseconds. This allows other operations to be performed
@@ -64,7 +65,6 @@ function sleep(milliseconds) {
  * Learning loop.
  */
 async function evolutionaryAlgorithmLoop() {
-  let previousTime = performance.now();
   while (true) {
     setUpNextGeneration();
     for (let test = 0; test < TESTS_PER_AGENT_PER_GENERATION; test++) {
@@ -82,11 +82,6 @@ async function evolutionaryAlgorithmLoop() {
         `Generation: ${evolutionaryAlgorithm.generation},
         Species: ${evolutionaryAlgorithm.specie + 1}/${POPULATION_SIZE},
         Test: ${test + 1}/${TESTS_PER_AGENT_PER_GENERATION}`;
-      // Pauses the loop ever once in a while, so that the browser does not crash.
-      if (performance.now() - previousTime > PAUSE_INTERVAL) {
-        await sleep(0);
-        previousTime = performance.now();
-      }
     }
   }
 }
@@ -141,6 +136,11 @@ function resetGame() {
  * @return {Boolean} true = snake is alive, false = snake is dead
  */
 function gameLoop() {
+  // Pauses the loop ever once in a while, so that the browser does not crash.
+  if (performance.now() - previousTime > PAUSE_INTERVAL) {
+    await sleep(0);
+    previousTime = performance.now();
+  }
   updateInputLayer(evolutionaryAlgorithm, snake, pellet);
   evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].propagateForward();
   snake.direction = getDirectionFromOutputLayer(evolutionaryAlgorithm, snake);
@@ -227,13 +227,17 @@ SELECT_VIEW_SETTINGS.addEventListener(`change`, async () => {
 });
 
 document.getElementById(`button-start`).addEventListener(`click`, () => {
-  POPULATION_SIZE =  Number(document.getElementsByName('population-size')[0].value);
+  POPULATION_SIZE = Number(document.getElementsByName('population-size')[0].value);
   LAYER_SIZES = document.getElementsByName('hidden-layer-sizes')[0].value.replace(/\s+/g, '').split(',').map(x => Number(x));
   LAYER_SIZES.unshift(28);
   LAYER_SIZES.push(4);
   MUTATION_RATE = Number(document.getElementsByName('mutation-rate')[0].value);
   ELITISM_RATE =  Number(document.getElementsByName('elitism-rate')[0].value);
   TESTS_PER_AGENT_PER_GENERATION =  Number(document.getElementsByName('tests')[0].value);
+
+  if () {
+
+  }
 
   evolutionaryAlgorithm = new EvolutionaryAlgorithm(POPULATION_SIZE, LAYER_SIZES, MUTATION_RATE, ELITISM_RATE);
   evolutionaryAlgorithmLoop();

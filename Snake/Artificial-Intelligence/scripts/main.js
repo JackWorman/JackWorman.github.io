@@ -101,7 +101,7 @@ function setUpNextGeneration() {
     evolutionaryAlgorithm.specie++;
     if (evolutionaryAlgorithm.specie === POPULATION_SIZE) {
       evolutionaryAlgorithm.sort();
-      bestFitnesses.push(evolutionaryAlgorithm.neuralNetworks[0].fitness);
+      bestFitnesses.push(evolutionaryAlgorithm.neuralNetworks[0].fitness/TESTS_PER_AGENT_PER_GENERATION);
       renderGraph();
       evolutionaryAlgorithm.calculateDiversity();
       evolutionaryAlgorithm.selectParents();

@@ -246,7 +246,7 @@ document.getElementById(`button-start`).addEventListener(`click`, (event) => {
     return;
   }
 
-  this.removeEventListener('click', arguments.callee, false);
+  document.getElementById(`button-start`).removeEventListener('click', arguments.callee, false);
 
   // document.getElementById(`div-settings-container`).style.display = `none`;
   document.getElementById(`div-tester`).style.display = `block`;

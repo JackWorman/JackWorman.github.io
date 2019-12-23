@@ -231,13 +231,13 @@ document.getElementById(`button-start`).addEventListener(`click`, function testF
   LAYER_SIZES = document.getElementsByName(`hidden-layer-sizes`)[0].value.replace(/\s+/g, ``).split(`,`).map(x => Number.parseInt(x));
   LAYER_SIZES.unshift(28);
   LAYER_SIZES.push(4);
-  // TODO: LAYER_SIZES verification
   MUTATION_RATE = Number.parseFloat(document.getElementsByName(`mutation-rate`)[0].value)/100;
   ELITISM_RATE = Number.parseFloat(document.getElementsByName(`elitism-rate`)[0].value)/100;
   TESTS_PER_AGENT_PER_GENERATION =  Number.parseInt(document.getElementsByName(`tests`)[0].value);
 
   if (
     POPULATION_SIZE < 1
+    || LAYER_SIZES.some(x => isNaN(x)) || LAYER_SIZES.some(x => x < 1)
     || MUTATION_RATE < 0 || MUTATION_RATE > 100
     || ELITISM_RATE < 0 || ELITISM_RATE > 100
     || TESTS_PER_AGENT_PER_GENERATION < 0

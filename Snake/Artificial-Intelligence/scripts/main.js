@@ -46,7 +46,6 @@ export let bestFitnesses = [];
 let showMode = `all`;
 let snakeCopies = [];
 let previousTime = performance.now();
-let flag = false;
 
 /**
  * Pauses the execution of a function for a given amount of milliseconds. This allows other operations to be performed
@@ -228,8 +227,6 @@ document.querySelectorAll(`input[name=view-mode]`).forEach(element => element.ad
 }));
 
 document.getElementById(`button-start`).addEventListener(`click`, () => {
-  if (flag) return;
-
   POPULATION_SIZE = Number.parseInt(document.getElementsByName(`population-size`)[0].value);
   LAYER_SIZES = document.getElementsByName(`hidden-layer-sizes`)[0].value.replace(/\s+/g, ``).split(`,`).map(x => Number.parseInt(x));
   LAYER_SIZES.unshift(28);
@@ -249,9 +246,9 @@ document.getElementById(`button-start`).addEventListener(`click`, () => {
     return;
   }
 
-  flag = true;
+  this.removeEventListener('click', arguments.callee, false);
 
-  document.getElementById(`div-settings-container`).style.display = `none`;
+  // document.getElementById(`div-settings-container`).style.display = `none`;
   document.getElementById(`div-tester`).style.display = `block`;
   evolutionaryAlgorithm = new EvolutionaryAlgorithm(POPULATION_SIZE, LAYER_SIZES, MUTATION_RATE, ELITISM_RATE);
   evolutionaryAlgorithmLoop();

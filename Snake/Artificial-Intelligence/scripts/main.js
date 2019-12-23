@@ -226,7 +226,7 @@ document.querySelectorAll(`input[name=view-mode]`).forEach(element => element.ad
   CONTEXT_NEURAL_NETWORK.clearRect(0, 0, canvasSize, canvasSize);
 }));
 
-document.getElementById(`button-start`).addEventListener(`click`, (event) => {
+document.getElementById(`button-start`).addEventListener(`click`, function testFunc() {
   POPULATION_SIZE = Number.parseInt(document.getElementsByName(`population-size`)[0].value);
   LAYER_SIZES = document.getElementsByName(`hidden-layer-sizes`)[0].value.replace(/\s+/g, ``).split(`,`).map(x => Number.parseInt(x));
   LAYER_SIZES.unshift(28);
@@ -246,7 +246,7 @@ document.getElementById(`button-start`).addEventListener(`click`, (event) => {
     return;
   }
 
-  document.getElementById(`button-start`).removeEventListener('click', arguments.callee, false);
+  document.getElementById(`button-start`).removeEventListener('click', testFunc, false);
 
   // document.getElementById(`div-settings-container`).style.display = `none`;
   document.getElementById(`div-tester`).style.display = `block`;

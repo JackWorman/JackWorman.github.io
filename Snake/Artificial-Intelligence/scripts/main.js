@@ -248,7 +248,7 @@ document.getElementById(`button-start`).addEventListener(`click`, function testF
 
   document.getElementById(`button-start`).removeEventListener('click', testFunc, false);
 
-  // document.getElementById(`div-settings-container`).style.display = `none`;
+  document.getElementById(`div-settings-container`).style.display = `none`;
   document.getElementById(`div-tester`).style.display = `block`;
   evolutionaryAlgorithm = new EvolutionaryAlgorithm(POPULATION_SIZE, LAYER_SIZES, MUTATION_RATE, ELITISM_RATE);
   evolutionaryAlgorithmLoop();

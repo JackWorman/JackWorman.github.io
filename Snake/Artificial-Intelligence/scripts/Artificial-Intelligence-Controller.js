@@ -115,7 +115,7 @@ function renderWeights(neuralNetwork) {
         if (neuralNetwork.weights[i].elements[k][j] < 0) {
           CONTEXT_NEURAL_NETWORK.strokeStyle = `rgb(255, 0, 0, ${intensity})`;
         } else {
-          CONTEXT_NEURAL_NETWORK.strokeStyle = `rgb(0, 0, 255, ${intensity})`;
+          CONTEXT_NEURAL_NETWORK.strokeStyle = `rgb(0, 255, 0, ${intensity})`;
         }
         CONTEXT_NEURAL_NETWORK.stroke();
       }

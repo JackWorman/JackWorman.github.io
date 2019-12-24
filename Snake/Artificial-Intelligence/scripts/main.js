@@ -98,8 +98,8 @@ function setUpNextGeneration() {
       evolutionaryAlgorithm.sort();
       bestFitnesses.push(evolutionaryAlgorithm.neuralNetworks[0].fitness/TESTS_PER_AGENT_PER_GENERATION);
       renderGraph();
-      evolutionaryAlgorithm.calculateDiversity();
-      evolutionaryAlgorithm.selectParents();
+      // evolutionaryAlgorithm.calculateDiversity();
+      evolutionaryAlgorithm.selectParentsViaRouletteWheel();
       evolutionaryAlgorithm.crossover();
       evolutionaryAlgorithm.mutate();
       evolutionaryAlgorithm.elitism();

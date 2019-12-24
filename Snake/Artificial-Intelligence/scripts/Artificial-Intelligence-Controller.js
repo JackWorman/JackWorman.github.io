@@ -1,6 +1,6 @@
 "use strict";
 
-import {GRID_SIZE, canvasSize} from "./main.js";
+import {GRID_SIZE} from "./main.js";
 
 export function updateInputLayer(evolutionaryAlgorithm, snake, pellet) {
   const inputLayer = evolutionaryAlgorithm.neuralNetworks[evolutionaryAlgorithm.specie].layers[0].elements;
@@ -28,7 +28,7 @@ function detectWall(horizontal, vertical, snake) {
     count++;
     const testPoint = {x: snake.bodySegments[0].x + count * horizontal, y: snake.bodySegments[0].y + count * vertical};
     // Check for wall.
-    if (testPoint.x < 0 || testPoint.x >= 30 || testPoint.y < 0 || testPoint.y >= 30) {
+    if (testPoint.x < 0 || testPoint.x >= GRID_SIZE || testPoint.y < 0 || testPoint.y >= GRID_SIZE) {
       return 1 - (count - 1) / (GRID_SIZE - 1);
     }
   }
@@ -40,7 +40,7 @@ function detectBody(horizontal, vertical, snake) {
     count++;
     const testPoint = {x: snake.bodySegments[0].x + count * horizontal, y: snake.bodySegments[0].y + count * vertical};
     // Check for wall.
-    if (testPoint.x < 0 || testPoint.x >= 30 || testPoint.y < 0 || testPoint.y >= 30) {
+    if (testPoint.x < 0 || testPoint.x >= GRID_SIZE || testPoint.y < 0 || testPoint.y >= GRID_SIZE) {
       return 0;
     }
     // Check for snake body.
@@ -58,7 +58,7 @@ function detectFruit(horizontal, vertical, snake, pellet) {
     count++;
     const testPoint = {x: snake.bodySegments[0].x + count * horizontal, y: snake.bodySegments[0].y + count * vertical};
     // Check for wall.
-    if (testPoint.x < 0 || testPoint.x >= 30 || testPoint.y < 0 || testPoint.y >= 30) {
+    if (testPoint.x < 0 || testPoint.x >= GRID_SIZE || testPoint.y < 0 || testPoint.y >= GRID_SIZE) {
       return 0;
     }
     // Check for fruit.

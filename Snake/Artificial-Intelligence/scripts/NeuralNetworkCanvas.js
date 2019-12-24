@@ -1,5 +1,7 @@
 "use strict";
 
+import {canvasSize} from "./main.js";
+
 const CANVAS_NEURAL_NETWORK = document.getElementById(`canvas-neural-network`);
 const CONTEXT_NEURAL_NETWORK = CANVAS_NEURAL_NETWORK.getContext(`2d`);
 

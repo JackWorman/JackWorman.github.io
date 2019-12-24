@@ -1,6 +1,7 @@
 "use strict";
 
-import {updateInputLayer, getDirectionFromOutputLayer, renderNeuralNetwork} from "./Artificial-Intelligence-Controller.js";
+import {updateInputLayer, getDirectionFromOutputLayer} from "./Artificial-Intelligence-Controller.js";
+import {renderNeuralNetwork} from "./NeuralNetworkCanvas.js";
 import {renderGraph} from "./GraphCanvas.js";
 import {EvolutionaryAlgorithm} from "./EvolutionaryAlgorithm.js";
 import {Snake} from "../../scripts/Snake.js";

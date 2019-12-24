@@ -226,7 +226,7 @@ document.querySelectorAll(`input[name=view-mode]`).forEach(element => element.ad
   CONTEXT_NEURAL_NETWORK.clearRect(0, 0, canvasSize, canvasSize);
 }));
 
-document.getElementById(`button-start`).addEventListener(`click`, function testFunc() {
+document.getElementById(`button-start`).addEventListener(`click`, testFunc() {
   POPULATION_SIZE = Number.parseInt(document.getElementsByName(`population-size`)[0].value);
   LAYER_SIZES = document.getElementsByName(`hidden-layer-sizes`)[0].value.replace(/\s+/g, ``).split(`,`).map(x => Number.parseInt(x));
   LAYER_SIZES.unshift(28);
@@ -238,15 +238,15 @@ document.getElementById(`button-start`).addEventListener(`click`, function testF
   if (
     POPULATION_SIZE < 1
     || LAYER_SIZES.some(x => isNaN(x)) || LAYER_SIZES.some(x => x < 1)
-    || MUTATION_RATE < 0 || MUTATION_RATE > 100
-    || ELITISM_RATE < 0 || ELITISM_RATE > 100
+    || MUTATION_RATE < 0 || MUTATION_RATE > 1
+    || ELITISM_RATE < 0 || ELITISM_RATE > 1
     || TESTS_PER_AGENT_PER_GENERATION < 0
   ) {
     alert(`Error: One or more invalid inputs.`);
     return;
   }
 
-  document.getElementById(`button-start`).removeEventListener('click', testFunc, false);
+  document.getElementById(`button-start`).removeEventListener(`click`, testFunc, false);
 
   document.getElementById(`div-settings-container`).style.display = `none`;
   document.getElementById(`div-tester`).style.display = `block`;

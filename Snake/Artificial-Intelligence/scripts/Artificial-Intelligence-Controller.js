@@ -145,7 +145,7 @@ function renderNodes(neuralNetwork, evolutionaryAlgorithm) {
       ];
       outputLayerDirections.sort((a, b) => { return b.intensity - a.intensity; });
       if (i === neuralNetwork.layers.length - 1 && j === outputLayerDirections[0].index) {
-        CONTEXT_NEURAL_NETWORK.fillStyle = `rgb(${intensity}, 0, 0)`;
+        CONTEXT_NEURAL_NETWORK.fillStyle = `rgb(0, ${intensity}, 0)`;
       } else {
         CONTEXT_NEURAL_NETWORK.fillStyle = `rgb(${intensity}, ${intensity}, ${intensity})`;
       }

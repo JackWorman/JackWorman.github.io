@@ -232,7 +232,7 @@ document.getElementById(`button-start`).addEventListener(`click`, function testF
   // LAYER_SIZES.unshift(28);
   // LAYER_SIZES.push(4);
   const hiddenLayers = document.getElementsByName(`hidden-layer-sizes`)[0].value.replace(/\s+/g, ``).split(`,`).map(x => Number.parseInt(x));
-  LAYER_SIZES = [28, ...hidenLayers, 4];
+  LAYER_SIZES = [28, ...hiddenLayers, 4];
   alert(LAYER_SIZES);
   MUTATION_RATE = Number.parseFloat(document.getElementsByName(`mutation-rate`)[0].value)/100;
   ELITISM_RATE = Number.parseFloat(document.getElementsByName(`elitism-rate`)[0].value)/100;

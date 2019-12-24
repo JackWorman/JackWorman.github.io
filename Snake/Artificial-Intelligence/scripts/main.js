@@ -233,6 +233,7 @@ document.getElementById(`button-start`).addEventListener(`click`, function testF
   // LAYER_SIZES.push(4);
   const hiddenLayers = document.getElementsByName(`hidden-layer-sizes`)[0].value.replace(/\s+/g, ``).split(`,`).map(x => Number.parseInt(x));
   LAYER_SIZES = [28, 4].splice(1, 0, ...hiddenLayers);
+  alert(LAYER_SIZES);
   MUTATION_RATE = Number.parseFloat(document.getElementsByName(`mutation-rate`)[0].value)/100;
   ELITISM_RATE = Number.parseFloat(document.getElementsByName(`elitism-rate`)[0].value)/100;
   TESTS_PER_AGENT_PER_GENERATION =  Number.parseInt(document.getElementsByName(`tests`)[0].value);
@@ -247,7 +248,7 @@ document.getElementById(`button-start`).addEventListener(`click`, function testF
     alert(`Error: One or more invalid inputs.`);
     return;
   }
-
+  // Removes the listener, so that the function can only be called once.
   document.getElementById(`button-start`).removeEventListener(`click`, testFunc, false);
 
   document.getElementById(`div-settings-container`).style.display = `none`;

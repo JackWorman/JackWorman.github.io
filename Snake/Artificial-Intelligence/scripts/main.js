@@ -25,14 +25,14 @@ const PAUSE_INTERVAL = 50;
 // EA Settings
 let POPULATION_SIZE = 280;
 let LAYER_SIZES = [28, 20, 12, 4];
-let MUTATION_RATE = 0.02;
+let MUTATION_RATE = 0.1;
 let ELITISM_RATE = 0.01;
-let TESTS_PER_AGENT_PER_GENERATION = 50;
+let TESTS_PER_AGENT_PER_GENERATION = 2;
 const MAX_HUNGER = GRID_SIZE*GRID_SIZE;
 
 const snake = new Snake();
 const pellet = new Pellet();
-let evolutionaryAlgorithm = new EvolutionaryAlgorithm(POPULATION_SIZE, LAYER_SIZES, MUTATION_RATE, ELITISM_RATE);
+let evolutionaryAlgorithm;
 
 export let canvasSize = 600;
 CANVAS_GAME.width = CANVAS_GAME.height = canvasSize;

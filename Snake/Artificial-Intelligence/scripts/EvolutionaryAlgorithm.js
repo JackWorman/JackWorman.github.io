@@ -67,12 +67,33 @@ export class EvolutionaryAlgorithm {
   }
 
   selectParentsViaRank() {
+    this.neuralNetworks.sort((a, b) => { return b.fitness - a.fitness; });
     let totalFitness = 0;
     for (let i = 0; i < this.neuralNetworks.length; i++) {
       totalFitness += i + 1;
     }
     this.parent1s = [];
     this.parent2s = [];
+    for (let i = 0; i < this.populationSize - Math.round(this.elitismRate * this.populationSize); i++) {
+      let fitnessCutoff = Math.random() * totalFitness;
+      let accumulatedFitness = 0;
+      for (let j = 0; j < this.neuralNetworks.length; j++) {
+        accumulatedFitness += this.populationSize - j;
+        if (fitnessCutoff < accumulatedFitness) {
+          this.parent1s.push(neuralNetworks[j]);
+          break;
+        }
+      }
+      fitnessCutoff = Math.random() * totalFitness;
+      accumulatedFitness = 0;
+      for (let j = 0; j < this.neuralNetworks.length; j++) {
+        accumulatedFitness += this.populationSize - j;
+        if (fitnessCutoff < accumulatedFitness) {
+          this.parent2s.push(neuralNetworks[j]);
+          break;
+        }
+      }
+    }
   }
 
   crossover() {

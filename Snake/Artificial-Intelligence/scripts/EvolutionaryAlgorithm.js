@@ -80,7 +80,7 @@ export class EvolutionaryAlgorithm {
       for (let j = 0; j < this.neuralNetworks.length; j++) {
         accumulatedFitness += this.populationSize - j;
         if (fitnessCutoff < accumulatedFitness) {
-          this.parent1s.push(neuralNetworks[j]);
+          this.parent1s.push(this.neuralNetworks[j]);
           break;
         }
       }
@@ -89,7 +89,7 @@ export class EvolutionaryAlgorithm {
       for (let j = 0; j < this.neuralNetworks.length; j++) {
         accumulatedFitness += this.populationSize - j;
         if (fitnessCutoff < accumulatedFitness) {
-          this.parent2s.push(neuralNetworks[j]);
+          this.parent2s.push(this.neuralNetworks[j]);
           break;
         }
       }

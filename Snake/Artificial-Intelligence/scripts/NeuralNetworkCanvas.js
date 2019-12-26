@@ -20,9 +20,14 @@ function renderWeights(neuralNetwork) {
       const layer2Size = neuralNetwork.layers[i + 1].numRows;
       for (let k = 0; k < layer2Size; k++) {
         CONTEXT_NEURAL_NETWORK.beginPath();
-        CONTEXT_NEURAL_NETWORK.moveTo(canvasSize*((i+1)/(neuralNetwork.layers.length + 1)), canvasSize/(layer1Size + 1)*(j + 1));
-        CONTEXT_NEURAL_NETWORK.lineTo(canvasSize*((i+2)/(neuralNetwork.layers.length + 1)), canvasSize/(layer2Size + 1)*(k + 1));
-        CONTEXT_NEURAL_NETWORK.closePath();
+        CONTEXT_NEURAL_NETWORK.moveTo(
+          canvasSize*(i + 1)/(neuralNetwork.layers.length + 1),
+          canvasSize/(layer1Size + 1)*(j + 1)
+        );
+        CONTEXT_NEURAL_NETWORK.lineTo(
+          canvasSize*(i + 2)/(neuralNetwork.layers.length + 1),
+          canvasSize/(layer2Size + 1)*(k + 1)
+        );
         const intensity = neuralNetwork.layers[i].elements[j][0];
         if (neuralNetwork.weights[i].elements[k][j] < 0) {
           CONTEXT_NEURAL_NETWORK.strokeStyle = `rgb(255, 0, 0, ${intensity})`;
@@ -40,9 +45,15 @@ function renderNodes(neuralNetwork, evolutionaryAlgorithm) {
   for (let i = 0; i < neuralNetwork.layers.length; i++) {
     const layerSize = neuralNetwork.layers[i].numRows;
     for (let j = 0; j < layerSize; j++) {
-      const intensity = neuralNetwork.layers[i].elements[j][0] * 255;
+      const intensity = neuralNetwork.layers[i].elements[j][0]*255;
       CONTEXT_NEURAL_NETWORK.beginPath();
-      CONTEXT_NEURAL_NETWORK.arc(canvasSize*((i + 1)/(neuralNetwork.layers.length + 1)), canvasSize*((j + 1)/(layerSize + 1)), 8, 0, 2*Math.PI);
+      CONTEXT_NEURAL_NETWORK.arc(
+        canvasSize*(i + 1)/(neuralNetwork.layers.length + 1),
+        canvasSize*(j + 1)/(layerSize + 1),
+        8,
+        0,
+        2*Math.PI
+      );
       CONTEXT_NEURAL_NETWORK.closePath();
       CONTEXT_NEURAL_NETWORK.strokeStyle = `rgb(255, 255, 255)`;
       CONTEXT_NEURAL_NETWORK.lineWidth = 2;
@@ -80,7 +91,7 @@ function renderLabels(neuralNetwork) {
       CONTEXT_NEURAL_NETWORK.textAlign = `right`;
       CONTEXT_NEURAL_NETWORK.fillText(
         `${DIRECTIONS[i]} ${DETECTORS[j]}`,
-        -16 + canvasSize*((1)/(neuralNetwork.layers.length + 1)),
+        -16 + canvasSize/(neuralNetwork.layers.length + 1),
         canvasSize/(28 + 1)*((3*i + j) + 1)
       );
     }
@@ -90,15 +101,15 @@ function renderLabels(neuralNetwork) {
   for (let i = 24; i < 28; i++) {
     CONTEXT_NEURAL_NETWORK.fillText(
       OUTPUT_NODE_LABELS[i%4],
-      -16 + canvasSize*((1)/(neuralNetwork.layers.length + 1)),
-      canvasSize/(28 + 1)*((i) + 1)
+      -16 + canvasSize/(neuralNetwork.layers.length + 1),
+      canvasSize/(28 + 1)*(i + 1)
     );
   }
   for (let i = 0; i < 4; i++) {
     CONTEXT_NEURAL_NETWORK.textAlign = `left`;
     CONTEXT_NEURAL_NETWORK.fillText(
       OUTPUT_NODE_LABELS[i],
-      16 + canvasSize*((neuralNetwork.layers.length)/(neuralNetwork.layers.length + 1)),
+      16 + canvasSize*neuralNetwork.layers.length/(neuralNetwork.layers.length + 1),
       canvasSize/(4 + 1)*(i + 1)
     );
   }

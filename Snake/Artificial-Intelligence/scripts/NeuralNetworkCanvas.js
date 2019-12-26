@@ -34,7 +34,7 @@ function renderWeights(neuralNetwork) {
         } else {
           CONTEXT_NEURAL_NETWORK.strokeStyle = `rgb(0, 0, 255, ${intensity})`;
         }
-        CONTEXT_NEURAL_NETWORK.lineWidth = 2;
+        CONTEXT_NEURAL_NETWORK.lineWidth = 1;
         CONTEXT_NEURAL_NETWORK.stroke();
       }
     }

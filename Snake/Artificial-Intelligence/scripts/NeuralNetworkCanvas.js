@@ -30,9 +30,9 @@ function renderWeights(neuralNetwork) {
         );
         const intensity = neuralNetwork.layers[i].elements[j][0];
         if (neuralNetwork.weights[i].elements[k][j] < 0) {
-          CONTEXT_NEURAL_NETWORK.strokeStyle = `rgb(255, 0, 0, ${intensity})`;
+          CONTEXT_NEURAL_NETWORK.strokeStyle = `rgba(255, 0, 0, ${intensity})`;
         } else {
-          CONTEXT_NEURAL_NETWORK.strokeStyle = `rgb(0, 0, 255, ${intensity})`;
+          CONTEXT_NEURAL_NETWORK.strokeStyle = `rgba(0, 0, 255, ${intensity})`;
         }
         CONTEXT_NEURAL_NETWORK.lineWidth = 1;
         CONTEXT_NEURAL_NETWORK.stroke();
@@ -68,7 +68,7 @@ function renderNodes(neuralNetwork, evolutionaryAlgorithm) {
       ];
       outputLayerDirections.sort((a, b) => { return b.intensity - a.intensity; });
       if (i === neuralNetwork.layers.length - 1 && j === outputLayerDirections[0].index) {
-        CONTEXT_NEURAL_NETWORK.fillStyle = `rgb(0, ${intensity}, 0)`;
+        CONTEXT_NEURAL_NETWORK.fillStyle = `rgba(0, 255, 0, ${intensity})`;
       } else {
         CONTEXT_NEURAL_NETWORK.fillStyle = `rgb(${intensity}, ${intensity}, ${intensity})`;
       }

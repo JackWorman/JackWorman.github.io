@@ -81,6 +81,7 @@ function reset() {
   userInput = ``;
   startTyping = false;
   indicatorLocation = 0;
+  errors = 0;
   setUpText();
 }
 
@@ -124,14 +125,14 @@ document.addEventListener(`keydown`, (event) => {
   toggleIndicatorInterval = setInterval(toggleIndicator, MILLISECONDS_PER_SECOND / 3);
   // Check if done.
   if (userInput === text) {
-    const words = Number(localStorage.getItem(`words`)) + ((text.length - 1)/5);
+    const words = Number(localStorage.getItem(`words`)) + (text.length - 1)/5;
     localStorage.setItem(`words`, words);
-    const minutes = Number(localStorage.getItem(`minutes`)) + ((performance.now() - startTime) / 1000 / 60);
+    const minutes = Number(localStorage.getItem(`minutes`)) + (performance.now() - startTime)/1000/60;
     localStorage.setItem(`minutes`, minutes);
     const wpm = words / minutes;
     localStorage.setItem(`wpm`, wpm);
     SPAN_AVERAGE_WPM.textContent = `Average WPM: ${Math.round(wpm)}`;
-    alert(`WPM: ${updateWPM()}`);
+    alert(`Adjusted WPM: ${updateWPM() - errors}`);
     reset();
   }
 });

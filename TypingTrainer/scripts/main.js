@@ -5,6 +5,7 @@ const SECONDS_PER_MINUTE = 60;
 const DIV_TEXT = document.getElementById(`div-text-container`);
 const SPAN_WPM = document.getElementById(`span-wpm`);
 const SPAN_AVERAGE_WPM = document.getElementById(`span-average-wpm`);
+const SPAN_ERRORS = document.getElementById(`span-errors`);
 
 localStorage.setItem(`words`, 0);
 localStorage.setItem(`minutes`, 0);
@@ -18,6 +19,7 @@ let text = ``;
 let userInput = ``;
 let textSetUp = false;
 let indicatorLocation = 0;
+let errors = 0;
 
 function loadFile(filePath) {
   return new Promise((resolve, reject) => {
@@ -114,6 +116,8 @@ document.addEventListener(`keydown`, (event) => {
       spanIndicatedCharacter.classList.add(`correct`);
     } else {
       spanIndicatedCharacter.classList.add(`incorrect`);
+      errors++;
+      SPAN_ERRORS.textContent = `Errors: ${errors}`;
     }
   }
   clearInterval(toggleIndicatorInterval);

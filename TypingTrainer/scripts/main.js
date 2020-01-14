@@ -141,8 +141,14 @@ document.addEventListener(`keydown`, (event) => {
 function drawKeyboard() {
   CANVAS_KEYBOARD.width = 800;
   CANVAS_KEYBOARD.height = 400;
+  const TOP_ROW = `QWERTYUIOP`;
+  const MIDDLE_ROW = `ASDFGHJKL;`;
+  const BOTTOM_ROW = `ZXCVBNM,.`;
   CONTEXT_KEYBOARD.fillStyle = 'green';
-  CONTEXT_KEYBOARD.fillRect(10, 10, 50, 50);
+  for (let i = 0; i < TOP_ROW.length; i++) {
+    CONTEXT_KEYBOARD.fillRect(10 + 10*i, 10, 50, 50);
+    CONTEXT_KEYBOARD.strokeText(TOP_ROW.getChar(i), 35 + 10*i, 35);
+  }
 }
 
 reset();

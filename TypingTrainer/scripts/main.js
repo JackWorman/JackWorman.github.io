@@ -139,8 +139,8 @@ document.addEventListener(`keydown`, (event) => {
 });
 
 function drawKeyboard() {
-  CANVAS_KEYBOARD.width = 1000;
-  CANVAS_KEYBOARD.height = 300;
+  CANVAS_KEYBOARD.width = 900;
+  CANVAS_KEYBOARD.height = 250;
   const TOP_ROW = `QWERTYUIOP`;
   const MIDDLE_ROW = `ASDFGHJKL;`;
   const BOTTOM_ROW = `ZXCVBNM,.`;

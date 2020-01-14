@@ -153,7 +153,7 @@ function drawKeyboard() {
   const WHITE = `rgb(255, 255, 255)`;
   CONTEXT_KEYBOARD.font = `12px Arial`;
   CONTEXT_KEYBOARD.strokeStyle = WHITE;
-  CONTEXT_KEYBOARD.fillStyle = WHITE;
+  CONTEXT_KEYBOARD.fillStyle = `rgb(100, 100, 100)`;
   CONTEXT_KEYBOARD.textBaseline = `middle`;
   CONTEXT_KEYBOARD.textAlign = `middle`;
 

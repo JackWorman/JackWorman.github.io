@@ -149,6 +149,14 @@ function drawKeyboard() {
     CONTEXT_KEYBOARD.fillRect(10 + 60*i, 10, 50, 50);
     CONTEXT_KEYBOARD.strokeText(TOP_ROW.charAt(i), 35 + 60*i, 35);
   }
+  for (let i = 0; i < MIDDLE_ROW.length; i++) {
+    CONTEXT_KEYBOARD.fillRect(35 + 60*i, 70, 50, 50);
+    CONTEXT_KEYBOARD.strokeText(MIDDLE_ROW.charAt(i), 60 + 60*i, 70);
+  }
+  for (let i = 0; i < BOTTOM_ROW.length; i++) {
+    CONTEXT_KEYBOARD.fillRect(60 + 60*i, 130, 50, 50);
+    CONTEXT_KEYBOARD.strokeText(BOTTOM_ROW.charAt(i), 85 + 60*i, 130);
+  }
 }
 
 reset();

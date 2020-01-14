@@ -35,3 +35,7 @@ div {
 .incorrect {
   background: red;
 }
+
+#canvas-keyboard {
+  border: 1px solid white;
+}

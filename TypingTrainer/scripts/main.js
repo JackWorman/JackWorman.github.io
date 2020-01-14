@@ -150,7 +150,7 @@ function drawKeyboard() {
     `ASDFGHJKL;'`,
     `ZXCVBNM,./`
   ];
-
+  const WHITE = `rgb(255, 255, 255)`;
   CONTEXT_KEYBOARD.font = `12px Arial`;
   CONTEXT_KEYBOARD.strokeStyle = WHITE;
   CONTEXT_KEYBOARD.fillStyle = WHITE;

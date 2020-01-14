@@ -150,7 +150,13 @@ function drawKeyboard() {
     `ASDFGHJKL;'`,
     `ZXCVBNM,./`
   ];
-  CONTEXT_KEYBOARD.fillStyle = 'green';
+
+  CONTEXT_KEYBOARD.font = `12px Arial`;
+  CONTEXT_KEYBOARD.strokeStyle = WHITE;
+  CONTEXT_KEYBOARD.fillStyle = WHITE;
+  CONTEXT_KEYBOARD.textBaseline = `middle`;
+  CONTEXT_KEYBOARD.textAlign = `middle`;
+
   for (let i = 0; i < KEYBOARD_LAYOUT.length; i++) {
     for (let j = 0; j < KEYBOARD_LAYOUT[i].length; j++) {
       CONTEXT_KEYBOARD.fillRect(10 + 60*j + 25*i, 10 + 60*i, 50, 50);

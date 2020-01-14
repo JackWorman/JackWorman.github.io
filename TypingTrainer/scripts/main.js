@@ -177,7 +177,7 @@ function drawKeyboard() {
       CONTEXT_KEYBOARD.strokeText(KEYBOARD_LAYOUT[i].charAt(j), FIRST_KEYS[i].size + 45 + 60*j, 35 + 60*i);
     }
     CONTEXT_KEYBOARD.fillRect(FIRST_KEYS[i].size + 20 + 60*KEYBOARD_LAYOUT[i].length, 10 + 60*i, LAST_KEYS[i].size, 50);
-    CONTEXT_KEYBOARD.strokeText(LAST_KEYS[i].text, 35 + FIRST_KEYS[i].size + 60*KEYBOARD_LAYOUT[i].length, 35 + 60*i);
+    CONTEXT_KEYBOARD.strokeText(LAST_KEYS[i].text, 65 + FIRST_KEYS[i].size + 60*KEYBOARD_LAYOUT[i].length, 35 + 60*i);
   }
 }
 

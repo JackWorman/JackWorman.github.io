@@ -147,7 +147,7 @@ function drawKeyboard() {
   CONTEXT_KEYBOARD.fillStyle = 'green';
   for (let i = 0; i < TOP_ROW.length; i++) {
     CONTEXT_KEYBOARD.fillRect(10 + 10*i, 10, 50, 50);
-    CONTEXT_KEYBOARD.strokeText(TOP_ROW.getChar(i), 35 + 10*i, 35);
+    CONTEXT_KEYBOARD.strokeText(TOP_ROW.charAt(i), 35 + 10*i, 35);
   }
 }
 

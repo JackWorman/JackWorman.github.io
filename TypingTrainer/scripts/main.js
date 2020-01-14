@@ -144,8 +144,14 @@ function drawKeyboard() {
   const TOP_ROW = `QWERTYUIOP`;
   const MIDDLE_ROW = `ASDFGHJKL;`;
   const BOTTOM_ROW = `ZXCVBNM,.`;
+  const FIRST_KEYS = [
+    {text: `\``, size: 50},
+    {text: `Tab`, size: 75},
+    {text: `Caps`, size: 100},
+    {text: `Shift`, size: 125}
+  ];
   const KEYBOARD_LAYOUT = [
-    `\`1234567890-=`,
+    `1234567890-=`,
     `QWERTYUIOP[]`,
     `ASDFGHJKL;'`,
     `ZXCVBNM,./`
@@ -158,6 +164,8 @@ function drawKeyboard() {
   CONTEXT_KEYBOARD.textAlign = `center`;
 
   for (let i = 0; i < KEYBOARD_LAYOUT.length; i++) {
+    CONTEXT_KEYBOARD.fillRect(10, 10 + 60*i, FIRST_KEYS[i].size, 50);
+    CONTEXT_KEYBOARD.strokeText(FIRST_KEYS[i].text, 35, 35 + 60*i);
     for (let j = 0; j < KEYBOARD_LAYOUT[i].length; j++) {
       CONTEXT_KEYBOARD.fillRect(10 + 60*j + 25*i, 10 + 60*i, 50, 50);
       CONTEXT_KEYBOARD.strokeText(KEYBOARD_LAYOUT[i].charAt(j), 35 + 60*j + 25*i, 35 + 60*i);

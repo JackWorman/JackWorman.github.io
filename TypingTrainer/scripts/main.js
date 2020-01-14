@@ -6,6 +6,8 @@ const DIV_TEXT = document.getElementById(`div-text-container`);
 const SPAN_WPM = document.getElementById(`span-wpm`);
 const SPAN_AVERAGE_WPM = document.getElementById(`span-average-wpm`);
 const SPAN_ERRORS = document.getElementById(`span-errors`);
+const CANVAS_KEYBOARD = document.getElementById(`canvas-keyboard`);
+const CONTEXT_KEYBOARD = CANVAS_KEYBOARD.getContext('2d');
 
 localStorage.setItem(`words`, 0);
 localStorage.setItem(`minutes`, 0);
@@ -82,10 +84,9 @@ function reset() {
   startTyping = false;
   indicatorLocation = 0;
   errors = 0;
+  SPAN_ERRORS.textContent = `Errors: ${errors}`;
   setUpText();
 }
-
-reset();
 
 document.addEventListener(`keydown`, (event) => {
   // Checks for an invalid key.
@@ -136,3 +137,13 @@ document.addEventListener(`keydown`, (event) => {
     reset();
   }
 });
+
+function drawKeyboard() {
+  CANVAS_KEYBOARD.width = 800;
+  CANVAS_KEYBOARD.height = 400;
+  CONTEXT_KEYBOARD.fillStyle = 'green';
+  CONTEXT_KEYBOARD.fillRect(10, 10, 10, 10);
+}
+
+reset();
+drawKeyboard();

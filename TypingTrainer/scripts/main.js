@@ -155,7 +155,7 @@ function drawKeyboard() {
   CONTEXT_KEYBOARD.strokeStyle = WHITE;
   CONTEXT_KEYBOARD.fillStyle = `rgb(100, 100, 100)`;
   CONTEXT_KEYBOARD.textBaseline = `middle`;
-  CONTEXT_KEYBOARD.textAlign = `middle`;
+  CONTEXT_KEYBOARD.textAlign = `center`;
 
   for (let i = 0; i < KEYBOARD_LAYOUT.length; i++) {
     for (let j = 0; j < KEYBOARD_LAYOUT[i].length; j++) {

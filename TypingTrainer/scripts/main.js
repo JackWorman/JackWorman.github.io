@@ -142,7 +142,7 @@ function drawKeyboard() {
   CANVAS_KEYBOARD.width = 800;
   CANVAS_KEYBOARD.height = 400;
   CONTEXT_KEYBOARD.fillStyle = 'green';
-  CONTEXT_KEYBOARD.fillRect(10, 10, 10, 10);
+  CONTEXT_KEYBOARD.fillRect(10, 10, 50, 50);
 }
 
 reset();

@@ -144,6 +144,12 @@ function drawKeyboard() {
   const TOP_ROW = `QWERTYUIOP`;
   const MIDDLE_ROW = `ASDFGHJKL;`;
   const BOTTOM_ROW = `ZXCVBNM,.`;
+  const KEYBOARD_LAYOUT = [
+    `\`1234567890-=`,
+    `QWERTYUIOP[]`,
+    `ASDFGHJKL;'`,
+    `ZXCVBNM,./`
+  ];
   CONTEXT_KEYBOARD.fillStyle = 'green';
   for (let i = 0; i < TOP_ROW.length; i++) {
     CONTEXT_KEYBOARD.fillRect(10 + 60*i, 10, 50, 50);

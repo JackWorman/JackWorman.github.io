@@ -180,7 +180,8 @@ function drawKeyboard() {
     CONTEXT_KEYBOARD.strokeText(
       LAST_KEYS[i].text,
       FIRST_KEYS[i].size + 20 + 60*KEYBOARD_LAYOUT[i].length + LAST_KEYS[i].size/2,
-      10 + 60*i, 35 + 60*i);
+      35 + 60*i
+    );
   }
 }
 

@@ -153,8 +153,8 @@ function drawKeyboard() {
   const LAST_KEYS = [
     {text: `Backspace`, size: 100},
     {text: `\\`, size: 75},
-    {text: `Enter`, size: 100},
-    {text: `Shift`, size: 125}
+    {text: `Enter`, size: 110},
+    {text: `Shift`, size: 145}
   ];
   const KEYBOARD_LAYOUT = [
     `1234567890-=`,

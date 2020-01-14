@@ -150,6 +150,12 @@ function drawKeyboard() {
     {text: `Caps`, size: 100},
     {text: `Shift`, size: 125}
   ];
+  const LAST_KEYS = [
+    {text: `Backspace`, size: 100},
+    {text: `\\`, size: 75},
+    {text: `Enter`, size: 100},
+    {text: `Shift`, size: 125}
+  ];
   const KEYBOARD_LAYOUT = [
     `1234567890-=`,
     `QWERTYUIOP[]`,
@@ -170,6 +176,8 @@ function drawKeyboard() {
       CONTEXT_KEYBOARD.fillRect(FIRST_KEYS[i].size + 20 + 60*j, 10 + 60*i, 50, 50);
       CONTEXT_KEYBOARD.strokeText(KEYBOARD_LAYOUT[i].charAt(j), FIRST_KEYS[i].size + 45 + 60*j, 35 + 60*i);
     }
+    CONTEXT_KEYBOARD.fillRect(FIRST_KEYS[i].size + 20 + 60*KEYBOARD_LAYOUT[i].length, 10 + 60*i, LAST_KEYS[i].size, 50);
+    CONTEXT_KEYBOARD.strokeText(FIRST_KEYS[i].text, 35, 35 + 60*i);
   }
 }
 

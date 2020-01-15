@@ -238,16 +238,18 @@ function drawKeyboard() {
       2*STANDARD_KEY_SIZE/3 + STANDARD_KEY_SIZE*i
     );
   }
+  let sum = 0;
   for (let i = 0; i < BOTTOM_ROW_KEYS.length; i++) {
+    sum += BOTTOM_ROW_KEYS[i].size*STANDARD_KEY_SIZE;
     CONTEXT_KEYBOARD.strokeRect(
       0,
       STANDARD_KEY_SIZE*4,
-      BOTTOM_ROW_KEYS[i].size*STANDARD_KEY_SIZE,
+      sum,
       STANDARD_KEY_SIZE
     );
     CONTEXT_KEYBOARD.fillText(
       BOTTOM_ROW_KEYS[i].text,
-      BOTTOM_ROW_KEYS[i].size*STANDARD_KEY_SIZE/2,
+      sum - BOTTOM_ROW_KEYS[i].size*STANDARD_KEY_SIZE/2,
       STANDARD_KEY_SIZE*4
     );
   }

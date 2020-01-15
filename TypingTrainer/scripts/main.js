@@ -204,6 +204,7 @@ function drawKeyboard() {
       2*STANDARD_KEY_SIZE/3 + STANDARD_KEY_SIZE*i
     );
     for (let j = 0; j < KEYBOARD_LAYOUT[i].length; j++) {
+      alert(indicatorLocation);
       if (DIV_TEXT.childNodes[indicatorLocation].textContent === KEYBOARD_SHIFT_LAYOUT[i].charAt(j).toUpperCase()) {
         CONTEXT_KEYBOARD.fillStyle = `rgb(255, 0, 0)`;
         CONTEXT_KEYBOARD.fillRect(

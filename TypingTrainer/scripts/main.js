@@ -139,11 +139,12 @@ document.addEventListener(`keydown`, (event) => {
 });
 
 function drawKeyboard() {
+  const KEY_SPACING = 10;
+  const STANDARD_KEY_SIZE = 50;
+
   CANVAS_KEYBOARD.width = 900;
   CANVAS_KEYBOARD.height = 250;
-  const TOP_ROW = `QWERTYUIOP`;
-  const MIDDLE_ROW = `ASDFGHJKL;`;
-  const BOTTOM_ROW = `ZXCVBNM,.`;
+
   const FIRST_KEYS = [
     {text: `\``, size: 50},
     {text: `Tab`, size: 75},
@@ -156,31 +157,60 @@ function drawKeyboard() {
     {text: `Enter`, size: 110},
     {text: `Shift`, size: 145}
   ];
+
   const KEYBOARD_LAYOUT = [
     `1234567890-=`,
     `QWERTYUIOP[]`,
     `ASDFGHJKL;'`,
     `ZXCVBNM,./`
   ];
-  const WHITE = `rgb(255, 255, 255)`;
+  const KEYBOARD_SHIFT_LAYOUT = [
+    `!@#$%^&*()_+`,
+    `          {}`,
+    `         :"`,
+    `       <>?`
+  ];
   CONTEXT_KEYBOARD.font = `12px Arial`;
-  CONTEXT_KEYBOARD.strokeStyle = WHITE;
+  CONTEXT_KEYBOARD.strokeStyle = `rgb(255, 255, 255)`;
   CONTEXT_KEYBOARD.fillStyle = `rgb(100, 100, 100)`;
   CONTEXT_KEYBOARD.textBaseline = `middle`;
   CONTEXT_KEYBOARD.textAlign = `center`;
 
   for (let i = 0; i < KEYBOARD_LAYOUT.length; i++) {
-    CONTEXT_KEYBOARD.fillRect(10, 10 + 60*i, FIRST_KEYS[i].size, 50);
-    CONTEXT_KEYBOARD.strokeText(FIRST_KEYS[i].text, 10 + FIRST_KEYS[i].size/2, 35 + 60*i);
+    CONTEXT_KEYBOARD.fillRect(
+      KEY_SPACING,
+      KEY_SPACING + (KEY_SPACING + STANDARD_KEY_SIZE)*i,
+      FIRST_KEYS[i].size,
+      STANDARD_KEY_SIZE
+    );
+    CONTEXT_KEYBOARD.strokeText(
+      FIRST_KEYS[i].text,
+      KEY_SPACING + FIRST_KEYS[i].size/2,
+      (KEY_SPACING + STANDARD_KEY_SIZE/2) + (KEY_SPACING + STANDARD_KEY_SIZE)*i
+    );
     for (let j = 0; j < KEYBOARD_LAYOUT[i].length; j++) {
-      CONTEXT_KEYBOARD.fillRect(FIRST_KEYS[i].size + 20 + 60*j, 10 + 60*i, 50, 50);
-      CONTEXT_KEYBOARD.strokeText(KEYBOARD_LAYOUT[i].charAt(j), FIRST_KEYS[i].size + 45 + 60*j, 35 + 60*i);
+      CONTEXT_KEYBOARD.fillRect(
+        FIRST_KEYS[i].size + 2*KEY_SPACING + (KEY_SPACING + STANDARD_KEY_SIZE)*j,
+        KEY_SPACING + (KEY_SPACING + STANDARD_KEY_SIZE)*i,
+        STANDARD_KEY_SIZE,
+        STANDARD_KEY_SIZE
+      );
+      CONTEXT_KEYBOARD.strokeText(
+        KEYBOARD_LAYOUT[i].charAt(j),
+        FIRST_KEYS[i].size + 2*KEY_SPACING + STANDARD_KEY_SIZE/2 + (KEY_SPACING + STANDARD_KEY_SIZE)*j,
+        (KEY_SPACING + STANDARD_KEY_SIZE/2) + (KEY_SPACING + STANDARD_KEY_SIZE)*i
+      );
     }
-    CONTEXT_KEYBOARD.fillRect(FIRST_KEYS[i].size + 20 + 60*KEYBOARD_LAYOUT[i].length, 10 + 60*i, LAST_KEYS[i].size, 50);
+    CONTEXT_KEYBOARD.fillRect(
+      FIRST_KEYS[i].size + 2*KEY_SPACING + (KEY_SPACING + STANDARD_KEY_SIZE)*KEYBOARD_LAYOUT[i].length,
+      KEY_SPACING + (KEY_SPACING + STANDARD_KEY_SIZE)*i,
+      LAST_KEYS[i].size,
+      STANDARD_KEY_SIZE
+    );
     CONTEXT_KEYBOARD.strokeText(
       LAST_KEYS[i].text,
-      FIRST_KEYS[i].size + 20 + 60*KEYBOARD_LAYOUT[i].length + LAST_KEYS[i].size/2,
-      35 + 60*i
+      FIRST_KEYS[i].size + 2*KEY_SPACING + (KEY_SPACING + STANDARD_KEY_SIZE)*KEYBOARD_LAYOUT[i].length + LAST_KEYS[i].size/2,
+      (KEY_SPACING + STANDARD_KEY_SIZE/2) + (KEY_SPACING + STANDARD_KEY_SIZE)*i
     );
   }
 }

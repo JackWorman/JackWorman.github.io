@@ -139,7 +139,7 @@ document.addEventListener(`keydown`, (event) => {
 });
 
 function drawKeyboard() {
-  const KEY_SPACING = 10;
+  const KEY_SPACING = 1;
   const STANDARD_KEY_SIZE = 50;
 
   CANVAS_KEYBOARD.width = 900;

@@ -170,7 +170,7 @@ function drawKeyboard() {
     `       <>?`
   ];
 
-  CONTEXT_KEYBOARD.strokeStyle = `rgb(100, 100, 100)`;
+  CONTEXT_KEYBOARD.strokeStyle = `rgb(0, 0, 0)`;
   CONTEXT_KEYBOARD.font = `14px Verdana`;
   CONTEXT_KEYBOARD.textBaseline = `middle`;
   CONTEXT_KEYBOARD.textAlign = `center`;

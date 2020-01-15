@@ -183,12 +183,12 @@ function drawKeyboard() {
       FIRST_KEYS[i].size,
       STANDARD_KEY_SIZE
     );
-    CONTEXT_KEYBOARD.strokeText(
+    CONTEXT_KEYBOARD.fillText(
       FIRST_KEYS[i].shiftText,
       KEY_SPACING + FIRST_KEYS[i].size/2,
       (KEY_SPACING + STANDARD_KEY_SIZE/3) + (KEY_SPACING + STANDARD_KEY_SIZE)*i
     );
-    CONTEXT_KEYBOARD.strokeText(
+    CONTEXT_KEYBOARD.fillText(
       FIRST_KEYS[i].text,
       KEY_SPACING + FIRST_KEYS[i].size/2,
       (KEY_SPACING + 2*STANDARD_KEY_SIZE/3) + (KEY_SPACING + STANDARD_KEY_SIZE)*i
@@ -200,12 +200,12 @@ function drawKeyboard() {
         STANDARD_KEY_SIZE,
         STANDARD_KEY_SIZE
       );
-      CONTEXT_KEYBOARD.strokeText(
+      CONTEXT_KEYBOARD.fillText(
         KEYBOARD_SHIFT_LAYOUT[i].charAt(j),
         FIRST_KEYS[i].size + 2*KEY_SPACING + STANDARD_KEY_SIZE/2 + (KEY_SPACING + STANDARD_KEY_SIZE)*j,
         (KEY_SPACING + STANDARD_KEY_SIZE/3) + (KEY_SPACING + STANDARD_KEY_SIZE)*i
       );
-      CONTEXT_KEYBOARD.strokeText(
+      CONTEXT_KEYBOARD.fillText(
         KEYBOARD_LAYOUT[i].charAt(j),
         FIRST_KEYS[i].size + 2*KEY_SPACING + STANDARD_KEY_SIZE/2 + (KEY_SPACING + STANDARD_KEY_SIZE)*j,
         (KEY_SPACING + 2*STANDARD_KEY_SIZE/3) + (KEY_SPACING + STANDARD_KEY_SIZE)*i
@@ -217,12 +217,12 @@ function drawKeyboard() {
       LAST_KEYS[i].size,
       STANDARD_KEY_SIZE
     );
-    CONTEXT_KEYBOARD.strokeText(
+    CONTEXT_KEYBOARD.fillText(
       LAST_KEYS[i].shiftText,
       FIRST_KEYS[i].size + 2*KEY_SPACING + (KEY_SPACING + STANDARD_KEY_SIZE)*KEYBOARD_LAYOUT[i].length + LAST_KEYS[i].size/2,
       (KEY_SPACING + STANDARD_KEY_SIZE/3) + (KEY_SPACING + STANDARD_KEY_SIZE)*i
     );
-    CONTEXT_KEYBOARD.strokeText(
+    CONTEXT_KEYBOARD.fillText(
       LAST_KEYS[i].text,
       FIRST_KEYS[i].size + 2*KEY_SPACING + (KEY_SPACING + STANDARD_KEY_SIZE)*KEYBOARD_LAYOUT[i].length + LAST_KEYS[i].size/2,
       (KEY_SPACING + 2*STANDARD_KEY_SIZE/3) + (KEY_SPACING + STANDARD_KEY_SIZE)*i

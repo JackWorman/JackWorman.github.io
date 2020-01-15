@@ -206,8 +206,8 @@ function drawKeyboard() {
       2*STANDARD_KEY_SIZE/3 + STANDARD_KEY_SIZE*i
     );
     for (let j = 0; j < KEYBOARD_LAYOUT[i].length; j++) {
-      alert(`${DIV_TEXT.childNodes[indicatorLocation].textContent} - ${KEYBOARD_SHIFT_LAYOUT[i].charAt(j).toLowerCase()}`);
-      if (DIV_TEXT.childNodes[indicatorLocation].textContent === KEYBOARD_SHIFT_LAYOUT[i].charAt(j).toLowerCase()) {
+      // alert(`${DIV_TEXT.childNodes[indicatorLocation].textContent} - ${KEYBOARD_LAYOUT[i].charAt(j).toLowerCase()}`);
+      if (DIV_TEXT.childNodes[indicatorLocation].textContent === KEYBOARD_LAYOUT[i].charAt(j).toLowerCase()) {
         CONTEXT_KEYBOARD.fillStyle = `rgb(255, 0, 0)`;
         CONTEXT_KEYBOARD.fillRect(
           FIRST_KEYS[i].size*STANDARD_KEY_SIZE + STANDARD_KEY_SIZE*j,

@@ -146,16 +146,16 @@ function drawKeyboard() {
   CANVAS_KEYBOARD.height = 250;
 
   const FIRST_KEYS = [
-    {text: `\``, shiftText: `~`, size: 50},
-    {text: `Tab`, shiftText: ` `, size: 75},
-    {text: `Caps`, shiftText: ` `, size: 100},
-    {text: `Shift`, shiftText: ` `, size: 125}
+    {text: `\``, shiftText: `~`, size: STANDARD_KEY_SIZE},
+    {text: `Tab`, shiftText: ` `, size: 1.5*STANDARD_KEY_SIZE},
+    {text: `Caps`, shiftText: ` `, size: 1.75*STANDARD_KEY_SIZE},
+    {text: `Shift`, shiftText: ` `, size: 2.25*STANDARD_KEY_SIZE}
   ];
   const LAST_KEYS = [
-    {text: `Backspace`, shiftText: ` `, size: 100},
-    {text: `\\`, shiftText: `|`, size: 75},
-    {text: `Enter`, shiftText: ` `, size: 100},
-    {text: `Shift`, shiftText: ` `, size: 125}
+    {text: `Backspace`, shiftText: ` `, size: 2*STANDARD_KEY_SIZE},
+    {text: `\\`, shiftText: `|`, size: 1.5*STANDARD_KEY_SIZE},
+    {text: `Enter`, shiftText: ` `, size: 2.25*STANDARD_KEY_SIZE},
+    {text: `Shift`, shiftText: ` `, size: 2.75*STANDARD_KEY_SIZE}
   ];
   const KEYBOARD_LAYOUT = [
     `1234567890-=`,

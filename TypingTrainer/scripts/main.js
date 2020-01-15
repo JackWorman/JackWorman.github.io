@@ -139,7 +139,7 @@ document.addEventListener(`keydown`, (event) => {
 });
 
 function drawKeyboard() {
-  const KEY_SPACING = 1;
+  const KEY_SPACING = 0;
   const STANDARD_KEY_SIZE = 50;
 
   CANVAS_KEYBOARD.width = 900;
@@ -170,13 +170,14 @@ function drawKeyboard() {
     `       <>?`
   ];
 
+  CONTEXT_KEYBOARD.strokeStyle = `rgb(100, 100, 100)`;
   CONTEXT_KEYBOARD.font = `14px Verdana`;
   CONTEXT_KEYBOARD.textBaseline = `middle`;
   CONTEXT_KEYBOARD.textAlign = `center`;
 
   for (let i = 0; i < KEYBOARD_LAYOUT.length; i++) {
     CONTEXT_KEYBOARD.fillStyle = `rgb(100, 100, 100)`;
-    CONTEXT_KEYBOARD.fillRect(
+    CONTEXT_KEYBOARD.strokeRect(
       KEY_SPACING,
       KEY_SPACING + (KEY_SPACING + STANDARD_KEY_SIZE)*i,
       FIRST_KEYS[i].size,
@@ -195,7 +196,7 @@ function drawKeyboard() {
     );
     for (let j = 0; j < KEYBOARD_LAYOUT[i].length; j++) {
       CONTEXT_KEYBOARD.fillStyle = `rgb(100, 100, 100)`;
-      CONTEXT_KEYBOARD.fillRect(
+      CONTEXT_KEYBOARD.strokeRect(
         FIRST_KEYS[i].size + 2*KEY_SPACING + (KEY_SPACING + STANDARD_KEY_SIZE)*j,
         KEY_SPACING + (KEY_SPACING + STANDARD_KEY_SIZE)*i,
         STANDARD_KEY_SIZE,
@@ -214,7 +215,7 @@ function drawKeyboard() {
       );
     }
     CONTEXT_KEYBOARD.fillStyle = `rgb(100, 100, 100)`;
-    CONTEXT_KEYBOARD.fillRect(
+    CONTEXT_KEYBOARD.strokeRect(
       FIRST_KEYS[i].size + 2*KEY_SPACING + (KEY_SPACING + STANDARD_KEY_SIZE)*KEYBOARD_LAYOUT[i].length,
       KEY_SPACING + (KEY_SPACING + STANDARD_KEY_SIZE)*i,
       LAST_KEYS[i].size,

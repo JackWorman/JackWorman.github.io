@@ -141,8 +141,8 @@ document.addEventListener(`keydown`, (event) => {
 function drawKeyboard() {
   const STANDARD_KEY_SIZE = 50;
 
-  CANVAS_KEYBOARD.width = 900;
-  CANVAS_KEYBOARD.height = 250;
+  CANVAS_KEYBOARD.width = 15*STANDARD_KEY_SIZE;
+  CANVAS_KEYBOARD.height = 5*STANDARD_KEY_SIZE;
 
   const FIRST_KEYS = [
     {text: `\``, shiftText: `~`, size: 1},

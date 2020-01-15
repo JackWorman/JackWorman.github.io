@@ -219,7 +219,7 @@ function drawKeyboard() {
     CONTEXT_KEYBOARD.fillText(
       LAST_KEYS[i].shiftText,
       FIRST_KEYS[i].size*STANDARD_KEY_SIZE + STANDARD_KEY_SIZE*KEYBOARD_LAYOUT[i].length + LAST_KEYS[i].size*STANDARD_KEY_SIZE/2,
-      STANDARD_KEY_SIZE/3 + TANDARD_KEY_SIZE*i
+      STANDARD_KEY_SIZE/3 + STANDARD_KEY_SIZE*i
     );
     CONTEXT_KEYBOARD.fillText(
       LAST_KEYS[i].text,

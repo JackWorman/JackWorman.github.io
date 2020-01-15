@@ -146,16 +146,16 @@ function drawKeyboard() {
   CANVAS_KEYBOARD.height = 250;
 
   const FIRST_KEYS = [
-    {text: `\``, size: 50},
-    {text: `Tab`, size: 75},
-    {text: `Caps`, size: 100},
-    {text: `Shift`, size: 125}
+    {text: `\``, shiftText: `~`, size: 50},
+    {text: `Tab`, shiftText: ` `, size: 75},
+    {text: `Caps`, shiftText: ` `, size: 100},
+    {text: `Shift`, shiftText: ` `, size: 125}
   ];
   const LAST_KEYS = [
-    {text: `Backspace`, size: 100},
-    {text: `\\`, size: 75},
-    {text: `Enter`, size: 110},
-    {text: `Shift`, size: 145}
+    {text: `Backspace`, shiftText: ` `, size: 100},
+    {text: `\\`, shiftText: `|`, size: 75},
+    {text: `Enter`, shiftText: ` `, size: 110},
+    {text: `Shift`, shiftText: ` `, size: 145}
   ];
 
   const KEYBOARD_LAYOUT = [
@@ -186,7 +186,12 @@ function drawKeyboard() {
     CONTEXT_KEYBOARD.strokeText(
       FIRST_KEYS[i].text,
       KEY_SPACING + FIRST_KEYS[i].size/2,
-      (KEY_SPACING + STANDARD_KEY_SIZE/2) + (KEY_SPACING + STANDARD_KEY_SIZE)*i
+      (KEY_SPACING + STANDARD_KEY_SIZE/3) + (KEY_SPACING + STANDARD_KEY_SIZE)*i
+    );
+    CONTEXT_KEYBOARD.strokeText(
+      FIRST_KEYS[i].shiftText,
+      KEY_SPACING + FIRST_KEYS[i].size/2,
+      (KEY_SPACING + 2*STANDARD_KEY_SIZE/3) + (KEY_SPACING + STANDARD_KEY_SIZE)*i
     );
     for (let j = 0; j < KEYBOARD_LAYOUT[i].length; j++) {
       CONTEXT_KEYBOARD.fillRect(
@@ -215,7 +220,12 @@ function drawKeyboard() {
     CONTEXT_KEYBOARD.strokeText(
       LAST_KEYS[i].text,
       FIRST_KEYS[i].size + 2*KEY_SPACING + (KEY_SPACING + STANDARD_KEY_SIZE)*KEYBOARD_LAYOUT[i].length + LAST_KEYS[i].size/2,
-      (KEY_SPACING + STANDARD_KEY_SIZE/2) + (KEY_SPACING + STANDARD_KEY_SIZE)*i
+      (KEY_SPACING + STANDARD_KEY_SIZE/3) + (KEY_SPACING + STANDARD_KEY_SIZE)*i
+    );
+    CONTEXT_KEYBOARD.strokeText(
+      LAST_KEYS[i].shiftText,
+      FIRST_KEYS[i].size + 2*KEY_SPACING + (KEY_SPACING + STANDARD_KEY_SIZE)*KEYBOARD_LAYOUT[i].length + LAST_KEYS[i].size/2,
+      (KEY_SPACING + 2*STANDARD_KEY_SIZE/3) + (KEY_SPACING + STANDARD_KEY_SIZE)*i
     );
   }
 }

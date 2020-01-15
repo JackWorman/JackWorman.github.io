@@ -248,7 +248,7 @@ function drawKeyboard() {
     CONTEXT_KEYBOARD.fillText(
       BOTTOM_ROW_KEYS[i].text,
       BOTTOM_ROW_KEYS[i].size*STANDARD_KEY_SIZE/2,
-      2*STANDARD_KEY_SIZE/3 + STANDARD_KEY_SIZE*i
+      STANDARD_KEY_SIZE*4
     );
   }
 }

@@ -55,6 +55,7 @@ function setUpText() {
     }
     toggleIndicatorInterval = setInterval(toggleIndicator, MILLISECONDS_PER_SECOND / 3);
     textSetUp = true;
+    drawKeyboard();
   }, (error) => {
     console.error("Failed!", error);
   });
@@ -136,6 +137,7 @@ document.addEventListener(`keydown`, (event) => {
     alert(`Adjusted WPM: ${updateWPM() - errors}`);
     reset();
   }
+  drawKeyboard();
 });
 
 function drawKeyboard() {
@@ -204,7 +206,6 @@ function drawKeyboard() {
       2*STANDARD_KEY_SIZE/3 + STANDARD_KEY_SIZE*i
     );
     for (let j = 0; j < KEYBOARD_LAYOUT[i].length; j++) {
-      alert(DIV_TEXT.childNodes[indicatorLocation]);
       if (DIV_TEXT.childNodes[indicatorLocation].textContent === KEYBOARD_SHIFT_LAYOUT[i].charAt(j).toUpperCase()) {
         CONTEXT_KEYBOARD.fillStyle = `rgb(255, 0, 0)`;
         CONTEXT_KEYBOARD.fillRect(
@@ -267,4 +268,3 @@ function drawKeyboard() {
 }
 
 reset();
-drawKeyboard();

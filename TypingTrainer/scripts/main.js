@@ -249,7 +249,7 @@ function drawKeyboard() {
     CONTEXT_KEYBOARD.fillText(
       BOTTOM_ROW_KEYS[i].text,
       sum + BOTTOM_ROW_KEYS[i].size*STANDARD_KEY_SIZE/2,
-      STANDARD_KEY_SIZE*4
+      STANDARD_KEY_SIZE*4.5
     );
     sum += BOTTOM_ROW_KEYS[i].size*STANDARD_KEY_SIZE;
   }

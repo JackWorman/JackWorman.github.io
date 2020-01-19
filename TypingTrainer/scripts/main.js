@@ -255,6 +255,16 @@ function drawKeyboard() {
   }
   let sum = 0;
   for (let i = 0; i < BOTTOM_ROW_KEYS.length; i++) {
+    if (DIV_TEXT.childNodes[indicatorLocation].textContent === ` ` && BOTTOM_ROW_KEYS[i].text === `Space`) {
+      CONTEXT_KEYBOARD.fillStyle = `rgb(0, 255, 0)`;
+      CONTEXT_KEYBOARD.fillRect(
+        sum,
+        STANDARD_KEY_SIZE*4,
+        BOTTOM_ROW_KEYS[i].size*STANDARD_KEY_SIZE,
+        STANDARD_KEY_SIZE
+      );
+      CONTEXT_KEYBOARD.fillStyle = `rgb(255, 255, 255)`;
+    }
     CONTEXT_KEYBOARD.strokeRect(
       sum,
       STANDARD_KEY_SIZE*4,

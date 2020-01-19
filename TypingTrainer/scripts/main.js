@@ -143,16 +143,14 @@ document.addEventListener(`keydown`, (event) => {
 function drawKeyboard() {
 
 
-
-  const STANDARD_KEY_SIZE = document.documentElement.clientWidth/2/15;
-
-  CANVAS_KEYBOARD.width = 15*STANDARD_KEY_SIZE;
+  CANVAS_KEYBOARD.width = document.documentElement.clientWidth/2;;
+  const STANDARD_KEY_SIZE = CANVAS_KEYBOARD.width/15;
   CANVAS_KEYBOARD.height = 5*STANDARD_KEY_SIZE;
 
   const FIRST_KEYS = [
-    {text: `\``, shiftText: `~`, size: 1},
-    {text: `Tab`, shiftText: ``, size: 1.5},
-    {text: `Caps`, shiftText: ``, size: 1.75},
+    {text: `\``,   shiftText: `~`, size: 1},
+    {text: `Tab`,   shiftText: ``, size: 1.5},
+    {text: `Caps`,  shiftText: ``, size: 1.75},
     {text: `Shift`, shiftText: ``, size: 2.25}
   ];
   const KEYBOARD_SHIFT_LAYOUT = [
@@ -168,20 +166,20 @@ function drawKeyboard() {
     `ZXCVBNM,./`
   ];
   const LAST_KEYS = [
-    {text: `Backspace`, shiftText: ``, size: 2},
-    {text: `\\`, shiftText: `|`, size: 1.5},
-    {text: `Enter`, shiftText: ``, size: 2.25},
-    {text: `Shift`, shiftText: ``, size: 2.75}
+    {text: `Backspace`, shiftText: ``,  size: 2},
+    {text: `\\`,        shiftText: `|`, size: 1.5},
+    {text: `Enter`,     shiftText: ``,  size: 2.25},
+    {text: `Shift`,     shiftText: ``,  size: 2.75}
   ];
   const BOTTOM_ROW_KEYS = [
-    {text: `Ctrl`, size: 1.25},
-    {text: `Win`, size: 1.25},
-    {text: `Alt`, size: 1.25},
+    {text: `Ctrl`,  size: 1.25},
+    {text: `Win`,   size: 1.25},
+    {text: `Alt`,   size: 1.25},
     {text: `Space`, size: 6.25},
-    {text: `Alt`, size: 1.25},
-    {text: `Win`, size: 1.25},
-    {text: `Menu`, size: 1.25},
-    {text: `Ctrl`, size: 1.25}
+    {text: `Alt`,   size: 1.25},
+    {text: `Win`,   size: 1.25},
+    {text: `Menu`,  size: 1.25},
+    {text: `Ctrl`,  size: 1.25}
   ];
 
   CONTEXT_KEYBOARD.strokeStyle = `rgb(0, 0, 0)`;

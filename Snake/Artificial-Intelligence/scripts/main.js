@@ -27,7 +27,7 @@ let POPULATION_SIZE = 280;
 let LAYER_SIZES = [28, 20, 12, 4];
 let MUTATION_RATE = 0.1;
 let ELITISM_RATE = 0.01;
-let TESTS_PER_AGENT_PER_GENERATION = 2;
+let TESTS_PER_AGENT_PER_GENERATION = 1;
 const MAX_HUNGER = GRID_SIZE*GRID_SIZE;
 
 const snake = new Snake();
@@ -68,6 +68,9 @@ function sleep(milliseconds) {
 async function evolutionaryAlgorithmLoop() {
   while (true) {
     setUpNextGeneration();
+    if (bestFitnesses.length > 0) {
+      TESTS_PER_AGENT_PER_GENERATION = Math.max(1, Math.round(Math.sqrt(Math.max(...bestFitnesses))));
+    }
     for (let test = 0; test < TESTS_PER_AGENT_PER_GENERATION; test++) {
       resetGame(test);
       do {

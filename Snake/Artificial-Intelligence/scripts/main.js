@@ -27,7 +27,7 @@ let POPULATION_SIZE = 280;
 let LAYER_SIZES = [28, 20, 12, 4];
 let MUTATION_RATE = 0.1;
 let ELITISM_RATE = 0.01;
-let TESTS_PER_AGENT_PER_GENERATION = 1;
+let testsPerAgentPerGeneration = 1;
 const MAX_HUNGER = GRID_SIZE*GRID_SIZE;
 
 const snake = new Snake();
@@ -69,9 +69,9 @@ async function evolutionaryAlgorithmLoop() {
   while (true) {
     setUpNextGeneration();
     if (evolutionaryAlgorithm.bestFitnesses.length > 0) {
-      TESTS_PER_AGENT_PER_GENERATION = Math.max(1, Math.round(Math.sqrt(Math.max(...evolutionaryAlgorithm.bestFitnesses))));
+      testsPerAgentPerGeneration = Math.max(1, Math.round(Math.sqrt(Math.max(...evolutionaryAlgorithm.bestFitnesses))));
     }
-    for (let test = 0; test < TESTS_PER_AGENT_PER_GENERATION; test++) {
+    for (let test = 0; test < testsPerAgentPerGeneration; test++) {
       resetGame(test);
       do {
         await render(test);
@@ -85,7 +85,7 @@ async function evolutionaryAlgorithmLoop() {
       SPAN_GEN_SPECIE.textContent =
         `Generation: ${evolutionaryAlgorithm.generation},
         Species: ${evolutionaryAlgorithm.specie + 1}/${POPULATION_SIZE},
-        Test: ${test + 1}/${TESTS_PER_AGENT_PER_GENERATION}`;
+        Test: ${test + 1}/${testsPerAgentPerGeneration}`;
     }
     // download(`testDownload`, JSON.stringify(evolutionaryAlgorithm));
     // alert();
@@ -102,7 +102,7 @@ function setUpNextGeneration() {
     evolutionaryAlgorithm.specie++;
     if (evolutionaryAlgorithm.specie === POPULATION_SIZE) {
       evolutionaryAlgorithm.sort();
-      evolutionaryAlgorithm.bestFitnesses.push(evolutionaryAlgorithm.neuralNetworks[0].fitness/TESTS_PER_AGENT_PER_GENERATION);
+      evolutionaryAlgorithm.bestFitnesses.push(evolutionaryAlgorithm.neuralNetworks[0].fitness/testsPerAgentPerGeneration);
       renderGraph();
       // evolutionaryAlgorithm.calculateDiversity();
       evolutionaryAlgorithm.selectParentsViaRouletteWheel();
@@ -117,7 +117,7 @@ function setUpNextGeneration() {
     SPAN_GEN_SPECIE.textContent =
       `Generation: ${evolutionaryAlgorithm.generation},
       Species: ${evolutionaryAlgorithm.specie + 1}/${POPULATION_SIZE},
-      Test: 1/${TESTS_PER_AGENT_PER_GENERATION}`;
+      Test: 1/${testsPerAgentPerGeneration}`;
   } else {
     started = true;
     renderGraph();
@@ -203,7 +203,7 @@ async function render(test) {
     SPAN_GEN_SPECIE.textContent =
       `Generation: ${evolutionaryAlgorithm.generation},
       Species: ${evolutionaryAlgorithm.specie + 1}/${POPULATION_SIZE},
-      Test: ${test + 1}/${TESTS_PER_AGENT_PER_GENERATION}`;
+      Test: ${test + 1}/${testsPerAgentPerGeneration}`;
     window.requestAnimationFrame(() => {
       renderGame();
       renderNeuralNetwork(evolutionaryAlgorithm, snake);
@@ -239,14 +239,14 @@ document.getElementById(`button-start`).addEventListener(`click`, function testF
   LAYER_SIZES = [28, ...hiddenLayers, 4];
   MUTATION_RATE = Number.parseFloat(document.getElementsByName(`mutation-rate`)[0].value)/100;
   ELITISM_RATE = Number.parseFloat(document.getElementsByName(`elitism-rate`)[0].value)/100;
-  TESTS_PER_AGENT_PER_GENERATION =  Number.parseInt(document.getElementsByName(`tests`)[0].value);
+  testsPerAgentPerGeneration =  Number.parseInt(document.getElementsByName(`tests`)[0].value);
 
   if (
     POPULATION_SIZE < 1
     || LAYER_SIZES.some(x => isNaN(x)) || LAYER_SIZES.some(x => x < 1)
     || MUTATION_RATE < 0 || MUTATION_RATE > 1
     || ELITISM_RATE < 0 || ELITISM_RATE > 1
-    || TESTS_PER_AGENT_PER_GENERATION < 0
+    || testsPerAgentPerGeneration < 0
   ) {
     alert(`Error: One or more invalid inputs.`);
     return;

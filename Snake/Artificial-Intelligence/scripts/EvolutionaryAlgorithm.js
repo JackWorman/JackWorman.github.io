@@ -16,6 +16,7 @@ export class EvolutionaryAlgorithm {
     this.specie = 0;
     this.parent1s = [];
     this.parent2s = [];
+    this.bestFitnesses = [];
   }
 
   initialize() {

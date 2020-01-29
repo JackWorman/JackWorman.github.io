@@ -32,7 +32,7 @@ const MAX_HUNGER = GRID_SIZE*GRID_SIZE;
 
 const snake = new Snake();
 const pellet = new Pellet();
-let evolutionaryAlgorithm;
+export let evolutionaryAlgorithm;
 
 export let canvasSize = 600;
 CANVAS_GAME.width = CANVAS_GAME.height = canvasSize;
@@ -43,7 +43,7 @@ let showTraining = true;
 let started = false;
 let hunger;
 let apples;
-export let bestFitnesses = [];
+//export let bestFitnesses = [];
 let showMode = `all`;
 let snakeCopies = [];
 let previousTime = performance.now();
@@ -68,8 +68,8 @@ function sleep(milliseconds) {
 async function evolutionaryAlgorithmLoop() {
   while (true) {
     setUpNextGeneration();
-    if (bestFitnesses.length > 0) {
-      TESTS_PER_AGENT_PER_GENERATION = Math.max(1, Math.round(Math.sqrt(Math.max(...bestFitnesses))));
+    if (evolutionaryAlgorithm.bestFitnesses.length > 0) {
+      TESTS_PER_AGENT_PER_GENERATION = Math.max(1, Math.round(Math.sqrt(Math.max(...evolutionaryAlgorithm.bestFitnesses))));
     }
     for (let test = 0; test < TESTS_PER_AGENT_PER_GENERATION; test++) {
       resetGame(test);
@@ -87,8 +87,8 @@ async function evolutionaryAlgorithmLoop() {
         Species: ${evolutionaryAlgorithm.specie + 1}/${POPULATION_SIZE},
         Test: ${test + 1}/${TESTS_PER_AGENT_PER_GENERATION}`;
     }
-    download(`testDownload`, JSON.stringify(evolutionaryAlgorithm));
-    alert();
+    // download(`testDownload`, JSON.stringify(evolutionaryAlgorithm));
+    // alert();
   }
 }
 
@@ -102,7 +102,7 @@ function setUpNextGeneration() {
     evolutionaryAlgorithm.specie++;
     if (evolutionaryAlgorithm.specie === POPULATION_SIZE) {
       evolutionaryAlgorithm.sort();
-      bestFitnesses.push(evolutionaryAlgorithm.neuralNetworks[0].fitness/TESTS_PER_AGENT_PER_GENERATION);
+      evolutionaryAlgorithm.bestFitnesses.push(evolutionaryAlgorithm.neuralNetworks[0].fitness/TESTS_PER_AGENT_PER_GENERATION);
       renderGraph();
       // evolutionaryAlgorithm.calculateDiversity();
       evolutionaryAlgorithm.selectParentsViaRouletteWheel();

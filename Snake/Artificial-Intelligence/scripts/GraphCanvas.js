@@ -1,6 +1,6 @@
 "use strict";
 
-import {canvasSize, bestFitnesses} from "./main.js";
+import {canvasSize, evolutionaryAlgorithm} from "./main.js";
 
 const CANVAS_GRAPH = document.getElementById(`canvas-graph`);
 const CONTEXT_GRAPH = CANVAS_GRAPH.getContext(`2d`);
@@ -24,6 +24,7 @@ function relMouseCoords(event) {
 HTMLCanvasElement.prototype.relMouseCoords = relMouseCoords;
 
 export function renderGraph() {
+  let bestFitnesses = evolutionaryAlgorithm.bestFitnesses;
   const WHITE = `rgb(255, 255, 255)`;
   CONTEXT_GRAPH.clearRect(0, 0, canvasSize, canvasSize);
   CONTEXT_GRAPH.font = `14px Arial`;
@@ -51,6 +52,7 @@ export function renderGraph() {
 }
 
 function renderCrosshair(event) {
+  let bestFitnesses = evolutionaryAlgorithm.bestFitnesses;
   if (bestFitnesses.length < 2) return;
   const RED = `rgb(255, 0, 0)`;
   const maxFitness = Math.max(...bestFitnesses);

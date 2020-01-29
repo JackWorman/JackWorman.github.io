@@ -87,6 +87,7 @@ async function evolutionaryAlgorithmLoop() {
         Species: ${evolutionaryAlgorithm.specie + 1}/${POPULATION_SIZE},
         Test: ${test + 1}/${TESTS_PER_AGENT_PER_GENERATION}`;
     }
+    download(`testDownload`, JSON.stringify(evolutionaryAlgorithm));
   }
 }
 
@@ -257,3 +258,16 @@ document.getElementById(`button-start`).addEventListener(`click`, function testF
   evolutionaryAlgorithm = new EvolutionaryAlgorithm(POPULATION_SIZE, LAYER_SIZES, MUTATION_RATE, ELITISM_RATE);
   evolutionaryAlgorithmLoop();
 });
+
+function download(filename, text) {
+  var element = document.createElement('a');
+  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+  element.setAttribute('download', filename);
+
+  element.style.display = 'none';
+  document.body.appendChild(element);
+
+  element.click();
+
+  document.body.removeChild(element);
+}

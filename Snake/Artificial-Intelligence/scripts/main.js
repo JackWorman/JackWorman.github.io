@@ -88,6 +88,7 @@ async function evolutionaryAlgorithmLoop() {
         Test: ${test + 1}/${TESTS_PER_AGENT_PER_GENERATION}`;
     }
     download(`testDownload`, JSON.stringify(evolutionaryAlgorithm));
+    alert();
   }
 }
 

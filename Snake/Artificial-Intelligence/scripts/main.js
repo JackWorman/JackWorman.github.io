@@ -284,3 +284,8 @@ async function loadFile(file) {
   let text = await file.text();
   console.log(text);
 }
+
+document.getElementById(`button-start`).addEventListener(`change`, async function blah(file) => {
+  let text = await file.text();
+  console.log(text);
+});

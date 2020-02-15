@@ -276,10 +276,11 @@ function download(filename, text) {
 function readFile(file) {
   return new Promise((resolve, reject) => {
     let fr = new FileReader();
-    fr.onload = x=> resolve(fr.result);
+    fr.onload = x => resolve(fr.result);
     fr.readAsText(file);
 })}
 
-document.getElementById(`button-load`).addEventListener(`click`, () => {
-  window.requestFileSystem();
-});
+async function loadFile(file) {
+  let text = await file.text();
+  console.log(text);
+}

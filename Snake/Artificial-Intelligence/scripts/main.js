@@ -87,6 +87,9 @@ async function evolutionaryAlgorithmLoop() {
         Species: ${evolutionaryAlgorithm.specie + 1}/${POPULATION_SIZE},
         Test: ${test + 1}/${testsPerAgentPerGeneration}`;
     }
+    if (evolutionaryAlgorithm.bestFitnesses.length === 10) {
+      download(`testDownload`, JSON.stringify(evolutionaryAlgorithm));
+    }
     // download(`testDownload`, JSON.stringify(evolutionaryAlgorithm));
     // alert();
   }

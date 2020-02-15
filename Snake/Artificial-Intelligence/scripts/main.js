@@ -87,9 +87,6 @@ async function evolutionaryAlgorithmLoop() {
         Species: ${evolutionaryAlgorithm.specie + 1}/${POPULATION_SIZE},
         Test: ${test + 1}/${testsPerAgentPerGeneration}`;
     }
-    if (evolutionaryAlgorithm.bestFitnesses.length === 10) {
-      download(`testDownload`, JSON.stringify(evolutionaryAlgorithm));
-    }
     // download(`testDownload`, JSON.stringify(evolutionaryAlgorithm));
     // alert();
   }
@@ -275,3 +272,14 @@ function download(filename, text) {
 
   document.body.removeChild(element);
 }
+
+function readFile(file) {
+  return new Promise((resolve, reject) => {
+    let fr = new FileReader();
+    fr.onload = x=> resolve(fr.result);
+    fr.readAsText(file);
+})}
+
+document.getElementById(`button-load`).addEventListener(`click`, () => {
+  window.requestFileSystem();
+});

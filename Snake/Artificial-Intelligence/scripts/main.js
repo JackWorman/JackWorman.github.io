@@ -286,6 +286,7 @@ async function loadFile(file) {
 }
 
 document.getElementById(`input-file`).addEventListener(`change`, async function blah(file) {
+  console.log(file);
   let text = await file.text();
   console.log(text);
 });

@@ -44,9 +44,13 @@ function loadFile(filePath) {
 function setUpText() {
   loadFile(`https://jackworman.com/TypingTrainer/words.txt`).then((response) => {
     const words = response.split(/\n/);
-    text = words[Math.floor(Math.random() * words.length)];
+    let tempWord = words[Math.floor(Math.random() * words.length)];
+    let upperCaseWord = tempWord.charAt(0).toUpperCase() + tempWord.slice(1);
+    text = upperCaseWord;
     while (text.length < Math.max(50, Number(localStorage.getItem(`wpm`)) * 5 / 2)) {
-      text += ` ${words[Math.floor(Math.random() * words.length)]}`;
+      tempWord = words[Math.floor(Math.random() * words.length)];
+      upperCaseWord = tempWord.charAt(0).toUpperCase() + tempWord.slice(1);
+      text += ` ${upperCaseWord}`;
     }
     for (const character of text) {
       const spanCharacter = document.createElement(`span`);

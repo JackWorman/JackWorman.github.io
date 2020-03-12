@@ -40,3 +40,7 @@ div {
   border: 1px solid white;
   background-color: rgb(100, 100, 100);
 }
+
+#div-text-container {
+  border: 1px solid white;
+}

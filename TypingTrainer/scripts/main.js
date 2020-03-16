@@ -145,8 +145,6 @@ document.addEventListener(`keydown`, (event) => {
 });
 
 function drawKeyboard() {
-
-
   CANVAS_KEYBOARD.width = document.documentElement.clientWidth/2;;
   const STANDARD_KEY_SIZE = CANVAS_KEYBOARD.width/15;
   CANVAS_KEYBOARD.height = 5*STANDARD_KEY_SIZE;

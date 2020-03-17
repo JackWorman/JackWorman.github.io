@@ -189,14 +189,25 @@ function drawKeyboard() {
             STANDARD_KEY_SIZE
           );
           CONTEXT_KEYBOARD.fillStyle = `rgb(255, 255, 255)`;
-      } else {
-        CONTEXT_KEYBOARD.strokeRect(
+      } else if (
+          RIGHT_SHIFT_CHARACTERS.includes(DIV_TEXT.childNodes[indicatorLocation].textContent)
+          && KEYBOARD_LAYOUT[row][i].topDisplay === `Shift`
+      ) {
+          CONTEXT_KEYBOARD.fillStyle = `rgb(0, 128, 128)`;
+          CONTEXT_KEYBOARD.fillRect(
+            xPosition,
+            row*STANDARD_KEY_SIZE,
+            KEYBOARD_LAYOUT[row][i].size*STANDARD_KEY_SIZE,
+            STANDARD_KEY_SIZE
+          );
+          CONTEXT_KEYBOARD.fillStyle = `rgb(255, 255, 255)`;
+      }
+      CONTEXT_KEYBOARD.strokeRect(
           xPosition,
           row*STANDARD_KEY_SIZE,
           KEYBOARD_LAYOUT[row][i].size*STANDARD_KEY_SIZE,
           STANDARD_KEY_SIZE
         );
-      }
       CONTEXT_KEYBOARD.fillText(
         KEYBOARD_LAYOUT[row][i].topDisplay,
         xPosition + KEYBOARD_LAYOUT[row][i].size*STANDARD_KEY_SIZE/2,

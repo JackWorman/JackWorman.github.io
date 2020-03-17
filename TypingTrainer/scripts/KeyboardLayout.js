@@ -1,6 +1,6 @@
 "use strict";
 
-export KEYBOARD_LAYOUT = [
+export const KEYBOARD_LAYOUT = [
   [
     {value: `\``, shiftValue: `~`, bottomDisplay: `\``, topDisplay: `~`,      size: 1},
     {value: `1`,  shiftValue: `!`, bottomDisplay: `1`,  topDisplay: `!`,      size: 1},

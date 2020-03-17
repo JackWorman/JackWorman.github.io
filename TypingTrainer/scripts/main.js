@@ -162,7 +162,10 @@ function drawKeyboard() {
   for (let row = 0; row < KEYBOARD_LAYOUT.length; row++) {
     let xPosition = 0;
     for (let i = 0; i < KEYBOARD_LAYOUT[row].length; i++) {
-      if (DIV_TEXT.childNodes[indicatorLocation].textContent === KEYBOARD_LAYOUT[row][i].value) {
+      if (
+        DIV_TEXT.childNodes[indicatorLocation].textContent === KEYBOARD_LAYOUT[row][i].value
+        || DIV_TEXT.childNodes[indicatorLocation].textContent === KEYBOARD_LAYOUT[row][i].shiftValue
+      ) {
         CONTEXT_KEYBOARD.fillStyle = `rgb(0, 0, 128)`;
         CONTEXT_KEYBOARD.fillRect(
           xPosition,

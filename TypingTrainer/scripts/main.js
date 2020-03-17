@@ -147,26 +147,43 @@ document.addEventListener(`keydown`, (event) => {
 
 import {KEYBOARD_LAYOUT} from './KeyboardLayout.js';
 
-// function drawKeyboard2() {
-//   CANVAS_KEYBOARD.width = document.documentElement.clientWidth/2;;
-//   const STANDARD_KEY_SIZE = CANVAS_KEYBOARD.width/15;
-//   CANVAS_KEYBOARD.height = 5*STANDARD_KEY_SIZE;
-//
-//   CONTEXT_KEYBOARD.strokeStyle = `rgb(0, 0, 0)`;
-//   CONTEXT_KEYBOARD.lineWidth = `2px`;
-//   CONTEXT_KEYBOARD.font = `14px Verdana`;
-//   CONTEXT_KEYBOARD.textBaseline = `middle`;
-//   CONTEXT_KEYBOARD.textAlign = `center`;
-//   CONTEXT_KEYBOARD.fillStyle = `rgb(255, 255, 255)`;
-//
-//   for (let row = 0; row < KEYBOARD_LAYOUT.length; row++) {
-//     for (let i = 0; i < KEYBOARD_LAYOUT[row].length; i++) {
-//
-//     }
-//   }
-// }
-
 function drawKeyboard() {
+  CANVAS_KEYBOARD.width = document.documentElement.clientWidth/2;;
+  const STANDARD_KEY_SIZE = CANVAS_KEYBOARD.width/15;
+  CANVAS_KEYBOARD.height = 5*STANDARD_KEY_SIZE;
+
+  CONTEXT_KEYBOARD.strokeStyle = `rgb(0, 0, 0)`;
+  CONTEXT_KEYBOARD.lineWidth = `2px`;
+  CONTEXT_KEYBOARD.font = `14px Verdana`;
+  CONTEXT_KEYBOARD.textBaseline = `middle`;
+  CONTEXT_KEYBOARD.textAlign = `center`;
+  CONTEXT_KEYBOARD.fillStyle = `rgb(255, 255, 255)`;
+
+  for (let row = 0; row < KEYBOARD_LAYOUT.length; row++) {
+    let xPosition = 0;
+    for (let i = 0; i < KEYBOARD_LAYOUT[row].length; i++) {
+      CONTEXT_KEYBOARD.strokeRect(
+        xPosition,
+        row*STANDARD_KEY_SIZE,
+        KEYBOARD_LAYOUT[row][i].size*STANDARD_KEY_SIZE,
+        STANDARD_KEY_SIZE
+      );
+      CONTEXT_KEYBOARD.fillText(
+        KEYBOARD_LAYOUT[row][i].topDisplay,
+        xPosition + row*STANDARD_KEY_SIZE/2,
+        row*STANDARD_KEY_SIZE + 2*STANDARD_KEY_SIZE/3
+      );
+      CONTEXT_KEYBOARD.fillText(
+        KEYBOARD_LAYOUT[row][i].bottomDisplay,
+        xPosition + row*STANDARD_KEY_SIZE/2,
+        row*STANDARD_KEY_SIZE + 2*STANDARD_KEY_SIZE/3
+      );
+      xPosition += row*STANDARD_KEY_SIZE;
+    }
+  }
+}
+
+function drawKeyboard2() {
   CANVAS_KEYBOARD.width = document.documentElement.clientWidth/2;;
   const STANDARD_KEY_SIZE = CANVAS_KEYBOARD.width/15;
   CANVAS_KEYBOARD.height = 5*STANDARD_KEY_SIZE;

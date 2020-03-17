@@ -15,7 +15,7 @@ export const KEYBOARD_LAYOUT = [
     {value: `0`,  shiftValue: `)`, bottomDisplay: `0`,  topDisplay: `)`,      size: 1},
     {value: `-`,  shiftValue: `_`, bottomDisplay: `-`,  topDisplay: `_`,      size: 1},
     {value: `=`,  shiftValue: `+`, bottomDisplay: `=`,  topDisplay: `+`,      size: 1},
-    {value: ``,   shiftValue: ``,  bottomDisplay: ``,   topDisplay: `\&#8592`, size: 2}
+    {value: ``,   shiftValue: ``,  bottomDisplay: ``,   topDisplay: &#8592, size: 2}
   ],
   [
     {value: ``,   shiftValue: ``,  bottomDisplay: ``,   topDisplay: `Tab`, size: 1.5},

@@ -170,15 +170,15 @@ function drawKeyboard() {
       );
       CONTEXT_KEYBOARD.fillText(
         KEYBOARD_LAYOUT[row][i].topDisplay,
-        xPosition + row*STANDARD_KEY_SIZE/2,
+        xPosition + KEYBOARD_LAYOUT[row][i].size*STANDARD_KEY_SIZE/2,
         row*STANDARD_KEY_SIZE + 2*STANDARD_KEY_SIZE/3
       );
       CONTEXT_KEYBOARD.fillText(
         KEYBOARD_LAYOUT[row][i].bottomDisplay,
-        xPosition + row*STANDARD_KEY_SIZE/2,
+        xPosition + KEYBOARD_LAYOUT[row][i].size*STANDARD_KEY_SIZE/2,
         row*STANDARD_KEY_SIZE + 2*STANDARD_KEY_SIZE/3
       );
-      xPosition += row*STANDARD_KEY_SIZE;
+      xPosition += KEYBOARD_LAYOUT[row][i].size*STANDARD_KEY_SIZE;
     }
   }
 }

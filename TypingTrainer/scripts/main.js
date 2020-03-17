@@ -170,6 +170,7 @@ function drawKeyboard() {
           KEYBOARD_LAYOUT[row][i].size*STANDARD_KEY_SIZE,
           STANDARD_KEY_SIZE
         );
+        CONTEXT_KEYBOARD.fillStyle = `rgb(255, 255, 255)`;
       } else {
         CONTEXT_KEYBOARD.strokeRect(
           xPosition,

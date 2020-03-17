@@ -166,7 +166,7 @@ function drawKeyboard() {
         DIV_TEXT.childNodes[indicatorLocation].textContent === KEYBOARD_LAYOUT[row][i].value
         || DIV_TEXT.childNodes[indicatorLocation].textContent === KEYBOARD_LAYOUT[row][i].shiftValue
       ) {
-        CONTEXT_KEYBOARD.fillStyle = `rgb(0, 0, 128)`;
+        CONTEXT_KEYBOARD.fillStyle = `rgb(0, 128, 128)`;
         CONTEXT_KEYBOARD.fillRect(
           xPosition,
           row*STANDARD_KEY_SIZE,

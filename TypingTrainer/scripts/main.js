@@ -188,6 +188,7 @@ function drawKeyboard() {
           KEYBOARD_LAYOUT[row][i].size*STANDARD_KEY_SIZE,
           STANDARD_KEY_SIZE
         );
+      // Render key labels.
       CONTEXT_KEYBOARD.fillStyle = `rgb(255, 255, 255)`;
       CONTEXT_KEYBOARD.fillText(
         KEYBOARD_LAYOUT[row][i].topDisplay,

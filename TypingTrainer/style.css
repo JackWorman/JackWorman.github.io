@@ -38,7 +38,7 @@ div {
 
 #canvas-keyboard {
   border: 1px solid white;
-  /* background-color: rgb(100, 100, 100); */
+  padding: 2px;
 }
 
 #div-text-container {

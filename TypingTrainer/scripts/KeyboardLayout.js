@@ -1,13 +1,5 @@
 "use strict";
 
-// {
-//   value: `a`,
-//   shiftValue: `A`,
-//   bottomDisplay: ``,
-//   topDisplay: `A`,
-//   size: 1
-// }
-
 export KEYBOARD_LAYOUT = [
   [
     {value: `\``, shiftValue: `~`, bottomDisplay: `\``, topDisplay: `~`,      size: 1},
@@ -26,49 +18,58 @@ export KEYBOARD_LAYOUT = [
     {value: ``,   shiftValue: ``,  bottomDisplay: ``,   topDisplay: `&#8592`, size: 2}
   ],
   [
-    {text: `Tab`, shiftText: ``, size: 1.5},
-    {text: `Q`, shiftText: ``, size: 1},
-    {text: `W`, shiftText: ``, size: 1},
-    {text: `E`, shiftText: ``, size: 1},
-    {text: `R`, shiftText: ``, size: 1},
-    {text: `T`, shiftText: ``, size: 1},
-    {text: `Y`, shiftText: ``, size: 1},
-    {text: `U`, shiftText: ``, size: 1},
-    {text: `I`, shiftText: ``, size: 1},
-    {text: `O`, shiftText: ``, size: 1},
-    {text: `P`, shiftText: ``, size: 1},
-    {text: `[`, shiftText: `{`, size: 1},
-    {text: `]`, shiftText: `}`, size: 1},
-    {text: `\\`, shiftText: `|`, size: 1.5}
+    {value: ``,   shiftValue: ``,  bottomDisplay: ``,   topDisplay: `Tab`, size: 1.5},
+    {value: `q`,  shiftValue: `Q`, bottomDisplay: ``,   topDisplay: `Q`,   size: 1},
+    {value: `w`,  shiftValue: `W`, bottomDisplay: ``,   topDisplay: `W`,   size: 1},
+    {value: `e`,  shiftValue: `E`, bottomDisplay: ``,   topDisplay: `E`,   size: 1},
+    {value: `r`,  shiftValue: `R`, bottomDisplay: ``,   topDisplay: `R`,   size: 1},
+    {value: `t`,  shiftValue: `T`, bottomDisplay: ``,   topDisplay: `T`,   size: 1},
+    {value: `y`,  shiftValue: `Y`, bottomDisplay: ``,   topDisplay: `Y`,   size: 1},
+    {value: `u`,  shiftValue: `U`, bottomDisplay: ``,   topDisplay: `U`,   size: 1},
+    {value: `i`,  shiftValue: `I`, bottomDisplay: ``,   topDisplay: `I`,   size: 1},
+    {value: `o`,  shiftValue: `O`, bottomDisplay: ``,   topDisplay: `O`,   size: 1},
+    {value: `p`,  shiftValue: `P`, bottomDisplay: ``,   topDisplay: `P`,   size: 1},
+    {value: `[`,  shiftValue: `{`, bottomDisplay: `[`,  topDisplay: `{`,   size: 1},
+    {value: `]`,  shiftValue: `}`, bottomDisplay: `]`,  topDisplay: `}`,   size: 1},
+    {value: `\\`, shiftValue: `|`, bottomDisplay: `\\`, topDisplay: `|`,   size: 1.5}
   ],
   [
-    {text: `Caps`, shiftText: ``, size: 1.75},
-    {text: `Q`, shiftText: ``, size: 1},
-    {text: `W`, shiftText: ``, size: 1},
-    {text: `E`, shiftText: ``, size: 1},
-    {text: `R`, shiftText: ``, size: 1},
-    {text: `T`, shiftText: ``, size: 1},
-    {text: `Y`, shiftText: ``, size: 1},
-    {text: `U`, shiftText: ``, size: 1},
-    {text: `I`, shiftText: ``, size: 1},
-    {text: `O`, shiftText: ``, size: 1},
-    {text: `P`, shiftText: ``, size: 1},
-    {text: `[`, shiftText: `{`, size: 1},
-    {text: `]`, shiftText: `}`, size: 1},
-    {text: `\\`, shiftText: `|`, size: 1.5}
-
+    {value: ``,  shiftValue: ``,  bottomDisplay: ``,  topDisplay: `Caps`,  size: 1.75},
+    {value: `a`, shiftValue: `A`, bottomDisplay: ``,  topDisplay: `A`,     size: 1},
+    {value: `s`, shiftValue: `S`, bottomDisplay: ``,  topDisplay: `S`,     size: 1},
+    {value: `d`, shiftValue: `D`, bottomDisplay: ``,  topDisplay: `D`,     size: 1},
+    {value: `f`, shiftValue: `F`, bottomDisplay: ``,  topDisplay: `F`,     size: 1},
+    {value: `g`, shiftValue: `G`, bottomDisplay: ``,  topDisplay: `G`,     size: 1},
+    {value: `h`, shiftValue: `H`, bottomDisplay: ``,  topDisplay: `H`,     size: 1},
+    {value: `j`, shiftValue: `J`, bottomDisplay: ``,  topDisplay: `J`,     size: 1},
+    {value: `k`, shiftValue: `K`, bottomDisplay: ``,  topDisplay: `K`,     size: 1},
+    {value: `l`, shiftValue: `L`, bottomDisplay: ``,  topDisplay: `L`,     size: 1},
+    {value: `;`, shiftValue: `:`, bottomDisplay: `;`, topDisplay: `:`,     size: 1},
+    {value: `'`, shiftValue: `"`, bottomDisplay: `'`, topDisplay: `"`,     size: 1},
+    {value: ``,  shiftValue: ``,  bottomDisplay: ``,  topDisplay: `Enter`, size: 2.25},
   ],
   [
-
+    {value: ``,  shiftValue: ``,  bottomDisplay: ``,  topDisplay: `Shift`, size: 2.25},
+    {value: `z`, shiftValue: `Z`, bottomDisplay: ``,  topDisplay: `Z`,     size: 1},
+    {value: `x`, shiftValue: `X`, bottomDisplay: ``,  topDisplay: `X`,     size: 1},
+    {value: `c`, shiftValue: `C`, bottomDisplay: ``,  topDisplay: `C`,     size: 1},
+    {value: `v`, shiftValue: `V`, bottomDisplay: ``,  topDisplay: `V`,     size: 1},
+    {value: `b`, shiftValue: `B`, bottomDisplay: ``,  topDisplay: `B`,     size: 1},
+    {value: `n`, shiftValue: `N`, bottomDisplay: ``,  topDisplay: `N`,     size: 1},
+    {value: `m`, shiftValue: `M`, bottomDisplay: ``,  topDisplay: `M`,     size: 1},
+    {value: `,`, shiftValue: `<`, bottomDisplay: `,`, topDisplay: `<`,     size: 1},
+    {value: `.`, shiftValue: `>`, bottomDisplay: `.`, topDisplay: `>`,     size: 1},
+    {value: `/`, shiftValue: `?`, bottomDisplay: `/`, topDisplay: `?`,     size: 1},
+    {value: ``,  shiftValue: ``,  bottomDisplay: ``,  topDisplay: `Shift`, size: 2.75},
   ],
   [
-    {text: `Ctrl`,  size: 1.25},
-    {text: `Win`,   size: 1.25},
-    {text: `Alt`,   size: 1.25},
-    {text: `Space`, size: 6.25},
-    {text: `Alt`,   size: 1.25},
-    {text: `Win`,   size: 1.25},
-    {text: `Menu`,  size: 1.25},
-    {text: `Ctrl`,  size: 1.25}
+    {value: ``, shiftValue: ``, bottomDisplay: ``, topDisplay: `Ctrl`, size: 1.25},
+    {value: ``, shiftValue: ``, bottomDisplay: ``, topDisplay: `Win`,  size: 1.25},
+    {value: ``, shiftValue: ``, bottomDisplay: ``, topDisplay: `Alt`,  size: 1.25},
+    {value: ``, shiftValue: ``, bottomDisplay: ``, topDisplay: ` `,    size: 6.25},
+    {value: ``, shiftValue: ``, bottomDisplay: ``, topDisplay: `Alt`,  size: 1.25},
+    {value: ``, shiftValue: ``, bottomDisplay: ``, topDisplay: `Win`,  size: 1.25},
+    {value: ``, shiftValue: ``, bottomDisplay: ``, topDisplay: `Menu`, size: 1.25},
+    {value: ``, shiftValue: ``, bottomDisplay: ``,  opDisplay: `Ctrl`, size: 1.25}
   ]
-]
+];

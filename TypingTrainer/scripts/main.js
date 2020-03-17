@@ -144,6 +144,28 @@ document.addEventListener(`keydown`, (event) => {
   drawKeyboard();
 });
 
+
+import {KEYBOARD_LAYOUT} from './KeyboardLayout.js';
+
+// function drawKeyboard2() {
+//   CANVAS_KEYBOARD.width = document.documentElement.clientWidth/2;;
+//   const STANDARD_KEY_SIZE = CANVAS_KEYBOARD.width/15;
+//   CANVAS_KEYBOARD.height = 5*STANDARD_KEY_SIZE;
+//
+//   CONTEXT_KEYBOARD.strokeStyle = `rgb(0, 0, 0)`;
+//   CONTEXT_KEYBOARD.lineWidth = `2px`;
+//   CONTEXT_KEYBOARD.font = `14px Verdana`;
+//   CONTEXT_KEYBOARD.textBaseline = `middle`;
+//   CONTEXT_KEYBOARD.textAlign = `center`;
+//   CONTEXT_KEYBOARD.fillStyle = `rgb(255, 255, 255)`;
+//
+//   for (let row = 0; row < KEYBOARD_LAYOUT.length; row++) {
+//     for (let i = 0; i < KEYBOARD_LAYOUT[row].length; i++) {
+//
+//     }
+//   }
+// }
+
 function drawKeyboard() {
   CANVAS_KEYBOARD.width = document.documentElement.clientWidth/2;;
   const STANDARD_KEY_SIZE = CANVAS_KEYBOARD.width/15;

@@ -148,6 +148,9 @@ document.addEventListener(`keydown`, (event) => {
 import {KEYBOARD_LAYOUT} from './KeyboardLayout.js';
 
 function drawKeyboard() {
+  const LEFT_SHIFT_CHARACTERS = `^&*()_+YUIOP{}|HJKL:"NM<>?`;
+  const RIGHT_SHIFT_CHARACTERS = `~!@#$%QWERTASDFGZXCVB`;
+
   CANVAS_KEYBOARD.width = document.documentElement.clientWidth/2;;
   const STANDARD_KEY_SIZE = CANVAS_KEYBOARD.width/15;
   CANVAS_KEYBOARD.height = 5*STANDARD_KEY_SIZE;
@@ -174,6 +177,18 @@ function drawKeyboard() {
           STANDARD_KEY_SIZE
         );
         CONTEXT_KEYBOARD.fillStyle = `rgb(255, 255, 255)`;
+      } else if (
+        LEFT_SHIFT_CHARACTERS.includes(DIV_TEXT.childNodes[indicatorLocation].textContent)
+        && KEYBOARD_LAYOUT[row][i].topDisplay === `Shift`
+      ) {
+          CONTEXT_KEYBOARD.fillStyle = `rgb(0, 128, 128)`;
+          CONTEXT_KEYBOARD.fillRect(
+            xPosition,
+            row*STANDARD_KEY_SIZE,
+            KEYBOARD_LAYOUT[row][i].size*STANDARD_KEY_SIZE,
+            STANDARD_KEY_SIZE
+          );
+          CONTEXT_KEYBOARD.fillStyle = `rgb(255, 255, 255)`;
       } else {
         CONTEXT_KEYBOARD.strokeRect(
           xPosition,
@@ -194,142 +209,6 @@ function drawKeyboard() {
       );
       xPosition += KEYBOARD_LAYOUT[row][i].size*STANDARD_KEY_SIZE;
     }
-  }
-}
-
-function drawKeyboard2() {
-  CANVAS_KEYBOARD.width = document.documentElement.clientWidth/2;;
-  const STANDARD_KEY_SIZE = CANVAS_KEYBOARD.width/15;
-  CANVAS_KEYBOARD.height = 5*STANDARD_KEY_SIZE;
-
-  const FIRST_KEYS = [
-    {text: `\``,   shiftText: `~`, size: 1},
-    {text: `Tab`,   shiftText: ``, size: 1.5},
-    {text: `Caps`,  shiftText: ``, size: 1.75},
-    {text: `Shift`, shiftText: ``, size: 2.25}
-  ];
-  const KEYBOARD_SHIFT_LAYOUT = [
-    `!@#$%^&*()_+`,
-    `          {}`,
-    `         :"`,
-    `       <>?`
-  ];
-  const KEYBOARD_LAYOUT = [
-    `1234567890-=`,
-    `QWERTYUIOP[]`,
-    `ASDFGHJKL;'`,
-    `ZXCVBNM,./`
-  ];
-  const LAST_KEYS = [
-    {text: `Backspace`, shiftText: ``,  size: 2},
-    {text: `\\`,        shiftText: `|`, size: 1.5},
-    {text: `Enter`,     shiftText: ``,  size: 2.25},
-    {text: `Shift`,     shiftText: ``,  size: 2.75}
-  ];
-  const BOTTOM_ROW_KEYS = [
-    {text: `Ctrl`,  size: 1.25},
-    {text: `Win`,   size: 1.25},
-    {text: `Alt`,   size: 1.25},
-    {text: `Space`, size: 6.25},
-    {text: `Alt`,   size: 1.25},
-    {text: `Win`,   size: 1.25},
-    {text: `Menu`,  size: 1.25},
-    {text: `Ctrl`,  size: 1.25}
-  ];
-
-  CONTEXT_KEYBOARD.strokeStyle = `rgb(0, 0, 0)`;
-  CONTEXT_KEYBOARD.lineWidth = `2px`;
-  CONTEXT_KEYBOARD.font = `14px Verdana`;
-  CONTEXT_KEYBOARD.textBaseline = `middle`;
-  CONTEXT_KEYBOARD.textAlign = `center`;
-  CONTEXT_KEYBOARD.fillStyle = `rgb(255, 255, 255)`;
-
-  for (let i = 0; i < KEYBOARD_LAYOUT.length; i++) {
-    CONTEXT_KEYBOARD.strokeRect(
-      0,
-      STANDARD_KEY_SIZE*i,
-      FIRST_KEYS[i].size*STANDARD_KEY_SIZE,
-      STANDARD_KEY_SIZE
-    );
-    CONTEXT_KEYBOARD.fillText(
-      FIRST_KEYS[i].shiftText,
-      FIRST_KEYS[i].size*STANDARD_KEY_SIZE/2,
-      STANDARD_KEY_SIZE/3 + STANDARD_KEY_SIZE*i
-    );
-    CONTEXT_KEYBOARD.fillText(
-      FIRST_KEYS[i].text,
-      FIRST_KEYS[i].size*STANDARD_KEY_SIZE/2,
-      2*STANDARD_KEY_SIZE/3 + STANDARD_KEY_SIZE*i
-    );
-    for (let j = 0; j < KEYBOARD_LAYOUT[i].length; j++) {
-      if (DIV_TEXT.childNodes[indicatorLocation].textContent === KEYBOARD_LAYOUT[i].charAt(j).toLowerCase()) {
-        CONTEXT_KEYBOARD.fillStyle = `rgb(0, 255, 0)`;
-        CONTEXT_KEYBOARD.fillRect(
-          FIRST_KEYS[i].size*STANDARD_KEY_SIZE + STANDARD_KEY_SIZE*j,
-          STANDARD_KEY_SIZE*i,
-          STANDARD_KEY_SIZE,
-          STANDARD_KEY_SIZE
-        );
-        CONTEXT_KEYBOARD.fillStyle = `rgb(255, 255, 255)`;
-      }
-      CONTEXT_KEYBOARD.strokeRect(
-        FIRST_KEYS[i].size*STANDARD_KEY_SIZE + STANDARD_KEY_SIZE*j,
-        STANDARD_KEY_SIZE*i,
-        STANDARD_KEY_SIZE,
-        STANDARD_KEY_SIZE
-      );
-      CONTEXT_KEYBOARD.fillText(
-        KEYBOARD_SHIFT_LAYOUT[i].charAt(j),
-        FIRST_KEYS[i].size*STANDARD_KEY_SIZE + STANDARD_KEY_SIZE/2 + STANDARD_KEY_SIZE*j,
-        STANDARD_KEY_SIZE/3 + STANDARD_KEY_SIZE*i
-      );
-      CONTEXT_KEYBOARD.fillText(
-        KEYBOARD_LAYOUT[i].charAt(j),
-        FIRST_KEYS[i].size*STANDARD_KEY_SIZE + STANDARD_KEY_SIZE/2 + STANDARD_KEY_SIZE*j,
-        2*STANDARD_KEY_SIZE/3 + STANDARD_KEY_SIZE*i
-      );
-    }
-    CONTEXT_KEYBOARD.strokeRect(
-      FIRST_KEYS[i].size*STANDARD_KEY_SIZE + STANDARD_KEY_SIZE*KEYBOARD_LAYOUT[i].length,
-      STANDARD_KEY_SIZE*i,
-      LAST_KEYS[i].size*STANDARD_KEY_SIZE,
-      STANDARD_KEY_SIZE
-    );
-    CONTEXT_KEYBOARD.fillText(
-      LAST_KEYS[i].shiftText,
-      FIRST_KEYS[i].size*STANDARD_KEY_SIZE + STANDARD_KEY_SIZE*KEYBOARD_LAYOUT[i].length + LAST_KEYS[i].size*STANDARD_KEY_SIZE/2,
-      STANDARD_KEY_SIZE/3 + STANDARD_KEY_SIZE*i
-    );
-    CONTEXT_KEYBOARD.fillText(
-      LAST_KEYS[i].text,
-      FIRST_KEYS[i].size*STANDARD_KEY_SIZE + STANDARD_KEY_SIZE*KEYBOARD_LAYOUT[i].length + LAST_KEYS[i].size*STANDARD_KEY_SIZE/2,
-      2*STANDARD_KEY_SIZE/3 + STANDARD_KEY_SIZE*i
-    );
-  }
-  let sum = 0;
-  for (let i = 0; i < BOTTOM_ROW_KEYS.length; i++) {
-    if (DIV_TEXT.childNodes[indicatorLocation].textContent === ` ` && BOTTOM_ROW_KEYS[i].text === `Space`) {
-      CONTEXT_KEYBOARD.fillStyle = `rgb(0, 255, 0)`;
-      CONTEXT_KEYBOARD.fillRect(
-        sum,
-        STANDARD_KEY_SIZE*4,
-        BOTTOM_ROW_KEYS[i].size*STANDARD_KEY_SIZE,
-        STANDARD_KEY_SIZE
-      );
-      CONTEXT_KEYBOARD.fillStyle = `rgb(255, 255, 255)`;
-    }
-    CONTEXT_KEYBOARD.strokeRect(
-      sum,
-      STANDARD_KEY_SIZE*4,
-      BOTTOM_ROW_KEYS[i].size*STANDARD_KEY_SIZE,
-      STANDARD_KEY_SIZE
-    );
-    CONTEXT_KEYBOARD.fillText(
-      BOTTOM_ROW_KEYS[i].text,
-      sum + BOTTOM_ROW_KEYS[i].size*STANDARD_KEY_SIZE/2,
-      STANDARD_KEY_SIZE*4.5
-    );
-    sum += BOTTOM_ROW_KEYS[i].size*STANDARD_KEY_SIZE;
   }
 }
 

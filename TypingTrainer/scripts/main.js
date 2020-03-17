@@ -163,14 +163,13 @@ function drawKeyboard() {
     let xPosition = 0;
     for (let i = 0; i < KEYBOARD_LAYOUT[row].length; i++) {
       if (DIV_TEXT.childNodes[indicatorLocation].textContent === KEYBOARD_LAYOUT[row][i].value) {
-        CONTEXT_KEYBOARD.fillStyle = `rgb(255, 0, 0)`;
+        CONTEXT_KEYBOARD.fillStyle = `rgb(0, 0, 128)`;
         CONTEXT_KEYBOARD.fillRect(
           xPosition,
           row*STANDARD_KEY_SIZE,
           KEYBOARD_LAYOUT[row][i].size*STANDARD_KEY_SIZE,
           STANDARD_KEY_SIZE
         );
-        CONTEXT_KEYBOARD.fillStyle = `rgb(255, 255, 255)`;
       } else {
         CONTEXT_KEYBOARD.strokeRect(
           xPosition,

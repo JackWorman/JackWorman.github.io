@@ -166,8 +166,12 @@ function drawKeyboard() {
     let xPosition = 0;
     for (let i = 0; i < KEYBOARD_LAYOUT[row].length; i++) {
       if (
-        DIV_TEXT.childNodes[indicatorLocation].textContent === KEYBOARD_LAYOUT[row][i].value
-        || DIV_TEXT.childNodes[indicatorLocation].textContent === KEYBOARD_LAYOUT[row][i].shiftValue
+        (DIV_TEXT.childNodes[indicatorLocation].textContent === KEYBOARD_LAYOUT[row][i].value
+        || DIV_TEXT.childNodes[indicatorLocation].textContent === KEYBOARD_LAYOUT[row][i].shiftValue)
+        || (LEFT_SHIFT_CHARACTERS.includes(DIV_TEXT.childNodes[indicatorLocation].textContent)
+        && KEYBOARD_LAYOUT[row][i].value === `Left Shift`)
+        || (RIGHT_SHIFT_CHARACTERS.includes(DIV_TEXT.childNodes[indicatorLocation].textContent)
+        && KEYBOARD_LAYOUT[row][i].value === `Right Shift`)
       ) {
         CONTEXT_KEYBOARD.fillStyle = `rgb(0, 128, 128)`;
         CONTEXT_KEYBOARD.fillRect(
@@ -177,31 +181,32 @@ function drawKeyboard() {
           STANDARD_KEY_SIZE
         );
         CONTEXT_KEYBOARD.fillStyle = `rgb(255, 255, 255)`;
-      } else if (
-        LEFT_SHIFT_CHARACTERS.includes(DIV_TEXT.childNodes[indicatorLocation].textContent)
-        && KEYBOARD_LAYOUT[row][i].value === `Left Shift`
-      ) {
-          CONTEXT_KEYBOARD.fillStyle = `rgb(0, 128, 128)`;
-          CONTEXT_KEYBOARD.fillRect(
-            xPosition,
-            row*STANDARD_KEY_SIZE,
-            KEYBOARD_LAYOUT[row][i].size*STANDARD_KEY_SIZE,
-            STANDARD_KEY_SIZE
-          );
-          CONTEXT_KEYBOARD.fillStyle = `rgb(255, 255, 255)`;
-      } else if (
-          RIGHT_SHIFT_CHARACTERS.includes(DIV_TEXT.childNodes[indicatorLocation].textContent)
-          && KEYBOARD_LAYOUT[row][i].value === `Right Shift`
-      ) {
-          CONTEXT_KEYBOARD.fillStyle = `rgb(0, 128, 128)`;
-          CONTEXT_KEYBOARD.fillRect(
-            xPosition,
-            row*STANDARD_KEY_SIZE,
-            KEYBOARD_LAYOUT[row][i].size*STANDARD_KEY_SIZE,
-            STANDARD_KEY_SIZE
-          );
-          CONTEXT_KEYBOARD.fillStyle = `rgb(255, 255, 255)`;
       }
+      // else if (
+      //   LEFT_SHIFT_CHARACTERS.includes(DIV_TEXT.childNodes[indicatorLocation].textContent)
+      //   && KEYBOARD_LAYOUT[row][i].value === `Left Shift`
+      // ) {
+      //     CONTEXT_KEYBOARD.fillStyle = `rgb(0, 128, 128)`;
+      //     CONTEXT_KEYBOARD.fillRect(
+      //       xPosition,
+      //       row*STANDARD_KEY_SIZE,
+      //       KEYBOARD_LAYOUT[row][i].size*STANDARD_KEY_SIZE,
+      //       STANDARD_KEY_SIZE
+      //     );
+      //     CONTEXT_KEYBOARD.fillStyle = `rgb(255, 255, 255)`;
+      // } else if (
+      //     RIGHT_SHIFT_CHARACTERS.includes(DIV_TEXT.childNodes[indicatorLocation].textContent)
+      //     && KEYBOARD_LAYOUT[row][i].value === `Right Shift`
+      // ) {
+      //     CONTEXT_KEYBOARD.fillStyle = `rgb(0, 128, 128)`;
+      //     CONTEXT_KEYBOARD.fillRect(
+      //       xPosition,
+      //       row*STANDARD_KEY_SIZE,
+      //       KEYBOARD_LAYOUT[row][i].size*STANDARD_KEY_SIZE,
+      //       STANDARD_KEY_SIZE
+      //     );
+      //     CONTEXT_KEYBOARD.fillStyle = `rgb(255, 255, 255)`;
+      // }
       CONTEXT_KEYBOARD.strokeRect(
           xPosition,
           row*STANDARD_KEY_SIZE,

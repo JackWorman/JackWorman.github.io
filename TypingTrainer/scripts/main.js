@@ -1,5 +1,7 @@
 "use strict";
 
+import {KEYBOARD_LAYOUT} from './KeyboardLayout.js';
+
 const MILLISECONDS_PER_SECOND = 1000;
 const SECONDS_PER_MINUTE = 60;
 const DIV_TEXT = document.getElementById(`div-text-container`);
@@ -94,6 +96,7 @@ function reset() {
 }
 
 document.addEventListener(`keydown`, (event) => {
+  console.log(event);
   // Checks for an invalid key.
   if (!textSetUp || !(event.keyCode >= 65 && event.keyCode <= 90) && event.keyCode !== 8 && event.keyCode !== 32) {
     return;
@@ -143,9 +146,6 @@ document.addEventListener(`keydown`, (event) => {
   }
   drawKeyboard();
 });
-
-
-import {KEYBOARD_LAYOUT} from './KeyboardLayout.js';
 
 function drawKeyboard() {
   const LEFT_SHIFT_CHARACTERS = `^&*()_+YUIOP{}|HJKL:"NM<>?`;
@@ -201,6 +201,7 @@ function drawKeyboard() {
         xPosition + KEYBOARD_LAYOUT[row][i].size*STANDARD_KEY_SIZE/2,
         row*STANDARD_KEY_SIZE + 2*STANDARD_KEY_SIZE/3
       );
+
       xPosition += KEYBOARD_LAYOUT[row][i].size*STANDARD_KEY_SIZE;
     }
   }

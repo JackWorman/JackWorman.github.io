@@ -162,12 +162,23 @@ function drawKeyboard() {
   for (let row = 0; row < KEYBOARD_LAYOUT.length; row++) {
     let xPosition = 0;
     for (let i = 0; i < KEYBOARD_LAYOUT[row].length; i++) {
-      CONTEXT_KEYBOARD.strokeRect(
-        xPosition,
-        row*STANDARD_KEY_SIZE,
-        KEYBOARD_LAYOUT[row][i].size*STANDARD_KEY_SIZE,
-        STANDARD_KEY_SIZE
-      );
+      if (DIV_TEXT.childNodes[indicatorLocation].textContent === KEYBOARD_LAYOUT[row][i].value) {
+        CONTEXT_KEYBOARD.fillStyle = `rgb(255, 0, 0)`;
+        CONTEXT_KEYBOARD.fillRect(
+          xPosition,
+          row*STANDARD_KEY_SIZE,
+          KEYBOARD_LAYOUT[row][i].size*STANDARD_KEY_SIZE,
+          STANDARD_KEY_SIZE
+        );
+        CONTEXT_KEYBOARD.fillStyle = `rgb(255, 255, 255)`;
+      } else {
+        CONTEXT_KEYBOARD.strokeRect(
+          xPosition,
+          row*STANDARD_KEY_SIZE,
+          KEYBOARD_LAYOUT[row][i].size*STANDARD_KEY_SIZE,
+          STANDARD_KEY_SIZE
+        );
+      }
       CONTEXT_KEYBOARD.fillText(
         KEYBOARD_LAYOUT[row][i].topDisplay,
         xPosition + KEYBOARD_LAYOUT[row][i].size*STANDARD_KEY_SIZE/2,

@@ -160,7 +160,6 @@ function drawKeyboard() {
   CONTEXT_KEYBOARD.font = `14px Verdana`;
   CONTEXT_KEYBOARD.textBaseline = `middle`;
   CONTEXT_KEYBOARD.textAlign = `center`;
-  CONTEXT_KEYBOARD.fillStyle = `rgb(255, 255, 255)`;
 
   for (let row = 0; row < KEYBOARD_LAYOUT.length; row++) {
     let xPosition = 0;
@@ -174,39 +173,15 @@ function drawKeyboard() {
         && KEYBOARD_LAYOUT[row][i].value === `Right Shift`)
       ) {
         CONTEXT_KEYBOARD.fillStyle = `rgb(0, 128, 128)`;
-        CONTEXT_KEYBOARD.fillRect(
-          xPosition,
-          row*STANDARD_KEY_SIZE,
-          KEYBOARD_LAYOUT[row][i].size*STANDARD_KEY_SIZE,
-          STANDARD_KEY_SIZE
-        );
-        CONTEXT_KEYBOARD.fillStyle = `rgb(255, 255, 255)`;
+      } else {
+        CONTEXT_KEYBOARD.fillStyle = `rgb(100, 100, 100)`;
       }
-      // else if (
-      //   LEFT_SHIFT_CHARACTERS.includes(DIV_TEXT.childNodes[indicatorLocation].textContent)
-      //   && KEYBOARD_LAYOUT[row][i].value === `Left Shift`
-      // ) {
-      //     CONTEXT_KEYBOARD.fillStyle = `rgb(0, 128, 128)`;
-      //     CONTEXT_KEYBOARD.fillRect(
-      //       xPosition,
-      //       row*STANDARD_KEY_SIZE,
-      //       KEYBOARD_LAYOUT[row][i].size*STANDARD_KEY_SIZE,
-      //       STANDARD_KEY_SIZE
-      //     );
-      //     CONTEXT_KEYBOARD.fillStyle = `rgb(255, 255, 255)`;
-      // } else if (
-      //     RIGHT_SHIFT_CHARACTERS.includes(DIV_TEXT.childNodes[indicatorLocation].textContent)
-      //     && KEYBOARD_LAYOUT[row][i].value === `Right Shift`
-      // ) {
-      //     CONTEXT_KEYBOARD.fillStyle = `rgb(0, 128, 128)`;
-      //     CONTEXT_KEYBOARD.fillRect(
-      //       xPosition,
-      //       row*STANDARD_KEY_SIZE,
-      //       KEYBOARD_LAYOUT[row][i].size*STANDARD_KEY_SIZE,
-      //       STANDARD_KEY_SIZE
-      //     );
-      //     CONTEXT_KEYBOARD.fillStyle = `rgb(255, 255, 255)`;
-      // }
+      CONTEXT_KEYBOARD.fillRect(
+        xPosition,
+        row*STANDARD_KEY_SIZE,
+        KEYBOARD_LAYOUT[row][i].size*STANDARD_KEY_SIZE,
+        STANDARD_KEY_SIZE
+      );
       CONTEXT_KEYBOARD.strokeRect(
           xPosition,
           row*STANDARD_KEY_SIZE,

@@ -2,20 +2,20 @@
 
 export const KEYBOARD_LAYOUT = [
   [
-    {value: `\``, shiftValue: `~`, bottomDisplay: `\``, topDisplay: `~`,      size: 1},
-    {value: `1`,  shiftValue: `!`, bottomDisplay: `1`,  topDisplay: `!`,      size: 1},
-    {value: `2`,  shiftValue: `@`, bottomDisplay: `2`,  topDisplay: `@`,      size: 1},
-    {value: `3`,  shiftValue: `#`, bottomDisplay: `3`,  topDisplay: `#`,      size: 1},
-    {value: `4`,  shiftValue: `$`, bottomDisplay: `4`,  topDisplay: `$`,      size: 1},
-    {value: `5`,  shiftValue: `%`, bottomDisplay: `5`,  topDisplay: `%`,      size: 1},
-    {value: `6`,  shiftValue: `^`, bottomDisplay: `6`,  topDisplay: `^`,      size: 1},
-    {value: `7`,  shiftValue: `&`, bottomDisplay: `7`,  topDisplay: `&`,      size: 1},
-    {value: `8`,  shiftValue: `*`, bottomDisplay: `8`,  topDisplay: `*`,      size: 1},
-    {value: `9`,  shiftValue: `(`, bottomDisplay: `9`,  topDisplay: `(`,      size: 1},
-    {value: `0`,  shiftValue: `)`, bottomDisplay: `0`,  topDisplay: `)`,      size: 1},
-    {value: `-`,  shiftValue: `_`, bottomDisplay: `-`,  topDisplay: `_`,      size: 1},
-    {value: `=`,  shiftValue: `+`, bottomDisplay: `=`,  topDisplay: `+`,      size: 1},
-    {value: ``,   shiftValue: ``,  bottomDisplay: ``,   topDisplay: `\u02FF`, size: 2}
+    {value: `\``, shiftValue: `~`, bottomDisplay: `\``, topDisplay: `~`,         size: 1},
+    {value: `1`,  shiftValue: `!`, bottomDisplay: `1`,  topDisplay: `!`,         size: 1},
+    {value: `2`,  shiftValue: `@`, bottomDisplay: `2`,  topDisplay: `@`,         size: 1},
+    {value: `3`,  shiftValue: `#`, bottomDisplay: `3`,  topDisplay: `#`,         size: 1},
+    {value: `4`,  shiftValue: `$`, bottomDisplay: `4`,  topDisplay: `$`,         size: 1},
+    {value: `5`,  shiftValue: `%`, bottomDisplay: `5`,  topDisplay: `%`,         size: 1},
+    {value: `6`,  shiftValue: `^`, bottomDisplay: `6`,  topDisplay: `^`,         size: 1},
+    {value: `7`,  shiftValue: `&`, bottomDisplay: `7`,  topDisplay: `&`,         size: 1},
+    {value: `8`,  shiftValue: `*`, bottomDisplay: `8`,  topDisplay: `*`,         size: 1},
+    {value: `9`,  shiftValue: `(`, bottomDisplay: `9`,  topDisplay: `(`,         size: 1},
+    {value: `0`,  shiftValue: `)`, bottomDisplay: `0`,  topDisplay: `)`,         size: 1},
+    {value: `-`,  shiftValue: `_`, bottomDisplay: `-`,  topDisplay: `_`,         size: 1},
+    {value: `=`,  shiftValue: `+`, bottomDisplay: `=`,  topDisplay: `+`,         size: 1},
+    {value: ``,   shiftValue: ``,  bottomDisplay: ``,   topDisplay: `Backspace`, size: 2}
   ],
   [
     {value: ``,   shiftValue: ``,  bottomDisplay: ``,   topDisplay: `Tab`, size: 1.5},

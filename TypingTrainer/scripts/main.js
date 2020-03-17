@@ -179,7 +179,7 @@ function drawKeyboard() {
         CONTEXT_KEYBOARD.fillStyle = `rgb(255, 255, 255)`;
       } else if (
         LEFT_SHIFT_CHARACTERS.includes(DIV_TEXT.childNodes[indicatorLocation].textContent)
-        && KEYBOARD_LAYOUT[row][i].topDisplay === `Shift`
+        && KEYBOARD_LAYOUT[row][i].value === `Left Shift`
       ) {
           CONTEXT_KEYBOARD.fillStyle = `rgb(0, 128, 128)`;
           CONTEXT_KEYBOARD.fillRect(
@@ -191,7 +191,7 @@ function drawKeyboard() {
           CONTEXT_KEYBOARD.fillStyle = `rgb(255, 255, 255)`;
       } else if (
           RIGHT_SHIFT_CHARACTERS.includes(DIV_TEXT.childNodes[indicatorLocation].textContent)
-          && KEYBOARD_LAYOUT[row][i].topDisplay === `Shift`
+          && KEYBOARD_LAYOUT[row][i].value === `Right Shift`
       ) {
           CONTEXT_KEYBOARD.fillStyle = `rgb(0, 128, 128)`;
           CONTEXT_KEYBOARD.fillRect(

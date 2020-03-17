@@ -70,6 +70,6 @@ export const KEYBOARD_LAYOUT = [
     {value: ``, shiftValue: ``, bottomDisplay: ``, topDisplay: `Alt`,  size: 1.25},
     {value: ``, shiftValue: ``, bottomDisplay: ``, topDisplay: `Win`,  size: 1.25},
     {value: ``, shiftValue: ``, bottomDisplay: ``, topDisplay: `Menu`, size: 1.25},
-    {value: ``, shiftValue: ``, bottomDisplay: ``,  opDisplay: `Ctrl`, size: 1.25}
+    {value: ``, shiftValue: ``, bottomDisplay: ``, topDisplay: `Ctrl`, size: 1.25}
   ]
 ];

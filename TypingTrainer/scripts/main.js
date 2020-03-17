@@ -176,7 +176,7 @@ function drawKeyboard() {
       CONTEXT_KEYBOARD.fillText(
         KEYBOARD_LAYOUT[row][i].bottomDisplay,
         xPosition + KEYBOARD_LAYOUT[row][i].size*STANDARD_KEY_SIZE/2,
-        row*STANDARD_KEY_SIZE + 2*STANDARD_KEY_SIZE/3
+        row*STANDARD_KEY_SIZE + STANDARD_KEY_SIZE/3
       );
       xPosition += KEYBOARD_LAYOUT[row][i].size*STANDARD_KEY_SIZE;
     }

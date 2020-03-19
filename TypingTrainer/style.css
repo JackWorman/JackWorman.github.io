@@ -40,10 +40,15 @@ div {
   border: 1px solid white;
   padding: 2px;
 }
-
 #div-canvas-container {
   border: 1px solid white;
   padding: 2px;
+}
+
+#div-canvas-container canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 #canvas-highlight {

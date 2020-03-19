@@ -165,9 +165,11 @@ function drawKeyboard() {
   const CURRENT_CHARACTER = DIV_TEXT.childNodes[indicatorLocation].textContent;
 
   for (const row of KEYBOARD_LAYOUT) {
+    console.log(row);
   // for (let row = 0; row < KEYBOARD_LAYOUT.length; row++) {
     let xPosition = 0;
     for (const key of row) {
+      // console.log(key);
     // for (let i = 0; i < KEYBOARD_LAYOUT[row].length; i++) {
       // Determine if the key should be highlighted.
       if (

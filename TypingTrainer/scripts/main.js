@@ -147,7 +147,7 @@ document.addEventListener(`keydown`, (event) => {
     alert(`Adjusted WPM: ${updateWPM() - errors}`);
     reset();
   }
-  drawKeyboard();
+  highlightKeys();
 });
 
 // TODO: Use two canvases, the top layer will contain parts that do not change (labels, key borders),
@@ -237,6 +237,6 @@ function drawKeyboard() {
 
 
 
-drawKeyboard();
+// drawKeyboard();
 
 reset();

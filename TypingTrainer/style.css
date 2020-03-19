@@ -36,11 +36,12 @@ div {
   background: red;
 }
 
-#canvas-keyboard {
+#div-text-container {
   border: 1px solid white;
   padding: 2px;
 }
 
-#div-text-container {
+#canvas-keyboard {
   border: 1px solid white;
+  padding: 2px;
 }

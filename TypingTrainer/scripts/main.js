@@ -164,10 +164,10 @@ function drawKeyboard() {
 
   const CURRENT_CHARACTER = DIV_TEXT.childNodes[indicatorLocation].textContent;
 
-  for (const row in KEYBOARD_LAYOUT) {
+  for (const row of KEYBOARD_LAYOUT) {
   // for (let row = 0; row < KEYBOARD_LAYOUT.length; row++) {
     let xPosition = 0;
-    for (const key in row) {
+    for (const key of row) {
     // for (let i = 0; i < KEYBOARD_LAYOUT[row].length; i++) {
       // Determine if the key should be highlighted.
       if (

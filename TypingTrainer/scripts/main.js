@@ -168,7 +168,7 @@ function drawKeyboard() {
     // console.log(row);
   // for (let row = 0; row < KEYBOARD_LAYOUT.length; row++) {
     let xPosition = 0;
-    for (const key of row) {
+    for (const key of rowValue) {
       console.log(key);
     // for (let i = 0; i < KEYBOARD_LAYOUT[row].length; i++) {
       // Determine if the key should be highlighted.

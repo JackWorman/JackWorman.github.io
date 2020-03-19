@@ -65,7 +65,7 @@ function setUpText() {
     }
     toggleIndicatorInterval = setInterval(toggleIndicator, MILLISECONDS_PER_SECOND / 3);
     textSetUp = true;
-    // drawKeyboard();
+    drawKeyboard();
   }, (error) => {
     console.error("Failed!", error);
   });

@@ -151,24 +151,20 @@ document.addEventListener(`keydown`, (event) => {
 });
 
 function highlightKeys() {
+  // Checks if there is any text in "DIV_TEXT". Exits to avoid errors if there is no text.
   if (DIV_TEXT.childNodes.length == 0) return;
   const CURRENT_CHARACTER = DIV_TEXT.childNodes[indicatorLocation].textContent;
 
-  const STANDARD_KEY_SIZE = CANVAS_HIGHLIGHT.width/15;
-
   const LEFT_SHIFT_CHARACTERS = `^&*()_+YUIOP{}|HJKL:"NM<>?`;
   const RIGHT_SHIFT_CHARACTERS = `~!@#$%QWERTASDFGZXCVB`;
-
+  const STANDARD_KEY_SIZE = CANVAS_HIGHLIGHT.width/15;
 
   CONTEXT_HIGHLIGHT.clearRect(0, 0, CANVAS_HIGHLIGHT.width, CANVAS_HIGHLIGHT.height);
-
-
   CONTEXT_HIGHLIGHT.fillStyle = `rgb(0, 128, 128)`;
-
+  // Loops over every key and checks if it should be highlighted.
   for (const [rowNumber, rowValue] of KEYBOARD_LAYOUT.entries()) {
     let xPosition = 0;
     for (const key of rowValue) {
-      // Determine if the key should be highlighted.
       if (
         CURRENT_CHARACTER === key.value
         || CURRENT_CHARACTER === key.shiftValue

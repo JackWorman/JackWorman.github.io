@@ -165,7 +165,7 @@ function drawKeyboard() {
   const CURRENT_CHARACTER = DIV_TEXT.childNodes[indicatorLocation].textContent;
 
   for (const [rowNumber, rowValue] of KEYBOARD_LAYOUT) {
-    // console.log(row);
+    console.log(rowValue);
   // for (let row = 0; row < KEYBOARD_LAYOUT.length; row++) {
     let xPosition = 0;
     for (const key of rowValue) {

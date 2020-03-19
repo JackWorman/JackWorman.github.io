@@ -234,4 +234,4 @@ window.addEventListener(`resize`, scaleCanvases);
 window.addEventListener(`load`, () => {
   scaleCanvases();
   reset();
-);
+});

@@ -164,7 +164,7 @@ function highlightKeys() {
 
   // Adjusts the size of the canvas.
   // CANVAS_KEYBOARD.width = document.documentElement.clientWidth/2;;
-  const STANDARD_KEY_SIZE = CANVAS_KEYBOARD.width/15;
+  // const STANDARD_KEY_SIZE = CANVAS_KEYBOARD.width/15;
   // CANVAS_KEYBOARD.height = 5*STANDARD_KEY_SIZE;
 
   const CURRENT_CHARACTER = DIV_TEXT.childNodes[indicatorLocation].textContent;
@@ -198,7 +198,7 @@ function highlightKeys() {
 function drawKeyboard() {
   // // Adjusts the size of the canvas.
   // CANVAS_KEYBOARD.width = document.documentElement.clientWidth/2;;
-  // const STANDARD_KEY_SIZE = CANVAS_KEYBOARD.width/15;
+  const STANDARD_KEY_SIZE = CANVAS_KEYBOARD.width/15;
   // CANVAS_KEYBOARD.height = 5*STANDARD_KEY_SIZE;
 
   // Settings

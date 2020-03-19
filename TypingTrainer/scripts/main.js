@@ -164,7 +164,7 @@ function drawKeyboard() {
 
   const CURRENT_CHARACTER = DIV_TEXT.childNodes[indicatorLocation].textContent;
 
-  for (const row of KEYBOARD_LAYOUT) {
+  for (const [rowNumber, rowValue] of KEYBOARD_LAYOUT) {
     // console.log(row);
   // for (let row = 0; row < KEYBOARD_LAYOUT.length; row++) {
     let xPosition = 0;
@@ -183,13 +183,13 @@ function drawKeyboard() {
       }
       CONTEXT_KEYBOARD.fillRect(
         xPosition,
-        row*STANDARD_KEY_SIZE,
+        rowNumber*STANDARD_KEY_SIZE,
         key.size*STANDARD_KEY_SIZE,
         STANDARD_KEY_SIZE
       );
       CONTEXT_KEYBOARD.strokeRect(
           xPosition,
-          row*STANDARD_KEY_SIZE,
+          rowNumber*STANDARD_KEY_SIZE,
           key.size*STANDARD_KEY_SIZE,
           STANDARD_KEY_SIZE
         );
@@ -198,12 +198,12 @@ function drawKeyboard() {
       CONTEXT_KEYBOARD.fillText(
         key.topDisplay,
         xPosition + key.size*STANDARD_KEY_SIZE/2,
-        row*STANDARD_KEY_SIZE + STANDARD_KEY_SIZE/3
+        rowNumber*STANDARD_KEY_SIZE + STANDARD_KEY_SIZE/3
       );
       CONTEXT_KEYBOARD.fillText(
         key.bottomDisplay,
         xPosition + key.size*STANDARD_KEY_SIZE/2,
-        row*STANDARD_KEY_SIZE + 2*STANDARD_KEY_SIZE/3
+        rowNumber*STANDARD_KEY_SIZE + 2*STANDARD_KEY_SIZE/3
       );
 
       xPosition += key.size*STANDARD_KEY_SIZE;

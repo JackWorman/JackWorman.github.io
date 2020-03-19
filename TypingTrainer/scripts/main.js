@@ -150,22 +150,11 @@ document.addEventListener(`keydown`, (event) => {
   highlightKeys();
 });
 
-// TODO: Use two canvases, the top layer will contain parts that do not change (labels, key borders),
-//       bottom will be the highlighting
 function highlightKeys() {
-
-    // // Adjusts the size of the canvas.
-    // CANVAS_HIGHLIGHT.width = document.documentElement.clientWidth/2;;
-    const STANDARD_KEY_SIZE = CANVAS_HIGHLIGHT.width/15;
-    // CANVAS_HIGHLIGHT.height = 5*STANDARD_KEY_SIZE;
+  const STANDARD_KEY_SIZE = CANVAS_HIGHLIGHT.width/15;
 
   const LEFT_SHIFT_CHARACTERS = `^&*()_+YUIOP{}|HJKL:"NM<>?`;
   const RIGHT_SHIFT_CHARACTERS = `~!@#$%QWERTASDFGZXCVB`;
-
-  // Adjusts the size of the canvas.
-  // CANVAS_KEYBOARD.width = document.documentElement.clientWidth/2;;
-  // const STANDARD_KEY_SIZE = CANVAS_KEYBOARD.width/15;
-  // CANVAS_KEYBOARD.height = 5*STANDARD_KEY_SIZE;
 
   const CURRENT_CHARACTER = DIV_TEXT.childNodes[indicatorLocation].textContent;
 
@@ -196,10 +185,7 @@ function highlightKeys() {
 }
 
 function drawKeyboard() {
-  // // Adjusts the size of the canvas.
-  // CANVAS_KEYBOARD.width = document.documentElement.clientWidth/2;;
   const STANDARD_KEY_SIZE = CANVAS_KEYBOARD.width/15;
-  // CANVAS_KEYBOARD.height = 5*STANDARD_KEY_SIZE;
 
   // Settings
   CONTEXT_KEYBOARD.strokeStyle = `rgb(0, 0, 0)`;
@@ -242,31 +228,7 @@ function scaleCanvases() {
   highlightKeys();
 }
 
-window.addEventListener(`load`, () => {
-  scaleCanvases();
-
-    // CANVAS_KEYBOARD.width = document.documentElement.clientWidth/2;;
-    // const STANDARD_KEY_SIZE = CANVAS_KEYBOARD.width/15;
-    // CANVAS_KEYBOARD.height = 5*STANDARD_KEY_SIZE;
-    //
-    // CANVAS_HIGHLIGHT.width = document.documentElement.clientWidth/2;;
-    // // const STANDARD_KEY_SIZE = CANVAS_HIGHLIGHT.width/15;
-    // CANVAS_HIGHLIGHT.height = 5*STANDARD_KEY_SIZE;
-});
-
-window.addEventListener(`resize`, () => {
-  scaleCanvases();
-
-  // CANVAS_KEYBOARD.width = document.documentElement.clientWidth/2;;
-  // const STANDARD_KEY_SIZE = CANVAS_KEYBOARD.width/15;
-  // CANVAS_KEYBOARD.height = 5*STANDARD_KEY_SIZE;
-  //
-  // CANVAS_HIGHLIGHT.width = document.documentElement.clientWidth/2;;
-  // // const STANDARD_KEY_SIZE = CANVAS_HIGHLIGHT.width/15;
-  // CANVAS_HIGHLIGHT.height = 5*STANDARD_KEY_SIZE;
-});
-
-
-// drawKeyboard();
+window.addEventListener(`load`, scaleCanvases);
+window.addEventListener(`resize`, scaleCanvases);
 
 reset();

@@ -40,7 +40,9 @@ div {
   border: 1px solid white;
   padding: 2px;
 }
+
 #div-canvas-container {
+  position: relative;
   border: 1px solid white;
   padding: 2px;
 }

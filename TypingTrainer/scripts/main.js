@@ -148,19 +148,14 @@ document.addEventListener(`keydown`, (event) => {
 
 // TODO: Use two canvases, the top layer will contain parts that do not change (labels, key borders),
 //       bottom will be the highlighting
-function drawKeyboard() {
+function highlightKeys() {
   const LEFT_SHIFT_CHARACTERS = `^&*()_+YUIOP{}|HJKL:"NM<>?`;
   const RIGHT_SHIFT_CHARACTERS = `~!@#$%QWERTASDFGZXCVB`;
 
+  // Adjusts the size of the canvas.
   CANVAS_KEYBOARD.width = document.documentElement.clientWidth/2;;
   const STANDARD_KEY_SIZE = CANVAS_KEYBOARD.width/15;
   CANVAS_KEYBOARD.height = 5*STANDARD_KEY_SIZE;
-
-  CONTEXT_KEYBOARD.strokeStyle = `rgb(0, 0, 0)`;
-  CONTEXT_KEYBOARD.lineWidth = `2px`;
-  CONTEXT_KEYBOARD.font = `14px Verdana`;
-  CONTEXT_KEYBOARD.textBaseline = `middle`;
-  CONTEXT_KEYBOARD.textAlign = `center`;
 
   const CURRENT_CHARACTER = DIV_TEXT.childNodes[indicatorLocation].textContent;
 
@@ -169,7 +164,8 @@ function drawKeyboard() {
     for (const key of rowValue) {
       // Determine if the key should be highlighted.
       if (
-        (CURRENT_CHARACTER === key.value || CURRENT_CHARACTER === key.shiftValue)
+        CURRENT_CHARACTER === key.value
+        || CURRENT_CHARACTER === key.shiftValue
         || (LEFT_SHIFT_CHARACTERS.includes(CURRENT_CHARACTER) && key.value === `Left Shift`)
         || (RIGHT_SHIFT_CHARACTERS.includes(CURRENT_CHARACTER) && key.value === `Right Shift`)
       ) {
@@ -183,6 +179,31 @@ function drawKeyboard() {
         key.size*STANDARD_KEY_SIZE,
         STANDARD_KEY_SIZE
       );
+
+      xPosition += key.size*STANDARD_KEY_SIZE;
+    }
+  }
+
+  drawKeyboard();
+}
+
+function drawKeyboard() {
+  // Adjusts the size of the canvas.
+  CANVAS_KEYBOARD.width = document.documentElement.clientWidth/2;;
+  const STANDARD_KEY_SIZE = CANVAS_KEYBOARD.width/15;
+  CANVAS_KEYBOARD.height = 5*STANDARD_KEY_SIZE;
+
+  // Settings
+  CONTEXT_KEYBOARD.strokeStyle = `rgb(0, 0, 0)`;
+  CONTEXT_KEYBOARD.lineWidth = `2px`;
+  CONTEXT_KEYBOARD.font = `14px Verdana`;
+  CONTEXT_KEYBOARD.textBaseline = `middle`;
+  CONTEXT_KEYBOARD.textAlign = `center`;
+  CONTEXT_KEYBOARD.fillStyle = `rgb(255, 255, 255)`;
+
+  for (const [rowNumber, rowValue] of KEYBOARD_LAYOUT.entries()) {
+    let xPosition = 0;
+    for (const key of rowValue) {
       CONTEXT_KEYBOARD.strokeRect(
           xPosition,
           rowNumber*STANDARD_KEY_SIZE,
@@ -190,7 +211,6 @@ function drawKeyboard() {
           STANDARD_KEY_SIZE
         );
       // Render key labels.
-      CONTEXT_KEYBOARD.fillStyle = `rgb(255, 255, 255)`;
       CONTEXT_KEYBOARD.fillText(
         key.topDisplay,
         xPosition + key.size*STANDARD_KEY_SIZE/2,

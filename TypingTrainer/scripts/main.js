@@ -235,27 +235,35 @@ function drawKeyboard() {
   }
 }
 
+function scaleCanvases() {
+  CANVAS_KEYBOARD.width = CANVAS_HIGHLIGHT.width = document.documentElement.clientWidth/2;
+  CANVAS_KEYBOARD.height = CANVAS_HIGHLIGHT.height = CANVAS_KEYBOARD.width/3;
+  drawKeyboard();
+  highlightKeys();
+}
+
 window.addEventListener(`load`, () => {
+  scaleCanvases();
 
-
-    CANVAS_KEYBOARD.width = document.documentElement.clientWidth/2;;
-    const STANDARD_KEY_SIZE = CANVAS_KEYBOARD.width/15;
-    CANVAS_KEYBOARD.height = 5*STANDARD_KEY_SIZE;
-
-    CANVAS_HIGHLIGHT.width = document.documentElement.clientWidth/2;;
-    // const STANDARD_KEY_SIZE = CANVAS_HIGHLIGHT.width/15;
-    CANVAS_HIGHLIGHT.height = 5*STANDARD_KEY_SIZE;
+    // CANVAS_KEYBOARD.width = document.documentElement.clientWidth/2;;
+    // const STANDARD_KEY_SIZE = CANVAS_KEYBOARD.width/15;
+    // CANVAS_KEYBOARD.height = 5*STANDARD_KEY_SIZE;
+    //
+    // CANVAS_HIGHLIGHT.width = document.documentElement.clientWidth/2;;
+    // // const STANDARD_KEY_SIZE = CANVAS_HIGHLIGHT.width/15;
+    // CANVAS_HIGHLIGHT.height = 5*STANDARD_KEY_SIZE;
 });
 
 window.addEventListener(`resize`, () => {
+  scaleCanvases();
 
-  CANVAS_KEYBOARD.width = document.documentElement.clientWidth/2;;
-  const STANDARD_KEY_SIZE = CANVAS_KEYBOARD.width/15;
-  CANVAS_KEYBOARD.height = 5*STANDARD_KEY_SIZE;
-
-  CANVAS_HIGHLIGHT.width = document.documentElement.clientWidth/2;;
-  // const STANDARD_KEY_SIZE = CANVAS_HIGHLIGHT.width/15;
-  CANVAS_HIGHLIGHT.height = 5*STANDARD_KEY_SIZE;
+  // CANVAS_KEYBOARD.width = document.documentElement.clientWidth/2;;
+  // const STANDARD_KEY_SIZE = CANVAS_KEYBOARD.width/15;
+  // CANVAS_KEYBOARD.height = 5*STANDARD_KEY_SIZE;
+  //
+  // CANVAS_HIGHLIGHT.width = document.documentElement.clientWidth/2;;
+  // // const STANDARD_KEY_SIZE = CANVAS_HIGHLIGHT.width/15;
+  // CANVAS_HIGHLIGHT.height = 5*STANDARD_KEY_SIZE;
 });
 
 

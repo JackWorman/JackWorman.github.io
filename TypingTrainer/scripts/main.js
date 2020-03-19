@@ -146,6 +146,8 @@ document.addEventListener(`keydown`, (event) => {
   drawKeyboard();
 });
 
+// TODO: Use two canvases, the top layer will contain parts that do not change (labels, key borders),
+//       bottom will be the highlighting
 function drawKeyboard() {
   const LEFT_SHIFT_CHARACTERS = `^&*()_+YUIOP{}|HJKL:"NM<>?`;
   const RIGHT_SHIFT_CHARACTERS = `~!@#$%QWERTASDFGZXCVB`;
@@ -160,17 +162,16 @@ function drawKeyboard() {
   CONTEXT_KEYBOARD.textBaseline = `middle`;
   CONTEXT_KEYBOARD.textAlign = `center`;
 
+  const CURRENT_CHARACTER = DIV_TEXT.childNodes[indicatorLocation].textContent;
+
   for (let row = 0; row < KEYBOARD_LAYOUT.length; row++) {
     let xPosition = 0;
     for (let i = 0; i < KEYBOARD_LAYOUT[row].length; i++) {
       // Determine if the key should be highlighted.
       if (
-        (DIV_TEXT.childNodes[indicatorLocation].textContent === KEYBOARD_LAYOUT[row][i].value
-        || DIV_TEXT.childNodes[indicatorLocation].textContent === KEYBOARD_LAYOUT[row][i].shiftValue)
-        || (LEFT_SHIFT_CHARACTERS.includes(DIV_TEXT.childNodes[indicatorLocation].textContent)
-        && KEYBOARD_LAYOUT[row][i].value === `Left Shift`)
-        || (RIGHT_SHIFT_CHARACTERS.includes(DIV_TEXT.childNodes[indicatorLocation].textContent)
-        && KEYBOARD_LAYOUT[row][i].value === `Right Shift`)
+        (CURRENT_CHARACTER === KEYBOARD_LAYOUT[row][i].value || CURRENT_CHARACTER === KEYBOARD_LAYOUT[row][i].shiftValue)
+        || (LEFT_SHIFT_CHARACTERS.includes(CURRENT_CHARACTER) && KEYBOARD_LAYOUT[row][i].value === `Left Shift`)
+        || (RIGHT_SHIFT_CHARACTERS.includes(CURRENT_CHARACTER) && KEYBOARD_LAYOUT[row][i].value === `Right Shift`)
       ) {
         CONTEXT_KEYBOARD.fillStyle = `rgb(0, 128, 128)`;
       } else {

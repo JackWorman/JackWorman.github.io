@@ -156,7 +156,7 @@ function highlightKeys() {
 
     // // Adjusts the size of the canvas.
     // CANVAS_HIGHLIGHT.width = document.documentElement.clientWidth/2;;
-    // const STANDARD_KEY_SIZE = CANVAS_HIGHLIGHT.width/15;
+    const STANDARD_KEY_SIZE = CANVAS_HIGHLIGHT.width/15;
     // CANVAS_HIGHLIGHT.height = 5*STANDARD_KEY_SIZE;
 
   const LEFT_SHIFT_CHARACTERS = `^&*()_+YUIOP{}|HJKL:"NM<>?`;
@@ -164,7 +164,7 @@ function highlightKeys() {
 
   // Adjusts the size of the canvas.
   // CANVAS_KEYBOARD.width = document.documentElement.clientWidth/2;;
-  // const STANDARD_KEY_SIZE = CANVAS_KEYBOARD.width/15;
+  const STANDARD_KEY_SIZE = CANVAS_KEYBOARD.width/15;
   // CANVAS_KEYBOARD.height = 5*STANDARD_KEY_SIZE;
 
   const CURRENT_CHARACTER = DIV_TEXT.childNodes[indicatorLocation].textContent;
@@ -234,6 +234,18 @@ function drawKeyboard() {
     }
   }
 }
+
+window.addEventListener(`load`, () => {
+
+
+    CANVAS_KEYBOARD.width = document.documentElement.clientWidth/2;;
+    const STANDARD_KEY_SIZE = CANVAS_KEYBOARD.width/15;
+    CANVAS_KEYBOARD.height = 5*STANDARD_KEY_SIZE;
+
+    CANVAS_HIGHLIGHT.width = document.documentElement.clientWidth/2;;
+    // const STANDARD_KEY_SIZE = CANVAS_HIGHLIGHT.width/15;
+    CANVAS_HIGHLIGHT.height = 5*STANDARD_KEY_SIZE;
+});
 
 window.addEventListener(`resize`, () => {
 

@@ -153,6 +153,12 @@ document.addEventListener(`keydown`, (event) => {
 // TODO: Use two canvases, the top layer will contain parts that do not change (labels, key borders),
 //       bottom will be the highlighting
 function highlightKeys() {
+
+    // Adjusts the size of the canvas.
+    CANVAS_HIGHLIGHT.width = document.documentElement.clientWidth/2;;
+    const STANDARD_KEY_SIZE = CANVAS_HIGHLIGHT.width/15;
+    CANVAS_HIGHLIGHT.height = 5*STANDARD_KEY_SIZE;
+
   const LEFT_SHIFT_CHARACTERS = `^&*()_+YUIOP{}|HJKL:"NM<>?`;
   const RIGHT_SHIFT_CHARACTERS = `~!@#$%QWERTASDFGZXCVB`;
 

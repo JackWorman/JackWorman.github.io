@@ -164,14 +164,16 @@ function drawKeyboard() {
 
   const CURRENT_CHARACTER = DIV_TEXT.childNodes[indicatorLocation].textContent;
 
-  for (let row = 0; row < KEYBOARD_LAYOUT.length; row++) {
+  for (const row in KEYBOARD_LAYOUT) {
+  // for (let row = 0; row < KEYBOARD_LAYOUT.length; row++) {
     let xPosition = 0;
-    for (let i = 0; i < KEYBOARD_LAYOUT[row].length; i++) {
+    for (const key in row) {
+    // for (let i = 0; i < KEYBOARD_LAYOUT[row].length; i++) {
       // Determine if the key should be highlighted.
       if (
-        (CURRENT_CHARACTER === KEYBOARD_LAYOUT[row][i].value || CURRENT_CHARACTER === KEYBOARD_LAYOUT[row][i].shiftValue)
-        || (LEFT_SHIFT_CHARACTERS.includes(CURRENT_CHARACTER) && KEYBOARD_LAYOUT[row][i].value === `Left Shift`)
-        || (RIGHT_SHIFT_CHARACTERS.includes(CURRENT_CHARACTER) && KEYBOARD_LAYOUT[row][i].value === `Right Shift`)
+        (CURRENT_CHARACTER === key.value || CURRENT_CHARACTER === key.shiftValue)
+        || (LEFT_SHIFT_CHARACTERS.includes(CURRENT_CHARACTER) && key.value === `Left Shift`)
+        || (RIGHT_SHIFT_CHARACTERS.includes(CURRENT_CHARACTER) && key.value === `Right Shift`)
       ) {
         CONTEXT_KEYBOARD.fillStyle = `rgb(0, 128, 128)`;
       } else {
@@ -180,29 +182,29 @@ function drawKeyboard() {
       CONTEXT_KEYBOARD.fillRect(
         xPosition,
         row*STANDARD_KEY_SIZE,
-        KEYBOARD_LAYOUT[row][i].size*STANDARD_KEY_SIZE,
+        key.size*STANDARD_KEY_SIZE,
         STANDARD_KEY_SIZE
       );
       CONTEXT_KEYBOARD.strokeRect(
           xPosition,
           row*STANDARD_KEY_SIZE,
-          KEYBOARD_LAYOUT[row][i].size*STANDARD_KEY_SIZE,
+          key.size*STANDARD_KEY_SIZE,
           STANDARD_KEY_SIZE
         );
       // Render key labels.
       CONTEXT_KEYBOARD.fillStyle = `rgb(255, 255, 255)`;
       CONTEXT_KEYBOARD.fillText(
-        KEYBOARD_LAYOUT[row][i].topDisplay,
-        xPosition + KEYBOARD_LAYOUT[row][i].size*STANDARD_KEY_SIZE/2,
+        key.topDisplay,
+        xPosition + key.size*STANDARD_KEY_SIZE/2,
         row*STANDARD_KEY_SIZE + STANDARD_KEY_SIZE/3
       );
       CONTEXT_KEYBOARD.fillText(
-        KEYBOARD_LAYOUT[row][i].bottomDisplay,
-        xPosition + KEYBOARD_LAYOUT[row][i].size*STANDARD_KEY_SIZE/2,
+        key.bottomDisplay,
+        xPosition + key.size*STANDARD_KEY_SIZE/2,
         row*STANDARD_KEY_SIZE + 2*STANDARD_KEY_SIZE/3
       );
 
-      xPosition += KEYBOARD_LAYOUT[row][i].size*STANDARD_KEY_SIZE;
+      xPosition += key.size*STANDARD_KEY_SIZE;
     }
   }
 }

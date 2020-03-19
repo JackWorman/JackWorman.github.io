@@ -154,10 +154,10 @@ document.addEventListener(`keydown`, (event) => {
 //       bottom will be the highlighting
 function highlightKeys() {
 
-    // Adjusts the size of the canvas.
-    CANVAS_HIGHLIGHT.width = document.documentElement.clientWidth/2;;
-    const STANDARD_KEY_SIZE = CANVAS_HIGHLIGHT.width/15;
-    CANVAS_HIGHLIGHT.height = 5*STANDARD_KEY_SIZE;
+    // // Adjusts the size of the canvas.
+    // CANVAS_HIGHLIGHT.width = document.documentElement.clientWidth/2;;
+    // const STANDARD_KEY_SIZE = CANVAS_HIGHLIGHT.width/15;
+    // CANVAS_HIGHLIGHT.height = 5*STANDARD_KEY_SIZE;
 
   const LEFT_SHIFT_CHARACTERS = `^&*()_+YUIOP{}|HJKL:"NM<>?`;
   const RIGHT_SHIFT_CHARACTERS = `~!@#$%QWERTASDFGZXCVB`;
@@ -196,10 +196,10 @@ function highlightKeys() {
 }
 
 function drawKeyboard() {
-  // Adjusts the size of the canvas.
-  CANVAS_KEYBOARD.width = document.documentElement.clientWidth/2;;
-  const STANDARD_KEY_SIZE = CANVAS_KEYBOARD.width/15;
-  CANVAS_KEYBOARD.height = 5*STANDARD_KEY_SIZE;
+  // // Adjusts the size of the canvas.
+  // CANVAS_KEYBOARD.width = document.documentElement.clientWidth/2;;
+  // const STANDARD_KEY_SIZE = CANVAS_KEYBOARD.width/15;
+  // CANVAS_KEYBOARD.height = 5*STANDARD_KEY_SIZE;
 
   // Settings
   CONTEXT_KEYBOARD.strokeStyle = `rgb(0, 0, 0)`;
@@ -235,6 +235,16 @@ function drawKeyboard() {
   }
 }
 
+window.addEventListener(`resize`, () => {
+
+  CANVAS_KEYBOARD.width = document.documentElement.clientWidth/2;;
+  const STANDARD_KEY_SIZE = CANVAS_KEYBOARD.width/15;
+  CANVAS_KEYBOARD.height = 5*STANDARD_KEY_SIZE;
+
+  CANVAS_HIGHLIGHT.width = document.documentElement.clientWidth/2;;
+  // const STANDARD_KEY_SIZE = CANVAS_HIGHLIGHT.width/15;
+  CANVAS_HIGHLIGHT.height = 5*STANDARD_KEY_SIZE;
+});
 
 
 // drawKeyboard();

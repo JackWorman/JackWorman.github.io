@@ -65,7 +65,7 @@ function setUpText() {
     }
     toggleIndicatorInterval = setInterval(toggleIndicator, MILLISECONDS_PER_SECOND / 3);
     textSetUp = true;
-    drawKeyboard();
+    // drawKeyboard();
   }, (error) => {
     console.error("Failed!", error);
   });
@@ -163,8 +163,6 @@ function highlightKeys() {
 
   CONTEXT_HIGHLIGHT.fillStyle = `rgb(0, 128, 128)`;
 
-
-
   for (const [rowNumber, rowValue] of KEYBOARD_LAYOUT.entries()) {
     let xPosition = 0;
     for (const key of rowValue) {
@@ -231,7 +229,9 @@ function scaleCanvases() {
   highlightKeys();
 }
 
-window.addEventListener(`load`, scaleCanvases);
 window.addEventListener(`resize`, scaleCanvases);
 
-reset();
+window.addEventListener(`load`, () => {
+  scaleCanvases();
+  reset();
+);

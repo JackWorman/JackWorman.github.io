@@ -156,7 +156,9 @@ function highlightKeys() {
   const LEFT_SHIFT_CHARACTERS = `^&*()_+YUIOP{}|HJKL:"NM<>?`;
   const RIGHT_SHIFT_CHARACTERS = `~!@#$%QWERTASDFGZXCVB`;
 
+  if (DIV_TEXT.childNodes.length == 0) return;
   const CURRENT_CHARACTER = DIV_TEXT.childNodes[indicatorLocation].textContent;
+
 
   CONTEXT_HIGHLIGHT.clearRect(0, 0, CANVAS_HIGHLIGHT.width, CANVAS_HIGHLIGHT.height);
 

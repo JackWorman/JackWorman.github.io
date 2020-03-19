@@ -41,7 +41,15 @@ div {
   padding: 2px;
 }
 
-#canvas-keyboard {
+#div-canvas-container {
   border: 1px solid white;
   padding: 2px;
+}
+
+#canvas-highlight {
+  z-index: 0;
+}
+
+#canvas-keyboard {
+  z-index: 1;
 }

@@ -8,8 +8,12 @@ const DIV_TEXT = document.getElementById(`div-text-container`);
 const SPAN_WPM = document.getElementById(`span-wpm`);
 const SPAN_AVERAGE_WPM = document.getElementById(`span-average-wpm`);
 const SPAN_ERRORS = document.getElementById(`span-errors`);
+
 const CANVAS_KEYBOARD = document.getElementById(`canvas-keyboard`);
 const CONTEXT_KEYBOARD = CANVAS_KEYBOARD.getContext('2d');
+
+const CANVAS_HIGHLIGHT = document.getElementById(`canvas-highlight`);
+const CONTEXT_HIGHLIGHT = CANVAS_HIGHLIGHT.getContext('2d');
 
 localStorage.setItem(`words`, 0);
 localStorage.setItem(`minutes`, 0);
@@ -169,11 +173,11 @@ function highlightKeys() {
         || (LEFT_SHIFT_CHARACTERS.includes(CURRENT_CHARACTER) && key.value === `Left Shift`)
         || (RIGHT_SHIFT_CHARACTERS.includes(CURRENT_CHARACTER) && key.value === `Right Shift`)
       ) {
-        CONTEXT_KEYBOARD.fillStyle = `rgb(0, 128, 128)`;
+        CONTEXT_HIGHLIGHT.fillStyle = `rgb(0, 128, 128)`;
       } else {
-        CONTEXT_KEYBOARD.fillStyle = `rgb(100, 100, 100)`;
+        CONTEXT_HIGHLIGHT.fillStyle = `rgb(100, 100, 100)`;
       }
-      CONTEXT_KEYBOARD.fillRect(
+      CONTEXT_HIGHLIGHT.fillRect(
         xPosition,
         rowNumber*STANDARD_KEY_SIZE,
         key.size*STANDARD_KEY_SIZE,
@@ -183,8 +187,6 @@ function highlightKeys() {
       xPosition += key.size*STANDARD_KEY_SIZE;
     }
   }
-
-  drawKeyboard();
 }
 
 function drawKeyboard() {
@@ -226,5 +228,9 @@ function drawKeyboard() {
     }
   }
 }
+
+
+
+drawKeyboard();
 
 reset();

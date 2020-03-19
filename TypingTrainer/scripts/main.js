@@ -158,6 +158,13 @@ function highlightKeys() {
 
   const CURRENT_CHARACTER = DIV_TEXT.childNodes[indicatorLocation].textContent;
 
+  CONTEXT_HIGHLIGHT.clearRect(0, 0, CANVAS_HIGHLIGHT.width, CANVAS_HIGHLIGHT.height);
+
+
+  CONTEXT_HIGHLIGHT.fillStyle = `rgb(0, 128, 128)`;
+
+
+
   for (const [rowNumber, rowValue] of KEYBOARD_LAYOUT.entries()) {
     let xPosition = 0;
     for (const key of rowValue) {
@@ -168,17 +175,13 @@ function highlightKeys() {
         || (LEFT_SHIFT_CHARACTERS.includes(CURRENT_CHARACTER) && key.value === `Left Shift`)
         || (RIGHT_SHIFT_CHARACTERS.includes(CURRENT_CHARACTER) && key.value === `Right Shift`)
       ) {
-        CONTEXT_HIGHLIGHT.fillStyle = `rgb(0, 128, 128)`;
-      } else {
-        CONTEXT_HIGHLIGHT.fillStyle = `rgb(100, 100, 100)`;
+        CONTEXT_HIGHLIGHT.fillRect(
+          xPosition,
+          rowNumber*STANDARD_KEY_SIZE,
+          key.size*STANDARD_KEY_SIZE,
+          STANDARD_KEY_SIZE
+        );
       }
-      CONTEXT_HIGHLIGHT.fillRect(
-        xPosition,
-        rowNumber*STANDARD_KEY_SIZE,
-        key.size*STANDARD_KEY_SIZE,
-        STANDARD_KEY_SIZE
-      );
-
       xPosition += key.size*STANDARD_KEY_SIZE;
     }
   }

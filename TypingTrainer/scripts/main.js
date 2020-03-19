@@ -65,7 +65,7 @@ function setUpText() {
     }
     toggleIndicatorInterval = setInterval(toggleIndicator, MILLISECONDS_PER_SECOND / 3);
     textSetUp = true;
-    drawKeyboard();
+    highlightKeys();
   }, (error) => {
     console.error("Failed!", error);
   });
@@ -151,13 +151,13 @@ document.addEventListener(`keydown`, (event) => {
 });
 
 function highlightKeys() {
+  if (DIV_TEXT.childNodes.length == 0) return;
+  const CURRENT_CHARACTER = DIV_TEXT.childNodes[indicatorLocation].textContent;
+
   const STANDARD_KEY_SIZE = CANVAS_HIGHLIGHT.width/15;
 
   const LEFT_SHIFT_CHARACTERS = `^&*()_+YUIOP{}|HJKL:"NM<>?`;
   const RIGHT_SHIFT_CHARACTERS = `~!@#$%QWERTASDFGZXCVB`;
-
-  if (DIV_TEXT.childNodes.length == 0) return;
-  const CURRENT_CHARACTER = DIV_TEXT.childNodes[indicatorLocation].textContent;
 
 
   CONTEXT_HIGHLIGHT.clearRect(0, 0, CANVAS_HIGHLIGHT.width, CANVAS_HIGHLIGHT.height);

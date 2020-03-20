@@ -78,8 +78,8 @@ function setUpText() {
     }
 
 
-    let text = textWords.join(` `);
-
+    text = textWords.join(` `);
+    
     for (const character of text) {
       const spanCharacter = document.createElement(`span`);
       spanCharacter.textContent = character;

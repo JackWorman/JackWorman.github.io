@@ -63,7 +63,7 @@ function setUpText() {
     // }
     let textLength = 0;
     let textWords = [];
-    while (textLength < 40 * CHARACTERS_PER_WORD) {
+    while (textLength < 40 * CHARACTERS_PER_WORD + Max(0, textWords.length - 1)) {
       let word = words[Math.floor(Math.random() * words.length)];
       // Makes it a capital word.
       if (Math.random() <= 0.2) {
@@ -79,7 +79,7 @@ function setUpText() {
 
 
     text = textWords.join(` `);
-    
+
     for (const character of text) {
       const spanCharacter = document.createElement(`span`);
       spanCharacter.textContent = character;

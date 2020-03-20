@@ -52,26 +52,32 @@ function setUpText() {
   loadFile(`https://jackworman.com/TypingTrainer/words.txt`).then((response) => {
     const words = response.split(/\n/);
 
-
-    // let tempWord = words[Math.floor(Math.random() * words.length)];
-    // let upperCaseWord = tempWord.charAt(0).toUpperCase() + tempWord.slice(1);
-    // text = upperCaseWord;
-    // while (text.length < Math.max(50, Number(localStorage.getItem(`wpm`)) * 5 / 2)) {
-    //   tempWord = words[Math.floor(Math.random() * words.length)];
-    //   upperCaseWord = tempWord.charAt(0).toUpperCase() + tempWord.slice(1);
-    //   text += ` ${upperCaseWord}`;
-    // }
     let textLength = 0;
     let textWords = [];
     while (textLength < 40 * CHARACTERS_PER_WORD + Math.max(0, textWords.length - 1)) {
       let word = words[Math.floor(Math.random() * words.length)];
       // Makes it a capital word.
-      if (Math.random() <= 0.2) {
+      if (Math.random() <= 0.3) {
         word = word.charAt(0).toUpperCase() + word.slice(1);
       }
       // Adds a symbol.
-      if (Math.random() <= 0.05) {
-        word = `(${word})`;
+      if (Math.random() <= 0.1) {
+        const symbolTypes = [
+          {prefix: `(`, suffix: `)`},
+          {prefix: `[`, suffix: `]`},
+          {prefix: `{`, suffix: `}`},
+          {prefix: `'`, suffix: `'`},
+          {prefix: `"`, suffix: `"`},
+          {prefix: `\``, suffix: `\``},
+          {prefix: ``, suffix: `!`},
+          {prefix: ``, suffix: `?`},
+          {prefix: ``, suffix: `,`},
+          {prefix: ``, suffix: `.`},
+          {prefix: ``, suffix: `;`},
+          {prefix: ``, suffix: `:`}
+        ];
+        const randomSymbolType = Math.floor(Math.random() * symbolTypes.length);
+        word = `${symbolTypes[randomSymbolType].prefix}${word}${symbolTypes[randomSymbolType].suffix}`;
       }
       textWords.push(word);
       textLength += word.length;

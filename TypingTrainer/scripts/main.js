@@ -130,7 +130,7 @@ function reset() {
 document.addEventListener(`keydown`, (event) => {
   console.log(event);
   // Checks for an invalid key.
-  if (!textSetUp || !(event.keyCode >= 65 && event.keyCode <= 90) && event.keyCode !== 8 && event.keyCode !== 32) {
+  if (!textSetUp || !(event.keyCode >= 65 && event.keyCode <= 90) && event.keyCode !== 8 && event.keyCode !== 32 && event.keyCode !== 173) {
     return;
   }
   event.preventDefault(); // Stops the browser from going to the previous page.

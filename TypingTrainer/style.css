@@ -38,6 +38,7 @@ div {
 
 #div-text-container {
   border: 1px solid white;
+  white-space: pre-wrap;
 }
 
 #div-canvas-container {

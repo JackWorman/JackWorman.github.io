@@ -2,6 +2,7 @@
 
 import {KEYBOARD_LAYOUT} from './KeyboardLayout.js';
 
+const CHARACTERS_PER_WORD = 5;
 const MILLISECONDS_PER_SECOND = 1000;
 const SECONDS_PER_MINUTE = 60;
 const DIV_TEXT = document.getElementById(`div-text-container`);
@@ -50,14 +51,34 @@ function loadFile(filePath) {
 function setUpText() {
   loadFile(`https://jackworman.com/TypingTrainer/words.txt`).then((response) => {
     const words = response.split(/\n/);
-    let tempWord = words[Math.floor(Math.random() * words.length)];
-    let upperCaseWord = tempWord.charAt(0).toUpperCase() + tempWord.slice(1);
-    text = upperCaseWord;
-    while (text.length < Math.max(50, Number(localStorage.getItem(`wpm`)) * 5 / 2)) {
-      tempWord = words[Math.floor(Math.random() * words.length)];
-      upperCaseWord = tempWord.charAt(0).toUpperCase() + tempWord.slice(1);
-      text += ` ${upperCaseWord}`;
+
+
+    // let tempWord = words[Math.floor(Math.random() * words.length)];
+    // let upperCaseWord = tempWord.charAt(0).toUpperCase() + tempWord.slice(1);
+    // text = upperCaseWord;
+    // while (text.length < Math.max(50, Number(localStorage.getItem(`wpm`)) * 5 / 2)) {
+    //   tempWord = words[Math.floor(Math.random() * words.length)];
+    //   upperCaseWord = tempWord.charAt(0).toUpperCase() + tempWord.slice(1);
+    //   text += ` ${upperCaseWord}`;
+    // }
+    let textLength = 0;
+    let textWords = [];
+    while (textLength < 40 * CHARACTERS_PER_WORD) {
+      let word = words[Math.floor(Math.random() * words.length)];
+      // Makes it a capital word.
+      if (Math.random() <= 0.2) {
+        word = word.charAt(0).toUpperCase() + word.slice(1);
+      }
+      // Adds a symbol.
+      if (Math.random() <= 0.05) {
+        word = `(${word})`;
+      }
+      textLength += word.length;
     }
+
+
+    let text = textWords.join(` `);
+
     for (const character of text) {
       const spanCharacter = document.createElement(`span`);
       spanCharacter.textContent = character;

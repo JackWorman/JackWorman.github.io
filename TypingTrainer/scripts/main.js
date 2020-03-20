@@ -73,6 +73,7 @@ function setUpText() {
       if (Math.random() <= 0.05) {
         word = `(${word})`;
       }
+      text.append(word);
       textLength += word.length;
     }
 

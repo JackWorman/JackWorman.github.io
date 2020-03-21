@@ -128,33 +128,22 @@ function reset() {
 }
 
 document.addEventListener(`keydown`, (event) => {
-
-  console.log(event);
-  // event.key
-
-  const KEYS_AVAILABLE = ` abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\`!()-[]{};:'",.?`;
-
-  if (!isTextSetUp || (!KEYS_AVAILABLE.includes(event.key) && event.key !== `Backspace`)) {
+  // Checks for an invalid key.
+  const VALID_KEYS = ` abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\`!()-[]{};:'",.?`;
+  if (!isTextSetUp || (!VALID_KEYS.includes(event.key) && event.key !== `Backspace`)) {
     return;
   }
-
-  // Checks for an invalid key.
-  // if (
-  //   !isTextSetUp || !(event.keyCode >= 65 && event.keyCode <= 90) && event.keyCode !== 8 && event.keyCode !== 32
-  //   && event.keyCode !== 173 && event.keyCode !== 190 && event.keyCode !== 59 && event.keyCode !== 191
-  //   && event.keyCode !== 219 && event.keyCode !== 221 && event.keyCode !== 222 && event.keyCode !== 192
-  //   && !(event.keyCode >= 48 && event.keyCode <= 57) && event.keyCode !== 188
-  // ) {
-  //   return;
-  // }
   event.preventDefault(); // Stops the browser from going to the previous page.
+
   // First time check
   if (!startTyping) {
     startTyping = true;
     startTime = performance.now();
     updateWPMInterval = setInterval(updateWPM, MILLISECONDS_PER_SECOND / 10);
   }
-  if (event.keyCode === 8) {
+
+  if (event.key === `Backspace`) {
+    // Checks if there is any user input.
     if (userInput.length !== 0) {
       userInput = userInput.substring(0, userInput.length - 1);
       indicatorLocation--;

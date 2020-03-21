@@ -53,7 +53,8 @@ function setUpText() {
     const words = response.split(/\n/);
 
     // const characterSet = `etaoinshrdiuwmfchypbkvjxqz`;
-    const characterSet = `etaoin`;
+    const characterSet = `etaoinshrd`;
+    let re = new RegExp(`^[${characterSet}]*$`);
 
     let textLength = 0;
     let textWords = [];

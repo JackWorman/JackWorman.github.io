@@ -59,20 +59,15 @@ function setUpText() {
     let textWords = [];
     while (textLength < 40 * CHARACTERS_PER_WORD + Math.max(0, textWords.length - 1)) {
       let word = ``;
-      while (true) {
+      do {
         word = words[Math.floor(Math.random() * words.length)];
-        for (const letter of characterSet) {
-          if (word.includes(letter)) {
-            break;
-          }
-        }
-      }
+      } while (!/^[etaoin]*$/.test(word))
       // Makes it a capital word.
       if (Math.random() <= 0.2) {
         word = word.charAt(0).toUpperCase() + word.slice(1);
       }
       // Adds a symbol.
-      if (Math.random() <= 0.2) {
+      if (Math.random() <= 0.1) {
         const symbolTypes = [
           {prefix: `(`,  suffix: `)`},
           {prefix: `[`,  suffix: `]`},

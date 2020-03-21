@@ -52,10 +52,21 @@ function setUpText() {
   loadFile(`https://jackworman.com/TypingTrainer/words.txt`).then((response) => {
     const words = response.split(/\n/);
 
+    // const characterSet = `etaoinshrdiuwmfchypbkvjxqz`;
+    const characterSet = `etaoin`;
+
     let textLength = 0;
     let textWords = [];
     while (textLength < 40 * CHARACTERS_PER_WORD + Math.max(0, textWords.length - 1)) {
-      let word = words[Math.floor(Math.random() * words.length)];
+      let word = ``;
+      while (true) {
+        word = words[Math.floor(Math.random() * words.length)];
+        for (const letter of characterSet) {
+          if (word.includes(letter)) {
+            break;
+          }
+        }
+      }
       // Makes it a capital word.
       if (Math.random() <= 0.2) {
         word = word.charAt(0).toUpperCase() + word.slice(1);
@@ -63,18 +74,18 @@ function setUpText() {
       // Adds a symbol.
       if (Math.random() <= 0.2) {
         const symbolTypes = [
-          {prefix: `(`, suffix: `)`},
-          {prefix: `[`, suffix: `]`},
-          {prefix: `{`, suffix: `}`},
-          {prefix: `'`, suffix: `'`},
-          {prefix: `"`, suffix: `"`},
+          {prefix: `(`,  suffix: `)`},
+          {prefix: `[`,  suffix: `]`},
+          {prefix: `{`,  suffix: `}`},
+          {prefix: `'`,  suffix: `'`},
+          {prefix: `"`,  suffix: `"`},
           {prefix: `\``, suffix: `\``},
-          {prefix: ``, suffix: `!`},
-          {prefix: ``, suffix: `?`},
-          {prefix: ``, suffix: `,`},
-          {prefix: ``, suffix: `.`},
-          {prefix: ``, suffix: `;`},
-          {prefix: ``, suffix: `:`}
+          {prefix: ``,   suffix: `!`},
+          {prefix: ``,   suffix: `?`},
+          {prefix: ``,   suffix: `,`},
+          {prefix: ``,   suffix: `.`},
+          {prefix: ``,   suffix: `;`},
+          {prefix: ``,   suffix: `:`}
         ];
         const randomSymbolType = Math.floor(Math.random() * symbolTypes.length);
         word = `${symbolTypes[randomSymbolType].prefix}${word}${symbolTypes[randomSymbolType].suffix}`;

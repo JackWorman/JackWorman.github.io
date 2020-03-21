@@ -62,7 +62,7 @@ function setUpText() {
       let word = ``;
       do {
         word = words[Math.floor(Math.random() * words.length)];
-      } while (!/^[etaoin]*$/.test(word))
+      } while (!re.test(word))
       // Makes it a capital word.
       if (Math.random() <= 0.2) {
         word = word.charAt(0).toUpperCase() + word.slice(1);

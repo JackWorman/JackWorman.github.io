@@ -145,12 +145,18 @@ document.addEventListener(`keydown`, (event) => {
   if (event.key === `Backspace`) {
     // Checks if there is any user input.
     if (userInput.length !== 0) {
-      userInput = userInput.substring(0, userInput.length - 1);
-      indicatorLocation--;
-      DIV_TEXT.childNodes[indicatorLocation].classList.remove(`correct`, `incorrect`);
-      if (indicatorLocation !== text.length - 1) {
-        DIV_TEXT.childNodes[indicatorLocation + 1].classList.remove(`indicator`);
+      // userInput = userInput.substring(0, userInput.length - 1);
+      // indicatorLocation--;
+      // DIV_TEXT.childNodes[indicatorLocation].classList.remove(`correct`, `incorrect`);
+      // if (indicatorLocation !== text.length - 1) {
+      //   DIV_TEXT.childNodes[indicatorLocation + 1].classList.remove(`indicator`);
+      // }
+
+      userInput = ``;
+      for (const childNode of DIV_TEXT.childNodes) {
+        childNode.classList.remove(`correct`, `incorrect`);
       }
+      indicatorLocation = 0;
     }
   } else if (userInput.length !== text.length) {
     const spanIndicatedCharacter = DIV_TEXT.childNodes[indicatorLocation];

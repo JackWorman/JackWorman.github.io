@@ -23,6 +23,11 @@ div {
   font-size: 20px;
 }
 
+#div-text-container {
+  border: 1px solid white;
+  white-space: pre-wrap;
+}
+
 .indicator {
   background-color: white;
   color: black
@@ -34,11 +39,6 @@ div {
 
 .incorrect {
   background: red;
-}
-
-#div-text-container {
-  border: 1px solid white;
-  white-space: pre-wrap;
 }
 
 #div-canvas-container {

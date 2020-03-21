@@ -26,7 +26,7 @@ let startTime;
 let startTyping = false;
 let text = ``;
 let userInput = ``;
-let textSetUp = false;
+let isTextSetUp = false;
 let indicatorLocation = 0;
 let errors = 0;
 
@@ -92,7 +92,7 @@ function setUpText() {
       DIV_TEXT.appendChild(spanCharacter);
     }
     toggleIndicatorInterval = setInterval(toggleIndicator, MILLISECONDS_PER_SECOND / 3);
-    textSetUp = true;
+    isTextSetUp = true;
     highlightKeys();
   }, (error) => {
     console.error("Failed!", error);
@@ -118,7 +118,7 @@ function reset() {
   clearInterval(updateWPMInterval);
   clearInterval(toggleIndicatorInterval);
   DIV_TEXT.innerHTML = ``;
-  textSetUp = false;
+  isTextSetUp = false;
   userInput = ``;
   startTyping = false;
   indicatorLocation = 0;
@@ -128,16 +128,25 @@ function reset() {
 }
 
 document.addEventListener(`keydown`, (event) => {
+
   console.log(event);
-  // Checks for an invalid key.
-  if (
-    !textSetUp || !(event.keyCode >= 65 && event.keyCode <= 90) && event.keyCode !== 8 && event.keyCode !== 32
-    && event.keyCode !== 173 && event.keyCode !== 190 && event.keyCode !== 59 && event.keyCode !== 191
-    && event.keyCode !== 219 && event.keyCode !== 221 && event.keyCode !== 222 && event.keyCode !== 192
-    && !(event.keyCode >= 48 && event.keyCode <= 57) && event.keyCode !== 188
-  ) {
+  // event.key
+
+  const KEYS_AVAILABLE = ` abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\`!()-[]{};:'",.?`;
+
+  if (!isTextSetUp || (!KEYS_AVAILABLE.includes(event.key) && event.key !== `Backspace`)) {
     return;
   }
+
+  // Checks for an invalid key.
+  // if (
+  //   !isTextSetUp || !(event.keyCode >= 65 && event.keyCode <= 90) && event.keyCode !== 8 && event.keyCode !== 32
+  //   && event.keyCode !== 173 && event.keyCode !== 190 && event.keyCode !== 59 && event.keyCode !== 191
+  //   && event.keyCode !== 219 && event.keyCode !== 221 && event.keyCode !== 222 && event.keyCode !== 192
+  //   && !(event.keyCode >= 48 && event.keyCode <= 57) && event.keyCode !== 188
+  // ) {
+  //   return;
+  // }
   event.preventDefault(); // Stops the browser from going to the previous page.
   // First time check
   if (!startTyping) {

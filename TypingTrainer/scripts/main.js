@@ -130,7 +130,7 @@ function reset() {
 document.addEventListener(`keydown`, (event) => {
   // Checks for an invalid characters.
   const VALID_CHARACTERS =` abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ 0123456789\`~!@#$%^&*()-_=+[]{}\\|;:'",<.>/?`;
-  if (!isTextSetUp || (!VALID_KEYS.includes(event.key) && event.key !== `Backspace`)) {
+  if (!isTextSetUp || (!VALID_CHARACTERS.includes(event.key) && event.key !== `Backspace`)) {
     return;
   }
   event.preventDefault(); // Stops the browser from going to the previous page.

@@ -128,8 +128,8 @@ function reset() {
 }
 
 document.addEventListener(`keydown`, (event) => {
-  // Checks for an invalid key.
-  const VALID_KEYS = ` abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789\`!()-[]{};:'",.?`;
+  // Checks for an invalid characters.
+  const VALID_CHARACTERS =` abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ 0123456789\`~!@#$%^&*()-_=+[]{}\\|;:'",<.>/?`;
   if (!isTextSetUp || (!VALID_KEYS.includes(event.key) && event.key !== `Backspace`)) {
     return;
   }

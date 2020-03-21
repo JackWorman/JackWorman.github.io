@@ -163,8 +163,8 @@ document.addEventListener(`keydown`, (event) => {
       spanIndicatedCharacter.classList.add(`incorrect`);
       errors++;
       SPAN_ERRORS.textContent = `Errors: ${errors}`;
-      
 
+      alert();
       userInput = ``;
       for (const childNode of DIV_TEXT.childNodes) {
         childNode.classList.remove(`correct`, `incorrect`);

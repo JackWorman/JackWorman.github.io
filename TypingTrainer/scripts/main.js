@@ -16,10 +16,6 @@ const CONTEXT_KEYBOARD = CANVAS_KEYBOARD.getContext('2d');
 const CANVAS_HIGHLIGHT = document.getElementById(`canvas-highlight`);
 const CONTEXT_HIGHLIGHT = CANVAS_HIGHLIGHT.getContext('2d');
 
-localStorage.setItem(`words`, 0);
-localStorage.setItem(`minutes`, 0);
-localStorage.setItem(`wpm`, 0);
-
 let toggleIndicatorInterval;
 let updateWPMInterval;
 let startTime;
@@ -53,16 +49,16 @@ function setUpText() {
     const words = response.split(/\n/);
 
     // const characterSet = `etaoinshrdiuwmfchypbkvjxqz`;
-    const characterSet = `etaoi`;
-    let re = new RegExp(`^[${characterSet}]*$`);
+    // const characterSet = `etaoi`;
+    // let re = new RegExp(`^[${characterSet}]*$`);
 
     let textLength = 0;
     let textWords = [];
     while (textLength < 40 * CHARACTERS_PER_WORD + Math.max(0, textWords.length - 1)) {
-      let word = ``;
-      do {
-        word = words[Math.floor(Math.random() * words.length)];
-      } while (!re.test(word))
+      let word = words[Math.floor(Math.random() * words.length)];
+      // do {
+      //   word = words[Math.floor(Math.random() * words.length)];
+      // } while (!re.test(word))
       // Makes it a capital word.
       if (Math.random() <= 0.2) {
         word = word.charAt(0).toUpperCase() + word.slice(1);
@@ -184,11 +180,8 @@ document.addEventListener(`keydown`, (event) => {
   // Check if done.
   if (userInput === text) {
     const words = Number(localStorage.getItem(`words`)) + (text.length - 1)/5;
-    localStorage.setItem(`words`, words);
     const minutes = Number(localStorage.getItem(`minutes`)) + (performance.now() - startTime)/1000/60;
-    localStorage.setItem(`minutes`, minutes);
     const wpm = words / minutes;
-    localStorage.setItem(`wpm`, wpm);
     SPAN_AVERAGE_WPM.textContent = `Average WPM: ${Math.round(wpm)}`;
     alert(`Adjusted WPM: ${updateWPM() - errors}`);
     reset();

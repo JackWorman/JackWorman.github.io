@@ -15,14 +15,14 @@ const SPAN_SCORE = document.getElementById(`span-score`);
 const SPAN_HIGHSCORE = document.getElementById(`span-highscore`);
 const ASTEROID_SPAWN_INTERVAL = 5000;
 
-let ship = new Ship(canvasSize / 2, canvasSize / 2);
+let ship = new Ship(canvasSize/2, canvasSize/2);
 let asteroids = [];
 let timeOfLastAsteroidSpawn;
 let gameLoopInterval;
 let scoreMultiplier;
 
 // Get inputs.
-let inputs = {"mousePos": {x: 0, y: 0}};
+const inputs = {"mousePos": {x: 0, y: 0}};
 onkeydown = onkeyup = (e) => {
   inputs[e.keyCode] = e.type === `keydown`;
 }
@@ -34,7 +34,7 @@ onmousedown = onmouseup = (e) => {
   }
 }
 onmousemove = (e) => {
-  let rect = CANVAS_FOREGROUND.getBoundingClientRect();
+  const rect = CANVAS_FOREGROUND.getBoundingClientRect();
   inputs[`mousePos`] = {x: e.clientX - rect.left, y: e.clientY - rect.top};
 }
 

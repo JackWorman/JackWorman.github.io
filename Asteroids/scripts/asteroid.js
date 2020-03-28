@@ -1,9 +1,10 @@
 "use strict";
 
+const MILLISECONDS_PER_SECOND = 1000;
+
 const ASTEROID_COLOR = `rgb(100, 100, 100)`;
 const BASE_RADIUS = 25;
 const BASE_SPEED = 360;
-const MILLISECONDS_PER_SECOND = 1000;
 
 export default class Asteroid {
   constructor(x, y, size) {
@@ -13,8 +14,8 @@ export default class Asteroid {
     this.radius = BASE_RADIUS * Math.pow(2, size);
     this.speed = BASE_SPEED / Math.pow(2, size);
     this.rotationAngle = 0;
-    this.rotationSpeed = Math.random() * 0.05 - 0.025;
-    this.angle = Math.random() * 2 * Math.PI;
+    this.rotationSpeed = 0.05*Math.random() - 0.025;
+    this.angle = 2*Math.PI*Math.random() ;
   }
 
   move(canvasSize, deltaTime) {
@@ -27,9 +28,9 @@ export default class Asteroid {
   }
 
   render(context) {
-    let sides = 10;
+    const sides = 10;
+    const angle = 2*Math.PI/sides;
     context.beginPath();
-    let angle = 2 * Math.PI / sides;
     context.translate(this.x, this.y);
     context.rotate(this.rotationAngle);
     context.moveTo(this.radius, 0);

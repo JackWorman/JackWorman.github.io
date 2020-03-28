@@ -1,20 +1,26 @@
-'use strict';
+"use strict";
 
-const MILLISECONDS_PER_SECOND = 1000;
+import {MILLISECONDS_PER_SECOND} from "./Constants.js";
 const DELTA_TIMES_BUFFER_SIZE = 100;
 const DECIMALS = 2;
-const SPAN_FPS = document.getElementById('span-fps');
 
-let initialCall = true;
+const SPAN_FPS = document.getElementById(`span-fps`);
+
+let isInitialCall = true;
 let deltaTimes;
 let previousTime;
 
+export function reset() {
+  isInitialCall = true;
+  display(0);
+}
+
 export function update() {
-   // First time setup.
-  if (initialCall) {
+  // First time setup.
+  if (isInitialCall) {
     deltaTimes = [];
     previousTime = performance.now();
-    initialCall = false;
+    isInitialCall = false;
     return;
   }
   const currentTime = performance.now();
@@ -23,15 +29,10 @@ export function update() {
     deltaTimes.shift();
   }
   const averageDeltaTime = (deltaTimes.reduce((a, b) => (a + b)) / deltaTimes.length);
-  window.requestAnimationFrame(() => display(MILLISECONDS_PER_SECOND / averageDeltaTime));
+  display(MILLISECONDS_PER_SECOND/averageDeltaTime);
   previousTime = currentTime;
 }
 
-export function reset() {
-  initialCall = true;
-  window.requestAnimationFrame(() => display(0));
-}
-
 function display(fps) {
-  SPAN_FPS.textContent = 'FPS: ' + fps.toFixed(DECIMALS);
+  window.requestAnimationFrame(() => SPAN_FPS.textContent = `FPS: ${fps.toFixed(DECIMALS)}`);
 }

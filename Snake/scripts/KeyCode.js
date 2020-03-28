@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 export const leftArrow = 37;
 export const upArrow = 38;

@@ -4,11 +4,11 @@
 
 @font-face {
 	font-family: 'Forty Second Street';
-	src: url('https://jackworman.com/Asteroids/fonts/forty-second-street.woff') format('woff');
+	src: url('./fonts/forty-second-street.woff') format('woff');
 }
 @font-face {
 	font-family: 'VT323';
-	src: url('https://jackworman.com/Asteroids/fonts/vt323.ttf') format('truetype');
+	src: url('./fonts/vt323.ttf') format('truetype');
 }
 
 .noselect {

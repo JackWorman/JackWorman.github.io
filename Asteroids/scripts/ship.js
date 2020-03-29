@@ -1,6 +1,8 @@
 "use strict";
 
 import Laser from "./laser.js";
+import {userInputs} from "./UserInputs.js";
+import {KeyCodes} from "./KeyCodes.js";
 
 const SHIP_COLOR = `rgb(255, 255, 255)`;
 const MILLISECONDS_PER_SECOND = 1000;
@@ -16,10 +18,10 @@ export default class Ship {
     this.timeOfLastShot = -this.shootRate;
   }
 
-  render(context, mousePos) {
-    let size = 15;
-    let angle = Math.atan2(mousePos.y - this.y, mousePos.x - this.x) - Math.PI / 2;
-    let centerY = (size * Math.tan(67.5 * Math.PI / 180) + size * Math.tan(22.5 * Math.PI / 180)) / 3;
+  render(context) {
+    const size = 15;
+    const angle = Math.atan2(userInputs[`mousePosition`].y - this.y, userInputs[`mousePosition`].x - this.x) - Math.PI / 2;
+    const centerY = (size * Math.tan(67.5 * Math.PI / 180) + size * Math.tan(22.5 * Math.PI / 180)) / 3;
     context.translate(this.x, this.y);
     context.rotate(angle);
     context.beginPath();
@@ -34,19 +36,19 @@ export default class Ship {
     context.translate(-this.x, -this.y);
   }
 
-  move(inputs, canvasSize, deltaTime) {
-    if (inputs[16]) {
-      this.speed = 600;
-    } else {
-      this.speed = 300;
-    }
+  move(canvasSize, deltaTime) {
+    // if (inputs[16]) {
+    //   this.speed = 600;
+    // } else {
+    //   this.speed = 300;
+    // }
     let xDirection = 0;
     let yDirection = 0;
-    if (inputs[65] || inputs[37]) xDirection--;
-    if (inputs[68] || inputs[39]) xDirection++;
-    if (inputs[87] || inputs[38]) yDirection--;
-    if (inputs[83] || inputs[40]) yDirection++;
-    let angle = Math.atan2(yDirection, xDirection);
+    if (userInputs[KeyCodes.A] || userInputs[KeyCodes.LeftArrow]) xDirection--;
+    if (userInputs[KeyCodes.D] || userInputs[KeyCodes.RightArrow]) xDirection++;
+    if (userInputs[KeyCodes.W] || userInputs[KeyCodes.UpArrow]) yDirection--;
+    if (userInputs[KeyCodes.S] || userInputs[KeyCodes.DownArrow]) yDirection++;
+    const angle = Math.atan2(yDirection, xDirection);
     if (xDirection !== 0 || yDirection !== 0) {
       this.x += this.speed * deltaTime / MILLISECONDS_PER_SECOND * Math.cos(angle);
       this.y += this.speed * deltaTime / MILLISECONDS_PER_SECOND * Math.sin(angle);
@@ -58,17 +60,20 @@ export default class Ship {
     if (this.y >= canvasSize + 100) this.y -= canvasSize + 200;
   }
 
-  shoot(inputs) {
-    if ((inputs[`leftMouseDown`] || inputs[`rightMouseDown`] || inputs[32]) && performance.now() - this.timeOfLastShot > this.shootRate) {
+  shoot(currentTime) {
+    if (
+      (userInputs[`leftMouseDown`] || userInputs[`rightMouseDown`] || userInputs[32])
+      && currentTime - this.timeOfLastShot > this.shootRate
+    ) {
       this.timeOfLastShot = performance.now();
-      let angle = Math.atan2(inputs[`mousePos`].y - this.y, inputs[`mousePos`].x - this.x);
+      const angle = Math.atan2(userInputs[`mousePosition`].y - this.y, userInputs[`mousePosition`].x - this.x);
       this.lasers.push(new Laser(this.x, this.y, 2400, angle));
     }
   }
 
   detectCollison(asteroids) {
     for (let i = 0; i < asteroids.length; i++) {
-      let distance = Math.sqrt(Math.pow(this.x - asteroids[i].x, 2) + Math.pow(this.y - asteroids[i].y, 2));
+      const distance = Math.sqrt(Math.pow(this.x - asteroids[i].x, 2) + Math.pow(this.y - asteroids[i].y, 2));
       if (distance < asteroids[i].radius) {
         return true;
       }

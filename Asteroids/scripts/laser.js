@@ -20,26 +20,31 @@ export default class Laser {
     this.y = y;
     this.speed = speed;
     this.angle = angle;
-    this.distance = 0;
+    // this.distance = 0;
     this.color = Math.floor(Math.random() * 7);
+    this.creationTime = performance.now();
+  }
+
+  checkExpiration(currentTime) {
+    return currentTime - this.creationTime >= 250;
   }
 
   move(canvasSize, deltaTime) {
-    let dx = this.speed * deltaTime / MILLISECONDS_PER_SECOND * Math.cos(this.angle);
-    let dy = this.speed * deltaTime / MILLISECONDS_PER_SECOND * Math.sin(this.angle);
+    const dx = this.speed * deltaTime / MILLISECONDS_PER_SECOND * Math.cos(this.angle);
+    const dy = this.speed * deltaTime / MILLISECONDS_PER_SECOND * Math.sin(this.angle);
     this.x += dx;
     this.y += dy;
     if (this.x < -MAXIMUM_ASTEROID_RADIUS) this.x += canvasSize + MAXIMUM_ASTEROID_RADIUS * 2;
     if (this.y < -MAXIMUM_ASTEROID_RADIUS) this.y += canvasSize + MAXIMUM_ASTEROID_RADIUS * 2;
     if (this.x >= canvasSize + MAXIMUM_ASTEROID_RADIUS) this.x -= canvasSize + MAXIMUM_ASTEROID_RADIUS * 2;
     if (this.y >= canvasSize + MAXIMUM_ASTEROID_RADIUS) this.y -= canvasSize + MAXIMUM_ASTEROID_RADIUS * 2;
-    this.distance += Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
-    return this.distance > canvasSize * 2 / 3;
+    // this.distance += Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
+    // return this.distance > canvasSize * 2 / 3;
   }
 
   render(context) {
-    let length = 40;
-    let width = 2;
+    const length = 40;
+    const width = 2;
     context.save();
     context.translate(this.x, this.y);
     context.rotate(this.angle);
@@ -56,7 +61,7 @@ export default class Laser {
 
   detectCollison(asteroids) {
     for (let i = 0; i < asteroids.length; i++) {
-      let distance = Math.sqrt(Math.pow(this.x - asteroids[i].x, 2) + Math.pow(this.y - asteroids[i].y, 2));
+      const distance = Math.sqrt(Math.pow(this.x - asteroids[i].x, 2) + Math.pow(this.y - asteroids[i].y, 2));
       if (distance < asteroids[i].radius) {
         if (asteroids[i].size !== 0) {
           asteroids.push(new Asteroid(asteroids[i].x, asteroids[i].y, asteroids[i].size - 1));

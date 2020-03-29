@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 
 const MILLISECONDS_PER_SECOND = 1000;
 const DELTA_TIMES_BUFFER_SIZE = 100;

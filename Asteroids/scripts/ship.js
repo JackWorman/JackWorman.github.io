@@ -23,7 +23,7 @@ export default class Ship {
 
   render(context) {
     const size = 15;
-    const angle = Math.atan2(userInputs[`mousePosition`].y - this.y, userInputs[`mousePosition`].x - this.x) - Math.PI / 2;
+    const angle = Math.atan2(userInputs[`mousePosition`].y - this.y, userInputs[`mousePosition`].x - this.x) - Math.PI/2;
     const centerY = (size * Math.tan(67.5 * Math.PI / 180) + size * Math.tan(22.5 * Math.PI / 180)) / 3;
     context.translate(this.x, this.y);
     context.rotate(angle);
@@ -48,10 +48,11 @@ export default class Ship {
     if (userInputs[KeyCodes.S] || userInputs[KeyCodes.DownArrow]) yDirection++;
     const angle = Math.atan2(yDirection, xDirection);
     if (xDirection !== 0 || yDirection !== 0) {
-      this.x += this.speed * deltaTime / MILLISECONDS_PER_SECOND * Math.cos(angle);
-      this.y += this.speed * deltaTime / MILLISECONDS_PER_SECOND * Math.sin(angle);
+      const deltaTimeInSeconds = deltaTime/MILLISECONDS_PER_SECOND;
+      this.x += this.speed * deltaTimeInSeconds * Math.cos(angle);
+      this.y += this.speed * deltaTimeInSeconds * Math.sin(angle);
     }
-    // Detect if the ship went off the map.
+    // Detect if the ship went off the map. Pac-Man logic
     if (this.x < -100) this.x += canvasSize + 200;
     if (this.y < -100) this.y += canvasSize + 200;
     if (this.x >= canvasSize + 100) this.x -= canvasSize + 200;

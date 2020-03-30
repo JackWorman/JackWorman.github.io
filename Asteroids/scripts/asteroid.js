@@ -25,9 +25,10 @@ export default class Asteroid {
   }
 
   move(canvasSize, deltaTime) {
-    this.rotationAngle += this.rotationSpeed * deltaTime / MILLISECONDS_PER_SECOND;
-    this.x += this.speed * deltaTime / MILLISECONDS_PER_SECOND * Math.cos(this.angle);
-    this.y += this.speed * deltaTime / MILLISECONDS_PER_SECOND * Math.sin(this.angle);
+    const deltaTimeInSeconds = deltaTime/MILLISECONDS_PER_SECOND;
+    this.rotationAngle += this.rotationSpeed * deltaTimeInSeconds;
+    this.x += this.speed * deltaTimeInSeconds * Math.cos(this.angle);
+    this.y += this.speed * deltaTimeInSeconds * Math.sin(this.angle);
     // Pac-Man logic
     if (this.x < -100) this.x += canvasSize + 200;
     if (this.y < -100) this.y += canvasSize + 200;

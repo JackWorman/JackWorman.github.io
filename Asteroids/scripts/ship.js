@@ -5,18 +5,20 @@ import {userInputs} from "./UserInputs.js";
 import {KeyCodes} from "./KeyCodes.js";
 import {canvasSize} from "./ScaleCanvas.js";
 
-const SHIP_COLOR = `rgb(255, 255, 255)`;
 const MILLISECONDS_PER_SECOND = 1000;
+
+const SHIP_COLOR = `rgb(255, 255, 255)`;
 
 export default class Ship {
   constructor(x, y) {
-    this.x = x;
-    this.y = y;
-    this.speed = 300;
-    this.direction = 0;
-    this.lasers = [];
-    this.shootRate = 500;
-    this.timeOfLastShot = -this.shootRate;
+    Object.defineProperty(this, `x`,              {value: x, writable: true});
+    Object.defineProperty(this, `y`,              {value: y, writable: true});
+    Object.defineProperty(this, `speed`,          {value: 300});
+    Object.defineProperty(this, `direction`,      {value: 0, writable: true});
+    Object.defineProperty(this, `lasers`,         {value: []});
+    Object.defineProperty(this, `shootRate`,      {value: 500});
+    Object.defineProperty(this, `timeOfLastShot`, {value: 0, writable: true});
+    Object.seal(this);
   }
 
   render(context) {
@@ -38,11 +40,6 @@ export default class Ship {
   }
 
   move(deltaTime) {
-    // if (inputs[16]) {
-    //   this.speed = 600;
-    // } else {
-    //   this.speed = 300;
-    // }
     let xDirection = 0;
     let yDirection = 0;
     if (userInputs[KeyCodes.A] || userInputs[KeyCodes.LeftArrow]) xDirection--;
@@ -66,7 +63,7 @@ export default class Ship {
       (userInputs[`leftMouseDown`] || userInputs[`rightMouseDown`] || userInputs[32])
       && currentTime - this.timeOfLastShot > this.shootRate
     ) {
-      this.timeOfLastShot = performance.now();
+      this.timeOfLastShot = currentTime;
       const angle = Math.atan2(userInputs[`mousePosition`].y - this.y, userInputs[`mousePosition`].x - this.x);
       this.lasers.push(new Laser(this.x, this.y, 2400, angle));
     }

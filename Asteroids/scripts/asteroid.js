@@ -7,20 +7,28 @@ const BASE_RADIUS = 25;
 const BASE_SPEED = 360;
 
 export default class Asteroid {
+  /**
+   * @param {number} x    The horizontal coordinate.
+   * @param {number} y    The vertical coordinate.
+   * @param {number} size The size cooresponding to a specific radius.
+   */
   constructor(x, y, size) {
-    this.x = x;
-    this.y = y;
-    this.size = size;
-    this.radius = BASE_RADIUS * Math.pow(2, size);
-    this.speed = BASE_SPEED / Math.pow(2, size);
-    this.rotationAngle = 0;
-    this.rotationSpeed = 0.05*Math.random() - 0.025;
-    this.angle = 2*Math.PI*Math.random() ;
+    Object.defineProperty(this, `x`,             {value: x, writable: true});
+    Object.defineProperty(this, `y`,             {value: y, writable: true});
+    Object.defineProperty(this, `size`,          {value: size});
+    Object.defineProperty(this, `radius`,        {value: BASE_RADIUS*Math.pow(2, size)});
+    Object.defineProperty(this, `speed`,         {value: BASE_SPEED/Math.pow(2, size)});
+    Object.defineProperty(this, `rotationAngle`, {value: 0, writable: true});
+    Object.defineProperty(this, `rotationSpeed`, {value: 2*Math.PI*Math.random() - Math.PI});
+    Object.defineProperty(this, `angle`,         {value: 2*Math.PI*Math.random()});
+    Object.seal(this);
   }
 
   move(canvasSize, deltaTime) {
+    this.rotationAngle += this.rotationSpeed * deltaTime / MILLISECONDS_PER_SECOND;
     this.x += this.speed * deltaTime / MILLISECONDS_PER_SECOND * Math.cos(this.angle);
     this.y += this.speed * deltaTime / MILLISECONDS_PER_SECOND * Math.sin(this.angle);
+    // Pac-Man logic
     if (this.x < -100) this.x += canvasSize + 200;
     if (this.y < -100) this.y += canvasSize + 200;
     if (this.x >= canvasSize + 100) this.x -= canvasSize + 200;
@@ -42,6 +50,5 @@ export default class Asteroid {
     context.fill();
     context.rotate(-this.rotationAngle);
     context.translate(-this.x, -this.y);
-    this.rotationAngle += this.rotationSpeed;
   }
 }

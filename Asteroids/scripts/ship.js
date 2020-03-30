@@ -3,6 +3,7 @@
 import Laser from "./laser.js";
 import {userInputs} from "./UserInputs.js";
 import {KeyCodes} from "./KeyCodes.js";
+import {canvasSize} from "./ScaleCanvas.js";
 
 const SHIP_COLOR = `rgb(255, 255, 255)`;
 const MILLISECONDS_PER_SECOND = 1000;
@@ -36,7 +37,7 @@ export default class Ship {
     context.translate(-this.x, -this.y);
   }
 
-  move(canvasSize, deltaTime) {
+  move(deltaTime) {
     // if (inputs[16]) {
     //   this.speed = 600;
     // } else {
@@ -72,9 +73,9 @@ export default class Ship {
   }
 
   detectCollison(asteroids) {
-    for (let i = 0; i < asteroids.length; i++) {
-      const distance = Math.sqrt(Math.pow(this.x - asteroids[i].x, 2) + Math.pow(this.y - asteroids[i].y, 2));
-      if (distance < asteroids[i].radius) {
+    for (const asteroid of asteroids) {
+      const distance = Math.sqrt(Math.pow(this.x - asteroid.x, 2) + Math.pow(this.y - asteroid.y, 2));
+      if (distance < asteroid.radius) {
         return true;
       }
     }

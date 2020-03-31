@@ -1,7 +1,7 @@
 "use strict";
 
 import Asteroid from "./asteroid.js";
-import {canvasSize} from "./ScaleCanvas.js";
+import {canvasSize, canvasScale} from "./ScaleCanvas.js";
 
 const MILLISECONDS_PER_SECOND = 1000;
 
@@ -48,8 +48,8 @@ export default class Laser {
    * @param  {number} deltaTime The number of milliseconds since the last frame.
    */
   move(deltaTime) {
-    const dx = this.speed * deltaTime * Math.cos(this.angle);
-    const dy = this.speed * deltaTime * Math.sin(this.angle);
+    const dx = this.speed * deltaTime * Math.cos(this.angle) * canvasScale;
+    const dy = this.speed * deltaTime * Math.sin(this.angle) * canvasScale;
     this.x += dx;
     this.y += dy;
     // Logic connecting the edges of the screen.
@@ -65,8 +65,8 @@ export default class Laser {
    * @param  {???} context The 2D context used to interact with the canvas.
    */
   render(context) {
-    const length = 40;
-    const width = 2;
+    const length = 40 * canvasScale;
+    const width = 2 * canvasScale;
     context.save();
     context.translate(this.x, this.y);
     context.rotate(this.angle);
@@ -89,7 +89,7 @@ export default class Laser {
   detectCollison(asteroids) {
     for (const [index, asteroid] of asteroids.entries()) {
       const distance = Math.sqrt(Math.pow(this.x - asteroid.x, 2) + Math.pow(this.y - asteroid.y, 2));
-      if (distance < asteroid.radius) {
+      if (distance < asteroid.radius * canvasScale) {
         if (asteroid.size !== 0) {
           asteroids.push(new Asteroid(asteroid.x, asteroid.y, asteroid.size - 1));
           asteroids.push(new Asteroid(asteroid.x, asteroid.y, asteroid.size - 1));

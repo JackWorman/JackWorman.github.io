@@ -9,7 +9,7 @@ import {canvasSize, scaleCanvas} from "./ScaleCanvas.js";
 const MILLISECONDS_PER_SECOND = 1000;
 
 const BLACK = `rgb(0, 0, 0)`;
-const FRAMES_PER_SECOND = 60;
+const FRAMES_PER_SECOND = 120;
 const ASTEROID_SPAWN_INTERVAL = 5000;
 
 export const CANVAS_FOREGROUND = document.getElementById(`canvas-foreground`);
@@ -50,7 +50,7 @@ function gameLoop() {
   FrameRate.update();
 
   for (const asteroid of asteroids) {
-    asteroid.move(canvasSize, deltaSeconds);
+    asteroid.move(deltaSeconds);
   }
 
   ship.move(deltaSeconds);

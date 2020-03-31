@@ -3,7 +3,7 @@
 import Laser from "./laser.js";
 import {userInputs} from "./UserInputs.js";
 import {KeyCodes} from "./KeyCodes.js";
-import {canvasSize} from "./ScaleCanvas.js";
+import {canvasSize, canvasScale} from "./ScaleCanvas.js";
 
 const MILLISECONDS_PER_SECOND = 1000;
 
@@ -22,7 +22,7 @@ export default class Ship {
   }
 
   render(context) {
-    const size = 15;
+    const size = 15*canvasScale;
     const angle = Math.atan2(userInputs[`mousePosition`].y - this.y, userInputs[`mousePosition`].x - this.x) - Math.PI/2;
     const centerY = (size * Math.tan(67.5 * Math.PI / 180) + size * Math.tan(22.5 * Math.PI / 180)) / 3;
     context.translate(this.x, this.y);
@@ -48,8 +48,8 @@ export default class Ship {
     if (userInputs[KeyCodes.S] || userInputs[KeyCodes.DownArrow]) yDirection++;
     const angle = Math.atan2(yDirection, xDirection);
     if (xDirection !== 0 || yDirection !== 0) {
-      this.x += this.speed * deltaTime * Math.cos(angle);
-      this.y += this.speed * deltaTime * Math.sin(angle);
+      this.x += this.speed * deltaTime * Math.cos(angle) * canvasScale;
+      this.y += this.speed * deltaTime * Math.sin(angle) * canvasScale;
     }
     // Detect if the ship went off the map. Pac-Man logic
     if (this.x < -100) this.x += canvasSize + 200;
@@ -72,7 +72,7 @@ export default class Ship {
   detectCollison(asteroids) {
     for (const asteroid of asteroids) {
       const distance = Math.sqrt(Math.pow(this.x - asteroid.x, 2) + Math.pow(this.y - asteroid.y, 2));
-      if (distance < asteroid.radius) {
+      if (distance < asteroid.radius*canvasScale) {
         return true;
       }
     }

@@ -44,16 +44,16 @@ function gameLoop() {
     gameLoop.previousTime = 0;
   }
   const currentTime = performance.now();
-  const deltaTime = currentTime - gameLoop.previousTime;
+  const deltaSeconds = (currentTime - gameLoop.previousTime)/MILLISECONDS_PER_SECOND;
   gameLoop.previousTime = currentTime;
 
   FrameRate.update();
 
   for (const asteroid of asteroids) {
-    asteroid.move(canvasSize, deltaTime);
+    asteroid.move(canvasSize, deltaSeconds);
   }
 
-  ship.move(deltaTime);
+  ship.move(deltaSeconds);
   if (ship.detectCollison(asteroids)) {
     reset();
   }
@@ -65,7 +65,7 @@ function gameLoop() {
       scoreMultiplier = 1;
       continue;
     }
-    ship.lasers[i].move(deltaTime);
+    ship.lasers[i].move(deltaSeconds);
     if (ship.lasers[i].detectCollison(asteroids)) { // Laser hit an asteroid
       Score.update(asteroids.length * scoreMultiplier);
       scoreMultiplier++;

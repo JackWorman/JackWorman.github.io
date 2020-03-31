@@ -48,9 +48,8 @@ export default class Laser {
    * @param  {number} deltaTime The number of milliseconds since the last frame.
    */
   move(deltaTime) {
-    const deltaTimeInSeconds = deltaTime/MILLISECONDS_PER_SECOND;
-    const dx = this.speed * deltaTimeInSeconds * Math.cos(this.angle);
-    const dy = this.speed * deltaTimeInSeconds * Math.sin(this.angle);
+    const dx = this.speed * deltaTime * Math.cos(this.angle);
+    const dy = this.speed * deltaTime * Math.sin(this.angle);
     this.x += dx;
     this.y += dy;
     // Logic connecting the edges of the screen.

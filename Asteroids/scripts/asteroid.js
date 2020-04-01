@@ -1,7 +1,5 @@
 "use strict";
 
-import {canvasSize, canvasScale} from "./ScaleCanvas.js";
-
 const MILLISECONDS_PER_SECOND = 1000;
 
 const ASTEROID_COLOR = `rgb(100, 100, 100)`;
@@ -33,8 +31,8 @@ export default class Asteroid {
     const interiorAngle = 2*Math.PI/NUMBER_OF_SIDES;
     for (let i = 0; i < NUMBER_OF_SIDES; i++) {
       points.push({
-        x: canvasScale*this.pointRadii[i]*Math.cos(interiorAngle*i) + this.x,
-        y: canvasScale*this.pointRadii[i]*Math.sin(interiorAngle*i) + this.y
+        x: 1*this.pointRadii[i]*Math.cos(interiorAngle*i) + this.x,
+        y: 1*this.pointRadii[i]*Math.sin(interiorAngle*i) + this.y
       });
     }
     Object.defineProperty(this, `points`, {value: points, writable: true});
@@ -46,15 +44,15 @@ export default class Asteroid {
    * rotation speed.
    * @param {number} deltaSeconds The amount of seconds that have passed since the last frame.
    */
-  move(deltaSeconds) {
+  move(deltaSeconds, canvasSize, canvasScale) {
     this.rotationAngle += deltaSeconds*this.rotationSpeed;
     this.x += canvasScale*deltaSeconds*this.speed*Math.cos(this.direction);
     this.y += canvasScale*deltaSeconds*this.speed*Math.sin(this.direction);
     // Pac-Man logic
-    if (this.x < -100) this.x += canvasSize + 200;
-    if (this.y < -100) this.y += canvasSize + 200;
-    if (this.x >= canvasSize + 100) this.x -= canvasSize + 200;
-    if (this.y >= canvasSize + 100) this.y -= canvasSize + 200;
+    if (this.x < -canvasScale*100) this.x += canvasSize + canvasScale*200;
+    if (this.y < -canvasScale*100) this.y += canvasSize + canvasScale*200;
+    if (this.x >= canvasSize + canvasScale*100) this.x -= canvasSize + canvasScale*200;
+    if (this.y >= canvasSize + canvasScale*100) this.y -= canvasSize + canvasScale*200;
 
     // Updates points.
     const points = [];

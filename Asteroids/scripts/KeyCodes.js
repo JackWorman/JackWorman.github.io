@@ -11,4 +11,4 @@ export const KeyCodes = {
   "RightArrow": 39,
   "Space": 32,
   "Shift": 16
-};
+}

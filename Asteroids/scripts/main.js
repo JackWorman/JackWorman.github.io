@@ -4,7 +4,7 @@ import Ship from "./ship.js";
 import Asteroid from "./asteroid.js";
 import * as FrameRate from "./FrameRate.js";
 import * as Score from "./Score.js";
-import {canvasSize, scaleCanvas} from "./ScaleCanvas.js";
+import {canvasSize, canvasScale, scaleCanvas} from "./ScaleCanvas.js";
 
 const MILLISECONDS_PER_SECOND = 1000;
 
@@ -43,13 +43,7 @@ function gameLoop() {
 
   FrameRate.update();
 
-  for (const asteroid of asteroids) {
-    asteroid.move(deltaSeconds);
-  }
-
-  ship.move(deltaSeconds);
   if (ship.detectCollison(asteroids)) {
-    window.requestAnimationFrame(render);
     reset();
   }
 
@@ -60,12 +54,16 @@ function gameLoop() {
       scoreMultiplier = 1;
       continue;
     }
-    ship.lasers[i].move(deltaSeconds);
     if (ship.lasers[i].detectCollison(asteroids)) { // Laser hit an asteroid
       Score.update(asteroids.length * scoreMultiplier);
       scoreMultiplier++;
       ship.lasers.splice(i, 1);
     }
+  }
+
+  const allSprites = [ship, ...ship.lasers, ...asteroids];
+  for (const sprite of allSprites) {
+    sprite.move(deltaSeconds, canvasSize, canvasScale);
   }
 
   // Spawn an asteroid every "ASTEROID_SPAWN_INTERVAL".

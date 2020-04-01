@@ -1,5 +1,6 @@
 "use strict";
 
+import {checkCollison} from "./main.js";
 import Laser from "./laser.js";
 import {userInputs} from "./UserInputs.js";
 import {KeyCodes} from "./KeyCodes.js";
@@ -27,10 +28,10 @@ export default class Ship {
     ];
     Object.defineProperty(this, `radiusAnglePairs`, {value: radiusAnglePairs});
     const points = [];
-    for (let i = 0; i < 4; i++) {
+    for (const radiusAnglePair of this.radiusAnglePairs) {
       points.push({
-        x: canvasScale*this.radiusAnglePairs[i].radius*Math.cos(this.radiusAnglePairs[i].angle) + this.x,
-        y: canvasScale*this.radiusAnglePairs[i].radius*Math.sin(this.radiusAnglePairs[i].angle) + this.y
+        x: canvasScale*radiusAnglePair.radius*Math.cos(radiusAnglePair.angle) + this.x,
+        y: canvasScale*radiusAnglePair.radius*Math.sin(radiusAnglePair.angle) + this.y
       });
     }
     Object.defineProperty(this, `points`, {value: points, writable: true});
@@ -66,15 +67,14 @@ export default class Ship {
     if (this.y >= canvasSize + 100) this.y -= canvasSize + 200;
 
     // Updates points.
-    const angle = Math.atan2(userInputs[`mousePosition`].y - this.y, userInputs[`mousePosition`].x - this.x);
-    const points = [];
-    for (let i = 0; i < 4; i++) {
-      points.push({
-        x: canvasScale*this.radiusAnglePairs[i].radius*Math.cos(this.radiusAnglePairs[i].angle + angle) + this.x,
-        y: canvasScale*this.radiusAnglePairs[i].radius*Math.sin(this.radiusAnglePairs[i].angle + angle) + this.y
+    const rotationAngle = Math.atan2(userInputs[`mousePosition`].y - this.y, userInputs[`mousePosition`].x - this.x);
+    this.points = [];
+    for (const radiusAnglePair of this.radiusAnglePairs) {
+      this.points.push({
+        x: canvasScale*radiusAnglePair.radius*Math.cos(radiusAnglePair.angle + rotationAngle) + this.x,
+        y: canvasScale*radiusAnglePair.radius*Math.sin(radiusAnglePair.angle + rotationAngle) + this.y
       });
     }
-    this.points = points;
   }
 
   shoot(currentTime) {
@@ -90,8 +90,7 @@ export default class Ship {
 
   detectCollison(asteroids) {
     for (const asteroid of asteroids) {
-      const distance = Math.sqrt(Math.pow(this.x - asteroid.x, 2) + Math.pow(this.y - asteroid.y, 2));
-      if (distance < asteroid.radius*canvasScale) {
+      if (checkCollison(this.points, asteroid.points)) {
         return true;
       }
     }

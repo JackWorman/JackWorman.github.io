@@ -49,6 +49,7 @@ function gameLoop() {
 
   ship.move(deltaSeconds);
   if (ship.detectCollison(asteroids)) {
+    window.requestAnimationFrame(render);
     reset();
   }
 
@@ -97,6 +98,7 @@ export function render() {
 scaleCanvas();
 reset();
 
+// TODO: detect if a shape is completely inside the other
 export function checkCollison(points1, points2) {
   // Create line segments from points.
   const lineSegments1 = [];

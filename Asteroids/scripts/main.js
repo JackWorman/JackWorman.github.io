@@ -8,14 +8,8 @@ import {canvasSize, scaleCanvas} from "./ScaleCanvas.js";
 
 const MILLISECONDS_PER_SECOND = 1000;
 
-const BLACK = `rgb(0, 0, 0)`;
 const FRAMES_PER_SECOND = 120;
 const ASTEROID_SPAWN_INTERVAL = 5000;
-
-export const CANVAS_FOREGROUND = document.getElementById(`canvas-foreground`);
-const CONTEXT_FOREGROUND = CANVAS_FOREGROUND.getContext(`2d`);
-const SPAN_SCORE = document.getElementById(`span-score`);
-const SPAN_HIGHSCORE = document.getElementById(`span-highscore`);
 
 let ship = new Ship(canvasSize/2, canvasSize/2);
 let asteroids = [];
@@ -89,6 +83,8 @@ function gameLoop() {
 }
 
 export function render() {
+  const CANVAS_FOREGROUND = document.getElementById(`canvas-foreground`);
+  const CONTEXT_FOREGROUND = CANVAS_FOREGROUND.getContext(`2d`);
   CONTEXT_FOREGROUND.clearRect(0, 0, canvasSize, canvasSize);
   const allSprites = [...ship.lasers, ...asteroids, ship];
   for (const sprite of allSprites) {
@@ -100,3 +96,70 @@ export function render() {
 
 scaleCanvas();
 reset();
+
+function checkLineSegmentIntersection(p1, p2, p3, p4) {
+  const line1 = {slope: null, intercept: null, vertical: false};
+  const line2 = {slope: null, intercept: null, vertical: false};
+  const intersectionPoint = {x: null, y: null};
+
+  // Checks for vertical line.
+  if (p2.x - p1.x === 0) {
+    line1.vertical = true;
+  } else {
+    line1.slope = (p2.y - p1.y)/(p2.x - p1.x);
+    line1.intercept = p1.y - line1.slope*p1.x;
+  }
+  console.log(line1);
+
+  // Checks for vertical line.
+  if (p4.x - p3.x === 0) {
+    line2.vertical = true;
+  } else {
+    line2.slope = (p4.y - p3.y)/(p4.x - p3.x);
+    line2.intercept = p3.y - line2.slope*p3.x;
+  }
+  console.log(line2);
+
+  //
+  if (!line1.vertical && !line2.vertical) {
+    console.log(`neither line is vertical`);
+    if (line1.slope === line2.slope) {
+      return (p1.x <= Math.max(p3.x, p4.x) && p1.x >= Math.min(p3.x, p4.x)
+        && p1.y <= Math.max(p3.y, p4.y) && p1.y >= Math.min(p3.y, p4.y))
+        || (p2.x <= Math.max(p3.x, p4.x) && p2.x >= Math.min(p3.x, p4.x)
+        && p2.y <= Math.max(p3.y, p4.y) && p2.y >= Math.min(p3.y, p4.y));
+    } else {
+      intersectionPoint.x = (line2.intercept - line1.intercept)/(line1.slope - line2.slope);
+      intersectionPoint.y = line1.slope*intersectionPoint.x + line1.intercept;
+      return intersectionPoint.x <= Math.max(p1.x, p2.x) && intersectionPoint.x >= Math.min(p1.x, p2.x)
+        && intersectionPoint.y <= Math.max(p1.y, p2.y) && intersectionPoint.y >= Math.min(p1.y, p2.y);
+    }
+  //
+  } else if (!line1.vertical && line2.vertical) {
+    console.log(`line2 is vertical`);
+    intersectionPoint.x = p3.x;
+    intersectionPoint.y = line1.slope*intersectionPoint.x + line1.intercept;
+    return intersectionPoint.x <= Math.max(p1.x, p2.x) && intersectionPoint.x >= Math.min(p1.x, p2.x)
+      && intersectionPoint.y <= Math.max(p1.y, p2.y) && intersectionPoint.y >= Math.min(p1.y, p2.y);
+  //
+  } else if (line1.vertical && !line2.vertical) {
+    console.log(`line1 is vertical`);
+    intersectionPoint.x = p1.x;
+    intersectionPoint.y = line2.slope*intersectionPoint.x + line2.intercept;
+    return intersectionPoint.x <= Math.max(p1.x, p2.x) && intersectionPoint.x >= Math.min(p1.x, p2.x)
+      && intersectionPoint.y <= Math.max(p1.y, p2.y) && intersectionPoint.y >= Math.min(p1.y, p2.y);
+  //
+  } else if (line1.vertical && line2.vertical) {
+    console.log(`line1 and line2 is vertical`);
+    return (p1.x <= Math.max(p3.x, p4.x) && p1.x >= Math.min(p3.x, p4.x)
+      && p1.y <= Math.max(p3.y, p4.y) && p1.y >= Math.min(p3.y, p4.y))
+      || (p2.x <= Math.max(p3.x, p4.x) && p2.x >= Math.min(p3.x, p4.x)
+      && p2.y <= Math.max(p3.y, p4.y) && p2.y >= Math.min(p3.y, p4.y));
+  }
+}
+
+const p1 = {x: 0, y: 0};
+const p2 = {x: 0, y: 1};
+const p3 = {x: 0, y: 0};
+const p4 = {x: 3, y: 0};
+console.log(checkLineSegmentIntersection(p1, p2, p3, p4));

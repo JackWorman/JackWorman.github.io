@@ -1,7 +1,5 @@
 "use strict";
 
-import {CANVAS_FOREGROUND} from "./main.js";
-
 // Get inputs.
 export const userInputs = {"mousePosition": {x: 0, y: 0}};
 
@@ -18,6 +16,7 @@ onmousedown = onmouseup = (e) => {
 }
 
 onmousemove = (event) => {
+  const CANVAS_FOREGROUND = document.getElementById(`canvas-foreground`);
   const rect = CANVAS_FOREGROUND.getBoundingClientRect();
   userInputs[`mousePosition`] = {x: event.clientX - rect.left, y: event.clientY - rect.top};
 }

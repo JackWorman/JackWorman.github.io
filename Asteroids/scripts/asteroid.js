@@ -7,6 +7,7 @@ const MILLISECONDS_PER_SECOND = 1000;
 const ASTEROID_COLOR = `rgb(100, 100, 100)`;
 const BASE_RADIUS = 25;
 const BASE_SPEED = 360;
+const NUMBER_OF_SIDES = 10;
 
 export default class Asteroid {
   /**
@@ -20,53 +21,60 @@ export default class Asteroid {
     Object.defineProperty(this, `size`,          {value: size});
     Object.defineProperty(this, `radius`,        {value: BASE_RADIUS*Math.pow(2, size)});
     Object.defineProperty(this, `speed`,         {value: BASE_SPEED/Math.pow(2, size)});
+    Object.defineProperty(this, `direction`,     {value: 2*Math.PI*Math.random()});
     Object.defineProperty(this, `rotationAngle`, {value: 0, writable: true});
     Object.defineProperty(this, `rotationSpeed`, {value: 2*Math.PI*Math.random() - Math.PI});
-    Object.defineProperty(this, `direction`,     {value: 2*Math.PI*Math.random()});
-
-    this.randomX = [];
-    this.randomY = [];
-    for (let i = 0; i < 10; i++) {
-      this.randomX.push(Math.random()/2 + 0.5);
-      this.randomY.push(Math.random()/2 + 0.5);
+    const pointRadii = [];
+    for (let i = 0; i < NUMBER_OF_SIDES; i++) {
+      pointRadii.push((Math.random()/2 + 0.5)*this.radius);
     }
-
+    Object.defineProperty(this, `pointRadii`, {value: pointRadii});
+    const points = [];
+    const interiorAngle = 2*Math.PI/NUMBER_OF_SIDES;
+    for (let i = 0; i < NUMBER_OF_SIDES; i++) {
+      points.push({
+        x: canvasScale*(this.pointRadii[i]*Math.cos(interiorAngle*i) + this.x),
+        y: canvasScale*(this.pointRadii[i]*Math.sin(interiorAngle*i) + this.y)
+      });
+    }
+    Object.defineProperty(this, `points`, {value: points, writable: true});
     Object.seal(this);
   }
 
   /**
    * Changes the x and y coordinates based on the direction and speed. Also, rotates the asteroid according to the
    * rotation speed.
-   * @param  {number} deltaSeconds The amount of seconds that have passed since the last frame.
+   * @param {number} deltaSeconds The amount of seconds that have passed since the last frame.
    */
   move(deltaSeconds) {
-    this.rotationAngle += this.rotationSpeed * deltaSeconds;
-    this.x += this.speed * deltaSeconds * Math.cos(this.direction) * canvasScale;
-    this.y += this.speed * deltaSeconds * Math.sin(this.direction) * canvasScale;
+    this.rotationAngle += deltaSeconds*this.rotationSpeed;
+    this.x += canvasScale*deltaSeconds*this.speed*Math.cos(this.direction);
+    this.y += canvasScale*deltaSeconds*this.speed*Math.sin(this.direction);
     // Pac-Man logic
     if (this.x < -100) this.x += canvasSize + 200;
     if (this.y < -100) this.y += canvasSize + 200;
     if (this.x >= canvasSize + 100) this.x -= canvasSize + 200;
     if (this.y >= canvasSize + 100) this.y -= canvasSize + 200;
+
+    // Updates points.
+    const points = [];
+    const interiorAngle = 2*Math.PI/NUMBER_OF_SIDES;
+    for (let i = 0; i < NUMBER_OF_SIDES; i++) {
+      points.push({
+        x: canvasScale*this.pointRadii[i]*Math.cos(interiorAngle*i + this.rotationAngle) + this.x,
+        y: canvasScale*this.pointRadii[i]*Math.sin(interiorAngle*i + this.rotationAngle) + this.y
+      });
+    }
+    this.points = points;
   }
 
   render(context) {
-    const sides = 10;
-    const interiorAngle = 2*Math.PI/sides;
     context.beginPath();
-    context.translate(this.x, this.y);
-    context.rotate(this.rotationAngle);
-    context.moveTo(this.radius*this.randomX[0]*canvasScale, 0);
-    for (let i = 1; i < sides; i++) {
-      context.lineTo(
-        this.radius*Math.cos(i*interiorAngle)*this.randomX[i]*canvasScale,
-        this.radius*Math.sin(i*interiorAngle)*this.randomY[i]*canvasScale
-      );
+    for (const point of this.points) {
+      context.lineTo(point.x, point.y)
     }
     context.closePath();
     context.fillStyle = ASTEROID_COLOR;
     context.fill();
-    context.rotate(-this.rotationAngle);
-    context.translate(-this.x, -this.y);
   }
 }

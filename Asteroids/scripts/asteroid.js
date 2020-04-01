@@ -68,6 +68,10 @@ export default class Asteroid {
     this.points = points;
   }
 
+  /**
+   * Displays the asteroid by connecting all the points and filling it in.
+   * @param {CanvasRenderingContext2D} context The canvas's 2D graphics context.
+   */
   render(context) {
     context.beginPath();
     for (const point of this.points) {

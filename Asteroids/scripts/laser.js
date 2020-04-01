@@ -39,14 +39,16 @@ export default class Laser {
       {radius: this.radius, angle: 26*Math.PI/25},
       {radius: this.radius, angle: 49*Math.PI/25},
     ]});
-    const points = [];
-    for (const radiusAnglePair of this.radiusAnglePairs) {
-      points.push({
-        x: 1*radiusAnglePair.radius*Math.cos(radiusAnglePair.angle + this.angle) + this.x,
-        y: 1*radiusAnglePair.radius*Math.sin(radiusAnglePair.angle + this.angle) + this.y
-      });
-    }
-    Object.defineProperty(this, `points`, {value: points, writable: true});
+    Object.defineProperty(this, `points`, {value: (() => {
+      const points = [];
+      for (const radiusAnglePair of this.radiusAnglePairs) {
+        points.push({
+          x: 1*radiusAnglePair.radius*Math.cos(radiusAnglePair.angle + this.angle) + this.x,
+          y: 1*radiusAnglePair.radius*Math.sin(radiusAnglePair.angle + this.angle) + this.y
+        });
+      }
+      return points;
+    })(), writable: true});
 
     Object.seal(this);
   }

@@ -23,7 +23,17 @@ export default class Ship {
       {radius: this.radius/2, angle: Math.PI},
       {radius: this.radius,   angle: 11*Math.PI/9},
     ]});
-    Object.defineProperty(this, `points`, {value: [], writable: true});
+    Object.defineProperty(this, `points`, {value: (() => {
+      const rotationAngle = Math.atan2(Controls.CursorPosition().y - this.y, Controls.CursorPosition().x - this.x);
+      const points = [];
+      for (const radiusAnglePair of this.radiusAnglePairs) {
+        points.push({
+          x: 1*radiusAnglePair.radius*Math.cos(radiusAnglePair.angle + rotationAngle) + this.x,
+          y: 1*radiusAnglePair.radius*Math.sin(radiusAnglePair.angle + rotationAngle) + this.y
+        });
+      }
+      return points;
+    })(), writable: true});
     Object.seal(this);
   }
 

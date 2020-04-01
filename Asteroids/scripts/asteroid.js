@@ -22,20 +22,24 @@ export default class Asteroid {
     Object.defineProperty(this, `direction`,     {value: 2*Math.PI*Math.random()});
     Object.defineProperty(this, `rotationAngle`, {value: 0, writable: true});
     Object.defineProperty(this, `rotationSpeed`, {value: 2*Math.PI*Math.random() - Math.PI});
-    const pointRadii = [];
-    for (let i = 0; i < NUMBER_OF_SIDES; i++) {
-      pointRadii.push((Math.random()/2 + 0.5)*this.radius);
-    }
-    Object.defineProperty(this, `pointRadii`, {value: pointRadii});
-    const points = [];
-    const interiorAngle = 2*Math.PI/NUMBER_OF_SIDES;
-    for (let i = 0; i < NUMBER_OF_SIDES; i++) {
-      points.push({
-        x: 1*this.pointRadii[i]*Math.cos(interiorAngle*i) + this.x,
-        y: 1*this.pointRadii[i]*Math.sin(interiorAngle*i) + this.y
-      });
-    }
-    Object.defineProperty(this, `points`, {value: points, writable: true});
+    Object.defineProperty(this, `pointRadii`, {value: (() => {
+      const pointRadii = [];
+      for (let i = 0; i < NUMBER_OF_SIDES; i++) {
+        pointRadii.push((Math.random()/2 + 0.5)*this.radius);
+      }
+      return pointRadii;
+    })()});
+    Object.defineProperty(this, `points`, {value: (() => {
+      const points = [];
+      const interiorAngle = 2*Math.PI/NUMBER_OF_SIDES;
+      for (let i = 0; i < NUMBER_OF_SIDES; i++) {
+        points.push({
+          x: 1*this.pointRadii[i]*Math.cos(interiorAngle*i) + this.x,
+          y: 1*this.pointRadii[i]*Math.sin(interiorAngle*i) + this.y
+        });
+      }
+      return points;
+    })(), writable: true});
     Object.seal(this);
   }
 

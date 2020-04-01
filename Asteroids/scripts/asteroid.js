@@ -33,8 +33,8 @@ export default class Asteroid {
     const interiorAngle = 2*Math.PI/NUMBER_OF_SIDES;
     for (let i = 0; i < NUMBER_OF_SIDES; i++) {
       points.push({
-        x: canvasScale*(this.pointRadii[i]*Math.cos(interiorAngle*i) + this.x),
-        y: canvasScale*(this.pointRadii[i]*Math.sin(interiorAngle*i) + this.y)
+        x: canvasScale*this.pointRadii[i]*Math.cos(interiorAngle*i) + this.x,
+        y: canvasScale*this.pointRadii[i]*Math.sin(interiorAngle*i) + this.y
       });
     }
     Object.defineProperty(this, `points`, {value: points, writable: true});

@@ -13,30 +13,38 @@ export default class Ship {
   constructor(x, y) {
     Object.defineProperty(this, `x`,              {value: x, writable: true});
     Object.defineProperty(this, `y`,              {value: y, writable: true});
+    Object.defineProperty(this, `radius`,         {value: 20});
     Object.defineProperty(this, `speed`,          {value: 300});
     Object.defineProperty(this, `direction`,      {value: 0, writable: true});
     Object.defineProperty(this, `lasers`,         {value: []});
     Object.defineProperty(this, `shootRate`,      {value: 500});
     Object.defineProperty(this, `timeOfLastShot`, {value: 0, writable: true});
+    const radiusAnglePairs = [
+      {radius: this.radius,   angle: 0},
+      {radius: this.radius,   angle: 7*Math.PI/9},
+      {radius: this.radius/2, angle: Math.PI},
+      {radius: this.radius,   angle: 11*Math.PI/9},
+    ];
+    Object.defineProperty(this, `radiusAnglePairs`, {value: radiusAnglePairs});
+    const points = [];
+    for (let i = 0; i < 4; i++) {
+      points.push({
+        x: canvasScale*this.radiusAnglePairs[i].radius*Math.cos(this.radiusAnglePairs[i].angle) + this.x,
+        y: canvasScale*this.radiusAnglePairs[i].radius*Math.sin(this.radiusAnglePairs[i].angle) + this.y
+      });
+    }
+    Object.defineProperty(this, `points`, {value: points, writable: true});
     Object.seal(this);
   }
 
   render(context) {
-    const size = 15*canvasScale;
-    const angle = Math.atan2(userInputs[`mousePosition`].y - this.y, userInputs[`mousePosition`].x - this.x) - Math.PI/2;
-    const centerY = (size * Math.tan(67.5 * Math.PI / 180) + size * Math.tan(22.5 * Math.PI / 180)) / 3;
-    context.translate(this.x, this.y);
-    context.rotate(angle);
     context.beginPath();
-    context.moveTo(-size, -centerY);
-    context.lineTo(0, size * Math.tan(67.5 * Math.PI / 180) - centerY);
-    context.lineTo(size, -centerY);
-    context.lineTo(0, size * Math.tan(22.5 * Math.PI / 180) - centerY);
+    for (const point of this.points) {
+      context.lineTo(point.x, point.y)
+    }
     context.closePath();
     context.fillStyle = SHIP_COLOR;
     context.fill();
-    context.rotate(-angle);
-    context.translate(-this.x, -this.y);
   }
 
   move(deltaTime) {
@@ -46,16 +54,27 @@ export default class Ship {
     if (userInputs[KeyCodes.D] || userInputs[KeyCodes.RightArrow]) xDirection++;
     if (userInputs[KeyCodes.W] || userInputs[KeyCodes.UpArrow]) yDirection--;
     if (userInputs[KeyCodes.S] || userInputs[KeyCodes.DownArrow]) yDirection++;
-    const angle = Math.atan2(yDirection, xDirection);
+    const direction = Math.atan2(yDirection, xDirection);
     if (xDirection !== 0 || yDirection !== 0) {
-      this.x += this.speed * deltaTime * Math.cos(angle) * canvasScale;
-      this.y += this.speed * deltaTime * Math.sin(angle) * canvasScale;
+      this.x += canvasScale*deltaTime*this.speed*Math.cos(direction);
+      this.y += canvasScale*deltaTime*this.speed*Math.sin(direction);
     }
     // Detect if the ship went off the map. Pac-Man logic
     if (this.x < -100) this.x += canvasSize + 200;
     if (this.y < -100) this.y += canvasSize + 200;
     if (this.x >= canvasSize + 100) this.x -= canvasSize + 200;
     if (this.y >= canvasSize + 100) this.y -= canvasSize + 200;
+
+    // Updates points.
+    const angle = Math.atan2(userInputs[`mousePosition`].y - this.y, userInputs[`mousePosition`].x - this.x);
+    const points = [];
+    for (let i = 0; i < 4; i++) {
+      points.push({
+        x: canvasScale*this.radiusAnglePairs[i].radius*Math.cos(this.radiusAnglePairs[i].angle + angle) + this.x,
+        y: canvasScale*this.radiusAnglePairs[i].radius*Math.sin(this.radiusAnglePairs[i].angle + angle) + this.y
+      });
+    }
+    this.points = points;
   }
 
   shoot(currentTime) {

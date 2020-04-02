@@ -1,13 +1,13 @@
 "use strict";
 
+import {KeyCode} from "./KeyCode.js";
 import {userInputs} from "./UserInputs.js";
-import {KeyCodes} from "./KeyCodes.js";
 
-export const Up = () => { return userInputs[KeyCodes.W] || userInputs[KeyCodes.UpArrow]; };
-export const Down = () => { return userInputs[KeyCodes.S] || userInputs[KeyCodes.DownArrow]; };
-export const Left = () => { return userInputs[KeyCodes.A] || userInputs[KeyCodes.LeftArrow]; };
-export const Right = () => { return userInputs[KeyCodes.D] || userInputs[KeyCodes.RightArrow]; };
+export const Up = () => { return userInputs[KeyCode.W] || userInputs[KeyCode.UpArrow]; };
+export const Down = () => { return userInputs[KeyCode.S] || userInputs[KeyCode.DownArrow]; };
+export const Left = () => { return userInputs[KeyCode.A] || userInputs[KeyCode.LeftArrow]; };
+export const Right = () => { return userInputs[KeyCode.D] || userInputs[KeyCode.RightArrow]; };
 export const Shoot = () => {
-  return userInputs[KeyCodes.Space] || userInputs['leftMouseDown'] || userInputs['rightMouseDown'];
+  return userInputs[KeyCode.Space] || userInputs['leftMouseDown'] || userInputs['rightMouseDown'];
 };
 export const CursorPosition = () => { return userInputs[`mousePosition`]; }

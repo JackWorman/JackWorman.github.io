@@ -1,6 +1,6 @@
 "use strict";
 
-export const KeyCodes = {
+export const KeyCode = {
   "W": 87,
   "A": 65,
   "S": 83,

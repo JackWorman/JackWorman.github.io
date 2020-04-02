@@ -1,6 +1,6 @@
 "use strict";
 
-import {KeyCode} from "./KeyCode.js";
+import * as KeyCode from "./KeyCode.js";
 import {userInputs} from "./UserInputs.js";
 
 export const Up = () => { return userInputs[KeyCode.W] || userInputs[KeyCode.UpArrow]; };

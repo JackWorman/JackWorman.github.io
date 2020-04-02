@@ -1,14 +1,12 @@
 "use strict";
 
-export const KeyCode = {
-  "W": 87,
-  "A": 65,
-  "S": 83,
-  "D": 68,
-  "UpArrow": 38,
-  "LeftArrow": 37,
-  "DownArrow": 40,
-  "RightArrow": 39,
-  "Space": 32,
-  "Shift": 16
-}
+export const Shift = 16;
+export const Space = 32;
+export const LeftArrow = 37;
+export const UpArrow = 38;
+export const RightArrow = 39;
+export const DownArrow = 40;
+export const A = 65;
+export const D = 68;
+export const S = 83;
+export const W = 87;

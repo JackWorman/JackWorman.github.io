@@ -1,6 +1,6 @@
 "use strict";
 
-import {checkCollison} from "./main.js"; // move collison detection from sprites
+import {checkCollison} from "./CollisionDetection.js";
 import Asteroid from "./Asteroid.js";
 
 const MILLISECONDS_PER_SECOND = 1000;

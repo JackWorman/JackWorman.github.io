@@ -1,6 +1,6 @@
 "use strict";
 
-import {checkCollison} from "./main.js";
+import {checkCollison} from "./CollisionDetection.js";
 import Laser from "./Laser.js";
 import * as Controls from "./Controls.js";
 import Asteroid from "./Asteroid.js";

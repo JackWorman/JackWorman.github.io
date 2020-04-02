@@ -1,10 +1,11 @@
 "use strict";
 
-import Ship from "./Ship.js";
-import Asteroid from "./Asteroid.js";
 import * as FrameRate from "./FrameRate.js";
 import * as Score from "./Score.js";
+import Ship from "./Ship.js";
+import Asteroid from "./Asteroid.js";
 import {canvasSize, canvasScale, scaleCanvas} from "./ScaleCanvas.js";
+import {checkCollison} from "./CollisionDetection.js";
 
 const MILLISECONDS_PER_SECOND = 1000;
 
@@ -14,8 +15,8 @@ const ASTEROID_SPAWN_INTERVAL = 5000;
 let ship = new Ship(canvasSize/2, canvasSize/2);
 let asteroids = [];
 let timeOfLastAsteroidSpawn;
-let gameLoopInterval;
 let scoreMultiplier = 1;
+let gameLoopInterval;
 
 async function reset() {
   if (typeof gameLoopInterval === `undefined`) {
@@ -99,92 +100,3 @@ export function render() {
 
 scaleCanvas();
 reset();
-
-// TODO: detect if a shape is completely inside the other
-export function checkCollison(points1, points2) {
-  // Create line segments from points.
-  const lineSegments1 = [];
-  for (let i = 0; i < points1.length - 1; i++) {
-    lineSegments1.push([points1[i], points1[i + 1]]);
-  }
-  lineSegments1.push([points1[points1.length - 1], points1[0]]);
-  const lineSegments2 = [];
-  for (let i = 0; i < points2.length - 1; i++) {
-    lineSegments2.push([points2[i], points2[i + 1]]);
-  }
-  lineSegments2.push([points2[points2.length - 1], points2[0]]);
-
-  // test each set of line segments
-  for (const lineSegment1 of lineSegments1) {
-    for (const lineSegment2 of lineSegments2) {
-      if (checkIntersection(...lineSegment1, ...lineSegment2)) {
-        return true;
-      }
-    }
-  }
-  return false;
-}
-
-function checkIntersection(p1, p2, p3, p4) {
-  const line1 = {slope: null, intercept: null, vertical: false};
-  const line2 = {slope: null, intercept: null, vertical: false};
-  const intersectionPoint = {x: null, y: null};
-
-  // Checks for vertical line.
-  if (p2.x - p1.x === 0) {
-    line1.vertical = true;
-  } else {
-    line1.slope = (p2.y - p1.y)/(p2.x - p1.x);
-    line1.intercept = p1.y - line1.slope*p1.x;
-  }
-
-  // Checks for vertical line.
-  if (p4.x - p3.x === 0) {
-    line2.vertical = true;
-  } else {
-    line2.slope = (p4.y - p3.y)/(p4.x - p3.x);
-    line2.intercept = p3.y - line2.slope*p3.x;
-  }
-
-  //
-  if (!line1.vertical && !line2.vertical) {
-    if (line1.slope === line2.slope) {
-      return (p1.x <= Math.max(p3.x, p4.x) && p1.x >= Math.min(p3.x, p4.x)
-        && p1.y <= Math.max(p3.y, p4.y) && p1.y >= Math.min(p3.y, p4.y))
-        || (p2.x <= Math.max(p3.x, p4.x) && p2.x >= Math.min(p3.x, p4.x)
-        && p2.y <= Math.max(p3.y, p4.y) && p2.y >= Math.min(p3.y, p4.y));
-    } else {
-      intersectionPoint.x = (line2.intercept - line1.intercept)/(line1.slope - line2.slope);
-      intersectionPoint.y = line1.slope*intersectionPoint.x + line1.intercept;
-      return intersectionPoint.x <= Math.max(p1.x, p2.x) && intersectionPoint.x >= Math.min(p1.x, p2.x)
-        && intersectionPoint.y <= Math.max(p1.y, p2.y) && intersectionPoint.y >= Math.min(p1.y, p2.y)
-        && intersectionPoint.x <= Math.max(p3.x, p4.x) && intersectionPoint.x >= Math.min(p3.x, p4.x)
-        && intersectionPoint.y <= Math.max(p3.y, p4.y) && intersectionPoint.y >= Math.min(p3.y, p4.y);
-    }
-  //
-  } else if (!line1.vertical && line2.vertical) {
-    intersectionPoint.x = p3.x;
-    intersectionPoint.y = line1.slope*intersectionPoint.x + line1.intercept;
-    return intersectionPoint.x <= Math.max(p1.x, p2.x) && intersectionPoint.x >= Math.min(p1.x, p2.x)
-      && intersectionPoint.y <= Math.max(p1.y, p2.y) && intersectionPoint.y >= Math.min(p1.y, p2.y);
-  //
-  } else if (line1.vertical && !line2.vertical) {
-    intersectionPoint.x = p1.x;
-    intersectionPoint.y = line2.slope*intersectionPoint.x + line2.intercept;
-    return intersectionPoint.x <= Math.max(p1.x, p2.x) && intersectionPoint.x >= Math.min(p1.x, p2.x)
-      && intersectionPoint.y <= Math.max(p1.y, p2.y) && intersectionPoint.y >= Math.min(p1.y, p2.y);
-  //
-  } else if (line1.vertical && line2.vertical) {
-    return (p1.x <= Math.max(p3.x, p4.x) && p1.x >= Math.min(p3.x, p4.x)
-      && p1.y <= Math.max(p3.y, p4.y) && p1.y >= Math.min(p3.y, p4.y))
-      || (p2.x <= Math.max(p3.x, p4.x) && p2.x >= Math.min(p3.x, p4.x)
-      && p2.y <= Math.max(p3.y, p4.y) && p2.y >= Math.min(p3.y, p4.y));
-  }
-}
-
-// const p1 = {x: 376.63922397555547, y: 375.3790090214039};
-// const p2 = {x: 341.8646649860681, y: 361.0112286938371};
-// const p3 = {x: -52.01140653648993, y: 514.8599622552507};
-// const p4 = {x: 4.999265538515136, y: 495.8272648274736};
-// console.log(checkIntersection(p1, p2, p3, p4));
-// alert();

@@ -2,7 +2,7 @@
 
 const MILLISECONDS_PER_SECOND = 1000;
 
-const DELTA_TIMES_BUFFER_SIZE = 100;
+const DELTA_TIMES_BUFFER_SIZE = 500;
 const DECIMALS = 2;
 const SPAN_FPS = document.getElementById(`span-fps`);
 
@@ -24,7 +24,7 @@ export function update() {
     deltaTimes.shift();
   }
   const averageDeltaTime = (deltaTimes.reduce((a, b) => (a + b)) / deltaTimes.length);
-  window.requestAnimationFrame(() => display(MILLISECONDS_PER_SECOND / averageDeltaTime));
+  window.requestAnimationFrame(() => display(MILLISECONDS_PER_SECOND/averageDeltaTime));
   previousTime = currentTime;
 }
 

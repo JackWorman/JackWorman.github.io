@@ -5,7 +5,7 @@
  * @param  {array<object>} points1 A set of points defining the first polygon.
  * @param  {array<object>} points2 A set of points defining the second polygon.
  * @return {boolean}               Whether or not there is an intersection between the polygons.
- * TODO: detect if a shape is completely inside the other, using ray test (odd intersection=inside, even=outside)
+ * TODO: use path sweeping instead of testing if inside a polygon
  */
 export function checkCollison(points1, points2) {
   const lineSegments1 = createLineSegmentsFromPairsOfPoints(points1);
@@ -18,6 +18,47 @@ export function checkCollison(points1, points2) {
       }
     }
   }
+  // Check if one of the polygon contains the other polygon.
+  for (const point of points1) {
+    const testRay= {
+      vertical: false,
+      xIntercept: null,
+      range: {min: point.y, max: point.y},
+      slope: 0,
+      yIntercept: point.y,
+      domain: {min: point.x, max: Number.POSITIVE_INFINITY}
+    }
+    let intersectionCount = 0;
+    for (const lineSegment of lineSegments2) {
+      if (checkForIntersection(testRay, lineSegment)) {
+        intersectionCount++;
+      }
+    }
+    if (intersectionCount%2 === 1) {
+      return true;
+    }
+  }
+
+  for (const point of points2) {
+    const testRay = {
+      vertical: false,
+      xIntercept: null,
+      range: {min: point.y, max: point.y},
+      slope: 0,
+      yIntercept: point.y,
+      domain: {min: point.x, max: Number.POSITIVE_INFINITY}
+    }
+    let intersectionCount = 0;
+    for (const lineSegment of lineSegments1) {
+      if (checkForIntersection(testRay, lineSegment)) {
+        intersectionCount++;
+      }
+    }
+    if (intersectionCount%2 === 1) {
+      return true;
+    }
+  }
+
   return false;
 }
 

@@ -82,5 +82,7 @@ export default class Asteroid {
     context.closePath();
     context.fillStyle = ASTEROID_COLOR;
     context.fill();
+    context.strokeStyle = `rgb(150, 150, 150)`;
+    context.stroke();
   }
 }

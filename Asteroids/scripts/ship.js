@@ -3,6 +3,7 @@
 import {checkCollison} from "./main.js";
 import Laser from "./laser.js";
 import * as Controls from "./Controls.js";
+import Asteroid from "./asteroid.js";
 
 const SHIP_COLOR = `rgb(0, 255, 0)`;
 
@@ -34,6 +35,7 @@ export default class Ship {
       }
       return points;
     })(), writable: true});
+    Object.defineProperty(this, `health`, {value: 2, writable: true});
     Object.seal(this);
   }
 
@@ -43,7 +45,14 @@ export default class Ship {
       context.lineTo(point.x, point.y)
     }
     context.closePath();
-    context.fillStyle = SHIP_COLOR;
+    if (this.health === 2) {
+      context.fillStyle = `rgb(0, 255, 0)`;
+    } else if (this.health === 1) {
+      context.fillStyle = `rgb(255, 255, 0)`;
+    } else if (this.health === 0) {
+      context.fillStyle = `rgb(255, 0, 0)`;
+    }
+    // context.fillStyle = SHIP_COLOR;
     context.fill();
   }
 
@@ -86,8 +95,9 @@ export default class Ship {
   }
 
   detectCollison(asteroids) {
-    for (const asteroid of asteroids) {
+    for (const [index, asteroid] of asteroids.entries()) {
       if (checkCollison(this.points, asteroid.points)) {
+        asteroids.splice(index, 1); // Removes the element at 'index'.
         return true;
       }
     }

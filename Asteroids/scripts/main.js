@@ -44,7 +44,11 @@ function gameLoop() {
   FrameRate.update();
 
   if (ship.detectCollison(asteroids)) {
-    reset();
+    // (new Audio(`./sounds/hit-sound.wav`)).play();
+    if (ship.health === 0) {
+      reset();
+    }
+    ship.health--;
   }
 
   // Laser logic, interates in reverse so that lasers can be removed.

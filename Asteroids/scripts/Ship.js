@@ -92,14 +92,4 @@ export default class Ship {
       (new Audio(`./sounds/laser.wav`)).play();
     }
   }
-
-  detectCollison(asteroids) {
-    for (const [index, asteroid] of asteroids.entries()) {
-      if (checkCollison(this.points, asteroid.points)) {
-        asteroids.splice(index, 1); // Removes the element at 'index'.
-        return true;
-      }
-    }
-    return false;
-  }
 }

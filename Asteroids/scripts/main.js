@@ -16,13 +16,13 @@ let ship = new Ship(canvasSize/2, canvasSize/2);
 let asteroids = [];
 let timeOfLastAsteroidSpawn;
 let scoreMultiplier = 1;
-let gameLoopInterval;
+let gameLoopTimeout;
 
 async function reset() {
-  if (typeof gameLoopInterval === `undefined`) {
+  if (typeof gameLoopTimeout === `undefined`) {
     await Swal.fire(`WASD to move.\nMouse to aim.\nMouse buttons or space to shoot.`);
   } else {
-    clearInterval(gameLoopInterval);
+    clearTimeout(gameLoopTimeout);
     await Swal.fire({text: `Game Over`, showConfirmButton: false, timer: 1000});
   }
   FrameRate.reset();
@@ -31,7 +31,9 @@ async function reset() {
   timeOfLastAsteroidSpawn = -ASTEROID_SPAWN_INTERVAL;
   scoreMultiplier = 1;
   Score.reset();
-  gameLoopInterval = setInterval(gameLoop, MILLISECONDS_PER_SECOND/FRAMES_PER_SECOND);
+  // gameLoopInterval = setInterval(gameLoop, MILLISECONDS_PER_SECOND/FRAMES_PER_SECOND);
+  scaleCanvas();
+  gameLoopTimeout = setTimeout(gameLoop, 0);
 }
 
 function gameLoop() {
@@ -44,28 +46,42 @@ function gameLoop() {
 
   FrameRate.update();
 
-  if (ship.detectCollison(asteroids)) {
-    // (new Audio(`./sounds/hit-sound.wav`)).play();
-    if (ship.health === 0) {
-      reset();
-    }
-    ship.health--;
-  }
-
-  // Laser logic, interates in reverse so that lasers can be removed.
+  // Checks for laser expiration and laser-asteroid collisions.
   for (let i = ship.lasers.length - 1; i >= 0; i--) {
     if (ship.lasers[i].checkExpiration(currentTime)) {
       ship.lasers.splice(i, 1);
       scoreMultiplier = 1;
       continue;
     }
-    if (ship.lasers[i].detectCollison(asteroids)) { // Laser hit an asteroid
-      Score.update(asteroids.length * scoreMultiplier);
-      scoreMultiplier++;
-      ship.lasers.splice(i, 1);
+    for (const [index, asteroid] of asteroids.entries()) {
+      if (checkCollison(ship.lasers[i].points, asteroid.points)) {
+        if (asteroid.size > 0) {
+          asteroids.push(new Asteroid(asteroid.x, asteroid.y, asteroid.size - 1));
+          asteroids.push(new Asteroid(asteroid.x, asteroid.y, asteroid.size - 1));
+        }
+        asteroids.splice(index, 1); // Removes the element at 'index'.
+        Score.update(asteroids.length * scoreMultiplier);
+        scoreMultiplier++;
+        ship.lasers.splice(i, 1);
+        break;
+      }
     }
   }
 
+  // Checks for ship-asteroid collisions.
+  for (const [index, asteroid] of asteroids.entries()) {
+    if (checkCollison(ship.points, asteroid.points)) {
+      if (ship.health === 0) {
+        reset();
+        return;
+      }
+      ship.health--;
+      asteroids.splice(index, 1); // Removes the asteroid that was hit.
+      break;
+    }
+  }
+
+  // Move all the sprites.
   const allSprites = [ship, ...ship.lasers, ...asteroids];
   for (const sprite of allSprites) {
     sprite.move(deltaSeconds, canvasSize, canvasScale);
@@ -84,6 +100,8 @@ function gameLoop() {
   ship.shoot(currentTime);
 
   window.requestAnimationFrame(render);
+
+  gameLoopTimeout = setTimeout(gameLoop, 0);
 }
 
 export function render() {

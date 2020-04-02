@@ -1,14 +1,13 @@
 "use strict";
 
 import {checkCollison} from "./main.js";
-import Laser from "./laser.js";
+import Laser from "./Laser.js";
 import * as Controls from "./Controls.js";
-import Asteroid from "./asteroid.js";
+import Asteroid from "./Asteroid.js";
 
 const SHIP_COLOR = `rgb(0, 255, 0)`;
 
 export default class Ship {
-  // TODO: add health, 3 hits per game, change color to represent health, green->yellow->red
   constructor(x, y) {
     Object.defineProperty(this, `x`,              {value: x, writable: true});
     Object.defineProperty(this, `y`,              {value: y, writable: true});

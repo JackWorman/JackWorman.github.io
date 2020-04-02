@@ -1,7 +1,7 @@
 "use strict";
 
-import Ship from "./ship.js";
-import Asteroid from "./asteroid.js";
+import Ship from "./Ship.js";
+import Asteroid from "./Asteroid.js";
 import * as FrameRate from "./FrameRate.js";
 import * as Score from "./Score.js";
 import {canvasSize, canvasScale, scaleCanvas} from "./ScaleCanvas.js";

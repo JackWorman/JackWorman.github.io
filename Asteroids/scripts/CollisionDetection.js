@@ -38,7 +38,6 @@ export function checkCollison(points1, points2) {
       return true;
     }
   }
-
   for (const point of points2) {
     const testRay = {
       vertical: false,

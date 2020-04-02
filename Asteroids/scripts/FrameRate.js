@@ -1,6 +1,7 @@
 "use strict";
 
 const MILLISECONDS_PER_SECOND = 1000;
+
 const DELTA_TIMES_BUFFER_SIZE = 100;
 const DECIMALS = 2;
 const SPAN_FPS = document.getElementById(`span-fps`);

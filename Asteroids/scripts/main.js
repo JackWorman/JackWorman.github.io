@@ -32,7 +32,6 @@ async function reset() {
   scoreMultiplier = 1;
   Score.reset();
   // gameLoopInterval = setInterval(gameLoop, MILLISECONDS_PER_SECOND/FRAMES_PER_SECOND);
-  scaleCanvas();
   gameLoopTimeout = setTimeout(gameLoop, 0);
 }
 

@@ -1,9 +1,7 @@
 "use strict";
 
-import {checkCollison} from "./CollisionDetection.js";
 import Laser from "./Laser.js";
 import * as Controls from "./Controls.js";
-import Asteroid from "./Asteroid.js";
 
 const SHIP_COLOR = `rgb(0, 255, 0)`;
 
@@ -38,6 +36,10 @@ export default class Ship {
     Object.seal(this);
   }
 
+  /**
+   * Displays the ship by connecting all the points and filling it in.
+   * @param {CanvasRenderingContext2D} context The canvas's 2D graphics context.
+   */
   render(context) {
     context.beginPath();
     for (const point of this.points) {
@@ -55,6 +57,12 @@ export default class Ship {
     context.fill();
   }
 
+  /**
+   * [move description]
+   * @param  {number} deltaTime   The time elapsed, in seconds, since the last frame.
+   * @param  {number} canvasSize  [description]
+   * @param  {number} canvasScale [description]
+   */
   move(deltaTime, canvasSize, canvasScale) {
     let xDirection = 0;
     let yDirection = 0;

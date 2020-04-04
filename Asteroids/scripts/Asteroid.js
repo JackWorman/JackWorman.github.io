@@ -1,7 +1,5 @@
 "use strict";
 
-const MILLISECONDS_PER_SECOND = 1000;
-
 const ASTEROID_COLOR = `rgb(100, 100, 100)`;
 const BASE_RADIUS = 25;
 const BASE_SPEED = 360;

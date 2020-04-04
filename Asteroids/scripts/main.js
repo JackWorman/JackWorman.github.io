@@ -16,6 +16,7 @@ let ship = new Ship(canvasSize/2, canvasSize/2);
 let asteroids = [];
 let timeOfLastAsteroidSpawn;
 let scoreMultiplier = 1;
+let asteroidsHit = 0;
 let gameLoopTimeout;
 
 async function reset() {
@@ -30,8 +31,8 @@ async function reset() {
   asteroids = [];
   timeOfLastAsteroidSpawn = -ASTEROID_SPAWN_INTERVAL;
   scoreMultiplier = 1;
+  asteroidsHit = 0;
   Score.reset();
-  // gameLoopInterval = setInterval(gameLoop, MILLISECONDS_PER_SECOND/FRAMES_PER_SECOND);
   gameLoopTimeout = setTimeout(gameLoop, 0);
 }
 
@@ -59,7 +60,8 @@ function gameLoop() {
           asteroids.push(new Asteroid(asteroid.x, asteroid.y, asteroid.size - 1));
         }
         asteroids.splice(index, 1); // Removes the element at 'index'.
-        Score.update(asteroids.length * scoreMultiplier);
+        asteroidsHit++;
+        Score.update(asteroidsHit*scoreMultiplier);
         scoreMultiplier++;
         ship.lasers.splice(i, 1);
         break;
@@ -111,8 +113,11 @@ export function render() {
   for (const sprite of allSprites) {
     sprite.render(CONTEXT_FOREGROUND);
   }
-  CONTEXT_FOREGROUND.strokeStyle = `rgb(255, 255, 255)`;
-  CONTEXT_FOREGROUND.strokeText(`x${scoreMultiplier}`, 50, 50);
+  CONTEXT_FOREGROUND.font = `32px VT323`;
+  CONTEXT_FOREGROUND.textBaseline = `middle`;
+  CONTEXT_FOREGROUND.textAlign = `center`;
+  CONTEXT_FOREGROUND.fillStyle = `rgb(255, 255, 255)`;
+  CONTEXT_FOREGROUND.fillText(`x${scoreMultiplier}`, 50, 50);
 }
 
 scaleCanvas();

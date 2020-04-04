@@ -1,10 +1,5 @@
 "use strict";
 
-import {checkCollison} from "./CollisionDetection.js";
-import Asteroid from "./Asteroid.js";
-
-const MILLISECONDS_PER_SECOND = 1000;
-
 const RAINBOW = [
   `rgb(255, 0, 0)`,
   `rgb(255, 127, 0)`,
@@ -48,6 +43,8 @@ export default class Laser {
       }
       return points;
     })(), writable: true});
+    Object.defineProperty(this, `previousPoints`, {value: this.points, writable: true});
+
 
     Object.seal(this);
   }
@@ -75,8 +72,8 @@ export default class Laser {
     if (this.y < -canvasScale*100) this.y += canvasSize + canvasScale*200;
     if (this.x >= canvasSize + canvasScale*100) this.x -= canvasSize + canvasScale*200;
     if (this.y >= canvasSize + canvasScale*100) this.y -= canvasSize + canvasScale*200;
-
     // Updates points.
+    this.previousPoints = this.points;
     this.points = [];
     for (const radiusAnglePair of this.radiusAnglePairs) {
       this.points.push({
@@ -91,31 +88,38 @@ export default class Laser {
    * @param  {CanvasRenderingContext2D} context The 2D context used to interact with the canvas.
    */
   render(context) {
-    context.beginPath();
-    for (const point of this.points) {
-      context.lineTo(point.x, point.y)
-    }
-    context.closePath();
-    context.fillStyle = RAINBOW[this.color++ % RAINBOW.length];
-    context.fill();
-  }
+    if (this.x < -1*100) return;
+    if (this.y < -1*100) return;
+    if (this.x >= 723 + 1*100) return;
+    if (this.y >= 723 + 1*100) return;
 
-  /**
-   * Checks if the laser has collided with any of the asteroids.
-   * @param  {array<Asteroid>} asteroids The list of all asteroid objects.
-   * @return {boolean}                   Whether or not an asteroid was hit.
-   */
-  detectCollison(asteroids) {
-    for (const [index, asteroid] of asteroids.entries()) {
-      if (checkCollison(this.points, asteroid.points)) {
-        if (asteroid.size > 0) {
-          asteroids.push(new Asteroid(asteroid.x, asteroid.y, asteroid.size - 1));
-          asteroids.push(new Asteroid(asteroid.x, asteroid.y, asteroid.size - 1));
-        }
-        asteroids.splice(index, 1); // Removes the element at 'index'.
-        return true;
-      }
+    const percentTimeLeft = (performance.now() - this.creationTime)/EXPIRATION_TIME;
+    if (percentTimeLeft < 1/7) {
+      context.fillStyle = `red`;
+    } else if (percentTimeLeft < 2/7) {
+      context.fillStyle = `orange`;
+    } else if (percentTimeLeft < 3/7) {
+      context.fillStyle = `yellow`;
+    } else if (percentTimeLeft < 4/7) {
+      context.fillStyle = `green`;
+    } else if (percentTimeLeft < 5/7) {
+      context.fillStyle = `aqua`;
+    } else if (percentTimeLeft < 6/7) {
+      context.fillStyle = `blue`;
+    } else {
+      context.fillStyle = `purple`;
     }
-    return false;
+
+    context.beginPath();
+    // for (const point of this.points) {
+    //   context.lineTo(point.x, point.y)
+    // }
+    context.lineTo(this.points[0].x, this.points[0].y);
+    context.lineTo(this.previousPoints[1].x, this.previousPoints[1].y);
+    context.lineTo(this.previousPoints[2].x, this.previousPoints[2].y);
+    context.lineTo(this.points[3].x, this.points[3].y);
+    context.closePath();
+    // context.fillStyle = context.fillStyle; // RAINBOW[this.color++ % RAINBOW.length];
+    context.fill();
   }
 }

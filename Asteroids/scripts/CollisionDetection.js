@@ -5,7 +5,7 @@
  * @param  {array<object>} points1 A set of points defining the first polygon.
  * @param  {array<object>} points2 A set of points defining the second polygon.
  * @return {boolean}               Whether or not there is an intersection between the polygons.
- * TODO: use path sweeping instead of testing if inside a polygon
+ * TODO: use path sweeping instead of testing if inside a polygon (connect previousPoints with currentPoints)
  */
 export function checkCollison(points1, points2) {
   const lineSegments1 = createLineSegmentsFromPairsOfPoints(points1);

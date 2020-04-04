@@ -44,8 +44,6 @@ export default class Laser {
       return points;
     })(), writable: true});
     Object.defineProperty(this, `previousPoints`, {value: this.points, writable: true});
-
-
     Object.seal(this);
   }
 
@@ -88,10 +86,11 @@ export default class Laser {
    * @param  {CanvasRenderingContext2D} context The 2D context used to interact with the canvas.
    */
   render(context) {
-    if (this.x < -1*100) return;
-    if (this.y < -1*100) return;
-    if (this.x >= 723 + 1*100) return;
-    if (this.y >= 723 + 1*100) return;
+    // TODO: fix edge wrap bug
+    // if (this.x < -1*100) return;
+    // if (this.y < -1*100) return;
+    // if (this.x >= 723 + 1*100) return;
+    // if (this.y >= 723 + 1*100) return;
 
     const percentTimeLeft = (performance.now() - this.creationTime)/EXPIRATION_TIME;
     if (percentTimeLeft < 1/7) {
@@ -111,15 +110,11 @@ export default class Laser {
     }
 
     context.beginPath();
-    // for (const point of this.points) {
-    //   context.lineTo(point.x, point.y)
-    // }
     context.lineTo(this.points[0].x, this.points[0].y);
     context.lineTo(this.previousPoints[1].x, this.previousPoints[1].y);
     context.lineTo(this.previousPoints[2].x, this.previousPoints[2].y);
     context.lineTo(this.points[3].x, this.points[3].y);
     context.closePath();
-    // context.fillStyle = context.fillStyle; // RAINBOW[this.color++ % RAINBOW.length];
     context.fill();
   }
 }

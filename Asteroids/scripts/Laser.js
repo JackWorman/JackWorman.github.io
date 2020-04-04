@@ -1,5 +1,7 @@
 "use strict";
 
+import {canvasSize, canvasScale} from "./ScaleCanvas.js";
+
 const RAINBOW = [
   `rgb(255, 0, 0)`,
   `rgb(255, 127, 0)`,
@@ -86,11 +88,11 @@ export default class Laser {
    * @param  {CanvasRenderingContext2D} context The 2D context used to interact with the canvas.
    */
   render(context) {
-    // TODO: fix edge wrap bug
-    // if (this.x < -1*100) return;
-    // if (this.y < -1*100) return;
-    // if (this.x >= 723 + 1*100) return;
-    // if (this.y >= 723 + 1*100) return;
+    // Stops the laser from glitching when points and previousPoints are on different sides of the screen.
+    if (this.x < -canvasScale*100/2) return;
+    if (this.y < -canvasScale*100/2) return;
+    if (this.x >= canvasSize + canvasScale*100/2) return;
+    if (this.y >= canvasSize + canvasScale*100/2) return;
 
     const percentTimeLeft = (performance.now() - this.creationTime)/EXPIRATION_TIME;
     if (percentTimeLeft < 1/7) {

@@ -44,7 +44,7 @@ let started = false;
 let hunger;
 let apples;
 //export let bestFitnesses = [];
-let showMode = `all`;
+let showMode = `best`;
 let snakeCopies = [];
 let previousTime = performance.now();
 

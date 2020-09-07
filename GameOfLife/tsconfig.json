@@ -1,6 +1,7 @@
 {
   "compileOnSave": true,
   "compilerOptions": {
-    "outDir": "scripts/javascripts"
+    "outDir": "scripts/javascripts",
+    "target": "ESNext"
   }
 }

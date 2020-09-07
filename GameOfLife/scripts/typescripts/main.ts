@@ -10,7 +10,7 @@ const GRID_SIZE: number = 50;
 const GRID_GAP_SIZE: number = CANVAS_SIZE / GRID_SIZE;
 
 CANVAS_BOARD.addEventListener('click', clickEvent);
-function clickEvent(event: MouseEvent) {
+function clickEvent(this: HTMLCanvasElement, event: MouseEvent) {
     const rect = this.getBoundingClientRect();
     const x = event.clientX - rect.left;
     const y = event.clientY - rect.top;
@@ -31,7 +31,7 @@ function drawGrid(): void {
 
 drawGrid();
 
-const board = [];
+const board: Array<Array<number>> = [];
 for (let i: number = 0; i < 50; i++) {
     board.push([]);
     for (let j: number = 0; j < 50; j++) {

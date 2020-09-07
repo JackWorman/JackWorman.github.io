@@ -167,12 +167,12 @@ document.addEventListener(`keydown`, (event) => {
       errors++;
       SPAN_ERRORS.textContent = `Errors: ${errors}`;
 
-      alert();
-      userInput = ``;
-      for (const childNode of DIV_TEXT.childNodes) {
-        childNode.classList.remove(`correct`, `incorrect`);
-      }
-      indicatorLocation = 0;
+      // alert();
+      // userInput = ``;
+      // for (const childNode of DIV_TEXT.childNodes) {
+      //   childNode.classList.remove(`correct`, `incorrect`);
+      // }
+      // indicatorLocation = 0;
     }
   }
   clearInterval(toggleIndicatorInterval);

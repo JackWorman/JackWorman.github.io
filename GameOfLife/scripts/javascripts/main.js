@@ -1,8 +1,6 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const Helper_js_1 = require("./Helper.js");
-const CANVAS_BOARD = Helper_js_1.getHTMLCanvasElementById('canvas-board');
-const CONTEXT_BOARD = Helper_js_1.getCanvasRenderingContext2D(CANVAS_BOARD);
+import { getHTMLCanvasElementById, getCanvasRenderingContext2D } from "./Helper.js";
+const CANVAS_BOARD = getHTMLCanvasElementById('canvas-board');
+const CONTEXT_BOARD = getCanvasRenderingContext2D(CANVAS_BOARD);
 const CANVAS_SIZE = 800;
 CANVAS_BOARD.width = CANVAS_SIZE;
 CANVAS_BOARD.height = CANVAS_SIZE;

@@ -9,7 +9,7 @@ for (var col = 0; col < 100; col++) {
         CONTEXT_BOARD.lineTo(col * 8, 800);
         CONTEXT_BOARD.moveTo(0, row * 8);
         CONTEXT_BOARD.lineTo(800, row * 8);
-        CONTEXT_BOARD.closePath();
     }
 }
+CONTEXT_BOARD.closePath();
 CONTEXT_BOARD.stroke();

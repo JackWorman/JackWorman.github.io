@@ -1,4 +1,4 @@
-import { getHTMLCanvasElementById, getCanvasRenderingContext2D } from "./Helper";
+import { getHTMLCanvasElementById, getCanvasRenderingContext2D } from "./Helper.js";
 const CANVAS_BOARD = getHTMLCanvasElementById('canvas-board');
 const CONTEXT_BOARD = getCanvasRenderingContext2D(CANVAS_BOARD);
 const CANVAS_SIZE = 800;

@@ -11,7 +11,7 @@ function clickEvent(event) {
     const x = (event.clientX - rect.left) % GRID_SIZE;
     const y = (event.clientY - rect.top) % GRID_SIZE;
     console.log(x, y);
-    board[x][y] = !board[x][y];
+    board[y][x] = !board[y][x];
     console.log(board);
 }
 function drawGrid() {

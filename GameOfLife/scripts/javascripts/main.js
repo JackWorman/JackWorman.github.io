@@ -25,9 +25,12 @@ function drawGrid() {
     CONTEXT_BOARD.stroke();
 }
 drawGrid();
-const board = new Array(GRID_SIZE);
+const board = [];
 for (let i = 0; i <= 50; i++) {
-    board.push(new Array(GRID_SIZE));
+    board.push([]);
+    for (let j = 0; j <= 50; j++) {
+        board[i].push(new Array(GRID_SIZE));
+    }
 }
 board[30][30] = -1;
 console.log(board);

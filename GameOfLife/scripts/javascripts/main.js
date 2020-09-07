@@ -28,3 +28,11 @@ function getCanvasRenderingContext2D(htmlCanvasElement) {
     }
     throw new Error('Could not get CanvasRenderingContext2D.');
 }
+CANVAS_BOARD.addEventListener('click', clickEvent);
+function clickEvent(event) {
+    // e = Mouse click event.
+    var rect = this.getBoundingClientRect();
+    var x = event.clientX - rect.left; //x position within the element.
+    var y = event.clientY - rect.top; //y position within the element.
+    console.log(x + ", " + y);
+}

@@ -10,8 +10,6 @@ for (let col: number = 0; col < 100; col++) {
     CONTEXT_BOARD.beginPath();
     CONTEXT_BOARD.moveTo(col * 8, 0);
     CONTEXT_BOARD.lineTo(col * 8, 800);
-    CONTEXT_BOARD.closePath();
-    CONTEXT_BOARD.beginPath();
     CONTEXT_BOARD.moveTo(0, row * 8);
     CONTEXT_BOARD.lineTo(800, row * 8);
     CONTEXT_BOARD.closePath();

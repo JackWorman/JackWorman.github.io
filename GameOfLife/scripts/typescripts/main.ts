@@ -1,5 +1,16 @@
-function say(words: string) {
-  alert(words);
-}
+const CANVAS_BOARD = document.getElementById('canvas-board') as HTMLCanvasElement;
+const CONTEXT_BOARD: CanvasRenderingContext2D = CANVAS_BOARD.getContext('2d');
 
-say('Hello update!');
+CANVAS_BOARD.width = 800;
+CANVAS_BOARD.height = 800;
+
+
+for (let col: number = 0; col < 100; col++) {
+  for (let row: number = 0; row < 100; row++) {
+    CONTEXT_BOARD.beginPath();
+    CONTEXT_BOARD.moveTo(col * 800, 0);
+    CONTEXT_BOARD.lineTo(col * 800, row * 800);
+    CONTEXT_BOARD.closePath();
+  }
+}
+CONTEXT_BOARD.stroke();

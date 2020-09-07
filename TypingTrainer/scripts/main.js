@@ -48,17 +48,10 @@ function setUpText() {
   loadFile(`https://jackworman.com/TypingTrainer/words.txt`).then((response) => {
     const words = response.split(/\n/);
 
-    // const characterSet = `etaoinshrdiuwmfchypbkvjxqz`;
-    // const characterSet = `etaoi`;
-    // let re = new RegExp(`^[${characterSet}]*$`);
-
     let textLength = 0;
     let textWords = [];
     while (textLength < 40 * CHARACTERS_PER_WORD + Math.max(0, textWords.length - 1)) {
       let word = words[Math.floor(Math.random() * words.length)];
-      // do {
-      //   word = words[Math.floor(Math.random() * words.length)];
-      // } while (!re.test(word))
       // Makes it a capital word.
       if (Math.random() <= 0.2) {
         word = word.charAt(0).toUpperCase() + word.slice(1);
@@ -166,13 +159,6 @@ document.addEventListener(`keydown`, (event) => {
       spanIndicatedCharacter.classList.add(`incorrect`);
       errors++;
       SPAN_ERRORS.textContent = `Errors: ${errors}`;
-
-      // alert();
-      // userInput = ``;
-      // for (const childNode of DIV_TEXT.childNodes) {
-      //   childNode.classList.remove(`correct`, `incorrect`);
-      // }
-      // indicatorLocation = 0;
     }
   }
   clearInterval(toggleIndicatorInterval);

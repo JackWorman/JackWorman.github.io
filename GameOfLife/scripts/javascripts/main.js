@@ -1,13 +1,30 @@
-var CANVAS_BOARD = document.getElementById('canvas-board');
-var CONTEXT_BOARD = CANVAS_BOARD.getContext('2d');
-CANVAS_BOARD.width = 800;
-CANVAS_BOARD.height = 800;
+var CANVAS_BOARD = getHTMLCanvasElementById('canvas-board');
+var CONTEXT_BOARD = getCanvasRenderingContext2D(CANVAS_BOARD);
+var CANVAS_SIZE = 800;
+CANVAS_BOARD.width = CANVAS_SIZE;
+CANVAS_BOARD.height = CANVAS_SIZE;
+var GRID_SIZE = 50;
+var GRID_GAP_SIZE = CANVAS_SIZE / GRID_SIZE;
 CONTEXT_BOARD.beginPath();
-for (var col = 0; col <= 100; col++) {
-    CONTEXT_BOARD.moveTo(col * 8, 0);
-    CONTEXT_BOARD.lineTo(col * 8, 800);
-    CONTEXT_BOARD.moveTo(0, col * 8);
-    CONTEXT_BOARD.lineTo(800, col * 8);
+for (var i = 0; i <= 50; i++) {
+    CONTEXT_BOARD.moveTo(i * GRID_GAP_SIZE, 0);
+    CONTEXT_BOARD.lineTo(i * GRID_GAP_SIZE, CANVAS_SIZE);
+    CONTEXT_BOARD.moveTo(0, i * GRID_GAP_SIZE);
+    CONTEXT_BOARD.lineTo(CANVAS_SIZE, i * GRID_GAP_SIZE);
 }
 CONTEXT_BOARD.closePath();
 CONTEXT_BOARD.stroke();
+function getHTMLCanvasElementById(id) {
+    var htmlCanvasElement = document.getElementById(id);
+    if (htmlCanvasElement instanceof HTMLCanvasElement) {
+        return htmlCanvasElement;
+    }
+    throw new Error('Could not get HTMLCanvasElement.');
+}
+function getCanvasRenderingContext2D(htmlCanvasElement) {
+    var canvasRenderingContext2D = htmlCanvasElement.getContext('2d');
+    if (canvasRenderingContext2D instanceof CanvasRenderingContext2D) {
+        return canvasRenderingContext2D;
+    }
+    throw new Error('Could not get CanvasRenderingContext2D.');
+}

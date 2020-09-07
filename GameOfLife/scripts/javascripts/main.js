@@ -8,8 +8,8 @@ const GRID_SIZE = 50;
 const GRID_GAP_SIZE = CANVAS_SIZE / GRID_SIZE;
 function clickEvent(event) {
     const rect = this.getBoundingClientRect();
-    const x = (event.clientX - rect.left) % (CANVAS_SIZE / GRID_SIZE);
-    const y = (event.clientY - rect.top) % (CANVAS_SIZE / GRID_SIZE);
+    const x = Math.floor((event.clientX - rect.left) / (CANVAS_SIZE / GRID_SIZE));
+    const y = Math.floor((event.clientY - rect.top) / (CANVAS_SIZE / GRID_SIZE));
     console.log(x, y);
     board[y][x] = !board[y][x];
     console.log(board);

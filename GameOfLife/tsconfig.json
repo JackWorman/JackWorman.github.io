@@ -2,6 +2,6 @@
   "compileOnSave": true,
   "compilerOptions": {
     "outDir": "scripts/javascripts",
-    "target": "ESNext"
+    "target": "ES6"
   }
 }

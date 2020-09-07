@@ -11,8 +11,8 @@ const GRID_GAP_SIZE: number = CANVAS_SIZE / GRID_SIZE;
 
 function clickEvent(this: HTMLCanvasElement, event: MouseEvent) {
     const rect = this.getBoundingClientRect();
-    const x = (event.clientX - rect.left) % GRID_SIZE;
-    const y = (event.clientY - rect.top) % GRID_SIZE;
+    const x = (event.clientX - rect.left) % (GRID_SIZE / CANVAS_SIZE);
+    const y = (event.clientY - rect.top) % (GRID_SIZE / CANVAS_SIZE);
     console.log(x, y);
     board[y][x] = !board[y][x];
     console.log(board);

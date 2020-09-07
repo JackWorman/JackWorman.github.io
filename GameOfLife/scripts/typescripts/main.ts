@@ -9,12 +9,12 @@ CANVAS_BOARD.height = CANVAS_SIZE;
 const GRID_SIZE: number = 50;
 const GRID_GAP_SIZE: number = CANVAS_SIZE / GRID_SIZE;
 
-CANVAS_BOARD.addEventListener('click', clickEvent);
 function clickEvent(this: HTMLCanvasElement, event: MouseEvent) {
     const rect = this.getBoundingClientRect();
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
-    console.log(x, y);
+    const x = (event.clientX - rect.left) % GRID_SIZE;
+    const y = (event.clientY - rect.top) % GRID_SIZE;
+    board[x][y] = !board[x][y];
+    console.log(board);
 }
 
 function drawGrid(): void {
@@ -29,14 +29,21 @@ function drawGrid(): void {
     CONTEXT_BOARD.stroke();
 }
 
-drawGrid();
-
-const board: Array<Array<number>> = [];
-for (let i: number = 0; i < 50; i++) {
-    board.push([]);
-    for (let j: number = 0; j < 50; j++) {
-        board[i].push(0);
+function createEmptyBoard(): Array<Array<boolean>> {
+    const board: Array<Array<boolean>> = [];
+    for (let i: number = 0; i < 50; i++) {
+        board.push([]);
+        for (let j: number = 0; j < 50; j++) {
+            board[i].push(false);
+        }
     }
+    return board;
 }
-board[30][30] = -1;
-console.log(board);
+
+
+const board: Array<Array<boolean>> = createEmptyBoard();
+
+window.addEventListener('load', () => {
+    drawGrid();
+    CANVAS_BOARD.addEventListener('click', clickEvent);
+});

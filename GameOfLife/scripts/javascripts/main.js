@@ -10,6 +10,7 @@ function clickEvent(event) {
     const rect = this.getBoundingClientRect();
     const x = (event.clientX - rect.left) % GRID_SIZE;
     const y = (event.clientY - rect.top) % GRID_SIZE;
+    console.log(x, y);
     board[x][y] = !board[x][y];
     console.log(board);
 }

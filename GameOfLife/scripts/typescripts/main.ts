@@ -32,9 +32,9 @@ function drawGrid(): void {
 drawGrid();
 
 const board = [];
-for (let i: number = 0; i <= 50; i++) {
+for (let i: number = 0; i < 50; i++) {
     board.push([]);
-    for (let j: number = 0; j <= 50; j++) {
+    for (let j: number = 0; j < 50; j++) {
         board[i].push(0);
     }
 }

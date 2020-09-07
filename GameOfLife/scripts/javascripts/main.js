@@ -26,9 +26,9 @@ function drawGrid() {
 }
 drawGrid();
 const board = [];
-for (let i = 0; i <= 50; i++) {
+for (let i = 0; i < 50; i++) {
     board.push([]);
-    for (let j = 0; j <= 50; j++) {
+    for (let j = 0; j < 50; j++) {
         board[i].push(0);
     }
 }

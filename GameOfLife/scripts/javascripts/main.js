@@ -26,8 +26,8 @@ function drawGrid() {
 }
 drawGrid();
 const board = new Array(GRID_SIZE);
-for (let col of board) {
-    col = new Array(GRID_SIZE);
+for (let i = 0; i <= 50; i++) {
+    board.push(new Array(GRID_SIZE));
 }
 board[30][30] = -1;
 console.log(board);

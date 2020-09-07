@@ -1,7 +1,7 @@
 {
-  "compileOnSave": true,
-  "compilerOptions": {
-    "outDir": "scripts/javascripts",
-    "target": "ES6"
-  }
+    "compileOnSave": true,
+    "compilerOptions": {
+        "outDir": "scripts/javascripts",
+        "target": "ES6"
+    }
 }

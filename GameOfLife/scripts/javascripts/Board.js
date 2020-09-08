@@ -23,13 +23,12 @@ export function clickEvent(event) {
     drawBoard();
 }
 export function drawBoard() {
-    console.log('1234');
+    CONTEXT_BOARD.fillStyle = 'rgb(255, 0, 0)';
     CONTEXT_BOARD.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
     drawAliveCells();
     drawGrid();
 }
 function drawAliveCells() {
-    CONTEXT_BOARD.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
     const SQUARE_SIZE = CANVAS_SIZE / GRID_SIZE;
     for (let row = 0; row < GRID_SIZE; row++) {
         for (let col = 0; col < GRID_SIZE; col++) {

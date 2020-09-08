@@ -34,14 +34,13 @@ export function clickEvent(this: HTMLCanvasElement, event: MouseEvent): void {
 }
 
 export function drawBoard(): void {
-    console.log('1234');
+    CONTEXT_BOARD.fillStyle = 'rgb(255, 0, 0)';
     CONTEXT_BOARD.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
     drawAliveCells();
     drawGrid();
 }
 
 function drawAliveCells(): void {
-    CONTEXT_BOARD.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
     const SQUARE_SIZE = CANVAS_SIZE / GRID_SIZE;
     for (let row: number = 0; row < GRID_SIZE; row++) {
         for (let col: number = 0; col < GRID_SIZE; col++) {

@@ -26,7 +26,7 @@ function drawGrid() {
     CONTEXT_BOARD.stroke();
 }
 function drawCells() {
-    CONTEXT_BOARD.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
+    CONTEXT_BOARD.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
     const SQUARE_SIZE = CANVAS_SIZE / GRID_SIZE;
     for (let row = 0; row < GRID_SIZE; row++) {
         for (let col = 0; col < GRID_SIZE; col++) {

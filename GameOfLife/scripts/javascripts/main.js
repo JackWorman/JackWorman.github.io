@@ -35,6 +35,7 @@ function drawCells() {
             }
         }
     }
+    drawGrid();
 }
 function createEmptyBoard() {
     const board = [];

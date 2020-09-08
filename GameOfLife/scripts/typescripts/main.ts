@@ -40,6 +40,7 @@ function drawCells(): void {
             }
         }
     }
+    drawGrid();
 }
 
 function createEmptyBoard(): Array<Array<boolean>> {

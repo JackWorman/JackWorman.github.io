@@ -34,6 +34,7 @@ export function clickEvent(this: HTMLCanvasElement, event: MouseEvent): void {
 }
 
 export function drawBoard(): void {
+    CONTEXT_BOARD.strokeStyle = CONTEXT_BOARD.fillStyle = 'rgb(255, 255, 255)';
     CONTEXT_BOARD.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
     drawAliveCells();
     drawGrid();

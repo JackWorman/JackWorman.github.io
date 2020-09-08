@@ -1,5 +1,5 @@
 import { getHTMLButtonElementById } from "./Helper.js";
-import { CANVAS_BOARD, clickEvent, board, drawBoard } from "./Board.js";
+import { CANVAS_BOARD, CANVAS_SIZE, clickEvent, board, drawBoard } from "./Board.js";
 const SIMULATION_RATE = 500;
 const BUTTON = getHTMLButtonElementById('button-start-simulation');
 let simulationIntervalId;
@@ -29,6 +29,7 @@ function simulate() {
     drawBoard();
 }
 window.addEventListener('load', () => {
+    CANVAS_BOARD.height = CANVAS_BOARD.width = CANVAS_SIZE;
     drawBoard();
     CANVAS_BOARD.addEventListener('click', clickEvent);
     BUTTON.addEventListener('click', startSimulation, { once: true });

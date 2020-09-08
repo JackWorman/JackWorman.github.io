@@ -1,5 +1,5 @@
 import { getHTMLCanvasElementById, getCanvasRenderingContext2D } from "./Helper.js";
-const CANVAS_SIZE = 800;
+export const CANVAS_SIZE = 800;
 export const GRID_SIZE = 50;
 export const CANVAS_BOARD = getHTMLCanvasElementById('canvas-board');
 const CONTEXT_BOARD = getCanvasRenderingContext2D(CANVAS_BOARD);

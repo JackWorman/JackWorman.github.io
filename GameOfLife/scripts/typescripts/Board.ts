@@ -1,15 +1,15 @@
 import { getHTMLCanvasElementById, getCanvasRenderingContext2D } from "./Helper.js";
 
-const CANVAS_SIZE = 800;
-export const GRID_SIZE = 50;
-
-export const CANVAS_BOARD: HTMLCanvasElement = getHTMLCanvasElementById('canvas-board')
-const CONTEXT_BOARD: CanvasRenderingContext2D = getCanvasRenderingContext2D(CANVAS_BOARD);
-
 interface Cell {
     isAlive: boolean;
     neighborCount: number;
 }
+
+export const CANVAS_SIZE = 800;
+export const GRID_SIZE = 50;
+
+export const CANVAS_BOARD: HTMLCanvasElement = getHTMLCanvasElementById('canvas-board')
+const CONTEXT_BOARD: CanvasRenderingContext2D = getCanvasRenderingContext2D(CANVAS_BOARD);
 
 export const board: Array<Array<Cell>> = createEmptyBoard();
 

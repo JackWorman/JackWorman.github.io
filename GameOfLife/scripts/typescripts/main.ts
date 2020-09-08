@@ -75,15 +75,13 @@ let simulationIntervalId: number;
 function startSimulation(): void {
     simulationIntervalId = window.setInterval(simulate, 500);
     BUTTON.innerHTML = 'Stop Simulation';
-    BUTTON.removeEventListener('click', startSimulation);
-    BUTTON.addEventListener('click', stopSimulation);
+    BUTTON.addEventListener('click', stopSimulation, {once: true});
 }
 
 function stopSimulation(): void {
     window.clearInterval(simulationIntervalId);
     BUTTON.innerHTML = 'Start Simulation';
-    BUTTON.removeEventListener('click', stopSimulation);
-    BUTTON.addEventListener('click', startSimulation);
+    BUTTON.addEventListener('click', startSimulation, {once: true});
 }
 
 function simulate(): void {
@@ -131,5 +129,5 @@ const board: Array<Array<boolean>> = createEmptyBoard();
 window.addEventListener('load', () => {
     drawBoard();
     CANVAS_BOARD.addEventListener('click', clickEvent);
-    BUTTON.addEventListener('click', startSimulation);
+    BUTTON.addEventListener('click', startSimulation, {once: true});
 });

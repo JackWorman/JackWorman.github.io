@@ -9,18 +9,18 @@ CANVAS_BOARD.height = CANVAS_SIZE;
 const GRID_SIZE: number = 50;
 const GRID_GAP_SIZE: number = CANVAS_SIZE / GRID_SIZE;
 
-function clickEvent(this: HTMLCanvasElement, event: MouseEvent) {
+function clickEvent(this: HTMLCanvasElement, event: MouseEvent): void {
+    const SQUARE_SIZE = CANVAS_SIZE / GRID_SIZE;
     const rect = this.getBoundingClientRect();
-    const x = Math.floor((event.clientX - rect.left) / (CANVAS_SIZE / GRID_SIZE));
-    const y = Math.floor((event.clientY - rect.top) / (CANVAS_SIZE / GRID_SIZE));
-    console.log(x, y);
-    board[y][x] = !board[y][x];
-    console.log(board);
+    const col = Math.floor((event.clientX - rect.left) / SQUARE_SIZE);
+    const row = Math.floor((event.clientY - rect.top) / SQUARE_SIZE);
+    board[row][col] = !board[row][col];
+    drawCells();
 }
 
 function drawGrid(): void {
     CONTEXT_BOARD.beginPath();
-    for (let i: number = 0; i <= 50; i++) {
+    for (let i: number = 0; i <= GRID_SIZE; i++) {
         CONTEXT_BOARD.moveTo(i * GRID_GAP_SIZE, 0);
         CONTEXT_BOARD.lineTo(i * GRID_GAP_SIZE, CANVAS_SIZE);
         CONTEXT_BOARD.moveTo(0, i * GRID_GAP_SIZE);
@@ -28,6 +28,18 @@ function drawGrid(): void {
     }
     CONTEXT_BOARD.closePath();
     CONTEXT_BOARD.stroke();
+}
+
+function drawCells(): void {
+    CONTEXT_BOARD.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
+    const SQUARE_SIZE = CANVAS_SIZE / GRID_SIZE;
+    for (let row: number = 0; row < GRID_SIZE; row++) {
+        for (let col: number = 0; col < GRID_SIZE; col++) {
+            if (board[row][col]) {
+                CONTEXT_BOARD.fillRect(col * SQUARE_SIZE, row * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
+            }
+        }
+    }
 }
 
 function createEmptyBoard(): Array<Array<boolean>> {
@@ -40,7 +52,6 @@ function createEmptyBoard(): Array<Array<boolean>> {
     }
     return board;
 }
-
 
 const board: Array<Array<boolean>> = createEmptyBoard();
 

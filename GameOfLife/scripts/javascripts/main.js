@@ -88,6 +88,7 @@ function simulate() {
             }
         }
     }
+    drawBoard();
 }
 function getNeighborCount(col, row) {
     let count = 0;

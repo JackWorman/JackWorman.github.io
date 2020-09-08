@@ -96,6 +96,7 @@ function simulate(): void {
             }
         }
     }
+    drawBoard();
 }
 
 function getNeighborCount(col: number, row: number): number {

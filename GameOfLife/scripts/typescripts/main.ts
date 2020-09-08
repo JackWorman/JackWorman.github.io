@@ -2,6 +2,7 @@ import { getHTMLCanvasElementById, getCanvasRenderingContext2D } from "./Helper.
 
 const CANVAS_BOARD: HTMLCanvasElement = getHTMLCanvasElementById('canvas-board')
 const CONTEXT_BOARD: CanvasRenderingContext2D = getCanvasRenderingContext2D(CANVAS_BOARD);
+const BUTTON = document.getElementById('button-start-simulation') as HTMLButtonElement;
 
 const CANVAS_SIZE: number = 800;
 CANVAS_BOARD.width = CANVAS_SIZE;
@@ -70,8 +71,19 @@ function createEmptyBoard2(): Array<Array<number>> {
     return board;
 }
 
+let simulationIntervalId: number;
 function startSimulation(): void {
-    setInterval(simulate, 500);
+    simulationIntervalId = window.setInterval(simulate, 500);
+    BUTTON.innerHTML = 'Stop Simulation';
+    BUTTON.removeEventListener('click', startSimulation);
+    BUTTON.addEventListener('click', stopSimulation);
+}
+
+function stopSimulation(): void {
+    window.clearInterval(simulationIntervalId);
+    BUTTON.innerHTML = 'Start Simulation';
+    BUTTON.removeEventListener('click', stopSimulation);
+    BUTTON.addEventListener('click', startSimulation);
 }
 
 function simulate(): void {
@@ -119,6 +131,5 @@ const board: Array<Array<boolean>> = createEmptyBoard();
 window.addEventListener('load', () => {
     drawBoard();
     CANVAS_BOARD.addEventListener('click', clickEvent);
-    const button = document.getElementById('button-start-simulation') as HTMLButtonElement;
-    button.addEventListener('click', startSimulation);
+    BUTTON.addEventListener('click', startSimulation);
 });

@@ -1,6 +1,7 @@
 import { getHTMLCanvasElementById, getCanvasRenderingContext2D } from "./Helper.js";
 const CANVAS_BOARD = getHTMLCanvasElementById('canvas-board');
 const CONTEXT_BOARD = getCanvasRenderingContext2D(CANVAS_BOARD);
+const BUTTON = document.getElementById('button-start-simulation');
 const CANVAS_SIZE = 800;
 CANVAS_BOARD.width = CANVAS_SIZE;
 CANVAS_BOARD.height = CANVAS_SIZE;
@@ -61,8 +62,18 @@ function createEmptyBoard2() {
     }
     return board;
 }
+let simulationIntervalId;
 function startSimulation() {
-    setInterval(simulate, 500);
+    simulationIntervalId = window.setInterval(simulate, 500);
+    BUTTON.innerHTML = 'Stop Simulation';
+    BUTTON.removeEventListener('click', startSimulation);
+    BUTTON.addEventListener('click', stopSimulation);
+}
+function stopSimulation() {
+    window.clearInterval(simulationIntervalId);
+    BUTTON.innerHTML = 'Start Simulation';
+    BUTTON.removeEventListener('click', stopSimulation);
+    BUTTON.addEventListener('click', startSimulation);
 }
 function simulate() {
     const neighborCountBoard = createEmptyBoard2();
@@ -108,6 +119,5 @@ const board = createEmptyBoard();
 window.addEventListener('load', () => {
     drawBoard();
     CANVAS_BOARD.addEventListener('click', clickEvent);
-    const button = document.getElementById('button-start-simulation');
-    button.addEventListener('click', startSimulation);
+    BUTTON.addEventListener('click', startSimulation);
 });

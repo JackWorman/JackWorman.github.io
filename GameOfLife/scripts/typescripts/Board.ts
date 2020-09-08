@@ -34,7 +34,6 @@ export function clickEvent(this: HTMLCanvasElement, event: MouseEvent): void {
 }
 
 export function drawBoard(): void {
-    CONTEXT_BOARD.fillStyle = 'rgb(255, 0, 0)';
     CONTEXT_BOARD.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
     drawAliveCells();
     drawGrid();
@@ -44,7 +43,7 @@ function drawAliveCells(): void {
     const SQUARE_SIZE = CANVAS_SIZE / GRID_SIZE;
     for (let row: number = 0; row < GRID_SIZE; row++) {
         for (let col: number = 0; col < GRID_SIZE; col++) {
-            if (board[col][row]) {
+            if (board[col][row].isAlive) {
                 CONTEXT_BOARD.fillRect(col * SQUARE_SIZE, row * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
             }
         }

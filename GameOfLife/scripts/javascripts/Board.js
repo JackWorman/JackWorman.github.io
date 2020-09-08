@@ -23,7 +23,6 @@ export function clickEvent(event) {
     drawBoard();
 }
 export function drawBoard() {
-    CONTEXT_BOARD.fillStyle = 'rgb(255, 0, 0)';
     CONTEXT_BOARD.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
     drawAliveCells();
     drawGrid();
@@ -32,7 +31,7 @@ function drawAliveCells() {
     const SQUARE_SIZE = CANVAS_SIZE / GRID_SIZE;
     for (let row = 0; row < GRID_SIZE; row++) {
         for (let col = 0; col < GRID_SIZE; col++) {
-            if (board[col][row]) {
+            if (board[col][row].isAlive) {
                 CONTEXT_BOARD.fillRect(col * SQUARE_SIZE, row * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
             }
         }

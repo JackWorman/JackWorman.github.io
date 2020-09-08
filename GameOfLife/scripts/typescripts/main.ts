@@ -1,7 +1,7 @@
 import { getHTMLButtonElementById } from "./Helper.js";
 import { CANVAS_BOARD, CANVAS_SIZE, clickEvent, board, drawBoard } from "./Board.js";
 
-const SIMULATION_RATE = 500;
+const SIMULATION_RATE: number = 500;
 
 const BUTTON: HTMLButtonElement = getHTMLButtonElementById('button-start-simulation');
 

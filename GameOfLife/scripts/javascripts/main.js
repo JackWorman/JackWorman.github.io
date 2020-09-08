@@ -18,15 +18,10 @@ function stopSimulation() {
 function simulate() {
     for (const col of board) {
         for (const cell of col) {
-            if (cell.isAlive) {
-                if (cell.neighborCount < 2) {
-                    cell.isAlive = false;
-                }
-                else if (cell.neighborCount > 3) {
-                    cell.isAlive = false;
-                }
+            if (cell.isAlive && (cell.neighborCount < 2 || cell.neighborCount > 3)) {
+                cell.isAlive = false;
             }
-            else if (cell.neighborCount === 3) {
+            else if (!cell.isAlive && cell.neighborCount === 3) {
                 cell.isAlive = true;
             }
         }

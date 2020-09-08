@@ -12,3 +12,10 @@ export function getCanvasRenderingContext2D(htmlCanvasElement) {
     }
     throw new Error('Could not get CanvasRenderingContext2D.');
 }
+export function getHTMLButtonElementById(id) {
+    const htmlButtonElement = document.getElementById(id);
+    if (htmlButtonElement instanceof HTMLButtonElement) {
+        return htmlButtonElement;
+    }
+    throw new Error('Could not get HTMLButtonElement.');
+}

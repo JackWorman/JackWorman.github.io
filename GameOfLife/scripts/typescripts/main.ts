@@ -1,12 +1,14 @@
 import { getHTMLButtonElementById } from "./Helper.js";
 import { CANVAS_BOARD, clickEvent, board, drawBoard } from "./Board.js";
 
+const SIMULATION_RATE = 500;
+
 const BUTTON: HTMLButtonElement = getHTMLButtonElementById('button-start-simulation');
 
 let simulationIntervalId: number;
 
 function startSimulation(): void {
-    simulationIntervalId = window.setInterval(simulate, 500);
+    simulationIntervalId = window.setInterval(simulate, SIMULATION_RATE);
     BUTTON.innerHTML = 'Stop Simulation';
     BUTTON.addEventListener('click', stopSimulation, {once: true});
     CANVAS_BOARD.removeEventListener('click', clickEvent);

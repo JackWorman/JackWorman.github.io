@@ -34,6 +34,7 @@ export function clickEvent(this: HTMLCanvasElement, event: MouseEvent): void {
 }
 
 export function drawBoard(): void {
+    console.log('1234');
     CONTEXT_BOARD.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
     drawAliveCells();
     drawGrid();

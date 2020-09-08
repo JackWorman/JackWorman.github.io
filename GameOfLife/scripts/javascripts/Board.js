@@ -23,6 +23,7 @@ export function clickEvent(event) {
     drawBoard();
 }
 export function drawBoard() {
+    console.log('1234');
     CONTEXT_BOARD.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
     drawAliveCells();
     drawGrid();

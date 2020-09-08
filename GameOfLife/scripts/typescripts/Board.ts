@@ -62,3 +62,26 @@ function drawGrid(): void {
     CONTEXT_BOARD.closePath();
     CONTEXT_BOARD.stroke();
 }
+
+export function calculateNeighborCounts(): void {
+    for (let col: number = 0; col < GRID_SIZE; col++) {
+        for (let row: number = 0; row < GRID_SIZE; row++) {
+            board[col][row].neighborCount = calculateNeighborCount(col, row);
+        }
+    }
+}
+
+function calculateNeighborCount(col: number, row: number): number {
+    let count: number = 0;
+    for (let i: number = col - 1; i <= col + 1; i++) {
+        for (let j: number = 0; j <= row + 1; j++) {
+            if (i < 0 || j < 0 || i >= GRID_SIZE || j >= GRID_SIZE || (i === col && j === row)) {
+                continue;
+            }
+            if (board[i][j].isAlive) {
+                count++;
+            }
+        }
+    }
+    return count;
+}

@@ -49,3 +49,24 @@ function drawGrid() {
     CONTEXT_BOARD.closePath();
     CONTEXT_BOARD.stroke();
 }
+export function calculateNeighborCounts() {
+    for (let col = 0; col < GRID_SIZE; col++) {
+        for (let row = 0; row < GRID_SIZE; row++) {
+            board[col][row].neighborCount = calculateNeighborCount(col, row);
+        }
+    }
+}
+function calculateNeighborCount(col, row) {
+    let count = 0;
+    for (let i = col - 1; i <= col + 1; i++) {
+        for (let j = 0; j <= row + 1; j++) {
+            if (i < 0 || j < 0 || i >= GRID_SIZE || j >= GRID_SIZE || (i === col && j === row)) {
+                continue;
+            }
+            if (board[i][j].isAlive) {
+                count++;
+            }
+        }
+    }
+    return count;
+}

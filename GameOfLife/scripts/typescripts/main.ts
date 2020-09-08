@@ -1,5 +1,5 @@
 import { getHTMLButtonElementById } from "./Helper.js";
-import { CANVAS_BOARD, CANVAS_SIZE, clickEvent, board, drawBoard } from "./Board.js";
+import { CANVAS_BOARD, CANVAS_SIZE, clickEvent, board, drawBoard, calculateNeighborCounts } from "./Board.js";
 
 const SIMULATION_RATE: number = 500;
 
@@ -22,6 +22,7 @@ function stopSimulation(): void {
 }
 
 function simulate(): void {
+    calculateNeighborCounts();
     for (const col of board) {
         for (const cell of col) {
             if (cell.isAlive && (cell.neighborCount < 2 || cell.neighborCount > 3)) {

@@ -107,4 +107,6 @@ const board = createEmptyBoard();
 window.addEventListener('load', () => {
     drawBoard();
     CANVAS_BOARD.addEventListener('click', clickEvent);
+    const button = document.getElementById('button-start-simulation');
+    button.addEventListener('click', startSimulation);
 });

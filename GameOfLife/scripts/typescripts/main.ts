@@ -118,4 +118,6 @@ const board: Array<Array<boolean>> = createEmptyBoard();
 window.addEventListener('load', () => {
     drawBoard();
     CANVAS_BOARD.addEventListener('click', clickEvent);
+    const button = document.getElementById('button-start-simulation') as HTMLButtonElement;
+    button.addEventListener('click', startSimulation);
 });

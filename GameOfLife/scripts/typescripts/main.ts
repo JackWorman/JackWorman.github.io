@@ -14,8 +14,26 @@ function clickEvent(this: HTMLCanvasElement, event: MouseEvent): void {
     const rect = this.getBoundingClientRect();
     const col = Math.floor((event.clientX - rect.left) / SQUARE_SIZE);
     const row = Math.floor((event.clientY - rect.top) / SQUARE_SIZE);
-    board[row][col] = !board[row][col];
-    drawCells();
+    board[col][row] = !board[col][row];
+    drawBoard();
+}
+
+function drawBoard(): void {
+    CONTEXT_BOARD.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
+    drawLiveCells();
+    drawGrid();
+}
+
+function drawLiveCells(): void {
+    CONTEXT_BOARD.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
+    const SQUARE_SIZE = CANVAS_SIZE / GRID_SIZE;
+    for (let row: number = 0; row < GRID_SIZE; row++) {
+        for (let col: number = 0; col < GRID_SIZE; col++) {
+            if (board[col][row]) {
+                CONTEXT_BOARD.fillRect(col * SQUARE_SIZE, row * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
+            }
+        }
+    }
 }
 
 function drawGrid(): void {
@@ -30,19 +48,6 @@ function drawGrid(): void {
     CONTEXT_BOARD.stroke();
 }
 
-function drawCells(): void {
-    CONTEXT_BOARD.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
-    const SQUARE_SIZE = CANVAS_SIZE / GRID_SIZE;
-    for (let row: number = 0; row < GRID_SIZE; row++) {
-        for (let col: number = 0; col < GRID_SIZE; col++) {
-            if (board[row][col]) {
-                CONTEXT_BOARD.fillRect(col * SQUARE_SIZE, row * SQUARE_SIZE, SQUARE_SIZE, SQUARE_SIZE);
-            }
-        }
-    }
-    drawGrid();
-}
-
 function createEmptyBoard(): Array<Array<boolean>> {
     const board: Array<Array<boolean>> = [];
     for (let i: number = 0; i < 50; i++) {
@@ -54,9 +59,63 @@ function createEmptyBoard(): Array<Array<boolean>> {
     return board;
 }
 
+function createEmptyBoard2(): Array<Array<number>> {
+    const board: Array<Array<number>> = [];
+    for (let i: number = 0; i < 50; i++) {
+        board.push([]);
+        for (let j: number = 0; j < 50; j++) {
+            board[i].push(0);
+        }
+    }
+    return board;
+}
+
+function startSimulation(): void {
+    setInterval(simulate, 500);
+}
+
+function simulate(): void {
+    const neighborCountBoard: Array<Array<number>> = createEmptyBoard2();
+    for (let row: number = 0; row < GRID_SIZE; row++) {
+        for (let col: number = 0; col < GRID_SIZE; col++) {
+            neighborCountBoard[col][row] = getNeighborCount(col, row);
+        }
+    }
+    for (let row: number = 0; row < GRID_SIZE; row++) {
+        for (let col: number = 0; col < GRID_SIZE; col++) {
+            if (board[col][row]) {
+                if (neighborCountBoard[col][row] < 2) {
+                    board[col][row] = false;
+                } else if (neighborCountBoard[col][row] > 3) {
+                    board[col][row] = false;
+                }
+            } else {
+                if (neighborCountBoard[col][row] === 3) {
+                    board[col][row] = true;
+                }
+            }
+        }
+    }
+}
+
+function getNeighborCount(col: number, row: number): number {
+    let count: number = 0;
+    for (let i: number = col - 1; i <= col + 1; i++) {
+        for (let j: number = row - 1; j <= row + 1; j++) {
+            if (i < 0 || j < 0 || i >= GRID_SIZE || j >= GRID_SIZE ||( i === col && j === row)) {
+                continue;
+            }
+            if (board[i][j]) {
+                count++;
+            }
+        }
+    }
+    return count;
+}
+
 const board: Array<Array<boolean>> = createEmptyBoard();
 
 window.addEventListener('load', () => {
-    drawGrid();
+    drawBoard();
     CANVAS_BOARD.addEventListener('click', clickEvent);
 });

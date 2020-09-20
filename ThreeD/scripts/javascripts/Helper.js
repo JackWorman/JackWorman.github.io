@@ -19,3 +19,10 @@ export function getHTMLButtonElementById(id) {
     }
     throw new Error('Could not get HTMLButtonElement.');
 }
+export function getHTMLSpanElement(id) {
+    const htmlSpanElement = document.getElementById(id);
+    if (htmlSpanElement instanceof HTMLSpanElement) {
+        return htmlSpanElement;
+    }
+    throw new Error('Could not get HTMLSpanElement.');
+}

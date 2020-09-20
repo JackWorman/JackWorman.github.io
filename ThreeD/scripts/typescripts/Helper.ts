@@ -1,31 +1,17 @@
-export function getHTMLCanvasElementById(id: string): HTMLCanvasElement {
-    const htmlCanvasElement = document.getElementById(id);
-    if (htmlCanvasElement instanceof HTMLCanvasElement) {
-        return htmlCanvasElement;
+export function getHtmlElementByIdAndType<T extends HTMLElement>(id: string, htmlElementType: new () => T): T {
+    const htmlElement = document.getElementById(id);
+    if (htmlElement === null) {
+        throw new Error(`No HTML element exists with id "${id}".`);
+    } else if (!(htmlElement instanceof htmlElementType)) {
+        throw new Error(`Found an HTML element with id "${id}", but it was not of type "${htmlElementType.name}".`);
     }
-    throw new Error('Could not get HTMLCanvasElement.');
+    return htmlElement;
 }
 
 export function getCanvasRenderingContext2D(htmlCanvasElement: HTMLCanvasElement): CanvasRenderingContext2D {
     const canvasRenderingContext2D = htmlCanvasElement.getContext('2d');
-    if (canvasRenderingContext2D instanceof CanvasRenderingContext2D) {
-        return canvasRenderingContext2D;
+    if (!(canvasRenderingContext2D instanceof CanvasRenderingContext2D)) {
+        throw new Error('Could not get CanvasRenderingContext2D.');
     }
-    throw new Error('Could not get CanvasRenderingContext2D.');
-}
-
-export function getHTMLButtonElementById(id: string): HTMLButtonElement {
-    const htmlButtonElement = document.getElementById(id);
-    if (htmlButtonElement instanceof HTMLButtonElement) {
-        return htmlButtonElement;
-    }
-    throw new Error('Could not get HTMLButtonElement.');
-}
-
-export function getHTMLSpanElement(id: string): HTMLSpanElement {
-    const htmlSpanElement = document.getElementById(id);
-    if (htmlSpanElement instanceof HTMLSpanElement) {
-        return htmlSpanElement;
-    }
-    throw new Error('Could not get HTMLSpanElement.');
+    return canvasRenderingContext2D;
 }

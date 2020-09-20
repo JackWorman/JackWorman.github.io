@@ -1,9 +1,9 @@
-import { getHTMLCanvasElementById, getCanvasRenderingContext2D, getHTMLSpanElement } from './Helper.js';
+import { getHtmlElementByIdAndType, getCanvasRenderingContext2D } from './Helper.js';
 import { PhysicsObject } from './PhysicsObject.js';
 import { Dot } from './Dot.js';
 
-const fpsSpan: HTMLSpanElement = getHTMLSpanElement('span-fps');
-const canvas: HTMLCanvasElement = getHTMLCanvasElementById('canvas-scene');
+const fpsSpan: HTMLSpanElement = getHtmlElementByIdAndType('span-fps', HTMLSpanElement);
+const canvas: HTMLCanvasElement = getHtmlElementByIdAndType('canvas-scene', HTMLCanvasElement);
 const context: CanvasRenderingContext2D = getCanvasRenderingContext2D(canvas);
 
 const dots: Array<Dot> = [];
@@ -11,8 +11,9 @@ const frames: Array<number> = [];
 
 window.addEventListener('load', () => {
     resizeCanvas();
-    for (var i = 0; i < 5000; i++) {
-        const pO = new PhysicsObject({x: 0, y: 0, z: 0}, {x: 0, y: 0, z: 0}, {x: 0, y: 0, z: 0}, {x: Math.random() - 0.5, y: Math.random() - 0.5, z: (Math.random() - 0.5)});
+    for (var i = 0; i < 1; i++) {
+        // const pO = new PhysicsObject({x: 0, y: 0, z: 0}, {x: 0, y: 0, z: 0}, {x: 0, y: 0, z: 0}, {x: Math.random() - 0.5, y: Math.random() - 0.5, z: (Math.random() - 0.5)});
+        const pO = new PhysicsObject({x: 0, y: 0, z: 0}, {x: 0, y: 0, z: 0}, {x: 0, y: 0, z: 0}, {x: Math.random() - 0.5, y: 0, z: 0});
         const dot = new Dot(pO, 10);
         dots.push(dot);
     }

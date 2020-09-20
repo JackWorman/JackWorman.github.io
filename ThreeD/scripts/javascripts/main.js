@@ -5,7 +5,7 @@ window.addEventListener('load', () => {
     context.strokeStyle = 'rgb(255, 255, 255)';
     context.beginPath();
     context.moveTo(100, 100);
-    context.lineTo(500, 700);
+    context.lineTo(300, 300);
     context.closePath();
     context.stroke();
 });

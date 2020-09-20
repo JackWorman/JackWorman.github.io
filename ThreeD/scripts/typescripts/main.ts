@@ -11,9 +11,9 @@ const frames: Array<number> = [];
 
 window.addEventListener('load', () => {
     resizeCanvas();
-    for (var i = 0; i < 1; i++) {
-        // const pO = new PhysicsObject({x: 0, y: 0, z: 0}, {x: 0, y: 0, z: 0}, {x: 0, y: 0, z: 0}, {x: Math.random() - 0.5, y: Math.random() - 0.5, z: (Math.random() - 0.5)});
-        const pO = new PhysicsObject({x: 0, y: 0, z: 0}, {x: 0, y: 0, z: 0}, {x: 0, y: 0, z: 0}, {x: Math.random() - 0.5, y: 0, z: 0});
+    for (var i = 0; i < 5000; i++) {
+        const pO = new PhysicsObject({x: 0, y: 0, z: 0}, {x: 0, y: 0, z: 0}, {x: 0, y: 0, z: 0}, {x: Math.random() - 0.5, y: Math.random() - 0.5, z: (Math.random() - 0.5)});
+        // const pO = new PhysicsObject({x: 0, y: 0, z: 0}, {x: 0, y: 0, z: 0}, {x: 0, y: 0, z: 0}, {x: Math.random() - 0.5, y: 0, z: 0});
         const dot = new Dot(pO, 10);
         dots.push(dot);
     }

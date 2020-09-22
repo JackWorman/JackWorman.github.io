@@ -6,7 +6,7 @@ interface Vector3D {
     z: number;
 }
 
-export default abstract class PhysicsObject {
+export default class PhysicsObject {
     readonly position: Vector3D;
     readonly velocity: Vector3D;
     readonly acceleration: Vector3D = {x: 0, y: 0, z: 0};
@@ -53,6 +53,4 @@ export default abstract class PhysicsObject {
             this.acceleration.z += scale * diff.z;
         }
     }
-
-    abstract render(context: CanvasRenderingContext2D, camera: Camera): void;
 }

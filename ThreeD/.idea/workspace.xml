@@ -20,19 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9e535a5b-2670-42b6-b74a-29df244e1da5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/scripts/javascripts/FrameRate.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/scripts/typescripts/FrameRate.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/javascripts/Camera.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/javascripts/Camera.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/javascripts/Dot.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/javascripts/Dot.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/javascripts/Helper.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/javascripts/Helper.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/javascripts/Scene.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/javascripts/Scene.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/javascripts/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/javascripts/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/typescripts/Camera.ts" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/typescripts/Camera.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/typescripts/Dot.ts" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/typescripts/Dot.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/typescripts/Helper.ts" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/typescripts/Helper.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/typescripts/PhysicsObject.ts" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/typescripts/PhysicsObject.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/typescripts/Scene.ts" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/typescripts/Scene.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/typescripts/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/typescripts/main.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,7 +68,7 @@
       <option name="presentableId" value="Default" />
       <updated>1600743867988</updated>
       <workItem from="1600743872893" duration="5656000" />
-      <workItem from="1600786495639" duration="4433000" />
+      <workItem from="1600786495639" duration="4875000" />
     </task>
     <servers />
   </component>

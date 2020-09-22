@@ -21,7 +21,6 @@ function simulate(): void {
         dot.updateGravity(dots);
         dot.move(dt);
     }
-    // test comment
 }
 
 function createObjects(): void {

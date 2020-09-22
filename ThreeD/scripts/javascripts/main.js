@@ -18,7 +18,6 @@ function simulate() {
         dot.updateGravity(dots);
         dot.move(dt);
     }
-    // test comment
 }
 function createObjects() {
     const physicsObject = new PhysicsObject(10 ** 17 / (Math.random() + 1), { x: -500, y: 0, z: 1000 }, { x: 0, y: 1200, z: 0 });

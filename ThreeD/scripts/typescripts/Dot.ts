@@ -1,48 +1,49 @@
-import { PhysicsObject } from './PhysicsObject.js';
+import PhysicsObject from './PhysicsObject.js';
 
-export class Dot extends PhysicsObject {
-    radius: number;
+export default class Dot extends PhysicsObject {
+    private readonly radius: number;
+    private xProjected: number;
+    private yProjected: number;
+    private radiusProjected: number;
+    private readonly color: string;
 
-    xProjected: number;
-    yProjected: number;
-    scaleProjected: number;
-
-    color: string;
-
-    constructor(physicsObject: PhysicsObject, radius: number) {
-        super(physicsObject.position, physicsObject.velocity, physicsObject.acceleration, physicsObject.jerk);
+    constructor(physicsObject: PhysicsObject, radius: number, color?: string) {
+        super(physicsObject.mass, physicsObject.position, physicsObject.velocity);
 
         this.radius = radius;
-
         this.xProjected = 0;
         this.yProjected = 0;
-        this.scaleProjected = 0;
-
-        this.color = `rgb(${255 * Math.random()}, ${255 * Math.random()}, ${255 * Math.random()})`;
+        this.radiusProjected = 0;
+        this.color = typeof(color) === 'undefined'
+            ? `rgb(${Math.floor(255 * Math.random())}, ${Math.floor(255 * Math.random())}, ${Math.floor(255 * Math.random())})`
+            : color;
     }
 
-    render(context: CanvasRenderingContext2D) {
+    render(context: CanvasRenderingContext2D, cameraPos: {x: number, y: number, z: number}) {
         const width = context.canvas.width;
         const height = context.canvas.height;
-        this.project(width, height);
-        if (this.scaleProjected <= 0) {
+        this.project(width, height, cameraPos);
+        if (this.position.z <= cameraPos.z) {
             return;
         }
 
         context.fillStyle = this.color;
 
         context.beginPath();
-        context.arc(this.xProjected, this.yProjected, this.radius * this.scaleProjected, 0, 2 * Math.PI);
+        context.arc(this.xProjected, this.yProjected, this.radiusProjected, 0, 2 * Math.PI);
         context.closePath();
         context.fill();
     }
 
-    private project(width: number, height: number) {
-        const PERSPECTIVE: number = width * 0.7;
-        const PROJECTION_CENTER_X = width / 2;
-        const PROJECTION_CENTER_Y = height / 2;
-        this.scaleProjected = PERSPECTIVE / (PERSPECTIVE + this.position.z);
-        this.xProjected = (this.position.x * this.scaleProjected) + PROJECTION_CENTER_X;
-        this.yProjected = (this.position.y * this.scaleProjected) + PROJECTION_CENTER_Y;
+    private project(width: number, height: number, cameraPos: {x: number, y: number, z: number}) {
+        const PROJECTION_CENTER_X = width / 2 + cameraPos.x;
+        const PROJECTION_CENTER_Y = height / 2 + cameraPos.y;
+
+        const FOV = (120 / 180) * Math.PI;
+        const zProjected = (0.5 * width * Math.tan((Math.PI - FOV) / 2)) / (this.position.z - cameraPos.z);
+        this.xProjected = this.position.x * zProjected + PROJECTION_CENTER_X;
+        this.yProjected = this.position.y * zProjected + PROJECTION_CENTER_Y;
+        const x2 = (this.position.x + this.radius) * zProjected + PROJECTION_CENTER_X;
+        this.radiusProjected = x2 - this.xProjected;
     }
 }

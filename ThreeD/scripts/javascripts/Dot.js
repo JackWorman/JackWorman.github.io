@@ -10,11 +10,11 @@ export default class Dot extends PhysicsObject {
             ? `rgb(${Math.floor(255 * Math.random())}, ${Math.floor(255 * Math.random())}, ${Math.floor(255 * Math.random())})`
             : color;
     }
-    render(context, cameraPos) {
+    render(context, camera) {
         const width = context.canvas.width;
         const height = context.canvas.height;
-        this.project(width, height, cameraPos);
-        if (this.position.z <= cameraPos.z) {
+        this.project(width, height, camera);
+        if (this.position.z <= camera.position.z) {
             return;
         }
         context.fillStyle = this.color;
@@ -23,11 +23,10 @@ export default class Dot extends PhysicsObject {
         context.closePath();
         context.fill();
     }
-    project(width, height, cameraPos) {
-        const PROJECTION_CENTER_X = width / 2 + cameraPos.x;
-        const PROJECTION_CENTER_Y = height / 2 + cameraPos.y;
-        const FOV = (120 / 180) * Math.PI;
-        const zProjected = (0.5 * width * Math.tan((Math.PI - FOV) / 2)) / (this.position.z - cameraPos.z);
+    project(width, height, camera) {
+        const PROJECTION_CENTER_X = width / 2 + camera.position.x;
+        const PROJECTION_CENTER_Y = height / 2 + camera.position.y;
+        const zProjected = (0.5 * width * Math.tan((Math.PI - camera.fov) / 2)) / (this.position.z - camera.position.z);
         this.xProjected = this.position.x * zProjected + PROJECTION_CENTER_X;
         this.yProjected = this.position.y * zProjected + PROJECTION_CENTER_Y;
         const x2 = (this.position.x + this.radius) * zProjected + PROJECTION_CENTER_X;

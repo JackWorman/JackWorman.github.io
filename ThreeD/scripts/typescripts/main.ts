@@ -1,35 +1,23 @@
-import {getHtmlElementByIdAndType} from './Helper.js';
 import PhysicsObject from './PhysicsObject.js';
 import Dot from './Dot.js';
 import Scene from "./Scene.js";
+import FrameRate from "./FrameRate.js";
 
-const fpsSpan: HTMLSpanElement = getHtmlElementByIdAndType('span-fps', HTMLSpanElement);
-const frames: Array<number> = [];
-
-const dots: Array<Dot> = [];
 const scene: Scene = new Scene('canvas-scene');
+const frameRate: FrameRate = new FrameRate('span-fps');
+const dots: Dot[] = [];
 
 window.addEventListener('load', () => {
     createObjects();
-    window.requestAnimationFrame(loop);
+    window.requestAnimationFrame(simulate);
 });
 
-let lastFrame = 0;
-function loop(): void {
-    window.requestAnimationFrame(loop);
-    const now = performance.now();
-    const dt = (now - lastFrame) / 1000;
-    frames.push(1 / dt);
-    if (frames.length > 100) {
-        frames.shift();
-    }
-    const average = (array: Array<number>): number => array.reduce((a: number, b: number) => a + b) / array.length;
-    fpsSpan.textContent = 'FPS: ' + average(frames).toFixed(2);
-    lastFrame = now;
-
+function simulate(): void {
+    window.requestAnimationFrame(simulate);
+    const dt = frameRate.getDtInSeconds();
     scene.context.clearRect(0, 0, scene.canvas.width, scene.canvas.height);
     for (const dot of dots) {
-        dot.render(scene.context, scene.camera.position);
+        dot.render(scene.context, scene.camera);
         dot.updateGravity(dots);
         dot.move(dt);
     }

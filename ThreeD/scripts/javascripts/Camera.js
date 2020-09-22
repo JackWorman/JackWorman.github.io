@@ -1,7 +1,7 @@
 export default class Camera {
-    // TODO: direction: Vector3D = {x: 0, y: 0, z: 1};
-    constructor() {
+    constructor(fov) {
         this.position = { x: 0, y: 0, z: 0 };
+        this.fov = fov;
         this.addEvents();
     }
     addEvents() {

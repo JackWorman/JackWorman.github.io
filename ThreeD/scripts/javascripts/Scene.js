@@ -5,7 +5,7 @@ export default class Scene {
     constructor(canvasId) {
         this.canvas = getHtmlElementByIdAndType(canvasId, HTMLCanvasElement);
         this.context = getCanvasRenderingContext2D(this.canvas);
-        this.camera = new Camera();
+        this.camera = new Camera(120 / 180 * Math.PI);
         this.resizeCanvas();
         window.addEventListener('resize', this.resizeCanvas);
     }

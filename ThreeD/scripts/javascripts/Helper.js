@@ -15,3 +15,6 @@ export function getCanvasRenderingContext2D(htmlCanvasElement) {
     }
     return canvasRenderingContext2D;
 }
+export function getAverageOfArray(array) {
+    return array.reduce((a, b) => a + b) / array.length;
+}

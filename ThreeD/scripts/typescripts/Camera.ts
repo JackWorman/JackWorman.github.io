@@ -1,13 +1,9 @@
-interface Vector3D {
-    x: number;
-    y: number;
-    z: number;
-}
+import Vector3D from "./Vector3D.js";
 
 export default class Camera {
-    position: Vector3D = {x: 0, y: 0, z: 0};
+    readonly position: Vector3D = new Vector3D();
     // TODO: direction: Vector3D = {x: 0, y: 0, z: 1};
-    fov: number;
+    readonly fov: number;
 
     constructor(fov: number) {
         this.fov = fov;

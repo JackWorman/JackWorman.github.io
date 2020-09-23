@@ -1,6 +1,7 @@
+import Vector3D from "./Vector3D.js";
 export default class Camera {
     constructor(fov) {
-        this.position = { x: 0, y: 0, z: 0 };
+        this.position = new Vector3D();
         this.fov = fov;
         this.addEvents();
     }

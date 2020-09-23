@@ -19,7 +19,17 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9e535a5b-2670-42b6-b74a-29df244e1da5" name="Default Changelist" comment="">
+    <list default="true" id="9e535a5b-2670-42b6-b74a-29df244e1da5" name="Default Changelist" comment="removed test commit in ide comment">
+      <change afterPath="$PROJECT_DIR$/scripts/javascripts/Vector3D.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/typescripts/Vector3D.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/javascripts/Camera.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/javascripts/Camera.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/javascripts/Dot.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/javascripts/Sphere.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/javascripts/PhysicsObject.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/javascripts/PhysicsObject.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/javascripts/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/javascripts/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/typescripts/Camera.ts" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/typescripts/Camera.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/typescripts/Dot.ts" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/typescripts/Sphere.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/typescripts/PhysicsObject.ts" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/typescripts/PhysicsObject.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/typescripts/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/typescripts/main.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -66,8 +76,23 @@
       <option name="presentableId" value="Default" />
       <updated>1600743867988</updated>
       <workItem from="1600743872893" duration="5656000" />
-      <workItem from="1600786495639" duration="5053000" />
+      <workItem from="1600786495639" duration="13201000" />
     </task>
+    <task id="LOCAL-00001" summary="1234">
+      <created>1600793800576</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1600793800576</updated>
+    </task>
+    <task id="LOCAL-00002" summary="removed test commit in ide comment">
+      <created>1600793895147</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1600793895147</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -87,15 +112,30 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="1234" />
+    <MESSAGE value="removed test commit in ide comment" />
+    <option name="LAST_COMMIT_MESSAGE" value="removed test commit in ide comment" />
   </component>
   <component name="WindowStateProjectService">
     <state x="461" y="164" width="1188" height="711" key="SettingsEditor" timestamp="1600745156815">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="461" y="164" width="1188" height="711" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1600745156815" />
-    <state x="616" y="240" key="run.anything.popup" timestamp="1600792150209">
+    <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1600793898130">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1600792150209" />
+    <state x="552" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1600793898130" />
+    <state x="667" y="119" width="585" height="801" key="find.popup" timestamp="1600797014796">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="667" y="119" width="585" height="801" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1600797014796" />
+    <state x="616" y="240" key="run.anything.popup" timestamp="1600823537336">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1600823537336" />
+    <state x="623" y="225" key="search.everywhere.popup" timestamp="1600823544291">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="623" y="225" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1600823544291" />
   </component>
 </project>

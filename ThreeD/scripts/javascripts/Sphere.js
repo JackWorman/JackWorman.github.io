@@ -13,14 +13,32 @@ export default class Sphere extends PhysicsObject {
     render(context, camera) {
         const width = context.canvas.width;
         const height = context.canvas.height;
+        context.beginPath();
+        let isFirst = true;
+        for (const previousPosition of this.previousPositions) {
+            if (previousPosition.z <= camera.position.z) {
+                continue;
+            }
+            const point = this.getProjection(width, height, camera, previousPosition);
+            if (isFirst) {
+                isFirst = false;
+                context.moveTo(point.x, point.y);
+            }
+            else {
+                context.lineTo(point.x, point.y);
+            }
+        }
+        context.strokeStyle = 'rgb(255,255,255)';
+        context.lineWidth = 0.5;
+        context.stroke();
         this.project(width, height, camera);
         if (this.position.z <= camera.position.z) {
             return;
         }
-        context.fillStyle = this.color;
         context.beginPath();
         context.arc(this.xProjected, this.yProjected, this.radiusProjected, 0, 2 * Math.PI);
         context.closePath();
+        context.fillStyle = this.color;
         context.fill();
     }
     project(width, height, camera) {

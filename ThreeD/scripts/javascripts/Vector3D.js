@@ -16,10 +16,16 @@ export default class Vector3D {
         this.z *= scale;
         return this;
     }
+    static scale(scale, vector) {
+        return vector.copy().scale(scale);
+    }
     add(vector3d) {
         this.x += vector3d.x;
         this.y += vector3d.y;
         this.z += vector3d.z;
         return this;
+    }
+    copy() {
+        return new Vector3D(this.x, this.y, this.z);
     }
 }

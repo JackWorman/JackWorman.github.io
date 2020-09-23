@@ -23,10 +23,18 @@ export default class Vector3D {
         return this;
     }
 
+    static scale(scale: number, vector: Vector3D) {
+        return vector.copy().scale(scale);
+    }
+
     add(vector3d: Vector3D): this {
         this.x += vector3d.x;
         this.y += vector3d.y;
         this.z += vector3d.z;
         return this;
+    }
+
+    copy(): Vector3D {
+        return new Vector3D(this.x, this.y, this.z);
     }
 }

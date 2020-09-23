@@ -17,6 +17,7 @@ function simulate(): void {
     window.requestAnimationFrame(simulate);
     const dt = frameRate.getDtInSeconds();
     scene.context.clearRect(0, 0, scene.canvas.width, scene.canvas.height);
+    physicsObjects.sort((a, b) => {return b.position.z - a.position.z});
     for (const sphere of physicsObjects) {
         sphere.render(scene.context, scene.camera);
         sphere.updateGravity(physicsObjects);
@@ -52,8 +53,14 @@ function createObjects(): void {
     physicsObjects.push(new Sphere(
         10**19 * (Math.random() + 1.2),
         new Vector3D(0, 0, 1000),
-        new Vector3D(),
+        new Vector3D(50, 50, 0),
         100,
         'rgb(255,255,0)'
+    ));
+    physicsObjects.push(new Sphere(
+        10**15 * (Math.random() + 1),
+        new Vector3D(0, -1000, 2000),
+        new Vector3D(500, 100, 0),
+        20
     ));
 }

@@ -22,16 +22,27 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9e535a5b-2670-42b6-b74a-29df244e1da5" name="Default Changelist" comment="Some more refactoring">
+    <list default="true" id="9e535a5b-2670-42b6-b74a-29df244e1da5" name="Default Changelist" comment="Added tracers">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/javascripts/PhysicsObject.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/javascripts/PhysicsObject.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/javascripts/Sphere.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/javascripts/Sphere.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/javascripts/Vector3D.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/javascripts/Vector3D.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/javascripts/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/javascripts/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/typescripts/PhysicsObject.ts" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/typescripts/PhysicsObject.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/typescripts/Sphere.ts" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/typescripts/Sphere.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/typescripts/Vector3D.ts" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/typescripts/Vector3D.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/typescripts/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/typescripts/main.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/javascripts/Camera.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/Camera.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/javascripts/FrameRate.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/FrameRate.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/javascripts/Helper.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/Helper.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/javascripts/PhysicsObject.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/PhysicsObject.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/javascripts/Scene.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/Scene.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/javascripts/Sphere.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/Sphere.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/javascripts/Vector3D.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/Vector3D.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/javascripts/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/typescripts/Camera.ts" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/Camera.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/typescripts/FrameRate.ts" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/FrameRate.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/typescripts/Helper.ts" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/Helper.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/typescripts/PhysicsObject.ts" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/PhysicsObject.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/typescripts/Scene.ts" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/Scene.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/typescripts/Sphere.ts" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/Sphere.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/typescripts/Vector3D.ts" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/Vector3D.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/typescripts/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/main.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,6 +86,12 @@
     <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\WebStorm 2020.2.2\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\mworman\Documents\GitHub\JackWorman.github.io\ThreeD\scripts" />
+      <recent name="C:\Users\mworman\Documents\GitHub\JackWorman.github.io\ThreeD\scripts\javascripts" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -85,7 +102,7 @@
       <updated>1600743867988</updated>
       <workItem from="1600743872893" duration="5656000" />
       <workItem from="1600786495639" duration="14239000" />
-      <workItem from="1600824635257" duration="6095000" />
+      <workItem from="1600824635257" duration="17205000" />
     </task>
     <task id="LOCAL-00001" summary="1234">
       <created>1600793800576</created>
@@ -115,7 +132,14 @@
       <option name="project" value="LOCAL" />
       <updated>1600824892559</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Added tracers">
+      <created>1600831028653</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1600831028653</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -138,29 +162,30 @@
     <MESSAGE value="1234" />
     <MESSAGE value="removed test commit in ide comment" />
     <MESSAGE value="Some more refactoring" />
-    <option name="LAST_COMMIT_MESSAGE" value="Some more refactoring" />
+    <MESSAGE value="Added tracers" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added tracers" />
   </component>
   <component name="WindowStateProjectService">
     <state x="785" y="299" key="#com.intellij.ide.scriptingContext.ui.PerFileMappingsDialogWrapper" timestamp="1600824173969">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="785" y="299" key="#com.intellij.ide.scriptingContext.ui.PerFileMappingsDialogWrapper/0.0.1920.1040@0.0.1920.1040" timestamp="1600824173969" />
-    <state x="461" y="164" width="1188" height="711" key="SettingsEditor" timestamp="1600824609581">
+    <state x="461" y="164" width="1188" height="711" key="SettingsEditor" timestamp="1601212638682">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="461" y="164" width="1188" height="711" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1600824609581" />
+    <state x="461" y="164" width="1188" height="711" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1601212638682" />
     <state x="830" y="434" key="VCS.EditChangelistDialog" timestamp="1600824830238">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="830" y="434" key="VCS.EditChangelistDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1600824830238" />
-    <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1600824901225">
+    <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1600831030133">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1600824901225" />
-    <state x="667" y="119" width="585" height="801" key="find.popup" timestamp="1600829705563">
+    <state x="552" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1600831030133" />
+    <state x="867" y="163" width="585" height="801" key="find.popup" timestamp="1600993405592">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="667" y="119" width="585" height="801" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1600829705563" />
+    <state x="867" y="163" width="585" height="801" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1600993405592" />
     <state x="616" y="240" key="run.anything.popup" timestamp="1600823537336">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

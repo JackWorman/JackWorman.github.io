@@ -1,15 +1,14 @@
-import PhysicsObject from './PhysicsObject.js';
-import Sphere from './Sphere.js';
 import Scene from "./Scene.js";
-import FrameRate from "./FrameRate.js";
+import PhysicsObject from "./PhysicsObject.js";
+import Sphere from "./Sphere.js";
 import Vector3D from "./Vector3D.js";
+import FrameRate from "./FrameRate.js";
 
-const scene: Scene = new Scene('canvas-scene');
 const frameRate: FrameRate = new FrameRate('span-fps');
-const physicsObjects: PhysicsObject[] = [];
+const scene: Scene = new Scene('canvas-scene');
 
 window.addEventListener('load', () => {
-    createObjects();
+    scene.addPhysicsObjects(createPhysicsObjects());
     window.requestAnimationFrame(simulate);
 });
 
@@ -17,15 +16,16 @@ function simulate(): void {
     window.requestAnimationFrame(simulate);
     const dt = frameRate.getDtInSeconds();
     scene.context.clearRect(0, 0, scene.canvas.width, scene.canvas.height);
-    physicsObjects.sort((a, b) => {return b.position.z - a.position.z});
-    for (const sphere of physicsObjects) {
-        sphere.render(scene.context, scene.camera);
-        sphere.updateGravity(physicsObjects);
-        sphere.move(dt);
+    scene.physicsObjects.sort((a, b) => {return b.position.z - a.position.z});
+    for (const physicsObject of scene.physicsObjects) {
+        physicsObject.render(scene.context, scene.camera);
+        physicsObject.updateGravity(scene.physicsObjects);
+        physicsObject.move(dt);
     }
 }
 
-function createObjects(): void {
+function createPhysicsObjects(): PhysicsObject[] {
+    const physicsObjects: PhysicsObject[] = [];
     physicsObjects.push(new Sphere(
         10**17 / (Math.random() + 1),
         new Vector3D(-500, 0, 1000),
@@ -53,7 +53,7 @@ function createObjects(): void {
     physicsObjects.push(new Sphere(
         10**19 * (Math.random() + 1.2),
         new Vector3D(0, 0, 1000),
-        new Vector3D(50, 50, 0),
+        new Vector3D(0, 0, 0),
         100,
         'rgb(255,255,0)'
     ));
@@ -63,4 +63,5 @@ function createObjects(): void {
         new Vector3D(500, 100, 0),
         20
     ));
+    return physicsObjects;
 }

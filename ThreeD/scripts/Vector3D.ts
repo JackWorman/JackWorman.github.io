@@ -23,7 +23,7 @@ export default class Vector3D {
         return this;
     }
 
-    static scale(scale: number, vector: Vector3D) {
+    static scale(scale: number, vector: Vector3D): Vector3D {
         return vector.copy().scale(scale);
     }
 

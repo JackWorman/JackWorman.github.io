@@ -16,9 +16,8 @@ export default class Sphere extends PhysicsObject {
         this.xProjected = 0;
         this.yProjected = 0;
         this.radiusProjected = 0;
-        this.color = typeof(color) === 'undefined'
-            ? `rgb(${Math.floor(255 * Math.random())}, ${Math.floor(255 * Math.random())}, ${Math.floor(255 * Math.random())})`
-            : color;
+        this.color = color
+            ?? `rgb(${Math.floor(255 * Math.random())}, ${Math.floor(255 * Math.random())}, ${Math.floor(255 * Math.random())})`;
     }
 
     render(context: CanvasRenderingContext2D, camera: Camera): void {
@@ -55,7 +54,7 @@ export default class Sphere extends PhysicsObject {
         context.fill();
     }
 
-    private project(width: number, height: number, camera: Camera) {
+    private project(width: number, height: number, camera: Camera): void {
         const PROJECTION_CENTER_X = width / 2 + camera.position.x;
         const PROJECTION_CENTER_Y = height / 2 + camera.position.y;
 

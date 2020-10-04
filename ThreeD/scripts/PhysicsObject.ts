@@ -10,8 +10,8 @@ export default abstract class PhysicsObject {
 
     protected constructor(mass: number, position?: Vector3D, velocity?: Vector3D) {
         this.mass = mass;
-        this.position = typeof position !== 'undefined' ? position : new Vector3D();
-        this.velocity = typeof velocity !== 'undefined' ? velocity : new Vector3D();
+        this.position = position ?? new Vector3D();
+        this.velocity = velocity ?? new Vector3D();
     }
 
     abstract render(context: CanvasRenderingContext2D, camera: Camera): void;

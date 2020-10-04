@@ -11,10 +11,10 @@ export default class Camera {
     }
 
     private addEvents(): void {
-        window.addEventListener('wheel', (event: WheelEvent) => {
+        addEventListener('wheel', (event: WheelEvent) => {
             this.position.z += event.deltaY * -50;
         });
-        window.addEventListener('mousemove', (mouseEvent: MouseEvent) => {
+        addEventListener('mousemove', (mouseEvent: MouseEvent) => {
             if (mouseEvent.buttons !== 0) {
                 this.position.x += mouseEvent.movementX;
                 this.position.y += mouseEvent.movementY;

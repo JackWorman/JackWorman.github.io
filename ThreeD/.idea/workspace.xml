@@ -23,26 +23,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9e535a5b-2670-42b6-b74a-29df244e1da5" name="Default Changelist" comment="Added tracers">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/javascripts/Camera.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/Camera.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/javascripts/FrameRate.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/FrameRate.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/javascripts/Helper.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/Helper.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/javascripts/PhysicsObject.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/PhysicsObject.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/javascripts/Scene.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/Scene.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/javascripts/Sphere.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/Sphere.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/javascripts/Vector3D.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/Vector3D.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/javascripts/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/typescripts/Camera.ts" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/Camera.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/typescripts/FrameRate.ts" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/FrameRate.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/typescripts/Helper.ts" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/Helper.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/typescripts/PhysicsObject.ts" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/PhysicsObject.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/typescripts/Scene.ts" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/Scene.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/typescripts/Sphere.ts" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/Sphere.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/typescripts/Vector3D.ts" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/Vector3D.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/typescripts/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/main.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/Camera.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/Camera.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/Camera.ts" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/Camera.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/PhysicsObject.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/PhysicsObject.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/PhysicsObject.ts" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/PhysicsObject.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/Sphere.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/Sphere.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/Sphere.ts" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/Sphere.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/Vector3D.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/Vector3D.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/Vector3D.ts" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/Vector3D.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,7 +92,9 @@
       <updated>1600743867988</updated>
       <workItem from="1600743872893" duration="5656000" />
       <workItem from="1600786495639" duration="14239000" />
-      <workItem from="1600824635257" duration="17205000" />
+      <workItem from="1600824635257" duration="18492000" />
+      <workItem from="1601340672534" duration="590000" />
+      <workItem from="1601808556597" duration="2136000" />
     </task>
     <task id="LOCAL-00001" summary="1234">
       <created>1600793800576</created>
@@ -139,7 +131,14 @@
       <option name="project" value="LOCAL" />
       <updated>1600831028653</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Added tracers">
+      <created>1601213289933</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1601213289933</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -178,10 +177,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="830" y="434" key="VCS.EditChangelistDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1600824830238" />
-    <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1600831030133">
+    <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1601213291765">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1600831030133" />
+    <state x="552" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1601213291765" />
     <state x="867" y="163" width="585" height="801" key="find.popup" timestamp="1600993405592">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

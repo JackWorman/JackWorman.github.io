@@ -4,8 +4,8 @@ export default class PhysicsObject {
         this.acceleration = new Vector3D();
         this.previousPositions = [];
         this.mass = mass;
-        this.position = typeof position !== 'undefined' ? position : new Vector3D();
-        this.velocity = typeof velocity !== 'undefined' ? velocity : new Vector3D();
+        this.position = position ?? new Vector3D();
+        this.velocity = velocity ?? new Vector3D();
     }
     move(dt) {
         PhysicsObject.updateTriple(dt, this.position, this.velocity, this.acceleration);

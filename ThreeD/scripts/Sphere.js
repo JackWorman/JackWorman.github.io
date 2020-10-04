@@ -6,9 +6,8 @@ export default class Sphere extends PhysicsObject {
         this.xProjected = 0;
         this.yProjected = 0;
         this.radiusProjected = 0;
-        this.color = typeof (color) === 'undefined'
-            ? `rgb(${Math.floor(255 * Math.random())}, ${Math.floor(255 * Math.random())}, ${Math.floor(255 * Math.random())})`
-            : color;
+        this.color = color
+            ?? `rgb(${Math.floor(255 * Math.random())}, ${Math.floor(255 * Math.random())}, ${Math.floor(255 * Math.random())})`;
     }
     render(context, camera) {
         const width = context.canvas.width;

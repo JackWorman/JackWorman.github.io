@@ -1,7 +1,7 @@
-import Vector3D from "./Vector3D.js";
+import Vector3 from "./Vector3.js";
 
 export default class Camera {
-    readonly position: Vector3D = new Vector3D();
+    readonly position: Vector3 = new Vector3();
     // TODO: direction: Vector3D = {x: 0, y: 0, z: 1};
     readonly fov: number;
 

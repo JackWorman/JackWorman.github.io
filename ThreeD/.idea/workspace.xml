@@ -22,17 +22,23 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9e535a5b-2670-42b6-b74a-29df244e1da5" name="Default Changelist" comment="Added tracers">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="9e535a5b-2670-42b6-b74a-29df244e1da5" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/scripts/Vector.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/Vector3.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/Vector3.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/Camera.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/Camera.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/Camera.ts" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/Camera.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/PhysicsObject.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/PhysicsObject.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/PhysicsObject.ts" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/PhysicsObject.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/Scene.ts" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/Scene.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/Sphere.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/Sphere.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scripts/Sphere.ts" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/Sphere.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/Vector3D.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/Vector3D.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scripts/Vector3D.ts" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/Vector3D.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/Vector3D.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/Vector3D.ts" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/Vector.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/main.ts" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/main.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,8 +78,8 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
-    <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\WebStorm 2020.2.2\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
+    <property name="settings.editor.selected.configurable" value="web-ide.project.structure" />
+    <property name="ts.external.directory.path" value="C:\Users\mworman\AppData\Roaming\npm\node_modules\typescript\lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -94,7 +100,10 @@
       <workItem from="1600786495639" duration="14239000" />
       <workItem from="1600824635257" duration="18492000" />
       <workItem from="1601340672534" duration="590000" />
-      <workItem from="1601808556597" duration="2136000" />
+      <workItem from="1601808556597" duration="57805000" />
+      <workItem from="1602074953901" duration="3281000" />
+      <workItem from="1602203390331" duration="2651000" />
+      <workItem from="1602273564075" duration="17778000" />
     </task>
     <task id="LOCAL-00001" summary="1234">
       <created>1600793800576</created>
@@ -138,11 +147,24 @@
       <option name="project" value="LOCAL" />
       <updated>1601213289933</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Using ?? whenever possible">
+      <created>1601810805810</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1601810805810</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+    <option name="exactExcludedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/scripts/Vector.js" />
+        <option value="$PROJECT_DIR$/scripts/Vector3.js" />
+      </list>
+    </option>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -157,41 +179,58 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="1234" />
     <MESSAGE value="removed test commit in ide comment" />
     <MESSAGE value="Some more refactoring" />
     <MESSAGE value="Added tracers" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added tracers" />
+    <MESSAGE value="Using ?? whenever possible" />
+    <option name="LAST_COMMIT_MESSAGE" value="Using ?? whenever possible" />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="WindowStateProjectService">
     <state x="785" y="299" key="#com.intellij.ide.scriptingContext.ui.PerFileMappingsDialogWrapper" timestamp="1600824173969">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="785" y="299" key="#com.intellij.ide.scriptingContext.ui.PerFileMappingsDialogWrapper/0.0.1920.1040@0.0.1920.1040" timestamp="1600824173969" />
-    <state x="461" y="164" width="1188" height="711" key="SettingsEditor" timestamp="1601212638682">
+    <state x="765" y="235" key="#com.intellij.ide.util.MemberChooser" timestamp="1602337397850">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="461" y="164" width="1188" height="711" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1601212638682" />
+    <state x="765" y="235" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1602337397850" />
+    <state x="92" y="92" width="1736" height="856" key="DiffContextDialog" timestamp="1601861299511">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="92" y="92" width="1736" height="856" key="DiffContextDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1601861299511" />
+    <state x="835" y="274" key="FileChooserDialogImpl" timestamp="1601810827072">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="835" y="274" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1601810827072" />
+    <state x="461" y="164" width="1188" height="711" key="SettingsEditor" timestamp="1601811556675">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="461" y="164" width="1188" height="711" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1601811556675" />
     <state x="830" y="434" key="VCS.EditChangelistDialog" timestamp="1600824830238">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="830" y="434" key="VCS.EditChangelistDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1600824830238" />
-    <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1601213291765">
+    <state x="552" y="252" key="Vcs.Push.Dialog.v2" timestamp="1601810808906">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="552" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1601213291765" />
-    <state x="867" y="163" width="585" height="801" key="find.popup" timestamp="1600993405592">
+    <state x="552" y="252" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1601810808906" />
+    <state x="867" y="163" width="585" height="801" key="find.popup" timestamp="1601866049213">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="867" y="163" width="585" height="801" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1600993405592" />
-    <state x="616" y="240" key="run.anything.popup" timestamp="1600823537336">
+    <state x="867" y="163" width="585" height="801" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1601866049213" />
+    <state x="616" y="240" key="run.anything.popup" timestamp="1601949525828">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1600823537336" />
-    <state x="623" y="225" key="search.everywhere.popup" timestamp="1600823544291">
+    <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1601949525828" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1601994210383">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="623" y="225" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1600823544291" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1601994210383" />
   </component>
 </project>

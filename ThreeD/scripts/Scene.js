@@ -1,5 +1,6 @@
-import { getHtmlElementByIdAndType, getCanvasRenderingContext2D } from './Helper.js';
+import {getCanvasRenderingContext2D, getHtmlElementByIdAndType} from './Helper.js';
 import Camera from "./Camera.js";
+
 export default class Scene {
     constructor(canvasId) {
         this.physicsObjects = [];

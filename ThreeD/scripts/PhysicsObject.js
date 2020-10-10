@@ -1,48 +1,69 @@
-import Vector3D from "./Vector3D.js";
+import Vector3 from "./Vector3.js";
+
+const GRAVITATIONAL_CONSTANT = 6.67408 * 10 ** -11;
 export default class PhysicsObject {
     constructor(mass, position, velocity) {
-        this.acceleration = new Vector3D();
+        this.acceleration = new Vector3();
         this.previousPositions = [];
         this.mass = mass;
-        this.position = position ?? new Vector3D();
-        this.velocity = velocity ?? new Vector3D();
+        this.position = position ?? new Vector3();
+        this.velocity = velocity ?? new Vector3();
     }
+
+    static updateTriple(dt, t1, t2, t3) {
+        t1
+            .add(Vector3.scale(t2, dt))
+            .add(Vector3.scale(t3, dt ** 2 / 2));
+    }
+
     move(dt) {
         PhysicsObject.updateTriple(dt, this.position, this.velocity, this.acceleration);
-        PhysicsObject.updateTriple(dt, this.velocity, this.acceleration, new Vector3D());
-        PhysicsObject.updateTriple(dt, this.acceleration, new Vector3D(), new Vector3D());
-        this.previousPositions.push(this.position.copy());
-        if (this.previousPositions.length > 1000) {
+        PhysicsObject.updateTriple(dt, this.velocity, this.acceleration, new Vector3());
+        PhysicsObject.updateTriple(dt, this.acceleration, new Vector3(), new Vector3());
+        this.previousPositions.push(Vector3.clone(this.position));
+        if (this.previousPositions.length > 500) {
             this.previousPositions.shift();
         }
     }
-    static updateTriple(dt, t1, t2, t3) {
-        t1
-            .add(Vector3D.scale(dt, t2))
-            .add(Vector3D.scale(dt ** 2 / 2, t3));
-    }
+
     updateGravity(physicsObjects) {
         this.acceleration.set(0, 0, 0);
-        const G = 6.67408 * 10 ** -11;
         for (const physicsObject of physicsObjects) {
-            const rSquared = (this.position.x - physicsObject.position.x) ** 2
-                + (this.position.y - physicsObject.position.y) ** 2
-                + (this.position.z - physicsObject.position.z) ** 2;
-            if (rSquared === 0) {
+            if (physicsObject === this) {
                 continue;
             }
-            const a = G * physicsObject.mass / rSquared;
-            const diff = new Vector3D(physicsObject.position.x - this.position.x, physicsObject.position.y - this.position.y, physicsObject.position.z - this.position.z);
-            const scale = a / Math.sqrt(diff.x ** 2 + diff.y ** 2 + diff.z ** 2);
-            this.acceleration.add(diff.scale(scale));
+            const r = Vector3.distance(this.position, physicsObject.position);
+            if (r === 0) {
+                continue;
+            }
+            const a = GRAVITATIONAL_CONSTANT * physicsObject.mass / r ** 2;
+            const diff = Vector3.sub(physicsObject.position, this.position);
+            this.acceleration.add(diff.scale(a / r));
         }
     }
+
+    renderTrace(context, camera) {
+        const width = context.canvas.width;
+        const height = context.canvas.height;
+        context.beginPath();
+        for (const previousPosition of this.previousPositions) {
+            if (previousPosition.z <= camera.position.z) {
+                continue;
+            }
+            const projPoint = this.getProjection(width, height, camera, previousPosition);
+            context.lineTo(projPoint.x, projPoint.y);
+        }
+        context.strokeStyle = 'rgb(255,255,255)';
+        context.lineWidth = 0.5;
+        context.stroke();
+    }
+
     getProjection(width, height, camera, vector) {
         const PROJECTION_CENTER_X = width / 2 + camera.position.x;
         const PROJECTION_CENTER_Y = height / 2 + camera.position.y;
         const zProjected = (0.5 * width * Math.tan((Math.PI - camera.fov) / 2)) / (vector.z - camera.position.z);
         const xProjected = vector.x * zProjected + PROJECTION_CENTER_X;
         const yProjected = vector.y * zProjected + PROJECTION_CENTER_Y;
-        return new Vector3D(xProjected, yProjected, zProjected);
+        return new Vector3(xProjected, yProjected, zProjected);
     }
 }

@@ -1,10 +1,12 @@
-import Vector3D from "./Vector3D.js";
+import Vector3 from "./Vector3.js";
+
 export default class Camera {
     constructor(fov) {
-        this.position = new Vector3D();
+        this.position = new Vector3();
         this.fov = fov;
         this.addEvents();
     }
+
     addEvents() {
         addEventListener('wheel', (event) => {
             this.position.z += event.deltaY * -50;

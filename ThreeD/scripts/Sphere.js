@@ -7,7 +7,6 @@ export default class Sphere extends PhysicsObject {
         this.radius = radius;
         this.faces = this.createFaces();
     }
-
     render(context, camera) {
         const width = context.canvas.width;
         const height = context.canvas.height;
@@ -25,7 +24,6 @@ export default class Sphere extends PhysicsObject {
             context.fill();
         }
     }
-
     projectPoint(point, width, height, camera) {
         const newPoint = Vector3.add(point, this.position);
         const PROJECTION_CENTER_X = width / 2 + camera.position.x;
@@ -35,7 +33,6 @@ export default class Sphere extends PhysicsObject {
         const yProjected = (newPoint.y) * zProjected + PROJECTION_CENTER_Y;
         return [xProjected, yProjected];
     }
-
     createFaces() {
         const INC = 24;
         if (INC % 2 === 1) {

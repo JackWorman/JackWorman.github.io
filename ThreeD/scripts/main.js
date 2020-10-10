@@ -9,7 +9,6 @@ window.addEventListener('load', () => {
     scene.addPhysicsObjects(createPhysicsObjects());
     window.requestAnimationFrame(simulate);
 });
-
 function simulate() {
     window.requestAnimationFrame(simulate);
     // const dt = frameRate.getDtInSeconds();

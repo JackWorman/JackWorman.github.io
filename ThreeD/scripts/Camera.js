@@ -6,7 +6,6 @@ export default class Camera {
         this.fov = fov;
         this.addEvents();
     }
-
     addEvents() {
         addEventListener('wheel', (event) => {
             this.position.z += event.deltaY * -50;
